@@ -86,7 +86,7 @@ const Donation = () => {
         console.log(error);
       }
     } else {
-      alert("Ethereum object doesn't exist or not detected, get Metamask !");
+      console.log("Ethereum object doesn't exist or not detected, get Metamask !");
     }
   }
 
