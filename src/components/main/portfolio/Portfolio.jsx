@@ -1,23 +1,28 @@
 import React from 'react'
+import { BsGithub } from 'react-icons/bs'
+import IMG1 from '../../../assets/main/Megalis.png'
+import IMG2 from '../../../assets/main/FFNN.png'
+import IMG3 from '../../../assets/main/Wave.png'
 import './portfolio.css'
-import {BsGithub} from 'react-icons/bs'
-import IMG1 from '../../../assets/istockphoto-876612206-170667a.jpg'
-import IMG2 from '../../../assets/us-air-force-general-dynamics-f-16-fighting-falcon-alaska-wallpaper-preview.jpg'
 
 const data = [
   {
     id: 1,
     image: IMG1,
-    title: 'Project 1',
-    github: 'https://github.com/JulienEsbt',
-    demo: 'https://github.com/JulienEsbt'
+    title: 'EVM Compatible Smart Contract that allows users to archive files on the Blockchain',
+    github: 'https://github.com/JulienEsbt/Megalis-Smart-Contract'
   },
   {
     id: 2,
     image: IMG2,
-    title: 'Project 2',
-    github: 'https://github.com/JulienEsbt',
-    demo: 'https://github.com/JulienEsbt'
+    title: 'Multi-Layer Feed-Forward Neural Network in Python using Machine Learning',
+    github: 'https://github.com/JulienEsbt/Neural-Networks-in-Pure-NumPy'
+  },
+  {
+    id: 3,
+    image: IMG3,
+    title: 'A messenger-like App and Smart Contract that store message on the Blockchain',
+    github: 'https://github.com/JulienEsbt/My-Wave-Portal-Front'
   }
 ]
 
@@ -29,7 +34,7 @@ const Portfolio = () => {
 
       <div className='container portfolio__container'>
         {
-          data.map(({id, image, title, github, demo}) => {
+          data.map(({id, image, title, github}) => {
             return (
               <article key={id} className='portfolio__item'>
                 <div className='portfolio__item-image'>
@@ -38,22 +43,11 @@ const Portfolio = () => {
                 <h3>{title}</h3>
                 <div className="portfolio__item-cta">
                   <a href={github} target='_blank' rel="noreferrer" className='btn'><BsGithub/> GitHub <BsGithub/></a>
-                  <a href={demo} target='_blank' rel="noreferrer" className='btn btn-primary'>Live Demo</a>
                 </div>
               </article>
             )
           })
         }
-        {/*<article className='portfolio__item'>
-          <div className='portfolio__item-image'>
-            <img src={IMG1} alt="" />
-          </div>
-          <h3>This is a portfolio item title</h3>
-          <div className="portfolio__item-cta">
-            <a href='https://github.com/JulienEsbt' target='_blank' rel="noreferrer" className='btn'><BsGithub/> GitHub <BsGithub/></a>
-            <a href='https://github.com/JulienEsbt' target='_blank' rel="noreferrer" className='btn btn-primary'>Live Demo</a>
-          </div>
-        </article>*/}
       </div>
     </section>
   )

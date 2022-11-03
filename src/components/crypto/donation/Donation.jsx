@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import ETH from '../../../assets/ETH.jpeg'
+import Popover from '@mui/material/Popover';
+import ETH from '../../../assets/crypto/ETH.jpeg'
 import './donation.css'
 
 const SendETH = async ({ether, receiver }) => {
@@ -35,6 +35,7 @@ const Donation = () => {
   const [network, setNetwork] = useState('Unknow network');
   const [etherscan, setEtherscan] = useState('No Scan link');
   const [tx, setTx] = useState('No Tx');
+  const [isShown, setIsShown] = useState(false);
 
   const updateNetwork = async () => {
     const networkBis = await window.ethereum.request({method: 'net_version'});
@@ -126,7 +127,7 @@ const Donation = () => {
 
       <article className='donation container'>
         <div className="network__avatar">
-          <img src={ETH} alt="Avatar One" />
+          <img src={ETH} alt="network__avatar" />
         </div>
         <PopupState>
           {(popupState) => (
@@ -140,13 +141,19 @@ const Donation = () => {
         </PopupState>
         <h5 className='network__name'>
           {!currentAccount && (
-          <Button onClick={connectWallet}>Connect Wallet</Button>)}
+          <Button onClick={connectWallet} onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>Connect Wallet</Button>)}
+          {isShown && (
+              <div className="network__name">
+                You can connect your wallet with Metamask or a any other crypto wallet (as XDefi or whatever) and send a transaction OnChain on Ethereum blockchain.
+                You can also change the network on Metamask to make the donation on an other blockchain (EVM Compatible, as BSC, Polygon, Gnosis, Testnets, etc).
+              </div>
+          )}
         </h5>
         <small className='network'>
           {currentAccount && (<h5 className='network'> Connected Address : {currentAccount} </h5>)}
         </small>
         <form className="container donation__container eth" onSubmit={makeTransaction}>
-          <h5>Send ETH payment</h5>
+          <h5>Send ETH Donation</h5>
           <input className="but" name="ether" type="text" placeholder="Amount in ETH" />
           <button type="submit" className="but but-primary">Donate now</button>
           <br></br>

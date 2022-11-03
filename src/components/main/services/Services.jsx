@@ -1,6 +1,6 @@
 import React from 'react'
+import { BiCheck } from 'react-icons/bi'
 import './services.css'
-import {BiCheck} from 'react-icons/bi'
 
 const Services = () => {
   return (
@@ -11,28 +11,20 @@ const Services = () => {
       <div className='.container services__container'>
         <article className='service'>
           <div className='service__head'>
-            <h3>UI/UX Design</h3>
+            <h3>BackEnd</h3>
           </div>
           <ul className='service__list'>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Machine Learning Projects</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Simple Games</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
-            </li>
-            <li>
-              <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
-            </li>
-            <li>
-              <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Text Editor</p>
             </li>
           </ul>
         </article>
@@ -44,55 +36,43 @@ const Services = () => {
           <ul className='service__list'>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Showcase Website</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Portfolio</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Decentralized App FrontEnd</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Blockchain App</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
-            </li>
-            <li>
-              <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>NFTs App</p>
             </li>
           </ul>
         </article>
 
         <article className='service'>
           <div className='service__head'>
-            <h3>Content Creation</h3>
+            <h3>Blockchain Solution</h3>
           </div>
           <ul className='service__list'>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Smart Contract Creation</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>Decentralized App</p>
             </li>
             <li>
               <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
-            </li>
-            <li>
-              <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
-            </li>
-            <li>
-              <BiCheck className='service__list-icon'/>
-              <p>SOME TEXT TO WRITE</p>
+              <p>(Blockchain Formation/Lesson)</p>
             </li>
           </ul>
         </article>

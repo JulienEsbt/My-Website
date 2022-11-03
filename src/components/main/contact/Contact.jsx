@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import './contact.css'
-import {MdOutlineEmail} from 'react-icons/md'
-import {FaTwitter, FaLinkedin} from 'react-icons/fa'
 import emailjs from 'emailjs-com';
+import { MdOutlineEmail } from 'react-icons/md'
+import { FaTwitter, FaLinkedin } from 'react-icons/fa'
+import './contact.css'
 
 const Contact = () => {
   const form = useRef();
@@ -33,12 +33,14 @@ const Contact = () => {
             <h5>julien.esterbet@gmail.com</h5>
             <a href="mailto:julien.esterbet@gmail.com" target='_blank' rel="noreferrer">Send A Message</a>
           </article>
+
           <article className='contact__option'>
             <FaLinkedin className='contact__option-icon' />
             <h4>LinkedIn</h4>
             <h5>julien.esterbet</h5>
             <a href="https://www.linkedin.com/in/julien-esterbet/" target='_blank' rel="noreferrer">Send A Message</a>
           </article>
+
           <article className='contact__option'>
             <FaTwitter className='contact__option-icon' />
             <h4>twitter</h4>

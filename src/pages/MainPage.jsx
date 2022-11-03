@@ -6,7 +6,7 @@ import About from '../components/main/about/About'
 import Experience from '../components/main/experience/Experience'
 import Services from '../components/main/services/Services'
 import Portfolio from '../components/main/portfolio/Portfolio'
-import Testimonials from '../components/main/testimonials/Testimonials'
+import Goals from '../components/main/goals/Goals'
 import Contact from '../components/main/contact/Contact'
 import Footer from '../components/main/footer/Footer'
 
@@ -20,7 +20,7 @@ const MainPage = () => {
       <Experience />
       <Services />
       <Portfolio />
-      <Testimonials />
+      <Goals />
       <Contact />
       <Footer />
     </>

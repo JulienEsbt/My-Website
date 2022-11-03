@@ -1,9 +1,9 @@
 import React from 'react'
-import './about.css'
-import ME from '../../../assets/NFT2.png'
 import { FaBitcoin, FaEthereum, FaCodeBranch, FaFileCode } from 'react-icons/fa'
 import { BiLineChart } from 'react-icons/bi'
 import { BsCurrencyExchange } from 'react-icons/bs'
+import ME from '../../../assets/crypto/NFT2.png'
+import './about.css'
 
 const About = () => {
   return (

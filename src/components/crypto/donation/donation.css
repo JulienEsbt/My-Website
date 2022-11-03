@@ -12,6 +12,11 @@
     border: 0.4rem solid var(--color-primary-variant);
 }
 
+.network__avatar img {
+    width: 106%;
+    height: 106%;
+}
+
 .donation {
     background: var(--color-primary-variant);
     text-align: center;

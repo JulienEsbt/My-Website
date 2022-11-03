@@ -59,6 +59,13 @@ header {
 }
 
 /* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
+@media screen and (min-width: 100000px) {
+    .header__socials, .scroll__down {
+        display: none;
+    }
+}
+
+/* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
 @media screen and (max-width: 1024px) {
     header {
         height: 68vh;
