@@ -1,0 +1,27 @@
+.pagenavbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.navbutton {
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.navbutton:hover {
+    background: var(--color-bg-variant);
+}
+
+.pagebar {
+    color: #fff;
+    font-family: "Monument Extended";
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.pagetext {
+    padding: 2rem;
+}
