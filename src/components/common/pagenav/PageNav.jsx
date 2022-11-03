@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import './pagenav.css'
 import { Spin as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom'
+import './pagenav.css'
 
 const PageNav = () => {
     const [isOpen, setOpen] = useState(false)

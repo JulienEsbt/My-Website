@@ -1,11 +1,11 @@
 import React from 'react'
-import './services.css'
-import {BiCheck} from 'react-icons/bi'
+import './tools.css'
+import { BiCheck } from 'react-icons/bi'
 import { TbAffiliate } from 'react-icons/tb'
 
-const Services = () => {
+const Tools = () => {
   return (
-    <section id='services'>
+    <section id='tools'>
       <h5>What I Use</h5>
       <h2>Tools</h2>
 
@@ -126,4 +126,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default Tools

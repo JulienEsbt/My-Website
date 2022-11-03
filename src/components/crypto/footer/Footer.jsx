@@ -1,8 +1,8 @@
 import React from 'react'
 import './footer.css'
-import {FaTwitter, FaInstagram, FaTiktok} from 'react-icons/fa'
-import {BsYoutube} from 'react-icons/bs'
-import {BsLinkedin, BsGithub} from 'react-icons/bs'
+import { FaTwitter, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { BsYoutube } from 'react-icons/bs'
+import { BsLinkedin, BsGithub } from 'react-icons/bs'
 
 const Footer = () => {
   return (
@@ -12,9 +12,9 @@ const Footer = () => {
       <ul className='permalinks'>
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#testimonials">Donation</a></li>
+        <li><a href="#knowledge">Knowledge</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#donation">Donation</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 

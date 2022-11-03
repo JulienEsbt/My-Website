@@ -53,7 +53,7 @@
 /* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
 @media screen and (max-width: 1024px) {
     .services__container {
-        grid-template-columns: 1fr, 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
 

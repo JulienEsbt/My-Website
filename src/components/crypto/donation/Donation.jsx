@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import ETH from '../../../assets/ETH.jpeg'
-import './testimonials.css'
+import './donation.css'
 
 const SendETH = async ({ether, receiver }) => {
   try {
@@ -27,7 +30,7 @@ const SendETH = async ({ether, receiver }) => {
   }
 };
 
-const Testimonials = () => {
+const Donation = () => {
   const [currentAccount, setCurrentAccount] = useState();
   const [network, setNetwork] = useState('Unknow network');
   const [etherscan, setEtherscan] = useState('No Scan link');
@@ -117,32 +120,41 @@ const Testimonials = () => {
   },);
 
   return (
-    <section id='testimonials'>
+    <section id='donation'>
       <h5>If you want to make a</h5>
       <h2>Donation</h2>
 
-      <article className='testimonials container'>
-        <div className="client__avatar">
+      <article className='donation container'>
+        <div className="network__avatar">
           <img src={ETH} alt="Avatar One" />
         </div>
-        <h5 className='client__name'>
-          Réseau :
-          {currentAccount && (network)}
+        <PopupState>
+          {(popupState) => (
+              <div>
+                {currentAccount && (<Button {...bindTrigger(popupState)}>Network : </Button> )}
+                <Popover {...bindPopover(popupState)} anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} transformOrigin={{vertical: 'top', horizontal: 'center'}}>
+                  <Typography sx={{ p: 2 }}>{network}</Typography>
+                </Popover>
+              </div>
+          )}
+        </PopupState>
+        <h5 className='network__name'>
           {!currentAccount && (
           <Button onClick={connectWallet}>Connect Wallet</Button>)}
         </h5>
-        <small className='client__review'>
-          {currentAccount && (<h5 className='client__review'> Connected Address : {currentAccount} </h5>)}
+        <small className='network'>
+          {currentAccount && (<h5 className='network'> Connected Address : {currentAccount} </h5>)}
         </small>
-        <form className="container testimonials__container eth" onSubmit={makeTransaction}>
+        <form className="container donation__container eth" onSubmit={makeTransaction}>
           <h5>Send ETH payment</h5>
           <input className="but" name="ether" type="text" placeholder="Amount in ETH" />
           <button type="submit" className="but but-primary">Donate now</button>
-          <a href={etherscan + 'tx/' + tx} target="_blank" rel="noreferrer"><Button>Voir la transaction</Button></a>
+          <br></br>
+          <a href={etherscan + 'tx/' + tx} target="_blank" rel="noreferrer" className="but but-primary">Voir la transaction</a>
         </form>
       </article>
     </section>
   )
 }
 
-export default Testimonials
+export default Donation

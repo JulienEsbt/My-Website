@@ -1,6 +1,6 @@
 import React from 'react'
-import {BsYoutube} from 'react-icons/bs'
-import {FaTwitter, FaInstagram, FaTiktok} from 'react-icons/fa'
+import { BsYoutube } from 'react-icons/bs'
+import { FaTwitter, FaInstagram, FaTiktok } from 'react-icons/fa'
 
 const CTA = () => {
   return (
