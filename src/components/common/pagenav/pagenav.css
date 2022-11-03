@@ -25,7 +25,3 @@
 .pagetext {
     padding: 2rem;
 }
-
-Hamburger {
-    transition: var(--transition);
-}

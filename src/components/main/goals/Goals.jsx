@@ -50,7 +50,7 @@ const Goals = () => {
           data.map(({avatar, name, review}, index) => {
             return (
               <SwiperSlide key={index} className='testimonials'>
-                <div className="client__avatar"><img className="pic" src={avatar}/></div>
+                <div className="client__avatar"><img className="pic" src={avatar} alt={name}/></div>
                 <h5 className='client__name'>{name}</h5>
                 <small className='client__review'>{review}</small>
               </SwiperSlide>
