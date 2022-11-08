@@ -41,8 +41,8 @@ const About = () => {
 
           <p>
             I am a 23 years old student in a european master cursus, learning computer science, fintech and entrepreneurship.
-            I am passionnate about dev, new techs, blockchain, finance, aeronautic, motorsports, travelling, cryptocurrencies, aerospace, etc.
-            Quit a lot of things, and I am always open to new things and new experiences.
+            I am passionate about dev, new techs, blockchain, finance, aeronautic, motorsports, travelling, cryptocurrencies, aerospace, etc.
+            Quit a lot of stuff ! I am always open to new opportunities, new meetings and new experiences.
           </p>
 
         </div>

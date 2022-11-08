@@ -37,14 +37,14 @@ const Contact = () => {
           <article className='contact__option'>
             <FaLinkedin className='contact__option-icon' />
             <h4>LinkedIn</h4>
-            <h5>julien.esterbet</h5>
+            <h5>julien Esterbet</h5>
             <a href="https://www.linkedin.com/in/julien-esterbet/" target='_blank' rel="noreferrer">Send A Message</a>
           </article>
 
           <article className='contact__option'>
             <FaTwitter className='contact__option-icon' />
             <h4>twitter</h4>
-            <h5>julienesbtcrypto</h5>
+            <h5>julien Esbt Crypto</h5>
             <a href="https://twitter.com/JulienEsbtCrypt" target='_blank' rel="noreferrer">Send A Message</a>
           </article>
         </div>

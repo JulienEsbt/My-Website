@@ -30,7 +30,7 @@ const Knowledge = () => {
               <BsPatchCheckFill className='knowledge__details-icon' />
               <div>
                 <h4>Polkadot</h4>
-                <small className='text-light'>Crowdloans, Stacking, ParaChains, ...</small>
+                <small className='text-light'>Crowd-loans, Stacking, ParaChains, ...</small>
               </div>
             </article>
             <article className='knowledge__details'>

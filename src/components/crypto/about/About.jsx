@@ -40,7 +40,8 @@ const About = () => {
           </div>
 
           <p>
-            Hi there! I'm a Blockchain Developer and Crypto Investor. I'm passionate about Blockchain Technology and I'm investing on Crypto Projects. I'm also developping Smarts Contracts with solidity and FrontEnd app with ReactJS.
+            Hi there! I'm a Blockchain Developer and Crypto Investor. I'm passionate about Blockchain Technology and investing on Crypto Projects.
+            I'm also developing Smarts Contracts with solidity and FrontEnd app with ReactJS.
           </p>
         </div>
       </div>

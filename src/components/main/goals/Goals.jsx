@@ -20,7 +20,7 @@ const data = [
     {
         avatar: AVATAR2,
         name: 'Learn',
-        review: 'I am so fascinate about cryptography, cyber security, blockchain, and decentralized technologies. I want to learn as much as I can about it.'
+        review: 'As I am so fascinate about cryptography, cybersecurity, blockchain, and decentralized technologies, I want to learn as much as I can about it.'
     },
     {
         avatar: AVATAR3,
@@ -35,7 +35,7 @@ const data = [
     {
         avatar: AVATAR5,
         name: 'Succeed',
-        review: 'I want to innovate, learn, fail, and succeed. Since I failed in the French Air Force, I know that I have to create value and do entrepreneurship, and own companies.'
+        review: 'I want to innovate, learn, fail, ... and success ! Since I failed in the French Air Force, I know that I want to create value and do entrepreneurship, own companies.'
     }
 ]
 

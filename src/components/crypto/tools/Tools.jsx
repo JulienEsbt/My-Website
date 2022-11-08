@@ -12,7 +12,7 @@ const Tools = () => {
       <div className='.container services__container'>
         <article className='service'>
           <div className='service__head'>
-            <h3>Exchanges</h3>
+            <h3>Exchanges (Referral Link)</h3>
           </div>
           <ul className='service__list'>
             <li>
