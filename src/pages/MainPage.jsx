@@ -11,20 +11,23 @@ import Contact from '../components/main/contact/Contact'
 import Footer from '../components/main/footer/Footer'
 
 const MainPage = () => {
-  return (
-    <>
-      <PageNav />
-      <Header />
-      <Nav />
-      <About />
-      <Experience />
-      <Services />
-      <Portfolio />
-      <Goals />
-      <Contact />
-      <Footer />
-    </>
-  )
+    return (
+        <>
+            <div id="top" />
+            <main id="main" tabIndex="-1">
+                <PageNav />
+                <Header />
+                <Nav />
+                <About />
+                <Experience />
+                <Services />
+                <Portfolio />
+                <Goals />
+                <Contact />
+                <Footer />
+            </main>
+        </>
+    )
 }
 
 export default MainPage

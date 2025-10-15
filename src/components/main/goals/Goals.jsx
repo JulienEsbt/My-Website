@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination } from 'swiper';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import AVATAR1 from '../../../assets/main/Crypto.jpeg'
 import AVATAR2 from '../../../assets/main/Helico.jpg'
