@@ -1,6 +1,6 @@
 {
   "name": "react-portfolio-website-v1",
-  "homepage": "htpps://julien-esterbet.com",
+  "homepage": "https://julien-esterbet.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "caniuse-lite": "^1.0.30001557",
     "emailjs-com": "^3.2.0",
     "ethers": "^5.7.2",
     "hamburger-react": "^2.5.0",
