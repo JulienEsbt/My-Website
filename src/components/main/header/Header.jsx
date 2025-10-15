@@ -1,4 +1,5 @@
 import React, {useLayoutEffect, useRef} from 'react'
+import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import gsap from 'gsap'
 import CTA from './CTA'
@@ -7,6 +8,8 @@ import ME from '../../../assets/main/Me.png'
 import './header.css'
 
 const Header = () => {
+    const {t} = useTranslation('common')
+
     const root = useRef(null)
     const title = useRef(null)
     const name = useRef(null)
@@ -17,7 +20,6 @@ const Header = () => {
     const scroll = useRef(null)
 
     useLayoutEffect(() => {
-        // Respecte "reduce motion"
         const mm = gsap.matchMedia()
         mm.add('(prefers-reduced-motion: no-preference)', () => {
             const tl = gsap.timeline({defaults: {ease: 'power3.out', duration: 0.7}})
@@ -37,13 +39,14 @@ const Header = () => {
         <header className="hero" ref={root}>
             <div className="container header__container">
                 <div className="hero__copy">
-                    <h5 ref={title} className="eyebrow">Hello, I’m</h5>
+                    <h5 ref={title} className="eyebrow">{t('header.eyebrow')}</h5>
+
                     <h1 ref={name} className="hero__title">
                         <span className="stroke">Julien</span> Esterbet
                     </h1>
-                    <p ref={role} className="hero__subtitle">Full-stack Developer • Web3 • FinTech</p>
 
-                    {/* CTA animé au hover avec Framer */}
+                    <p ref={role} className="hero__subtitle">{t('header.subtitle')}</p>
+
                     <div ref={cta}>
                         <CTA/>
                     </div>
@@ -67,7 +70,12 @@ const Header = () => {
                     <HeaderSocials/>
                 </div>
 
-                <a ref={scroll} href="#about" className="scroll__down" aria-label="Scroll to About section">
+                <a
+                    ref={scroll}
+                    href="#about"
+                    className="scroll__down"
+                    aria-label="Scroll to About section"
+                >
                     <span className="scroll__dot"/>
                     <span>Scroll</span>
                 </a>
