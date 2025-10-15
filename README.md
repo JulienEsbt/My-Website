@@ -1,71 +1,99 @@
-# Getting Started with Create React App
+# 🌐 Julien Esterbet — Personal Website & Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive **React-based portfolio** showcasing my projects, technical skills, and interests across **software engineering, Web3, and FinTech**.  
+This website also includes a dedicated section about **cryptocurrency & decentralized technologies**, reflecting my passion for blockchain, AI, and innovation.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Tech Stack
 
-### `npm start`
+- ⚛️ **React** — front-end framework
+- 🧭 **React Router v6** — page routing (`/` & `/crypto`)
+- 🎨 **MUI (Material UI)** & custom CSS — modern UI components
+- 💅 **Styled Components / CSS Modules** — modular styling
+- 🪙 **Ethers.js** — blockchain interactions (Metamask donation feature)
+- 📦 **Node.js / npm** — dependency management and build tools
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Project Structure
 
-### `npm test`
+    src/
+    ├── components/
+    │   ├── main/          → Main portfolio sections
+    │   ├── crypto/        → Crypto-focused pages and features
+    │   └── common/        → Shared components (e.g., PageNav)
+    ├── pages/
+    │   ├── MainPage.jsx   → Root route (/)
+    │   └── CryptoPage.jsx → Secondary route (/crypto)
+    ├── assets/            → Images, icons, media
+    └── App.jsx            → Global router and structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🧩 Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 🏠 **Portfolio Landing Page** — About, Experience, Projects, Goals, and Contact
+- 💰 **Crypto Page** — Ethereum-based donation feature using `ethers.js`
+- 🧭 **Smooth Navigation** — via `React Router v6` and in-page anchors
+- 💻 **Responsive Design** — fully mobile and tablet compatible
+- 🔒 **Clean Git Workflow** — `main` → `develop` → `feature/*`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧠 Scripts
 
-### `npm run eject`
+| Command | Description |
+|----------|-------------|
+| `npm install` | Install all dependencies |
+| `npm start` | Start development server at [http://localhost:3000](http://localhost:3000) |
+| `npm run build` | Build optimized production files |
+| `npm run lint` | (optional) Lint the codebase for consistent style |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Development Workflow
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**1️⃣ Create a feature branch**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    git checkout develop
+    git pull
+    git checkout -b feature/your-feature
 
-## Learn More
+**2️⃣ Commit and push changes**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    git add -A
+    git commit -m "feat: add new section"
+    git push -u origin feature/your-feature
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**3️⃣ Open a Pull Request**
+- base: `develop`
+- compare: `feature/your-feature`
+- Merge once reviewed
 
-### Code Splitting
+**4️⃣ Deploy**
+- When ready: PR from `develop` → `main`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## ✨ Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Julien Esterbet**  
+💼 Analyst Programmer @ Prepar-Vie  
+🎓 MSc Computer Science — FinTech specialization  
+🌍 Passionate about blockchain, AI, and sustainable innovation
 
-### Making a Progressive Web App
+🔗 [LinkedIn](https://www.linkedin.com/in/julien-esterbet/)  
+🐙 [GitHub](https://github.com/JulienEsbt)  
+📸 [Instagram](https://www.instagram.com/julien.esbt/)  
+🐦 [Twitter](https://twitter.com/JulienEsbtCrypt)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🧾 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is open-source and available under the **MIT License**.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# My-Portfolio-Website
+> “Knowledge and curiosity are the real compasses of innovation.” — *Julien Esterbet*
