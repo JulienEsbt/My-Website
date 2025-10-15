@@ -1,6 +1,6 @@
 import React from 'react'
-import { Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Pagination} from 'swiper';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import AVATAR1 from '../../../assets/main/Crypto.jpeg'
 import AVATAR2 from '../../../assets/main/Helico.jpg'
 import AVATAR3 from '../../../assets/main/Fly.jpg'
@@ -41,25 +41,26 @@ const data = [
 
 
 const Goals = () => {
-  return (
-    <section id='goals'>
-      <h5>Some More Personnal</h5>
-      <h2>Goals</h2>
+    return (
+        <section id='goals'>
+            <h5>Some More Personnal</h5>
+            <h2>Goals</h2>
 
-      <Swiper className="container testimonials__container" modules={[Pagination]} spaceBetween={40} slidesPerView={1} pagination={{ clickable: true }}>{
-          data.map(({avatar, name, review}, index) => {
-            return (
-              <SwiperSlide key={index} className='testimonials'>
-                <div className="client__avatar"><img className="pic" src={avatar} alt={name}/></div>
-                <h5 className='client__name'>{name}</h5>
-                <small className='client__review'>{review}</small>
-              </SwiperSlide>
-            )
-          })
-        }
-      </Swiper>
-    </section>
-  )
+            <Swiper className="container testimonials__container" modules={[Pagination]} spaceBetween={40}
+                    slidesPerView={1} pagination={{clickable: true}}>{
+                data.map(({avatar, name, review}, index) => {
+                    return (
+                        <SwiperSlide key={index} className='testimonials'>
+                            <div className="client__avatar"><img className="pic" src={avatar} alt={name}/></div>
+                            <h5 className='client__name'>{name}</h5>
+                            <small className='client__review'>{review}</small>
+                        </SwiperSlide>
+                    )
+                })
+            }
+            </Swiper>
+        </section>
+    )
 }
 
 export default Goals
