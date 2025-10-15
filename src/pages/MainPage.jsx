@@ -13,18 +13,18 @@ import Footer from '../components/main/footer/Footer'
 const MainPage = () => {
     return (
         <>
-            <div id="top" />
+            <div id="top"/>
             <main id="main" tabIndex="-1">
-                <PageNav />
-                <Header />
-                <Nav />
-                <About />
-                <Experience />
-                <Services />
-                <Portfolio />
-                <Goals />
-                <Contact />
-                <Footer />
+                <PageNav/>
+                <Header/>
+                <Nav/>
+                {/*<About/>
+                <Experience/>
+                <Services/>
+                <Portfolio/>
+                <Goals/>
+                <Contact/>
+                <Footer/>*/}
             </main>
         </>
     )
