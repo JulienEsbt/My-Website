@@ -10,19 +10,22 @@ import Contact from '../components/crypto/contact/Contact'
 import Footer from '../components/crypto/footer/Footer'
 
 const CryptoPage = () => {
-  return (
-    <div>
-      <PageNav />
-      <Header />
-      <Nav />
-      <About />
-      <Knowledge />
-      <Tools />
-      <Donation />
-      <Contact />
-      <Footer />
-    </div>
-  )
+    return (
+        <>
+            <div id="top" />
+            <main id="main" tabIndex="-1">
+                <PageNav />
+                <Header />
+                <Nav />
+                <About />
+                <Knowledge />
+                <Tools />
+                <Donation />
+                <Contact />
+                <Footer />
+            </main>
+        </>
+    )
 }
 
 export default CryptoPage
