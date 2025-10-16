@@ -11,7 +11,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {
-    const {t} = useTranslation(['about'])
+    const {t} = useTranslation()
     const sectionRef = useRef(null)
     const imgRef = useRef(null)
     const cardsRef = useRef([])
@@ -92,8 +92,8 @@ const About = () => {
 
     return (
         <section id='about' ref={sectionRef}>
-            <h5>{t('headingSmall')}</h5>
-            <h2>{t('heading')}</h2>
+            <h5>{t('about.headingSmall')}</h5>
+            <h2>{t('about.heading')}</h2>
 
             <div className='container about__container'>
                 <div className='about__me'>
@@ -104,36 +104,27 @@ const About = () => {
 
                 <div className='about__content'>
                     <div className='about__cards'>
-                        <article
-                            className='about__card'
-                            ref={(el) => (cardsRef.current[0] = el)}
-                        >
+                        <article className='about__card' ref={(el) => (cardsRef.current[0] = el)}>
                             <FaAward className='about__icon'/>
-                            <h5>{t('cards.expertiseTitle')}</h5>
-                            <small>{t('cards.expertiseText')}</small>
+                            <h5>{t('about.cards.expertiseTitle')}</h5>
+                            <small>{t('about.cards.expertiseText')}</small>
                         </article>
 
-                        <article
-                            className='about__card'
-                            ref={(el) => (cardsRef.current[1] = el)}
-                        >
+                        <article className='about__card' ref={(el) => (cardsRef.current[1] = el)}>
                             <FiUsers className='about__icon'/>
-                            <h5>{t('cards.collabTitle')}</h5>
-                            <small>{t('cards.collabText')}</small>
+                            <h5>{t('about.cards.collabTitle')}</h5>
+                            <small>{t('about.cards.collabText')}</small>
                         </article>
 
-                        <article
-                            className='about__card'
-                            ref={(el) => (cardsRef.current[2] = el)}
-                        >
+                        <article className='about__card' ref={(el) => (cardsRef.current[2] = el)}>
                             <VscFolderLibrary className='about__icon'/>
-                            <h5>{t('cards.innovationTitle')}</h5>
-                            <small>{t('cards.innovationText')}</small>
+                            <h5>{t('about.cards.innovationTitle')}</h5>
+                            <small>{t('about.cards.innovationText')}</small>
                         </article>
                     </div>
 
                     <p ref={textRef}>
-                        <Trans i18nKey='bio' ns='about' components={{b: <b/>}}/>
+                        <Trans i18nKey='about.bio' ns='common' components={{b: <b/>}}/>
                     </p>
                 </div>
             </div>
