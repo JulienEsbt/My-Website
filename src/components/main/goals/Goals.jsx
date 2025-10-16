@@ -1,66 +1,103 @@
-import React from 'react'
-import {Pagination} from 'swiper';
-import {Swiper, SwiperSlide} from 'swiper/react';
+import React, {useLayoutEffect, useRef} from 'react'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import {Pagination} from 'swiper/modules'
+import {useTranslation} from 'react-i18next'
+import {gsap} from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+
 import AVATAR1 from '../../../assets/main/Crypto.jpeg'
 import AVATAR2 from '../../../assets/main/Helico.jpg'
 import AVATAR3 from '../../../assets/main/Fly.jpg'
 import AVATAR4 from '../../../assets/main/Shuttle.jpg'
 import AVATAR5 from '../../../assets/main/SpaceX.jpg'
 
+import 'swiper/css'
+import 'swiper/css/pagination'
 import './goals.css'
-import 'swiper/css/pagination';
-import 'swiper/css';
 
-const data = [
-    {
-        avatar: AVATAR1,
-        name: 'Build',
-        review: 'Since I learned how to code, I have been fascinated by the idea of building my own projects. And even more since I learned about Web3 and blockchain.'
-    },
-    {
-        avatar: AVATAR2,
-        name: 'Learn',
-        review: 'As I am so fascinate about cryptography, cybersecurity, blockchain, and decentralized technologies, I want to learn as much as I can about it.'
-    },
-    {
-        avatar: AVATAR3,
-        name: 'Fly',
-        review: 'My biggest passion for now. I want to pass my Private Pilot Licence for both planes and helicopters as soon as possible. Flying is my biggest dream and the best sensation ever.'
-    },
-    {
-        avatar: AVATAR4,
-        name: 'Travel',
-        review: 'I love travelling, and my goal for the future is to be able to travel all around the world and discover new cultures, new places and new inspiring peoples.'
-    },
-    {
-        avatar: AVATAR5,
-        name: 'Succeed',
-        review: 'I want to innovate, learn, fail, ... and success ! Since I failed in the French Air Force, I know that I want to create value and do entrepreneurship, own companies.'
-    }
+gsap.registerPlugin(ScrollTrigger)
+
+const items = [
+    {key: 'build', avatar: AVATAR1},
+    {key: 'learn', avatar: AVATAR2},
+    {key: 'fly', avatar: AVATAR3},
+    {key: 'travel', avatar: AVATAR4},
+    {key: 'succeed', avatar: AVATAR5},
 ]
 
+const PART_INDEX = {avatar: 0, name: 1, review: 2}
 
-const Goals = () => {
+export default function Goals() {
+    const {t} = useTranslation()
+    const sectionRef = useRef(null)
+    const swiperRef = useRef(null)
+
+    // on stocke TOUTES les refs des slides à la suite: [s0-avatar, s0-name, s0-review, s1-avatar, ...]
+    const cardRefs = useRef([])
+
+    const setPartRef = (slideIdx, part) => (el) => {
+        const base = slideIdx * 3
+        const idx = base + PART_INDEX[part]
+        cardRefs.current[idx] = el
+    }
+
+    useLayoutEffect(() => {
+        const el = sectionRef.current
+        const parts = cardRefs.current.filter(Boolean)
+
+        const ctx = gsap.context(() => {
+            // fade-in de la section
+            gsap.from(el, {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {trigger: el, start: 'top 80%'},
+            })
+
+            // apparition en cascade de TOUTES les parties (toutes slides confondues)
+            gsap.from(parts, {
+                opacity: 0,
+                y: 16,
+                duration: 0.6,
+                ease: 'power2.out',
+                stagger: 0.06,
+                scrollTrigger: {trigger: el, start: 'top 72%'},
+            })
+        }, sectionRef)
+
+        return () => ctx.revert()
+    }, [])
+
     return (
-        <section id='goals'>
-            <h5>Some More Personnal</h5>
-            <h2>Goals</h2>
+        <section id="goals" ref={sectionRef}>
+            <h5>{t('goals.kicker')}</h5>
+            <h2>{t('goals.title')}</h2>
 
-            <Swiper className="container testimonials__container" modules={[Pagination]} spaceBetween={40}
-                    slidesPerView={1} pagination={{clickable: true}}>{
-                data.map(({avatar, name, review}, index) => {
-                    return (
-                        <SwiperSlide key={index} className='testimonials'>
-                            <div className="client__avatar"><img className="pic" src={avatar} alt={name}/></div>
-                            <h5 className='client__name'>{name}</h5>
-                            <small className='client__review'>{review}</small>
-                        </SwiperSlide>
-                    )
-                })
-            }
+            <Swiper
+                className="container testimonials__container"
+                modules={[Pagination]}
+                spaceBetween={40}
+                slidesPerView={1}
+                pagination={{clickable: true}}
+                ref={swiperRef}
+            >
+                {items.map(({key, avatar}, i) => (
+                    <SwiperSlide key={key} className="testimonials">
+                        <div className="client__avatar" ref={setPartRef(i, 'avatar')}>
+                            <img className="pic" src={avatar} alt={t(`goals.items.${key}.name`)}/>
+                        </div>
+
+                        <h5 className="client__name" ref={setPartRef(i, 'name')}>
+                            {t(`goals.items.${key}.name`)}
+                        </h5>
+
+                        <small className="client__review" ref={setPartRef(i, 'review')}>
+                            {t(`goals.items.${key}.review`)}
+                        </small>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </section>
     )
 }
-
-export default Goals

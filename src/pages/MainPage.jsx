@@ -2,6 +2,12 @@ import React from 'react'
 import PageNav from '../components/common/pagenav/PageNav'
 import Header from '../components/main/header/Header'
 import About from '../components/main/about/About'
+import Experience from "../components/main/experience/Experience.jsx";
+import Services from "../components/main/services/Services.jsx";
+import Portfolio from "../components/main/portfolio/Portfolio.jsx";
+import Goals from "../components/main/goals/Goals.jsx";
+import Contact from "../components/main/contact/Contact.jsx";
+import Footer from '../components/main/footer/Footer.jsx';
 
 const MainPage = () => {
     return (
@@ -12,12 +18,12 @@ const MainPage = () => {
                 <Header/>
                 {/*<Nav/>*/}
                 <About/>
-                {/*  <Experience/>
+                <Experience/>
                 <Services/>
                 <Portfolio/>
                 <Goals/>
                 <Contact/>
-                <Footer/>*/}
+                <Footer/>
             </main>
         </>
     )
