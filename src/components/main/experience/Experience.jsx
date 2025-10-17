@@ -1,122 +1,129 @@
-import React from 'react'
-import { BsPatchCheckFill } from 'react-icons/bs'
-import './experience.css'
+import React, {useLayoutEffect, useRef} from 'react';
+import {BsPatchCheckFill} from 'react-icons/bs';
+import {gsap} from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {useTranslation} from 'react-i18next';
+import './experience.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
-  return (
-    <section id='experience'>
-      <h5>What Skills I Have</h5>
-      <h2>My Experience</h2>
+    const {t} = useTranslation('common');
 
-      <div className="container experience__container">
-        <div className="experience__frontend">
-          <h3>Frontend Development</h3>
-          <div className="experience__content">
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>HTML</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    const sectionRef = useRef(null);
+    const detailsRef = useRef([]);
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>CSS</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    useLayoutEffect(() => {
+        const el = sectionRef.current;
+        const details = detailsRef.current.filter(Boolean);
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>JavaScript</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+        const ctx = gsap.context(() => {
+            gsap.from(el, {
+                opacity: 0,
+                y: 24,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {trigger: el, start: 'top 80%'},
+            });
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>React</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+            gsap.from(details, {
+                opacity: 0,
+                y: 12,
+                duration: 0.4,
+                ease: 'power2.out',
+                stagger: 0.06,
+                scrollTrigger: {trigger: el, start: 'top 70%'},
+            });
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Angular</h4>
-                <small className='text-light'>Intermediate</small>
-              </div>
-            </article>
+            details.forEach((node) => {
+                node.addEventListener('mouseenter', () =>
+                    gsap.to(node, {scale: 1.02, duration: 0.15, ease: 'power1.out'})
+                );
+                node.addEventListener('mouseleave', () =>
+                    gsap.to(node, {scale: 1, duration: 0.2, ease: 'power1.out'})
+                );
+            });
+        }, sectionRef);
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Svelte</h4>
-                <small className='text-light'>Beginner</small>
-              </div>
-            </article>
-          </div>
-        </div>
+        return () => ctx.revert();
+    }, []);
 
-        <div className="experience__backend">
-        <h3>Backend Development</h3>
-          <div className="experience__content">
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Java</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    // translation map for levels
+    const L = {
+        exp: t('experience.levels.experienced'),
+        int: t('experience.levels.intermediate'),
+        beg: t('experience.levels.beginner'),
+    };
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Solidity</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    // keep the same skills; just change 'level' to a code that we translate via L
+    const FRONT = [
+        {name: 'React', level: 'exp'},
+        {name: 'TypeScript', level: 'exp'},
+        {name: 'Tailwind CSS', level: 'exp'},
+        {name: 'Angular', level: 'int'},
+        {name: 'GSAP / Framer Motion', level: 'exp'},
+        {name: 'Web3 client (ethers.js)', level: 'int'},
+    ];
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Python</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    const BACK = [
+        {name: 'Java (Spring Boot)', level: 'exp'},
+        {name: 'Node.js (scripting, APIs)', level: 'int'},
+        {name: 'Python (FastAPI, automation)', level: 'int'},
+        {name: 'SQL (MySQL)', level: 'int'},
+        {name: 'Solidity (smart contracts)', level: 'int'},
+        {name: 'Blockchain integration (Hardhat / APIs)', level: 'int'},
+    ];
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>PHP</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
+    const setDetailRef = (el, idx) => (detailsRef.current[idx] = el);
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>MySql</h4>
-                <small className='text-light'>Intermediate</small>
-              </div>
-            </article>
+    return (
+        <section id="experience" ref={sectionRef}>
+            <h5>{t('experience.kicker')}</h5>
+            <h2>{t('experience.title')}</h2>
 
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon' />
-              <div>
-                <h4>Scala</h4>
-                <small className='text-light'>Experienced</small>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+            <div className="container experience__container">
+                {/* FRONTEND */}
+                <div className="experience__frontend">
+                    <h3>{t('experience.groups.frontend')}</h3>
+                    <div className="experience__content">
+                        {FRONT.map((s, i) => (
+                            <article
+                                className="experience__details"
+                                key={`fe-${s.name}`}
+                                ref={(el) => setDetailRef(el, i)}
+                            >
+                                <BsPatchCheckFill className="experience__details-icon"/>
+                                <div>
+                                    <h4>{s.name}</h4>
+                                    <small className="text-light">{L[s.level]}</small>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
 
-export default Experience
+                {/* BACKEND */}
+                <div className="experience__backend">
+                    <h3>{t('experience.groups.backend')}</h3>
+                    <div className="experience__content">
+                        {BACK.map((s, i) => (
+                            <article
+                                className="experience__details"
+                                key={`be-${s.name}`}
+                                ref={(el) => setDetailRef(el, FRONT.length + i)}
+                            >
+                                <BsPatchCheckFill className="experience__details-icon"/>
+                                <div>
+                                    <h4>{s.name}</h4>
+                                    <small className="text-light">{L[s.level]}</small>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Experience;

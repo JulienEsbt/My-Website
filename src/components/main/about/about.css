@@ -9,10 +9,10 @@
     aspect-ratio: 1/1;
     border-radius: 2rem;
     background: linear-gradient(
-        45deg,
-        transparent,
-        var(--color-primary),
-        transparent
+            45deg,
+            transparent,
+            var(--color-primary),
+            transparent
     );
     display: grid;
     place-items: center;
@@ -100,11 +100,36 @@
         gap: 1rem;
     }
 
-    .about__content{
+    .about__content {
         text-align: center;
     }
 
     .about__content p {
         margin: 1.5rem 0;
+    }
+
+    /* === Smooth GSAP integration without breaking :hover === */
+    .about__me-image {
+        --ty: 0px;
+        --rot: 10deg;
+        transform: translateY(var(--ty)) rotate(var(--rot));
+        transition: var(--transition);
+    }
+
+    .about__me-image:hover {
+        --rot: 0deg;
+    }
+
+    .about__card {
+        --y: 0px;
+        transform: translateY(var(--y));
+        transition: var(--transition);
+    }
+
+    /* Améliore la fluidité des anims */
+    .about__me-image,
+    .about__card,
+    .about__content p {
+        will-change: transform, opacity;
     }
 }
