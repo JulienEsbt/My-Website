@@ -5,6 +5,13 @@
     margin: 0 1rem;
 }
 
+/* sécurise la largeur/centrage même avec la classe ".container" littérale */
+.services__container {
+    max-width: var(--container-width-1g, 75%); /* même var que ton thème */
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .service {
     background: var(--color-bg-variant);
     border-radius: 2rem;
@@ -73,4 +80,32 @@
     .service {
         margin: 0 1rem;
     }
+}
+
+/* --- micro-animations, layout inchangé --- */
+.service {
+    will-change: transform, box-shadow;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+}
+
+.service:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+}
+
+/* petite lueur sous l’entête après reveal */
+.service__head {
+    position: relative;
+}
+
+.service__head::after {
+    content: "";
+    position: absolute;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: -6px;
+    height: 12px;
+    border-radius: 999px;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(77, 181, 255, .25), transparent 70%);
+    pointer-events: none;
 }

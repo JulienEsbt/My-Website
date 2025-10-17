@@ -1,0 +1,157 @@
+{
+  "site": {
+    "title": "Julien Esterbet — Portfolio",
+    "nav": {
+      "home": "Home",
+      "crypto": "Crypto"
+    }
+  },
+  "header": {
+    "eyebrow": "Hello, I’m",
+    "subtitle": "Full-stack Developer • Web3 • FinTech"
+  },
+  "cta": {
+    "open": "Open CV",
+    "download": "Download CV",
+    "talk": "Let’s talk"
+  },
+  "experience": {
+    "kicker": "What Skills I Have",
+    "title": "My Experience",
+    "groups": {
+      "frontend": "Frontend Development",
+      "backend": "Backend Development"
+    },
+    "levels": {
+      "experienced": "Experienced",
+      "intermediate": "Intermediate",
+      "beginner": "Beginner"
+    }
+  },
+  "services": {
+    "kicker": "What I Offer",
+    "title": "Services",
+    "groups": {
+      "backend": "BackEnd",
+      "webdev": "Web Development",
+      "blockchain": "Blockchain / Web3"
+    },
+    "items": {
+      "backend": {
+        "api": "Design & build REST/GraphQL APIs (Java / Spring Boot, Python / FastAPI)",
+        "automation": "Data pipelines & automation (ETL, scheduled jobs, reports)",
+        "integration": "3rd-party integrations (payments, CRMs, Slack/Notion, e-mail)",
+        "quality": "Testing, CI, performance & security hardening"
+      },
+      "webdev": {
+        "site": "High-performance portfolio / showcase site (React + Vite)",
+        "spa": "Modern SPA & dashboards (React / TypeScript)",
+        "uiMotion": "Design system & motion (GSAP / Framer Motion)",
+        "forms": "UX forms, e-mail flows & analytics setup"
+      },
+      "blockchain": {
+        "contracts": "Smart contracts in Solidity with tests (Hardhat)",
+        "dapp": "dApp front-end (ethers.js) with wallet connect",
+        "auditLite": "Implementation review & upgrade path (light audit)",
+        "payments": "On-chain payments & Web3 integrations"
+      }
+    }
+  },
+  "portfolio": {
+    "kicker": "My Recent Work",
+    "title": "Portfolio",
+    "cta": "View on GitHub",
+    "items": {
+      "1": {
+        "title": "EVM smart contract to archive files on-chain"
+      },
+      "2": {
+        "title": "Multi-layer feed-forward neural network (NumPy)"
+      },
+      "3": {
+        "title": "Messenger-like dApp storing messages on-chain"
+      }
+    }
+  },
+  "about": {
+    "headingSmall": "Get to Know",
+    "heading": "About Me",
+    "cards": {
+      "expertiseTitle": "Expertise",
+      "expertiseText": "Software • AI • Web3 • FinTech",
+      "collabTitle": "Collaboration",
+      "collabText": "Cross-team projects & research",
+      "innovationTitle": "Innovation",
+      "innovationText": "Human-centered technology"
+    },
+    "bio": "I'm a 26-year-old developer driven by curiosity and coherence between technology and meaning. After graduating with a European Master’s in Computer Science (FinTech specialization), I joined <b>Prepar-Vie</b> to contribute to digital transformation and rethink how software can serve both efficiency and transparency.<br/><br/>My path bridges <b>AI</b>, <b>Web3</b>, <b>cybersecurity</b> and <b>finance</b> — but also philosophy, sociology and aeronautics. I believe real innovation emerges when worlds intersect.<br/><br/>I’m driven by a simple idea: technology should enhance human freedom, not replace it."
+  },
+  "contact": {
+    "kicker": "Get In Touch",
+    "title": "Contact Me",
+    "options": {
+      "email": {
+        "title": "Email",
+        "value": "julien.esterbet@gmail.com",
+        "cta": "Send a message"
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "value": "Julien Esterbet",
+        "cta": "Send a message"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "value": "JulienEsbtCrypt",
+        "cta": "Send a message"
+      }
+    },
+    "form": {
+      "name": "Your Full Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "submit": "Send Email",
+      "success": "Message sent! I'll get back to you soon.",
+      "error": "Oops, message not sent. Try again later."
+    }
+  },
+  "footer": {
+    "logo": "Julien ESTERBET",
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "experience": "Experience",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "goals": "Goals",
+      "contact": "Contact"
+    },
+    "copyright": "© Julien Esterbet Portfolio. All rights reserved."
+  },
+  "goals": {
+    "kicker": "Some More Personal",
+    "title": "Goals",
+    "items": {
+      "build": {
+        "name": "Build",
+        "review": "Since I learned how to code, I’ve been fascinated by building my own projects—especially since discovering Web3 and blockchain."
+      },
+      "learn": {
+        "name": "Learn",
+        "review": "I’m deeply into cryptography, cybersecurity, blockchain and decentralized tech, and I want to learn as much as I can."
+      },
+      "fly": {
+        "name": "Fly",
+        "review": "My biggest passion right now. I want to get my Private Pilot Licence for both planes and helicopters. Flying is the ultimate feeling."
+      },
+      "travel": {
+        "name": "Travel",
+        "review": "I love traveling—my goal is to explore the world and discover new cultures, places and inspiring people."
+      },
+      "succeed": {
+        "name": "Succeed",
+        "review": "I want to innovate, learn, fail… and succeed! After missing out on the French Air Force, I know I want to create value and build companies."
+      }
+    }
+  }
+}
