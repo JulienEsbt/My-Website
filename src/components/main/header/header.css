@@ -1,84 +1,96 @@
-header {
-    height: 100vh;
-    overflow: hidden;
+/* === PATCH LAYOUT (colle ça en bas de header.css) ======================== */
+/* ton bloc hero/header */
+.hero, header {
+    /* réserve ~72–96px en haut (selon viewport) */
+    padding-top: clamp(72px, 8vh, 96px);
 }
 
+/* Centre vraiment le container et agrandit l’espace entre colonnes */
 .header__container {
-    text-align: center;
-    height: 100%;
-    position: relative;
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr; /* colonnes équilibrées */
+    gap: clamp(2rem, 6vw, 5rem); /* + d’air entre texte & photo */
+    align-items: center;
+    position: relative; /* ancre les socials à ce bloc */
 }
 
-/* ==================== CTA ==================== */
+/* Empêche le portrait d’empiéter sur le texte et centre dans sa colonne */
+.hero__visual {
+    justify-self: center;
+}
+
+.me {
+    position: relative; /* pour le pseudo-élément/glow */
+    width: clamp(18rem, 28vw, 24rem); /* un poil plus compact */
+}
+
+/* Laisse un peu d’espace sous les CTA pour éviter l’impression de chevauchement */
 .cta {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
+    margin-top: 1.5rem;
+    margin-bottom: .75rem; /* NEW */
 }
 
-/* ==================== HEADER SOCIALS ==================== */
+/* Socials : calés par rapport au container, pas à la fenêtre */
+/* === HEADER SOCIALS — taille ajustée + centrage parfait === */
 .header__socials {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    /* pilule */
+    width: 90px;
+    height: 200px;
+    border-radius: 55px;
+    background: rgba(10, 12, 23, 0.85);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 0.8rem;
-    position: absolute;
-    left: 0;
-    bottom: 3rem;
+    gap: 26px; /* un peu plus d'espace entre les icônes */
+    backdrop-filter: blur(6px);
 }
 
+.header__socials a {
+    width: 48px; /* taille plus grande */
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem; /* icône plus visible */
+    color: #cfd6e6;
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.header__socials a:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* ligne bleue décorative centrée */
 .header__socials::after {
     content: "";
-    width: 1px;
-    height: 2rem;
+    width: 2px;
+    height: 34px;
+    border-radius: 2px;
     background: var(--color-primary);
+    opacity: 0.95;
 }
 
-/* ==================== ME ==================== */
-.me {
-    background: linear-gradient(var(--color-primary), transparent);
-    width: 22rem;
-    height: 30rem;
-    position: absolute;
-    left: calc(50% - 11rem);
-    margin-top: 4rem;
-    border-radius: 12rem 12rem 0 0;
-    overflow: hidden;
-    padding: 5rem 1.5rem 1.5rem 1.5rem;
+/* disparition sur mobile */
+@media (max-width: 1024px) {
+    .header__socials {
+        display: none;
+    }
 }
 
-/* ==================== SCROLL DOWN ==================== */
+/* Scroll down discret et non intrusif */
 .scroll__down {
-    position: absolute;
-    right: -2.3rem;
-    bottom: 5rem;
-    transform: rotate(90deg);
-    font-weight: 300;
-    font-size: 0.9rem;
-}
-
-/* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
-@media screen and (min-width: 100000px) {
-    .header__socials, .scroll__down {
-        display: none;
-    }
-}
-
-/* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
-@media screen and (max-width: 1024px) {
-    header {
-        height: 68vh;
-    }
-}
-
-/* ==================== MEDIA QUERIES (SMALL DEVICES) ==================== */
-@media screen and (max-width: 600px) {
-    header {
-        height: 100vh;
-    }
-
-    .header__socials, .scroll__down {
-        display: none;
-    }
+    right: 1rem;
+    bottom: 3.5rem;
+    opacity: .8;
 }

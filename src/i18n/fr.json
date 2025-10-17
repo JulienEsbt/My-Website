@@ -1,0 +1,157 @@
+{
+  "site": {
+    "title": "Julien Esterbet — Portfolio",
+    "nav": {
+      "home": "Accueil",
+      "crypto": "Crypto"
+    }
+  },
+  "header": {
+    "eyebrow": "Bonjour, je suis",
+    "subtitle": "Développeur Full-stack • Web3 • FinTech"
+  },
+  "cta": {
+    "open": "Ouvrir le CV",
+    "download": "Télécharger le CV",
+    "talk": "Discutons"
+  },
+  "experience": {
+    "kicker": "Mes compétences",
+    "title": "Mon expérience",
+    "groups": {
+      "frontend": "Développement Frontend",
+      "backend": "Développement Backend"
+    },
+    "levels": {
+      "experienced": "Confirmé",
+      "intermediate": "Intermédiaire",
+      "beginner": "Débutant"
+    }
+  },
+  "services": {
+    "kicker": "Ce que je propose",
+    "title": "Services",
+    "groups": {
+      "backend": "BackEnd",
+      "webdev": "Développement Web",
+      "blockchain": "Blockchain / Web3"
+    },
+    "items": {
+      "backend": {
+        "api": "Conception & dev d’API REST/GraphQL (Java / Spring Boot, Python / FastAPI)",
+        "automation": "Pipelines de données & automatisation (ETL, batchs, rapports)",
+        "integration": "Intégrations tierces (paiements, CRM, Slack/Notion, e-mail)",
+        "quality": "Tests, CI, optimisation perf & amélioration sécurité"
+      },
+      "webdev": {
+        "site": "Site vitrine / portfolio haute performance (React + Vite)",
+        "spa": "SPA modernes & dashboards (React / TypeScript)",
+        "uiMotion": "Design system & micro-interactions (GSAP / Framer Motion)",
+        "forms": "Formulaires, parcours e-mail & mise en place analytics"
+      },
+      "blockchain": {
+        "contracts": "Smart contracts en Solidity avec tests (Hardhat)",
+        "dapp": "Front-end de dApp (ethers.js) avec Wallet Connect",
+        "auditLite": "Revue d’implémentation & trajectoire d’upgrade (audit léger)",
+        "payments": "Paiements on-chain & intégrations Web3"
+      }
+    }
+  },
+  "portfolio": {
+    "kicker": "Mes projets récents",
+    "title": "Portfolio",
+    "cta": "Voir sur GitHub",
+    "items": {
+      "1": {
+        "title": "Smart contract EVM pour archiver des fichiers on-chain"
+      },
+      "2": {
+        "title": "Machine Learning - Neural Network (NumPy)"
+      },
+      "3": {
+        "title": "Application décentralisé type Messenger stockant les messages on-chain"
+      }
+    }
+  },
+  "about": {
+    "headingSmall": "Faisons connaissance",
+    "heading": "À propos de moi",
+    "cards": {
+      "expertiseTitle": "Expertise",
+      "expertiseText": "Software • IA • Web3 • FinTech",
+      "collabTitle": "Collaboration",
+      "collabText": "Projets transverses & recherche",
+      "innovationTitle": "Innovation",
+      "innovationText": "Technologie centrée sur l’humain"
+    },
+    "bio": "Développeur de 26 ans, je cherche l’équilibre entre technologie et sens. Diplômé d’un Master européen en informatique (spécialisation FinTech), j’ai rejoint <b>Prepar-Vie</b> pour contribuer à la transformation digitale et repenser comment le logiciel sert l’efficacité et la transparence.<br/><br/>Mon parcours relie <b>IA</b>, <b>Web3</b>, <b>cybersécurité</b> et <b>finance</b> — mais aussi philosophie, sociologie et aéronautique. Je crois que l’innovation naît quand les univers se croisent.<br/><br/>Mon idée fixe : la technologie doit augmenter la liberté humaine, pas la remplacer."
+  },
+  "contact": {
+    "kicker": "Entrer en contact",
+    "title": "Contactez-moi",
+    "options": {
+      "email": {
+        "title": "Email",
+        "value": "julien.esterbet@gmail.com",
+        "cta": "Envoyer un message"
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "value": "Julien Esterbet",
+        "cta": "Envoyer un message"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "value": "JulienEsbtCrypt",
+        "cta": "Envoyer un message"
+      }
+    },
+    "form": {
+      "name": "Votre nom complet",
+      "email": "Votre email",
+      "message": "Votre message",
+      "submit": "Envoyer",
+      "success": "Message envoyé ! Je vous réponds vite.",
+      "error": "Oups, l’envoi a échoué. Réessayez plus tard."
+    }
+  },
+  "footer": {
+    "logo": "Julien ESTERBET",
+    "links": {
+      "home": "Accueil",
+      "about": "À propos",
+      "experience": "Expérience",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "goals": "Objectifs",
+      "contact": "Contact"
+    },
+    "copyright": "© Portfolio de Julien Esterbet. Tous droits réservés."
+  },
+  "goals": {
+    "kicker": "Un peu plus personnel",
+    "title": "Objectifs",
+    "items": {
+      "build": {
+        "name": "Construire",
+        "review": "J’ai toujours aimé construire — des systèmes, des outils, des idées qui prennent forme avec le temps. Créer me permet de trouver un équilibre. C’est ma façon de laisser une trace, quelque chose qui parle pour moi quand je ne suis plus là."
+      },
+      "learn": {
+        "name": "Apprendre",
+        "review": "Je suis curieux de tout — la tech, la philosophie, la politique, la psychologie. J’essaie de comprendre comment les choses fonctionnent, mais surtout pourquoi on pense comme on pense. Apprendre, c’est ma manière de rester éveillé au monde."
+      },
+      "fly": {
+        "name": "Voler",
+        "review": "Voler m’a toujours fasciné. Ce n’est pas qu’une question de machines ou d’altitude — c’est une question de regard. Là-haut, tout semble plus simple, plus léger. J’aimerais obtenir ma licence de pilote, surtout pour ce sentiment de calme au-dessus du bruit."
+      },
+      "travel": {
+        "name": "Voyager",
+        "review": "Voyager me fait me sentir vivant. J’aime me perdre dans des endroits inconnus, rencontrer des gens que je ne reverrai sans doute jamais, et voir comment les autres vivent et pensent. Ça me rappelle que mon monde n’est pas le seul à exister."
+      },
+      "succeed": {
+        "name": "Réussir",
+        "review": "Je ne sais pas vraiment ce que veut dire réussir. Pour moi, c’est faire ce que j’aime sans me perdre en chemin. Continuer à apprendre, à rater, à construire — et peut-être, en passant, donner envie à d’autres d’en faire autant."
+      }
+    }
+  }
+}
