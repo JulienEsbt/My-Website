@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
-import AVATAR1 from '../../../assets/main/Crypto.jpeg'
+import AVATAR1 from '../../../assets/main/crypto.jpeg'
 import AVATAR2 from '../../../assets/main/Helico.jpg'
 import AVATAR3 from '../../../assets/main/Fly.jpg'
 import AVATAR4 from '../../../assets/main/Shuttle.jpg'
