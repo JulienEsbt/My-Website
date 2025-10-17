@@ -68,3 +68,7 @@ input, textarea {
         width: var(--container-width-sm);
     }
 }
+
+input:hover, textarea:hover {
+    background: rgba(255, 255, 255, 0.035);
+}
