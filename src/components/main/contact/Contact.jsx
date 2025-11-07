@@ -7,7 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {gsap} from 'gsap';
 
 const Contact = () => {
-    const {t} = useTranslation(); // avec ta config en.json / fr.json (namespace par défaut)
+    const {t} = useTranslation(); // avec ta config main_en.json / main_fr.json (namespace par défaut)
 
     const sectionRef = useRef(null);
     const imgRef = useRef(null);

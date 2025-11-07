@@ -3,8 +3,8 @@ import {initReactI18next} from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 // Import statique (bundlé par Vite)
-import i18n_en from './en.json'
-import i18n_fr from './fr.json'
+import i18n_en from './main_en.json'
+import i18n_fr from './main_fr.json'
 
 i18n
     .use(LanguageDetector)
