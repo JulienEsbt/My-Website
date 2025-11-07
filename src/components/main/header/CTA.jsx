@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import CV from '../../../assets/main/cv.pdf'
+import {LINKS} from "../../../config/links.js";
 
 const Btn = ({href, children, className = 'btn', ...props}) => (
     <motion.a
@@ -20,10 +20,10 @@ const CTA = () => {
 
     return (
         <div className="cta" role="group" aria-label="Primary actions">
-            <Btn href={CV} target="_blank" rel="noreferrer">
+            <Btn href={LINKS.files.cv} target="_blank" rel="noreferrer">
                 {t('cta.open')}
             </Btn>
-            <Btn href={CV} download>
+            <Btn href={LINKS.files.cv} download>
                 {t('cta.download')}
             </Btn>
             <Btn href="#contact" className="btn btn-primary">

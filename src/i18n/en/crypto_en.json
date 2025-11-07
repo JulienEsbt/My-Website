@@ -1,0 +1,144 @@
+{
+  "header": {
+    "eyebrow": "Web3 • Crypto • DeFi",
+    "subtitle": "Blockchain • Crypto • Investment • Dev",
+    "scroll": "Scroll",
+    "scrollAria": "Scroll to the Contact section",
+    "altPortrait": "Crypto avatar of Julien (Julienesbt.eth)"
+  },
+  "cta": {
+    "groupLabel": "Crypto social links",
+    "twitter": "Visit my Twitter profile",
+    "youtube": "Visit my YouTube channel",
+    "tiktok": "Visit my TikTok profile",
+    "instagram": "Visit my Instagram profile"
+  },
+  "about": {
+    "headingSmall": "What I do",
+    "heading": "Who am I",
+    "alt": "Crypto avatar / coworking visual",
+    "cards": {
+      "passionTitle": "Passionate",
+      "passionText": "About blockchain technology",
+      "investingTitle": "Investing",
+      "investingText": "In crypto & Web3 projects",
+      "devTitle": "Developing",
+      "devText": "EVM smart contracts & React apps"
+    },
+    "bio": "Hi there! I'm a <b>Blockchain Developer</b> and <b>Crypto Investor</b>. I love building around Web3 (Solidity, EVM, React) and backing projects I believe in."
+  },
+  "knowledge": {
+    "kicker": "What interests me",
+    "title": "My knowledge",
+    "groups": {
+      "blockchain": "Blockchain",
+      "other": "Other"
+    },
+    "labels": {
+      "exchanges": "Exchanges",
+      "wallets": "Wallets",
+      "chains": "Blockchains",
+      "tech": "Technologies",
+      "tools": "Tools"
+    },
+    "items": {
+      "bitcoin": "Functioning, mining, Lightning Network, ...",
+      "ethereum": "Staking, layers, DeFi, bridges, ERCs, EVM, ...",
+      "polkadot": "Crowdloans, staking, parachains, ...",
+      "solana": "Consensus, DeFi, NFTs, explorer, ...",
+      "elrond": "Consensus, DeFi, launchpad, explorer, ...",
+      "cosmos": "Consensus, Osmosis, Terra, Keplr, ...",
+      "exchanges": "Binance, SwissBorg, FTX, ...",
+      "wallets": "MetaMask, XDEFI, Keplr, Phantom, ...",
+      "chains": "EVM, Avalanche, Cardano, NEAR, ...",
+      "nfts": "OpenSea, Sandbox, Pokmi, SoulWare, ...",
+      "tech": "Rollups, ZK-Proofs, cryptography, ...",
+      "tools": "Ledger, explorers, CoinMarketCap, Sclapex..."
+    }
+  },
+  "tools": {
+    "kicker": "What I use",
+    "title": "Tools",
+    "groups": {
+      "exchanges": "Exchanges (Referral links)",
+      "others": "Others",
+      "explorers": "Some explorers"
+    },
+    "aria": {
+      "open": "Open {{site}} in a new tab",
+      "listExchanges": "List of exchange links",
+      "listOthers": "List of other tools",
+      "listExplorers": "List of blockchain explorers"
+    }
+  },
+  "contact": {
+    "kicker": "Get in touch",
+    "title": "Contact me",
+    "options": {
+      "email": {
+        "title": "Email",
+        "value": "julien.esterbet@gmail.com",
+        "cta": "Send a message"
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "value": "julien-esterbet",
+        "cta": "Write me"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "value": "Julien Esbt Crypto",
+        "cta": "DM me"
+      }
+    },
+    "form": {
+      "name": "Your full name",
+      "email": "Your email",
+      "message": "Your message",
+      "submit": "Send Email",
+      "success": "Message sent successfully. Thanks!",
+      "error": "Oops, something went wrong. Please try again."
+    }
+  },
+  "footer": {
+    "logo": "Julien ESTERBET",
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "knowledge": "Knowledge",
+      "tools": "Tools",
+      "donation": "Donation",
+      "contact": "Contact"
+    },
+    "copyright": "© Julien Esterbet — Crypto Portfolio. All rights reserved."
+  },
+  "donation": {
+    "kicker": "If you want to make a",
+    "title": "Donation",
+    "alt": {
+      "eth": "Ethereum logo / avatar"
+    },
+    "aria": {
+      "showNetwork": "Show current network"
+    },
+    "network": {
+      "button": "Network",
+      "unknown": "Chain ID:"
+    },
+    "wallet": {
+      "connect": "Connect Wallet",
+      "helper": "Connect with MetaMask or any EVM wallet. You can also switch network (BSC, Polygon, Gnosis, etc.).",
+      "connected": "Connected address:"
+    },
+    "form": {
+      "title": "Send ETH Donation",
+      "placeholder": "Amount in ETH",
+      "submit": "Donate now",
+      "viewTx": "View transaction",
+      "noTx": "No transaction yet",
+      "success": "Transaction sent — thank you!",
+      "error": "Something went wrong, please retry."
+    },
+    "receiver": "Receiver: {{addr}}"
+  }
+}
