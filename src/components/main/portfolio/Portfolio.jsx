@@ -7,13 +7,15 @@ import IMG3 from '../../../assets/main/Wave.png'
 import './portfolio.css'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {LINKS} from '../../../config/links'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const data = [
-    {id: '1', image: IMG1, github: 'https://github.com/JulienEsbt/Megalis-Smart-Contract'},
-    {id: '2', image: IMG2, github: 'https://github.com/JulienEsbt/Neural-Networks-in-Pure-NumPy'},
-    {id: '3', image: IMG3, github: 'https://github.com/JulienEsbt/My-Wave-Portal-Front'}
+// on garde l'ordre + l'ID pour l'i18n, mais on lit les URLs depuis LINKS
+const ITEMS = [
+    {id: '1', image: IMG1, link: LINKS.projects.megalis},
+    {id: '2', image: IMG2, link: LINKS.projects.ffnn},
+    {id: '3', image: IMG3, link: LINKS.projects.wave}
 ]
 
 export default function Portfolio() {
@@ -21,75 +23,40 @@ export default function Portfolio() {
     const sectionRef = useRef(null)
     const imgRef = useRef(null)
     const cardsRef = useRef([])
-    const textRef = useRef(null)
+    const btnRef = useRef(null)
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Apparition globale
             gsap.from(sectionRef.current, {
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 80%',
-                },
+                opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
             })
 
-            // Image
             gsap.fromTo(
                 imgRef.current,
                 {'--ty': '40px', opacity: 0},
                 {
-                    '--ty': '0px',
-                    opacity: 1,
-                    duration: 0.9,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 80%',
-                    },
+                    '--ty': '0px', opacity: 1, duration: 0.9, ease: 'power3.out',
+                    scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
                 }
             )
 
-            // Flottement permanent
             gsap.to(imgRef.current, {
-                '--ty': '-=6px',
-                yoyo: true,
-                repeat: -1,
-                duration: 3,
-                ease: 'sine.inOut',
+                '--ty': '-=6px', yoyo: true, repeat: -1, duration: 3, ease: 'sine.inOut',
             })
 
-            // Cartes
             gsap.fromTo(
-                cardsRef.current,
+                cardsRef.current.filter(Boolean),
                 {'--y': '20px', opacity: 0},
                 {
-                    '--y': '0px',
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'power2.out',
-                    stagger: 0.12,
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 75%',
-                    },
+                    '--y': '0px', opacity: 1, duration: 0.6, ease: 'power2.out', stagger: 0.12,
+                    scrollTrigger: {trigger: sectionRef.current, start: 'top 75%'},
                 }
             )
 
-            // Paragraphe
-            gsap.from(textRef.current, {
-                opacity: 0,
-                y: 20,
-                duration: 0.7,
-                ease: 'power2.out',
-                delay: 0.1,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 70%',
-                },
+            gsap.from(btnRef.current, {
+                opacity: 0, y: 20, duration: 0.5, ease: 'power2.out',
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 70%'},
             })
         }, sectionRef)
 
@@ -102,14 +69,29 @@ export default function Portfolio() {
             <h2>{t('portfolio.title')}</h2>
 
             <div className="container portfolio__container" ref={imgRef}>
-                {data.map(({id, image, github}) => (
+                {ITEMS.map(({id, image, link}, idx) => (
                     <article key={id} className="portfolio__item">
-                        <div className="portfolio__item-image" ref={(el) => (cardsRef.current[id] = el)}>
-                            <img src={image} alt={t(`portfolio.items.${id}.title`)}/>
+                        <div
+                            className="portfolio__item-image"
+                            ref={(el) => (cardsRef.current[idx] = el)}
+                        >
+                            <img
+                                src={image}
+                                alt={t(`portfolio.items.${id}.title`)}
+                                loading="lazy"
+                                decoding="async"
+                            />
                         </div>
                         <h3>{t(`portfolio.items.${id}.title`)}</h3>
                         <div className="portfolio__item-cta">
-                            <a className="btn" href={github} target="_blank" rel="noreferrer" ref={textRef}>
+                            <a
+                                className="btn"
+                                href={link}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={`${t('portfolio.cta')} · ${t(`portfolio.items.${id}.title`)}`}
+                                ref={idx === 0 ? btnRef : undefined}
+                            >
                                 <BsGithub/> {t('portfolio.cta')} <BsGithub/>
                             </a>
                         </div>

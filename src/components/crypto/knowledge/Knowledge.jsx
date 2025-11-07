@@ -1,111 +1,122 @@
-import React from 'react'
+import React, {useLayoutEffect, useRef} from 'react'
 import './knowledge.css'
-import { BsPatchCheckFill } from 'react-icons/bs'
+import {BsPatchCheckFill} from 'react-icons/bs'
+import {gsap} from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {useTranslation} from 'react-i18next'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Knowledge = () => {
-  return (
-    <section id='knowledge'>
-      <h5>What Interests I Have</h5>
-      <h2>My knowledge</h2>
+    const {t} = useTranslation('crypto')
 
-      <div className="container knowledge__container">
-        <div className="knowledge__frontend">
-          <h3>Blockchain</h3>
-          <div className="knowledge__content">
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Bitcoin</h4>
-                <small className='text-light'>Functioning, Mining, Lightning Network, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Ethereum</h4>
-                <small className='text-light'>Stacking, Layers, DeFi, Bridges, ERCs, EVM...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Polkadot</h4>
-                <small className='text-light'>Crowd-loans, Stacking, ParaChains, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Solana</h4>
-                <small className='text-light'>Consensus, DeFi, NFTs, Explorer, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Elrond</h4>
-                <small className='text-light'>Consensus, DeFi, Launchpad, Explorer, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Cosmos</h4>
-                <small className='text-light'>Consensus, Osmosis, Terra, Kepler, ...</small>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div className="knowledge__backend">
-        <h3>Other</h3>
-          <div className="knowledge__content">
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Exchanges</h4>
-                <small className='text-light'>Binance, Swissborg, FTX, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Wallets</h4>
-                <small className='text-light'>Metamask, XDefi, Kepler, Phantom, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Blockchains</h4>
-                <small className='text-light'>EVM, Avalanche, Cardano, Near, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>NFTs</h4>
-                <small className='text-light'>OpenSea, Sandbox, Pokmi, SoulWare, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Technologies</h4>
-                <small className='text-light'>Rollup, ZK-Proof, Cryptography, ...</small>
-              </div>
-            </article>
-            <article className='knowledge__details'>
-              <BsPatchCheckFill className='knowledge__details-icon' />
-              <div>
-                <h4>Tools</h4>
-                <small className='text-light'>Ledger, Explorers, CMC, Sclapex...</small>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+    const sectionRef = useRef(null)
+    const detailsRef = useRef([])
+
+    useLayoutEffect(() => {
+        const el = sectionRef.current
+        const details = detailsRef.current.filter(Boolean)
+
+        const ctx = gsap.context(() => {
+            gsap.from(el, {
+                opacity: 0,
+                y: 24,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {trigger: el, start: 'top 80%'},
+            })
+
+            gsap.from(details, {
+                opacity: 0,
+                y: 12,
+                duration: 0.4,
+                ease: 'power2.out',
+                stagger: 0.06,
+                scrollTrigger: {trigger: el, start: 'top 70%'},
+            })
+
+            details.forEach((node) => {
+                node.addEventListener('mouseenter', () =>
+                    gsap.to(node, {scale: 1.02, duration: 0.15, ease: 'power1.out'})
+                )
+                node.addEventListener('mouseleave', () =>
+                    gsap.to(node, {scale: 1, duration: 0.2, ease: 'power1.out'})
+                )
+            })
+        }, sectionRef)
+
+        return () => ctx.revert()
+    }, [])
+
+    // Données (front/back ≈ blockchain/other) — titres & descriptions via i18n
+    const BLOCKCHAIN = [
+        {name: 'Bitcoin', descKey: 'knowledge.items.bitcoin'},
+        {name: 'Ethereum', descKey: 'knowledge.items.ethereum'},
+        {name: 'Polkadot', descKey: 'knowledge.items.polkadot'},
+        {name: 'Solana', descKey: 'knowledge.items.solana'},
+        {name: 'Elrond', descKey: 'knowledge.items.elrond'},
+        {name: 'Cosmos', descKey: 'knowledge.items.cosmos'},
+    ]
+
+    const OTHER = [
+        {name: t('knowledge.labels.exchanges'), descKey: 'knowledge.items.exchanges'},
+        {name: t('knowledge.labels.wallets'), descKey: 'knowledge.items.wallets'},
+        {name: t('knowledge.labels.chains'), descKey: 'knowledge.items.chains'},
+        {name: 'NFTs', descKey: 'knowledge.items.nfts'},
+        {name: t('knowledge.labels.tech'), descKey: 'knowledge.items.tech'},
+        {name: t('knowledge.labels.tools'), descKey: 'knowledge.items.tools'},
+    ]
+
+    const setDetailRef = (el, idx) => (detailsRef.current[idx] = el)
+
+    return (
+        <section id="knowledge" ref={sectionRef}>
+            <h5>{t('knowledge.kicker')}</h5>
+            <h2>{t('knowledge.title')}</h2>
+
+            <div className="container knowledge__container">
+                {/* Bloc Blockchain */}
+                <div className="knowledge__frontend">
+                    <h3>{t('knowledge.groups.blockchain')}</h3>
+                    <div className="knowledge__content">
+                        {BLOCKCHAIN.map((it, i) => (
+                            <article
+                                className="knowledge__details"
+                                key={`bc-${it.name}`}
+                                ref={(el) => setDetailRef(el, i)}
+                            >
+                                <BsPatchCheckFill className="knowledge__details-icon"/>
+                                <div>
+                                    <h4>{it.name}</h4>
+                                    <small className="text-light">{t(it.descKey)}</small>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Bloc Other */}
+                <div className="knowledge__backend">
+                    <h3>{t('knowledge.groups.other')}</h3>
+                    <div className="knowledge__content">
+                        {OTHER.map((it, i) => (
+                            <article
+                                className="knowledge__details"
+                                key={`ot-${it.name}-${i}`}
+                                ref={(el) => setDetailRef(el, BLOCKCHAIN.length + i)}
+                            >
+                                <BsPatchCheckFill className="knowledge__details-icon"/>
+                                <div>
+                                    <h4>{it.name}</h4>
+                                    <small className="text-light">{t(it.descKey)}</small>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }
 
 export default Knowledge

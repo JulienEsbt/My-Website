@@ -1,16 +1,63 @@
 import React from 'react'
-import { BsYoutube } from 'react-icons/bs'
-import { FaTwitter, FaInstagram, FaTiktok } from 'react-icons/fa'
+import {motion} from 'framer-motion'
+import {useTranslation} from 'react-i18next'
+import {LINKS} from "../../../config/links.js";
+import {BsYoutube} from 'react-icons/bs'
+import {FaTwitter, FaInstagram, FaTiktok} from 'react-icons/fa'
+
+const IconBtn = ({href, label, children, className = 'icon', ...props}) => (
+    <motion.a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{y: -2}}
+        whileTap={{scale: 0.95}}
+        className={className}
+        aria-label={label}
+        {...props}
+    >
+        {children}
+    </motion.a>
+)
 
 const CTA = () => {
-  return (
-    <div className='cta'>
-        <a href="https://twitter.com/JulienEsbtCrypt" className='icon icon-primary' target='_blank' rel="noreferrer"><FaTwitter /></a>
-        <a href="https://www.youtube.com/channel/UC8cax5btmg1s7V2Skt5kNBg" className='icon' target='_blank' rel="noreferrer"><BsYoutube /></a>
-        <a href="https://www.tiktok.com/@julienesbtcrypto" className='icon icon-primary' target='_blank' rel="noreferrer"><FaTiktok /></a>
-        <a href="https://www.instagram.com/julienesbtcrypto/" className='icon' target='_blank' rel="noreferrer"><FaInstagram /></a>
-    </div>
-  )
+    const {t} = useTranslation('crypto')
+
+    return (
+        <div className="cta" role="group" aria-label={t('cta.groupLabel')}>
+            <IconBtn
+                href={LINKS.social.twitter}
+                label={t('cta.twitter')}
+                className="icon icon-primary"
+            >
+                <FaTwitter/>
+            </IconBtn>
+
+            <IconBtn
+                href={LINKS.social.youtube}
+                label={t('cta.youtube')}
+                className="icon"
+            >
+                <BsYoutube/>
+            </IconBtn>
+
+            <IconBtn
+                href={LINKS.social.tiktok}
+                label={t('cta.tiktok')}
+                className="icon icon-primary"
+            >
+                <FaTiktok/>
+            </IconBtn>
+
+            <IconBtn
+                href={LINKS.social.instagram}
+                label={t('cta.instagram')}
+                className="icon"
+            >
+                <FaInstagram/>
+            </IconBtn>
+        </div>
+    )
 }
 
 export default CTA

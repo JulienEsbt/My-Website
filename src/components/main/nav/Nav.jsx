@@ -14,7 +14,6 @@ const Nav = () => {
         const els = SECTIONS.map(id => document.getElementById(id))
         const obs = new IntersectionObserver(
             (entries) => {
-                // on prend la section la plus visible
                 const visible = entries
                     .filter(e => e.isIntersecting)
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
@@ -28,8 +27,6 @@ const Nav = () => {
 
     const handleClick = (hash) => () => {
         setActive(hash)
-        // facultatif: retire le focus du bouton (esthétique)
-        // setTimeout(() => document.activeElement?.blur(), 150)
     }
 
     return (

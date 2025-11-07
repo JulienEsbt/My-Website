@@ -42,7 +42,7 @@ const Header = () => {
                     <h5 ref={title} className="eyebrow">{t('header.eyebrow')}</h5>
 
                     <h1 ref={name} className="hero__title">
-                        <span className="stroke">Julien</span> Esterbet
+                        <span className="stroke">{t('header.name.first')}</span> {t('header.name.last')}
                     </h1>
 
                     <p ref={role} className="hero__subtitle">{t('header.subtitle')}</p>
@@ -61,7 +61,7 @@ const Header = () => {
                         className="me"
                         aria-hidden
                     >
-                        <img src={ME} alt="Portrait of Julien Esterbet"/>
+                        <img src={ME} alt={t('header.portraitAlt')}/>
                         <div className="glow" aria-hidden/>
                     </motion.div>
                 </div>
@@ -74,15 +74,14 @@ const Header = () => {
                     ref={scroll}
                     href="#about"
                     className="scroll__down"
-                    aria-label="Scroll to About section"
+                    aria-label={t('header.scroll.aria')}
                 >
                     <span className="scroll__dot"/>
-                    <span>Scroll</span>
-
+                    <span>{t('header.scroll.label')}</span>
                 </a>
             </div>
         </header>
     )
 }
-// TODO Bouton Scroll !
+
 export default Header
