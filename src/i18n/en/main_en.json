@@ -7,6 +7,15 @@
     }
   },
   "header": {
+    "name": {
+      "first": "Julien",
+      "last": "Esterbet"
+    },
+    "portraitAlt": "Portrait of Julien Esterbet",
+    "scroll": {
+      "label": "Scroll",
+      "aria": "Scroll to About section"
+    },
     "eyebrow": "Hello, I’m",
     "subtitle": "Full-stack Developer • Web3 • FinTech"
   },

@@ -68,3 +68,13 @@
         padding: 2rem 1rem;
     }
 }
+
+/* mêmes micro-effets que Experience */
+.knowledge__container > div {
+    will-change: transform, box-shadow;
+}
+
+.knowledge__container > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}

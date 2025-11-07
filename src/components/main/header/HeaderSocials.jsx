@@ -1,11 +1,12 @@
 import React from 'react'
 import {BsGithub, BsLinkedin} from 'react-icons/bs'
+import {LINKS} from "../../../config/links.js";
 
 const HeaderSocials = () => {
     return (
         <nav className="header__socials" aria-label="Social links">
             <a
-                href="https://www.linkedin.com/in/julien-esterbet/"
+                href={LINKS.social.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
@@ -13,7 +14,7 @@ const HeaderSocials = () => {
                 <BsLinkedin/>
             </a>
             <a
-                href="https://github.com/JulienEsbt"
+                href={LINKS.social.github}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
