@@ -4,7 +4,7 @@ import {motion} from 'framer-motion'
 import gsap from 'gsap'
 import CTA from './CTA'
 import HeaderSocials from './HeaderSocials'
-import ME from '../../../assets/main/Me.png'
+import {ASSETS} from '../../../config/assets'
 import './header.css'
 
 const Header = () => {
@@ -61,7 +61,7 @@ const Header = () => {
                         className="me"
                         aria-hidden
                     >
-                        <img src={ME} alt={t('header.portraitAlt')}/>
+                        <img src={ASSETS.main.header.me} alt="Portrait of Julien Esterbet"/>
                         <div className="glow" aria-hidden/>
                     </motion.div>
                 </div>

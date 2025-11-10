@@ -3,7 +3,7 @@ import {useTranslation, Trans} from 'react-i18next'
 import {FaBitcoin, FaEthereum, FaCodeBranch, FaFileCode} from 'react-icons/fa'
 import {BiLineChart} from 'react-icons/bi'
 import {BsCurrencyExchange} from 'react-icons/bs'
-import ME from '../../../assets/crypto/NFT2.png'
+import {ASSETS} from '../../../config/assets'
 import './about.css'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
@@ -90,7 +90,7 @@ const About = () => {
             <div className="container about__container">
                 <div className="about__me">
                     <div className="about__me-image" ref={imgRef}>
-                        <img src={ME} alt={t('about.alt')}/>
+                        <img src={ASSETS.crypto.about.nft2} alt="NFT"/>
                     </div>
                 </div>
 

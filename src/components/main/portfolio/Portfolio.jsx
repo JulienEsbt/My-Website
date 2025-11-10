@@ -1,9 +1,7 @@
 import React, {useLayoutEffect, useRef} from 'react'
 import {BsGithub} from 'react-icons/bs'
 import {useTranslation} from 'react-i18next'
-import IMG1 from '../../../assets/main/Megalis.png'
-import IMG2 from '../../../assets/main/FFNN.png'
-import IMG3 from '../../../assets/main/Wave.png'
+import {ASSETS} from '../../../config/assets'
 import './portfolio.css'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
@@ -11,11 +9,10 @@ import {LINKS} from '../../../config/links'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// on garde l'ordre + l'ID pour l'i18n, mais on lit les URLs depuis LINKS
 const ITEMS = [
-    {id: '1', image: IMG1, link: LINKS.projects.megalis},
-    {id: '2', image: IMG2, link: LINKS.projects.ffnn},
-    {id: '3', image: IMG3, link: LINKS.projects.wave}
+    {id: '1', image: ASSETS.main.portfolio.megalis, link: LINKS.projects.megalis},
+    {id: '2', image: ASSETS.main.portfolio.ffnn, link: LINKS.projects.ffnn},
+    {id: '3', image: ASSETS.main.portfolio.wave, link: LINKS.projects.wave}
 ]
 
 export default function Portfolio() {
