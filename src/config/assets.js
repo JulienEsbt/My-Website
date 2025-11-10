@@ -1,7 +1,6 @@
 // MAIN
 import ME from '../assets/main/Me.png'
 import ME2 from '../assets/main/Me2.jpg'
-import T1 from '../assets/main/T1.jpg'
 
 import MEGALIS from '../assets/main/Megalis.png'
 import FFNN from '../assets/main/FFNN.png'
