@@ -10,7 +10,7 @@ import FLY from '../assets/main/Fly.jpg'
 import HELICO from '../assets/main/Helico.jpg'
 import SHUTTLE from '../assets/main/Shuttle.jpg'
 import SPACEX from '../assets/main/SpaceX.jpg'
-import CRYPTO from '../assets/main/Crypto.jpeg'
+import CRYPTO from '../assets/main/Crypto.jpg'
 
 import CV from '../assets/main/cv.pdf'
 
