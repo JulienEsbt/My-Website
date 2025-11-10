@@ -4,12 +4,7 @@ import {Pagination} from 'swiper/modules'
 import {useTranslation} from 'react-i18next'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-
-import AVATAR1 from '../../../assets/main/crypto.jpeg'
-import AVATAR2 from '../../../assets/main/Helico.jpg'
-import AVATAR3 from '../../../assets/main/Fly.jpg'
-import AVATAR4 from '../../../assets/main/Shuttle.jpg'
-import AVATAR5 from '../../../assets/main/SpaceX.jpg'
+import {ASSETS} from '../../../config/assets'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -18,11 +13,11 @@ import './goals.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const items = [
-    {key: 'build', avatar: AVATAR1},
-    {key: 'learn', avatar: AVATAR2},
-    {key: 'fly', avatar: AVATAR3},
-    {key: 'travel', avatar: AVATAR4},
-    {key: 'succeed', avatar: AVATAR5},
+    {key: 'build', avatar: ASSETS.main.goals.crypto},
+    {key: 'learn', avatar: ASSETS.main.goals.helico},
+    {key: 'fly', avatar: ASSETS.main.goals.fly},
+    {key: 'travel', avatar: ASSETS.main.goals.shuttle},
+    {key: 'succeed', avatar: ASSETS.main.goals.spacex},
 ]
 
 const PART_INDEX = {avatar: 0, name: 1, review: 2}

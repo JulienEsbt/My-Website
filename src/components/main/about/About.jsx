@@ -3,7 +3,7 @@ import {useTranslation, Trans} from 'react-i18next'
 import {FaAward} from 'react-icons/fa'
 import {FiUsers} from 'react-icons/fi'
 import {VscFolderLibrary} from 'react-icons/vsc'
-import ME from '../../../assets/main/Me2.jpg'
+import {ASSETS} from '../../../config/assets'
 import './about.css'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
@@ -98,7 +98,7 @@ const About = () => {
             <div className='container about__container'>
                 <div className='about__me'>
                     <div className='about__me-image' ref={imgRef}>
-                        <img src={ME} alt='Portrait'/>
+                        <img src={ASSETS.main.about.photo} alt="Portrait of Julien Esterbet"/>
                     </div>
                 </div>
 

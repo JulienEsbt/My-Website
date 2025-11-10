@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import PopupState, {bindPopover, bindTrigger} from 'material-ui-popup-state'
 import Popover from '@mui/material/Popover'
-import ETH from '../../../assets/crypto/ETH.jpeg'
+import {ASSETS} from '../../../config/assets'
 import './donation.css'
 import {useTranslation} from 'react-i18next'
 import {gsap} from 'gsap'
@@ -195,7 +195,7 @@ const Donation = () => {
 
             <article className="donation container">
                 <div className="network__avatar" ref={imgRef} aria-hidden>
-                    <img src={ETH} alt={t('donation.alt.eth')}/>
+                    <img src={ASSETS.crypto.donation.eth} alt="Ethereum logo"/>
                 </div>
 
                 {/* Network popover */}
