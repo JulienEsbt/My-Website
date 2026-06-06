@@ -1,0 +1,40 @@
+.page-hero {
+    min-height: 54vh;
+    margin-top: 0;
+    padding-top: 6rem;
+    display: flex;
+    align-items: center;
+}
+
+.page-hero__container {
+    position: relative;
+}
+
+.page-hero__kicker {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    margin-bottom: 1rem;
+}
+
+.page-hero h1 {
+    max-width: 760px;
+    font-size: clamp(2.7rem, 5.1vw, 4.6rem);
+    line-height: 1.08;
+    margin-bottom: 1.2rem;
+}
+
+.page-hero__subtitle {
+    max-width: 660px;
+    color: var(--color-light);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.page-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}

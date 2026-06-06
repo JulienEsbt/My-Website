@@ -1,0 +1,15 @@
+{
+  "hero": {
+    "kicker": "Voyage",
+    "title": "Ma carte de voyage",
+    "subtitle": "Un espace personnel pour conserver mes lieux, souvenirs, photos et récits de voyage."
+  },
+  "intro": {
+    "title": "Explorer, comprendre, ressentir",
+    "text": "Chaque voyage est une manière de découvrir un lieu, mais aussi une manière de mieux se comprendre soi-même."
+  },
+  "actions": {
+    "map": "Voir la carte",
+    "stories": "Voir les récits"
+  }
+}

@@ -1,0 +1,61 @@
+.reflexion-card {
+    background: rgba(44, 44, 108, 0.78);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    border-radius: 1.4rem;
+    padding: 1.8rem;
+    transition: var(--transition);
+}
+
+.reflexion-card:hover {
+    background: rgba(44, 44, 108, 0.45);
+    border-color: var(--color-primary-variant);
+    transform: translateY(-0.35rem);
+}
+
+.reflexion-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+}
+
+.reflexion-card__category {
+    color: var(--color-primary);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+}
+
+.reflexion-card__date {
+    color: var(--color-light);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.reflexion-card h3 {
+    margin-bottom: 0.9rem;
+    font-size: 1.45rem;
+    color: var(--color-white);
+}
+
+.reflexion-card p {
+    color: var(--color-light);
+    margin-bottom: 1.8rem;
+}
+
+.reflexion-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reflexion-card__footer span {
+    color: var(--color-primary);
+    font-size: 0.9rem;
+}
+
+.reflexion-card__button {
+    font-size: 0.9rem;
+}

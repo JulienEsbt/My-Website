@@ -1,0 +1,17 @@
+.timeline__container {
+    display: grid;
+    gap: 2rem;
+}
+
+.timeline__item {
+    background: var(--color-bg-variant);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.timeline__item:hover {
+    border-color: var(--color-primary-variant);
+    background: transparent;
+}

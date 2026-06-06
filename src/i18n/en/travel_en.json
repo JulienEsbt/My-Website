@@ -1,0 +1,15 @@
+{
+  "hero": {
+    "kicker": "Travel",
+    "title": "My travel map",
+    "subtitle": "A personal space to collect places, memories, photos and stories from my travels."
+  },
+  "intro": {
+    "title": "Explore, understand, feel",
+    "text": "Every journey is a way to discover a place, but also a way to understand oneself a little better."
+  },
+  "actions": {
+    "map": "See the map",
+    "stories": "See stories"
+  }
+}

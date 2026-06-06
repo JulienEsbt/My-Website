@@ -1,16 +1,13 @@
 import React from 'react'
-import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom'
-import MainPage from './pages/MainPage'
-import CryptoPage from './pages/CryptoPage'
+import {BrowserRouter} from 'react-router-dom'
+import Router from './app/router'
+import ScrollToTop from './components/common/scrollToTop/ScrollToTop'
 
 const App = () => (
-    <Router>
-        <Routes>
-            <Route path="/" element={<MainPage/>}/>
-            <Route path="/crypto" element={<CryptoPage/>}/>
-            <Route path="*" element={<Navigate to="/" replace/>}/>
-        </Routes>
-    </Router>
+    <BrowserRouter>
+        <ScrollToTop/>
+        <Router/>
+    </BrowserRouter>
 )
 
 export default App

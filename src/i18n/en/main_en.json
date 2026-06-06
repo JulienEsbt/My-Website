@@ -6,6 +6,12 @@
       "crypto": "Crypto"
     }
   },
+  "pageNav": {
+    "home": "Home",
+    "crypto": "Crypto",
+    "travel": "Travel",
+    "reflexions": "Reflexions"
+  },
   "header": {
     "name": {
       "first": "Julien",
