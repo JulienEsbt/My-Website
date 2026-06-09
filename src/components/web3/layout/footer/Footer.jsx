@@ -4,6 +4,7 @@ import {FaTwitter, FaInstagram, FaTiktok} from 'react-icons/fa'
 import {BsYoutube, BsLinkedin, BsGithub} from 'react-icons/bs'
 import {useTranslation} from 'react-i18next'
 import {LINKS} from '../../../../config/links.js'
+import {SITE_PAGES} from '../../../../config/pages.js'
 
 const Footer = () => {
     const {t} = useTranslation('crypto')
@@ -20,12 +21,10 @@ const Footer = () => {
         ['#contact', t('footer.links.contact')],
     ]
 
-    const pageLinks = [
-        ['/', tCommon('pageNav.home')],
-        ['/crypto', tCommon('pageNav.web3')],
-        ['/travel', tCommon('pageNav.travel')],
-        ['/reflexions', tCommon('pageNav.reflexions')],
-    ]
+    const pageLinks = SITE_PAGES.map((page) => [
+        page.path,
+        tCommon(page.i18nKey),
+    ])
 
     const socials = [
         ['Twitter', LINKS.social.twitter, <FaTwitter/>],

@@ -3,6 +3,7 @@ import {Spin as Hamburger} from 'hamburger-react'
 import {Link} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import LanguageSwitcher from '../languageSwitcher/LanguageSwitcher.jsx'
+import {SITE_PAGES} from '../../../config/pages.js'
 import './PageNav.css'
 
 const PageNav = () => {
@@ -11,9 +12,9 @@ const PageNav = () => {
 
     const pages = [
         {to: '/', label: t('pageNav.home')},
-        {to: '/crypto', label: t('pageNav.web3')},
+        {to: '/web3', label: t('pageNav.web3')},
         {to: '/travel', label: t('pageNav.travel')},
-        {to: '/reflexions', label: t('pageNav.reflexions')},
+        {to: '/reflections', label: t('pageNav.reflexions')},
     ]
 
     const closeMenu = () => setOpen(false)
@@ -32,14 +33,14 @@ const PageNav = () => {
 
                     {isOpen && (
                         <div className="pagebar">
-                            {pages.map((page) => (
+                            {SITE_PAGES.map((page) => (
                                 <Link
-                                    key={page.to}
-                                    to={page.to}
+                                    key={page.path}
+                                    to={page.path}
                                     className="pagetext"
                                     onClick={closeMenu}
                                 >
-                                    {page.label}
+                                    {t(page.i18nKey)}
                                 </Link>
                             ))}
                         </div>

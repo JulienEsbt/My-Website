@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
-import {CRYPTO_KNOWLEDGE} from '../../../../data/crypto/knowledge.js'
+import {CRYPTO_KNOWLEDGE} from '../../../../data/web3/knowledge.js'
 import './knowledge.css'
 
 const Knowledge = () => {

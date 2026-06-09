@@ -53,7 +53,7 @@ src/
 │  └─ ...
 ├─ pages/
 │  ├─ HomePage.jsx         # route /
-│  └─ CryptoPage.jsx       # route /crypto
+│  └─ Web3Page.jsx       # route /crypto
 ├─ styles/                 # global CSS / modules
 ├─ App.jsx                 # app shell & router
 └─ main.jsx                # Vite entry point
