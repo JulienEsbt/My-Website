@@ -1,0 +1,276 @@
+.donation-panel {
+    max-width: 900px;
+    padding: 2rem;
+    border-radius: 1.6rem;
+    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 32%),
+    linear-gradient(135deg, rgba(44, 44, 108, 0.78), rgba(12, 17, 43, 0.88));
+    border: 1px solid rgba(77, 181, 255, 0.22);
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.22);
+}
+
+.donation-panel__content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.donation-panel h3 {
+    color: var(--color-white);
+    margin-bottom: 0.6rem;
+}
+
+.donation-panel p {
+    color: var(--color-light);
+    line-height: 1.8;
+}
+
+.donation-panel__receiver {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: rgba(31, 31, 56, 0.65);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+}
+
+.donation-panel__receiver span {
+    display: block;
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+}
+
+.donation-panel__receiver code {
+    display: block;
+    max-width: 100%;
+    color: var(--color-light);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: help;
+}
+
+.donation-panel__form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.donation-panel__form input,
+.donation-panel__form select {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.9rem 1rem;
+    border-radius: 0.7rem;
+    background: rgba(31, 31, 56, 0.75);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+}
+
+.donation-panel__form input::placeholder {
+    color: var(--color-light);
+}
+
+.donation-panel__form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.donation-panel__tx {
+    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    color: var(--color-primary);
+}
+
+.donation-panel__error {
+    margin-top: 1rem;
+    color: #ff8a8a;
+}
+
+@media screen and (max-width: 800px) {
+    .donation-panel__content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.donation-panel__selector {
+    margin-bottom: 1.6rem;
+}
+
+.donation-panel__selector label {
+    display: block;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.donation-panel__search {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: rgba(31, 31, 56, 0.75);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    border-radius: 0.9rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.donation-panel__search svg {
+    color: var(--color-primary);
+}
+
+.donation-panel__search input {
+    width: 100%;
+    background: transparent;
+    color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+}
+
+.donation-panel__tokens {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.donation-panel__tokens.searching {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 18rem;
+    overflow-y: auto;
+    padding-right: 0.35rem;
+}
+
+.donation-panel__token {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 4.4rem;
+    text-align: left;
+    padding: 0.85rem 0.9rem;
+    border-radius: 0.95rem;
+    background: rgba(31, 31, 56, 0.58);
+    border: 1px solid rgba(77, 181, 255, 0.14);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.donation-panel__token:hover,
+.donation-panel__token.active {
+    background: rgba(77, 181, 255, 0.12);
+    border-color: var(--color-primary);
+    transform: translateY(-0.15rem);
+}
+
+.donation-panel__token strong {
+    display: block;
+    color: var(--color-white);
+    font-size: 0.92rem;
+    line-height: 1.2;
+}
+
+.donation-panel__token span {
+    display: block;
+    color: var(--color-light);
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+}
+
+.donation-panel__token small {
+    flex: 0 0 auto;
+    color: var(--color-primary);
+    font-size: 0.65rem;
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 999px;
+    padding: 0.12rem 0.38rem;
+}
+
+.donation-panel__tokens.searching .donation-panel__token {
+    min-height: 4rem;
+}
+
+@media screen and (max-width: 950px) {
+    .donation-panel__tokens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .donation-panel__tokens,
+    .donation-panel__tokens.searching {
+        grid-template-columns: 1fr;
+    }
+}
+
+.donation-panel__custom {
+    margin-top: 1rem;
+}
+
+.donation-panel__custom-toggle {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.donation-panel__custom-toggle:hover {
+    background: rgba(77, 181, 255, 0.14);
+    color: var(--color-white);
+}
+
+.donation-panel__custom-content {
+    margin-top: 1rem;
+    padding: 1.2rem;
+    border-radius: 1rem;
+    background: rgba(31, 31, 56, 0.55);
+    border: 1px solid rgba(77, 181, 255, 0.16);
+}
+
+.donation-panel__custom-content h4 {
+    color: var(--color-white);
+    margin-bottom: 0.4rem;
+}
+
+.donation-panel__custom-content p {
+    color: var(--color-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.donation-panel__custom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.donation-panel__custom-grid input {
+    padding: 0.85rem 1rem;
+    border-radius: 0.8rem;
+    background: rgba(31, 31, 56, 0.75);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+    .donation-panel__custom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .donation-panel__custom-grid {
+        grid-template-columns: 1fr;
+    }
+}

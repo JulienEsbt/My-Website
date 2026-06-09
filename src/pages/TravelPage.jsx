@@ -2,8 +2,10 @@ import React from 'react'
 import {useTranslation} from 'react-i18next'
 import PageNav from '../components/common/pagenav/PageNav'
 import PageHero from '../components/common/pagehero/PageHero'
-import TravelMap from '../components/travel/travelMap/TravelMap'
+import TravelStats from '../components/travel/travelStats/TravelStats'
 import TravelTimeline from '../components/travel/travelTimeline/TravelTimeline'
+import DreamDestinations from '../components/travel/dreamDestinations/DreamDestinations'
+import TravelExplorer from "../components/travel/travelExplorer/TravelExplorer.jsx";
 
 const TravelPage = () => {
     const {t} = useTranslation('travel')
@@ -18,17 +20,12 @@ const TravelPage = () => {
                     kicker={t('hero.kicker')}
                     title={t('hero.title')}
                     subtitle={t('hero.subtitle')}
-                >
-                    <a href="#map" className="btn btn-primary">
-                        {t('actions.map')}
-                    </a>
-                    <a href="#stories" className="btn">
-                        {t('actions.stories')}
-                    </a>
-                </PageHero>
+                />
 
-                <TravelMap/>
+                <TravelStats/>
+                <TravelExplorer/>
                 <TravelTimeline/>
+                <DreamDestinations/>
             </main>
         </>
     )

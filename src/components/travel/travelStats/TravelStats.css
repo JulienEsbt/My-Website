@@ -1,0 +1,46 @@
+.travel-stats-section {
+    margin-top: -0.5rem;
+    margin-bottom: 4rem;
+}
+
+.travel-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 1.2rem;
+    background: rgba(31, 31, 56, 0.55);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.travel-stat {
+    padding: 1.2rem 1.5rem;
+    border-right: 1px solid rgba(77, 181, 255, 0.18);
+}
+
+.travel-stat:last-child {
+    border-right: none;
+}
+
+.travel-stat span {
+    display: block;
+    color: var(--color-light);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.travel-stat strong {
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+    .travel-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .travel-stat {
+        border-bottom: 1px solid rgba(77, 181, 255, 0.18);
+    }
+}

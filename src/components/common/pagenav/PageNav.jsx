@@ -9,6 +9,13 @@ const PageNav = () => {
     const [isOpen, setOpen] = useState(false)
     const {t} = useTranslation('common')
 
+    const pages = [
+        {to: '/', label: t('pageNav.home')},
+        {to: '/crypto', label: t('pageNav.web3')},
+        {to: '/travel', label: t('pageNav.travel')},
+        {to: '/reflexions', label: t('pageNav.reflexions')},
+    ]
+
     const closeMenu = () => setOpen(false)
 
     return (
@@ -25,18 +32,16 @@ const PageNav = () => {
 
                     {isOpen && (
                         <div className="pagebar">
-                            <Link to="/" className="pagetext" onClick={closeMenu}>
-                                {t('pageNav.home')}
-                            </Link>
-                            <Link to="/crypto" className="pagetext" onClick={closeMenu}>
-                                {t('pageNav.crypto')}
-                            </Link>
-                            <Link to="/travel" className="pagetext" onClick={closeMenu}>
-                                {t('pageNav.travel')}
-                            </Link>
-                            <Link to="/reflexions" className="pagetext" onClick={closeMenu}>
-                                {t('pageNav.reflexions')}
-                            </Link>
+                            {pages.map((page) => (
+                                <Link
+                                    key={page.to}
+                                    to={page.to}
+                                    className="pagetext"
+                                    onClick={closeMenu}
+                                >
+                                    {page.label}
+                                </Link>
+                            ))}
                         </div>
                     )}
                 </div>

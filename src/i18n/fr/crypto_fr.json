@@ -25,35 +25,277 @@
       "devTitle": "Développement",
       "devText": "Smart contracts EVM & apps React"
     },
+    "badge": "Profil Web3",
+    "title": "Entre développement, investissement et curiosité technique",
+    "explore": "Explorer mes connaissances",
     "bio": "Hello ! Je suis <b>développeur Blockchain</b> et <b>investisseur crypto</b>. J’adore construire autour du Web3 (Solidity, EVM, React) et soutenir des projets en lesquels je crois."
   },
   "knowledge": {
     "kicker": "Ce qui m'intéresse",
-    "title": "Mes connaissances",
-    "groups": {
-      "blockchain": "Blockchain",
-      "other": "Autres"
+    "title": "Écosystème Web3",
+    "levels": {
+      "advanced": "Avancé",
+      "intermediate": "Intermédiaire"
     },
-    "labels": {
-      "exchanges": "Plateformes d'échange",
-      "wallets": "Portefeuilles",
-      "chains": "Blockchains",
-      "tech": "Technologies",
-      "tools": "Outils"
+    "tags": {
+      "proofOfWork": "Proof of Work",
+      "limitedSupply": "21M BTC",
+      "lightning": "Lightning",
+      "storeOfValue": "Réserve de valeur",
+      "evm": "EVM",
+      "smartContracts": "Smart contracts",
+      "defi": "DeFi",
+      "layer2": "Layer 2",
+      "parachains": "Parachains",
+      "interoperability": "Interopérabilité",
+      "staking": "Staking",
+      "highThroughput": "Haut débit",
+      "lowFees": "Frais faibles",
+      "nfts": "NFTs",
+      "sharding": "Sharding",
+      "scalability": "Scalabilité",
+      "xportal": "xPortal",
+      "ibc": "IBC",
+      "appchains": "Appchains",
+      "erc20": "ERC-20",
+      "cosmos": "Cosmos",
+      "osmosis": "Osmosis",
+      "atom": "ATOM",
+      "contracts": "Contrats",
+      "types": "Types",
+      "security": "Sécurité",
+      "execution": "Exécution",
+      "gas": "Gas",
+      "bytecode": "Bytecode",
+      "tokens": "Tokens",
+      "transfer": "Transfert",
+      "allowance": "Allowance",
+      "nft": "NFT",
+      "ownership": "Propriété",
+      "metadata": "Metadata",
+      "standards": "Standards",
+      "accessControl": "Access Control",
+      "frontend": "Frontend",
+      "wallet": "Wallet",
+      "provider": "Provider",
+      "signer": "Signer",
+      "dex": "DEX",
+      "pools": "Pools",
+      "slippage": "Slippage",
+      "swap": "Swap",
+      "lp": "LP",
+      "v2v3": "V2/V3",
+      "lending": "Lending",
+      "borrowing": "Borrowing",
+      "collateral": "Collatéral",
+      "pos": "Proof of Stake",
+      "yield": "Rendement",
+      "validators": "Validateurs",
+      "interop": "Interop",
+      "risk": "Risque",
+      "apr": "APR",
+      "apy": "APY",
+      "browserWallet": "Browser wallet",
+      "coldWallet": "Cold wallet",
+      "selfCustody": "Self-custody",
+      "solana": "Solana",
+      "auth": "Authentification",
+      "node": "Node",
+      "rpc": "RPC",
+      "api": "API",
+      "jsonRpc": "JSON-RPC",
+      "etherscan": "Etherscan",
+      "blocks": "Blocs",
+      "transactions": "Transactions",
+      "arbitrum": "Arbitrum",
+      "optimism": "Optimism",
+      "base": "Base",
+      "optimistic": "Optimistic",
+      "zk": "ZK",
+      "scaling": "Scaling",
+      "balances": "Balances",
+      "prices": "Prix",
+      "scams": "Arnaques",
+      "ux": "UX",
+      "gnosisSafe": "Gnosis Safe",
+      "governance": "Gouvernance",
+      "frontRunning": "Front-running",
+      "sandwich": "Sandwich",
+      "protocol": "Protocole"
     },
-    "items": {
-      "bitcoin": "Fonctionnement, minage, Lightning Network, ...",
-      "ethereum": "Staking, layers, DeFi, bridges, ERC, EVM, ...",
-      "polkadot": "Crowdloans, staking, parachains, ...",
-      "solana": "Consensus, DeFi, NFT, explorer, ...",
-      "elrond": "Consensus, DeFi, launchpad, explorer, ...",
-      "cosmos": "Consensus, Osmosis, Terra, Keplr, ...",
-      "exchanges": "Binance, SwissBorg, FTX, ...",
-      "wallets": "MetaMask, XDEFI, Keplr, Phantom, ...",
-      "chains": "EVM, Avalanche, Cardano, NEAR, ...",
-      "nfts": "OpenSea, Sandbox, Pokmi, SoulWare, ...",
-      "tech": "Rollups, preuves ZK, cryptographie, ...",
-      "tools": "Ledger, explorers, CoinMarketCap, Sclapex..."
+    "categories": {
+      "blockchain": {
+        "title": "Blockchains",
+        "description": "Compréhension des principales blockchains et de leurs approches : Bitcoin, Ethereum, écosystèmes EVM, Cosmos, Solana, Polkadot et réseaux orientés scalabilité.",
+        "items": {
+          "bitcoin": {
+            "name": "Bitcoin",
+            "description": "Première cryptomonnaie décentralisée, pensée comme réserve de valeur et réseau monétaire pair-à-pair."
+          },
+          "ethereum": {
+            "name": "Ethereum",
+            "description": "Blockchain programmable majeure, cœur des smart contracts, de la DeFi, des NFTs et des applications EVM."
+          },
+          "polkadot": {
+            "name": "Polkadot",
+            "description": "Écosystème orienté interopérabilité, construit autour des parachains et d’une relay chain."
+          },
+          "solana": {
+            "name": "Solana",
+            "description": "Blockchain haute performance, pensée pour des transactions rapides et peu coûteuses."
+          },
+          "multiversx": {
+            "name": "Elrond / MultiversX",
+            "description": "Blockchain scalable utilisant le sharding, avec un écosystème orienté applications et performance."
+          },
+          "cosmos": {
+            "name": "Cosmos",
+            "description": "Écosystème de blockchains souveraines interconnectées via IBC."
+          }
+        }
+      },
+      "smartContracts": {
+        "title": "Smart Contracts",
+        "description": "Développement et interaction avec des contrats EVM : standards ERC, Solidity, bibliothèques, outils de développement et intégration frontend.",
+        "items": {
+          "solidity": {
+            "name": "Solidity",
+            "description": "Langage principal pour écrire des smart contracts sur Ethereum et les blockchains EVM."
+          },
+          "evm": {
+            "name": "EVM",
+            "description": "Machine virtuelle qui exécute les smart contracts sur Ethereum et de nombreuses blockchains compatibles."
+          },
+          "erc20": {
+            "name": "ERC-20",
+            "description": "Standard de tokens fongibles utilisé pour les stablecoins, tokens DeFi et actifs échangeables."
+          },
+          "erc721": {
+            "name": "ERC-721",
+            "description": "Standard NFT où chaque token est unique et identifiable."
+          },
+          "openzeppelin": {
+            "name": "OpenZeppelin",
+            "description": "Bibliothèque de contrats sécurisés et réutilisables pour accélérer le développement Solidity."
+          },
+          "ethers": {
+            "name": "ethers.js",
+            "description": "Librairie JavaScript utilisée pour interagir avec wallets, contrats et RPC depuis une app front."
+          }
+        }
+      },
+      "defi": {
+        "title": "DeFi",
+        "description": "Utilisation et compréhension des mécanismes de finance décentralisée : AMM, lending, staking, liquidité, bridges, rendement et risques associés.",
+        "items": {
+          "amm": {
+            "name": "AMM",
+            "description": "Market maker automatisé permettant d’échanger des actifs via des pools de liquidité."
+          },
+          "uniswap": {
+            "name": "Uniswap",
+            "description": "DEX majeur de l’écosystème Ethereum, basé sur des pools de liquidité."
+          },
+          "aave": {
+            "name": "Aave",
+            "description": "Protocole de lending permettant d’emprunter ou prêter des actifs crypto."
+          },
+          "staking": {
+            "name": "Staking",
+            "description": "Mécanisme de sécurisation ou de rendement consistant à immobiliser des actifs."
+          },
+          "bridges": {
+            "name": "Bridges",
+            "description": "Outils permettant de transférer des actifs ou messages entre plusieurs blockchains."
+          },
+          "yield": {
+            "name": "Yield",
+            "description": "Recherche de rendement via lending, liquidity providing, staking ou stratégies DeFi."
+          }
+        }
+      },
+      "wallets": {
+        "title": "Wallets & self-custody",
+        "description": "Utilisation avancée des wallets, signatures, approvals, hardware wallets et logique de souveraineté numérique liée à la conservation de ses clés.",
+        "items": {
+          "metamask": {
+            "name": "MetaMask",
+            "description": "Wallet EVM très utilisé pour signer des transactions et interagir avec les dApps."
+          },
+          "ledger": {
+            "name": "Ledger",
+            "description": "Hardware wallet permettant de conserver ses clés hors ligne."
+          },
+          "keplr": {
+            "name": "Keplr",
+            "description": "Wallet principal de l’écosystème Cosmos."
+          },
+          "phantom": {
+            "name": "Phantom",
+            "description": "Wallet populaire sur Solana, aussi de plus en plus multi-chain."
+          },
+          "approvals": {
+            "name": "Approvals",
+            "description": "Autorisations données à des contrats pour déplacer certains tokens : puissant mais risqué."
+          },
+          "signatures": {
+            "name": "Signatures",
+            "description": "Action de signer un message ou une transaction avec son wallet, sans toujours transférer de fonds."
+          }
+        }
+      },
+      "infrastructure": {
+        "title": "Infrastructure Web3",
+        "description": "Lecture et affichage de données on-chain via RPC, explorers, APIs, layer 2, rollups et outils d’infrastructure blockchain.",
+        "items": {
+          "rpc": {
+            "name": "RPC",
+            "description": "Point d’accès permettant à une application de lire et envoyer des données à une blockchain."
+          },
+          "alchemy": {
+            "name": "Alchemy",
+            "description": "Fournisseur d’infrastructure Web3 pour accéder aux RPC, NFTs, tokens et données on-chain."
+          },
+          "explorers": {
+            "name": "Explorers",
+            "description": "Outils comme Etherscan permettant d’explorer transactions, contrats, blocs et wallets."
+          },
+          "layer2": {
+            "name": "Layer 2",
+            "description": "Réseaux construits au-dessus d’Ethereum pour améliorer scalabilité et frais."
+          },
+          "rollups": {
+            "name": "Rollups",
+            "description": "Solutions qui exécutent des transactions hors L1 tout en publiant des preuves ou données sur Ethereum."
+          },
+          "tokenApis": {
+            "name": "Token APIs",
+            "description": "APIs permettant de récupérer soldes, metadata, prix et historique de tokens."
+          }
+        }
+      },
+      "security": {
+        "title": "Sécurité & risques",
+        "description": "Attention portée aux approvals, au phishing, aux signatures, aux risques de protocoles, à la sécurité wallet et aux limites de la self-custody.",
+        "items": {
+          "phishing": {
+            "name": "Phishing",
+            "description": "Attaques visant à pousser l’utilisateur à signer ou divulguer une information critique."
+          },
+          "multisig": {
+            "name": "Multisig",
+            "description": "Wallet nécessitant plusieurs signatures pour exécuter une transaction."
+          },
+          "mev": {
+            "name": "MEV basics",
+            "description": "Extraction de valeur liée à l’ordre des transactions dans un bloc."
+          },
+          "riskAnalysis": {
+            "name": "Risk analysis",
+            "description": "Évaluation des risques techniques, économiques, smart contracts et UX d’un protocole."
+          }
+        }
+      }
     }
   },
   "tools": {
@@ -69,6 +311,9 @@
       "listExchanges": "Liste des plateformes d’échange",
       "listOthers": "Liste d’autres outils",
       "listExplorers": "Liste des explorateurs blockchain"
+    },
+    "badges": {
+      "referral": "Parrainage"
     }
   },
   "contact": {
@@ -91,54 +336,138 @@
         "cta": "M’envoyer un DM"
       }
     },
+    "badge": "Disponible",
+    "heading": "Une idée, un projet ou une discussion ?",
+    "description": "Écris-moi pour parler blockchain, développement, projet Web3, collaboration ou simplement échanger autour de la tech.",
     "form": {
+      "nameLabel": "Nom",
+      "emailLabel": "Email",
+      "messageLabel": "Message",
       "name": "Votre nom complet",
       "email": "Votre email",
       "message": "Votre message",
       "submit": "Envoyer l’email",
+      "sending": "Envoi...",
       "success": "Message envoyé, merci !",
       "error": "Oups, un problème est survenu. Réessayez."
     }
   },
   "footer": {
     "logo": "Julien ESTERBET",
+    "sections": "Sections",
+    "pages": "Pages",
     "links": {
       "home": "Accueil",
       "about": "À propos",
       "knowledge": "Connaissances",
-      "tools": "Outils",
+      "networks": "Réseaux",
+      "wallet": "Wallet",
       "donation": "Donation",
+      "tools": "Outils",
       "contact": "Contact"
     },
     "copyright": "© Julien Esterbet — Portfolio Crypto. Tous droits réservés."
   },
-  "donation": {
-    "kicker": "Si vous souhaitez faire un",
-    "title": "Don",
-    "alt": {
-      "eth": "Logo / avatar Ethereum"
+  "donationPanel": {
+    "kicker": "Soutien",
+    "title": "Soutenir mon travail",
+    "heading": "Donation on-chain",
+    "subtitle": "Choisis un réseau, un token et envoie une donation EVM directement depuis ton wallet.",
+    "receiver": "Adresse receveuse",
+    "networkToken": "Réseau & token",
+    "searchPlaceholder": "Rechercher un réseau ou un token...",
+    "amountPlaceholder": "Montant en {{symbol}}",
+    "send": "Envoyer {{symbol}}",
+    "sending": "Envoi...",
+    "viewTx": "Voir la transaction",
+    "quickOptions": "Options rapides",
+    "customHint": "Recherche un token connu ou importe-le via son contrat.",
+    "errors": {
+      "noToken": "Sélectionne un token.",
+      "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",
+      "invalidAmount": "Entre un montant valide.",
+      "cancelled": "Transaction annulée par l’utilisateur.",
+      "failed": "Transaction échouée ou changement de réseau refusé.",
+      "invalidTokenAddress": "Adresse de contrat invalide.",
+      "importFailed": "Impossible d’importer ce token. Vérifie le réseau et l’adresse du contrat."
     },
-    "aria": {
-      "showNetwork": "Afficher le réseau actuel"
+    "custom": {
+      "title": "Importer un token ERC-20",
+      "text": "Colle l’adresse du contrat d’un token sur un réseau EVM compatible. Le symbole et les décimales seront lus directement on-chain.",
+      "chainHex": "Chain ID hexadécimal, ex: 0x1",
+      "chainName": "Nom du réseau",
+      "explorer": "Explorer, ex: https://etherscan.io/",
+      "contract": "Adresse du contrat ERC-20",
+      "import": "Importer le token",
+      "importing": "Import...",
+      "show": "Importer un token personnalisé",
+      "hide": "Masquer l’import personnalisé"
     },
-    "network": {
-      "button": "Réseau",
-      "unknown": "ID de chaîne :"
-    },
-    "wallet": {
-      "connect": "Connecter un wallet",
-      "helper": "Connectez-vous avec MetaMask ou tout wallet EVM. Vous pouvez aussi changer de réseau (BSC, Polygon, Gnosis, etc.).",
-      "connected": "Adresse connectée :"
-    },
-    "form": {
-      "title": "Envoyer un don en ETH",
-      "placeholder": "Montant en ETH",
-      "submit": "Donner maintenant",
-      "viewTx": "Voir la transaction",
-      "noTx": "Aucune transaction pour l’instant",
-      "success": "Transaction envoyée — merci !",
-      "error": "Un problème est survenu, réessayez."
-    },
-    "receiver": "Bénéficiaire : {{addr}}"
+    "badges": {
+      "catalog": "Catalogue",
+      "custom": "Custom",
+      "native": "Natif",
+      "erc20": "ERC-20"
+    }
+  },
+  "walletInspector": {
+    "kicker": "Analyse wallet",
+    "title": "Wallet Inspector",
+    "placeholder": "Colle une adresse EVM, ex: 0x...",
+    "inspect": "Analyser",
+    "loading": "Analyse...",
+    "connect": "Connecter mon wallet",
+    "address": "Adresse",
+    "network": "Réseau",
+    "nativeBalance": "Balance native",
+    "portfolio": "Valeur du portefeuille",
+    "tokenCount": "Tokens détectés",
+    "topHolding": "Top holding",
+    "pricedTokens": "valorisés",
+    "openExplorer": "Ouvrir l’explorer",
+    "tokens": "Tokens détectés",
+    "noTokens": "Aucun token détecté sur ce réseau.",
+    "unpriced": "Prix indisponible",
+    "nfts": "NFTs détectés",
+    "allocation": "Allocation",
+    "noPricedAssets": "Aucun actif valorisé.",
+    "noNfts": "Aucun NFT détecté.",
+    "viewAll": "Voir tout",
+    "errors": {
+      "invalidAddress": "Adresse ou ENS invalide.",
+      "missingRpc": "RPC manquant pour ce réseau.",
+      "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",
+      "failed": "Impossible d’analyser ce wallet."
+    }
+  },
+  "nav": {
+    "aria": "Navigation des sections crypto",
+    "items": {
+      "home": "Accueil",
+      "about": "À propos",
+      "knowledge": "Connaissances",
+      "networks": "Réseaux",
+      "wallet": "Wallet",
+      "contact": "Contact"
+    }
+  },
+  "blockchainExplorer": {
+    "kicker": "Réseaux live",
+    "title": "Blockchain Explorer",
+    "description": "Snapshots live des réseaux EVM : dernier bloc, chain ID, gas price, max fee, priority fee et liens explorer.",
+    "refresh": "Rafraîchir",
+    "refreshing": "Rafraîchissement...",
+    "latestBlock": "Dernier bloc",
+    "chain": "Chain",
+    "gas": "Gas",
+    "max": "Max",
+    "priority": "Priorité",
+    "unit": "valeurs en gwei",
+    "openExplorer": "Ouvrir l’explorer",
+    "status": {
+      "online": "En ligne",
+      "missingRpc": "RPC manquant",
+      "error": "Erreur"
+    }
   }
 }

@@ -1,0 +1,78 @@
+export const CRYPTO_KNOWLEDGE = [
+    {
+        id: 'blockchain',
+        icon: '⛓️',
+        level: 'advanced',
+        items: [
+            {id: 'bitcoin', icon: '₿', tags: ['proofOfWork', 'limitedSupply', 'lightning', 'storeOfValue']},
+            {id: 'ethereum', icon: 'Ξ', tags: ['evm', 'smartContracts', 'defi', 'layer2']},
+            {id: 'polkadot', icon: '●', tags: ['parachains', 'interoperability', 'staking']},
+            {id: 'solana', icon: '◎', tags: ['highThroughput', 'lowFees', 'defi', 'nfts']},
+            {id: 'multiversx', icon: '✦', tags: ['sharding', 'scalability', 'xportal']},
+            {id: 'cosmos', icon: '✺', tags: ['ibc', 'appchains', 'osmosis', 'atom']},
+        ],
+    },
+    {
+        id: 'smartContracts',
+        icon: '⚙️',
+        level: 'advanced',
+        items: [
+            {id: 'solidity', icon: '{}', tags: ['evm', 'contracts', 'types', 'security']},
+            {id: 'evm', icon: 'Ξ', tags: ['execution', 'gas', 'bytecode']},
+            {id: 'erc20', icon: '20', tags: ['tokens', 'transfer', 'allowance']},
+            {id: 'erc721', icon: '721', tags: ['nft', 'ownership', 'metadata']},
+            {id: 'openzeppelin', icon: 'OZ', tags: ['security', 'standards', 'accessControl']},
+            {id: 'ethers', icon: 'js', tags: ['frontend', 'wallet', 'provider', 'signer']},
+        ],
+    },
+    {
+        id: 'defi',
+        icon: '💧',
+        level: 'advanced',
+        items: [
+            {id: 'amm', icon: '∿', tags: ['dex', 'pools', 'slippage']},
+            {id: 'uniswap', icon: '🦄', tags: ['swap', 'lp', 'v2v3']},
+            {id: 'aave', icon: 'A', tags: ['lending', 'borrowing', 'collateral']},
+            {id: 'staking', icon: '◆', tags: ['pos', 'yield', 'validators']},
+            {id: 'bridges', icon: '↔', tags: ['interop', 'risk', 'layer2']},
+            {id: 'yield', icon: '%', tags: ['apr', 'apy', 'risk']},
+        ],
+    },
+    {
+        id: 'wallets',
+        icon: '👛',
+        level: 'advanced',
+        items: [
+            {id: 'metamask', icon: '🦊', tags: ['evm', 'signer', 'browserWallet']},
+            {id: 'ledger', icon: '▣', tags: ['coldWallet', 'security', 'selfCustody']},
+            {id: 'keplr', icon: 'K', tags: ['cosmos', 'ibc', 'staking']},
+            {id: 'phantom', icon: '👻', tags: ['solana', 'nfts', 'defi']},
+            {id: 'approvals', icon: '✓', tags: ['erc20', 'allowance', 'risk']},
+            {id: 'signatures', icon: '✍', tags: ['wallet', 'auth', 'security']},
+        ],
+    },
+    {
+        id: 'infrastructure',
+        icon: '🧱',
+        level: 'intermediate',
+        items: [
+            {id: 'rpc', icon: 'RPC', tags: ['node', 'provider', 'jsonRpc']},
+            {id: 'alchemy', icon: 'A', tags: ['rpc', 'api', 'node']},
+            {id: 'explorers', icon: '🔎', tags: ['etherscan', 'blocks', 'transactions']},
+            {id: 'layer2', icon: 'L2', tags: ['arbitrum', 'optimism', 'base']},
+            {id: 'rollups', icon: '↟', tags: ['optimistic', 'zk', 'scaling']},
+            {id: 'tokenApis', icon: 'API', tags: ['balances', 'metadata', 'prices']},
+        ],
+    },
+    {
+        id: 'security',
+        icon: '🛡️',
+        level: 'intermediate',
+        items: [
+            {id: 'phishing', icon: '!', tags: ['scams', 'wallet', 'ux']},
+            {id: 'multisig', icon: 'M', tags: ['gnosisSafe', 'governance', 'security']},
+            {id: 'mev', icon: '⚡', tags: ['frontRunning', 'sandwich', 'validators']},
+            {id: 'riskAnalysis', icon: '∆', tags: ['defi', 'security', 'protocol']},
+        ],
+    },
+]

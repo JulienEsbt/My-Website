@@ -52,7 +52,7 @@ src/
 │  ├─ common/              # shared UI (Header, Nav, Footer, etc.)
 │  └─ ...
 ├─ pages/
-│  ├─ MainPage.jsx         # route /
+│  ├─ HomePage.jsx         # route /
 │  └─ CryptoPage.jsx       # route /crypto
 ├─ styles/                 # global CSS / modules
 ├─ App.jsx                 # app shell & router
