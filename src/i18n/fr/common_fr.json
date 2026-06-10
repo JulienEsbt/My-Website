@@ -4,5 +4,41 @@
     "web3": "Web3",
     "travel": "Voyages",
     "reflexions": "Réflexions"
+  },
+  "contact": {
+    "kicker": "Entrer en contact",
+    "title": "Contactez-moi",
+    "options": {
+      "email": {
+        "title": "Email",
+        "value": "julien.esterbet@gmail.com",
+        "cta": "Envoyer un message"
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "value": "Julien Esterbet",
+        "cta": "M’écrire"
+      },
+      "twitter": {
+        "title": "Twitter / X",
+        "value": "Julien_Esbt_Pro",
+        "cta": "M’envoyer un DM"
+      }
+    },
+    "badge": "Disponible",
+    "heading": "Une idée, un projet ou une discussion ?",
+    "description": "Que ce soit pour un projet, une opportunité professionnelle, une collaboration ou simplement pour échanger autour de la technologie, du Web3 ou d’autres sujets qui nous passionnent, n’hésitez pas à me contacter.",
+    "form": {
+      "nameLabel": "Nom",
+      "emailLabel": "Email",
+      "messageLabel": "Message",
+      "name": "Votre nom complet",
+      "email": "Votre email",
+      "message": "Votre message",
+      "submit": "Envoyer l’email",
+      "sending": "Envoi...",
+      "success": "Message envoyé, merci !",
+      "error": "Oups, un problème est survenu. Réessayez."
+    }
   }
 }

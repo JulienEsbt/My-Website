@@ -8,7 +8,7 @@ import {ASSETS} from '../../../../config/assets.js'
 import './header.css'
 
 const Header = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const root = useRef(null)
     const title = useRef(null)

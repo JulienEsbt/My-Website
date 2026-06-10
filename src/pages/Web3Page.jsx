@@ -8,7 +8,7 @@ import BlockchainExplorer from '../components/web3/web3/blockchainExplorer/Block
 import WalletInspector from '../components/web3/web3/walletInspector/WalletInspector'
 import DonationPanel from '../components/web3/web3/donationPanel/DonationPanel'
 import Tools from '../components/web3/content/tools/Tools'
-import Contact from '../components/web3/content/contact/Contact'
+import ContactSection from "../components/common/contactSection/contactSection.jsx";
 import Footer from '../components/web3/layout/footer/Footer'
 
 const Web3Page = () => {
@@ -28,7 +28,7 @@ const Web3Page = () => {
             <WalletInspector/>
             <DonationPanel/>
             <Tools/>
-            <Contact/>
+            <ContactSection/>
             <Footer/>
         </main>
     )

@@ -17,7 +17,7 @@ const SECTIONS = [
 ]
 
 const Nav = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
     const [active, setActive] = useState('#top')
 
     useEffect(() => {

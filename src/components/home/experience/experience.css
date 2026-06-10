@@ -1,92 +1,124 @@
+.experience__intro {
+    width: min(720px, 88vw);
+    margin: -1rem auto 2.4rem;
+    text-align: center;
+    color: var(--color-light);
+    line-height: 1.7;
+}
+
 .experience__container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
 }
 
-.experience__container > div {
-    background: var(--color-bg-variant);
-    padding: 2.4rem 5rem;
-    border-radius: 2rem;
-    border: 1px solid transparent;
-    transition: var(--transition);
+.experience__card {
+    position: relative;
+    min-height: 100%;
+    padding: 1.35rem;
+    border-radius: 1.45rem;
+    background: radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.12), transparent 32%),
+    rgba(31, 31, 56, 0.62);
+    border: 1px solid rgba(77, 181, 255, 0.14);
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.experience__container > div:hover {
-    background: transparent;
-    border-color: var(--color-primary-variant);
-    cursor: default;
+.experience__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(77, 181, 255, 0.14), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.experience__container > div h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--color-primary);
+.experience__card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77, 181, 255, 0.38);
+    box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.28);
 }
 
-.experience__content {
+.experience__card:hover::before {
+    opacity: 1;
+}
+
+.experience__card-head,
+.experience__skills {
+    position: relative;
+    z-index: 1;
+}
+
+.experience__card-head {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 2rem;
-}
-
-.experience__details {
-    display: flex;
     gap: 1rem;
+    margin-bottom: 1.2rem;
 }
 
-.experience__details-icon {
-    margin-top: 6px;
+.experience__icon {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 1rem;
     color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    font-size: 1.25rem;
 }
 
-/* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
+.experience__card h3 {
+    margin: 0 0 0.45rem;
+    color: var(--color-white);
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.experience__card p {
+    margin: 0;
+    color: var(--color-light);
+    line-height: 1.6;
+    font-size: 0.86rem;
+}
+
+.experience__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.experience__skills span {
+    padding: 0.5rem 0.68rem;
+    border-radius: 999px;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.16);
+    font-size: 0.74rem;
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 1024px) {
     .experience__container {
         grid-template-columns: 1fr;
     }
 
-    .experience__container > div {
-        width: 80%;
-        padding: 2rem;
+    .experience__card {
+        width: min(720px, 100%);
         margin: 0 auto;
     }
-
-    .experience__content {
-        padding: 1rem;
-    }
 }
 
-/* ==================== MEDIA QUERIES (SMALL DEVICES) ==================== */
 @media screen and (max-width: 600px) {
-    .experience__container {
-        gap: 1rem;
+    .experience__intro {
+        margin-bottom: 1.8rem;
     }
 
-    .experience__container > div {
-        width: 100%;
-        padding: 2rem 1rem;
+    .experience__card {
+        padding: 1.1rem;
     }
-}
 
-.card {
-    background: var(--color-bg-variant);
-    border: 1px solid transparent;
-    border-radius: 2rem;
-    padding: 2.4rem 5rem;
-    transition: var(--transition);
-}
-
-.card:hover {
-    background: transparent;
-    border-color: var(--color-primary-variant);
-}
-
-.experience__container > div {
-    will-change: transform, box-shadow;
-}
-
-.experience__container > div:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    .experience__skills span {
+        font-size: 0.7rem;
+        padding: 0.45rem 0.6rem;
+    }
 }

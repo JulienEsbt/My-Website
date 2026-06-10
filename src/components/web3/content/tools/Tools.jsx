@@ -15,7 +15,7 @@ const buildTools = (items = []) =>
     }))
 
 const Tools = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const groups = [
         {

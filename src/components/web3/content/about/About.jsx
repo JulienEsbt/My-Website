@@ -9,7 +9,7 @@ import {ASSETS} from '../../../../config/assets.js'
 import './about.css'
 
 const About = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const cards = [
         {

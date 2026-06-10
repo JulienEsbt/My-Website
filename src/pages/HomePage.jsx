@@ -7,8 +7,8 @@ import Experience from "../components/home/experience/Experience.jsx";
 import Services from "../components/home/services/Services.jsx";
 import Portfolio from "../components/home/portfolio/Portfolio.jsx";
 import Goals from "../components/home/goals/Goals.jsx";
-import Contact from "../components/home/contact/Contact.jsx";
 import Footer from '../components/home/footer/Footer.jsx';
+import ContactSection from "../components/common/contactSection/contactSection.jsx";
 
 const HomePage = () => {
     return (
@@ -23,7 +23,7 @@ const HomePage = () => {
                 <Services/>
                 <Portfolio/>
                 <Goals/>
-                <Contact/>
+                <ContactSection/>
                 <Footer/>
             </main>
         </>

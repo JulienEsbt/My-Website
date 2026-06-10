@@ -5,8 +5,8 @@ import common_en from './en/common_en.json'
 import common_fr from './fr/common_fr.json'
 import home_en from './en/home_en.json'
 import home_fr from './fr/home_fr.json'
-import crypto_en from './en/web3_en.json'
-import crypto_fr from './fr/web3_fr.json'
+import web3_en from './en/web3_en.json'
+import web3_fr from './fr/web3_fr.json'
 import travel_en from './en/travel_en.json'
 import travel_fr from './fr/travel_fr.json'
 import reflexions_en from './en/reflexions_en.json'
@@ -20,19 +20,19 @@ i18n
             en: {
                 common: common_en,
                 home: home_en,
-                crypto: crypto_en,
+                web3: web3_en,
                 travel: travel_en,
                 reflexions: reflexions_en,
             },
             fr: {
                 common: common_fr,
                 home: home_fr,
-                crypto: crypto_fr,
+                web3: web3_fr,
                 travel: travel_fr,
                 reflexions: reflexions_fr,
             },
         },
-        ns: ['common', 'home', 'crypto', 'travel', 'reflexions'],
+        ns: ['common', 'home', 'web3', 'travel', 'reflexions'],
         defaultNS: 'common',
         fallbackLng: 'en',
         supportedLngs: ['en', 'fr'],

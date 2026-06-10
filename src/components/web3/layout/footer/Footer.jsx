@@ -7,7 +7,7 @@ import {LINKS} from '../../../../config/links.js'
 import {SITE_PAGES} from '../../../../config/pages.js'
 
 const Footer = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
     const {t: tCommon} = useTranslation('common')
 
     const sectionLinks = [

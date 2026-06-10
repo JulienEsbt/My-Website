@@ -1,57 +1,145 @@
-.container.testimonials__container {
-    width: 40%;
-    padding-bottom: 3rem;
-}
-
-.client__avatar {
-    width: 4rem;
-    aspect-ratio: 1/1;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    border: 0.4rem solid var(--color-primary-variant);
-}
-
-.testimonials {
-    background: var(--color-primary-variant);
+.goals__intro {
+    width: min(760px, 88vw);
+    margin: -1rem auto 2.6rem;
     text-align: center;
-    padding: 2rem;
-    border-radius: 2rem;
-    user-select: none;
-}
-
-.client__review {
     color: var(--color-light);
-    font-weight: 300;
-    display: block;
-    width: 80%;
-    margin: 0.8rem auto 0;
+    line-height: 1.7;
 }
 
-.pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.goals-carousel {
+    width: min(1050px, 92vw);
+    padding-bottom: 3.4rem;
 }
 
-.swiper-pagination-clickable .swiper-pagination-bullet {
+.goals-carousel__swiper {
+    padding: 1.2rem 0 3rem;
+}
+
+.goals-carousel__slide {
+    width: min(360px, 82vw);
+    height: auto;
+}
+
+.goal-card {
+    position: relative;
+    min-height: 22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.55rem;
+    border-radius: 1.75rem;
+    background: radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+}
+
+.goal-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(77, 181, 255, 0.12), transparent 42%),
+    radial-gradient(circle at 90% 12%, rgba(124, 92, 255, 0.13), transparent 34%);
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.goal-card__number {
+    position: absolute;
+    top: 1rem;
+    right: 1.1rem;
+    color: rgba(255, 255, 255, 0.055);
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.goal-card__icon {
+    position: relative;
+    z-index: 1;
+    width: 3.4rem;
+    height: 3.4rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.4rem;
+    border-radius: 1.15rem;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.09);
+    border: 1px solid rgba(77, 181, 255, 0.22);
+    font-size: 1.45rem;
+}
+
+.goal-card__label {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    margin-bottom: 0.55rem;
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.goal-card h3 {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 0.75rem;
+    color: var(--color-white);
+    font-size: 1.55rem;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.goal-card p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: var(--color-light);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.goals-carousel .swiper-slide {
+    opacity: 0.42;
+    transform: scale(0.9);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.goals-carousel .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.goals-carousel .swiper-pagination {
+    bottom: 0 !important;
+}
+
+.goals-carousel .swiper-pagination-bullet {
+    width: 0.55rem;
+    height: 0.55rem;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.18);
+    transition: var(--transition);
+}
+
+.goals-carousel .swiper-pagination-bullet-active {
+    width: 1.7rem;
+    border-radius: 999px;
     background: var(--color-primary);
 }
 
-/* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
-@media screen and (max-width: 1024px) {
-    .container.testimonials__container {
-        width: 60%;
-    }
-}
-
-/* ==================== MEDIA QUERIES (SMALL DEVICES) ==================== */
-@media screen and (max-width: 600px) {
-    .container.testimonials__container {
-        width: var(--container-width-sm);
+@media screen and (max-width: 760px) {
+    .goals-carousel {
+        width: min(440px, 92vw);
     }
 
-    .client__review {
-        width: var(--container-width-sm);
+    .goals-carousel__slide {
+        width: min(320px, 84vw);
+    }
+
+    .goal-card {
+        min-height: 20rem;
+        padding: 1.25rem;
     }
 }

@@ -1,86 +1,53 @@
 import React, {useLayoutEffect, useRef} from 'react'
+import {useTranslation} from 'react-i18next'
+import {FiCode, FiLayers, FiCpu} from 'react-icons/fi'
 import {BiCheck} from 'react-icons/bi'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import './services.css'
-import {useTranslation, Trans} from 'react-i18next'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const SERVICES = [
+    {
+        id: 'backend',
+        icon: <FiCpu/>,
+        items: ['api', 'automation', 'integration', 'quality'],
+    },
+    {
+        id: 'webdev',
+        icon: <FiCode/>,
+        items: ['site', 'spa', 'uiMotion', 'forms'],
+    },
+    {
+        id: 'blockchain',
+        icon: <FiLayers/>,
+        items: ['contracts', 'dapp', 'auditLite', 'payments'],
+    },
+]
 
 const Services = () => {
     const {t} = useTranslation('home')
     const sectionRef = useRef(null)
-    const imgRef = useRef(null)
     const cardsRef = useRef([])
-    const textRef = useRef(null)
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Apparition globale
             gsap.from(sectionRef.current, {
                 opacity: 0,
-                y: 30,
-                duration: 0.8,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 80%',
-                },
-            })
-
-            // Image
-            gsap.fromTo(
-                imgRef.current,
-                {'--ty': '40px', opacity: 0},
-                {
-                    '--ty': '0px',
-                    opacity: 1,
-                    duration: 0.9,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 80%',
-                    },
-                }
-            )
-
-            // Flottement permanent
-            gsap.to(imgRef.current, {
-                '--ty': '-=6px',
-                yoyo: true,
-                repeat: -1,
-                duration: 3,
-                ease: 'sine.inOut',
-            })
-
-            // Cartes
-            gsap.fromTo(
-                cardsRef.current,
-                {'--y': '20px', opacity: 0},
-                {
-                    '--y': '0px',
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'power2.out',
-                    stagger: 0.12,
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 75%',
-                    },
-                }
-            )
-
-            // Paragraphe
-            gsap.from(textRef.current, {
-                opacity: 0,
-                y: 20,
+                y: 28,
                 duration: 0.7,
                 ease: 'power2.out',
-                delay: 0.1,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 70%',
-                },
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
+            })
+
+            gsap.from(cardsRef.current.filter(Boolean), {
+                opacity: 0,
+                y: 24,
+                duration: 0.55,
+                ease: 'power2.out',
+                stagger: 0.1,
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 72%'},
             })
         }, sectionRef)
 
@@ -88,57 +55,40 @@ const Services = () => {
     }, [])
 
     return (
-        <section id='services' ref={sectionRef}>
+        <section id="services" ref={sectionRef}>
             <h5>{t('services.kicker')}</h5>
             <h2>{t('services.title')}</h2>
+            <p className="services__intro">{t('services.intro')}</p>
 
-            <div className='.container services__container'>
-                {/* BackEnd */}
-                <article className='service'>
-                    <div className='service__head' ref={imgRef}>
-                        <h3>{t('services.groups.backend')}</h3>
-                    </div>
-                    <ul className='service__list' ref={(el) => (cardsRef.current[0] = el)}>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.backend.api')}</p></li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.backend.automation')}</p>
-                        </li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.backend.integration')}</p>
-                        </li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.backend.quality')}</p></li>
-                    </ul>
-                </article>
+            <div className="container services__container">
+                {SERVICES.map((service, index) => (
+                    <article
+                        key={service.id}
+                        className="service"
+                        ref={(el) => (cardsRef.current[index] = el)}
+                    >
+                        <div className="service__head">
+                            <div className="service__icon">{service.icon}</div>
 
-                {/* Web Development */}
-                <article className='service'>
-                    <div className='service__head' ref={imgRef}>
-                        <h3>{t('services.groups.webdev')}</h3>
-                    </div>
-                    <ul className='service__list' ref={(el) => (cardsRef.current[1] = el)}>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.webdev.site')}</p></li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.webdev.spa')}</p></li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.webdev.uiMotion')}</p></li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.webdev.forms')}</p></li>
-                    </ul>
-                </article>
+                            <div>
+                                <h3>{t(`services.groups.${service.id}.title`)}</h3>
+                                <p>{t(`services.groups.${service.id}.description`)}</p>
+                            </div>
+                        </div>
 
-                {/* Blockchain / Web3 */}
-                <article className='service'>
-                    <div className='service__head' ref={imgRef}>
-                        <h3>{t('services.groups.blockchain')}</h3>
-                    </div>
-                    <ul className='service__list' ref={(el) => (cardsRef.current[2] = el)}>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.blockchain.contracts')}</p>
-                        </li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.blockchain.dapp')}</p></li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.blockchain.auditLite')}</p>
-                        </li>
-                        <li><BiCheck className='service__list-icon'/><p>{t('services.items.blockchain.payments')}</p>
-                        </li>
-                    </ul>
-                </article>
+                        <ul className="service__list">
+                            {service.items.map((item) => (
+                                <li key={item}>
+                                    <BiCheck className="service__list-icon"/>
+                                    <p>{t(`services.items.${service.id}.${item}`)}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </article>
+                ))}
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default Services;
+export default Services

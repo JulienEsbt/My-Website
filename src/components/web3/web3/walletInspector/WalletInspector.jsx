@@ -118,7 +118,7 @@ const fetchNfts = async (rpcUrl, owner) => {
 }
 
 const WalletInspector = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const [address, setAddress] = useState('')
     const [selectedNetworkId, setSelectedNetworkId] = useState('ethereum')

@@ -11,7 +11,7 @@ import {
 import './DonationPanel.css'
 
 const DonationPanel = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const [search, setSearch] = useState('')
     const [customTokens, setCustomTokens] = useState([])

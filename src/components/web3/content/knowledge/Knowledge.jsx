@@ -5,7 +5,7 @@ import {CRYPTO_KNOWLEDGE} from '../../../../data/web3/knowledge.js'
 import './knowledge.css'
 
 const Knowledge = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const [activeCategoryId, setActiveCategoryId] = useState(CRYPTO_KNOWLEDGE[0].id)
     const [activeItemId, setActiveItemId] = useState(CRYPTO_KNOWLEDGE[0].items[0].id)

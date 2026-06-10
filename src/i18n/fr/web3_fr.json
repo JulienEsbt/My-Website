@@ -316,42 +316,6 @@
       "referral": "Parrainage"
     }
   },
-  "contact": {
-    "kicker": "Entrer en contact",
-    "title": "Contactez-moi",
-    "options": {
-      "email": {
-        "title": "Email",
-        "value": "julien.esterbet@gmail.com",
-        "cta": "Envoyer un message"
-      },
-      "linkedin": {
-        "title": "LinkedIn",
-        "value": "julien-esterbet",
-        "cta": "M’écrire"
-      },
-      "twitter": {
-        "title": "Twitter",
-        "value": "Julien Esbt Crypto",
-        "cta": "M’envoyer un DM"
-      }
-    },
-    "badge": "Disponible",
-    "heading": "Une idée, un projet ou une discussion ?",
-    "description": "Écris-moi pour parler blockchain, développement, projet Web3, collaboration ou simplement échanger autour de la tech.",
-    "form": {
-      "nameLabel": "Nom",
-      "emailLabel": "Email",
-      "messageLabel": "Message",
-      "name": "Votre nom complet",
-      "email": "Votre email",
-      "message": "Votre message",
-      "submit": "Envoyer l’email",
-      "sending": "Envoi...",
-      "success": "Message envoyé, merci !",
-      "error": "Oups, un problème est survenu. Réessayez."
-    }
-  },
   "footer": {
     "logo": "Julien ESTERBET",
     "sections": "Sections",

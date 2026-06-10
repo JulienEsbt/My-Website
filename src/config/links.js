@@ -2,7 +2,7 @@ export const LINKS = {
     social: {
         linkedin: 'https://www.linkedin.com/in/julien-esterbet/',
         github: 'https://github.com/JulienEsbt',
-        twitter: 'https://twitter.com/JulienEsbtCrypt',
+        twitter: 'https://twitter.com/Julien_Esbt_Pro',
         youtube: 'https://www.youtube.com/channel/UC8cax5btmg1s7V2Skt5kNBg',
         tiktok: 'https://www.tiktok.com/@julienesbtcrypto',
         instagram: 'https://www.instagram.com/julienesbtcrypto/',

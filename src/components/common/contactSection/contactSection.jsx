@@ -5,11 +5,11 @@ import {MdOutlineEmail} from 'react-icons/md'
 import {FaLinkedin, FaTwitter} from 'react-icons/fa'
 import {FiArrowUpRight, FiSend} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
-import {LINKS} from '../../../../config/links.js'
-import './contact.css'
+import {LINKS} from "../../../config/links.js";
+import './contactSection.css'
 
-const Contact = () => {
-    const {t} = useTranslation('crypto')
+const ContactSection = () => {
+    const {t} = useTranslation('common')
     const form = useRef(null)
 
     const [status, setStatus] = useState(null)
@@ -179,4 +179,4 @@ const Contact = () => {
     )
 }
 
-export default Contact
+export default ContactSection

@@ -316,42 +316,6 @@
       "referral": "Referral"
     }
   },
-  "contact": {
-    "kicker": "Get in touch",
-    "title": "Contact me",
-    "options": {
-      "email": {
-        "title": "Email",
-        "value": "julien.esterbet@gmail.com",
-        "cta": "Send a message"
-      },
-      "linkedin": {
-        "title": "LinkedIn",
-        "value": "julien-esterbet",
-        "cta": "Write me"
-      },
-      "twitter": {
-        "title": "Twitter",
-        "value": "Julien Esbt Crypto",
-        "cta": "DM me"
-      }
-    },
-    "badge": "Available",
-    "heading": "An idea, a project or a discussion?",
-    "description": "Write me to talk about blockchain, development, Web3 projects, collaboration or simply tech.",
-    "form": {
-      "nameLabel": "Name",
-      "emailLabel": "Email",
-      "messageLabel": "Message",
-      "name": "Your full name",
-      "email": "Your email",
-      "message": "Your message",
-      "submit": "Send email",
-      "sending": "Sending...",
-      "success": "Message sent successfully. Thanks!",
-      "error": "Oops, something went wrong. Please try again."
-    }
-  },
   "footer": {
     "logo": "Julien ESTERBET",
     "sections": "Sections",

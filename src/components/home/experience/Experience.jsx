@@ -1,129 +1,93 @@
-import React, {useLayoutEffect, useRef} from 'react';
-import {BsPatchCheckFill} from 'react-icons/bs';
-import {gsap} from 'gsap';
-import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import {useTranslation} from 'react-i18next';
-import './experience.css';
+import React, {useLayoutEffect, useRef} from 'react'
+import {useTranslation} from 'react-i18next'
+import {FaReact, FaServer} from 'react-icons/fa'
+import {SiEthereum} from 'react-icons/si'
+import {gsap} from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import './experience.css'
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
+
+const GROUPS = [
+    {
+        id: 'frontend',
+        icon: <FaReact/>,
+        skills: ['react', 'typescript', 'angular', 'motion'],
+    },
+    {
+        id: 'backend',
+        icon: <FaServer/>,
+        skills: ['java', 'sql', 'apis', 'batch'],
+    },
+    {
+        id: 'web3',
+        icon: <SiEthereum/>,
+        skills: ['solidity', 'ethers', 'hardhat', 'onchain'],
+    },
+]
 
 const Experience = () => {
     const {t} = useTranslation('home')
-
-    const sectionRef = useRef(null);
-    const detailsRef = useRef([]);
+    const sectionRef = useRef(null)
+    const cardsRef = useRef([])
 
     useLayoutEffect(() => {
-        const el = sectionRef.current;
-        const details = detailsRef.current.filter(Boolean);
-
         const ctx = gsap.context(() => {
-            gsap.from(el, {
+            gsap.from(sectionRef.current, {
+                opacity: 0,
+                y: 28,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
+            })
+
+            gsap.from(cardsRef.current.filter(Boolean), {
                 opacity: 0,
                 y: 24,
-                duration: 0.6,
+                duration: 0.55,
                 ease: 'power2.out',
-                scrollTrigger: {trigger: el, start: 'top 80%'},
-            });
+                stagger: 0.1,
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 72%'},
+            })
+        }, sectionRef)
 
-            gsap.from(details, {
-                opacity: 0,
-                y: 12,
-                duration: 0.4,
-                ease: 'power2.out',
-                stagger: 0.06,
-                scrollTrigger: {trigger: el, start: 'top 70%'},
-            });
-
-            details.forEach((node) => {
-                node.addEventListener('mouseenter', () =>
-                    gsap.to(node, {scale: 1.02, duration: 0.15, ease: 'power1.out'})
-                );
-                node.addEventListener('mouseleave', () =>
-                    gsap.to(node, {scale: 1, duration: 0.2, ease: 'power1.out'})
-                );
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    // translation map for levels
-    const L = {
-        exp: t('experience.levels.experienced'),
-        int: t('experience.levels.intermediate'),
-        beg: t('experience.levels.beginner'),
-    };
-
-    // keep the same skills; just change 'level' to a code that we translate via L
-    const FRONT = [
-        {name: 'React', level: 'exp'},
-        {name: 'TypeScript', level: 'exp'},
-        {name: 'Tailwind CSS', level: 'exp'},
-        {name: 'Angular', level: 'int'},
-        {name: 'GSAP / Framer Motion', level: 'exp'},
-        {name: 'Web3 client (ethers.js)', level: 'int'},
-    ];
-
-    const BACK = [
-        {name: 'Java (Spring Boot)', level: 'exp'},
-        {name: 'Node.js (scripting, APIs)', level: 'int'},
-        {name: 'Python (FastAPI, automation)', level: 'int'},
-        {name: 'SQL (MySQL)', level: 'int'},
-        {name: 'Solidity (smart contracts)', level: 'int'},
-        {name: 'Blockchain integration (Hardhat / APIs)', level: 'int'},
-    ];
-
-    const setDetailRef = (el, idx) => (detailsRef.current[idx] = el);
+        return () => ctx.revert()
+    }, [])
 
     return (
         <section id="experience" ref={sectionRef}>
             <h5>{t('experience.kicker')}</h5>
             <h2>{t('experience.title')}</h2>
+            <p className="experience__intro">{t('experience.intro')}</p>
 
             <div className="container experience__container">
-                {/* FRONTEND */}
-                <div className="experience__frontend">
-                    <h3>{t('experience.groups.frontend')}</h3>
-                    <div className="experience__content">
-                        {FRONT.map((s, i) => (
-                            <article
-                                className="experience__details"
-                                key={`fe-${s.name}`}
-                                ref={(el) => setDetailRef(el, i)}
-                            >
-                                <BsPatchCheckFill className="experience__details-icon"/>
-                                <div>
-                                    <h4>{s.name}</h4>
-                                    <small className="text-light">{L[s.level]}</small>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </div>
+                {GROUPS.map((group, index) => (
+                    <article
+                        key={group.id}
+                        className="experience__card"
+                        ref={(el) => (cardsRef.current[index] = el)}
+                    >
+                        <div className="experience__card-head">
+                            <div className="experience__icon">{group.icon}</div>
 
-                {/* BACKEND */}
-                <div className="experience__backend">
-                    <h3>{t('experience.groups.backend')}</h3>
-                    <div className="experience__content">
-                        {BACK.map((s, i) => (
-                            <article
-                                className="experience__details"
-                                key={`be-${s.name}`}
-                                ref={(el) => setDetailRef(el, FRONT.length + i)}
-                            >
-                                <BsPatchCheckFill className="experience__details-icon"/>
-                                <div>
-                                    <h4>{s.name}</h4>
-                                    <small className="text-light">{L[s.level]}</small>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </div>
+                            <div>
+                                <h3>{t(`experience.groups.${group.id}.title`)}</h3>
+                                <p>{t(`experience.groups.${group.id}.description`)}</p>
+                            </div>
+                        </div>
+
+                        <div className="experience__skills">
+                            {group.skills.map((skill) => (
+                                <span key={skill}>
+                                    {t(`experience.groups.${group.id}.skills.${skill}`)}
+                                </span>
+                            ))}
+                        </div>
+                    </article>
+                ))}
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default Experience;
+export default Experience

@@ -21,7 +21,7 @@ const IconBtn = ({href, label, children, className = 'icon', ...props}) => (
 )
 
 const CTA = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     return (
         <div className="cta" role="group" aria-label={t('cta.groupLabel')}>

@@ -24,7 +24,7 @@ const formatGwei = (value) => {
 }
 
 const BlockchainExplorer = () => {
-    const {t} = useTranslation('crypto')
+    const {t} = useTranslation('web3')
 
     const [networks, setNetworks] = useState([])
     const [loading, setLoading] = useState(false)

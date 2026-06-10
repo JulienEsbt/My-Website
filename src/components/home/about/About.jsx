@@ -1,89 +1,52 @@
 import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation, Trans} from 'react-i18next'
-import {FaAward} from 'react-icons/fa'
-import {FiUsers} from 'react-icons/fi'
-import {VscFolderLibrary} from 'react-icons/vsc'
+import {FaCode} from 'react-icons/fa'
+import {FiCpu, FiGitBranch} from 'react-icons/fi'
 import {ASSETS} from '../../../config/assets'
-import './about.css'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import './about.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {
     const {t} = useTranslation('home')
+
     const sectionRef = useRef(null)
-    const imgRef = useRef(null)
-    const cardsRef = useRef([])
-    const textRef = useRef(null)
+    const visualRef = useRef(null)
+    const contentRef = useRef(null)
+
+    const cards = [
+        {icon: <FaCode/>, title: t('about.cards.expertiseTitle'), text: t('about.cards.expertiseText')},
+        {icon: <FiCpu/>, title: t('about.cards.collabTitle'), text: t('about.cards.collabText')},
+        {icon: <FiGitBranch/>, title: t('about.cards.innovationTitle'), text: t('about.cards.innovationText')},
+    ]
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Apparition globale
             gsap.from(sectionRef.current, {
                 opacity: 0,
-                y: 30,
+                y: 28,
                 duration: 0.8,
                 ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 80%',
-                },
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
             })
 
-            // Image
-            gsap.fromTo(
-                imgRef.current,
-                {'--ty': '40px', opacity: 0},
-                {
-                    '--ty': '0px',
-                    opacity: 1,
-                    duration: 0.9,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 80%',
-                    },
-                }
-            )
-
-            // Flottement permanent
-            gsap.to(imgRef.current, {
-                '--ty': '-=6px',
-                yoyo: true,
-                repeat: -1,
-                duration: 3,
-                ease: 'sine.inOut',
-            })
-
-            // Cartes
-            gsap.fromTo(
-                cardsRef.current,
-                {'--y': '20px', opacity: 0},
-                {
-                    '--y': '0px',
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'power2.out',
-                    stagger: 0.12,
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 75%',
-                    },
-                }
-            )
-
-            // Paragraphe
-            gsap.from(textRef.current, {
+            gsap.from(visualRef.current, {
                 opacity: 0,
-                y: 20,
-                duration: 0.7,
+                x: -28,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 74%'},
+            })
+
+            gsap.from(contentRef.current.children, {
+                opacity: 0,
+                y: 18,
+                duration: 0.55,
                 ease: 'power2.out',
-                delay: 0.1,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 70%',
-                },
+                stagger: 0.08,
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 72%'},
             })
         }, sectionRef)
 
@@ -91,41 +54,40 @@ const About = () => {
     }, [])
 
     return (
-        <section id='about' ref={sectionRef}>
+        <section id="about" ref={sectionRef}>
             <h5>{t('about.headingSmall')}</h5>
             <h2>{t('about.heading')}</h2>
 
-            <div className='container about__container'>
-                <div className='about__me'>
-                    <div className='about__me-image' ref={imgRef}>
-                        <img src={ASSETS.main.about.photo} alt="Portrait of Julien Esterbet"/>
+            <div className="container about__container">
+                <aside className="about__visual" ref={visualRef}>
+                    <div className="about__photo-card">
+                        <div className="about__photo">
+                            <img src={ASSETS.main.about.photo} alt={t('header.portraitAlt')}/>
+                        </div>
+
+                        <div className="about__caption">
+                            <strong>{t('about.caption.title')}</strong>
+                            <span>{t('about.caption.text')}</span>
+                        </div>
                     </div>
-                </div>
+                </aside>
 
-                <div className='about__content'>
-                    <div className='about__cards'>
-                        <article className='about__card' ref={(el) => (cardsRef.current[0] = el)}>
-                            <FaAward className='about__icon'/>
-                            <h5>{t('about.cards.expertiseTitle')}</h5>
-                            <small>{t('about.cards.expertiseText')}</small>
-                        </article>
-
-                        <article className='about__card' ref={(el) => (cardsRef.current[1] = el)}>
-                            <FiUsers className='about__icon'/>
-                            <h5>{t('about.cards.collabTitle')}</h5>
-                            <small>{t('about.cards.collabText')}</small>
-                        </article>
-
-                        <article className='about__card' ref={(el) => (cardsRef.current[2] = el)}>
-                            <VscFolderLibrary className='about__icon'/>
-                            <h5>{t('about.cards.innovationTitle')}</h5>
-                            <small>{t('about.cards.innovationText')}</small>
-                        </article>
+                <div className="about__content" ref={contentRef}>
+                    <div className="about__cards">
+                        {cards.map((card) => (
+                            <article className="about__card" key={card.title}>
+                                <div className="about__icon">{card.icon}</div>
+                                <div>
+                                    <h3>{card.title}</h3>
+                                    <p>{card.text}</p>
+                                </div>
+                            </article>
+                        ))}
                     </div>
 
-                    <p ref={textRef}>
-                        <Trans i18nKey='about.bio' ns='common' components={{b: <b/>}}/>
-                    </p>
+                    <div className="about__bio">
+                        <Trans i18nKey="about.bio" ns="home" components={{b: <b/>}}/>
+                    </div>
                 </div>
             </div>
         </section>
