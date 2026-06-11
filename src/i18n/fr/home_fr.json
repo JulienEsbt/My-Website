@@ -162,19 +162,6 @@
     },
     "bio": "Je suis développeur logiciel, avec une formation à la croisée de l’<b>informatique</b>, de la <b>finance</b> et des <b>technologies Web3</b>. Aujourd’hui, je travaille dans le secteur de l’assurance-vie, où je participe à des projets métiers, des interfaces web, des batchs et des systèmes documentaires.<br/><br/>Mais mon intérêt ne s’arrête pas au code. J’aime comprendre les systèmes : techniques, économiques, sociaux, politiques. Ce qui me motive, c’est de construire des outils utiles, mais aussi de réfléchir au rôle que la technologie peut jouer dans nos vies et dans la société.<br/><br/>Ce portfolio rassemble donc plusieurs facettes : mon parcours de développeur, mes projets, mon intérêt pour le Web3, mais aussi mes réflexions, mes voyages et les idées qui me construisent."
   },
-  "footer": {
-    "logo": "Julien ESTERBET",
-    "links": {
-      "home": "Accueil",
-      "about": "À propos",
-      "experience": "Expérience",
-      "services": "Services",
-      "portfolio": "Portfolio",
-      "goals": "Objectifs",
-      "contact": "Contact"
-    },
-    "copyright": "© Portfolio de Julien Esterbet. Tous droits réservés."
-  },
   "goals": {
     "kicker": "Un peu plus personnel",
     "title": "Ce qui me guide",
@@ -202,5 +189,8 @@
       }
     },
     "label": "Direction"
+  },
+  "nav": {
+    "aria": "Navigation des sections"
   }
 }

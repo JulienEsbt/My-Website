@@ -2,8 +2,8 @@ import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import gsap from 'gsap'
-import CTA from './CTA.jsx'
-import HeaderSocials from './HeaderSocials.jsx'
+import SocialsCTA from './SocialsCTA.jsx'
+import HeaderSocials from "../../../common/headerSocials/HeaderSocials.jsx";
 import {ASSETS} from '../../../../config/assets.js'
 import './header.css'
 
@@ -48,7 +48,7 @@ const Header = () => {
                     <p ref={role} className="hero__subtitle">{t('header.subtitle')}</p>
 
                     <div ref={cta}>
-                        <CTA/>
+                        <SocialsCTA/>
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@ const Header = () => {
                     </motion.div>
                 </div>
 
-                <div className="hero__left" ref={socials}>
+                <div ref={socials} className="web3-header__socials-wrapper">
                     <HeaderSocials/>
                 </div>
 

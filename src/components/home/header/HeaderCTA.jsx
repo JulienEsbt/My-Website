@@ -15,7 +15,7 @@ const Btn = ({href, children, className = 'btn', ...props}) => (
     </motion.a>
 )
 
-const CTA = () => {
+const HeaderCTA = () => {
     const {t} = useTranslation('home')
 
     return (
@@ -35,4 +35,4 @@ const CTA = () => {
     )
 }
 
-export default CTA
+export default HeaderCTA

@@ -2,8 +2,8 @@ import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import gsap from 'gsap'
-import CTA from './CTA'
-import HeaderSocials from './HeaderSocials'
+import HeaderCTA from './HeaderCTA.jsx'
+import HeaderSocials from "../../common/headerSocials/HeaderSocials.jsx";
 import {ASSETS} from '../../../config/assets'
 import './header.css'
 
@@ -78,7 +78,7 @@ const Header = () => {
                     </div>
 
                     <div ref={cta}>
-                        <CTA/>
+                        <HeaderCTA/>
                     </div>
                 </div>
 

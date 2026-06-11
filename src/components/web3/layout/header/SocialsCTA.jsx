@@ -20,7 +20,7 @@ const IconBtn = ({href, label, children, className = 'icon', ...props}) => (
     </motion.a>
 )
 
-const CTA = () => {
+const SocialsCTA = () => {
     const {t} = useTranslation('web3')
 
     return (
@@ -60,4 +60,4 @@ const CTA = () => {
     )
 }
 
-export default CTA
+export default SocialsCTA

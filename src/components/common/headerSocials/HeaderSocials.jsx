@@ -1,10 +1,11 @@
 import React from 'react'
-import {BsLinkedin, BsGithub} from 'react-icons/bs'
-import {LINKS} from "../../../../config/links.js";
+import {BsGithub, BsLinkedin} from 'react-icons/bs'
+import {LINKS} from '../../../config/links.js'
+import './headerSocials.css'
 
-const HeaderSocials = () => {
+const HeaderSocials = ({className = ''}) => {
     return (
-        <nav className="header__socials" aria-label="Crypto social links">
+        <nav className={`header-socials ${className}`} aria-label="Social links">
             <a
                 href={LINKS.social.linkedin}
                 target="_blank"
@@ -22,8 +23,6 @@ const HeaderSocials = () => {
             >
                 <BsGithub/>
             </a>
-
-            <span className="decor-line" aria-hidden/>
         </nav>
     )
 }

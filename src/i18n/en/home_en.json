@@ -162,19 +162,6 @@
     },
     "bio": "I am a software developer, with a background at the crossroads of <b>computer science</b>, <b>finance</b> and <b>Web3 technologies</b>. Today, I work in the life insurance sector, where I contribute to business projects, web interfaces, batch processes and document systems.<br/><br/>But my interest does not stop at code. I like understanding systems: technical, economic, social and political. What motivates me is building useful tools, but also thinking about the role technology can play in our lives and in society.<br/><br/>This portfolio brings together several sides of who I am: my developer journey, my projects, my interest in Web3, but also my reflections, travels and the ideas that shape me."
   },
-  "footer": {
-    "logo": "Julien ESTERBET",
-    "links": {
-      "home": "Home",
-      "about": "About",
-      "experience": "Experience",
-      "services": "Services",
-      "portfolio": "Portfolio",
-      "goals": "Goals",
-      "contact": "Contact"
-    },
-    "copyright": "© Julien Esterbet Portfolio. All rights reserved."
-  },
   "goals": {
     "kicker": "A bit more personal",
     "title": "What drives me",
@@ -202,5 +189,8 @@
       }
     },
     "label": "Direction"
+  },
+  "nav": {
+    "aria": "Section navigation"
   }
 }

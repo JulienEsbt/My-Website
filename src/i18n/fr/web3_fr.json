@@ -1,6 +1,6 @@
 {
   "header": {
-    "eyebrow": "Web3 • Crypto • DeFi",
+    "eyebrow": "Web3 • Blockchain • DeFi",
     "subtitle": "Blockchain • Crypto • Investissement • Dev",
     "scroll": "Défiler",
     "scrollAria": "Faire défiler jusqu’à la section Contact",
@@ -315,22 +315,6 @@
     "badges": {
       "referral": "Parrainage"
     }
-  },
-  "footer": {
-    "logo": "Julien ESTERBET",
-    "sections": "Sections",
-    "pages": "Pages",
-    "links": {
-      "home": "Accueil",
-      "about": "À propos",
-      "knowledge": "Connaissances",
-      "networks": "Réseaux",
-      "wallet": "Wallet",
-      "donation": "Donation",
-      "tools": "Outils",
-      "contact": "Contact"
-    },
-    "copyright": "© Julien Esterbet — Portfolio Crypto. Tous droits réservés."
   },
   "donationPanel": {
     "kicker": "Soutien",

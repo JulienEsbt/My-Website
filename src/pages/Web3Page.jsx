@@ -1,7 +1,7 @@
 import React from 'react'
 import PageNav from '../components/common/pagenav/PageNav'
 import Header from '../components/web3/layout/header/Header'
-import Nav from '../components/web3/layout/nav/Nav'
+import Web3Nav from '../components/web3/layout/web3Nav/Web3Nav.jsx'
 import About from '../components/web3/content/about/About'
 import Knowledge from '../components/web3/content/knowledge/Knowledge'
 import BlockchainExplorer from '../components/web3/web3/blockchainExplorer/BlockchainExplorer'
@@ -9,7 +9,7 @@ import WalletInspector from '../components/web3/web3/walletInspector/WalletInspe
 import DonationPanel from '../components/web3/web3/donationPanel/DonationPanel'
 import Tools from '../components/web3/content/tools/Tools'
 import ContactSection from "../components/common/contactSection/contactSection.jsx";
-import Footer from '../components/web3/layout/footer/Footer'
+import Footer from "../components/common/footerSection/Footer.jsx";
 
 const Web3Page = () => {
     return (
@@ -20,7 +20,7 @@ const Web3Page = () => {
                 <Header/>
             </section>
 
-            <Nav/>
+            <Web3Nav/>
 
             <About/>
             <Knowledge/>

@@ -40,5 +40,14 @@
       "success": "Message envoyé, merci !",
       "error": "Oups, un problème est survenu. Réessayez."
     }
+  },
+  "footer": {
+    "logo": "Julien ESTERBET",
+    "description": "Portfolio personnel autour du développement logiciel, du Web3, de la technologie, des voyages et des réflexions qui me construisent.",
+    "aria": "Navigation du pied de page",
+    "pages": "Pages",
+    "socials": "Réseaux",
+    "cta": "Me contacter",
+    "copyright": "© Julien Esterbet — Tous droits réservés."
   }
 }

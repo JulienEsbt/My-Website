@@ -49,7 +49,7 @@ src/
 ├─ components/
 │  ├─ main/                # portfolio sections
 │  ├─ crypto/              # crypto-related pages/features
-│  ├─ common/              # shared UI (Header, Nav, Footer, etc.)
+│  ├─ common/              # shared UI (Header, HomeNav, Footer, etc.)
 │  └─ ...
 ├─ pages/
 │  ├─ HomePage.jsx         # route /
