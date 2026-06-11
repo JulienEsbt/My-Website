@@ -9,8 +9,8 @@ import web3_en from './en/web3_en.json'
 import web3_fr from './fr/web3_fr.json'
 import travel_en from './en/travel_en.json'
 import travel_fr from './fr/travel_fr.json'
-import reflexions_en from './en/reflexions_en.json'
-import reflexions_fr from './fr/reflexions_fr.json'
+import reflections_en from './en/reflections_en.json'
+import reflections_fr from './fr/reflections_fr.json'
 
 i18n
     .use(LanguageDetector)
@@ -22,17 +22,17 @@ i18n
                 home: home_en,
                 web3: web3_en,
                 travel: travel_en,
-                reflexions: reflexions_en,
+                reflections: reflections_en,
             },
             fr: {
                 common: common_fr,
                 home: home_fr,
                 web3: web3_fr,
                 travel: travel_fr,
-                reflexions: reflexions_fr,
+                reflections: reflections_fr,
             },
         },
-        ns: ['common', 'home', 'web3', 'travel', 'reflexions'],
+        ns: ['common', 'home', 'web3', 'travel', 'reflections'],
         defaultNS: 'common',
         fallbackLng: 'en',
         supportedLngs: ['en', 'fr'],

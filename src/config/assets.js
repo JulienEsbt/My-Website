@@ -1,23 +1,23 @@
 // MAIN
-import ME from '../assets/main/Me.png'
-import ME2 from '../assets/main/Me2.jpg'
+import ME from '../assets/images/home/Me.png'
+import ME2 from '../assets/images/home/Me2.jpg'
 
-import MEGALIS from '../assets/main/Megalis.png'
-import FFNN from '../assets/main/FFNN.png'
-import WAVE from '../assets/main/Wave.png'
+import MEGALIS from '../assets/images/home/Megalis.png'
+import FFNN from '../assets/images/home/FFNN.png'
+import WAVE from '../assets/images/home/Wave.png'
 
-import FLY from '../assets/main/Fly.jpg'
-import HELICO from '../assets/main/Helico.jpg'
-import SHUTTLE from '../assets/main/Shuttle.jpg'
-import SPACEX from '../assets/main/SpaceX.jpg'
-import CRYPTO from '../assets/main/Crypto.jpg'
+import FLY from '../assets/images/home/Fly.jpg'
+import HELICO from '../assets/images/home/Helico.jpg'
+import SHUTTLE from '../assets/images/home/Shuttle.jpg'
+import SPACEX from '../assets/images/home/SpaceX.jpg'
+import CRYPTO from '../assets/images/home/Crypto.jpg'
 
-import CV from '../assets/main/cv.pdf'
+import CV from '../assets/documents/cv.pdf'
 
 // CRYPTO
-import ETH from '../assets/crypto/ETH.jpeg'
-import NFT1 from '../assets/crypto/NFT1.png'
-import NFT2 from '../assets/crypto/NFT2.png'
+import ETH from '../assets/images/web3/ETH.jpeg'
+import NFT1 from '../assets/images/web3/NFT1.png'
+import NFT2 from '../assets/images/web3/NFT2.png'
 
 export const ASSETS = {
     main: {

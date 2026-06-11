@@ -17,6 +17,6 @@ export const SITE_PAGES = [
     {
         id: 'reflections',
         path: '/reflections',
-        i18nKey: 'pageNav.reflexions',
+        i18nKey: 'pageNav.reflections',
     },
 ]

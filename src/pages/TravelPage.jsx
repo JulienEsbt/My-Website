@@ -1,11 +1,11 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
-import PageNav from '../components/common/pagenav/PageNav'
-import PageHero from '../components/common/pagehero/PageHero'
-import TravelStats from '../components/travel/travelStats/TravelStats'
-import TravelTimeline from '../components/travel/travelTimeline/TravelTimeline'
-import DreamDestinations from '../components/travel/dreamDestinations/DreamDestinations'
-import TravelExplorer from "../components/travel/travelExplorer/TravelExplorer.jsx";
+import PageNav from '../components/common/navigation/pageNav/PageNav'
+import PageHero from '../components/common/layout/pageHero/PageHero'
+import TravelStats from '../features/travel/travelStats/TravelStats'
+import TravelTimeline from '../features/travel/travelTimeline/TravelTimeline'
+import DreamDestinations from '../features/travel/dreamDestinations/DreamDestinations'
+import TravelExplorer from "../features/travel/travelExplorer/TravelExplorer.jsx";
 
 const TravelPage = () => {
     const {t} = useTranslation('travel')

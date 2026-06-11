@@ -191,6 +191,9 @@
     "label": "Direction"
   },
   "nav": {
-    "aria": "Section navigation"
+    "aria": "Section navigation",
+    "items": {
+      "home": "Home"
+    }
   }
 }

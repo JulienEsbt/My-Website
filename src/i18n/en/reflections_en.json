@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "kicker": "Reflections",
+    "title": "Thoughts, politics, philosophy & society",
+    "subtitle": "A personal notebook to structure my ideas, doubts, readings and convictions."
+  },
+  "filters": {
+    "all": "All",
+    "philosophy": "Philosophy",
+    "politics": "Politics",
+    "society": "Society",
+    "technology": "Technology"
+  },
+  "actions": {
+    "latest": "Latest notes",
+    "themes": "Explore themes"
+  },
+  "themes": {
+    "kicker": "Categories",
+    "title": "Explore my areas of thought"
+  },
+  "search": {
+    "placeholder": "Search a reflection..."
+  },
+  "stats": {
+    "articles": "Articles",
+    "themes": "Themes",
+    "latest": "Latest note"
+  },
+  "empty": {
+    "title": "No reflection found",
+    "text": "Try another search or another theme."
+  },
+  "card": {
+    "read": "Read"
+  },
+  "article": {
+    "back": "Back to reflexions",
+    "frenchOnly": "This article is currently available in French only."
+  },
+  "categories": {
+    "philosophy": "Philosophy",
+    "politics": "Politics",
+    "society": "Society",
+    "technology": "Technology"
+  },
+  "author": {
+    "title": "About these reflections",
+    "text": "These texts are personal notes. They are intended to evolve through my readings, experiences, encounters and ongoing questioning."
+  }
+}
