@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
-import {FiExternalLink, FiSearch, FiSend} from 'react-icons/fi'
+import {FiExternalLink, FiSearch, FiSend, FiCopy, FiCheck} from 'react-icons/fi'
 import {DONATION_RECEIVER, SUPPORTED_DONATION_TOKENS} from '../../../../config/wallet.js'
 import {TOKEN_CATALOG} from '../../../../config/tokenCatalog.js'
 import {
@@ -27,6 +27,8 @@ const DonationPanel = () => {
     const [customExplorer, setCustomExplorer] = useState('https://etherscan.io/')
     const [customContract, setCustomContract] = useState('')
     const [importingToken, setImportingToken] = useState(false)
+    const [showCustomImport, setShowCustomImport] = useState(false)
+    const [copied, setCopied] = useState(false)
 
     const allTokens = useMemo(
         () => [...SUPPORTED_DONATION_TOKENS, ...TOKEN_CATALOG, ...customTokens],
@@ -134,7 +136,19 @@ const DonationPanel = () => {
         }
     }
 
-    const [showCustomImport, setShowCustomImport] = useState(false)
+    const copyAddress = async () => {
+        try {
+            await navigator.clipboard.writeText(DONATION_RECEIVER)
+
+            setCopied(true)
+
+            setTimeout(() => {
+                setCopied(false)
+            }, 2000)
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     return (
         <section id="donation">
@@ -156,9 +170,21 @@ const DonationPanel = () => {
 
                     <div className="donation-panel__receiver">
                         <span>{t('donationPanel.receiver')}</span>
-                        <code title={DONATION_RECEIVER}>
-                            {DONATION_RECEIVER}
-                        </code>
+
+                        <div className="donation-panel__receiver-line">
+                            <code title={DONATION_RECEIVER}>
+                                {DONATION_RECEIVER}
+                            </code>
+
+                            <button
+                                type="button"
+                                className="donation-panel__copy"
+                                onClick={copyAddress}
+                                aria-label="Copier l'adresse"
+                            >
+                                {copied ? <FiCheck/> : <FiCopy/>}
+                            </button>
+                        </div>
                     </div>
                 </div>
 

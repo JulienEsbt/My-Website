@@ -10,7 +10,7 @@
 
 .donation-panel__content {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
 }
@@ -40,13 +40,8 @@
 }
 
 .donation-panel__receiver code {
-    display: block;
-    max-width: 100%;
     color: var(--color-light);
     font-size: 0.85rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     cursor: help;
 }
 
@@ -273,4 +268,61 @@
     .donation-panel__custom-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.donation-panel {
+    overflow: hidden;
+}
+
+.donation-panel__content,
+.donation-panel__content > div,
+.donation-panel__receiver,
+.donation-panel__selector,
+.donation-panel__search,
+.donation-panel__tokens,
+.donation-panel__token {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.donation-panel p,
+.donation-panel__receiver code {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.donation-panel__receiver code {
+    display: block;
+    white-space: normal;
+}
+
+.donation-panel__receiver-line {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.donation-panel__receiver-line code {
+    flex: 1;
+}
+
+.donation-panel__copy {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.55rem;
+    background: rgba(77, 181, 255, 0.1);
+    border: 1px solid rgba(77, 181, 255, 0.25);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.donation-panel__copy:hover {
+    background: rgba(77, 181, 255, 0.2);
+    color: var(--color-white);
 }

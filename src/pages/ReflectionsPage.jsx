@@ -143,6 +143,7 @@ const ReflectionsPage = () => {
                     language={language}
                     categoryLabels={t('categories', {returnObjects: true})}
                     readLabel={t('card.read')}
+                    featuredLabel={t('card.featured')}
                     emptyTitle={t('empty.title')}
                     emptyText={t('empty.text')}
                     kicker={t('latest.kicker')}

@@ -6,7 +6,8 @@ import trips from '../../../data/travel/trips.js'
 import './TravelTimeline.css'
 
 const TravelTimeline = () => {
-    const {t} = useTranslation('travel')
+    const {t, i18n} = useTranslation('travel')
+    const isFr = i18n.resolvedLanguage?.startsWith('fr')
 
     const sortedTrips = useMemo(
         () => [...trips].sort((a, b) => a.year - b.year),
@@ -15,6 +16,16 @@ const TravelTimeline = () => {
 
     const [activeTripId, setActiveTripId] = useState(sortedTrips[0]?.id)
     const activeTrip = sortedTrips.find((trip) => trip.id === activeTripId) ?? sortedTrips[0]
+
+    const getTripText = (trip, field) => {
+        if (!trip) return ''
+
+        if (!isFr) {
+            return trip[`${field}En`] ?? trip[field]
+        }
+
+        return trip[field]
+    }
 
     const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
 
@@ -48,15 +59,15 @@ const TravelTimeline = () => {
                                 <span className="travel-timeline__flag">{trip.flag}</span>
 
                                 <span>
-                                    <strong>{trip.city}</strong>
-                                    <small>{trip.country}</small>
+                                    <strong>{getTripText(trip, 'city')}</strong>
+                                    <small>{getTripText(trip, 'country')}</small>
                                 </span>
                             </span>
 
                             <span className="travel-timeline__meta">
-                                <span>{trip.dateLabel}</span>
+                                <span>{getTripText(trip, 'dateLabel')}</span>
                                 <em className={`travel-timeline__type ${trip.category}`}>
-                                    {trip.type}
+                                    {getTripText(trip, 'type')}
                                 </em>
                             </span>
 
@@ -77,15 +88,15 @@ const TravelTimeline = () => {
                             <span className="travel-timeline__detail-flag">{activeTrip.flag}</span>
 
                             <div>
-                                <h3>{activeTrip.city}</h3>
-                                <p>{activeTrip.country}</p>
+                                <h3>{getTripText(activeTrip, 'city')}</h3>
+                                <p>{getTripText(activeTrip, 'country')}</p>
                             </div>
                         </div>
 
                         <div className="travel-timeline__detail-badges">
-                            <span>{activeTrip.dateLabel}</span>
+                            <span>{getTripText(activeTrip, 'dateLabel')}</span>
                             <span className={`travel-timeline__type ${activeTrip.category}`}>
-                                {activeTrip.type}
+                                {getTripText(activeTrip, 'type')}
                             </span>
 
                             {activeTrip.hasLivedThere && <span>{t('timeline.badges.lived')}</span>}
@@ -95,7 +106,7 @@ const TravelTimeline = () => {
                         </div>
 
                         <p className="travel-timeline__detail-description">
-                            {activeTrip.description}
+                            {getTripText(activeTrip, 'description')}
                         </p>
 
                         <div className="travel-timeline__detail-section">
@@ -105,7 +116,7 @@ const TravelTimeline = () => {
                             </h4>
 
                             <p>
-                                {activeTrip.story || t('timeline.details.noStory')}
+                                {getTripText(activeTrip, 'story') || t('timeline.details.noStory')}
                             </p>
                         </div>
 
@@ -128,7 +139,7 @@ const TravelTimeline = () => {
                                         : undefined
                                 }
                             >
-                                <span>{activeTrip.city}</span>
+                                <span>{getTripText(activeTrip, 'city')}</span>
                             </a>
                         </div>
 

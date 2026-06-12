@@ -16,7 +16,10 @@ const DreamDestinations = () => {
 
             <div className="container dream-destinations">
                 {dreamDestinations.map((destination, index) => {
+                    const name = isFr ? destination.name : destination.nameEn
+                    const country = isFr ? destination.country : destination.countryEn
                     const category = isFr ? destination.category : destination.categoryEn
+                    const priority = isFr ? destination.priorityLabel : destination.priorityLabelEn
                     const reason = isFr ? destination.reason : destination.reasonEn
 
                     return (
@@ -30,17 +33,13 @@ const DreamDestinations = () => {
                         >
                             <div className="dream-card__top">
                                 <span className="dream-card__emoji">{destination.emoji}</span>
-                                <span className="dream-card__priority">
-                                    {isFr ? destination.priorityLabel : destination.priorityLabelEn}
-                                </span>
+                                <span className="dream-card__priority">{priority}</span>
                             </div>
 
-                            <span className="dream-card__category">
-                                {category}
-                            </span>
+                            <span className="dream-card__category">{category}</span>
 
-                            <h3>{destination.name}</h3>
-                            <small>{destination.country}</small>
+                            <h3>{name}</h3>
+                            <small>{country}</small>
 
                             <p>{reason}</p>
                         </motion.article>

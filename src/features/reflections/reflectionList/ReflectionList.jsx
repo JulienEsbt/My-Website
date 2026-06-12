@@ -7,6 +7,7 @@ const ReflectionList = ({
                             language,
                             categoryLabels,
                             readLabel,
+                            featuredLabel,
                             emptyTitle,
                             emptyText,
                             kicker,
@@ -32,6 +33,7 @@ const ReflectionList = ({
                             index={index}
                             categoryLabels={categoryLabels}
                             readLabel={readLabel}
+                            featuredLabel={featuredLabel}
                             featured={reflexion.featured}
                         />
                     ))}

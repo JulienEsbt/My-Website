@@ -2,7 +2,9 @@ const dreamDestinations = [
     {
         id: 'nepal',
         name: 'Népal',
-        country: 'Nepal',
+        nameEn: 'Nepal',
+        country: 'Népal',
+        countryEn: 'Nepal',
         emoji: '🇳🇵',
         category: 'Montagne',
         categoryEn: 'Mountains',
@@ -16,7 +18,9 @@ const dreamDestinations = [
     {
         id: 'baikonur',
         name: 'Baïkonour',
+        nameEn: 'Baikonur',
         country: 'Kazakhstan',
+        countryEn: 'Kazakhstan',
         emoji: '🇰🇿',
         category: 'Espace',
         categoryEn: 'Space',
@@ -30,7 +34,9 @@ const dreamDestinations = [
     {
         id: 'chernobyl',
         name: 'Tchernobyl',
+        nameEn: 'Chernobyl',
         country: 'Ukraine',
+        countryEn: 'Ukraine',
         emoji: '🇺🇦',
         category: 'Histoire',
         categoryEn: 'History',
@@ -44,7 +50,9 @@ const dreamDestinations = [
     {
         id: 'kyrgyzstan',
         name: 'Kirghizistan',
-        country: 'Kyrgyzstan',
+        nameEn: 'Kyrgyzstan',
+        country: 'Kirghizistan',
+        countryEn: 'Kyrgyzstan',
         emoji: '🇰🇬',
         category: 'Nature',
         categoryEn: 'Nature',
@@ -58,7 +66,9 @@ const dreamDestinations = [
     {
         id: 'china',
         name: 'Chine',
-        country: 'China',
+        nameEn: 'China',
+        country: 'Chine',
+        countryEn: 'China',
         emoji: '🇨🇳',
         category: 'Civilisation',
         categoryEn: 'Civilization',
@@ -72,7 +82,9 @@ const dreamDestinations = [
     {
         id: 'southeast-asia',
         name: 'Asie du Sud-Est',
+        nameEn: 'Southeast Asia',
         country: 'Vietnam • Thaïlande • Laos • Cambodge',
+        countryEn: 'Vietnam • Thailand • Laos • Cambodia',
         emoji: '🌏',
         category: 'Immersion',
         categoryEn: 'Immersion',

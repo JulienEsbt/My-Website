@@ -32,7 +32,8 @@
     "text": "Essaie une autre recherche ou un autre thème."
   },
   "card": {
-    "read": "Lire"
+    "read": "Lire",
+    "featured": "À lire"
   },
   "article": {
     "back": "Retour aux réflexions",

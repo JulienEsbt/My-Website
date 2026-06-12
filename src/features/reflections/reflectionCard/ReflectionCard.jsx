@@ -17,6 +17,7 @@ const ReflectionCard = ({
                             index,
                             categoryLabels,
                             readLabel,
+                            featuredLabel,
                             featured,
                         }) => {
     return (
@@ -34,7 +35,7 @@ const ReflectionCard = ({
 
                 {featured && (
                     <span className="reflexion-card__featured">
-                        À lire
+                        {featuredLabel}
                     </span>
                 )}
 

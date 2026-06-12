@@ -6,9 +6,11 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 48%, rgba(77, 181, 255, 0.2), transparent 32%),
-    radial-gradient(circle at 50% 48%, rgba(77, 181, 255, 0.08), transparent 55%),
-    linear-gradient(135deg, rgba(2, 8, 24, 0.92), rgba(8, 18, 45, 0.92));
+
+    background: radial-gradient(circle at 50% 48%, rgba(77, 181, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 50% 48%, rgba(255, 159, 67, 0.08), transparent 38%),
+    radial-gradient(circle at 50% 48%, rgba(77, 181, 255, 0.08), transparent 58%),
+    linear-gradient(135deg, rgba(2, 8, 24, 0.96), rgba(8, 18, 45, 0.94));
 }
 
 .travel-globe__shell.expanded {
