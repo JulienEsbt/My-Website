@@ -17,10 +17,11 @@ const ReflectionCard = ({
                             index,
                             categoryLabels,
                             readLabel,
+                            featured,
                         }) => {
     return (
         <motion.article
-            className="reflexion-card"
+            className={`reflexion-card ${featured ? 'featured' : ''}`}
             initial={{opacity: 0, y: 35}}
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true}}
@@ -30,6 +31,12 @@ const ReflectionCard = ({
                 <span className="reflexion-card__category">
                     {categoryLabels?.[reflexion.category] ?? reflexion.category}
                 </span>
+
+                {featured && (
+                    <span className="reflexion-card__featured">
+                        À lire
+                    </span>
+                )}
 
                 <span className="reflexion-card__date">
                     {formatDate(reflexion.date, language)}
@@ -43,7 +50,7 @@ const ReflectionCard = ({
             <div className="reflexion-card__footer">
                 <span>{reflexion.readingTime} min</span>
 
-                <Link to={`/reflexions/${reflexion.slug}`} className="btn reflexion-card__button">
+                <Link to={`/reflections/${reflexion.slug}`} className="btn reflexion-card__button">
                     {readLabel} →
                 </Link>
             </div>

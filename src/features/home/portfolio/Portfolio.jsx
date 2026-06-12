@@ -13,19 +13,19 @@ gsap.registerPlugin(ScrollTrigger)
 const ITEMS = [
     {
         id: '1',
-        image: ASSETS.main.portfolio.megalis,
+        image: ASSETS.home.portfolio.megalis,
         link: LINKS.projects.megalis,
         tags: ['solidity', 'evm', 'storage'],
     },
     {
         id: '2',
-        image: ASSETS.main.portfolio.ffnn,
+        image: ASSETS.home.portfolio.ffnn,
         link: LINKS.projects.ffnn,
         tags: ['python', 'numpy', 'ml'],
     },
     {
         id: '3',
-        image: ASSETS.main.portfolio.wave,
+        image: ASSETS.home.portfolio.wave,
         link: LINKS.projects.wave,
         tags: ['dapp', 'web3', 'messages'],
     },

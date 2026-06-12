@@ -47,7 +47,7 @@ const About = () => {
                 >
                     <div className="crypto-about__orb">
                         <img
-                            src={ASSETS.crypto.about.nft2}
+                            src={ASSETS.web3.about.nft2}
                             alt={t('about.alt')}
                         />
                     </div>

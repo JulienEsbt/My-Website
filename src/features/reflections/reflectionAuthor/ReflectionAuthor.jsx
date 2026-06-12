@@ -6,7 +6,7 @@ const ReflectionAuthor = () => {
     const {t} = useTranslation('reflections')
 
     return (
-        <section className="container reflexion-author">
+        <section id="author" className="container reflexion-author">
             <div className="reflexion-author__card">
                 <h3>{t('author.title')}</h3>
 

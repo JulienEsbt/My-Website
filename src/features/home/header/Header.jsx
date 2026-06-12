@@ -91,7 +91,7 @@ const Header = () => {
                     >
                         <div className="home-hero__portrait-frame">
                             <img
-                                src={ASSETS.main.header.me}
+                                src={ASSETS.home.header.me}
                                 alt={t('header.portraitAlt')}
                             />
                         </div>

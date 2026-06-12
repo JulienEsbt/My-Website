@@ -11,5 +11,62 @@
   "actions": {
     "map": "Voir la carte",
     "stories": "Voir les récits"
+  },
+  "stats": {
+    "countries": "Pays visités",
+    "destinations": "Destinations visitées",
+    "lived": "Lieux de vie",
+    "studyWork": "Études / Travail"
+  },
+  "timeline": {
+    "kicker": "Mon parcours",
+    "title": "Chronologie de voyage",
+    "badges": {
+      "lived": "Vécu",
+      "study": "Études",
+      "work": "Travail",
+      "planned": "Prévu"
+    },
+    "details": {
+      "story": "À propos de ce voyage",
+      "location": "Localisation",
+      "polarsteps": "Voir sur Polarsteps",
+      "noStory": "Je n’ai pas encore ajouté de récit détaillé pour ce voyage."
+    }
+  },
+  "dreams": {
+    "kicker": "Prochains horizons",
+    "title": "Destinations rêvées",
+    "intro": "Quelques lieux qui m’attirent particulièrement, entre grands paysages, histoire, espace, culture et projets de vie."
+  },
+  "explorer": {
+    "kicker": "Monde interactif",
+    "title": "Globe & carte",
+    "subtitle": "Explore les lieux qui ont marqué mon parcours à travers le temps.",
+    "globeTitle": "Globe 3D",
+    "globeText": "Vue immersive de mes destinations",
+    "mapTitle": "Carte interactive",
+    "mapText": "Carte détaillée de mes voyages et lieux de vie",
+    "expandGlobe": "Agrandir le globe",
+    "expandMap": "Agrandir la carte",
+    "reduce": "Réduire",
+    "hint": "Clique sur une carte pour l’agrandir et explorer en détail",
+    "legend": {
+      "home": "Lieu de vie",
+      "lived": "Vécu",
+      "study": "Études",
+      "visited": "Visité",
+      "planned": "Prévu",
+      "dream": "Destination rêvée"
+    }
+  },
+  "nav": {
+    "aria": "Navigation voyage",
+    "items": {
+      "top": "Accueil",
+      "explorer": "Carte",
+      "timeline": "Parcours",
+      "dreams": "Rêves"
+    }
   }
 }

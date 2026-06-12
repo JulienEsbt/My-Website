@@ -1,10 +1,54 @@
+.mapbox-marker {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.98);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapbox-marker.visited {
+    background: #4db5ff;
+    box-shadow: 0 0 0 8px rgba(77, 181, 255, 0.14), 0 0 1.6rem rgba(77, 181, 255, 1);
+}
+
+.mapbox-marker.home {
+    background: #9b7cff;
+    box-shadow: 0 0 0 8px rgba(155, 124, 255, 0.16), 0 0 1.6rem rgba(155, 124, 255, 0.95);
+}
+
+.mapbox-marker.lived {
+    background: #4ade80;
+    box-shadow: 0 0 0 8px rgba(74, 222, 128, 0.16), 0 0 1.6rem rgba(74, 222, 128, 0.95);
+}
+
+.mapbox-marker.study {
+    background: #facc15;
+    box-shadow: 0 0 0 8px rgba(250, 204, 21, 0.16), 0 0 1.6rem rgba(250, 204, 21, 0.85);
+}
+
+.mapbox-marker.work {
+    background: #c084fc;
+    box-shadow: 0 0 0 8px rgba(192, 132, 252, 0.16), 0 0 1.6rem rgba(192, 132, 252, 0.9);
+}
+
+.mapbox-marker.planned {
+    background: #fb7185;
+    box-shadow: 0 0 0 8px rgba(251, 113, 133, 0.16), 0 0 1.6rem rgba(251, 113, 133, 0.9);
+}
+
 .travel-mapbox {
+    position: relative;
+    display: block;
     width: 100%;
     height: 100%;
     min-height: 30rem;
-    border-radius: 1.2rem;
-    overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(77, 181, 255, 0.14);
+}
+
+.travel-mapbox .mapboxgl-map,
+.travel-mapbox .mapboxgl-canvas-container,
+.travel-mapbox .mapboxgl-canvas {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .travel-mapbox.expanded {
@@ -12,69 +56,74 @@
 }
 
 .mapboxgl-canvas {
-    border-radius: 1.2rem;
+    display: block;
 }
 
-.mapbox-marker {
-    width: 18px;
-    height: 18px;
-    background: var(--color-primary);
-    border: 3px solid rgba(255, 255, 255, 0.98);
-    border-radius: 50%;
-    box-shadow: 0 0 0 8px rgba(77, 181, 255, 0.14),
-    0 0 1.6rem rgba(77, 181, 255, 1);
-    cursor: pointer;
-}
+/* ===== POPUP ===== */
 
-.mapbox-marker::after {
-    content: '';
-    position: absolute;
-    inset: -10px;
-    border-radius: 50%;
-    border: 1px solid rgba(77, 181, 255, 0.35);
-    animation: mapPulse 2s infinite;
-}
-
-@keyframes mapPulse {
-    0% {
-        transform: scale(0.75);
-        opacity: 0.9;
-    }
-    100% {
-        transform: scale(1.45);
-        opacity: 0;
-    }
+.mapboxgl-popup {
+    z-index: 20;
 }
 
 .mapboxgl-popup-content {
-    background: rgba(8, 18, 45, 0.96);
-    color: var(--color-white);
-    border: 1px solid rgba(77, 181, 255, 0.3);
-    border-radius: 0.9rem;
+    min-width: 240px;
+    padding: 1rem !important;
+
+    background: rgba(5, 12, 34, 0.96) !important;
+    color: white !important;
+
+    border: 1px solid rgba(77, 181, 255, 0.25);
+    border-radius: 1rem !important;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(77, 181, 255, 0.12);
+
+    backdrop-filter: blur(12px);
+
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    max-width: 250px;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
 }
 
-.mapboxgl-popup-content strong {
+.travel-mapbox-popup strong {
+    display: block;
+    margin-bottom: 0.3rem;
+
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.travel-mapbox-popup span {
+    display: block;
+    margin-bottom: 0.7rem;
+
     color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-.mapboxgl-popup-content p {
-    margin-top: 0.4rem;
+.travel-mapbox-popup p {
+    margin: 0;
     color: var(--color-light);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.mapboxgl-popup-close-button {
+    color: white !important;
+    font-size: 1rem;
+}
+
+.mapboxgl-popup-close-button:hover {
+    background: transparent !important;
 }
 
 .mapboxgl-popup-tip {
-    border-top-color: rgba(8, 18, 45, 0.96) !important;
+    border-top-color: rgba(5, 12, 34, 0.96) !important;
+    border-bottom-color: rgba(5, 12, 34, 0.96) !important;
 }
 
-.mapboxgl-ctrl-group {
-    background: rgba(8, 18, 45, 0.88) !important;
-    border: 1px solid rgba(77, 181, 255, 0.25) !important;
-}
-
-.mapboxgl-ctrl button {
-    filter: invert(1);
+.mapbox-marker.dream {
+    background: #ff9f43;
+    box-shadow: 0 0 0 8px rgba(255, 159, 67, 0.16),
+    0 0 1.8rem rgba(255, 159, 67, 0.95);
 }

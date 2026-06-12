@@ -174,3 +174,76 @@
         height: 2.6rem;
     }
 }
+
+.travel-explorer__legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: -1.2rem auto 2.6rem;
+}
+
+.travel-explorer__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+
+    color: var(--color-light);
+    background: rgba(5, 12, 34, 0.55);
+    border: 1px solid rgba(77, 181, 255, 0.14);
+
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.travel-explorer__legend-dot {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+}
+
+.travel-explorer__legend-dot.home {
+    background: #9b7cff;
+    box-shadow: 0 0 0.8rem rgba(155, 124, 255, 0.8);
+}
+
+.travel-explorer__legend-dot.lived {
+    background: #4ade80;
+    box-shadow: 0 0 0.8rem rgba(74, 222, 128, 0.8);
+}
+
+.travel-explorer__legend-dot.study {
+    background: #facc15;
+    box-shadow: 0 0 0.8rem rgba(250, 204, 21, 0.75);
+}
+
+.travel-explorer__legend-dot.visited {
+    background: #4db5ff;
+    box-shadow: 0 0 0.8rem rgba(77, 181, 255, 0.8);
+}
+
+.travel-explorer__legend-dot.planned {
+    background: #fb7185;
+    box-shadow: 0 0 0.8rem rgba(251, 113, 133, 0.75);
+}
+
+.travel-explorer__legend-dot.dream {
+    background: #ff9f43;
+    box-shadow: 0 0 0.8rem rgba(255, 159, 67, 0.8);
+}
+
+@media screen and (max-width: 600px) {
+    .travel-explorer__legend {
+        margin-top: -0.8rem;
+        margin-bottom: 2rem;
+        gap: 0.45rem;
+    }
+
+    .travel-explorer__legend-item {
+        font-size: 0.72rem;
+        padding: 0.4rem 0.65rem;
+    }
+}

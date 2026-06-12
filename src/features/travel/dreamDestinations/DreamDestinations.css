@@ -1,42 +1,119 @@
+.dream-section {
+    margin-top: 6rem;
+}
+
+.dream-section__intro {
+    max-width: 48rem;
+    margin: -2rem auto 3rem;
+    text-align: center;
+    color: var(--color-light);
+    line-height: 1.8;
+}
+
 .dream-destinations {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.4rem;
 }
 
 .dream-card {
-    background: rgba(44, 44, 108, 0.72);
-    border: 1px solid rgba(77, 181, 255, 0.18);
-    border-radius: 1.4rem;
-    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 18rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+
+    background: radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.16), transparent 34%),
+    rgba(5, 12, 34, 0.68);
+
+    border: 1px solid rgba(77, 181, 255, 0.16);
+    box-shadow: 0 1.4rem 3.8rem rgba(0, 0, 0, 0.22);
+
     transition: var(--transition);
 }
 
-.dream-card:hover {
-    transform: translateY(-0.35rem);
-    background: rgba(44, 44, 108, 0.42);
-    border-color: var(--color-primary-variant);
+.dream-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 38%),
+    radial-gradient(circle at 85% 12%, rgba(124, 92, 255, 0.13), transparent 30%);
+
+    pointer-events: none;
 }
 
-.dream-card__emoji {
-    display: block;
-    font-size: 2.3rem;
+.dream-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77, 181, 255, 0.45);
+    box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.32),
+    0 0 1.4rem rgba(77, 181, 255, 0.10);
+}
+
+.dream-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.dream-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1rem;
 }
 
+.dream-card__emoji {
+    display: grid;
+    place-items: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 1.1rem;
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.dream-card__priority {
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.09);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.dream-card__category {
+    display: inline-flex;
+    margin-bottom: 0.8rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.09);
+    border: 1px solid rgba(77, 181, 255, 0.17);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
 .dream-card h3 {
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
+    color: var(--color-white);
+    font-size: 1.2rem;
 }
 
 .dream-card small {
-    color: var(--color-primary);
+    color: var(--color-light);
 }
 
 .dream-card p {
     color: var(--color-light);
     margin-top: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-size: 0.93rem;
+    line-height: 1.75;
 }
 
 @media screen and (max-width: 1024px) {
@@ -48,5 +125,9 @@
 @media screen and (max-width: 600px) {
     .dream-destinations {
         grid-template-columns: 1fr;
+    }
+
+    .dream-card {
+        min-height: auto;
     }
 }

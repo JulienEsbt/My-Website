@@ -11,11 +11,28 @@
     background: rgba(31, 31, 56, 0.55);
     backdrop-filter: blur(8px);
     overflow: hidden;
+    max-width: 920px;
 }
 
 .travel-stat {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem 1.25rem;
     border-right: 1px solid rgba(77, 181, 255, 0.18);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    transition: var(--transition);
+}
+
+.travel-stat:hover {
+    background: rgba(77, 181, 255, 0.04);
+}
+
+.travel-stat strong {
+    color: var(--color-primary);
+    font-size: 1.45rem;
+    font-weight: 700;
 }
 
 .travel-stat:last-child {
@@ -27,12 +44,6 @@
     color: var(--color-light);
     font-size: 0.85rem;
     margin-bottom: 0.25rem;
-}
-
-.travel-stat strong {
-    color: var(--color-primary);
-    font-size: 1rem;
-    font-weight: 600;
 }
 
 @media screen and (max-width: 800px) {

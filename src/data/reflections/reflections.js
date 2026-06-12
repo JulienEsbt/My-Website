@@ -52,6 +52,7 @@ const reflections = [
             en: 'Charter of thought',
         },
         category: 'philosophy',
+        featured: true,
         readingTime: 15,
         date: '2025-05-11',
         excerpt: {

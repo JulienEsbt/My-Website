@@ -1,30 +1,51 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import {useTranslation} from 'react-i18next'
 import dreamDestinations from '../../../data/travel/dreamDestinations.js'
 import './DreamDestinations.css'
 
 const DreamDestinations = () => {
+    const {t, i18n} = useTranslation('travel')
+    const isFr = i18n.resolvedLanguage?.startsWith('fr')
+
     return (
-        <section>
-            <h5>Next horizons</h5>
-            <h2>Dream Destinations</h2>
+        <section id="dreams" className="dream-section">
+            <h5>{t('dreams.kicker')}</h5>
+            <h2>{t('dreams.title')}</h2>
+            <p className="dream-section__intro">{t('dreams.intro')}</p>
 
             <div className="container dream-destinations">
-                {dreamDestinations.map((destination, index) => (
-                    <motion.article
-                        key={destination.id}
-                        className="dream-card"
-                        initial={{opacity: 0, y: 35}}
-                        whileInView={{opacity: 1, y: 0}}
-                        viewport={{once: true}}
-                        transition={{duration: 0.45, delay: index * 0.08}}
-                    >
-                        <span className="dream-card__emoji">{destination.emoji}</span>
-                        <h3>{destination.name}</h3>
-                        <small>{destination.country}</small>
-                        <p>{destination.reason}</p>
-                    </motion.article>
-                ))}
+                {dreamDestinations.map((destination, index) => {
+                    const category = isFr ? destination.category : destination.categoryEn
+                    const reason = isFr ? destination.reason : destination.reasonEn
+
+                    return (
+                        <motion.article
+                            key={destination.id}
+                            className="dream-card"
+                            initial={{opacity: 0, y: 35}}
+                            whileInView={{opacity: 1, y: 0}}
+                            viewport={{once: true}}
+                            transition={{duration: 0.45, delay: index * 0.08}}
+                        >
+                            <div className="dream-card__top">
+                                <span className="dream-card__emoji">{destination.emoji}</span>
+                                <span className="dream-card__priority">
+                                    {isFr ? destination.priorityLabel : destination.priorityLabelEn}
+                                </span>
+                            </div>
+
+                            <span className="dream-card__category">
+                                {category}
+                            </span>
+
+                            <h3>{destination.name}</h3>
+                            <small>{destination.country}</small>
+
+                            <p>{reason}</p>
+                        </motion.article>
+                    )
+                })}
             </div>
         </section>
     )

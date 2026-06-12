@@ -35,7 +35,7 @@
     "read": "Read"
   },
   "article": {
-    "back": "Back to reflexions",
+    "back": "Back to reflections",
     "frenchOnly": "This article is currently available in French only."
   },
   "categories": {
@@ -47,5 +47,18 @@
   "author": {
     "title": "About these reflections",
     "text": "These texts are personal notes. They are intended to evolve through my readings, experiences, encounters and ongoing questioning."
+  },
+  "latest": {
+    "kicker": "Personal notebook",
+    "title": "Latest reflections"
+  },
+  "nav": {
+    "aria": "Reflections navigation",
+    "items": {
+      "top": "Top",
+      "themes": "Themes",
+      "latest": "Articles",
+      "author": "Note"
+    }
   }
 }

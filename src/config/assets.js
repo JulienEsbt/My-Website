@@ -20,14 +20,14 @@ import NFT1 from '../assets/images/web3/NFT1.png'
 import NFT2 from '../assets/images/web3/NFT2.png'
 
 export const ASSETS = {
-    main: {
+    home: {
         header: {me: ME},
         about: {photo: ME2},
         portfolio: {megalis: MEGALIS, ffnn: FFNN, wave: WAVE},
         goals: {fly: FLY, helico: HELICO, shuttle: SHUTTLE, spacex: SPACEX, crypto: CRYPTO},
         cv: CV
     },
-    crypto: {
+    web3: {
         header: {nft1: NFT1},
         about: {nft2: NFT2},
         donation: {eth: ETH}

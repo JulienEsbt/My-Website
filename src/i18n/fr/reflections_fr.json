@@ -47,5 +47,18 @@
   "author": {
     "title": "À propos de ces réflexions",
     "text": "Ces textes sont des notes personnelles. Ils ont vocation à évoluer au fil de mes lectures, de mes expériences, de mes rencontres et de mes remises en question."
+  },
+  "latest": {
+    "kicker": "Carnet personnel",
+    "title": "Dernières réflexions"
+  },
+  "nav": {
+    "aria": "Navigation des réflexions",
+    "items": {
+      "top": "Accueil",
+      "themes": "Thèmes",
+      "latest": "Articles",
+      "author": "Note"
+    }
   }
 }

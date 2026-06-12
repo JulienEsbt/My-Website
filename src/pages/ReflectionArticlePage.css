@@ -1,53 +1,102 @@
 .reflexion-article {
-    max-width: 1040px;
+    max-width: 1060px;
     padding-top: 7rem;
     padding-bottom: 7rem;
 }
 
 .reflexion-article__back {
-    display: inline-block;
+    display: inline-flex;
     margin-bottom: 2rem;
     color: var(--color-primary);
     font-size: 0.9rem;
 }
 
+.reflexion-article__back:hover {
+    transform: translateX(-3px);
+}
+
 .reflexion-article__shell {
-    padding: 3rem;
-    border-radius: 1.6rem;
-    background: rgba(44, 44, 108, 0.48);
-    border: 1px solid var(--color-primary-variant);
-    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+
+    padding: clamp(1.5rem, 4vw, 3.2rem);
+    border-radius: 1.7rem;
+
+    background: var(--liquid-bg);
+    border: 1px solid var(--liquid-border-soft);
+
+    backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+
+    box-shadow: var(--liquid-shadow);
+}
+
+.reflexion-article__shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 38%),
+    radial-gradient(circle at 90% 0%, rgba(77, 181, 255, 0.13), transparent 32%);
+
+    pointer-events: none;
+}
+
+.reflexion-article__shell > * {
+    position: relative;
+    z-index: 1;
 }
 
 .reflexion-article__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-bottom: 1.4rem;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
 }
 
 .reflexion-article__meta span {
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary-variant);
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.38rem 0.72rem;
     border-radius: 999px;
-    padding: 0.35rem 0.7rem;
+
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
+    font-weight: 700;
 }
 
 .reflexion-article__shell > h1 {
-    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    max-width: 840px;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
     line-height: 1.05;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    color: var(--color-white);
 }
 
 .reflexion-article__excerpt {
-    max-width: 720px;
+    max-width: 760px;
     color: var(--color-light);
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 1.03rem;
+    line-height: 1.85;
     margin-bottom: 3rem;
+}
+
+.reflexion-article__notice {
+    max-width: 780px;
+    margin-bottom: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.18);
+
+    color: var(--color-light);
 }
 
 .reflexion-article__content {
@@ -59,81 +108,118 @@
 }
 
 .reflexion-article__content h2:first-of-type {
+    margin-top: 0;
+    margin-bottom: 2.2rem;
+
     color: var(--color-primary);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    line-height: 1.7;
 }
 
 .reflexion-article__content h2 {
     color: var(--color-white);
-    font-size: 1.55rem;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
     line-height: 1.35;
-    margin-top: 3rem;
+    margin-top: 3.2rem;
     margin-bottom: 1rem;
+}
+
+.reflexion-article__content h3 {
+    color: var(--color-primary);
+    font-size: 1.15rem;
+    margin-top: 2.2rem;
+    margin-bottom: 0.7rem;
 }
 
 .reflexion-article__content p {
     color: rgba(255, 255, 255, 0.76);
     font-size: 1rem;
-    line-height: 1.85;
-    margin-bottom: 1rem;
+    line-height: 1.95;
+    margin-bottom: 1.1rem;
+}
+
+.reflexion-article__content strong {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.reflexion-article__content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-color: rgba(77, 181, 255, 0.35);
+    text-underline-offset: 0.2rem;
 }
 
 .reflexion-article__content blockquote {
-    margin: 2rem 0 2.5rem;
-    padding: 1.5rem 1.7rem;
+    margin: 2.2rem 0 2.6rem;
+    padding: 1.4rem 1.6rem;
     border-left: 4px solid var(--color-primary);
-    background: rgba(77, 181, 255, 0.06);
     border-radius: 1rem;
+
+    background: rgba(77, 181, 255, 0.065);
+    border-top: 1px solid rgba(77, 181, 255, 0.12);
+    border-right: 1px solid rgba(77, 181, 255, 0.12);
+    border-bottom: 1px solid rgba(77, 181, 255, 0.12);
 }
 
 .reflexion-article__content blockquote p {
+    margin-bottom: 0;
     font-style: italic;
+    color: rgba(255, 255, 255, 0.84);
 }
 
 .reflexion-article__content hr {
     height: 1px;
-    margin: 2.8rem 0;
+    margin: 3rem 0;
     border: none;
-    background: rgba(77, 181, 255, 0.22);
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(77, 181, 255, 0.35),
+            transparent
+    );
 }
 
-.reflexion-article__content ul {
+.reflexion-article__content ul,
+.reflexion-article__content ol {
     margin: 1.3rem 0 2rem;
-    padding-left: 1.2rem;
+    padding-left: 1.3rem;
 }
 
 .reflexion-article__content li {
-    list-style: disc;
     color: rgba(255, 255, 255, 0.76);
-    line-height: 1.8;
+    line-height: 1.85;
     margin-bottom: 0.6rem;
+}
+
+.reflexion-article__content li::marker {
+    color: var(--color-primary);
 }
 
 @media screen and (max-width: 600px) {
     .reflexion-article {
+        width: var(--container-width-sm);
         padding-top: 6rem;
         padding-bottom: 4rem;
     }
 
     .reflexion-article__shell {
-        padding: 1.5rem;
-        border-radius: 1.2rem;
+        padding: 1.35rem;
+        border-radius: 1.3rem;
     }
 
     .reflexion-article__shell > h1 {
-        font-size: 2.4rem;
+        font-size: 2.15rem;
     }
-}
 
-.reflexion-article__notice {
-    max-width: 780px;
-    margin-bottom: 2rem;
-    padding: 1rem 1.2rem;
-    border-radius: 0.8rem;
-    background: rgba(77, 181, 255, 0.08);
-    border: 1px solid var(--color-primary-variant);
-    color: var(--color-light);
+    .reflexion-article__excerpt {
+        font-size: 0.96rem;
+        margin-bottom: 2.2rem;
+    }
+
+    .reflexion-article__content p {
+        font-size: 0.95rem;
+        line-height: 1.85;
+    }
 }

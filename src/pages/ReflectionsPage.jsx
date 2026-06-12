@@ -1,4 +1,5 @@
 import React, {useMemo, useState} from 'react'
+import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import PageNav from '../components/common/navigation/pageNav/PageNav'
 import PageHero from '../components/common/layout/pageHero/PageHero'
@@ -8,6 +9,8 @@ import ReflectionStats from '../features/reflections/reflectionStats/ReflectionS
 import ReflectionAuthor from '../features/reflections/reflectionAuthor/ReflectionAuthor.jsx'
 import Fuse from 'fuse.js'
 import reflections from '../data/reflections/reflections.js'
+import Footer from "../components/common/layout/footerSection/Footer.jsx";
+import ReflectionsNav from "../features/reflections/reflectionsNav/ReflectionsNav.jsx";
 
 const ReflectionsPage = () => {
     const {t, i18n} = useTranslation('reflections')
@@ -15,14 +18,6 @@ const ReflectionsPage = () => {
     const [search, setSearch] = useState('')
 
     const language = i18n.language?.startsWith('fr') ? 'fr' : 'en'
-
-    // const filters = [
-    //     {value: 'all', label: t('filters.all')},
-    //     {value: 'philosophy', label: t('filters.philosophy')},
-    //     {value: 'politics', label: t('filters.politics')},
-    //     {value: 'society', label: t('filters.society')},
-    //     {value: 'technology', label: t('filters.technology')},
-    // ]
 
     const categoryCount = new Set(reflections.map((item) => item.category)).size
 
@@ -74,8 +69,17 @@ const ReflectionsPage = () => {
             ? reflections
             : reflections.filter((reflexion) => reflexion.category === activeFilter)
 
+        const sortReflections = (items) => {
+            return [...items].sort((a, b) => {
+                if (a.featured && !b.featured) return -1
+                if (!a.featured && b.featured) return 1
+
+                return new Date(b.date) - new Date(a.date)
+            })
+        }
+
         if (!search.trim()) {
-            return byFilter
+            return sortReflections(byFilter)
         }
 
         const fuse = new Fuse(byFilter, {
@@ -88,7 +92,7 @@ const ReflectionsPage = () => {
             threshold: 0.35,
         })
 
-        return fuse.search(search).map((result) => result.item)
+        return sortReflections(fuse.search(search).map((result) => result.item))
     }, [activeFilter, search, language])
 
     return (
@@ -103,9 +107,18 @@ const ReflectionsPage = () => {
                     subtitle={t('hero.subtitle')}
                 />
 
+                <ReflectionsNav/>
+
                 <ReflectionStats items={stats}/>
 
-                <section id="themes" className="reflexions-themes">
+                <motion.section
+                    id="themes"
+                    className="reflexions-themes"
+                    initial={{opacity: 0, y: 28, filter: 'blur(10px)'}}
+                    whileInView={{opacity: 1, y: 0, filter: 'blur(0px)'}}
+                    viewport={{once: true, amount: 0.25}}
+                    transition={{duration: 0.65, ease: 'easeOut'}}
+                >
                     <h5>{t('themes.kicker')}</h5>
                     <h2>{t('themes.title')}</h2>
 
@@ -123,7 +136,7 @@ const ReflectionsPage = () => {
                         activeFilter={activeFilter}
                         onFilterChange={setActiveFilter}
                     />
-                </section>
+                </motion.section>
 
                 <ReflectionList
                     reflexions={filteredReflexions}
@@ -132,9 +145,12 @@ const ReflectionsPage = () => {
                     readLabel={t('card.read')}
                     emptyTitle={t('empty.title')}
                     emptyText={t('empty.text')}
+                    kicker={t('latest.kicker')}
+                    title={t('latest.title')}
                 />
 
                 <ReflectionAuthor/>
+                <Footer/>
             </main>
         </>
     )

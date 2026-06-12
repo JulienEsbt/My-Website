@@ -4,15 +4,20 @@
 }
 
 .reflexion-author__card {
-    max-width: 800px;
+    max-width: 820px;
     margin: 0 auto;
     text-align: center;
 
-    background: rgba(44, 44, 108, 0.45);
-    border: 1px solid var(--color-primary-variant);
-    border-radius: 1.4rem;
-
     padding: 2rem;
+    border-radius: 1.5rem;
+
+    background: var(--liquid-bg);
+    border: 1px solid var(--liquid-border-soft);
+
+    backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+
+    box-shadow: var(--liquid-shadow);
 }
 
 .reflexion-author__card h3 {

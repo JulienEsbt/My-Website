@@ -1,22 +1,41 @@
 import React, {useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
+import {useTranslation} from 'react-i18next'
 import {FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiMousePointer} from 'react-icons/fi'
 import TravelGlobe from '../travelGlobe/TravelGlobe.jsx'
 import TravelMapbox from '../travelMapbox/TravelMapbox.jsx'
 import './TravelExplorer.css'
 
 const TravelExplorer = () => {
+    const {t} = useTranslation('travel')
     const [activeView, setActiveView] = useState(null)
+
+    const currentTitle = activeView === 'globe'
+        ? t('explorer.globeTitle')
+        : t('explorer.mapTitle')
+
+    const currentText = activeView === 'globe'
+        ? t('explorer.globeText')
+        : t('explorer.mapText')
 
     return (
         <section id="travel-explorer" className="travel-explorer-section">
-            <h5>Interactive world</h5>
-            <h2>Globe & Map</h2>
+            <h5>{t('explorer.kicker')}</h5>
+            <h2>{t('explorer.title')}</h2>
             <p className="travel-explorer__subtitle">
-                Explorez les lieux qui ont marqué mon parcours à travers le temps.
+                {t('explorer.subtitle')}
             </p>
 
             <div className="travel-explorer__divider"/>
+
+            <div className="travel-explorer__legend">
+                {['home', 'lived', 'study', 'visited', 'planned', 'dream'].map((category) => (
+                    <span key={category} className="travel-explorer__legend-item">
+                        <i className={`travel-explorer__legend-dot ${category}`}/>
+                        {t(`explorer.legend.${category}`)}
+                    </span>
+                ))}
+            </div>
 
             <div className="container travel-explorer">
                 <AnimatePresence mode="wait">
@@ -36,15 +55,15 @@ const TravelExplorer = () => {
                                             <FiGlobe/>
                                         </span>
                                         <div>
-                                            <h3>Globe 3D</h3>
-                                            <p>Vue immersive de mes destinations</p>
+                                            <h3>{t('explorer.globeTitle')}</h3>
+                                            <p>{t('explorer.globeText')}</p>
                                         </div>
                                     </div>
 
                                     <button
                                         className="travel-explorer__expand-btn"
                                         onClick={() => setActiveView('globe')}
-                                        aria-label="Agrandir le globe"
+                                        aria-label={t('explorer.expandGlobe')}
                                     >
                                         <FiMaximize2/>
                                     </button>
@@ -62,15 +81,15 @@ const TravelExplorer = () => {
                                             <FiMap/>
                                         </span>
                                         <div>
-                                            <h3>Mapbox</h3>
-                                            <p>Carte détaillée et interactive</p>
+                                            <h3>{t('explorer.mapTitle')}</h3>
+                                            <p>{t('explorer.mapText')}</p>
                                         </div>
                                     </div>
 
                                     <button
                                         className="travel-explorer__expand-btn"
                                         onClick={() => setActiveView('map')}
-                                        aria-label="Agrandir la carte"
+                                        aria-label={t('explorer.expandMap')}
                                     >
                                         <FiMaximize2/>
                                     </button>
@@ -98,19 +117,15 @@ const TravelExplorer = () => {
                                         {activeView === 'globe' ? <FiGlobe/> : <FiMap/>}
                                     </span>
                                     <div>
-                                        <h3>{activeView === 'globe' ? 'Globe 3D' : 'Mapbox'}</h3>
-                                        <p>
-                                            {activeView === 'globe'
-                                                ? 'Vue immersive de mes destinations'
-                                                : 'Carte détaillée et interactive'}
-                                        </p>
+                                        <h3>{currentTitle}</h3>
+                                        <p>{currentText}</p>
                                     </div>
                                 </div>
 
                                 <button
                                     className="travel-explorer__expand-btn"
                                     onClick={() => setActiveView(null)}
-                                    aria-label="Réduire"
+                                    aria-label={t('explorer.reduce')}
                                 >
                                     <FiMinimize2/>
                                 </button>
@@ -129,7 +144,7 @@ const TravelExplorer = () => {
 
                 <div className="travel-explorer__hint">
                     <FiMousePointer/>
-                    <span>Cliquez sur une carte pour l’agrandir et explorer en détail</span>
+                    <span>{t('explorer.hint')}</span>
                 </div>
             </div>
         </section>

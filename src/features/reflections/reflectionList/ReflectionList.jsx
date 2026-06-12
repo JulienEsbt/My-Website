@@ -9,11 +9,13 @@ const ReflectionList = ({
                             readLabel,
                             emptyTitle,
                             emptyText,
+                            kicker,
+                            title,
                         }) => {
     return (
         <section id="latest">
-            <h5>Personal notebook</h5>
-            <h2>Latest Reflexions</h2>
+            <h5>{kicker}</h5>
+            <h2>{title}</h2>
 
             {reflexions.length === 0 ? (
                 <div className="container reflexion-empty">
@@ -30,6 +32,7 @@ const ReflectionList = ({
                             index={index}
                             categoryLabels={categoryLabels}
                             readLabel={readLabel}
+                            featured={reflexion.featured}
                         />
                     ))}
                 </div>

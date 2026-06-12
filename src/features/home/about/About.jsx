@@ -62,7 +62,7 @@ const About = () => {
                 <aside className="about__visual" ref={visualRef}>
                     <div className="about__photo-card">
                         <div className="about__photo">
-                            <img src={ASSETS.main.about.photo} alt={t('header.portraitAlt')}/>
+                            <img src={ASSETS.home.about.photo} alt={t('header.portraitAlt')}/>
                         </div>
 
                         <div className="about__caption">

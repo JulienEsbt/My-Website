@@ -11,5 +11,62 @@
   "actions": {
     "map": "See the map",
     "stories": "See stories"
+  },
+  "stats": {
+    "countries": "Countries visited",
+    "destinations": "Places visited",
+    "lived": "Places lived",
+    "studyWork": "Study / Work"
+  },
+  "timeline": {
+    "kicker": "My journey",
+    "title": "Travel timeline",
+    "badges": {
+      "lived": "Lived",
+      "study": "Study",
+      "work": "Work",
+      "planned": "Planned"
+    },
+    "details": {
+      "story": "About this trip",
+      "location": "Location",
+      "polarsteps": "View on Polarsteps",
+      "noStory": "I haven’t added a detailed story for this trip yet."
+    }
+  },
+  "dreams": {
+    "kicker": "Next horizons",
+    "title": "Dream destinations",
+    "intro": "A few places that strongly attract me, between vast landscapes, history, space, culture and life projects."
+  },
+  "explorer": {
+    "kicker": "Interactive world",
+    "title": "Globe & map",
+    "subtitle": "Explore the places that shaped my journey over time.",
+    "globeTitle": "3D globe",
+    "globeText": "Immersive view of my destinations",
+    "mapTitle": "Interactive map",
+    "mapText": "Detailed map of my travels and places lived",
+    "expandGlobe": "Expand globe",
+    "expandMap": "Expand map",
+    "reduce": "Reduce",
+    "hint": "Click on a map to expand it and explore in detail",
+    "legend": {
+      "home": "Home base",
+      "lived": "Lived",
+      "study": "Study",
+      "visited": "Visited",
+      "planned": "Planned",
+      "dream": "Dream destination"
+    }
+  },
+  "nav": {
+    "aria": "Travel navigation",
+    "items": {
+      "top": "Top",
+      "explorer": "Map",
+      "timeline": "Timeline",
+      "dreams": "Dreams"
+    }
   }
 }

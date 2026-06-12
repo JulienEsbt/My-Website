@@ -61,7 +61,7 @@ const Header = () => {
                         className="me"
                         aria-hidden
                     >
-                        <img src={ASSETS.crypto.header.nft1} alt="NFT"/>
+                        <img src={ASSETS.web3.header.nft1} alt="NFT"/>
                         <div className="glow" aria-hidden/>
                     </motion.div>
                 </div>
