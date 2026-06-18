@@ -1,0 +1,213 @@
+.crypto-about {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.crypto-about__visual {
+    position: relative;
+    min-height: 31rem;
+    display: grid;
+    place-items: center;
+}
+
+.crypto-about__orb {
+    width: min(24rem, 100%);
+    aspect-ratio: 1;
+    padding: 0.55rem;
+    border-radius: 2rem;
+    background: linear-gradient(135deg, rgba(77, 181, 255, 0.85), rgba(44, 44, 108, 0.1)),
+    radial-gradient(circle at top left, rgba(77, 181, 255, 0.32), transparent 45%);
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.28),
+    0 0 4rem rgba(77, 181, 255, 0.12);
+    transform: rotate(-4deg);
+    transition: var(--transition);
+}
+
+.crypto-about__orb:hover {
+    transform: rotate(0deg) translateY(-0.25rem);
+}
+
+.crypto-about__orb img {
+    height: 100%;
+    border-radius: 1.6rem;
+    object-fit: cover;
+}
+
+.crypto-about__floating-card {
+    position: absolute;
+    padding: 0.85rem 1rem;
+    border-radius: 1rem;
+    background: rgba(31, 31, 56, 0.82);
+    border: 1px solid rgba(77, 181, 255, 0.24);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.22);
+}
+
+.crypto-about__floating-card span {
+    display: block;
+    color: var(--color-primary);
+    font-size: 0.72rem;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.crypto-about__floating-card strong {
+    color: var(--color-white);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.crypto-about__floating-card--top {
+    top: 3rem;
+    right: 0;
+}
+
+.crypto-about__floating-card--bottom {
+    bottom: 3.4rem;
+    left: 0;
+}
+
+.crypto-about__content {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.crypto-about__intro {
+    padding: 1.5rem;
+    border-radius: 1.4rem;
+    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 35%),
+    rgba(31, 31, 56, 0.48);
+    border: 1px solid rgba(77, 181, 255, 0.16);
+}
+
+.crypto-about__intro > span {
+    display: inline-block;
+    color: var(--color-primary);
+    margin-bottom: 0.7rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+.crypto-about__intro h3 {
+    color: var(--color-white);
+    font-size: 1.55rem;
+    margin-bottom: 0.7rem;
+}
+
+.crypto-about__intro p {
+    color: var(--color-light);
+    line-height: 1.85;
+}
+
+.crypto-about__intro b {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.crypto-about__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.crypto-about__card {
+    padding: 1.1rem;
+    border-radius: 1.1rem;
+    background: linear-gradient(135deg, rgba(44, 44, 108, 0.72), rgba(12, 17, 43, 0.78));
+    border: 1px solid rgba(77, 181, 255, 0.16);
+    transition: var(--transition);
+}
+
+.crypto-about__card:hover {
+    transform: translateY(-0.25rem);
+    border-color: var(--color-primary-variant);
+    background: rgba(77, 181, 255, 0.08);
+}
+
+.crypto-about__card-icons {
+    display: flex;
+    gap: 0.35rem;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+}
+
+.crypto-about__card h4 {
+    color: var(--color-white);
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.crypto-about__card p {
+    color: var(--color-light);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.crypto-about__link {
+    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+}
+
+.crypto-about__link svg {
+    transition: var(--transition);
+}
+
+.crypto-about__link:hover svg {
+    transform: translateX(0.25rem);
+}
+
+@media screen and (max-width: 1024px) {
+    .crypto-about {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .crypto-about__visual {
+        min-height: 25rem;
+    }
+
+    .crypto-about__orb {
+        width: min(20rem, 80%);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .crypto-about__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .crypto-about__floating-card {
+        position: static;
+        margin-top: 0.8rem;
+        width: min(20rem, 100%);
+    }
+
+    .crypto-about__visual {
+        min-height: auto;
+        gap: 0.8rem;
+    }
+
+    .crypto-about__orb {
+        width: 80%;
+    }
+}
+
+.crypto-about__orb a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.crypto-about__orb a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,35 +1,59 @@
 // MAIN
-import ME from '../assets/main/Me.png'
-import ME2 from '../assets/main/Me2.jpg'
+import ME from '../assets/images/home/header/Me.jpeg'
+import ME2 from '../assets/images/home/about/D14F4D37-8AEF-4E9D-8CAE-DEDE412C2D64_1_105_c.jpeg'
 
-import MEGALIS from '../assets/main/Megalis.png'
-import FFNN from '../assets/main/FFNN.png'
-import WAVE from '../assets/main/Wave.png'
+import MEGALIS from '../assets/images/home/portfolio/Megalis.png'
+import FFNN from '../assets/images/home/portfolio/FFNN.png'
+import WAVE from '../assets/images/home/portfolio/Wave.png'
 
-import FLY from '../assets/main/Fly.jpg'
-import HELICO from '../assets/main/Helico.jpg'
-import SHUTTLE from '../assets/main/Shuttle.jpg'
-import SPACEX from '../assets/main/SpaceX.jpg'
-import CRYPTO from '../assets/main/Crypto.jpg'
+import CV from '../assets/documents/cv.pdf'
 
-import CV from '../assets/main/cv.pdf'
+// WEB3
+import NFT1 from '../assets/images/web3/NFT1.png'
+import NFT2 from '../assets/images/web3/NFT2.png'
 
-// CRYPTO
-import ETH from '../assets/crypto/ETH.jpeg'
-import NFT1 from '../assets/crypto/NFT1.png'
-import NFT2 from '../assets/crypto/NFT2.png'
+const SOULWARE_CONTRACT = '0x6d9E65c3E51837171eeBBB4c11808bb9c2Ea9353'
 
 export const ASSETS = {
-    main: {
+    home: {
         header: {me: ME},
         about: {photo: ME2},
         portfolio: {megalis: MEGALIS, ffnn: FFNN, wave: WAVE},
-        goals: {fly: FLY, helico: HELICO, shuttle: SHUTTLE, spacex: SPACEX, crypto: CRYPTO},
-        cv: CV
+        cv: CV,
     },
-    crypto: {
+
+    web3: {
+        nfts: {
+            soulware2173: {
+                id: 'soulware-2173',
+                name: 'Soulware #2173',
+                collection: 'Soulware Project',
+                image: NFT1,
+                chain: 'Ethereum',
+                standard: 'ERC-721',
+                contractAddress: SOULWARE_CONTRACT,
+                tokenId: '2173',
+                rarity: '#1,377',
+                etherscanUrl: `https://etherscan.io/nft/${SOULWARE_CONTRACT}/2173`,
+                openseaUrl: `https://opensea.io/item/ethereum/${SOULWARE_CONTRACT}/2173`,
+            },
+
+            soulware723: {
+                id: 'soulware-723',
+                name: 'Soulware #723',
+                collection: 'Soulware Project',
+                image: NFT2,
+                chain: 'Ethereum',
+                standard: 'ERC-721',
+                contractAddress: SOULWARE_CONTRACT,
+                tokenId: '723',
+                rarity: '#628',
+                etherscanUrl: `https://etherscan.io/nft/${SOULWARE_CONTRACT}/723`,
+                openseaUrl: `https://opensea.io/item/ethereum/${SOULWARE_CONTRACT}/723`,
+            },
+        },
+
         header: {nft1: NFT1},
         about: {nft2: NFT2},
-        donation: {eth: ETH}
-    }
+    },
 }

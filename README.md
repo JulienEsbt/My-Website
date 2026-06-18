@@ -1,188 +1,285 @@
 # 🌐 Julien Esterbet — Personal Website & Portfolio
 
-A modern, responsive **React + Vite portfolio** showcasing my projects, technical skills, and interests across *
-*software engineering, Web3, and FinTech**.  
-This website also includes a dedicated section about **cryptocurrency & decentralized technologies**, reflecting my
-passion for **blockchain, AI, and innovation**.
+A modern, responsive and multilingual **React + Vite portfolio** showcasing my projects, technical skills, travels,
+reflections and interests across **software engineering, Web3, blockchain, FinTech, artificial intelligence, travel and
+philosophy**.
+
+The website combines a professional portfolio, a personal travel journal, a reflection space, and a dedicated Web3
+ecosystem.
 
 ---
 
 ## 🚀 Tech Stack
 
-- ⚛️ **React 18** — component-based front‑end framework
-- ⚡ **Vite 5** — dev server + ultra‑fast build
-- 🧭 **React Router v6** — routing (`/` & `/crypto`)
-- 🎨 **MUI (Material UI)** + **CSS Modules** — modern responsive UI
-- 💅 **Styled Components** — scoped styling (selected components)
-- 🧩 **React Icons** — iconography
-- 🪙 **Ethers.js** — on‑chain interactions (MetaMask donation)
-- ☁️ **Vercel** — CI/CD & hosting
-- 🌐 **IONOS DNS** — custom domain management (`julien-esterbet.com`)
-- 📦 **Node.js / npm** — dependencies & scripts
+### Core
+
+- ⚛️ **React**
+- ⚡ **Vite**
+- 🧭 **React Router**
+- 🌍 **i18next**
+- 🎞️ **Framer Motion**
+- 🎨 **Material UI**
+- 🧩 **React Icons**
+
+### Mapping & Visualization
+
+- 🗺️ **Mapbox GL JS**
+- 🌎 **React Globe GL**
+- 🎯 Interactive travel visualizations
+
+### Content & Search
+
+- 📝 **MDX**
+- 🔍 **Fuse.js**
+- 🌐 Multilingual content architecture
+
+### Web3
+
+- 🪙 **Ethers.js**
+- 🦊 MetaMask integration
+- 💸 Multi-chain donation system
+
+### Infrastructure
+
+- ☁️ **Vercel**
+- 🌐 **IONOS DNS**
+- 📦 **Node.js / npm**
 
 ---
 
 ## 🌍 Environments & Deployment
 
-| Environment                 | Branch    | Domain / URL                        | Hosting         |
-|-----------------------------|-----------|-------------------------------------|-----------------|
-| **Production**              | `main`    | https://www.julien-esterbet.com     | Vercel          |
-| **Preproduction / Recette** | `develop` | https://recette.julien-esterbet.com | Vercel          |
-| **Alias Recette (r7)**      | `develop` | https://r7.julien-esterbet.com      | Vercel          |
-| **Local**                   | —         | http://localhost:3000               | Vite dev server |
+| Environment                 | Branch    | Domain / URL                        | Hosting |
+|-----------------------------|-----------|-------------------------------------|---------|
+| **Production**              | `main`    | https://www.julien-esterbet.com     | Vercel  |
+| **Preproduction / Recette** | `develop` | https://recette.julien-esterbet.com | Vercel  |
+| **Alias Recette (re7)**     | `develop` | https://re7.julien-esterbet.com     | Vercel  |
+| **Local**                   | —         | http://localhost:3000               | Vite    |
 
-**Pipeline**
+### Pipeline
 
-- Push on **`develop`** → auto‑deploy to **recette** & **r7**.
-- Push on **`main`** → auto‑deploy to **production** (custom domain).
-- DNS (IONOS) → `A` record for apex (`216.198.79.1`) + `CNAME` to `cname.vercel-dns.com` for subdomains (`www`,
-  `recette`, `r7`).
-- SSL handled automatically by Vercel (Let’s Encrypt).
+- Push on **develop** → deploy to **Recette**
+- Push on **main** → deploy to **Production**
+- SSL handled automatically by Vercel
+- DNS managed through IONOS
 
 ---
 
 ## 📁 Project Structure
 
-```
+## 📁 Project Structure
+
+```text
 src/
-├─ assets/                 # images, pdf, media
+├─ app/
+│  └─ router.jsx                         # Centralized application routes
+│
+├─ assets/
+│  ├─ documents/
+│  │  └─ cv.pdf
+│  └─ images/
+│     ├─ home/                           # Homepage images and portraits
+│     └─ web3/                           # Web3 / crypto visual assets
+│
 ├─ components/
-│  ├─ main/                # portfolio sections
-│  ├─ crypto/              # crypto-related pages/features
-│  ├─ common/              # shared UI (Header, Nav, Footer, etc.)
-│  └─ ...
+│  └─ common/
+│     ├─ layout/
+│     │  ├─ contactSection/              # Shared contact section
+│     │  ├─ footerSection/               # Shared footer
+│     │  └─ pageHero/                    # Reusable hero component for pages
+│     ├─ navigation/
+│     │  ├─ languageSwitcher/            # FR / EN language switcher
+│     │  ├─ pageNav/                     # Global page navigation
+│     │  └─ sectionNav/                  # Floating section navigation
+│     ├─ scrollToTop/
+│     └─ social/
+│        └─ headerSocials/
+│
+├─ config/
+│  ├─ assets.js                          # Centralized asset references
+│  ├─ blockchains.js                     # Supported blockchain networks
+│  ├─ links.js                           # External links and socials
+│  ├─ pages.js                           # Site pages configuration
+│  ├─ tokenCatalog.js                    # Token catalog for Web3 tools
+│  └─ wallet.js                          # Wallet / donation configuration
+│
+├─ content/
+│  └─ reflections/                       # MDX long-form articles
+│     └─ charte-de-pensee.fr.mdx
+│
+├─ data/
+│  ├─ reflections/
+│  │  └─ reflections.js                  # Reflection metadata
+│  ├─ travel/
+│  │  ├─ dreamDestinations.js            # Dream destinations data
+│  │  └─ trips.js                        # Travel timeline and map data
+│  └─ web3/
+│     └─ knowledge.js                    # Web3 educational content
+│
+├─ features/
+│  ├─ home/
+│  │  ├─ about/
+│  │  └─ ...
+│  │
+│  ├─ reflections/
+│  │  ├─ reflectionAuthor/
+│  │  └─ ...
+│  │
+│  ├─ travel/
+│  │  ├─ dreamDestinations/
+│  │  └─ ...
+│  │
+│  └─ web3/
+│     ├─ about/
+│     └─ ...
+│
+├─ i18n/
+│  ├─ en/
+│  ├─ fr/
+│  └─ i18n.js                            # i18next configuration
+│
 ├─ pages/
-│  ├─ MainPage.jsx         # route /
-│  └─ CryptoPage.jsx       # route /crypto
-├─ styles/                 # global CSS / modules
-├─ App.jsx                 # app shell & router
-└─ main.jsx                # Vite entry point
-public/
-└─ index.html
+│  ├─ HomePage.jsx
+│  ├─ TravelPage.jsx
+│  ├─ ReflectionsPage.jsx
+│  ├─ ReflectionArticlePage.jsx
+│  └─ Web3Page.jsx
+│
+├─ App.jsx
+├─ index.css
+└─ main.jsx
+
+root/
+├─ index.html
+├─ package.json
+├─ package-lock.json
+├─ vite.config.js
+├─ vercel.json
+├─ README.md
+└─ .env.local                           # local environment variables, not committed
 ```
 
 ---
 
 ## 🧩 Features
 
-- 🏠 **Portfolio Landing** — About, Experience, Projects, Goals, Contact
-- 💰 **Crypto Page** — Ethereum donation via `ethers.js` (MetaMask)
-- 🧭 **Smooth Navigation** — `React Router v6` + in‑page anchors
-- 📱 **Responsive** — mobile/tablet/desktop
-- 🔄 **CI/CD** — automated deploys from GitHub via Vercel
-- 🧹 **Clean Git Workflow** — `feature/*` → `develop` → `main`
+### 🏠 Portfolio
+
+- About
+- Experience
+- Projects
+- Goals
+- Contact
+
+### 🌎 Travel
+
+- Interactive Mapbox map
+- 3D Globe visualization
+- Travel timeline
+- Dream destinations
+- Travel statistics
+- Interactive navigation
+
+### 💭 Reflections
+
+- MDX articles
+- Categories & filtering
+- Full-text search
+- Featured reflections
+- Reading time display
+- French / English support
+
+### ⛓️ Web3
+
+- Blockchain resources
+- Wallet tools
+- Donation system
+- Multi-chain support
+
+### 🌍 Global
+
+- Responsive design
+- Multilingual support
+- Framer Motion animations
+- Glassmorphism UI
+- SEO-friendly routing
 
 ---
 
 ## 🧠 Scripts
 
-| Command           | Description                                    |
-|-------------------|------------------------------------------------|
-| `npm install`     | Install all dependencies                       |
-| `npm run dev`     | Start local dev server → http://localhost:3000 |
-| `npm run build`   | Build optimized production bundle to `/dist`   |
-| `npm run preview` | Preview the production build locally           |
-| `npm run lint`    | (optional) Lint for consistent style           |
+| Command           | Description                    |
+|-------------------|--------------------------------|
+| `npm install`     | Install dependencies           |
+| `npm run dev`     | Start local development server |
+| `npm run build`   | Build production bundle        |
+| `npm run preview` | Preview production build       |
+| `npm run lint`    | Run linter                     |
 
 ---
 
 ## 🛠️ Development Workflow
 
-**1) Create a feature branch**
+### 1. Create a feature branch
 
 ```bash
 git checkout develop
 git pull
-git checkout -b feature/your-feature
+git checkout -b feature/my-feature
 ```
 
-**2) Commit and push**
+### 2. Commit and push
 
 ```bash
-git add -A
-git commit -m "feat: add new feature"
-git push -u origin feature/your-feature
+git add .
+git commit -m "feat: my feature"
+git push
 ```
 
-**3) Open a Pull Request**
+### 3. Open a Pull Request
 
-- base: `develop`
-- compare: `feature/your-feature`
-- merge after review
+- Base: `develop`
+- Compare: `feature/my-feature`
 
-**4) Deploy flow**
+### 4. Deployment
 
-- `develop` → preproduction (**recette** & **r7**)
-- `main` → production (**julien-esterbet.com**)
+- `develop` → Recette
+- `main` → Production
 
 ---
 
 ## 💻 Local Development
 
-1. Clone the repo
-
 ```bash
-git clone https://github.com/<your-repo>.git
-cd <your-repo>
-```
+git clone https://github.com/JulienEsbt/My-Website.git
+cd My-Website
 
-2. Install deps
-
-```bash
 npm install
-```
-
-3. Run locally
-
-```bash
 npm run dev
 ```
 
-→ Open **http://localhost:3000**
+Open:
 
----
-
-## 🧱 Infrastructure overview
-
-**Registrar / DNS**: IONOS
-
-- `A` (apex `julien-esterbet.com`) → `216.198.79.1` (Vercel)
-- `CNAME` (`www`) → `cname.vercel-dns.com`
-- `CNAME` (`recette`) → `cname.vercel-dns.com`
-- `CNAME` (`r7`) → `cname.vercel-dns.com`
-- MX/TXT (mail/verification) unchanged
-
-**Hosting / CI/CD**: Vercel
-
-- Project connected to GitHub repository
-- **Production** environment tracks `main` → domain `julien-esterbet.com` (+ `www`)
-- **Preview/Preprod** environment tracks `develop` → domains `recette.julien-esterbet.com` & `r7.julien-esterbet.com`
-- Automatic builds (`npm ci && npm run build`) and immutable deployments
-- Auto HTTPS (Let’s Encrypt), cache & CDN at the edge
-
-**Workflow**
-
-```
-feature/*  →  develop  →  main
-    │           │          └─ deploys to Production (custom domain)
-    │           └─ deploys to Recette (recette & r7)
-    └─ PRs reviewed & merged
+```text
+http://localhost:3000
 ```
 
 ---
 
 ## ✨ Author
 
-**Julien Esterbet**  
+**Julien Esterbet**
+
 💼 Analyst Programmer @ Prepar-Vie  
-🎓 MSc Computer Science — FinTech specialization  
-🌍 Passionate about blockchain, AI & sustainable innovation
+🎓 MSc Computer Science — FinTech Specialization  
+🌍 Passionate about Blockchain, AI, Aerospace, Travel and Philosophy
+
+### Links
 
 - 🌐 Website: https://www.julien-esterbet.com
 - 💼 LinkedIn: https://www.linkedin.com/in/julien-esterbet/
 - 🐙 GitHub: https://github.com/JulienEsbt
 - 📸 Instagram: https://www.instagram.com/julien.esbt/
-- 🐦 Twitter: https://twitter.com/JulienEsbtCrypt
 
 ---
 
@@ -190,4 +287,5 @@ feature/*  →  develop  →  main
 
 Open-sourced under the **MIT License**.
 
-> “Knowledge and curiosity are the real compasses of innovation.” — *Julien Esterbet*
+> "Knowledge and curiosity are the real compasses of innovation."
+> — Julien Esterbet

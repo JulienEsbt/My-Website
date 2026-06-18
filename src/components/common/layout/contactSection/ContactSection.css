@@ -1,0 +1,177 @@
+.crypto-contact {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.crypto-contact__left {
+    display: grid;
+    gap: 1rem;
+}
+
+.crypto-contact__intro,
+.crypto-contact__form {
+    border-radius: 1.5rem;
+    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.13), transparent 35%),
+    linear-gradient(135deg, rgba(44, 44, 108, 0.76), rgba(12, 17, 43, 0.9));
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.18);
+}
+
+.crypto-contact__intro {
+    padding: 1.6rem;
+}
+
+.crypto-contact__intro > span {
+    display: inline-block;
+    color: var(--color-primary);
+    margin-bottom: 0.7rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+.crypto-contact__intro h3 {
+    color: var(--color-white);
+    margin-bottom: 0.7rem;
+}
+
+.crypto-contact__intro p {
+    color: var(--color-light);
+    line-height: 1.75;
+}
+
+.crypto-contact__options {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.crypto-contact__option {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: rgba(31, 31, 56, 0.58);
+    border: 1px solid rgba(77, 181, 255, 0.14);
+    transition: var(--transition);
+}
+
+.crypto-contact__option:hover {
+    background: rgba(77, 181, 255, 0.1);
+    border-color: rgba(77, 181, 255, 0.3);
+    transform: translateX(0.2rem);
+}
+
+.crypto-contact__option-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.1);
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    font-size: 1.25rem;
+}
+
+.crypto-contact__option strong {
+    display: block;
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+.crypto-contact__option small {
+    display: block;
+    color: var(--color-light);
+    font-size: 0.78rem;
+    margin-top: 0.15rem;
+}
+
+.crypto-contact__option em {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-primary);
+    font-style: normal;
+    font-size: 0.78rem;
+}
+
+.crypto-contact__form {
+    display: grid;
+    gap: 1rem;
+    padding: 1.6rem;
+}
+
+.crypto-contact__field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.crypto-contact__field label {
+    color: var(--color-light);
+    font-size: 0.82rem;
+}
+
+.crypto-contact__field input,
+.crypto-contact__field textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.9rem;
+    background: rgba(31, 31, 56, 0.58);
+    border: 1px solid rgba(77, 181, 255, 0.16);
+    resize: none;
+    color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+.crypto-contact__field input:focus,
+.crypto-contact__field textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(31, 31, 56, 0.82);
+}
+
+.crypto-contact__form button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: max-content;
+}
+
+.crypto-contact__status {
+    font-size: 0.9rem;
+}
+
+.crypto-contact__status.success {
+    color: #7cffb2;
+}
+
+.crypto-contact__status.error {
+    color: #ff8a8a;
+}
+
+@media screen and (max-width: 950px) {
+    .crypto-contact {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .crypto-contact__option {
+        grid-template-columns: auto 1fr;
+    }
+
+    .crypto-contact__option em {
+        grid-column: 2;
+    }
+
+    .crypto-contact__form button {
+        width: 100%;
+    }
+}

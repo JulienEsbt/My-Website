@@ -1,12 +1,16 @@
 import i18n from 'i18next'
 import {initReactI18next} from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
-
-// Import statiques (bundlés par Vite)
-import main_en from './en/main_en.json'
-import main_fr from './fr/main_fr.json'
-import crypto_en from './en/crypto_en.json'
-import crypto_fr from './fr/crypto_fr.json'
+import common_en from './en/common_en.json'
+import common_fr from './fr/common_fr.json'
+import home_en from './en/home_en.json'
+import home_fr from './fr/home_fr.json'
+import web3_en from './en/web3_en.json'
+import web3_fr from './fr/web3_fr.json'
+import travel_en from './en/travel_en.json'
+import travel_fr from './fr/travel_fr.json'
+import reflections_en from './en/reflections_en.json'
+import reflections_fr from './fr/reflections_fr.json'
 
 i18n
     .use(LanguageDetector)
@@ -14,15 +18,21 @@ i18n
     .init({
         resources: {
             en: {
-                common: main_en,
-                crypto: crypto_en,
+                common: common_en,
+                home: home_en,
+                web3: web3_en,
+                travel: travel_en,
+                reflections: reflections_en,
             },
             fr: {
-                common: main_fr,
-                crypto: crypto_fr,
+                common: common_fr,
+                home: home_fr,
+                web3: web3_fr,
+                travel: travel_fr,
+                reflections: reflections_fr,
             },
         },
-        ns: ['common', 'crypto'],
+        ns: ['common', 'home', 'web3', 'travel', 'reflections'],
         defaultNS: 'common',
         fallbackLng: 'en',
         supportedLngs: ['en', 'fr'],
@@ -35,9 +45,3 @@ i18n
         returnNull: false,
         react: {useSuspense: false},
     })
-
-i18n.on('languageChanged', (lng) => {
-    document.documentElement.setAttribute('lang', lng)
-})
-
-export default i18n

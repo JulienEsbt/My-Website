@@ -1,0 +1,135 @@
+.reflexion-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 1.7rem;
+    border-radius: 1.5rem;
+
+    background: var(--liquid-bg);
+    border: 1px solid var(--liquid-border-soft);
+
+    backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(180%);
+
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.24);
+
+    transition: var(--transition);
+}
+
+.reflexion-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 38%),
+    radial-gradient(circle at 85% 12%, rgba(77, 181, 255, 0.12), transparent 30%);
+
+    pointer-events: none;
+}
+
+.reflexion-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77, 181, 255, 0.42);
+    box-shadow: 0 2rem 4.8rem rgba(0, 0, 0, 0.32),
+    0 0 1.4rem rgba(77, 181, 255, 0.09);
+}
+
+.reflexion-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.reflexion-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+}
+
+.reflexion-card__category {
+    display: inline-flex;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.09);
+    border: 1px solid rgba(77, 181, 255, 0.17);
+
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: 700;
+}
+
+.reflexion-card__date {
+    color: var(--color-light);
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.reflexion-card h3 {
+    margin-bottom: 0.9rem;
+    font-size: 1.4rem;
+    color: var(--color-white);
+    line-height: 1.3;
+}
+
+.reflexion-card p {
+    color: var(--color-light);
+    margin-bottom: 1.6rem;
+    line-height: 1.75;
+}
+
+.reflexion-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reflexion-card__footer span {
+    color: var(--color-primary);
+    font-size: 0.85rem;
+}
+
+.reflexion-card__button {
+    font-size: 0.85rem;
+    border-radius: 999px;
+}
+
+.reflexion-card.featured {
+    grid-column: span 2;
+    min-height: 21rem;
+}
+
+.reflexion-card.featured h3 {
+    max-width: 760px;
+    font-size: clamp(1.8rem, 4vw, 2.65rem);
+}
+
+.reflexion-card.featured p {
+    max-width: 760px;
+    font-size: 1rem;
+}
+
+.reflexion-card__featured {
+    display: inline-flex;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+
+    color: #ffcf8a;
+    background: rgba(255, 159, 67, 0.12);
+    border: 1px solid rgba(255, 159, 67, 0.24);
+
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 900px) {
+    .reflexion-card.featured {
+        grid-column: span 1;
+        min-height: auto;
+    }
+}

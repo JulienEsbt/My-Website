@@ -1,0 +1,28 @@
+.reflexion-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+    .reflexion-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.reflexion-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: var(--color-bg-variant);
+    border-radius: 1.2rem;
+    border: 1px solid var(--color-primary-variant);
+}
+
+.reflexion-empty h3 {
+    color: var(--color-white);
+    margin-bottom: 0.6rem;
+}
+
+.reflexion-empty p {
+    color: var(--color-light);
+}

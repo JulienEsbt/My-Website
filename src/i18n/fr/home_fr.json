@@ -1,0 +1,199 @@
+{
+  "site": {
+    "title": "Julien Esterbet — Portfolio"
+  },
+  "header": {
+    "name": {
+      "first": "Julien",
+      "last": "Esterbet"
+    },
+    "portraitAlt": "Portrait de Julien Esterbet",
+    "eyebrow": "Bonjour, je suis",
+    "subtitle": "Développeur logiciel • Web3 • FinTech",
+    "description": "J’aime construire des outils, comprendre le monde qui m’entoure et explorer les idées qui façonnent notre société — avec l’envie de contribuer, à mon échelle, à quelque chose de plus juste et de plus utile.",
+    "badges": {
+      "badge1": "Software Engineering",
+      "badge2": "Web3",
+      "badge3": "Systèmes d’information",
+      "badge4": "Philosophie",
+      "badge5": "Sociologie",
+      "badge6": "Économie & politique"
+    },
+    "identity": {
+      "role": "Learn • Build • Question",
+      "focus": "Curieux des systèmes techniques et humains"
+    }
+  },
+  "cta": {
+    "aria": "Actions principales",
+    "contact": "Me contacter",
+    "web3": "Explorer Web3",
+    "cv": "Ouvrir le CV"
+  },
+  "experience": {
+    "kicker": "Compétences",
+    "title": "Ce que je sais construire",
+    "intro": "Une base full-stack orientée applications métiers, systèmes d’information et intégrations Web3.",
+    "levels": {
+      "strong": "Solide",
+      "good": "À l’aise",
+      "learning": "En progression"
+    },
+    "groups": {
+      "frontend": {
+        "title": "Frontend",
+        "description": "Interfaces modernes, composants réutilisables et expériences utilisateur propres.",
+        "skills": {
+          "react": "React",
+          "typescript": "TypeScript",
+          "angular": "Angular",
+          "motion": "GSAP / Framer Motion"
+        }
+      },
+      "backend": {
+        "title": "Backend & SI",
+        "description": "APIs, batchs, logique métier, traitements de données et intégration aux systèmes existants.",
+        "skills": {
+          "java": "Java / Spring",
+          "sql": "SQL",
+          "apis": "REST APIs",
+          "batch": "Batchs métiers"
+        }
+      },
+      "web3": {
+        "title": "Blockchain & Web3",
+        "description": "Smart contracts, intégrations wallet, données on-chain et conception d’applications décentralisées.",
+        "skills": {
+          "solidity": "Solidity",
+          "ethers": "ethers.js",
+          "hardhat": "Hardhat",
+          "onchain": "Smart contracts"
+        }
+      }
+    }
+  },
+  "services": {
+    "kicker": "Ce que je peux faire",
+    "title": "Services",
+    "intro": "Des services orientés construction concrète : applications métiers, interfaces modernes, automatisation et intégrations Web3.",
+    "groups": {
+      "backend": {
+        "title": "Backend & systèmes",
+        "description": "Structurer la logique métier, automatiser les traitements et connecter les systèmes."
+      },
+      "webdev": {
+        "title": "Développement web",
+        "description": "Créer des interfaces propres, rapides et adaptées à un vrai usage."
+      },
+      "blockchain": {
+        "title": "Blockchain & Web3",
+        "description": "Concevoir des smart contracts, connecter des wallets et intégrer des usages on-chain."
+      }
+    },
+    "items": {
+      "backend": {
+        "api": "Conception et développement d’APIs REST avec Java / Spring Boot",
+        "automation": "Batchs, traitements automatisés, génération de fichiers et rapports",
+        "integration": "Intégration avec systèmes métiers, bases de données et services tiers",
+        "quality": "Tests, refactorisation, fiabilisation et amélioration des performances"
+      },
+      "webdev": {
+        "site": "Sites vitrines et portfolios modernes avec React + Vite",
+        "spa": "Applications web et dashboards en React, TypeScript ou Angular",
+        "uiMotion": "Interfaces soignées avec animations GSAP / Framer Motion",
+        "forms": "Formulaires, parcours utilisateur, envoi d’e-mails et intégration analytics"
+      },
+      "blockchain": {
+        "contracts": "Développement de smart contracts Solidity avec tests Hardhat",
+        "dapp": "Création de dApps connectées à MetaMask / wallets EVM",
+        "auditLite": "Relecture d’implémentation, sécurité basique et logique d’upgrade",
+        "payments": "Paiements on-chain, lecture de données blockchain et intégrations Web3"
+      }
+    }
+  },
+  "portfolio": {
+    "kicker": "Projets & expérimentations",
+    "title": "Ce que j’ai construit",
+    "intro": "Une sélection de projets personnels et techniques : certains sont des prototypes, d’autres des explorations pour apprendre, tester et construire autour du logiciel, de l’IA et du Web3.",
+    "cta": "Voir le code",
+    "tags": {
+      "solidity": "Solidity",
+      "evm": "EVM",
+      "storage": "On-chain storage",
+      "python": "Python",
+      "numpy": "NumPy",
+      "ml": "Machine Learning",
+      "dapp": "dApp",
+      "web3": "Web3",
+      "messages": "Messages"
+    },
+    "items": {
+      "1": {
+        "type": "Smart contract",
+        "title": "Archivage de fichiers on-chain",
+        "description": "Un projet EVM explorant l’archivage de références de fichiers sur blockchain via smart contract."
+      },
+      "2": {
+        "type": "Machine Learning",
+        "title": "Neural Network from scratch",
+        "description": "Un réseau de neurones multi-couches développé avec NumPy pour comprendre les bases du deep learning sans framework haut niveau."
+      },
+      "3": {
+        "type": "dApp Web3",
+        "title": "Messagerie décentralisée",
+        "description": "Une application décentralisée de type messenger où les messages sont stockés et récupérés depuis la blockchain."
+      }
+    }
+  },
+  "about": {
+    "headingSmall": "Faisons connaissance",
+    "heading": "À propos",
+    "caption": {
+      "title": "Profil hybride",
+      "text": "Entre développement logiciel, systèmes métiers et réflexion critique."
+    },
+    "cards": {
+      "expertiseTitle": "Développer",
+      "expertiseText": "Applications métiers, interfaces web, batchs et APIs",
+      "collabTitle": "Comprendre",
+      "collabText": "Systèmes techniques, organisations et enjeux humains",
+      "innovationTitle": "Relier",
+      "innovationText": "Code, idées, usages et impact concret"
+    },
+    "bio": "Je suis développeur logiciel, avec une formation à la croisée de l’<b>informatique</b>, de la <b>finance</b> et des <b>technologies Web3</b>. Aujourd’hui, je travaille dans le secteur de l’assurance-vie, où je participe à des projets métiers, des interfaces web, des batchs et des systèmes documentaires.<br/><br/>Mais mon intérêt ne s’arrête pas au code. J’aime comprendre les systèmes : techniques, économiques, sociaux, politiques. Ce qui me motive, c’est de construire des outils utiles, mais aussi de réfléchir au rôle que la technologie peut jouer dans nos vies et dans la société.<br/><br/>Ce portfolio rassemble donc plusieurs facettes : mon parcours de développeur, mes projets, mon intérêt pour le Web3, mais aussi mes réflexions, mes voyages et les idées qui me construisent."
+  },
+  "goals": {
+    "kicker": "Un peu plus personnel",
+    "title": "Ce qui me guide",
+    "intro": "Au-delà du code, ce sont ces envies qui structurent mon parcours : construire, apprendre, réfléchir, découvrir et avancer sans me perdre.",
+    "items": {
+      "build": {
+        "name": "Construire",
+        "review": "Créer des outils, des systèmes et des projets concrets. J’aime transformer une idée abstraite en quelque chose qui existe vraiment."
+      },
+      "learn": {
+        "name": "Apprendre",
+        "review": "Comprendre la tech, l’économie, la philosophie, la politique et les systèmes qui façonnent nos vies."
+      },
+      "think": {
+        "name": "Questionner",
+        "review": "Ne pas accepter les choses telles qu’elles sont. Réfléchir au sens, aux usages et aux conséquences de ce que l’on construit."
+      },
+      "travel": {
+        "name": "Découvrir",
+        "review": "Voyager, rencontrer d’autres façons de vivre et garder en tête que mon propre monde n’est jamais le seul possible."
+      },
+      "succeed": {
+        "name": "Avancer",
+        "review": "Réussir, pour moi, c’est progresser sans me trahir : apprendre, créer, me tromper, recommencer et rester aligné."
+      }
+    },
+    "label": "Direction"
+  },
+  "nav": {
+    "aria": "Navigation des sections",
+    "items": {
+      "home": "Accueil"
+    }
+  }
+}
