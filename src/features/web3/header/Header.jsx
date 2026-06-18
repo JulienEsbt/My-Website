@@ -9,6 +9,7 @@ import './Header.css'
 
 const Header = () => {
     const {t} = useTranslation('web3')
+    const featuredNft = ASSETS.web3.nfts.soulware2173
 
     const root = useRef(null)
     const title = useRef(null)
@@ -61,7 +62,14 @@ const Header = () => {
                         className="me"
                         aria-hidden
                     >
-                        <img src={ASSETS.web3.header.nft1} alt="NFT"/>
+                        <a
+                            href={featuredNft.openseaUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${featuredNft.name} on OpenSea`}
+                        >
+                            <img src={featuredNft.image} alt={featuredNft.name}/>
+                        </a>
                         <div className="glow" aria-hidden/>
                     </motion.div>
                 </div>

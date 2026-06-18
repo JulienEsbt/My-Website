@@ -199,3 +199,15 @@
         width: 80%;
     }
 }
+
+.crypto-about__orb a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.crypto-about__orb a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

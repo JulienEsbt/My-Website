@@ -1,51 +1,6 @@
 const reflections = [
     {
-        id: 1,
-        slug: 'guerre-medias-anxiete-collective',
-        title: {
-            fr: 'Guerre, médias et anxiété collective',
-            en: 'War, media and collective anxiety',
-        },
-        category: 'society',
-        readingTime: 7,
-        date: '2026-06-05',
-        excerpt: {
-            fr: "Réflexion sur le climat anxiogène, la peur de la guerre, et la manière dont les médias et les politiques façonnent nos perceptions.",
-            en: 'A reflection on anxiety, war, media narratives and the way politics shapes our perception of reality.',
-        },
-    },
-    {
-        id: 2,
-        slug: 'souverainete-europe-democratie',
-        title: {
-            fr: 'Souveraineté, Europe et démocratie réelle',
-            en: 'Sovereignty, Europe and real democracy',
-        },
-        category: 'politics',
-        readingTime: 12,
-        date: '2026-06-05',
-        excerpt: {
-            fr: "Pourquoi la question européenne doit être posée sans dogmatisme : souveraineté politique, industrie, démocratie, coûts et alternatives.",
-            en: 'Why the European question must be explored without dogmatism: political sovereignty, industry, democracy, costs and alternatives.',
-        },
-    },
-    {
-        id: 3,
-        slug: 'elire-n-est-pas-voter',
-        title: {
-            fr: "Élire n’est pas voter",
-            en: 'Electing is not voting',
-        },
-        category: 'politics',
-        readingTime: 8,
-        date: '2026-06-05',
-        excerpt: {
-            fr: "Une réflexion sur la démocratie représentative, le RIC, l’assemblée constituante et la critique du pouvoir qui écrit ses propres règles.",
-            en: 'A reflection on representative democracy, citizen referendums, constituent assemblies and power writing its own rules.',
-        },
-    },
-    {
-        id: 4,
+        id: "charte-de-pensee-2025-05-11",
         slug: 'charte-de-pensee',
         title: {
             fr: 'Charte de pensée',
@@ -53,7 +8,7 @@ const reflections = [
         },
         category: 'philosophy',
         featured: true,
-        readingTime: 15,
+        readingTime: 10,
         date: '2025-05-11',
         excerpt: {
             fr: "Un texte personnel entre philosophie, poésie, responsabilité, révolte, amour, doute et désir de lucidité.",
@@ -61,20 +16,37 @@ const reflections = [
         },
     },
     {
-        id: 5,
-        slug: 'blockchain-confiance-institutions',
-        title: {
-            fr: 'Blockchain, confiance et institutions',
-            en: 'Blockchain, trust and institutions',
-        },
-        category: 'technology',
+        id: 'verite-liberte-construction-de-soi-2025-06-15',
+        slug: 'verite-liberte-construction-de-soi',
+        category: 'philosophy',
+        date: '2025-06-15',
         readingTime: 6,
-        date: '2026-06-05',
+        featured: false,
+        title: {
+            fr: 'Vérité, liberté et construction de soi',
+            en: 'Truth, freedom and self-construction',
+        },
         excerpt: {
-            fr: "La blockchain comme outil technique, mais aussi comme symptôme politique : que faire quand la confiance institutionnelle s’effondre ?",
-            en: 'Blockchain as a technical tool, but also as a political symptom: what happens when institutional trust collapses?',
+            fr: 'Une réflexion personnelle sur le doute, les déterminismes, la vérité, la responsabilité individuelle et la manière dont nous nous construisons.',
+            en: 'A personal reflection on doubt, determinisms, truth, individual responsibility and the way we build ourselves.',
         },
     },
+    {
+        id: 'mefiance-opposition-simple-2026-01-11',
+        slug: 'mefiance-opposition-simple',
+        category: 'philosophy',
+        date: '2026-02-02',
+        readingTime: 15,
+        featured: false,
+        title: {
+            fr: 'Se méfier des oppositions simples',
+            en: 'Being wary of simple oppositions',
+        },
+        excerpt: {
+            fr: 'Une réflexion personnelle sur notre tendance à simplifier le réel, les oppositions binaires, la responsabilité, le déterminisme et la difficulté de comprendre sans excuser.',
+            en: 'A personal reflection on our tendency to simplify reality, binary oppositions, responsibility, determinism and the difficulty of understanding without excusing.',
+        },
+    }
 ]
 
 export default reflections

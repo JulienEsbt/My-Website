@@ -10,6 +10,7 @@ import './About.css'
 
 const About = () => {
     const {t} = useTranslation('web3')
+    const aboutNft = ASSETS.web3.nfts.soulware723
 
     const cards = [
         {
@@ -46,10 +47,17 @@ const About = () => {
                     transition={{duration: 0.6, ease: 'easeOut'}}
                 >
                     <div className="crypto-about__orb">
-                        <img
-                            src={ASSETS.web3.about.nft2}
-                            alt={t('about.alt')}
-                        />
+                        <a
+                            href={aboutNft.openseaUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${aboutNft.name} on OpenSea`}
+                        >
+                            <img
+                                src={aboutNft.image}
+                                alt={aboutNft.name}
+                            />
+                        </a>
                     </div>
 
                     <div className="crypto-about__floating-card crypto-about__floating-card--top">
