@@ -82,7 +82,7 @@ const About = () => {
                         <span>{t('about.badge')}</span>
                         <h3>{t('about.title')}</h3>
                         <p>
-                            <Trans i18nKey="about.bio" ns="crypto" components={{b: <b/>}}/>
+                            <Trans i18nKey="about.bio" ns="web3" components={{b: <b/>}}/>
                         </p>
                     </div>
 

@@ -17,6 +17,10 @@
     "headingSmall": "Ce que je fais",
     "heading": "Qui suis-je",
     "alt": "Avatar crypto / visuel coworking",
+    "badge": "Profil Web3",
+    "title": "Entre développement, investissement et curiosité technique",
+    "explore": "Explorer mes connaissances",
+    "bio": "Hello ! Je suis <b>développeur Blockchain</b> et <b>investisseur crypto</b>. J’adore construire autour du Web3 (Solidity, EVM, React) et soutenir des projets en lesquels je crois.",
     "cards": {
       "passionTitle": "Passionné",
       "passionText": "Par la technologie blockchain",
@@ -24,11 +28,7 @@
       "investingText": "Dans des projets crypto & Web3",
       "devTitle": "Développement",
       "devText": "Smart contracts EVM & apps React"
-    },
-    "badge": "Profil Web3",
-    "title": "Entre développement, investissement et curiosité technique",
-    "explore": "Explorer mes connaissances",
-    "bio": "Hello ! Je suis <b>développeur Blockchain</b> et <b>investisseur crypto</b>. J’adore construire autour du Web3 (Solidity, EVM, React) et soutenir des projets en lesquels je crois."
+    }
   },
   "knowledge": {
     "kicker": "Ce qui m'intéresse",

@@ -49,6 +49,10 @@
 }
 
 @media screen and (max-width: 800px) {
+    .reflexion-stats-section {
+        margin-top: 1.8rem;
+    }
+
     .reflexion-stats {
         grid-template-columns: 1fr;
     }
