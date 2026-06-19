@@ -50,7 +50,7 @@ const ContactSection = () => {
 
         try {
             await emailjs.sendForm(
-                'service_me0jfjg',
+                'service_rv27pzc',
                 'template_mwmosps',
                 form.current,
                 'QgbIYSLquY8PrqQho'
@@ -58,7 +58,8 @@ const ContactSection = () => {
 
             setStatus('success')
             event.target.reset()
-        } catch {
+        } catch (error) {
+            console.error('EmailJS error:', error)
             setStatus('error')
         }
     }

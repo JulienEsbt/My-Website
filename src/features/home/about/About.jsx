@@ -14,7 +14,6 @@ const About = () => {
 
     const sectionRef = useRef(null)
     const visualRef = useRef(null)
-    const contentRef = useRef(null)
 
     const cards = [
         {icon: <FaCode/>, title: t('about.cards.expertiseTitle'), text: t('about.cards.expertiseText')},
@@ -38,15 +37,6 @@ const About = () => {
                 duration: 0.8,
                 ease: 'power3.out',
                 scrollTrigger: {trigger: sectionRef.current, start: 'top 74%'},
-            })
-
-            gsap.from(contentRef.current.children, {
-                opacity: 0,
-                y: 18,
-                duration: 0.55,
-                ease: 'power2.out',
-                stagger: 0.08,
-                scrollTrigger: {trigger: sectionRef.current, start: 'top 72%'},
             })
         }, sectionRef)
 
@@ -72,22 +62,20 @@ const About = () => {
                     </div>
                 </aside>
 
-                <div className="about__content" ref={contentRef}>
-                    <div className="about__cards">
-                        {cards.map((card) => (
-                            <article className="about__card" key={card.title}>
-                                <div className="about__icon">{card.icon}</div>
-                                <div>
-                                    <h3>{card.title}</h3>
-                                    <p>{card.text}</p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+                <div className="about__cards">
+                    {cards.map((card) => (
+                        <article className="about__card" key={card.title}>
+                            <div className="about__icon">{card.icon}</div>
+                            <div>
+                                <h3>{card.title}</h3>
+                                <p>{card.text}</p>
+                            </div>
+                        </article>
+                    ))}
+                </div>
 
-                    <div className="about__bio">
-                        <Trans i18nKey="about.bio" ns="home" components={{b: <b/>}}/>
-                    </div>
+                <div className="about__bio">
+                    <Trans i18nKey="about.bio" ns="home" components={{b: <b/>}}/>
                 </div>
             </div>
         </section>

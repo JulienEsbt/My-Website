@@ -330,6 +330,7 @@
     "viewTx": "View transaction",
     "quickOptions": "Quick options",
     "customHint": "Search a known token or import it using its contract.",
+    "mobileHelp": "Use search to find another network or token.",
     "errors": {
       "noToken": "Please select a token.",
       "noProvider": "No wallet detected. Install MetaMask or use a Web3 browser.",

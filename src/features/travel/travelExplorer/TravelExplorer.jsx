@@ -9,6 +9,7 @@ import './TravelExplorer.css'
 const TravelExplorer = () => {
     const {t} = useTranslation('travel')
     const [activeView, setActiveView] = useState(null)
+    const [mobileView, setMobileView] = useState('globe')
 
     const currentTitle = activeView === 'globe'
         ? t('explorer.globeTitle')
@@ -37,6 +38,26 @@ const TravelExplorer = () => {
                 ))}
             </div>
 
+            <div className="travel-explorer__mobile-switch">
+                <button
+                    type="button"
+                    className={mobileView === 'globe' ? 'active' : ''}
+                    onClick={() => setMobileView('globe')}
+                >
+                    <FiGlobe/>
+                    {t('explorer.globeTitle')}
+                </button>
+
+                <button
+                    type="button"
+                    className={mobileView === 'map' ? 'active' : ''}
+                    onClick={() => setMobileView('map')}
+                >
+                    <FiMap/>
+                    {t('explorer.mapTitle')}
+                </button>
+            </div>
+
             <div className="container travel-explorer">
                 <AnimatePresence mode="wait">
                     {!activeView && (
@@ -48,7 +69,8 @@ const TravelExplorer = () => {
                             exit={{opacity: 0, y: -20}}
                             transition={{duration: 0.35}}
                         >
-                            <article className="travel-explorer__card">
+                            <article
+                                className={`travel-explorer__card travel-explorer__card--globe ${mobileView === 'globe' ? 'mobile-active' : ''}`}>
                                 <div className="travel-explorer__card-header">
                                     <div className="travel-explorer__title-row">
                                         <span className="travel-explorer__icon">
@@ -74,7 +96,8 @@ const TravelExplorer = () => {
                                 </div>
                             </article>
 
-                            <article className="travel-explorer__card">
+                            <article
+                                className={`travel-explorer__card travel-explorer__card--map ${mobileView === 'map' ? 'mobile-active' : ''}`}>
                                 <div className="travel-explorer__card-header">
                                     <div className="travel-explorer__title-row">
                                         <span className="travel-explorer__icon">

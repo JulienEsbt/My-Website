@@ -229,6 +229,12 @@ const DonationPanel = () => {
                         ))}
                     </div>
 
+                    {!search.trim() && (
+                        <p className="donation-panel__mobile-help">
+                            {t('donationPanel.mobileHelp')}
+                        </p>
+                    )}
+
                     <div className={`donation-panel__custom ${showCustomImport ? 'open' : ''}`}>
                         <button
                             type="button"
