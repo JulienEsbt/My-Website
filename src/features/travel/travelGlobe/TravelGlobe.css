@@ -20,3 +20,22 @@
 .travel-globe__shell canvas {
     max-width: none;
 }
+
+@media screen and (max-width: 600px) {
+    .travel-globe__shell {
+        min-height: 21rem;
+    }
+
+    .travel-globe__shell canvas {
+        transform: scale(0.72);
+        transform-origin: center center;
+    }
+
+    .travel-globe__shell.expanded {
+        min-height: 31rem;
+    }
+
+    .travel-globe__shell.expanded canvas {
+        transform: scale(0.86);
+    }
+}

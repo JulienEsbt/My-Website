@@ -20,14 +20,20 @@
 }
 
 .tools-v2__head {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 0.9rem;
     padding: 1.3rem;
+    border: none;
     border-bottom: 1px solid rgba(77, 181, 255, 0.14);
+    background: transparent;
+    text-align: left;
+    cursor: default;
 }
 
 .tools-v2__head span {
+    flex: 0 0 auto;
     width: 2.4rem;
     height: 2.4rem;
     display: grid;
@@ -39,8 +45,16 @@
 }
 
 .tools-v2__head h3 {
+    flex: 1;
     color: var(--color-white);
     font-size: 1rem;
+}
+
+.tools-v2__chevron {
+    display: none;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    transition: var(--transition);
 }
 
 .tools-v2__list {
@@ -105,10 +119,48 @@
 @media screen and (max-width: 650px) {
     .tools-v2 {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .tools-v2__card:hover {
+        transform: none;
+    }
+
+    .tools-v2__head {
+        cursor: pointer;
+        padding: 1.15rem;
+    }
+
+    .tools-v2__head span {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .tools-v2__head h3 {
+        font-size: 0.98rem;
+    }
+
+    .tools-v2__chevron {
+        display: block;
+    }
+
+    .tools-v2__card.is-open .tools-v2__chevron {
+        transform: rotate(180deg);
+    }
+
+    .tools-v2__list {
+        display: none;
+        padding: 1rem;
+        gap: 0.65rem;
+    }
+
+    .tools-v2__card.is-open .tools-v2__list {
+        display: grid;
     }
 
     .tools-v2__list li a {
         grid-template-columns: auto 1fr auto;
+        padding: 0.8rem;
     }
 
     .tools-v2__list small {

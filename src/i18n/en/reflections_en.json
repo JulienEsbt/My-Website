@@ -37,7 +37,10 @@
   },
   "article": {
     "back": "Back to reflections",
-    "frenchOnly": "This article is currently available in French only."
+    "frenchOnly": "This article is currently available in French only.",
+    "finished": "You have finished this article",
+    "previous": "Previous article",
+    "next": "Next article"
   },
   "categories": {
     "philosophy": "Philosophy",

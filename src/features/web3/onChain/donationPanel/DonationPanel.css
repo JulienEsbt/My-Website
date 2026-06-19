@@ -326,3 +326,148 @@
     background: rgba(77, 181, 255, 0.2);
     color: var(--color-white);
 }
+
+@media screen and (max-width: 560px) {
+    .donation-panel__tokens:not(.searching) .donation-panel__token:nth-child(n + 3) {
+        display: none;
+    }
+
+    .donation-panel__tokens:not(.searching) {
+        margin-bottom: 0.9rem;
+    }
+}
+
+.donation-panel__mobile-help {
+    display: none;
+}
+
+@media screen and (max-width: 560px) {
+    .donation-panel__mobile-help {
+        display: block;
+        margin: -0.2rem 0 1rem;
+        color: var(--color-light);
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .donation-panel {
+        width: var(--container-width-sm);
+        padding: 1.25rem;
+        border-radius: 1.35rem;
+    }
+
+    .donation-panel__content {
+        gap: 1rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .donation-panel h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .donation-panel__content > div:first-child p {
+        display: none;
+    }
+
+    .donation-panel__receiver {
+        padding: 0.9rem;
+        border-radius: 0.9rem;
+    }
+
+    .donation-panel__receiver span,
+    .donation-panel__selector label {
+        font-size: 0.82rem;
+        margin-bottom: 0.55rem;
+    }
+
+    .donation-panel__receiver code {
+        font-size: 0.74rem;
+        line-height: 1.55;
+    }
+
+    .donation-panel__copy {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .donation-panel__selector {
+        margin-bottom: 1rem;
+    }
+
+    .donation-panel__search {
+        padding: 0.72rem 0.85rem;
+        border-radius: 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .donation-panel__search input {
+        font-size: 0.86rem;
+    }
+
+    .donation-panel__token {
+        min-height: 3.55rem;
+        padding: 0.72rem 0.8rem;
+        border-radius: 0.85rem;
+    }
+
+    .donation-panel__token strong {
+        font-size: 0.9rem;
+    }
+
+    .donation-panel__token span {
+        font-size: 0.7rem;
+    }
+
+    .donation-panel__token small {
+        font-size: 0.62rem;
+        padding: 0.1rem 0.34rem;
+    }
+
+    .donation-panel__mobile-help {
+        margin: -0.1rem 0 0.75rem;
+        font-size: 0.76rem;
+        line-height: 1.45;
+    }
+
+    .donation-panel__custom {
+        margin-top: 0.75rem;
+    }
+
+    .donation-panel__custom-toggle {
+        padding: 0.75rem 0.85rem;
+        border-radius: 0.8rem;
+        font-size: 0.86rem;
+    }
+
+    .donation-panel__form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .donation-panel__form input {
+        min-width: 0;
+        width: 100%;
+        padding: 0.82rem 0.9rem;
+        border-radius: 0.8rem;
+    }
+
+    .donation-panel__form button {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1rem;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .donation-panel__receiver-line {
+        align-items: flex-start;
+    }
+
+    .donation-panel__tokens {
+        gap: 0.55rem;
+    }
+}

@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen} from 'react-icons/fi'
+import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen, FiArrowLeft} from 'react-icons/fi'
 import trips from '../../../data/travel/trips.js'
 import './TravelTimeline.css'
 
@@ -15,7 +15,10 @@ const TravelTimeline = () => {
     )
 
     const [activeTripId, setActiveTripId] = useState(sortedTrips[0]?.id)
+    const [mobileDetailOpen, setMobileDetailOpen] = useState(false)
     const activeTrip = sortedTrips.find((trip) => trip.id === activeTripId) ?? sortedTrips[0]
+    const [detailAnimationKey, setDetailAnimationKey] = useState(0)
+    const [isClosingDetail, setIsClosingDetail] = useState(false)
 
     const getTripText = (trip, field) => {
         if (!trip) return ''
@@ -25,6 +28,15 @@ const TravelTimeline = () => {
         }
 
         return trip[field]
+    }
+
+    const closeMobileDetail = () => {
+        setIsClosingDetail(true)
+
+        setTimeout(() => {
+            setMobileDetailOpen(false)
+            setIsClosingDetail(false)
+        }, 220)
     }
 
     const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -47,7 +59,11 @@ const TravelTimeline = () => {
                             type="button"
                             key={trip.id}
                             className={`travel-timeline__item ${activeTripId === trip.id ? 'active' : ''}`}
-                            onClick={() => setActiveTripId(trip.id)}
+                            onClick={() => {
+                                setActiveTripId(trip.id)
+                                setMobileDetailOpen(true)
+                                setDetailAnimationKey((key) => key + 1)
+                            }}
                             initial={{opacity: 0, y: 24}}
                             whileInView={{opacity: 1, y: 0}}
                             viewport={{once: true}}
@@ -78,12 +94,20 @@ const TravelTimeline = () => {
 
                 {activeTrip && (
                     <motion.aside
-                        key={activeTrip.id}
-                        className="travel-timeline__detail"
+                        key={`${activeTrip.id}-${detailAnimationKey}`}
+                        className={`travel-timeline__detail ${mobileDetailOpen ? 'mobile-open' : ''} ${isClosingDetail ? 'closing' : ''}`}
                         initial={{opacity: 0, x: 24}}
                         animate={{opacity: 1, x: 0}}
                         transition={{duration: 0.35}}
                     >
+                        <button
+                            type="button"
+                            className="travel-timeline__back"
+                            onClick={closeMobileDetail}
+                        >
+                            <FiArrowLeft/>
+                            {t('timeline.details.back')}
+                        </button>
                         <div className="travel-timeline__detail-header">
                             <span className="travel-timeline__detail-flag">{activeTrip.flag}</span>
 

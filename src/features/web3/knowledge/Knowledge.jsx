@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
+import {FiArrowLeft} from 'react-icons/fi'
 import {CRYPTO_KNOWLEDGE} from '../../../data/web3/knowledge.js'
 import './Knowledge.css'
 
@@ -9,6 +10,9 @@ const Knowledge = () => {
 
     const [activeCategoryId, setActiveCategoryId] = useState(CRYPTO_KNOWLEDGE[0].id)
     const [activeItemId, setActiveItemId] = useState(CRYPTO_KNOWLEDGE[0].items[0].id)
+    const [mobilePanelOpen, setMobilePanelOpen] = useState(false)
+    const [panelAnimationKey, setPanelAnimationKey] = useState(0)
+    const [isClosingPanel, setIsClosingPanel] = useState(false)
 
     const activeCategory = useMemo(
         () => CRYPTO_KNOWLEDGE.find((category) => category.id === activeCategoryId),
@@ -25,6 +29,17 @@ const Knowledge = () => {
     const selectCategory = (category) => {
         setActiveCategoryId(category.id)
         setActiveItemId(category.items[0].id)
+        setMobilePanelOpen(true)
+        setPanelAnimationKey((key) => key + 1)
+    }
+
+    const closeMobilePanel = () => {
+        setIsClosingPanel(true)
+
+        setTimeout(() => {
+            setMobilePanelOpen(false)
+            setIsClosingPanel(false)
+        }, 220)
     }
 
     return (
@@ -61,12 +76,20 @@ const Knowledge = () => {
 
                 {activeCategory && activeItem && (
                     <motion.article
-                        key={activeCategory.id}
-                        className="knowledge-v3__panel"
+                        key={`${activeCategory.id}-${activeItem.id}-${panelAnimationKey}`}
+                        className={`knowledge-v3__panel ${mobilePanelOpen ? 'mobile-open' : ''} ${isClosingPanel ? 'closing' : ''}`}
                         initial={{opacity: 0, y: 24}}
                         animate={{opacity: 1, y: 0}}
                         transition={{duration: 0.35}}
                     >
+                        <button
+                            type="button"
+                            className="knowledge-v3__back"
+                            onClick={closeMobilePanel}
+                        >
+                            <FiArrowLeft/>
+                            Retour
+                        </button>
                         <div className="knowledge-v3__panel-header">
                             <span>{activeCategory.icon}</span>
 
@@ -84,7 +107,11 @@ const Knowledge = () => {
                                     className={`knowledge-v3__item ${
                                         activeItem.id === item.id ? 'active' : ''
                                     }`}
-                                    onClick={() => setActiveItemId(item.id)}
+                                    onClick={() => {
+                                        setActiveItemId(item.id)
+                                        setMobilePanelOpen(true)
+                                        setPanelAnimationKey((key) => key + 1)
+                                    }}
                                 >
                                     {t(`knowledge.categories.${activeCategory.id}.items.${item.id}.name`)}
                                 </button>

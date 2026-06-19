@@ -31,7 +31,8 @@
       "story": "À propos de ce voyage",
       "location": "Localisation",
       "polarsteps": "Voir sur Polarsteps",
-      "noStory": "Je n’ai pas encore ajouté de récit détaillé pour ce voyage."
+      "noStory": "Je n’ai pas encore ajouté de récit détaillé pour ce voyage.",
+      "back": "Retour aux voyages"
     }
   },
   "dreams": {

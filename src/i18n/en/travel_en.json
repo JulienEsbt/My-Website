@@ -31,7 +31,8 @@
       "story": "About this trip",
       "location": "Location",
       "polarsteps": "View on Polarsteps",
-      "noStory": "I haven’t added a detailed story for this trip yet."
+      "noStory": "I haven’t added a detailed story for this trip yet.",
+      "back": "Back to trips"
     }
   },
   "dreams": {
