@@ -15,7 +15,11 @@ const TravelNav = () => {
         {id: 'dreams', label: t('nav.items.dreams'), icon: <PiCompassBold/>},
     ]
 
-    return <SectionNav items={items} ariaLabel={t('nav.aria')}/>
+    return (
+        <div className="travel-nav">
+            <SectionNav items={items} ariaLabel={t('nav.aria')}/>
+        </div>
+    )
 }
 
 export default TravelNav
