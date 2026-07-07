@@ -19,6 +19,9 @@ const TravelTimeline = () => {
     const activeTrip = sortedTrips.find((trip) => trip.id === activeTripId) ?? sortedTrips[0]
     const [detailAnimationKey, setDetailAnimationKey] = useState(0)
     const [isClosingDetail, setIsClosingDetail] = useState(false)
+    const detailScrollRef = useRef(null)
+    const [canScrollDetail, setCanScrollDetail] = useState(false)
+    const [isDetailBottom, setIsDetailBottom] = useState(false)
 
     const getTripText = (trip, field) => {
         if (!trip) return ''
@@ -62,6 +65,17 @@ const TravelTimeline = () => {
         setActivePhotoIndex((index) =>
             index === tripPhotos.length - 1 ? 0 : index + 1
         )
+    }
+
+    const updateDetailScrollState = () => {
+        const el = detailScrollRef.current
+        if (!el) return
+
+        const canScroll = el.scrollHeight > el.clientHeight + 4
+        const isBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 8
+
+        setCanScrollDetail(canScroll)
+        setIsDetailBottom(isBottom)
     }
 
     useEffect(() => {
@@ -171,6 +185,10 @@ const TravelTimeline = () => {
         }
     }, [activePhotoIndex])
 
+    useEffect(() => {
+        requestAnimationFrame(updateDetailScrollState)
+    }, [activeTripId, isFr])
+
     return (
         <section id="stories" className="travel-timeline-section">
             <h5>{t('timeline.kicker')}</h5>
@@ -255,177 +273,198 @@ const TravelTimeline = () => {
                             {activeTrip.isPlanned && <span>{t('timeline.badges.planned')}</span>}
                         </div>
 
-                        <p className="travel-timeline__detail-description">
-                            {getTripText(activeTrip, 'description')}
-                        </p>
+                        <div
+                            ref={detailScrollRef}
+                            className="travel-timeline__detail-scroll"
+                            onScroll={updateDetailScrollState}
+                        >
 
-                        {tripPhotos.length > 0 && (
-                            <div className="travel-timeline__photo-preview">
-                                <button
-                                    type="button"
-                                    className="travel-timeline__photo-hero"
-                                    onClick={() => openPhoto(0)}
-                                >
-                                    <img src={tripPhotos[0].src} alt={tripPhotos[0].alt} loading="lazy"/>
-                                    <span>Voir les photos</span>
-                                </button>
+                            <p className="travel-timeline__detail-description">
+                                {getTripText(activeTrip, 'description')}
+                            </p>
 
-                                <div className="travel-timeline__photo-strip">
-                                    {tripPhotos.slice(1, 4).map((photo, index) => (
-                                        <button
-                                            key={photo.src}
-                                            type="button"
-                                            className="travel-timeline__photo-thumb"
-                                            onClick={() => openPhoto(index + 1)}
-                                        >
-                                            <img src={photo.src} alt={photo.alt} loading="lazy"/>
-                                        </button>
-                                    ))}
-                                </div>
-
-                                {tripPhotos.length > 4 && (
+                            {tripPhotos.length > 0 && (
+                                <div className="travel-timeline__photo-preview">
                                     <button
                                         type="button"
-                                        className="travel-timeline__photo-more-wide"
+                                        className="travel-timeline__photo-hero"
                                         onClick={() => openPhoto(0)}
                                     >
-                                        Ouvrir la galerie complète · {tripPhotos.length} photos
+                                        <img src={tripPhotos[0].src} alt={tripPhotos[0].alt} loading="lazy"/>
+                                        <span>Voir les photos</span>
                                     </button>
-                                )}
-                            </div>
-                        )}
 
-                        <div className="travel-timeline__detail-section">
-                            <h4>
-                                <FiBookOpen/>
-                                {t('timeline.details.story')}
-                            </h4>
-
-                            <p>
-                                {getTripText(activeTrip, 'story') || t('timeline.details.noStory')}
-                            </p>
-                        </div>
-
-                        <div className="travel-timeline__detail-section">
-                            <h4>
-                                <FiMapPin/>
-                                {t('timeline.details.location')}
-                            </h4>
-
-                            <a
-                                className={`travel-timeline__mini-map ${!miniMapUrl ? 'no-map' : ''}`}
-                                href={`https://www.google.com/maps?q=${activeTrip.lat},${activeTrip.lng}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={
-                                    miniMapUrl
-                                        ? {
-                                            backgroundImage: `linear-gradient(rgba(5, 12, 34, 0.18), rgba(5, 12, 34, 0.45)), url("${miniMapUrl}")`,
-                                        }
-                                        : undefined
-                                }
-                            >
-                                <span>{getTripText(activeTrip, 'city')}</span>
-                            </a>
-                        </div>
-
-                        {activeTrip.polarstepsUrl && (
-                            <a
-                                href={activeTrip.polarstepsUrl}
-                                className="travel-timeline__external"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {t('timeline.details.polarsteps')}
-                                <FiExternalLink/>
-                            </a>
-                        )}
-
-                        {activePhotoIndex !== null && (
-                            <div
-                                className="travel-timeline__lightbox"
-                                onClick={closePhoto}
-                            >
-                                <button
-                                    type="button"
-                                    className="travel-timeline__lightbox-close"
-                                    onClick={(event) => {
-                                        event.stopPropagation()
-                                        closePhoto()
-                                    }}
-                                    aria-label="Fermer la galerie"
-                                >
-                                    ×
-                                </button>
-
-                                <button
-                                    type="button"
-                                    className="travel-timeline__lightbox-nav previous"
-                                    onClick={(event) => {
-                                        event.stopPropagation()
-                                        previousPhoto()
-                                    }}
-                                    aria-label="Photo précédente"
-                                >
-                                    ←
-                                </button>
-
-                                <div
-                                    className="travel-timeline__lightbox-content"
-                                    onClick={(event) => event.stopPropagation()}
-                                >
-                                    <div className="travel-timeline__lightbox-image-frame">
-                                        <img
-                                            src={tripPhotos[activePhotoIndex].src}
-                                            alt={tripPhotos[activePhotoIndex].alt}
-                                        />
-
-                                        <span className="travel-timeline__lightbox-counter">
-                    {activePhotoIndex + 1} / {tripPhotos.length}
-                </span>
+                                    <div className="travel-timeline__photo-strip">
+                                        {tripPhotos.slice(1, 4).map((photo, index) => (
+                                            <button
+                                                key={photo.src}
+                                                type="button"
+                                                className="travel-timeline__photo-thumb"
+                                                onClick={() => openPhoto(index + 1)}
+                                            >
+                                                <img src={photo.src} alt={photo.alt} loading="lazy"/>
+                                            </button>
+                                        ))}
                                     </div>
 
-                                    <div className="travel-timeline__lightbox-dock">
-                                        <div
-                                            ref={lightboxStripRef}
-                                            className="travel-timeline__lightbox-strip"
-                                            onWheel={(event) => {
-                                                event.stopPropagation()
-                                                event.preventDefault()
-                                                event.currentTarget.scrollLeft += event.deltaY
-                                            }}
+                                    {tripPhotos.length > 4 && (
+                                        <button
+                                            type="button"
+                                            className="travel-timeline__photo-more-wide"
+                                            onClick={() => openPhoto(0)}
                                         >
-                                            {tripPhotos.map((photo, index) => (
-                                                <button
-                                                    key={`${photo.src}-lightbox-${index}`}
-                                                    type="button"
-                                                    className={activePhotoIndex === index ? 'active' : ''}
-                                                    onClick={() => setActivePhotoIndex(index)}
-                                                    aria-label={`Voir la photo ${index + 1}`}
-                                                >
-                                                    <img src={photo.src} alt={photo.alt}/>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
+                                            Ouvrir la galerie complète · {tripPhotos.length} photos
+                                        </button>
+                                    )}
                                 </div>
+                            )}
 
-                                <button
-                                    type="button"
-                                    className="travel-timeline__lightbox-nav next"
-                                    onClick={(event) => {
-                                        event.stopPropagation()
-                                        nextPhoto()
-                                    }}
-                                    aria-label="Photo suivante"
-                                >
-                                    →
-                                </button>
+                            <div className="travel-timeline__detail-section">
+                                <h4>
+                                    <FiBookOpen/>
+                                    {t('timeline.details.story')}
+                                </h4>
+
+                                <p>
+                                    {getTripText(activeTrip, 'story') || t('timeline.details.noStory')}
+                                </p>
                             </div>
+
+                            <div className="travel-timeline__detail-section">
+                                <h4>
+                                    <FiMapPin/>
+                                    {t('timeline.details.location')}
+                                </h4>
+
+                                <a
+                                    className={`travel-timeline__mini-map ${!miniMapUrl ? 'no-map' : ''}`}
+                                    href={`https://www.google.com/maps?q=${activeTrip.lat},${activeTrip.lng}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={
+                                        miniMapUrl
+                                            ? {
+                                                backgroundImage: `linear-gradient(rgba(5, 12, 34, 0.18), rgba(5, 12, 34, 0.45)), url("${miniMapUrl}")`,
+                                            }
+                                            : undefined
+                                    }
+                                >
+                                    <span>{getTripText(activeTrip, 'city')}</span>
+                                </a>
+                            </div>
+
+                            {activeTrip.polarstepsUrl && (
+                                <a
+                                    href={activeTrip.polarstepsUrl}
+                                    className="travel-timeline__external"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {t('timeline.details.polarsteps')}
+                                    <FiExternalLink/>
+                                </a>
+                            )}
+                        </div>
+
+                        {canScrollDetail && !isDetailBottom && (
+                            <button
+                                type="button"
+                                className="travel-timeline__scroll-cue"
+                                onClick={() => {
+                                    detailScrollRef.current?.scrollTo({
+                                        top: detailScrollRef.current.scrollHeight,
+                                        behavior: 'smooth',
+                                    })
+                                }}
+                            >
+                                ↓
+                            </button>
                         )}
                     </motion.aside>
                 )}
             </div>
+            {activePhotoIndex !== null && (
+                <div
+                    className="travel-timeline__lightbox"
+                    onClick={closePhoto}
+                >
+                    <button
+                        type="button"
+                        className="travel-timeline__lightbox-close"
+                        onClick={(event) => {
+                            event.stopPropagation()
+                            closePhoto()
+                        }}
+                        aria-label="Fermer la galerie"
+                    >
+                        ×
+                    </button>
+
+                    <button
+                        type="button"
+                        className="travel-timeline__lightbox-nav previous"
+                        onClick={(event) => {
+                            event.stopPropagation()
+                            previousPhoto()
+                        }}
+                        aria-label="Photo précédente"
+                    >
+                        ←
+                    </button>
+
+                    <div
+                        className="travel-timeline__lightbox-content"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="travel-timeline__lightbox-image-frame">
+                            <img
+                                src={tripPhotos[activePhotoIndex].src}
+                                alt={tripPhotos[activePhotoIndex].alt}
+                            />
+
+                            <span className="travel-timeline__lightbox-counter">
+                                            {activePhotoIndex + 1} / {tripPhotos.length}
+                                        </span>
+                        </div>
+
+                        <div className="travel-timeline__lightbox-dock">
+                            <div
+                                ref={lightboxStripRef}
+                                className="travel-timeline__lightbox-strip"
+                                onWheel={(event) => {
+                                    event.stopPropagation()
+                                    event.preventDefault()
+                                    event.currentTarget.scrollLeft += event.deltaY
+                                }}
+                            >
+                                {tripPhotos.map((photo, index) => (
+                                    <button
+                                        key={`${photo.src}-lightbox-${index}`}
+                                        type="button"
+                                        className={activePhotoIndex === index ? 'active' : ''}
+                                        onClick={() => setActivePhotoIndex(index)}
+                                        aria-label={`Voir la photo ${index + 1}`}
+                                    >
+                                        <img src={photo.src} alt={photo.alt}/>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="travel-timeline__lightbox-nav next"
+                        onClick={(event) => {
+                            event.stopPropagation()
+                            nextPhoto()
+                        }}
+                        aria-label="Photo suivante"
+                    >
+                        →
+                    </button>
+                </div>
+            )}
         </section>
     )
 }

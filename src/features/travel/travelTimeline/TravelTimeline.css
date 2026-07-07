@@ -157,13 +157,129 @@
 
 .travel-timeline__detail {
     position: sticky;
-    top: 6rem;
+    top: 5.5rem;
+
+    max-height: calc(100vh - 11rem);
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
     padding: 1.6rem;
     border-radius: 1.5rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.11), transparent 34%),
-    rgba(5, 12, 34, 0.72);
+    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 34%),
+    linear-gradient(145deg, rgba(8, 18, 45, 0.84), rgba(5, 12, 34, 0.72));
     border: 1px solid rgba(77, 181, 255, 0.18);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
+}
+
+.travel-timeline__detail-scroll {
+    position: relative;
+    min-height: 0;
+    overflow-y: auto;
+
+    margin-top: 0.2rem;
+    padding-right: 0.65rem;
+    padding-bottom: 0.5rem;
+
+    mask-image: linear-gradient(
+            to bottom,
+            black 0,
+            black calc(100% - 1.4rem),
+            transparent 100%
+    );
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77, 181, 255, 0.38) transparent;
+}
+
+.travel-timeline__detail-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77, 181, 255, 0.24) transparent;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar {
+    width: 2px;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: linear-gradient(
+            to bottom,
+            rgba(77, 181, 255, 0.55),
+            rgba(77, 181, 255, 0.12)
+    );
+    box-shadow: 0 0 0.45rem rgba(77, 181, 255, 0.22);
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(77, 181, 255, 0.75);
+}
+
+.travel-timeline__detail-scroll .travel-timeline__detail-section:first-child {
+    margin-top: 0;
+}
+
+.travel-timeline__detail-scroll .travel-timeline__photo-preview {
+    margin-top: 0.4rem;
+}
+
+.travel-timeline__detail-scroll .travel-timeline__detail-section:first-of-type {
+    margin-top: 1.2rem;
+}
+
+.travel-timeline__detail-scroll .travel-timeline__detail-description {
+    margin-bottom: 1.2rem;
+}
+
+.travel-timeline__detail-scroll {
+    position: relative;
+}
+
+.travel-timeline__detail {
+    position: sticky;
+}
+
+.travel-timeline__scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 0.75rem;
+    transform: translateX(-50%);
+
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    color: var(--color-primary);
+    background: rgba(8, 18, 45, 0.68);
+    border: 1px solid rgba(77, 181, 255, 0.24);
+    backdrop-filter: blur(14px);
+
+    font-size: 0.95rem;
+    font-weight: 800;
+    pointer-events: auto;
+    cursor: pointer;
+
+    box-shadow: 0 0 1.2rem rgba(77, 181, 255, 0.22);
+    animation: travel-scroll-cue 1.4s ease-in-out infinite;
+}
+
+@keyframes travel-scroll-cue {
+    0%, 100% {
+        opacity: 0.55;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(4px);
+    }
 }
 
 .travel-timeline__detail-header {
@@ -641,10 +757,19 @@
 .travel-timeline__lightbox {
     position: fixed;
     inset: 0;
-    z-index: 5000;
+    z-index: 999999;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
     padding: 2.4rem 5.5rem 6.8rem;
     background: rgb(2, 6, 18);
     overscroll-behavior: contain;
@@ -839,4 +964,25 @@
     .travel-timeline__lightbox-nav.next {
         right: 0.7rem;
     }
+}
+
+.travel-timeline__lightbox *,
+.travel-timeline__lightbox button,
+.travel-timeline__lightbox img {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.travel-timeline__lightbox button {
+    outline: none;
+}
+
+.travel-timeline__lightbox button:focus-visible {
+    outline: 2px solid rgba(77, 181, 255, 0.65);
+    outline-offset: 3px;
+}
+
+.travel-timeline__lightbox-image-frame,
+.travel-timeline__lightbox-image-frame img {
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
