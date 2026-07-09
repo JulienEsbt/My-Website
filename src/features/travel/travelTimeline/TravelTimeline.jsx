@@ -114,8 +114,9 @@ const TravelTimeline = () => {
 
         const scrollY = window.scrollY
 
-        document.documentElement.style.overflow = 'hidden'
-        document.body.style.overflow = 'hidden'
+        document.documentElement.classList.add('lightbox-open')
+        document.body.classList.add('lightbox-open')
+
         document.body.style.position = 'fixed'
         document.body.style.top = `-${scrollY}px`
         document.body.style.left = '0'
@@ -135,8 +136,9 @@ const TravelTimeline = () => {
             window.removeEventListener('wheel', preventPageScroll)
             window.removeEventListener('touchmove', preventPageScroll)
 
-            document.documentElement.style.overflow = ''
-            document.body.style.overflow = ''
+            document.documentElement.classList.remove('lightbox-open')
+            document.body.classList.remove('lightbox-open')
+
             document.body.style.position = ''
             document.body.style.top = ''
             document.body.style.left = ''
