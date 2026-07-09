@@ -793,7 +793,9 @@
 }
 
 .travel-timeline__lightbox-image-frame img {
-    max-width: min(100%, 1380px);
+    height: calc(100vh - 9.2rem);
+    width: auto;
+    max-width: 90vw;
     max-height: calc(100vh - 9.2rem);
     object-fit: contain;
     border-radius: 1.1rem;

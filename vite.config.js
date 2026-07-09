@@ -8,4 +8,8 @@ export default defineConfig({
         mdx(),
     ],
     server: {port: 3000},
+    assetsInclude: [
+        '**/*.JPG',
+        '**/*.PNG'
+    ]
 })

@@ -290,7 +290,7 @@ const TravelTimeline = () => {
                                         className="travel-timeline__photo-hero"
                                         onClick={() => openPhoto(0)}
                                     >
-                                        <img src={tripPhotos[0].src} alt={tripPhotos[0].alt} loading="lazy"/>
+                                        <img src={tripPhotos[0].src} alt="" loading="lazy"/>
                                         <span>Voir les photos</span>
                                     </button>
 
@@ -302,7 +302,7 @@ const TravelTimeline = () => {
                                                 className="travel-timeline__photo-thumb"
                                                 onClick={() => openPhoto(index + 1)}
                                             >
-                                                <img src={photo.src} alt={photo.alt} loading="lazy"/>
+                                                <img src={photo.src} alt="" loading="lazy"/>
                                             </button>
                                         ))}
                                     </div>
@@ -419,7 +419,7 @@ const TravelTimeline = () => {
                         <div className="travel-timeline__lightbox-image-frame">
                             <img
                                 src={tripPhotos[activePhotoIndex].src}
-                                alt={tripPhotos[activePhotoIndex].alt}
+                                alt=""
                             />
 
                             <span className="travel-timeline__lightbox-counter">
@@ -445,7 +445,7 @@ const TravelTimeline = () => {
                                         onClick={() => setActivePhotoIndex(index)}
                                         aria-label={`Voir la photo ${index + 1}`}
                                     >
-                                        <img src={photo.src} alt={photo.alt}/>
+                                        <img src={photo.src} alt=""/>
                                     </button>
                                 ))}
                             </div>

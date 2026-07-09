@@ -1,4 +1,21 @@
+import england2017Photos from '../../assets/images/travels/england-2017/england2017'
 import croatia2021Photos from "../../assets/images/travels/croatia-2021/croatia2021.js";
+import germany2022Photos from "../../assets/images/travels/germany-2022/germany2022.js";
+import estonia2022Photos from "../../assets/images/travels/estonia-2022/estonia2022.js";
+import spainMadrid2023Photos from "../../assets/images/travels/spain-madrid-2023/spainMadrid2023.js";
+import saintMartin2023Photos from "../../assets/images/travels/saint-martin-2023/saintMartin2023.js";
+import saintBarth2023Photos from "../../assets/images/travels/saint-barth-2023/saintBarth2023.js";
+import hungary2023Photos from "../../assets/images/travels/hungary-2023/hungary2023.js";
+import italy2023Photos from "../../assets/images/travels/italy-2023/italy2023.js";
+import austria2023Photos from "../../assets/images/travels/austria-2023/austria2023.js";
+import spainBarcelona2024Photos from "../../assets/images/travels/spain-barcelona-2024/spainBarcelona2024.js";
+import portugal2025Photos from "../../assets/images/travels/portugal-2025/portugal2025.js";
+import hungary2025Photos from "../../assets/images/travels/hungary-2025/hungary2025.js";
+import slovakia2025Photos from "../../assets/images/travels/slovakia-2025/slovakia2025.js";
+import czechia2025Photos from "../../assets/images/travels/czechia-2025/czechia2025.js";
+import northMacedonia2025Photos from "../../assets/images/travels/north-macedonia-2025/northMacedonia2025.js";
+import guadeloupe2025Photos from "../../assets/images/travels/guadeloupe-2025/guadeloupe2025.js";
+import belgium2025Photos from "../../assets/images/travels/belgium-2025/belgium2025.js";
 
 const trips = [
     {
@@ -137,7 +154,7 @@ Après le bac, je suis parti comme jeune au pair à Nottingham pour apprendre l�
 
 After high school, I moved to Nottingham as an au pair to learn English, at a time when I wanted to become a fighter pilot. My daily life was shaped by early morning workouts, taking care of the children, preparing for exams, meeting people, going out and discovering a new country. At 18, away from home and surrounded by people often older than me and from different backgrounds, that year helped me grow a lot.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: england2017Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -213,7 +230,7 @@ Un passage bref, mais qui ouvrait déjà la porte à une aventure internationale
 
 A brief stop, but one that already opened the door to a much larger international adventure.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: germany2022Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -249,7 +266,7 @@ La vieille ville médiévale, les rues pavées, l’ambiance nordique et les pre
 
 The medieval old town, cobbled streets, northern atmosphere and first encounters of the programme made this stay memorable. It was also there that I first met some people who would later become important in my journey.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: estonia2022Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -292,7 +309,7 @@ I discovered many of the city’s major places: the Royal Palace, Plaza Mayor, P
 
 We also visited Segovia, with its Roman aqueduct, Alcázar, gardens and historic streets. This Summer School allowed me to build friendships that still last today.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8595891-spain?mode=track',
-        photos: [],
+        photos: spainMadrid2023Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -333,7 +350,7 @@ During the day, while he was working, I often explored the island alone. I spent
 
 Together we also enjoyed many experiences: flyboarding, jet skiing, catamaran trips, restaurants and sunsets. It remains one of the greatest trips of my life.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
-        photos: [],
+        photos: saintMartin2023Photos,
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: true,
@@ -370,7 +387,7 @@ J'y ai découvert une île magnifique, réputée pour son luxe, ses restaurants 
 
 I discovered a beautiful island famous for its luxury, restaurants and beaches. One highlight was spending a day on a catamaran with pilots and airport staff working with my cousin. I also visited Johnny Hallyday's grave.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
-        photos: [],
+        photos: saintBarth2023Photos,
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: false,
@@ -411,7 +428,7 @@ I lived there for six months while completing my international master's degree a
 
 Between classes, cafés, thermal baths, nightlife and countless Erasmus trips, this experience deeply changed the way I see the world.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: [],
+        photos: hungary2023Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -452,7 +469,7 @@ Venice was obviously the highlight of the trip. I loved the almost unreal beauty
 
 We also explored Milan, Bergamo and Trento. The atmosphere was great, the weather was beautiful, the cities were not overcrowded and we truly enjoyed the journey. A simple, beautiful and joyful trip, full of stunning places and great memories.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: [],
+        photos: italy2023Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -489,7 +506,7 @@ Les marchés de Noël, la neige, les palais impériaux, les musées et l'atmosph
 
 The Christmas markets, snow, imperial palaces and museums made the city feel magical. It remains one of the most beautiful European cities I've visited during winter.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: [],
+        photos: austria2023Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -563,7 +580,7 @@ Nous avons découvert la ville, fait plusieurs randonnées, exploré les lieux i
 
 We explored the city, hiked, visited the main attractions and enjoyed a few days together. Even though I personally prefer Madrid, Barcelona is still a beautiful city to discover.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: spainBarcelona2024Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -599,7 +616,7 @@ Nous avons parcouru les quartiers emblématiques de la ville, admiré les points
 
 We explored the city's iconic districts, admired its viewpoints, enjoyed Portuguese food and walked for hours. Between sightseeing, nightlife and long conversations, this trip perfectly started my year of travelling.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: portugal2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -636,7 +653,7 @@ Finalement, ce simple week-end s'est transformé en près de deux semaines de vo
 
 Eventually, that simple weekend turned into a two-week journey across Central Europe. I reunited with many Erasmus friends, revisited my favourite places and rediscovered one of the cities that means the most to me.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: [],
+        photos: hungary2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -673,7 +690,7 @@ Même si le séjour fut relativement court, j'ai beaucoup apprécié découvrir 
 
 Although the stay was relatively short, I really enjoyed discovering this human-sized capital, its castle overlooking the Danube, its old streets and its relaxed atmosphere.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: [],
+        photos: slovakia2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -710,7 +727,7 @@ Nous avons découvert la vieille ville, le pont Charles, le château, les quarti
 
 We explored the Old Town, Charles Bridge, Prague Castle and many historic districts. It is a beautiful city that I would gladly visit again someday.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: [],
+        photos: czechia2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -747,7 +764,7 @@ En vivant plusieurs jours chez elle et sa famille, j'ai découvert bien plus qu'
 
 Living with her and her family allowed me to discover much more than a tourist destination. I experienced their daily life, culture, food, traditions and incredible hospitality. This immersion makes this trip one of the most meaningful I've ever had.`,
         polarstepsUrl: '',
-        photos: [],
+        photos: northMacedonia2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -784,7 +801,7 @@ Nous avons exploré les deux parties de l'île, découvert les cascades, les pla
 
 We explored both sides of the island, discovered waterfalls, paradise beaches, hiked, went jet skiing and enjoyed Caribbean sunsets and sunrises. A stunning destination where nature is everywhere.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16967081-guadeloupe-avec-guigui-et-mael?mode=track',
-        photos: [],
+        photos: guadeloupe2025Photos,
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: false,
@@ -864,7 +881,7 @@ I went there for a few days with my girlfriend. The stay was short but very plea
 
 A calm European break, but full of good memories.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/22238629-bruxelles?mode=track',
-        photos: [],
+        photos: belgium2025Photos,
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,

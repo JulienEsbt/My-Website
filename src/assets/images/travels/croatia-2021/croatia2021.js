@@ -14,62 +14,20 @@ import img7440 from './IMG_7440.jpeg'
 import img7445 from './IMG_7445.jpeg'
 
 const croatia2021Photos = [
-    {
-        src: img7060,
-        alt: 'Arrival in Dubrovnik',
-    },
-    {
-        src: img7069,
-        alt: 'Dubrovnik Old Town',
-    },
-    {
-        src: img7088,
-        alt: 'Dubrovnik city walls',
-    },
-    {
-        src: img7105,
-        alt: 'Historic streets of Dubrovnik',
-    },
-    {
-        src: img7156,
-        alt: 'Fort Lovrijenac',
-    },
-    {
-        src: img7157,
-        alt: 'View over the Adriatic Sea',
-    },
-    {
-        src: img7190,
-        alt: 'Lokrum Island',
-    },
-    {
-        src: img7197,
-        alt: 'Mediterranean landscape',
-    },
-    {
-        src: img7345,
-        alt: 'Sunset in Dubrovnik',
-    },
-    {
-        src: img7355,
-        alt: 'Dubrovnik harbour',
-    },
-    {
-        src: img7422,
-        alt: 'Croatian coastline',
-    },
-    {
-        src: img7424,
-        alt: 'Exploring Dubrovnik',
-    },
-    {
-        src: img7440,
-        alt: 'Adriatic Sea',
-    },
-    {
-        src: img7445,
-        alt: 'Final evening in Dubrovnik',
-    },
+    {src: img7060},
+    {src: img7069},
+    {src: img7088},
+    {src: img7105},
+    {src: img7156},
+    {src: img7157},
+    {src: img7190},
+    {src: img7197},
+    {src: img7345},
+    {src: img7355},
+    {src: img7422},
+    {src: img7424},
+    {src: img7440},
+    {src: img7445},
 ]
 
 export default croatia2021Photos
