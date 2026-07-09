@@ -22,12 +22,7 @@
     top: 1.2rem;
     bottom: 1.2rem;
     width: 2px;
-    background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(77, 181, 255, 0.85),
-            transparent
-    );
+    background: linear-gradient(to bottom, transparent, rgba(77, 181, 255, 0.85), transparent);
 }
 
 .travel-timeline__item {
@@ -35,20 +30,16 @@
     width: 100%;
     min-height: 5.4rem;
     padding: 1rem 1.1rem;
-
     display: grid;
     grid-template-columns: 1fr auto auto;
     align-items: center;
     gap: 1rem;
-
     text-align: left;
     cursor: pointer;
-
     border-radius: 1.25rem;
     background: rgba(5, 12, 34, 0.58);
     border: 1px solid rgba(77, 181, 255, 0.15);
     color: var(--color-white);
-
     box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.2);
     transition: var(--transition);
 }
@@ -61,8 +52,7 @@
 }
 
 .travel-timeline__item.active {
-    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.28),
-    0 0 1.4rem rgba(77, 181, 255, 0.14);
+    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.28), 0 0 1.4rem rgba(77, 181, 255, 0.14);
 }
 
 .travel-timeline__dot {
@@ -74,8 +64,7 @@
     transform: translateY(-50%);
     border-radius: 50%;
     background: var(--color-primary);
-    box-shadow: 0 0 0 6px rgba(77, 181, 255, 0.12),
-    0 0 18px rgba(77, 181, 255, 0.8);
+    box-shadow: 0 0 0 6px rgba(77, 181, 255, 0.12), 0 0 18px rgba(77, 181, 255, 0.8);
 }
 
 .travel-timeline__main {
@@ -110,9 +99,14 @@
 .travel-timeline__meta {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.55rem;
     flex-wrap: wrap;
-    justify-content: flex-end;
+}
+
+.travel-timeline__arrow {
+    color: var(--color-light);
+    font-size: 1.2rem;
 }
 
 .travel-timeline__meta span,
@@ -150,137 +144,27 @@
     background: rgba(255, 100, 70, 0.16);
 }
 
-.travel-timeline__arrow {
-    color: var(--color-light);
-    font-size: 1.2rem;
+.travel-timeline__type.home {
+    color: #c7b8ff;
+    background: rgba(124, 92, 255, 0.18);
 }
 
 .travel-timeline__detail {
     position: sticky;
     top: 5.5rem;
-
     max-height: calc(100vh - 11rem);
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
-
     padding: 1.6rem;
     border-radius: 1.5rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 34%),
-    linear-gradient(145deg, rgba(8, 18, 45, 0.84), rgba(5, 12, 34, 0.72));
+    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 34%), linear-gradient(145deg, rgba(8, 18, 45, 0.84), rgba(5, 12, 34, 0.72));
     border: 1px solid rgba(77, 181, 255, 0.18);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
 }
 
-.travel-timeline__detail-scroll {
-    position: relative;
-    min-height: 0;
-    overflow-y: auto;
-
-    margin-top: 0.2rem;
-    padding-right: 0.65rem;
-    padding-bottom: 0.5rem;
-
-    mask-image: linear-gradient(
-            to bottom,
-            black 0,
-            black calc(100% - 1.4rem),
-            transparent 100%
-    );
-
-    scrollbar-width: thin;
-    scrollbar-color: rgba(77, 181, 255, 0.38) transparent;
-}
-
-.travel-timeline__detail-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(77, 181, 255, 0.24) transparent;
-}
-
-.travel-timeline__detail-scroll::-webkit-scrollbar {
-    display: block;
-    width: 2px;
-}
-
-.travel-timeline__detail-scroll::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.travel-timeline__detail-scroll::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: linear-gradient(
-            to bottom,
-            rgba(77, 181, 255, 0.55),
-            rgba(77, 181, 255, 0.12)
-    );
-    box-shadow: 0 0 0.45rem rgba(77, 181, 255, 0.22);
-}
-
-.travel-timeline__detail-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(77, 181, 255, 0.75);
-}
-
-.travel-timeline__detail-scroll .travel-timeline__detail-section:first-child {
-    margin-top: 0;
-}
-
-.travel-timeline__detail-scroll .travel-timeline__photo-preview {
-    margin-top: 0.4rem;
-}
-
-.travel-timeline__detail-scroll .travel-timeline__detail-section:first-of-type {
-    margin-top: 1.2rem;
-}
-
-.travel-timeline__detail-scroll .travel-timeline__detail-description {
-    margin-bottom: 1.2rem;
-}
-
-.travel-timeline__detail-scroll {
-    position: relative;
-}
-
-.travel-timeline__detail {
-    position: sticky;
-}
-
-.travel-timeline__scroll-cue {
-    position: absolute;
-    left: 50%;
-    bottom: 0.75rem;
-    transform: translateX(-50%);
-
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-    color: var(--color-primary);
-    background: rgba(8, 18, 45, 0.68);
-    border: 1px solid rgba(77, 181, 255, 0.24);
-    backdrop-filter: blur(14px);
-
-    font-size: 0.95rem;
-    font-weight: 800;
-    pointer-events: auto;
-    cursor: pointer;
-
-    box-shadow: 0 0 1.2rem rgba(77, 181, 255, 0.22);
-    animation: travel-scroll-cue 1.4s ease-in-out infinite;
-}
-
-@keyframes travel-scroll-cue {
-    0%, 100% {
-        opacity: 0.55;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(4px);
-    }
+.travel-timeline__back {
+    display: none;
 }
 
 .travel-timeline__detail-header {
@@ -312,10 +196,41 @@
     margin-bottom: 1.2rem;
 }
 
+.travel-timeline__detail-scroll {
+    position: relative;
+    min-height: 0;
+    overflow-y: auto;
+    margin-top: 0.2rem;
+    padding-right: 0.65rem;
+    padding-bottom: 0.5rem;
+    mask-image: linear-gradient(to bottom, black 0, black calc(100% - 1.4rem), transparent 100%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77, 181, 255, 0.24) transparent;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: linear-gradient(to bottom, rgba(77, 181, 255, 0.55), rgba(77, 181, 255, 0.12));
+    box-shadow: 0 0 0.45rem rgba(77, 181, 255, 0.22);
+}
+
+.travel-timeline__detail-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(77, 181, 255, 0.75);
+}
+
 .travel-timeline__detail-description {
     color: var(--color-light);
     line-height: 1.8;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.2rem;
 }
 
 .travel-timeline__detail-section {
@@ -338,199 +253,45 @@
     line-height: 1.7;
 }
 
-.travel-timeline__mini-map {
-    position: relative;
-    height: 8rem;
-    border-radius: 1rem;
-
-    display: flex;
-    align-items: flex-end;
-
-    padding: 1rem;
-
-    overflow: hidden;
-
-    background-size: cover;
-    background-position: center;
-
-    border: 1px solid rgba(77, 181, 255, 0.24);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-
-    transition: var(--transition);
-}
-
-.travel-timeline__mini-map:hover {
-    transform: translateY(-2px);
-    border-color: rgba(77, 181, 255, 0.48);
-}
-
-.travel-timeline__mini-map span {
-    position: relative;
-    z-index: 1;
-
-    color: var(--color-white);
-    font-weight: 600;
-    font-size: 0.9rem;
-
-    padding: 0.35rem 0.65rem;
-    border-radius: 999px;
-
-    background: rgba(5, 12, 34, 0.72);
-    backdrop-filter: blur(12px);
-}
-
-.travel-timeline__external {
-    margin-top: 1.3rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.55rem 0.85rem;
-    border-radius: 999px;
-    border: 1px solid rgba(77, 181, 255, 0.4);
+.travel-timeline__scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 0.75rem;
+    transform: translateX(-50%);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
     color: var(--color-primary);
-    font-size: 0.85rem;
+    background: rgba(8, 18, 45, 0.68);
+    border: 1px solid rgba(77, 181, 255, 0.24);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-size: 0.95rem;
+    font-weight: 800;
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 0 0 1.2rem rgba(77, 181, 255, 0.22);
+    animation: travel-scroll-cue 1.4s ease-in-out infinite;
 }
 
-@media screen and (max-width: 1100px) {
-    .travel-timeline {
-        grid-template-columns: 1fr;
+@keyframes travel-scroll-cue {
+    0%, 100% {
+        opacity: 0.55;
+        transform: translateX(-50%) translateY(0);
     }
 
-    .travel-timeline__detail {
-        position: relative;
-        top: 0;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .travel-timeline__list {
-        padding-left: 2rem;
-    }
-
-    .travel-timeline__item {
-        grid-template-columns: 1fr auto;
-    }
-
-    .travel-timeline__meta {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-    }
-
-    .travel-timeline__arrow {
-        grid-column: 2;
-        grid-row: 1;
-    }
-
-    .travel-timeline__dot {
-        left: -1.92rem;
-    }
-}
-
-.travel-timeline__mini-map {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.travel-timeline__mini-map.no-map {
-    background: radial-gradient(circle at center, rgba(77, 181, 255, 0.18), transparent 45%),
-    rgba(5, 12, 34, 0.72);
-}
-
-.travel-timeline__type.home {
-    color: #c7b8ff;
-    background: rgba(124, 92, 255, 0.18);
-}
-
-.travel-timeline__back {
-    display: none;
-}
-
-@media screen and (max-width: 700px) {
-    .travel-timeline__detail {
-        display: none;
-    }
-
-    .travel-timeline__detail.mobile-open {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-
-        display: block;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-
-        width: 100%;
-        min-height: 100vh;
-        min-height: 100dvh;
-
-        padding: calc(env(safe-area-inset-top) + 5rem) 1.3rem calc(env(safe-area-inset-bottom) + 7rem);
-        border-radius: 0;
-
-        background: #020612;
-        background-image: radial-gradient(circle at top left, rgba(77, 181, 255, 0.14), transparent 38%),
-        linear-gradient(135deg, rgba(13, 22, 55, 0.98), rgba(5, 10, 28, 1));
-    }
-
-    .travel-timeline__back {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        margin-bottom: 1.5rem;
-        color: var(--color-primary);
-        background: transparent;
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.95rem;
-        cursor: pointer;
-    }
-
-    .travel-timeline__detail-header {
-        align-items: flex-start;
-    }
-
-    .travel-timeline__mini-map {
-        height: 10rem;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .travel-timeline__detail.mobile-open {
-        animation: timeline-detail-in 0.28s ease both;
-    }
-
-    .travel-timeline__detail.mobile-open.closing {
-        animation: timeline-detail-out 0.22s ease both;
-    }
-
-    @keyframes timeline-detail-in {
-        from {
-            opacity: 0;
-            transform: translateY(18px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes timeline-detail-out {
-        from {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        to {
-            opacity: 0;
-            transform: translateY(18px);
-        }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(4px);
     }
 }
 
 .travel-timeline__photo-preview {
     display: grid;
     gap: 0.65rem;
+    margin-top: 0.4rem;
 }
 
 .travel-timeline__photo-hero,
@@ -542,6 +303,14 @@
     border: 1px solid rgba(77, 181, 255, 0.18);
 }
 
+.travel-timeline__photo-hero {
+    height: 8.5rem;
+}
+
+.travel-timeline__photo-thumb {
+    height: 3.5rem;
+}
+
 .travel-timeline__photo-hero img,
 .travel-timeline__photo-thumb img {
     width: 100%;
@@ -551,16 +320,11 @@
     transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
 }
 
-.travel-timeline__photo-hero {
-    height: 8.5rem;
-}
-
 .travel-timeline__photo-hero span {
     position: absolute;
     left: 0.75rem;
     bottom: 0.75rem;
     z-index: 2;
-
     padding: 0.35rem 0.65rem;
     border-radius: 999px;
     color: var(--color-white);
@@ -573,10 +337,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.55rem;
-}
-
-.travel-timeline__photo-thumb {
-    height: 3.5rem;
 }
 
 .travel-timeline__photo-hero::after,
@@ -603,11 +363,9 @@
     width: 100%;
     padding: 0.7rem 0.9rem;
     border-radius: 0.85rem;
-
     color: var(--color-primary);
     background: rgba(77, 181, 255, 0.08);
     border: 1px solid rgba(77, 181, 255, 0.2);
-
     font-size: 0.78rem;
     font-weight: 700;
     cursor: pointer;
@@ -620,166 +378,71 @@
     transform: translateY(-2px);
 }
 
-.travel-timeline__photo-cover {
+.travel-timeline__mini-map {
     position: relative;
-    height: 10rem;
+    height: 8rem;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
     overflow: hidden;
     border-radius: 1rem;
-    cursor: pointer;
-    border: 1px solid rgba(77, 181, 255, 0.22);
+    border: 1px solid rgba(77, 181, 255, 0.24);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition: var(--transition);
 }
 
-.travel-timeline__photo-cover img,
-.travel-timeline__photo-thumbs img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.travel-timeline__mini-map:hover {
+    transform: translateY(-2px);
+    border-color: rgba(77, 181, 255, 0.48);
 }
 
-.travel-timeline__photo-cover span {
-    position: absolute;
-    left: 0.8rem;
-    bottom: 0.8rem;
-    padding: 0.35rem 0.7rem;
+.travel-timeline__mini-map.no-map {
+    background: radial-gradient(circle at center, rgba(77, 181, 255, 0.18), transparent 45%), rgba(5, 12, 34, 0.72);
+}
+
+.travel-timeline__mini-map span {
+    position: relative;
+    z-index: 1;
+    padding: 0.35rem 0.65rem;
     border-radius: 999px;
     color: var(--color-white);
     background: rgba(5, 12, 34, 0.72);
     backdrop-filter: blur(12px);
-    font-size: 0.78rem;
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.9rem;
     font-weight: 600;
 }
 
-.travel-timeline__photo-thumbs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.55rem;
-}
-
-.travel-timeline__photo-thumbs button,
-.travel-timeline__photo-more {
-    height: 4.2rem;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(77, 181, 255, 0.16);
-    cursor: pointer;
-}
-
-.travel-timeline__photo-more {
-    position: relative;
-    overflow: hidden;
-
-    min-height: 4.2rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(77, 181, 255, 0.18);
-    cursor: pointer;
-
-    display: grid;
-    place-items: center;
-
-    background: rgba(31, 31, 56, 0.65);
-}
-
-.travel-timeline__photo-more img {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    opacity: 0.42;
-    filter: blur(1px);
-    transform: scale(1.05);
-    transition: var(--transition);
-}
-
-.travel-timeline__photo-more::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-            135deg,
-            rgba(5, 12, 34, 0.35),
-            rgba(5, 12, 34, 0.78)
-    );
-}
-
-.travel-timeline__photo-more span,
-.travel-timeline__photo-more small {
-    position: relative;
-    z-index: 1;
-}
-
-.travel-timeline__photo-more span {
-    color: var(--color-white);
-    font-size: 1rem;
-    font-weight: 800;
-}
-
-.travel-timeline__photo-more small {
-    margin-top: -0.2rem;
+.travel-timeline__external {
+    margin-top: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(77, 181, 255, 0.4);
     color: var(--color-primary);
-    font-size: 0.68rem;
-    font-weight: 700;
-}
-
-.travel-timeline__photo-more:hover img {
-    opacity: 0.62;
-    transform: scale(1.08);
-}
-
-.travel-timeline__lightbox-close {
-    position: fixed;
-    top: 1.15rem;
-    right: 1.35rem;
-    z-index: 9000;
-
-    width: 3rem;
-    height: 3rem;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-    color: var(--color-white);
-    background: rgba(8, 18, 45, 0.72);
-    border: 1px solid rgba(77, 181, 255, 0.32);
-
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.travel-timeline__lightbox-close:hover {
-    color: var(--color-bg);
-    background: var(--color-primary);
-    transform: scale(1.06);
+    font-size: 0.85rem;
 }
 
 .travel-timeline__lightbox {
     position: fixed;
     inset: 0;
     z-index: 999999;
-
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
     isolation: isolate;
-
+    overscroll-behavior: contain;
     padding: 2.4rem 5.5rem 6.8rem;
     background: #020612;
-    overscroll-behavior: contain;
-
-    animation: none;
 }
 
 .travel-timeline__lightbox-content {
@@ -797,16 +460,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .travel-timeline__lightbox-image-frame img {
-    height: calc(100vh - 9.2rem);
     width: auto;
+    height: calc(100vh - 9.2rem);
     max-width: 90vw;
     max-height: calc(100vh - 9.2rem);
     object-fit: contain;
     border-radius: 1.1rem;
     box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.58);
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .travel-timeline__lightbox-counter {
@@ -820,24 +487,80 @@
     background: rgba(5, 12, 34, 0.68);
     border: 1px solid rgba(77, 181, 255, 0.28);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     font-size: 0.78rem;
     font-weight: 800;
+}
+
+.travel-timeline__lightbox-close,
+.travel-timeline__lightbox-nav {
+    position: fixed;
+    z-index: 5200;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--color-white);
+    background: rgba(8, 18, 45, 0.78);
+    border: 1px solid rgba(77, 181, 255, 0.32);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.travel-timeline__lightbox-close {
+    top: 1.15rem;
+    right: 1.35rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.8rem;
+}
+
+.travel-timeline__lightbox-nav {
+    top: 50%;
+    width: 3.2rem;
+    height: 3.2rem;
+    transform: translateY(-50%);
+    font-size: 1.35rem;
+}
+
+.travel-timeline__lightbox-close:hover,
+.travel-timeline__lightbox-nav:hover {
+    color: var(--color-bg);
+    background: var(--color-primary);
+}
+
+.travel-timeline__lightbox-close:hover {
+    transform: scale(1.06);
+}
+
+.travel-timeline__lightbox-nav:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.travel-timeline__lightbox-nav.previous {
+    left: 1.6rem;
+}
+
+.travel-timeline__lightbox-nav.next {
+    right: 1.6rem;
 }
 
 .travel-timeline__lightbox-dock {
     position: fixed;
     left: 50%;
     bottom: 2.1rem;
-    transform: translateX(-50%);
+    z-index: 5100;
     width: fit-content;
     max-width: min(88vw, 920px);
+    transform: translateX(-50%);
     padding: 0.34rem;
     border-radius: 1rem;
     background: rgba(8, 18, 45, 0.72);
     border: 1px solid rgba(77, 181, 255, 0.24);
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.38);
     backdrop-filter: blur(18px) saturate(160%);
-    z-index: 5100;
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
 }
 
 .travel-timeline__lightbox-strip {
@@ -889,54 +612,106 @@
     transform: scale(1.06);
 }
 
-.travel-timeline__lightbox-close,
-.travel-timeline__lightbox-nav {
-    position: fixed;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    color: var(--color-white);
-    background: rgba(8, 18, 45, 0.78);
-    border: 1px solid rgba(77, 181, 255, 0.32);
-    backdrop-filter: blur(16px);
-    cursor: pointer;
-    transition: var(--transition);
-    z-index: 5200;
+.travel-timeline__lightbox *,
+.travel-timeline__lightbox button,
+.travel-timeline__lightbox img {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.travel-timeline__lightbox-nav {
-    top: 50%;
-    width: 3.2rem;
-    height: 3.2rem;
-    transform: translateY(-50%);
-    font-size: 1.35rem;
+.travel-timeline__lightbox button {
+    outline: none;
 }
 
-.travel-timeline__lightbox-nav:hover {
-    color: var(--color-bg);
-    background: var(--color-primary);
-    transform: translateY(-50%) scale(1.05);
+.travel-timeline__lightbox button:focus-visible {
+    outline: 2px solid rgba(77, 181, 255, 0.65);
+    outline-offset: 3px;
 }
 
-.travel-timeline__lightbox-nav.previous {
-    left: 1.6rem;
-}
+@media screen and (max-width: 1100px) {
+    .travel-timeline {
+        grid-template-columns: 1fr;
+    }
 
-.travel-timeline__lightbox-nav.next {
-    right: 1.6rem;
+    .travel-timeline__detail {
+        position: relative;
+        top: 0;
+    }
 }
 
 @media screen and (max-width: 700px) {
+    .travel-timeline__list {
+        padding-left: 2rem;
+    }
+
+    .travel-timeline__item {
+        grid-template-columns: 1fr auto;
+    }
+
+    .travel-timeline__meta {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+
+    .travel-timeline__arrow {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .travel-timeline__dot {
+        left: -1.92rem;
+    }
+
+    .travel-timeline__detail {
+        display: none;
+    }
+
+    .travel-timeline__detail.mobile-open {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: block;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        width: 100%;
+        height: 100svh;
+        min-height: 100svh;
+        padding: calc(env(safe-area-inset-top) + 5rem) 1.3rem calc(env(safe-area-inset-bottom) + 7rem);
+        border-radius: 0;
+        background: #020612;
+        background-image: radial-gradient(circle at top left, rgba(77, 181, 255, 0.14), transparent 38%), linear-gradient(135deg, rgba(13, 22, 55, 0.98), rgba(5, 10, 28, 1));
+        animation: timeline-detail-in 0.28s ease both;
+    }
+
+    .travel-timeline__detail.mobile-open.closing {
+        animation: timeline-detail-out 0.22s ease both;
+    }
+
+    .travel-timeline__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--color-primary);
+        background: transparent;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        cursor: pointer;
+    }
+
+    .travel-timeline__detail-header {
+        align-items: flex-start;
+    }
+
+    .travel-timeline__mini-map {
+        height: 10rem;
+    }
+
     .travel-timeline__lightbox {
+        width: 100vw;
+        height: 100svh;
         align-items: center;
         justify-content: center;
-
-        width: 100vw;
-        height: 100vh;
-        height: 100dvh;
-
         padding: calc(env(safe-area-inset-top) + 0.75rem) 0.75rem calc(env(safe-area-inset-bottom) + 5.4rem);
-
         background: #020612;
     }
 
@@ -952,11 +727,10 @@
 
     .travel-timeline__lightbox-image-frame img {
         width: auto;
-        max-width: 100%;
         height: auto;
+        max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-
         border-radius: 0.65rem;
         box-shadow: 0 1.4rem 3rem rgba(0, 0, 0, 0.65);
     }
@@ -971,10 +745,8 @@
     .travel-timeline__lightbox-close {
         top: calc(env(safe-area-inset-top) + 3.8rem);
         right: 1rem;
-
         width: 2.85rem;
         height: 2.85rem;
-
         background: rgba(8, 18, 45, 0.86);
     }
 
@@ -1012,23 +784,26 @@
     }
 }
 
-.travel-timeline__lightbox *,
-.travel-timeline__lightbox button,
-.travel-timeline__lightbox img {
-    -webkit-tap-highlight-color: transparent;
+@keyframes timeline-detail-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.travel-timeline__lightbox button {
-    outline: none;
-}
+@keyframes timeline-detail-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-.travel-timeline__lightbox button:focus-visible {
-    outline: 2px solid rgba(77, 181, 255, 0.65);
-    outline-offset: 3px;
-}
-
-.travel-timeline__lightbox-image-frame,
-.travel-timeline__lightbox-image-frame img {
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    to {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 }

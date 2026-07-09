@@ -116,6 +116,13 @@ body.lightbox-open {
     z-index: 1;
 }
 
+html,
+body,
+#root {
+    min-height: 100svh;
+    background-color: #020612;
+}
+
 /* ==================== GENERAL STYLES ==================== */
 .container {
     width: var(--container-width-1g);

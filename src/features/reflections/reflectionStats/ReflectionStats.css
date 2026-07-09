@@ -56,15 +56,25 @@
 
     .reflexion-stats {
         width: min(100%, 92vw);
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         border-radius: 1.05rem;
     }
 
     .reflexion-stat {
         min-height: 4.2rem;
         padding: 0.85rem 1rem;
-        border-right: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .reflexion-stat:nth-child(2) {
+        border-right: none;
+    }
+
+    .reflexion-stat:nth-child(3) {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: none;
     }
 
     .reflexion-stat span {
@@ -75,9 +85,5 @@
     .reflexion-stat strong {
         font-size: 1rem;
         line-height: 1.2;
-    }
-
-    .reflexion-stat:last-child {
-        border-bottom: none;
     }
 }
