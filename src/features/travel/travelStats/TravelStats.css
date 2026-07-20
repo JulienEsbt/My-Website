@@ -47,11 +47,40 @@
 }
 
 @media screen and (max-width: 800px) {
+    .travel-stats-section {
+        margin-top: -1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
     .travel-stats {
-        grid-template-columns: 1fr 1fr;
+        width: min(100%, 92vw);
+        grid-template-columns: repeat(2, 1fr);
+        border-radius: 1.05rem;
     }
 
     .travel-stat {
-        border-bottom: 1px solid rgba(77, 181, 255, 0.18);
+        min-height: 5.2rem;
+        padding: 0.85rem 1rem;
+        border-right: 1px solid rgba(77, 181, 255, 0.14);
+        border-bottom: 1px solid rgba(77, 181, 255, 0.14);
+    }
+
+    .travel-stat:nth-child(2n) {
+        border-right: none;
+    }
+
+    .travel-stat:nth-last-child(-n + 2) {
+        border-bottom: none;
+    }
+
+    .travel-stat span {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        margin-bottom: 0.15rem;
+    }
+
+    .travel-stat strong {
+        font-size: 1.25rem;
+        line-height: 1.1;
     }
 }

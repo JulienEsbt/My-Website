@@ -48,7 +48,21 @@
     --liquid-blur: 44px;
 }
 
+html {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background: #020612;
+}
+
 body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    overflow-x: clip;
+
     font-family: 'Poppins', sans-serif;
     color: var(--color-white);
     line-height: 1.7;
@@ -76,17 +90,22 @@ body::before {
     opacity: 0.16;
 }
 
-html {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+html.lightbox-open,
+body.lightbox-open {
+    overflow: hidden;
+    background: #020612;
 }
 
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip;
+@supports (-webkit-touch-callout: none) {
+    html,
+    body,
+    #root {
+        background-color: #020612;
+    }
+
+    .travel-timeline__lightbox {
+        background-color: #020612;
+    }
 }
 
 #root {
@@ -95,6 +114,13 @@ body {
     overflow-x: clip;
     position: relative;
     z-index: 1;
+}
+
+html,
+body,
+#root {
+    min-height: 100svh;
+    background-color: #020612;
 }
 
 /* ==================== GENERAL STYLES ==================== */
