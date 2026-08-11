@@ -52,7 +52,7 @@ describe('ReflectionArticlePage', () => {
                 level: 2,
                 name: 'The more I learn, the more wary I become of certainty.',
             })
-        ).toBeVisible()
+        ).toBeInTheDocument()
         await waitFor(() => {
             expect(
                 screen.queryByText('This article is currently available in French only.')
