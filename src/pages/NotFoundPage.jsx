@@ -1,18 +1,17 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
 import {Link} from 'react-router-dom'
-import PageNav from '../components/common/navigation/pageNav/PageNav.jsx'
-import Footer from '../components/common/layout/footerSection/Footer.jsx'
+import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
+import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import './NotFoundPage.css'
 
 const NotFoundPage = ({context = 'page'}) => {
     const {t} = useTranslation('common')
     const descriptionKey = context === 'reflection' ? 'notFound.reflection' : 'notFound.description'
+    useDocumentTitle(t('notFound.pageTitle'))
 
     return (
-        <main id="main" tabIndex="-1">
-            <PageNav />
-
+        <PageFrame>
             <section className="container not-found" aria-labelledby="not-found-title">
                 <p className="not-found__code" aria-hidden="true">
                     404
@@ -30,9 +29,7 @@ const NotFoundPage = ({context = 'page'}) => {
                     </Link>
                 </div>
             </section>
-
-            <Footer />
-        </main>
+        </PageFrame>
     )
 }
 

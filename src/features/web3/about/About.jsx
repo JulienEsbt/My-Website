@@ -2,32 +2,31 @@ import React from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import {FaBitcoin, FaCodeBranch, FaEthereum, FaFileCode} from 'react-icons/fa'
-import {BiLineChart} from 'react-icons/bi'
-import {BsCurrencyExchange} from 'react-icons/bs'
-import {FiArrowRight} from 'react-icons/fi'
-import {ASSETS} from '../../../config/assets.js'
+import {FiArrowRight, FiCompass, FiShield} from 'react-icons/fi'
+import {WEB3_ASSETS} from '../../../config/web3Assets.js'
+import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './About.css'
 
 const About = () => {
     const {t} = useTranslation('web3')
-    const aboutNft = ASSETS.web3.nfts.soulware723
+    const aboutNft = WEB3_ASSETS.nfts.soulware723
 
     const cards = [
         {
             id: 'passion',
-            icons: [<FaBitcoin key="btc"/>, <FaEthereum key="eth"/>],
+            icons: [<FaBitcoin key="btc" />, <FaEthereum key="eth" />],
             title: t('about.cards.passionTitle'),
             text: t('about.cards.passionText'),
         },
         {
-            id: 'investing',
-            icons: [<BsCurrencyExchange key="exchange"/>, <BiLineChart key="chart"/>],
-            title: t('about.cards.investingTitle'),
-            text: t('about.cards.investingText'),
+            id: 'experiment',
+            icons: [<FiCompass key="compass" />, <FiShield key="shield" />],
+            title: t('about.cards.experimentTitle'),
+            text: t('about.cards.experimentText'),
         },
         {
             id: 'dev',
-            icons: [<FaCodeBranch key="branch"/>, <FaFileCode key="code"/>],
+            icons: [<FaCodeBranch key="branch" />, <FaFileCode key="code" />],
             title: t('about.cards.devTitle'),
             text: t('about.cards.devText'),
         },
@@ -35,7 +34,7 @@ const About = () => {
 
     return (
         <section id="about">
-            <h5>{t('about.headingSmall')}</h5>
+            <p className="section-kicker">{t('about.headingSmall')}</p>
             <h2>{t('about.heading')}</h2>
 
             <div className="container crypto-about">
@@ -51,23 +50,24 @@ const About = () => {
                             href={aboutNft.openseaUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`View ${aboutNft.name} on OpenSea`}
+                            aria-label={t('accessibility.openOnOpenSea', {name: aboutNft.name})}
                         >
-                            <img
-                                src={aboutNft.image}
+                            <ResponsiveImage
+                                media={aboutNft.image}
                                 alt={aboutNft.name}
+                                sizes="(max-width: 700px) 70vw, 420px"
                             />
                         </a>
                     </div>
 
                     <div className="crypto-about__floating-card crypto-about__floating-card--top">
-                        <span>Web3</span>
-                        <strong>EVM • DeFi • Wallets</strong>
+                        <span>{t('about.visual.domainLabel')}</span>
+                        <strong>{t('about.visual.domainValue')}</strong>
                     </div>
 
                     <div className="crypto-about__floating-card crypto-about__floating-card--bottom">
-                        <span>Focus</span>
-                        <strong>Build, learn, explore</strong>
+                        <span>{t('about.visual.focusLabel')}</span>
+                        <strong>{t('about.visual.focusValue')}</strong>
                     </div>
                 </motion.div>
 
@@ -82,7 +82,7 @@ const About = () => {
                         <span>{t('about.badge')}</span>
                         <h3>{t('about.title')}</h3>
                         <p>
-                            <Trans i18nKey="about.bio" ns="web3" components={{b: <b/>}}/>
+                            <Trans i18nKey="about.bio" ns="web3" components={{b: <b />}} />
                         </p>
                     </div>
 
@@ -96,9 +96,7 @@ const About = () => {
                                 viewport={{once: true}}
                                 transition={{duration: 0.4, delay: index * 0.08}}
                             >
-                                <div className="crypto-about__card-icons">
-                                    {card.icons}
-                                </div>
+                                <div className="crypto-about__card-icons">{card.icons}</div>
 
                                 <h4>{card.title}</h4>
                                 <p>{card.text}</p>
@@ -108,7 +106,7 @@ const About = () => {
 
                     <a href="#knowledge" className="crypto-about__link">
                         {t('about.explore')}
-                        <FiArrowRight/>
+                        <FiArrowRight />
                     </a>
                 </motion.div>
             </div>

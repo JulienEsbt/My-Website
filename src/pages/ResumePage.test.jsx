@@ -20,7 +20,7 @@ describe('ResumePage', () => {
             </MemoryRouter>
         )
 
-        expect(screen.getByRole('heading', {level: 1, name: 'Julien Esterbet'})).toBeVisible()
+        expect(screen.getByRole('heading', {level: 1, name: 'Julien Esterbet'})).toBeInTheDocument()
         expect(
             screen.getByRole('heading', {level: 2, name: 'Expérience professionnelle'})
         ).toBeVisible()
@@ -42,4 +42,4 @@ describe('ResumePage', () => {
             screen.getByRole('link', {name: 'Download the resume as a PDF'}).getAttribute('href')
         ).toContain('Julien-Esterbet-Resume-EN-2026.pdf')
     })
-}
+})

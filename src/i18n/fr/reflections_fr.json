@@ -1,68 +1,78 @@
 {
-  "hero": {
-    "kicker": "Réflexions",
-    "title": "Pensées, politique, philosophie & société",
-    "subtitle": "Un carnet personnel pour structurer mes idées, mes doutes, mes lectures et mes convictions."
-  },
-  "filters": {
-    "all": "Tous",
-    "philosophy": "Philosophie",
-    "politics": "Politique",
-    "society": "Société",
-    "technology": "Technologie"
-  },
-  "actions": {
-    "latest": "Dernières notes",
-    "themes": "Explorer les thèmes"
-  },
-  "themes": {
-    "kicker": "Catégories",
-    "title": "Explorer mes axes de réflexion"
-  },
-  "search": {
-    "placeholder": "Rechercher une réflexion..."
-  },
-  "stats": {
-    "articles": "Articles",
-    "themes": "Thèmes",
-    "latest": "Dernière note"
-  },
-  "empty": {
-    "title": "Aucune réflexion trouvée",
-    "text": "Essaie une autre recherche ou un autre thème."
-  },
-  "card": {
-    "read": "Lire",
-    "featured": "À lire"
-  },
-  "article": {
-    "back": "Retour aux réflexions",
-    "frenchOnly": "Cet article est actuellement disponible uniquement en français.",
-    "finished": "Vous avez terminé cet article",
-    "previous": "Article précédent",
-    "next": "Article suivant"
-  },
-  "categories": {
-    "philosophy": "Philosophie",
-    "politics": "Politique",
-    "society": "Société",
-    "technology": "Technologie"
-  },
-  "author": {
-    "title": "À propos de ces réflexions",
-    "text": "Ces textes sont des notes personnelles. Ils ont vocation à évoluer au fil de mes lectures, de mes expériences, de mes rencontres et de mes remises en question."
-  },
-  "latest": {
-    "kicker": "Carnet personnel",
-    "title": "Dernières réflexions"
-  },
-  "nav": {
-    "aria": "Navigation des réflexions",
-    "items": {
-      "top": "Accueil",
-      "themes": "Thèmes",
-      "latest": "Articles",
-      "author": "Note"
+    "meta": {
+        "title": "Écrits et réflexions — Julien Esterbet"
+    },
+    "hero": {
+        "kicker": "Carnet d’idées",
+        "title": "Pensées, politique, philosophie & société",
+        "subtitle": "Un espace éditorial personnel, distinct de la vitrine professionnelle, pour structurer mes idées, mes doutes, mes lectures et mes convictions."
+    },
+    "filters": {
+        "all": "Tous",
+        "philosophy": "Philosophie",
+        "politics": "Politique",
+        "society": "Société",
+        "technology": "Technologie"
+    },
+    "actions": {
+        "latest": "Dernières notes",
+        "themes": "Explorer les thèmes"
+    },
+    "themes": {
+        "kicker": "Catégories",
+        "title": "Explorer mes axes de réflexion"
+    },
+    "search": {
+        "label": "Rechercher dans les réflexions",
+        "placeholder": "Rechercher une réflexion...",
+        "results": "{{count}} réflexion trouvée",
+        "results_other": "{{count}} réflexions trouvées"
+    },
+    "stats": {
+        "articles": "Articles",
+        "themes": "Thèmes",
+        "latest": "Dernière note"
+    },
+    "empty": {
+        "title": "Aucune réflexion trouvée",
+        "text": "Essaie une autre recherche ou un autre thème."
+    },
+    "card": {
+        "read": "Lire",
+        "featured": "À lire"
+    },
+    "article": {
+        "back": "Retour aux réflexions",
+        "readingTime": "{{count}} min de lecture",
+        "progress": "Progression de la lecture",
+        "scrollBottom": "Aller à la fin de l’article",
+        "scrollTop": "Revenir en haut de l’article",
+        "frenchOnly": "Cet article est actuellement disponible uniquement en français.",
+        "finished": "Vous avez terminé cet article",
+        "previous": "Article précédent",
+        "next": "Article suivant"
+    },
+    "categories": {
+        "philosophy": "Philosophie",
+        "politics": "Politique",
+        "society": "Société",
+        "technology": "Technologie"
+    },
+    "author": {
+        "title": "À propos de ces réflexions",
+        "text": "Ces textes sont des notes personnelles. Ils ont vocation à évoluer au fil de mes lectures, de mes expériences, de mes rencontres et de mes remises en question."
+    },
+    "latest": {
+        "kicker": "Carnet personnel",
+        "title": "Dernières réflexions"
+    },
+    "nav": {
+        "aria": "Navigation des réflexions",
+        "items": {
+            "top": "Accueil",
+            "themes": "Thèmes",
+            "latest": "Articles",
+            "author": "Note"
+        }
     }
-  }
 }

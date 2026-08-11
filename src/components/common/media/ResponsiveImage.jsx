@@ -18,6 +18,8 @@ export default function ResponsiveImage({
     className,
     ...imageProps
 }) {
+    const priorityProps = fetchPriority ? {fetchpriority: fetchPriority} : {}
+
     if (!media?.variants) {
         return (
             <img
@@ -25,24 +27,36 @@ export default function ResponsiveImage({
                 alt={alt}
                 loading={loading}
                 decoding={decoding}
-                fetchPriority={fetchPriority}
                 className={className}
+                {...priorityProps}
                 {...imageProps}
             />
         )
     }
 
-    const byFormat = Object.groupBy(media.variants, (variant) => variant.format)
+    const byFormat = media.variants.reduce((groups, variant) => {
+        groups[variant.format] ??= []
+        groups[variant.format].push(variant)
+        return groups
+    }, {})
     const fallbacks = [...(byFormat.fallback ?? [])].sort((a, b) => a.width - b.width)
     const fallback = fallbacks.at(-1) ?? media.variants.at(-1)
 
     return (
         <picture className="responsive-picture">
             {byFormat.avif?.length > 0 && (
-                <source type="image/avif" srcSet={buildSourceSet([...byFormat.avif])} sizes={sizes} />
+                <source
+                    type="image/avif"
+                    srcSet={buildSourceSet([...byFormat.avif])}
+                    sizes={sizes}
+                />
             )}
             {byFormat.webp?.length > 0 && (
-                <source type="image/webp" srcSet={buildSourceSet([...byFormat.webp])} sizes={sizes} />
+                <source
+                    type="image/webp"
+                    srcSet={buildSourceSet([...byFormat.webp])}
+                    sizes={sizes}
+                />
             )}
             <img
                 src={fallback.url}
@@ -53,8 +67,8 @@ export default function ResponsiveImage({
                 alt={alt}
                 loading={loading}
                 decoding={decoding}
-                fetchPriority={fetchPriority}
                 className={className}
+                {...priorityProps}
                 {...imageProps}
             />
         </picture>

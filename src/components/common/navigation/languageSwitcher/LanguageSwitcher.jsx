@@ -11,14 +11,21 @@ export default function LanguageSwitcher() {
     const next = current === 'fr' ? 'en' : 'fr'
 
     const toggleLanguage = () => {
+        const url = new URL(window.location.href)
+        url.searchParams.set('lang', next)
+        window.history.replaceState(
+            window.history.state,
+            '',
+            `${url.pathname}${url.search}${url.hash}`
+        )
         i18n.changeLanguage(next)
     }
 
     return (
-        <div
+        <button
+            type="button"
             className="lang-switch"
             onClick={toggleLanguage}
-            role="button"
             aria-label={next === 'fr' ? 'Passer en français' : 'Switch to English'}
         >
             <motion.div
@@ -35,8 +42,8 @@ export default function LanguageSwitcher() {
                     exit={{opacity: 0, y: -6}}
                     transition={{duration: 0.2}}
                 >
-                    {/* Affiche le drapeau VERS lequel on va basculer */}
-                    {next === 'fr' ? '🇬🇧' : '🇫🇷'}
+                    {/* Conserve l'association visuelle historique : FR + drapeau français, EN + drapeau anglais. */}
+                    {current === 'fr' ? '🇫🇷' : '🇬🇧'}
                 </motion.div>
             </motion.div>
 
@@ -44,6 +51,6 @@ export default function LanguageSwitcher() {
                 <span className={current === 'fr' ? 'active' : ''}>FR</span>
                 <span className={current === 'en' ? 'active' : ''}>EN</span>
             </div>
-        </div>
+        </button>
     )
 }

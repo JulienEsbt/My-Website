@@ -1,53 +1,85 @@
 {
-  "pageNav": {
-    "home": "Portfolio",
-    "web3": "Web3",
-    "travel": "Travel",
-    "reflections": "Reflections"
-  },
-  "contact": {
-    "kicker": "Get in touch",
-    "title": "Contact me",
-    "options": {
-      "email": {
-        "title": "Email",
-        "value": "julien.esterbet@gmail.com",
-        "cta": "Send a message"
-      },
-      "linkedin": {
-        "title": "LinkedIn",
-        "value": "julien-esterbet",
-        "cta": "Write me"
-      },
-      "twitter": {
-        "title": "Twitter",
-        "value": "Julien Esbt Crypto",
-        "cta": "DM me"
-      }
+    "accessibility": {
+        "skipToContent": "Skip to main content",
+        "quickAccess": "Quick access",
+        "socialNavigation": "Social media"
     },
-    "badge": "Available",
-    "heading": "An idea, a project or a discussion?",
-    "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
-    "form": {
-      "nameLabel": "Name",
-      "emailLabel": "Email",
-      "messageLabel": "Message",
-      "name": "Your full name",
-      "email": "Your email",
-      "message": "Your message",
-      "submit": "Send email",
-      "sending": "Sending...",
-      "success": "Message sent successfully. Thanks!",
-      "error": "Oops, something went wrong. Please try again."
+    "loading": {
+        "route": "Loading page",
+        "feature": "Loading interactive content"
+    },
+    "pageNav": {
+        "aria": "Primary navigation",
+        "open": "Open navigation",
+        "close": "Close navigation",
+        "home": "Portfolio",
+        "web3": "Web3 Labs",
+        "travel": "Travel journals",
+        "reflections": "Writing and reflections",
+        "groups": {
+            "primary": "Portfolio and labs",
+            "editorial": "Explore further"
+        }
+    },
+    "contact": {
+        "kicker": "Get in touch",
+        "title": "Contact me",
+        "options": {
+            "email": {
+                "title": "Email",
+                "value": "julien.esterbet@gmail.com",
+                "cta": "Send a message"
+            },
+            "linkedin": {
+                "title": "LinkedIn",
+                "value": "julien-esterbet",
+                "cta": "Write me"
+            },
+            "twitter": {
+                "title": "Twitter",
+                "value": "Julien Esbt Crypto",
+                "cta": "DM me"
+            }
+        },
+        "badge": "Available",
+        "heading": "An idea, a project or a discussion?",
+        "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
+        "form": {
+            "nameLabel": "Name",
+            "emailLabel": "Email",
+            "messageLabel": "Message",
+            "name": "Your full name",
+            "email": "Your email",
+            "message": "Your message",
+            "submit": "Send email",
+            "sending": "Sending...",
+            "success": "Message sent successfully. Thanks!",
+            "error": "Oops, something went wrong. Please try again."
+        }
+    },
+    "footer": {
+        "logo": "Julien ESTERBET",
+        "description": "A product-minded full-stack developer portfolio, complemented by Web3 experiments and personal content available at a secondary level.",
+        "aria": "Footer navigation",
+        "pages": "Pages",
+        "socials": "Socials",
+        "cta": "Contact me",
+        "copyright": "© Julien Esterbet — All rights reserved."
+    },
+    "notFound": {
+        "pageTitle": "Page not found — Julien Esterbet",
+        "kicker": "Page not found",
+        "title": "This page does not exist or is no longer available.",
+        "description": "The address may be incorrect, or the content may have moved.",
+        "reflection": "This reflection does not exist or is no longer available.",
+        "home": "Back to the portfolio",
+        "reflections": "View reflections"
+    },
+    "errorBoundary": {
+        "kicker": "Unexpected error",
+        "title": "The portfolio could not be displayed correctly.",
+        "description": "No sensitive data was displayed. You can try again or return home.",
+        "home": "Back home",
+        "retry": "Try again"
     }
-  },
-  "footer": {
-    "logo": "Julien ESTERBET",
-    "description": "Personal portfolio focused on software development, Web3, technology, travel and the ideas that shape who I am.",
-    "aria": "Footer navigation",
-    "pages": "Pages",
-    "socials": "Socials",
-    "cta": "Contact me",
-    "copyright": "© Julien Esterbet — All rights reserved."
-  }
 }

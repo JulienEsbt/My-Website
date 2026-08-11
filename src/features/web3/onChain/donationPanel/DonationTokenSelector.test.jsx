@@ -30,11 +30,11 @@ describe('DonationTokenSelector', () => {
         )
 
         await user.type(screen.getByRole('searchbox'), 'pol')
-        await user.click(screen.getByRole('button', {name: /USDC Polygon/i}))
+        await user.click(screen.getByRole('button', {name: /USDCPolygon/i}))
 
         expect(onSearch).toHaveBeenCalled()
         expect(onSelect).toHaveBeenCalledWith('usdc')
-        expect(screen.getByRole('button', {name: /ETH Ethereum/i})).toHaveAttribute(
+        expect(screen.getByRole('button', {name: /ETHEthereum/i})).toHaveAttribute(
             'aria-pressed',
             'true'
         )

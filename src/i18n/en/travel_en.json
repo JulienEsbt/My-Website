@@ -1,73 +1,117 @@
 {
-  "hero": {
-    "kicker": "Travel",
-    "title": "My travel map",
-    "subtitle": "A personal space to collect places, memories, photos and stories from my travels."
-  },
-  "intro": {
-    "title": "Explore, understand, feel",
-    "text": "Every journey is a way to discover a place, but also a way to understand oneself a little better."
-  },
-  "actions": {
-    "map": "See the map",
-    "stories": "See stories"
-  },
-  "stats": {
-    "countries": "Countries visited",
-    "destinations": "Places visited",
-    "lived": "Places lived",
-    "studyWork": "Study / Work"
-  },
-  "timeline": {
-    "kicker": "My journey",
-    "title": "Travel timeline",
-    "badges": {
-      "lived": "Lived",
-      "study": "Study",
-      "work": "Work",
-      "planned": "Planned"
+    "meta": {
+        "title": "Travel journals — Julien Esterbet"
     },
-    "details": {
-      "story": "About this trip",
-      "location": "Location",
-      "polarsteps": "View on Polarsteps",
-      "noStory": "I haven’t added a detailed story for this trip yet.",
-      "back": "Back to trips"
+    "hero": {
+        "kicker": "Personal journals",
+        "title": "Travels and places lived",
+        "subtitle": "A secondary portfolio space for collecting places, memories, photos and stories from my travels."
+    },
+    "intro": {
+        "title": "Explore, understand, feel",
+        "text": "Every journey is a way to discover a place, but also a way to understand oneself a little better."
+    },
+    "actions": {
+        "map": "See the map",
+        "stories": "See stories"
+    },
+    "stats": {
+        "countries": "Countries visited",
+        "destinations": "Places visited",
+        "lived": "Places lived",
+        "studyWork": "Study / Work"
+    },
+    "timeline": {
+        "kicker": "My journey",
+        "title": "Travel timeline",
+        "badges": {
+            "lived": "Lived",
+            "study": "Study",
+            "work": "Work",
+            "planned": "Planned"
+        },
+        "details": {
+            "story": "About this trip",
+            "location": "Location",
+            "polarsteps": "View on Polarsteps",
+            "noStory": "I haven’t added a detailed story for this trip yet.",
+            "back": "Back to trips",
+            "scroll": "Show the rest of the story"
+        },
+        "gallery": {
+            "viewPhotos": "View photos",
+            "openAll": "Open the full gallery · {{count}} photos",
+            "loadError": "The photos from this trip cannot be loaded right now.",
+            "close": "Close gallery",
+            "previous": "Previous photo",
+            "next": "Next photo",
+            "openPhoto": "View photo {{number}}",
+            "photoAlt": "Travel memory from {{city}} — photo {{number}} of {{total}}",
+            "title": "Photo gallery — {{city}}",
+            "instructions": "Use the left and right arrow keys to change photos, and the Escape key to close the gallery."
+        }
+    },
+    "dreams": {
+        "kicker": "Next horizons",
+        "title": "Dream destinations",
+        "intro": "A few places that strongly attract me, between vast landscapes, history, space, culture and life projects.",
+        "aria": {
+            "list": "Dream destination selection",
+            "previous": "Previous destination",
+            "next": "Next destination",
+            "select": "Show {{destination}}"
+        }
+    },
+    "explorer": {
+        "kicker": "Interactive world",
+        "title": "Globe & map",
+        "subtitle": "Explore the places that shaped my journey over time.",
+        "globeTitle": "3D globe",
+        "globeText": "Immersive view of my destinations",
+        "mapTitle": "Interactive map",
+        "mapText": "Detailed map of my travels and places lived",
+        "expandGlobe": "Expand globe",
+        "expandMap": "Expand map",
+        "loadGlobe": "Load the 3D globe",
+        "loadMap": "Load the interactive map",
+        "loadHint": "Activate a visualization to explore it, then expand it when needed",
+        "reduce": "Reduce",
+        "hint": "Click on a map to expand it and explore in detail",
+        "globeAccessibleLabel": "Graphical representation of trips and dream destinations on a globe",
+        "mapAccessibleLabel": "Interactive map of trips and dream destinations",
+        "mapControls": {
+            "zoomIn": "Zoom in",
+            "zoomOut": "Zoom out",
+            "resetBearing": "Reset the map bearing to north",
+            "closePopup": "Close place details"
+        },
+        "globeMotion": {
+            "pause": "Pause globe motion",
+            "resume": "Resume globe motion"
+        },
+        "alternative": {
+            "summary": "View the text alternative for the globe and map",
+            "description": "This list provides the locations, dates, categories and descriptions shown in the visualizations. Each position can be opened in Google Maps.",
+            "trips": "Trips and places lived",
+            "dreams": "Dream destinations",
+            "openLocation": "Open {{location}} in Google Maps (new tab)"
+        },
+        "legend": {
+            "home": "Home base",
+            "lived": "Lived",
+            "study": "Study",
+            "visited": "Visited",
+            "planned": "Planned",
+            "dream": "Dream destination"
+        }
+    },
+    "nav": {
+        "aria": "Travel navigation",
+        "items": {
+            "top": "Top",
+            "explorer": "Map",
+            "timeline": "Timeline",
+            "dreams": "Dreams"
+        }
     }
-  },
-  "dreams": {
-    "kicker": "Next horizons",
-    "title": "Dream destinations",
-    "intro": "A few places that strongly attract me, between vast landscapes, history, space, culture and life projects."
-  },
-  "explorer": {
-    "kicker": "Interactive world",
-    "title": "Globe & map",
-    "subtitle": "Explore the places that shaped my journey over time.",
-    "globeTitle": "3D globe",
-    "globeText": "Immersive view of my destinations",
-    "mapTitle": "Interactive map",
-    "mapText": "Detailed map of my travels and places lived",
-    "expandGlobe": "Expand globe",
-    "expandMap": "Expand map",
-    "reduce": "Reduce",
-    "hint": "Click on a map to expand it and explore in detail",
-    "legend": {
-      "home": "Home base",
-      "lived": "Lived",
-      "study": "Study",
-      "visited": "Visited",
-      "planned": "Planned",
-      "dream": "Dream destination"
-    }
-  },
-  "nav": {
-    "aria": "Travel navigation",
-    "items": {
-      "top": "Top",
-      "explorer": "Map",
-      "timeline": "Timeline",
-      "dreams": "Dreams"
-    }
-  }
 }

@@ -1,21 +1,24 @@
-import img1309 from './IMG_1309.jpeg'
-import img1317 from './IMG_1317.jpeg'
-import img1333 from './IMG_1333.jpeg'
-import img1349 from './IMG_1349.jpeg'
-import img1362 from './IMG_1362.jpeg'
-import img1371 from './IMG_1371.jpeg'
-import img1406 from './IMG_1406.jpeg'
-import img1407 from './IMG_1407.jpeg'
-import img1430 from './IMG_1430.jpeg'
-import img1455 from './IMG_1455.jpeg'
-import img1459 from './IMG_1459.jpeg'
-import img1462 from './IMG_1462.jpeg'
+import albumManifest from '../../../../generated/media/travels/belgium-2025.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
-import img122f1a79 from './122f1a79-aad5-4d8d-800d-67efe42c81b5.jpg'
-import img1f676ff8 from './1f676ff8-3097-42e4-95c0-f74204a20c51.jpg'
-import img8045b88f from './8045b88f-04de-4409-a129-1b8fedbbfa8d.jpg'
-import img0dd40fba from './0dd40fba-af49-4274-9e0a-6476843f5cbb.jpg'
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
 
+const img1309 = getTravelMedia('belgium-2025/IMG_1309.jpeg')
+const img1317 = getTravelMedia('belgium-2025/IMG_1317.jpeg')
+const img1333 = getTravelMedia('belgium-2025/IMG_1333.jpeg')
+const img1349 = getTravelMedia('belgium-2025/IMG_1349.jpeg')
+const img1362 = getTravelMedia('belgium-2025/IMG_1362.jpeg')
+const img1371 = getTravelMedia('belgium-2025/IMG_1371.jpeg')
+const img1406 = getTravelMedia('belgium-2025/IMG_1406.jpeg')
+const img1407 = getTravelMedia('belgium-2025/IMG_1407.jpeg')
+const img1430 = getTravelMedia('belgium-2025/IMG_1430.jpeg')
+const img1455 = getTravelMedia('belgium-2025/IMG_1455.jpeg')
+const img1459 = getTravelMedia('belgium-2025/IMG_1459.jpeg')
+const img1462 = getTravelMedia('belgium-2025/IMG_1462.jpeg')
+const img122f1a79 = getTravelMedia('belgium-2025/122f1a79-aad5-4d8d-800d-67efe42c81b5.jpg')
+const img1f676ff8 = getTravelMedia('belgium-2025/1f676ff8-3097-42e4-95c0-f74204a20c51.jpg')
+const img8045b88f = getTravelMedia('belgium-2025/8045b88f-04de-4409-a129-1b8fedbbfa8d.jpg')
+const img0dd40fba = getTravelMedia('belgium-2025/0dd40fba-af49-4274-9e0a-6476843f5cbb.jpg')
 const belgium2025Photos = [
     {src: img1309},
     {src: img1317},

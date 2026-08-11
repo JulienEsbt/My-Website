@@ -1,18 +1,22 @@
-import img7060 from './IMG_7060.jpeg'
-import img7069 from './IMG_7069.jpeg'
-import img7088 from './IMG_7088.jpeg'
-import img7105 from './IMG_7105.jpeg'
-import img7156 from './IMG_7156.jpeg'
-import img7157 from './IMG_7157.jpeg'
-import img7190 from './IMG_7190.jpeg'
-import img7197 from './IMG_7197.jpeg'
-import img7345 from './IMG_7345.jpeg'
-import img7355 from './IMG_7355.jpeg'
-import img7422 from './IMG_7422.jpeg'
-import img7424 from './IMG_7424.jpeg'
-import img7440 from './IMG_7440.jpeg'
-import img7445 from './IMG_7445.jpeg'
+import albumManifest from '../../../../generated/media/travels/croatia-2021.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img7060 = getTravelMedia('croatia-2021/IMG_7060.jpeg')
+const img7069 = getTravelMedia('croatia-2021/IMG_7069.jpeg')
+const img7088 = getTravelMedia('croatia-2021/IMG_7088.jpeg')
+const img7105 = getTravelMedia('croatia-2021/IMG_7105.jpeg')
+const img7156 = getTravelMedia('croatia-2021/IMG_7156.jpeg')
+const img7157 = getTravelMedia('croatia-2021/IMG_7157.jpeg')
+const img7190 = getTravelMedia('croatia-2021/IMG_7190.jpeg')
+const img7197 = getTravelMedia('croatia-2021/IMG_7197.jpeg')
+const img7345 = getTravelMedia('croatia-2021/IMG_7345.jpeg')
+const img7355 = getTravelMedia('croatia-2021/IMG_7355.jpeg')
+const img7422 = getTravelMedia('croatia-2021/IMG_7422.jpeg')
+const img7424 = getTravelMedia('croatia-2021/IMG_7424.jpeg')
+const img7440 = getTravelMedia('croatia-2021/IMG_7440.jpeg')
+const img7445 = getTravelMedia('croatia-2021/IMG_7445.jpeg')
 const croatia2021Photos = [
     {src: img7060},
     {src: img7069},

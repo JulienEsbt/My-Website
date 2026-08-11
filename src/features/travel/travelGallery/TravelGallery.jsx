@@ -1,6 +1,8 @@
 import {useCallback, useEffect, useRef, useState} from 'react'
+import {createPortal} from 'react-dom'
 import {useTranslation} from 'react-i18next'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
+import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
@@ -61,6 +63,8 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
         onDismiss: closePhoto,
     })
 
+    useBodyScrollLock(activePhotoIndex !== null)
+
     useEffect(() => {
         if (activePhotoIndex === null) return undefined
 
@@ -83,14 +87,8 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     useEffect(() => {
         if (activePhotoIndex === null) return undefined
 
-        const scrollY = window.scrollY
         document.documentElement.classList.add('lightbox-open')
         document.body.classList.add('lightbox-open')
-        document.body.style.position = 'fixed'
-        document.body.style.top = `-${scrollY}px`
-        document.body.style.left = '0'
-        document.body.style.right = '0'
-        document.body.style.width = '100%'
 
         const preventPageScroll = (event) => {
             if (lightboxStripRef.current?.contains(event.target)) return
@@ -105,12 +103,6 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
             window.removeEventListener('touchmove', preventPageScroll)
             document.documentElement.classList.remove('lightbox-open')
             document.body.classList.remove('lightbox-open')
-            document.body.style.position = ''
-            document.body.style.top = ''
-            document.body.style.left = ''
-            document.body.style.right = ''
-            document.body.style.width = ''
-            window.scrollTo({top: scrollY, left: 0, behavior: 'instant'})
         }
     }, [activePhotoIndex])
 
@@ -197,106 +189,122 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                 )}
             </div>
 
-            {activePhotoIndex !== null && (
-                <div
-                    ref={lightboxRef}
-                    className="travel-timeline__lightbox"
-                    onClick={closePhoto}
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby="travel-gallery-title"
-                    tabIndex="-1"
-                >
-                    <button
-                        ref={lightboxCloseRef}
-                        type="button"
-                        className="travel-timeline__lightbox-close"
-                        onClick={(event) => {
-                            event.stopPropagation()
-                            closePhoto()
-                        }}
-                        aria-label={t('timeline.gallery.close')}
-                    >
-                        ×
-                    </button>
-
-                    <button
-                        type="button"
-                        className="travel-timeline__lightbox-nav previous"
-                        onClick={(event) => {
-                            event.stopPropagation()
-                            previousPhoto()
-                        }}
-                        aria-label={t('timeline.gallery.previous')}
-                    >
-                        ←
-                    </button>
-
+            {activePhotoIndex !== null &&
+                createPortal(
                     <div
-                        className="travel-timeline__lightbox-content"
-                        onClick={(event) => event.stopPropagation()}
+                        ref={lightboxRef}
+                        className="travel-timeline__lightbox"
+                        onClick={closePhoto}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="travel-gallery-title"
+                        aria-describedby="travel-gallery-instructions"
+                        tabIndex="-1"
                     >
-                        <div className="travel-timeline__lightbox-image-frame">
-                            <ResponsiveImage
-                                media={photos[activePhotoIndex].src}
-                                alt={t('timeline.gallery.photoAlt', {
-                                    city,
-                                    number: activePhotoIndex + 1,
-                                })}
-                                sizes="100vw"
-                                loading="eager"
-                                fetchPriority="high"
-                            />
+                        <h2 id="travel-gallery-title" className="sr-only">
+                            {t('timeline.gallery.title', {city})}
+                        </h2>
+                        <p id="travel-gallery-instructions" className="sr-only">
+                            {t('timeline.gallery.instructions')}
+                        </p>
 
-                            <span
-                                id="travel-gallery-title"
-                                className="travel-timeline__lightbox-counter"
-                                aria-live="polite"
-                            >
-                                {activePhotoIndex + 1} / {photos.length}
-                            </span>
-                        </div>
+                        <button
+                            ref={lightboxCloseRef}
+                            type="button"
+                            className="travel-timeline__lightbox-close"
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                closePhoto()
+                            }}
+                            aria-label={t('timeline.gallery.close')}
+                        >
+                            ×
+                        </button>
 
-                        <div className="travel-timeline__lightbox-dock">
-                            <div
-                                ref={lightboxStripRef}
-                                className="travel-timeline__lightbox-strip"
-                                onWheel={(event) => {
-                                    event.stopPropagation()
-                                    event.preventDefault()
-                                    event.currentTarget.scrollLeft += event.deltaY
-                                }}
-                            >
-                                {photos.map((photo, index) => (
-                                    <button
-                                        key={`${photo.src.id}-lightbox-${index}`}
-                                        type="button"
-                                        className={activePhotoIndex === index ? 'active' : ''}
-                                        onClick={() => setActivePhotoIndex(index)}
-                                        aria-label={t('timeline.gallery.openPhoto', {
-                                            number: index + 1,
-                                        })}
-                                    >
-                                        <ResponsiveImage media={photo.src} alt="" sizes="80px" />
-                                    </button>
-                                ))}
+                        <button
+                            type="button"
+                            className="travel-timeline__lightbox-nav previous"
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                previousPhoto()
+                            }}
+                            aria-label={t('timeline.gallery.previous')}
+                        >
+                            ←
+                        </button>
+
+                        <div
+                            className="travel-timeline__lightbox-content"
+                            onClick={(event) => event.stopPropagation()}
+                        >
+                            <div className="travel-timeline__lightbox-image-frame">
+                                <ResponsiveImage
+                                    media={photos[activePhotoIndex].src}
+                                    alt={t('timeline.gallery.photoAlt', {
+                                        city,
+                                        number: activePhotoIndex + 1,
+                                        total: photos.length,
+                                    })}
+                                    sizes="100vw"
+                                    loading="eager"
+                                    fetchPriority="high"
+                                />
+
+                                <span
+                                    className="travel-timeline__lightbox-counter"
+                                    aria-live="polite"
+                                    aria-atomic="true"
+                                >
+                                    {activePhotoIndex + 1} / {photos.length}
+                                </span>
+                            </div>
+
+                            <div className="travel-timeline__lightbox-dock">
+                                <div
+                                    ref={lightboxStripRef}
+                                    className="travel-timeline__lightbox-strip"
+                                    onWheel={(event) => {
+                                        event.stopPropagation()
+                                        event.preventDefault()
+                                        event.currentTarget.scrollLeft += event.deltaY
+                                    }}
+                                >
+                                    {photos.map((photo, index) => (
+                                        <button
+                                            key={`${photo.src.id}-lightbox-${index}`}
+                                            type="button"
+                                            className={activePhotoIndex === index ? 'active' : ''}
+                                            onClick={() => setActivePhotoIndex(index)}
+                                            aria-pressed={activePhotoIndex === index}
+                                            aria-label={t('timeline.gallery.openPhoto', {
+                                                number: index + 1,
+                                            })}
+                                        >
+                                            <ResponsiveImage
+                                                media={photo.src}
+                                                alt=""
+                                                sizes="80px"
+                                            />
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <button
-                        type="button"
-                        className="travel-timeline__lightbox-nav next"
-                        onClick={(event) => {
-                            event.stopPropagation()
-                            nextPhoto()
-                        }}
-                        aria-label={t('timeline.gallery.next')}
-                    >
-                        →
-                    </button>
-                </div>
-            )}
+                        <button
+                            type="button"
+                            className="travel-timeline__lightbox-nav next"
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                nextPhoto()
+                            }}
+                            aria-label={t('timeline.gallery.next')}
+                        >
+                            →
+                        </button>
+                    </div>,
+                    document.body
+                )}
         </>
     )
 }

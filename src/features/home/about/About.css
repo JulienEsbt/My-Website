@@ -7,8 +7,8 @@
     display: grid;
     grid-template-columns: minmax(280px, 360px) 1fr;
     grid-template-areas:
-        "visual cards"
-        "visual bio";
+        'visual cards'
+        'visual bio';
     gap: 1.25rem clamp(2.5rem, 5vw, 4.5rem);
     align-items: center;
 }
@@ -33,25 +33,29 @@
     position: relative;
     padding: 1rem;
     border-radius: 2rem;
-    background: radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.22), transparent 36%),
-    linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
+    background:
+        radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.22), transparent 36%),
+        linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
     border: 1px solid rgba(77, 181, 255, 0.22);
     box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.32);
     overflow: hidden;
-    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .about__photo-card::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: -40%;
     background: conic-gradient(
-            from 180deg,
-            transparent,
-            rgba(77, 181, 255, 0.55),
-            transparent,
-            rgba(124, 92, 255, 0.45),
-            transparent
+        from 180deg,
+        transparent,
+        rgba(77, 181, 255, 0.55),
+        transparent,
+        rgba(124, 92, 255, 0.45),
+        transparent
     );
     opacity: 0;
     transition: opacity 0.35s ease;
@@ -59,12 +63,13 @@
 }
 
 .about__photo-card::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 1px;
     border-radius: inherit;
-    background: radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.16), transparent 34%),
-    linear-gradient(145deg, rgba(31, 31, 56, 0.92), rgba(7, 12, 34, 0.98));
+    background:
+        radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.16), transparent 34%),
+        linear-gradient(145deg, rgba(31, 31, 56, 0.92), rgba(7, 12, 34, 0.98));
     z-index: 0;
 }
 
@@ -85,6 +90,7 @@
 }
 
 .about__photo {
+    aspect-ratio: 4 / 5;
     border-radius: 1.45rem;
     overflow: hidden;
     background: rgba(77, 181, 255, 0.08);
@@ -92,11 +98,15 @@
 
 .about__photo img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 100%;
+    aspect-ratio: auto;
     object-fit: cover;
+    object-position: center;
     display: block;
     transform: scale(1.01);
-    transition: transform 0.45s ease, filter 0.45s ease;
+    transition:
+        transform 0.45s ease,
+        filter 0.45s ease;
 }
 
 .about__photo-card:hover .about__photo img {
@@ -180,7 +190,7 @@
 .about__card p {
     margin: 0;
     color: var(--color-light);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     line-height: 1.45;
 }
 
@@ -194,7 +204,7 @@
 }
 
 .about__bio::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0.35rem;
@@ -213,9 +223,9 @@
     .about__container {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "cards"
-            "visual"
-            "bio";
+            'cards'
+            'visual'
+            'bio';
         gap: 2rem;
     }
 

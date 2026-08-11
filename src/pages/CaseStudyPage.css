@@ -83,6 +83,13 @@
     margin-top: 2rem;
 }
 
+.case-study__grid--two-columns {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .case-study__card {
     padding: 1.5rem;
     border-radius: 1.2rem;
@@ -189,7 +196,8 @@
 
 @media screen and (max-width: 900px) {
     .case-study__overview,
-    .case-study__grid {
+    .case-study__grid,
+    .case-study__grid--two-columns {
         grid-template-columns: 1fr;
     }
 

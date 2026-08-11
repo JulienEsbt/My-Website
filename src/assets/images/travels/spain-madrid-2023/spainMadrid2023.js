@@ -1,48 +1,53 @@
-import img0985 from './IMG_0985.JPG'
-import img1027 from './IMG_1027.JPG'
-import img1230 from './IMG_1230.JPG'
-import img1303 from './IMG_1303.JPG'
-import img1392 from './IMG_1392.JPG'
-import img2121 from './IMG_2121.jpeg'
-import img2147 from './IMG_2147.jpeg'
-import img2153 from './IMG_2153.jpeg'
-import img2163 from './IMG_2163.jpeg'
-import img2184 from './IMG_2184.jpeg'
-import img2188 from './IMG_2188.jpeg'
-import img2192 from './IMG_2192.jpeg'
-import img2201 from './IMG_2201.jpeg'
-import img4803 from './IMG_4803.jpeg'
-import img2253 from './IMG_2253.jpeg'
-import img2273 from './IMG_2273.jpeg'
-import img4199 from './IMG_4199.jpeg'
-import img2312 from './IMG_2312.jpeg'
-import img2324 from './IMG_2324.jpeg'
-import img2335 from './IMG_2335.JPG'
-import img2336 from './IMG_2336.jpeg'
-import img2349 from './IMG_2349.jpeg'
-import img8bcb from './8bcb2919-8bbb-4276-8648-476c5f61f13a.jpg'
-import img20230708 from './20230708_103252.jpg'
-import img5103 from './IMG_5103.jpeg'
-import img2487 from './IMG_2487.jpeg'
-import img2503 from './IMG_2503.jpeg'
-import img2511 from './IMG_2511.jpeg'
-import img2524 from './IMG_2524.jpeg'
-import img2535 from './IMG_2535.jpeg'
-import img2545 from './IMG_2545.jpeg'
-import img2577 from './IMG_2577.jpeg'
-import img5133 from './IMG_5133.jpeg'
-import img2675 from './IMG_2675.jpeg'
-import img2684 from './IMG_2684.jpeg'
-import img2688 from './IMG_2688.jpeg'
-import img2693 from './IMG_2693.jpeg'
-import img2695 from './IMG_2695.jpeg'
-import img2697 from './IMG_2697.jpeg'
-import imgWhatsApp from './WhatsApp Image 2023-07-13 at 14.45.11.jpeg'
-import img2736 from './IMG_2736.jpeg'
-import img2765 from './IMG_2765.jpeg'
-import img2774 from './IMG_2774.jpeg'
-import img148 from './148EDBA8-B4B1-439C-BDCC-106C8F67DEED.jpg'
+import albumManifest from '../../../../generated/media/travels/spain-madrid-2023.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img0985 = getTravelMedia('spain-madrid-2023/IMG_0985.JPG')
+const img1027 = getTravelMedia('spain-madrid-2023/IMG_1027.JPG')
+const img1071 = getTravelMedia('spain-madrid-2023/IMG_1071.JPG')
+const img1230 = getTravelMedia('spain-madrid-2023/IMG_1230.JPG')
+const img1303 = getTravelMedia('spain-madrid-2023/IMG_1303.JPG')
+const img1392 = getTravelMedia('spain-madrid-2023/IMG_1392.JPG')
+const img2121 = getTravelMedia('spain-madrid-2023/IMG_2121.jpeg')
+const img2147 = getTravelMedia('spain-madrid-2023/IMG_2147.jpeg')
+const img2153 = getTravelMedia('spain-madrid-2023/IMG_2153.jpeg')
+const img2163 = getTravelMedia('spain-madrid-2023/IMG_2163.jpeg')
+const img2184 = getTravelMedia('spain-madrid-2023/IMG_2184.jpeg')
+const img2188 = getTravelMedia('spain-madrid-2023/IMG_2188.jpeg')
+const img2192 = getTravelMedia('spain-madrid-2023/IMG_2192.jpeg')
+const img2201 = getTravelMedia('spain-madrid-2023/IMG_2201.jpeg')
+const img4803 = getTravelMedia('spain-madrid-2023/IMG_4803.jpeg')
+const img2253 = getTravelMedia('spain-madrid-2023/IMG_2253.jpeg')
+const img2273 = getTravelMedia('spain-madrid-2023/IMG_2273.jpeg')
+const img4199 = getTravelMedia('spain-madrid-2023/IMG_4199.jpeg')
+const img2312 = getTravelMedia('spain-madrid-2023/IMG_2312.jpeg')
+const img2324 = getTravelMedia('spain-madrid-2023/IMG_2324.jpeg')
+const img2335 = getTravelMedia('spain-madrid-2023/IMG_2335.JPG')
+const img2336 = getTravelMedia('spain-madrid-2023/IMG_2336.jpeg')
+const img2349 = getTravelMedia('spain-madrid-2023/IMG_2349.jpeg')
+const img8bcb = getTravelMedia('spain-madrid-2023/8bcb2919-8bbb-4276-8648-476c5f61f13a.jpg')
+const img20230708 = getTravelMedia('spain-madrid-2023/20230708_103252.jpg')
+const img5103 = getTravelMedia('spain-madrid-2023/IMG_5103.jpeg')
+const img2487 = getTravelMedia('spain-madrid-2023/IMG_2487.jpeg')
+const img2503 = getTravelMedia('spain-madrid-2023/IMG_2503.jpeg')
+const img2511 = getTravelMedia('spain-madrid-2023/IMG_2511.jpeg')
+const img2524 = getTravelMedia('spain-madrid-2023/IMG_2524.jpeg')
+const img2535 = getTravelMedia('spain-madrid-2023/IMG_2535.jpeg')
+const img2545 = getTravelMedia('spain-madrid-2023/IMG_2545.jpeg')
+const img2577 = getTravelMedia('spain-madrid-2023/IMG_2577.jpeg')
+const img5133 = getTravelMedia('spain-madrid-2023/IMG_5133.jpeg')
+const img2675 = getTravelMedia('spain-madrid-2023/IMG_2675.jpeg')
+const img2684 = getTravelMedia('spain-madrid-2023/IMG_2684.jpeg')
+const img2688 = getTravelMedia('spain-madrid-2023/IMG_2688.jpeg')
+const img2693 = getTravelMedia('spain-madrid-2023/IMG_2693.jpeg')
+const img2695 = getTravelMedia('spain-madrid-2023/IMG_2695.jpeg')
+const img2697 = getTravelMedia('spain-madrid-2023/IMG_2697.jpeg')
+const imgWhatsApp = getTravelMedia('spain-madrid-2023/WhatsApp Image 2023-07-13 at 14.45.11.jpeg')
+const img2736 = getTravelMedia('spain-madrid-2023/IMG_2736.jpeg')
+const img2765 = getTravelMedia('spain-madrid-2023/IMG_2765.jpeg')
+const img2774 = getTravelMedia('spain-madrid-2023/IMG_2774.jpeg')
+const img148 = getTravelMedia('spain-madrid-2023/148EDBA8-B4B1-439C-BDCC-106C8F67DEED.jpg')
 const spainMadrid2023Photos = [
     {src: img2147},
     {src: img2153},
@@ -88,6 +93,7 @@ const spainMadrid2023Photos = [
     {src: img0985},
     {src: img1027},
     {src: img1303},
+    {src: img1071},
 ]
 
 export default spainMadrid2023Photos

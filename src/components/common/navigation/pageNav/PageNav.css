@@ -13,7 +13,41 @@
 }
 
 .navbutton {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.6rem;
+    display: grid;
+    place-content: center;
+    gap: 0.32rem;
+    color: var(--color-white);
+    background: transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
     z-index: 1001;
+}
+
+.navbutton > span {
+    width: 2rem;
+    height: 0.18rem;
+    display: block;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+        transform 0.25s ease,
+        opacity 0.2s ease;
+}
+
+.navbutton.is-open > span:first-child {
+    transform: translateY(0.5rem) rotate(45deg);
+}
+
+.navbutton.is-open > span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbutton.is-open > span:last-child {
+    transform: translateY(-0.5rem) rotate(-45deg);
 }
 
 .pagebar {
@@ -21,12 +55,11 @@
     top: 3.5rem;
     left: 0;
 
-    min-width: 9rem;
+    min-width: 13rem;
     padding: 1rem 1.5rem;
 
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    gap: 1rem;
 
     border-radius: 1rem;
 
@@ -39,6 +72,24 @@
     box-shadow: var(--liquid-shadow);
 
     animation: fadeIn 0.2s ease-in-out;
+}
+
+.pagebar__group {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.pagebar__group + .pagebar__group {
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--liquid-border-soft);
+}
+
+.pagebar__group > span {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .pagetext {

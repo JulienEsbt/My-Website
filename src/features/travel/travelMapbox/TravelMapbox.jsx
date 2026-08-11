@@ -1,99 +1,44 @@
 import React, {useEffect, useRef} from 'react'
-import mapboxgl from 'mapbox-gl'
+import {useTranslation} from 'react-i18next'
 import trips from '../../../data/travel/trips.js'
-import dreamDestinations from "../../../data/travel/dreamDestinations.js";
+import dreamDestinations from '../../../data/travel/dreamDestinations.js'
+import {createTravelMap} from '../../../services/mapbox/mapboxAdapter.js'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './TravelMapbox.css'
 
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-
 const TravelMapbox = ({expanded = false}) => {
+    const {t, i18n} = useTranslation('travel')
     const mapContainer = useRef(null)
     const mapRef = useRef(null)
+    const initialExpanded = useRef(expanded)
+    const language = i18n.resolvedLanguage?.startsWith('fr') ? 'fr' : 'en'
 
     useEffect(() => {
         if (!mapContainer.current || mapRef.current) return
 
         const initTimer = setTimeout(() => {
-            mapRef.current = new mapboxgl.Map({
+            mapRef.current = createTravelMap({
                 container: mapContainer.current,
-                style: 'mapbox://styles/mapbox/satellite-streets-v12',
-                center: [12, 43],
-                zoom: expanded ? 3.2 : 2.35,
-                pitch: expanded ? 42 : 28,
-                bearing: -10,
-                projection: 'globe',
-                attributionControl: false,
+                expanded: initialExpanded.current,
+                trips,
+                dreamDestinations,
+                language,
+                dreamLabel: t('explorer.legend.dream'),
+                navigationLabels: {
+                    zoomIn: t('explorer.mapControls.zoomIn'),
+                    zoomOut: t('explorer.mapControls.zoomOut'),
+                    resetBearing: t('explorer.mapControls.resetBearing'),
+                    closePopup: t('explorer.mapControls.closePopup'),
+                },
             })
-
-            mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
-
-            mapRef.current.on('load', () => {
-                mapRef.current.resize()
-            })
-
-            mapRef.current.on('style.load', () => {
-                mapRef.current.setFog({
-                    color: 'rgb(5, 10, 24)',
-                    'high-color': 'rgb(77, 181, 255)',
-                    'horizon-blend': 0.08,
-                    'space-color': 'rgb(2, 6, 18)',
-                    'star-intensity': 0.45,
-                })
-            })
-
-            trips.forEach((trip) => {
-                const markerEl = document.createElement('div')
-                markerEl.className = `mapbox-marker ${trip.category ?? 'visited'}`
-
-                new mapboxgl.Marker(markerEl)
-                    .setLngLat([trip.lng, trip.lat])
-                    .setPopup(
-                        new mapboxgl.Popup({offset: 20}).setHTML(`
-                            <div class="travel-mapbox-popup">
-                                <strong>${trip.flag} ${trip.city}</strong>
-                                <span>${trip.country} • ${trip.dateLabel}</span>
-                                <p>${trip.description}</p>
-                            </div>
-                        `)
-                    )
-                    .addTo(mapRef.current)
-            })
-
-            dreamDestinations.forEach((destination) => {
-                const markerEl = document.createElement('div')
-                markerEl.className = 'mapbox-marker dream'
-
-                new mapboxgl.Marker(markerEl)
-                    .setLngLat([destination.lng, destination.lat])
-                    .setPopup(
-                        new mapboxgl.Popup({offset: 20}).setHTML(`
-                            <div class="travel-mapbox-popup">
-                                <strong>${destination.emoji} ${destination.name}</strong>
-                                <span>Destination rêvée • ${destination.country}</span>
-                                <p>${destination.reason}</p>
-                            </div>
-                        `)
-                    )
-                    .addTo(mapRef.current)
-            })
-
-            const resizeObserver = new ResizeObserver(() => {
-                mapRef.current?.resize()
-            })
-
-            resizeObserver.observe(mapContainer.current)
-
-            mapRef.current.__resizeObserver = resizeObserver
         }, 100)
 
         return () => {
             clearTimeout(initTimer)
-            mapRef.current?.__resizeObserver?.disconnect()
-            mapRef.current?.remove()
+            mapRef.current?.destroy()
             mapRef.current = null
         }
-    }, [])
+    }, [language, t])
 
     useEffect(() => {
         const resize = () => mapRef.current?.resize()
@@ -114,6 +59,8 @@ const TravelMapbox = ({expanded = false}) => {
         <div
             ref={mapContainer}
             className={`travel-mapbox ${expanded ? 'expanded' : ''}`}
+            role="region"
+            aria-label={t('explorer.mapAccessibleLabel')}
         />
     )
 }

@@ -19,7 +19,11 @@ describe('SectionNav', () => {
                 <SectionNav
                     ariaLabel="Navigation de test"
                     items={[
-                        {id: 'intro', label: 'Introduction', icon: <svg data-testid="intro-icon" />},
+                        {
+                            id: 'intro',
+                            label: 'Introduction',
+                            icon: <svg data-testid="intro-icon" />,
+                        },
                         {id: 'details', label: 'Détails', icon: <svg data-testid="details-icon" />},
                     ]}
                 />
@@ -34,7 +38,27 @@ describe('SectionNav', () => {
             'aria-current',
             'location'
         )
-        expect(screen.getByTestId('intro-icon').parentElement).toHaveAttribute('aria-hidden', 'true')
+        expect(screen.getByTestId('intro-icon').parentElement).toHaveAttribute(
+            'aria-hidden',
+            'true'
+        )
         expect(window.scrollTo).toHaveBeenCalled()
+    })
+
+    it('permet de masquer une infobulle affichée au clavier', async () => {
+        const user = userEvent.setup()
+
+        render(
+            <SectionNav
+                ariaLabel="Navigation de test"
+                items={[{id: 'intro', label: 'Introduction', icon: <svg />}]}
+            />
+        )
+
+        const link = screen.getByRole('link', {name: 'Introduction'})
+        link.focus()
+        await user.keyboard('{Escape}')
+
+        expect(link).toHaveAttribute('data-tooltip-dismissed', 'true')
     })
 })

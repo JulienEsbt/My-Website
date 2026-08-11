@@ -5,9 +5,11 @@ const SkipLink = () => {
     const {t} = useTranslation('common')
 
     return (
-        <a className="skip-link" href="#main">
-            {t('accessibility.skipToContent')}
-        </a>
+        <nav className="skip-link-nav" aria-label={t('accessibility.quickAccess')}>
+            <a className="skip-link" href="#main">
+                {t('accessibility.skipToContent')}
+            </a>
+        </nav>
     )
 }
 

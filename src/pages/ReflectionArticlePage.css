@@ -29,11 +29,12 @@
 }
 
 .reflexion-article__shell::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 15% 0%, rgba(77, 181, 255, 0.11), transparent 32%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 42%);
+    background:
+        radial-gradient(circle at 15% 0%, rgba(77, 181, 255, 0.11), transparent 32%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 42%);
     pointer-events: none;
 }
 
@@ -55,7 +56,7 @@
     color: var(--color-primary);
     background: rgba(77, 181, 255, 0.08);
     border: 1px solid rgba(77, 181, 255, 0.18);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     font-weight: 700;
@@ -105,7 +106,7 @@
 }
 
 .reflexion-article__content h2::before {
-    content: "";
+    content: '';
     display: block;
     width: 2.7rem;
     height: 2px;
@@ -247,7 +248,7 @@
     justify-content: center;
     gap: 0.45rem;
 
-    height: 2.65rem;
+    min-height: 2.75rem;
     padding: 0 0.95rem;
     border-radius: 999px;
 
@@ -262,7 +263,7 @@
 }
 
 .reflexion-article__floating-actions button {
-    width: 2.65rem;
+    width: 2.75rem;
     padding: 0;
 }
 
@@ -286,8 +287,8 @@
 
     .reflexion-article__floating-actions a,
     .reflexion-article__floating-actions button {
-        width: 2.7rem;
-        height: 2.7rem;
+        width: 2.75rem;
+        height: 2.75rem;
         padding: 0;
     }
 }
@@ -309,11 +310,7 @@
     height: 100%;
     width: 0;
 
-    background: linear-gradient(
-            90deg,
-            var(--color-primary),
-            rgba(124, 92, 255, 0.95)
-    );
+    background: linear-gradient(90deg, var(--color-primary), rgba(124, 92, 255, 0.95));
 
     box-shadow: 0 0 1rem rgba(77, 181, 255, 0.75);
     transition: width 0.08s linear;

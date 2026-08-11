@@ -10,6 +10,14 @@ export default [
     },
     js.configs.recommended,
     {
+        files: ['scripts/**/*.{js,mjs,cjs}'],
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            globals: globals.node,
+        },
+    },
+    {
         files: ['**/*.{js,jsx}'],
         languageOptions: {
             ecmaVersion: 'latest',
@@ -33,10 +41,13 @@ export default [
             ...reactHooks.configs.recommended.rules,
             ...reactRefresh.configs.vite.rules,
             'react/prop-types': 'off',
-            'no-unused-vars': ['error', {
-                argsIgnorePattern: '^_',
-                varsIgnorePattern: '^React$',
-            }],
+            'no-unused-vars': [
+                'error',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^React$',
+                },
+            ],
         },
         settings: {
             react: {version: 'detect'},

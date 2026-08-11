@@ -20,8 +20,10 @@ function createPopupContent({title, meta, description}) {
 }
 
 function addMarker(map, {className, coordinates, popup}) {
-    const marker = document.createElement('div')
+    const marker = document.createElement('button')
+    marker.type = 'button'
     marker.className = className
+    marker.setAttribute('aria-label', `${popup.title} — ${popup.meta}`)
 
     new mapboxgl.Marker(marker)
         .setLngLat(coordinates)
@@ -29,7 +31,15 @@ function addMarker(map, {className, coordinates, popup}) {
         .addTo(map)
 }
 
-export function createTravelMap({container, expanded, trips, dreamDestinations}) {
+export function createTravelMap({
+    container,
+    expanded,
+    trips,
+    dreamDestinations,
+    language = 'fr',
+    dreamLabel = 'Destination rêvée',
+    navigationLabels = {},
+}) {
     mapboxgl.accessToken = MAPBOX_TOKEN
 
     const map = new mapboxgl.Map({
@@ -41,7 +51,19 @@ export function createTravelMap({container, expanded, trips, dreamDestinations})
         bearing: -10,
         projection: 'globe',
         attributionControl: false,
+        locale: {
+            'NavigationControl.ZoomIn': navigationLabels.zoomIn,
+            'NavigationControl.ZoomOut': navigationLabels.zoomOut,
+            'NavigationControl.ResetBearing': navigationLabels.resetBearing,
+            'Popup.CloseButton': navigationLabels.closePopup,
+        },
     })
+
+    const canvas = map.getCanvas()
+    canvas.setAttribute('aria-hidden', 'true')
+    canvas.removeAttribute('aria-label')
+    canvas.removeAttribute('role')
+    canvas.tabIndex = -1
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right')
     map.on('load', () => map.resize())
@@ -56,25 +78,37 @@ export function createTravelMap({container, expanded, trips, dreamDestinations})
     })
 
     trips.forEach((trip) => {
+        const city = language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)
+        const country = language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
+        const dateLabel = language === 'fr' ? trip.dateLabel : (trip.dateLabelEn ?? trip.dateLabel)
+        const description =
+            language === 'fr' ? trip.description : (trip.descriptionEn ?? trip.description)
+
         addMarker(map, {
             className: `mapbox-marker ${trip.category ?? 'visited'}`,
             coordinates: [trip.lng, trip.lat],
             popup: {
-                title: `${trip.flag} ${trip.city}`,
-                meta: `${trip.country} • ${trip.dateLabel}`,
-                description: trip.description,
+                title: city,
+                meta: `${country} • ${dateLabel}`,
+                description,
             },
         })
     })
 
     dreamDestinations.forEach((destination) => {
+        const name = language === 'fr' ? destination.name : (destination.nameEn ?? destination.name)
+        const country =
+            language === 'fr' ? destination.country : (destination.countryEn ?? destination.country)
+        const description =
+            language === 'fr' ? destination.reason : (destination.reasonEn ?? destination.reason)
+
         addMarker(map, {
             className: 'mapbox-marker dream',
             coordinates: [destination.lng, destination.lat],
             popup: {
-                title: `${destination.emoji} ${destination.name}`,
-                meta: `Destination rêvée • ${destination.country}`,
-                description: destination.reason,
+                title: name,
+                meta: `${dreamLabel} • ${country}`,
+                description,
             },
         })
     })

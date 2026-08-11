@@ -9,7 +9,7 @@ import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
 import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import {HOME_ASSETS} from '../config/homeAssets.js'
 import {LINKS} from '../config/links.js'
-import './BrunoPizzaCaseStudyPage.css'
+import './CaseStudyPage.css'
 
 const SOLUTION_ITEMS = ['dashboard', 'workshop', 'settings']
 const ARCHITECTURE_STEPS = ['excel', 'react', 'express', 'sqlite', 'electron']
@@ -48,7 +48,7 @@ export default function BrunoPizzaCaseStudyPage() {
                 <div className="container case-study__visual">
                     <ResponsiveImage
                         media={HOME_ASSETS.portfolio.brunoPizza}
-                        alt={t('bruno.hero.title')}
+                        alt={t('bruno.hero.imageAlt')}
                         sizes="(max-width: 900px) 92vw, 1100px"
                         loading="eager"
                         fetchPriority="high"

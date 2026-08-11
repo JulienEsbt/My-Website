@@ -1,13 +1,17 @@
 import React from 'react'
+import {MotionConfig} from 'framer-motion'
 import {BrowserRouter} from 'react-router-dom'
 import Router from './app/router.jsx'
-import ScrollToTop from './components/common/scrollToTop/ScrollToTop'
+import AppShell from './app/AppShell.jsx'
 
 const App = () => (
-    <BrowserRouter>
-        <ScrollToTop/>
-        <Router/>
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+        <BrowserRouter>
+            <AppShell>
+                <Router />
+            </AppShell>
+        </BrowserRouter>
+    </MotionConfig>
 )
 
 export default App

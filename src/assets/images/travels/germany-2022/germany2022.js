@@ -1,19 +1,23 @@
-import img2083 from './IMG_2083.jpeg'
-import img2086 from './IMG_2086.jpeg'
-import img2093 from './IMG_2093.jpeg'
-import img2096 from './IMG_2096.jpeg'
-import img2097 from './IMG_2097.jpeg'
-import img2103 from './IMG_2103.jpeg'
-import img2105 from './IMG_2105.jpeg'
-import img2205 from './IMG_2205.jpeg'
-import img2107 from './IMG_2107.jpeg'
-import img2108 from './IMG_2108.jpeg'
-import img2114 from './IMG_2114.jpeg'
-import img2119 from './IMG_2119.jpeg'
-import img2131 from './IMG_2131.jpeg'
-import img2147 from './IMG_2147.jpeg'
-import img2166 from './IMG_2166.jpeg'
+import albumManifest from '../../../../generated/media/travels/germany-2022.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img2083 = getTravelMedia('germany-2022/IMG_2083.jpeg')
+const img2086 = getTravelMedia('germany-2022/IMG_2086.jpeg')
+const img2093 = getTravelMedia('germany-2022/IMG_2093.jpeg')
+const img2096 = getTravelMedia('germany-2022/IMG_2096.jpeg')
+const img2097 = getTravelMedia('germany-2022/IMG_2097.jpeg')
+const img2103 = getTravelMedia('germany-2022/IMG_2103.jpeg')
+const img2105 = getTravelMedia('germany-2022/IMG_2105.jpeg')
+const img2205 = getTravelMedia('germany-2022/IMG_2205.jpeg')
+const img2107 = getTravelMedia('germany-2022/IMG_2107.jpeg')
+const img2108 = getTravelMedia('germany-2022/IMG_2108.jpeg')
+const img2114 = getTravelMedia('germany-2022/IMG_2114.jpeg')
+const img2119 = getTravelMedia('germany-2022/IMG_2119.jpeg')
+const img2131 = getTravelMedia('germany-2022/IMG_2131.jpeg')
+const img2147 = getTravelMedia('germany-2022/IMG_2147.jpeg')
+const img2166 = getTravelMedia('germany-2022/IMG_2166.jpeg')
 const germany2022Photos = [
     {src: img2083},
     {src: img2086},

@@ -1,7 +1,10 @@
-import React, {useMemo, useState} from 'react'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import {FiArrowLeft} from 'react-icons/fi'
+import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
+import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {CRYPTO_KNOWLEDGE} from '../../../data/web3/knowledge.js'
 import './Knowledge.css'
 
@@ -13,6 +16,18 @@ const Knowledge = () => {
     const [mobilePanelOpen, setMobilePanelOpen] = useState(false)
     const [panelAnimationKey, setPanelAnimationKey] = useState(0)
     const [isClosingPanel, setIsClosingPanel] = useState(false)
+    const closeTimerRef = useRef(null)
+    const panelRef = useRef(null)
+    const backButtonRef = useRef(null)
+    const isMobilePanel = useMediaQuery('(max-width: 560px)')
+    const isPanelUnavailable = isMobilePanel && !mobilePanelOpen
+
+    useEffect(
+        () => () => {
+            clearTimeout(closeTimerRef.current)
+        },
+        []
+    )
 
     const activeCategory = useMemo(
         () => CRYPTO_KNOWLEDGE.find((category) => category.id === activeCategoryId),
@@ -36,15 +51,25 @@ const Knowledge = () => {
     const closeMobilePanel = () => {
         setIsClosingPanel(true)
 
-        setTimeout(() => {
+        clearTimeout(closeTimerRef.current)
+        closeTimerRef.current = setTimeout(() => {
             setMobilePanelOpen(false)
             setIsClosingPanel(false)
         }, 220)
     }
 
+    useFocusTrap({
+        active: isMobilePanel && mobilePanelOpen,
+        containerRef: panelRef,
+        initialFocusRef: backButtonRef,
+        onDismiss: closeMobilePanel,
+    })
+
+    useBodyScrollLock(isMobilePanel && mobilePanelOpen)
+
     return (
         <section id="knowledge">
-            <h5>{t('knowledge.kicker')}</h5>
+            <p className="section-kicker">{t('knowledge.kicker')}</p>
             <h2>{t('knowledge.title')}</h2>
 
             <div className="container knowledge-v3">
@@ -61,6 +86,7 @@ const Knowledge = () => {
                             whileInView={{opacity: 1, y: 0}}
                             viewport={{once: true}}
                             transition={{duration: 0.35, delay: index * 0.05}}
+                            aria-pressed={activeCategoryId === category.id}
                         >
                             <span>{category.icon}</span>
 
@@ -76,25 +102,35 @@ const Knowledge = () => {
 
                 {activeCategory && activeItem && (
                     <motion.article
+                        ref={panelRef}
                         key={`${activeCategory.id}-${activeItem.id}-${panelAnimationKey}`}
                         className={`knowledge-v3__panel ${mobilePanelOpen ? 'mobile-open' : ''} ${isClosingPanel ? 'closing' : ''}`}
                         initial={{opacity: 0, y: 24}}
                         animate={{opacity: 1, y: 0}}
                         transition={{duration: 0.35}}
+                        role={isMobilePanel && mobilePanelOpen ? 'dialog' : undefined}
+                        aria-modal={isMobilePanel && mobilePanelOpen ? 'true' : undefined}
+                        aria-hidden={isPanelUnavailable ? 'true' : undefined}
+                        inert={isPanelUnavailable ? '' : undefined}
+                        aria-labelledby="knowledge-panel-title"
+                        tabIndex={isMobilePanel && mobilePanelOpen ? -1 : undefined}
                     >
                         <button
+                            ref={backButtonRef}
                             type="button"
                             className="knowledge-v3__back"
                             onClick={closeMobilePanel}
                         >
-                            <FiArrowLeft/>
-                            Retour
+                            <FiArrowLeft />
+                            {t('knowledge.back')}
                         </button>
                         <div className="knowledge-v3__panel-header">
                             <span>{activeCategory.icon}</span>
 
                             <div>
-                                <h3>{t(`knowledge.categories.${activeCategory.id}.title`)}</h3>
+                                <h3 id="knowledge-panel-title">
+                                    {t(`knowledge.categories.${activeCategory.id}.title`)}
+                                </h3>
                                 <p>{t(`knowledge.categories.${activeCategory.id}.description`)}</p>
                             </div>
                         </div>
@@ -112,8 +148,11 @@ const Knowledge = () => {
                                         setMobilePanelOpen(true)
                                         setPanelAnimationKey((key) => key + 1)
                                     }}
+                                    aria-pressed={activeItem.id === item.id}
                                 >
-                                    {t(`knowledge.categories.${activeCategory.id}.items.${item.id}.name`)}
+                                    {t(
+                                        `knowledge.categories.${activeCategory.id}.items.${item.id}.name`
+                                    )}
                                 </button>
                             ))}
                         </div>
@@ -126,16 +165,18 @@ const Knowledge = () => {
                             transition={{duration: 0.3}}
                         >
                             <div className="knowledge-v3__detail-main">
-                                <div className="knowledge-v3__detail-icon">
-                                    {activeItem.icon}
-                                </div>
+                                <div className="knowledge-v3__detail-icon">{activeItem.icon}</div>
 
                                 <div>
                                     <h4>
-                                        {t(`knowledge.categories.${activeCategory.id}.items.${activeItem.id}.name`)}
+                                        {t(
+                                            `knowledge.categories.${activeCategory.id}.items.${activeItem.id}.name`
+                                        )}
                                     </h4>
                                     <p>
-                                        {t(`knowledge.categories.${activeCategory.id}.items.${activeItem.id}.description`)}
+                                        {t(
+                                            `knowledge.categories.${activeCategory.id}.items.${activeItem.id}.description`
+                                        )}
                                     </p>
                                 </div>
                             </div>

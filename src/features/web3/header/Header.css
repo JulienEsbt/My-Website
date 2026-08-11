@@ -9,12 +9,27 @@ header {
     position: relative;
 }
 
+.hero__copy {
+    padding-top: clamp(6rem, 13vh, 9rem);
+}
+
 /* ==================== HeaderCTA ==================== */
 .cta {
     margin-top: 2.5rem;
     display: flex;
     gap: 1.2rem;
     justify-content: center;
+}
+
+.web3-cta {
+    flex-wrap: wrap;
+}
+
+.web3-cta__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
 }
 
 /* ==================== ME ==================== */
@@ -40,28 +55,14 @@ header {
     font-size: 0.9rem;
 }
 
-.icon {
-    padding: 1rem 1.5rem;
-    border-radius: 1.2rem;
-    border: 1px solid var(--color-primary);
-    transition: var(--transition);
-}
-
-.icon:hover {
-    background: var(--color-white);
-    color: var(--color-bg);
-    border-color: transparent;
-}
-
-.icon-primary {
-    background: var(--color-primary);
-    color: var(--color-bg);
-}
-
 /* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
 @media screen and (max-width: 1024px) {
     header {
         height: 68vh;
+    }
+
+    .hero__copy {
+        padding-top: clamp(4.5rem, 10vh, 6.5rem);
     }
 }
 
@@ -69,6 +70,19 @@ header {
 @media screen and (max-width: 600px) {
     header {
         height: 100vh;
+    }
+
+    .hero__copy {
+        padding-top: 5.5rem;
+    }
+
+    .web3-cta {
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+
+    .web3-cta__button {
+        width: min(100%, 18rem);
     }
 
     .scroll__down {
@@ -81,6 +95,12 @@ header {
     left: 15rem;
     top: 40%;
     z-index: 10;
+}
+
+@media (max-width: 1400px) {
+    .web3-header__socials-wrapper {
+        left: 2rem;
+    }
 }
 
 @media (max-width: 1024px) {

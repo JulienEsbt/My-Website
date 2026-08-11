@@ -49,13 +49,17 @@ const renderMetadata = (template, seo) => {
 
     if (seo.structuredData) {
         const json = JSON.stringify(seo.structuredData).replaceAll('<', '\\u003c')
-        html = html.replace('</head>', `        <script type="application/ld+json">${json}</script>\n    </head>`)
+        html = html.replace(
+            '</head>',
+            `        <script type="application/ld+json">${json}</script>\n    </head>`
+        )
     }
 
     return html
 }
 
 const template = await readFile(join(dist, 'index.html'), 'utf8')
+await writeFile(join(dist, 'index.html'), renderMetadata(template, getSeoMetadata('/', 'fr')))
 
 for (const path of INDEXABLE_PATHS) {
     if (path === '/') continue

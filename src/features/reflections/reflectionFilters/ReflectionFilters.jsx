@@ -8,12 +8,14 @@ const ReflectionFilters = ({filters, activeFilter, onFilterChange}) => {
             {filters.map((filter) => (
                 <motion.button
                     key={filter.value}
+                    type="button"
                     className={`reflexion-filter ${activeFilter === filter.value ? 'active' : ''}`}
                     onClick={() => onFilterChange(filter.value)}
                     initial={{opacity: 0, y: 14}}
                     whileInView={{opacity: 1, y: 0}}
                     viewport={{once: true}}
                     transition={{duration: 0.35, delay: 0.04 * filters.indexOf(filter)}}
+                    aria-pressed={activeFilter === filter.value}
                 >
                     {filter.label}
                 </motion.button>

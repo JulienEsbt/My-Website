@@ -12,10 +12,12 @@ const dreamDestinations = [
         labelEn: 'In her footsteps',
         lat: 28.3949,
         lng: 84.124,
-        short: "Un voyage profondément personnel, vers le village d’Hewa et l’école liée à l’engagement de ma mère.",
-        shortEn: "A deeply personal journey to Hewa village and the school connected to my mother’s commitment.",
-        reason: "Le Népal n’est pas seulement une destination de rêve. C’est un lieu intime, presque symbolique, où j’aimerais aller pour découvrir Hewa, voir l’école construite grâce à l’engagement de ma mère et marcher, d’une certaine manière, sur une partie de ses traces.",
-        reasonEn: "Nepal is not only a dream destination. It is an intimate and symbolic place where I would like to discover Hewa, see the school built thanks to my mother’s commitment, and in a way, walk through part of her story.",
+        short: 'Un voyage profondément personnel, vers le village d’Hewa et l’école liée à l’engagement de ma mère.',
+        shortEn:
+            'A deeply personal journey to Hewa village and the school connected to my mother’s commitment.',
+        reason: 'Le Népal n’est pas seulement une destination de rêve. C’est un lieu intime, presque symbolique, où j’aimerais aller pour découvrir Hewa, voir l’école construite grâce à l’engagement de ma mère et marcher, d’une certaine manière, sur une partie de ses traces.',
+        reasonEn:
+            'Nepal is not only a dream destination. It is an intimate and symbolic place where I would like to discover Hewa, see the school built thanks to my mother’s commitment, and in a way, walk through part of her story.',
     },
     {
         id: 'baikonur',
@@ -30,10 +32,12 @@ const dreamDestinations = [
         labelEn: 'Space dream',
         lat: 45.9646,
         lng: 63.3052,
-        short: "Voir les navettes Bourane et la fusée Energia abandonnées dans leurs hangars mythiques.",
-        shortEn: "Seeing the abandoned Buran shuttles and Energia rocket inside their legendary hangars.",
-        reason: "Entre passion spatiale, histoire soviétique et fascination pour les lieux interdits, Baïkonour représente un rêve presque irréel : approcher les navettes Bourane et la fusée Energia abandonnées dans leurs immenses hangars.",
-        reasonEn: "Between space passion, Soviet history and fascination for forbidden places, Baikonur feels almost unreal: getting close to the abandoned Buran shuttles and Energia rocket inside their huge hangars.",
+        short: 'Voir les navettes Bourane et la fusée Energia abandonnées dans leurs hangars mythiques.',
+        shortEn:
+            'Seeing the abandoned Buran shuttles and Energia rocket inside their legendary hangars.',
+        reason: 'Entre passion spatiale, histoire soviétique et fascination pour les lieux interdits, Baïkonour représente un rêve presque irréel : approcher les navettes Bourane et la fusée Energia abandonnées dans leurs immenses hangars.',
+        reasonEn:
+            'Between space passion, Soviet history and fascination for forbidden places, Baikonur feels almost unreal: getting close to the abandoned Buran shuttles and Energia rocket inside their huge hangars.',
     },
     {
         id: 'chernobyl',
@@ -48,10 +52,12 @@ const dreamDestinations = [
         labelEn: 'Frozen memory',
         lat: 51.2763,
         lng: 30.2219,
-        short: "Un rêve ancien : découvrir Tchernobyl, Prypiat et cette mémoire abandonnée dans le temps.",
-        shortEn: "A long-time dream: discovering Chernobyl, Pripyat and this memory abandoned in time.",
-        reason: "Tchernobyl me fascine depuis des années. Pas seulement pour l’urbex, mais pour l’histoire, la mémoire, le silence de Prypiat et cette impression unique d’un lieu où le temps semble s’être arrêté.",
-        reasonEn: "Chernobyl has fascinated me for years. Not only for urbex, but for its history, memory, the silence of Pripyat and the unique feeling of a place where time seems to have stopped.",
+        short: 'Un rêve ancien : découvrir Tchernobyl, Prypiat et cette mémoire abandonnée dans le temps.',
+        shortEn:
+            'A long-time dream: discovering Chernobyl, Pripyat and this memory abandoned in time.',
+        reason: 'Tchernobyl me fascine depuis des années. Pas seulement pour l’urbex, mais pour l’histoire, la mémoire, le silence de Prypiat et cette impression unique d’un lieu où le temps semble s’être arrêté.',
+        reasonEn:
+            'Chernobyl has fascinated me for years. Not only for urbex, but for its history, memory, the silence of Pripyat and the unique feeling of a place where time seems to have stopped.',
     },
     {
         id: 'kyrgyzstan',
@@ -66,10 +72,11 @@ const dreamDestinations = [
         labelEn: 'Great outdoors',
         lat: 41.2044,
         lng: 74.7661,
-        short: "Montagnes, steppes, culture nomade et paysages immenses d’Asie centrale.",
-        shortEn: "Mountains, steppes, nomadic culture and vast Central Asian landscapes.",
-        reason: "Le Kirghizistan m’attire pour quelque chose de très simple : l’immensité. Des montagnes sauvages, des steppes, une culture nomade et cette impression d’un pays brut, silencieux, vaste et profondément dépaysant.",
-        reasonEn: "Kyrgyzstan attracts me for something very simple: immensity. Wild mountains, steppes, nomadic culture and the feeling of a raw, silent, vast and deeply disorienting country.",
+        short: 'Montagnes, steppes, culture nomade et paysages immenses d’Asie centrale.',
+        shortEn: 'Mountains, steppes, nomadic culture and vast Central Asian landscapes.',
+        reason: 'Le Kirghizistan m’attire pour quelque chose de très simple : l’immensité. Des montagnes sauvages, des steppes, une culture nomade et cette impression d’un pays brut, silencieux, vaste et profondément dépaysant.',
+        reasonEn:
+            'Kyrgyzstan attracts me for something very simple: immensity. Wild mountains, steppes, nomadic culture and the feeling of a raw, silent, vast and deeply disorienting country.',
     },
     {
         id: 'china',
@@ -84,10 +91,11 @@ const dreamDestinations = [
         labelEn: 'Vast civilization',
         lat: 35.8617,
         lng: 104.1954,
-        short: "Un pays immense, entre histoire, technologie, géopolitique et vertige culturel.",
-        shortEn: "A vast country between history, technology, geopolitics and cultural depth.",
-        reason: "La Chine m’attire par son immensité, son histoire, sa technologie, sa puissance géopolitique et la richesse d’une civilisation qui semble impossible à comprendre sans l’avoir vécue de l’intérieur.",
-        reasonEn: "China attracts me through its immensity, history, technology, geopolitical power and the richness of a civilization that seems impossible to understand without experiencing it from within.",
+        short: 'Un pays immense, entre histoire, technologie, géopolitique et vertige culturel.',
+        shortEn: 'A vast country between history, technology, geopolitics and cultural depth.',
+        reason: 'La Chine m’attire par son immensité, son histoire, sa technologie, sa puissance géopolitique et la richesse d’une civilisation qui semble impossible à comprendre sans l’avoir vécue de l’intérieur.',
+        reasonEn:
+            'China attracts me through its immensity, history, technology, geopolitical power and the richness of a civilization that seems impossible to understand without experiencing it from within.',
     },
     {
         id: 'southeast-asia',
@@ -102,10 +110,12 @@ const dreamDestinations = [
         labelEn: 'Slow travel',
         lat: 14.0583,
         lng: 108.2772,
-        short: "Partir plusieurs mois en backpack, sans itinéraire rigide, au rythme des rencontres.",
-        shortEn: "Backpacking for several months, without a rigid itinerary, following encounters and curiosity.",
-        reason: "Mon rêve serait de parcourir l’Asie du Sud-Est en backpack pendant plusieurs mois, sans itinéraire trop rigide, en découvrant les cultures, les paysages, la cuisine et les modes de vie locaux au fil des rencontres.",
-        reasonEn: "My dream would be to backpack across Southeast Asia for several months, without a rigid itinerary, discovering cultures, landscapes, food and local ways of life through encounters.",
+        short: 'Partir plusieurs mois en backpack, sans itinéraire rigide, au rythme des rencontres.',
+        shortEn:
+            'Backpacking for several months, without a rigid itinerary, following encounters and curiosity.',
+        reason: 'Mon rêve serait de parcourir l’Asie du Sud-Est en backpack pendant plusieurs mois, sans itinéraire trop rigide, en découvrant les cultures, les paysages, la cuisine et les modes de vie locaux au fil des rencontres.',
+        reasonEn:
+            'My dream would be to backpack across Southeast Asia for several months, without a rigid itinerary, discovering cultures, landscapes, food and local ways of life through encounters.',
     },
 ]
 

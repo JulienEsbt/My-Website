@@ -1,17 +1,17 @@
-import mediaManifest from '../generated/mediaManifest.json'
+export function createMediaResolver(manifest, domain) {
+    const mediaBySource = new Map(manifest.map((media) => [media.source, media]))
 
-const mediaBySource = new Map(mediaManifest.map((media) => [media.source, media]))
+    return (relativeSource) => {
+        const source = `src/assets/images/${domain}/${relativeSource}`
+        const media = mediaBySource.get(source)
 
-export function getMedia(relativeSource) {
-    const source = `src/assets/images/${relativeSource}`
-    const media = mediaBySource.get(source)
+        if (!media) {
+            throw new Error(`Média généré introuvable pour ${domain}/${relativeSource}`)
+        }
 
-    if (!media) {
-        throw new Error(`Média généré introuvable pour ${relativeSource}`)
-    }
-
-    return {
-        ...media,
-        id: relativeSource,
+        return {
+            ...media,
+            id: `${domain}/${relativeSource}`,
+        }
     }
 }

@@ -1,199 +1,211 @@
 {
-  "site": {
-    "title": "Julien Esterbet — Portfolio"
-  },
-  "header": {
-    "name": {
-      "first": "Julien",
-      "last": "Esterbet"
+    "site": {
+        "title": "Julien Esterbet — Portfolio"
     },
-    "portraitAlt": "Portrait of Julien Esterbet",
-    "eyebrow": "Hi, I'm",
-    "subtitle": "Software Developer • Web3 • FinTech",
-    "description": "I like building tools, understanding the world around me, and exploring the ideas that shape our society — with the desire to contribute, in my own way, to something fairer and more useful.",
-    "badges": {
-      "badge1": "Software Engineering",
-      "badge2": "Web3",
-      "badge3": "Information Systems",
-      "badge4": "Philosophy",
-      "badge5": "Sociology",
-      "badge6": "Economics & politics"
-    },
-    "identity": {
-      "role": "Learn • Build • Question",
-      "focus": "Curious about technical and human systems"
-    }
-  },
-  "cta": {
-    "aria": "Primary actions",
-    "contact": "Contact me",
-    "web3": "Explore Web3",
-    "cv": "Open resume"
-  },
-  "experience": {
-    "kicker": "Skills",
-    "title": "What I can build",
-    "intro": "A full-stack foundation focused on business applications, information systems and Web3 integrations.",
-    "levels": {
-      "strong": "Strong",
-      "good": "Comfortable",
-      "learning": "Learning"
-    },
-    "groups": {
-      "frontend": {
-        "title": "Frontend",
-        "description": "Modern interfaces, reusable components and clean user experiences.",
-        "skills": {
-          "react": "React",
-          "typescript": "TypeScript",
-          "angular": "Angular",
-          "motion": "GSAP / Framer Motion"
+    "header": {
+        "name": {
+            "first": "Julien",
+            "last": "Esterbet"
+        },
+        "portraitAlt": "Portrait of Julien Esterbet",
+        "eyebrow": "Product-minded full-stack developer",
+        "subtitle": "Business applications • FinTech • Web3",
+        "description": "I build web applications and business tools, from Java / Spring backends to React interfaces, with a particular interest in FinTech products and Web3 integrations.",
+        "badges": {
+            "badge1": "React & TypeScript",
+            "badge2": "Java & Spring",
+            "badge3": "Solidity & ethers.js",
+            "badge4": "Philosophy",
+            "badge5": "Sociology",
+            "badge6": "Economics & politics"
+        },
+        "identity": {
+            "role": "Design • Build • Improve",
+            "focus": "Useful, clear and maintainable products"
         }
-      },
-      "backend": {
-        "title": "Backend & IS",
-        "description": "APIs, batch processes, business logic, data processing and integration with existing systems.",
-        "skills": {
-          "java": "Java / Spring",
-          "sql": "SQL",
-          "apis": "REST APIs",
-          "batch": "Business batches"
+    },
+    "cta": {
+        "aria": "Primary actions",
+        "contact": "Contact me",
+        "web3": "Explore Web3 Labs",
+        "cv": "Open resume"
+    },
+    "experience": {
+        "kicker": "Skills",
+        "title": "What I can build",
+        "intro": "A full-stack foundation focused on business applications, information systems and Web3 integrations.",
+        "levels": {
+            "strong": "Strong",
+            "good": "Comfortable",
+            "learning": "Learning"
+        },
+        "groups": {
+            "frontend": {
+                "title": "Frontend",
+                "description": "Modern interfaces, reusable components and clean user experiences.",
+                "skills": {
+                    "react": "React",
+                    "typescript": "TypeScript",
+                    "angular": "Angular",
+                    "motion": "GSAP / Framer Motion"
+                }
+            },
+            "backend": {
+                "title": "Backend & IS",
+                "description": "APIs, batch processes, business logic, data processing and integration with existing systems.",
+                "skills": {
+                    "java": "Java / Spring",
+                    "sql": "SQL",
+                    "apis": "REST APIs",
+                    "batch": "Business batches"
+                }
+            },
+            "web3": {
+                "title": "Blockchain & Web3",
+                "description": "Smart contracts, wallet integrations, on-chain data and decentralized application design.",
+                "skills": {
+                    "solidity": "Solidity",
+                    "ethers": "ethers.js",
+                    "hardhat": "Hardhat",
+                    "onchain": "Smart contracts"
+                }
+            }
         }
-      },
-      "web3": {
-        "title": "Blockchain & Web3",
-        "description": "Smart contracts, wallet integrations, on-chain data and decentralized application design.",
-        "skills": {
-          "solidity": "Solidity",
-          "ethers": "ethers.js",
-          "hardhat": "Hardhat",
-          "onchain": "Smart contracts"
+    },
+    "services": {
+        "kicker": "Background and method",
+        "title": "Where I come from, how I work",
+        "intro": "A background at the crossroads of computer science, finance and Web3, extended through software work in demanding business environments.",
+        "groups": {
+            "background": {
+                "title": "Hybrid education",
+                "description": "A technical foundation complemented by finance and blockchain technologies.",
+                "items": {
+                    "education": "Education at the crossroads of computer science, finance and Web3",
+                    "academic": "Academic projects kept as learning evidence without presenting them as products",
+                    "perspective": "A lasting interest in the economic, social and political impact of technology"
+                }
+            },
+            "work": {
+                "title": "Business practice",
+                "description": "Current experience in life insurance, working with real systems and operational needs.",
+                "items": {
+                    "interfaces": "Building and evolving business web interfaces",
+                    "batch": "Batch processing and workflow automation",
+                    "documents": "Contributing to document management systems",
+                    "integration": "Integrating with existing information systems"
+                }
+            },
+            "method": {
+                "title": "Working method",
+                "description": "Understand the need, move through verifiable steps and make limitations explicit.",
+                "items": {
+                    "frame": "Frame the problem, users and useful scope",
+                    "iterate": "Build in clear increments instead of working through a long tunnel",
+                    "verify": "Test behavior, accessibility, security and performance according to risk",
+                    "document": "Document decisions, trade-offs and remaining improvements"
+                }
+            }
         }
-      }
+    },
+    "portfolio": {
+        "kicker": "Selected projects",
+        "title": "What I have built",
+        "intro": "An active business product, this continuously evolving portfolio and an academic Web3 prototype, each presented with its actual status.",
+        "cta": "View code",
+        "caseStudy": "View case study",
+        "demo": "View site",
+        "tags": {
+            "react": "React",
+            "typescript": "TypeScript",
+            "electron": "Electron",
+            "express": "Express",
+            "sqlite": "SQLite",
+            "solidity": "Solidity",
+            "evm": "EVM",
+            "storage": "On-chain storage",
+            "vite": "Vite",
+            "i18n": "FR / EN",
+            "accessibility": "Accessibility",
+            "vercel": "Vercel"
+        },
+        "items": {
+            "1": {
+                "type": "Active product",
+                "title": "Bruno Pizza — Production",
+                "description": "A local desktop application that imports and validates an Excel plan, organizes production by distributor and guides preparation pizza by pizza."
+            },
+            "2": {
+                "type": "Active portfolio",
+                "title": "My-Website",
+                "description": "A bilingual React and Vite portfolio currently being rebuilt around route-based architecture, responsive media and a documented RGAA approach."
+            },
+            "3": {
+                "type": "Academic prototype",
+                "title": "On-chain file archiving",
+                "description": "An academic EVM prototype exploring the timestamping of public document references through a smart contract."
+            }
+        }
+    },
+    "about": {
+        "photoAlt": "Julien and two students during a project presentation",
+        "headingSmall": "Getting to know me",
+        "heading": "About",
+        "caption": {
+            "title": "Hybrid profile",
+            "text": "Between software development, business systems and critical thinking."
+        },
+        "cards": {
+            "expertiseTitle": "Develop",
+            "expertiseText": "Business apps, web interfaces, batch processes and APIs",
+            "collabTitle": "Understand",
+            "collabText": "Technical systems, organizations and human challenges",
+            "innovationTitle": "Connect",
+            "innovationText": "Code, ideas, use cases and concrete impact"
+        },
+        "bio": "I am a software developer, with a background at the crossroads of <b>computer science</b>, <b>finance</b> and <b>Web3 technologies</b>. Today, I work in the life insurance sector, where I contribute to business projects, web interfaces, batch processes and document systems.<br/><br/>But my interest does not stop at code. I like understanding systems: technical, economic, social and political. What motivates me is building useful tools, but also thinking about the role technology can play in our lives and in society.<br/><br/>This portfolio brings together several sides of who I am: my developer journey, my projects, my interest in Web3, but also my reflections, travels and the ideas that shape me."
+    },
+    "goals": {
+        "kicker": "A bit more personal",
+        "title": "What drives me",
+        "intro": "Beyond code, these are the ideas that shape my path: building, learning, questioning, discovering and moving forward without losing myself.",
+        "items": {
+            "build": {
+                "name": "Build",
+                "review": "Create tools, systems and concrete projects. I like turning abstract ideas into things that actually exist."
+            },
+            "learn": {
+                "name": "Learn",
+                "review": "Understand technology, economics, philosophy, politics and the systems that shape our lives."
+            },
+            "think": {
+                "name": "Question",
+                "review": "Not taking things for granted. Thinking about meaning, usage and the consequences of what we build."
+            },
+            "travel": {
+                "name": "Discover",
+                "review": "Travel, encounter other ways of living and remember that my own world is never the only possible one."
+            },
+            "succeed": {
+                "name": "Move forward",
+                "review": "For me, success means growing without betraying myself: learning, creating, failing, starting again and staying aligned."
+            }
+        },
+        "label": "Direction",
+        "carouselAria": "What drives me",
+        "pause": "Pause automatic scrolling",
+        "resume": "Resume automatic scrolling",
+        "paginationBullet": "Go to slide {index}"
+    },
+    "nav": {
+        "aria": "Section navigation",
+        "items": {
+            "home": "Home",
+            "about": "About",
+            "experience": "Skills",
+            "portfolio": "Projects",
+            "goals": "Goals",
+            "contact": "Contact"
+        }
     }
-  },
-  "services": {
-    "kicker": "What I can do",
-    "title": "Services",
-    "intro": "Practical services focused on building: business applications, modern interfaces, automation and Web3 integrations.",
-    "groups": {
-      "backend": {
-        "title": "Backend & systems",
-        "description": "Structure business logic, automate processes and connect existing systems."
-      },
-      "webdev": {
-        "title": "Web development",
-        "description": "Build clean, fast and usable interfaces for real-world use cases."
-      },
-      "blockchain": {
-        "title": "Blockchain & Web3",
-        "description": "Design smart contracts, connect wallets and integrate on-chain use cases."
-      }
-    },
-    "items": {
-      "backend": {
-        "api": "Design and development of REST APIs with Java / Spring Boot",
-        "automation": "Batch jobs, automated processing, file generation and reports",
-        "integration": "Integration with business systems, databases and third-party services",
-        "quality": "Testing, refactoring, reliability improvements and performance tuning"
-      },
-      "webdev": {
-        "site": "Modern showcase websites and portfolios with React + Vite",
-        "spa": "Web apps and dashboards with React, TypeScript or Angular",
-        "uiMotion": "Polished interfaces with GSAP / Framer Motion animations",
-        "forms": "Forms, user flows, email sending and analytics integration"
-      },
-      "blockchain": {
-        "contracts": "Solidity smart contract development with Hardhat tests",
-        "dapp": "dApps connected to MetaMask / EVM wallets",
-        "auditLite": "Implementation review, basic security checks and upgrade logic",
-        "payments": "On-chain payments, blockchain data reading and Web3 integrations"
-      }
-    }
-  },
-  "portfolio": {
-    "kicker": "Projects & experiments",
-    "title": "What I have built",
-    "intro": "A selection of personal and technical projects: some are prototypes, others are explorations to learn, test and build around software, AI and Web3.",
-    "cta": "View code",
-    "tags": {
-      "solidity": "Solidity",
-      "evm": "EVM",
-      "storage": "On-chain storage",
-      "python": "Python",
-      "numpy": "NumPy",
-      "ml": "Machine Learning",
-      "dapp": "dApp",
-      "web3": "Web3",
-      "messages": "Messages"
-    },
-    "items": {
-      "1": {
-        "type": "Smart contract",
-        "title": "On-chain file archiving",
-        "description": "An EVM project exploring how file references can be archived on-chain through a smart contract."
-      },
-      "2": {
-        "type": "Machine Learning",
-        "title": "Neural Network from scratch",
-        "description": "A multi-layer neural network built with NumPy to understand deep learning fundamentals without a high-level framework."
-      },
-      "3": {
-        "type": "Web3 dApp",
-        "title": "Decentralized messaging",
-        "description": "A messenger-like decentralized application where messages are stored and retrieved from the blockchain."
-      }
-    }
-  },
-  "about": {
-    "headingSmall": "Getting to know me",
-    "heading": "About",
-    "caption": {
-      "title": "Hybrid profile",
-      "text": "Between software development, business systems and critical thinking."
-    },
-    "cards": {
-      "expertiseTitle": "Develop",
-      "expertiseText": "Business apps, web interfaces, batch processes and APIs",
-      "collabTitle": "Understand",
-      "collabText": "Technical systems, organizations and human challenges",
-      "innovationTitle": "Connect",
-      "innovationText": "Code, ideas, use cases and concrete impact"
-    },
-    "bio": "I am a software developer, with a background at the crossroads of <b>computer science</b>, <b>finance</b> and <b>Web3 technologies</b>. Today, I work in the life insurance sector, where I contribute to business projects, web interfaces, batch processes and document systems.<br/><br/>But my interest does not stop at code. I like understanding systems: technical, economic, social and political. What motivates me is building useful tools, but also thinking about the role technology can play in our lives and in society.<br/><br/>This portfolio brings together several sides of who I am: my developer journey, my projects, my interest in Web3, but also my reflections, travels and the ideas that shape me."
-  },
-  "goals": {
-    "kicker": "A bit more personal",
-    "title": "What drives me",
-    "intro": "Beyond code, these are the ideas that shape my path: building, learning, questioning, discovering and moving forward without losing myself.",
-    "items": {
-      "build": {
-        "name": "Build",
-        "review": "Create tools, systems and concrete projects. I like turning abstract ideas into things that actually exist."
-      },
-      "learn": {
-        "name": "Learn",
-        "review": "Understand technology, economics, philosophy, politics and the systems that shape our lives."
-      },
-      "think": {
-        "name": "Question",
-        "review": "Not taking things for granted. Thinking about meaning, usage and the consequences of what we build."
-      },
-      "travel": {
-        "name": "Discover",
-        "review": "Travel, encounter other ways of living and remember that my own world is never the only possible one."
-      },
-      "succeed": {
-        "name": "Move forward",
-        "review": "For me, success means growing without betraying myself: learning, creating, failing, starting again and staying aligned."
-      }
-    },
-    "label": "Direction"
-  },
-  "nav": {
-    "aria": "Section navigation",
-    "items": {
-      "home": "Home"
-    }
-  }
 }

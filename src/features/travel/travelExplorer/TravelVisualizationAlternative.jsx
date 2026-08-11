@@ -8,7 +8,7 @@ const TravelVisualizationAlternative = () => {
     const isFr = i18n.resolvedLanguage?.startsWith('fr')
 
     const sortedTrips = useMemo(() => [...trips].sort((a, b) => a.sortOrder - b.sortOrder), [])
-    const getText = (item, field) => (!isFr ? item[`${field}En`] ?? item[field] : item[field])
+    const getText = (item, field) => (!isFr ? (item[`${field}En`] ?? item[field]) : item[field])
 
     return (
         <details className="travel-explorer__alternative">
@@ -53,7 +53,8 @@ const TravelVisualizationAlternative = () => {
                             <span aria-hidden="true">{destination.emoji}</span>
                             <div>
                                 <strong>
-                                    {getText(destination, 'name')}, {getText(destination, 'country')}
+                                    {getText(destination, 'name')},{' '}
+                                    {getText(destination, 'country')}
                                 </strong>
                                 <span>{getText(destination, 'category')}</span>
                                 <p>{getText(destination, 'reason')}</p>

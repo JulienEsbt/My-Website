@@ -19,7 +19,7 @@ describe('SeoManager', () => {
             expect(document.title).toContain('Bruno Pizza')
         })
         expect(document.head.querySelector('meta[name="description"]')?.content).toContain(
-            'application desktop locale'
+            'desktop application'
         )
         expect(document.head.querySelector('link[rel="canonical"]')?.href).toBe(
             'https://www.julien-esterbet.com/projects/bruno-pizza'

@@ -4,10 +4,10 @@ import './ReflectionStats.css'
 
 const ReflectionStats = ({items}) => {
     return (
-        <section className="reflexion-stats-section">
+        <div className="reflexion-stats-section">
             <div className="container reflexion-stats">
                 {items.map((item, index) => (
-                    <motion.article
+                    <motion.div
                         key={item.label}
                         className="reflexion-stat"
                         initial={{opacity: 0, y: 28}}
@@ -17,10 +17,10 @@ const ReflectionStats = ({items}) => {
                     >
                         <span>{item.label}</span>
                         <strong>{item.value}</strong>
-                    </motion.article>
+                    </motion.div>
                 ))}
             </div>
-        </section>
+        </div>
     )
 }
 

@@ -12,12 +12,15 @@ describe('HeaderCTA', () => {
     it('maps each label to the expected action', () => {
         render(
             <MemoryRouter>
-                <HeaderCTA/>
+                <HeaderCTA />
             </MemoryRouter>
         )
 
         expect(screen.getByRole('link', {name: 'Contact me'})).toHaveAttribute('href', '#contact')
-        expect(screen.getByRole('link', {name: 'Explore Web3'})).toHaveAttribute('href', '/web3')
-        expect(screen.getByRole('link', {name: 'Open resume'}).getAttribute('href')).toContain('cv.pdf')
+        expect(screen.getByRole('link', {name: 'Explore Web3 Labs'})).toHaveAttribute(
+            'href',
+            '/web3'
+        )
+        expect(screen.getByRole('link', {name: 'Open resume'})).toHaveAttribute('href', '/resume')
     })
 })

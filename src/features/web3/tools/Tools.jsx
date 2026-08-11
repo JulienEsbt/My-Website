@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import './Tools.css'
 import {BiCheck} from 'react-icons/bi'
-import {TbAffiliate} from 'react-icons/tb'
 import {FiChevronDown, FiExternalLink} from 'react-icons/fi'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
@@ -11,7 +10,6 @@ const buildTools = (items = []) =>
     items.map((item) => ({
         label: item.name,
         href: item.url,
-        aff: Boolean(item.isReferral),
     }))
 
 const Tools = () => {
@@ -28,12 +26,6 @@ const Tools = () => {
 
     const groups = [
         {
-            id: 'exchanges',
-            title: t('tools.groups.exchanges'),
-            aria: t('tools.aria.listExchanges'),
-            items: buildTools(LINKS.tools?.exchanges),
-        },
-        {
             id: 'others',
             title: t('tools.groups.others'),
             aria: t('tools.aria.listOthers'),
@@ -49,8 +41,9 @@ const Tools = () => {
 
     return (
         <section id="tools">
-            <h5>{t('tools.kicker')}</h5>
+            <p className="section-kicker">{t('tools.kicker')}</p>
             <h2>{t('tools.title')}</h2>
+            <p className="tools-v2__intro">{t('tools.description')}</p>
 
             <div className="container tools-v2">
                 {groups.map((group, groupIndex) => {
@@ -74,7 +67,7 @@ const Tools = () => {
                             >
                                 <span>{groupIndex + 1}</span>
                                 <h3>{group.title}</h3>
-                                <FiChevronDown className="tools-v2__chevron"/>
+                                <FiChevronDown className="tools-v2__chevron" />
                             </button>
 
                             <ul
@@ -91,16 +84,15 @@ const Tools = () => {
                                             aria-label={t('tools.aria.open', {site: tool.label})}
                                         >
                                             <span className="tools-v2__icon">
-                                                {tool.aff ? <TbAffiliate/> : <BiCheck/>}
+                                                <BiCheck aria-hidden="true" />
                                             </span>
 
                                             <strong>{tool.label}</strong>
 
-                                            {tool.aff && (
-                                                <small>{t('tools.badges.referral')}</small>
-                                            )}
-
-                                            <FiExternalLink className="tools-v2__external"/>
+                                            <FiExternalLink
+                                                className="tools-v2__external"
+                                                aria-hidden="true"
+                                            />
                                         </a>
                                     </li>
                                 ))}

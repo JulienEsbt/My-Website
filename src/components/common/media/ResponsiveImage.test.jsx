@@ -33,7 +33,10 @@ describe('ResponsiveImage', () => {
             '/media/photo/320.avif 320w, /media/photo/960.avif 960w'
         )
         expect(image).toHaveAttribute('src', '/media/photo/960.jpg')
-        expect(image).toHaveAttribute('srcset', '/media/photo/320.jpg 320w, /media/photo/960.jpg 960w')
+        expect(image).toHaveAttribute(
+            'srcset',
+            '/media/photo/320.jpg 320w, /media/photo/960.jpg 960w'
+        )
         expect(image).toHaveAttribute('sizes', '(max-width: 700px) 100vw, 520px')
         expect(image).toHaveAttribute('width', '960')
         expect(image).toHaveAttribute('height', '720')

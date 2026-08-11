@@ -1,68 +1,78 @@
 {
-  "hero": {
-    "kicker": "Reflections",
-    "title": "Thoughts, politics, philosophy & society",
-    "subtitle": "A personal notebook to structure my ideas, doubts, readings and convictions."
-  },
-  "filters": {
-    "all": "All",
-    "philosophy": "Philosophy",
-    "politics": "Politics",
-    "society": "Society",
-    "technology": "Technology"
-  },
-  "actions": {
-    "latest": "Latest notes",
-    "themes": "Explore themes"
-  },
-  "themes": {
-    "kicker": "Categories",
-    "title": "Explore my areas of thought"
-  },
-  "search": {
-    "placeholder": "Search a reflection..."
-  },
-  "stats": {
-    "articles": "Articles",
-    "themes": "Themes",
-    "latest": "Latest note"
-  },
-  "empty": {
-    "title": "No reflection found",
-    "text": "Try another search or another theme."
-  },
-  "card": {
-    "read": "Read",
-    "featured": "To read"
-  },
-  "article": {
-    "back": "Back to reflections",
-    "frenchOnly": "This article is currently available in French only.",
-    "finished": "You have finished this article",
-    "previous": "Previous article",
-    "next": "Next article"
-  },
-  "categories": {
-    "philosophy": "Philosophy",
-    "politics": "Politics",
-    "society": "Society",
-    "technology": "Technology"
-  },
-  "author": {
-    "title": "About these reflections",
-    "text": "These texts are personal notes. They are intended to evolve through my readings, experiences, encounters and ongoing questioning."
-  },
-  "latest": {
-    "kicker": "Personal notebook",
-    "title": "Latest reflections"
-  },
-  "nav": {
-    "aria": "Reflections navigation",
-    "items": {
-      "top": "Top",
-      "themes": "Themes",
-      "latest": "Articles",
-      "author": "Note"
+    "meta": {
+        "title": "Writing and reflections — Julien Esterbet"
+    },
+    "hero": {
+        "kicker": "Ideas notebook",
+        "title": "Thoughts, politics, philosophy & society",
+        "subtitle": "A personal editorial space, distinct from the professional showcase, for structuring my ideas, doubts, readings and convictions."
+    },
+    "filters": {
+        "all": "All",
+        "philosophy": "Philosophy",
+        "politics": "Politics",
+        "society": "Society",
+        "technology": "Technology"
+    },
+    "actions": {
+        "latest": "Latest notes",
+        "themes": "Explore themes"
+    },
+    "themes": {
+        "kicker": "Categories",
+        "title": "Explore my areas of thought"
+    },
+    "search": {
+        "label": "Search reflections",
+        "placeholder": "Search a reflection...",
+        "results": "{{count}} reflection found",
+        "results_other": "{{count}} reflections found"
+    },
+    "stats": {
+        "articles": "Articles",
+        "themes": "Themes",
+        "latest": "Latest note"
+    },
+    "empty": {
+        "title": "No reflection found",
+        "text": "Try another search or another theme."
+    },
+    "card": {
+        "read": "Read",
+        "featured": "To read"
+    },
+    "article": {
+        "back": "Back to reflections",
+        "readingTime": "{{count}} min read",
+        "progress": "Reading progress",
+        "scrollBottom": "Go to the end of the article",
+        "scrollTop": "Go back to the top of the article",
+        "frenchOnly": "This article is currently available in French only.",
+        "finished": "You have finished this article",
+        "previous": "Previous article",
+        "next": "Next article"
+    },
+    "categories": {
+        "philosophy": "Philosophy",
+        "politics": "Politics",
+        "society": "Society",
+        "technology": "Technology"
+    },
+    "author": {
+        "title": "About these reflections",
+        "text": "These texts are personal notes. They are intended to evolve through my readings, experiences, encounters and ongoing questioning."
+    },
+    "latest": {
+        "kicker": "Personal notebook",
+        "title": "Latest reflections"
+    },
+    "nav": {
+        "aria": "Reflections navigation",
+        "items": {
+            "top": "Top",
+            "themes": "Themes",
+            "latest": "Articles",
+            "author": "Note"
+        }
     }
-  }
 }

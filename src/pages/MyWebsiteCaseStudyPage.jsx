@@ -16,7 +16,7 @@ const ARCHITECTURE_STEPS = ['entry', 'shell', 'routes', 'domains', 'media', 'ver
 const DECISION_ITEMS = ['incremental', 'privacy', 'accessibility', 'adapters']
 const CHALLENGE_ITEMS = ['legacy', 'interactive', 'editorial']
 const RESULT_ITEMS = ['delivery', 'performance', 'media', 'rgaa']
-const LIMIT_ITEMS = ['deployment', 'cv', 'font', 'fieldData']
+const LIMIT_ITEMS = ['deployment', 'mediaDelivery', 'securityHeaders', 'cv', 'font', 'fieldData']
 const STACK = ['React', 'Vite', 'React Router', 'i18next', 'Vitest', 'axe-core', 'Vercel']
 
 export default function MyWebsiteCaseStudyPage() {
@@ -111,7 +111,7 @@ export default function MyWebsiteCaseStudyPage() {
                 <section className="container case-study__section">
                     <p className="section-kicker">{t('website.decisions.kicker')}</p>
                     <h2>{t('website.decisions.title')}</h2>
-                    <div className="case-study__grid">
+                    <div className="case-study__grid case-study__grid--two-columns">
                         {DECISION_ITEMS.map((item) => (
                             <div key={item} className="case-study__card">
                                 <h3>{t(`website.decisions.items.${item}.title`)}</h3>

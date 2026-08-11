@@ -1,7 +1,6 @@
 import React, {useMemo, useState} from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import PageNav from '../components/common/navigation/pageNav/PageNav'
 import PageHero from '../components/common/layout/pageHero/PageHero'
 import ReflectionFilters from '../features/reflections/reflectionFilters/ReflectionFilters.jsx'
 import ReflectionList from '../features/reflections/reflectionList/ReflectionList.jsx'
@@ -9,11 +8,13 @@ import ReflectionStats from '../features/reflections/reflectionStats/ReflectionS
 import ReflectionAuthor from '../features/reflections/reflectionAuthor/ReflectionAuthor.jsx'
 import Fuse from 'fuse.js'
 import reflections from '../data/reflections/reflections.js'
-import Footer from "../components/common/layout/footerSection/Footer.jsx";
-import ReflectionsNav from "../features/reflections/reflectionsNav/ReflectionsNav.jsx";
+import ReflectionsNav from '../features/reflections/reflectionsNav/ReflectionsNav.jsx'
+import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
+import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 
 const ReflectionsPage = () => {
     const {t, i18n} = useTranslation('reflections')
+    useDocumentTitle(t('meta.title'))
     const [activeFilter, setActiveFilter] = useState('all')
     const [search, setSearch] = useState('')
 
@@ -22,38 +23,36 @@ const ReflectionsPage = () => {
     const categoryCount = new Set(reflections.map((item) => item.category)).size
 
     const categoryCounters = {
-        philosophy: reflections.filter(r => r.category === 'philosophy').length,
-        politics: reflections.filter(r => r.category === 'politics').length,
-        society: reflections.filter(r => r.category === 'society').length,
-        technology: reflections.filter(r => r.category === 'technology').length,
+        philosophy: reflections.filter((r) => r.category === 'philosophy').length,
+        politics: reflections.filter((r) => r.category === 'politics').length,
+        society: reflections.filter((r) => r.category === 'society').length,
+        technology: reflections.filter((r) => r.category === 'technology').length,
     }
 
     const filters = [
         {
             value: 'all',
-            label: `${t('filters.all')} (${reflections.length})`
+            label: `${t('filters.all')} (${reflections.length})`,
         },
         {
             value: 'philosophy',
-            label: `${t('filters.philosophy')} (${categoryCounters.philosophy})`
+            label: `${t('filters.philosophy')} (${categoryCounters.philosophy})`,
         },
         {
             value: 'politics',
-            label: `${t('filters.politics')} (${categoryCounters.politics})`
+            label: `${t('filters.politics')} (${categoryCounters.politics})`,
         },
         {
             value: 'society',
-            label: `${t('filters.society')} (${categoryCounters.society})`
+            label: `${t('filters.society')} (${categoryCounters.society})`,
         },
         {
             value: 'technology',
-            label: `${t('filters.technology')} (${categoryCounters.technology})`
-        }
+            label: `${t('filters.technology')} (${categoryCounters.technology})`,
+        },
     ]
 
-    const latestReflexion = [...reflections].sort(
-        (a, b) => new Date(b.date) - new Date(a.date)
-    )[0]
+    const latestReflexion = [...reflections].sort((a, b) => new Date(b.date) - new Date(a.date))[0]
 
     const stats = [
         {label: t('stats.articles'), value: reflections.length},
@@ -65,9 +64,10 @@ const ReflectionsPage = () => {
     ]
 
     const filteredReflexions = useMemo(() => {
-        const byFilter = activeFilter === 'all'
-            ? reflections
-            : reflections.filter((reflexion) => reflexion.category === activeFilter)
+        const byFilter =
+            activeFilter === 'all'
+                ? reflections
+                : reflections.filter((reflexion) => reflexion.category === activeFilter)
 
         const sortReflections = (items) => {
             return [...items].sort((a, b) => {
@@ -83,12 +83,7 @@ const ReflectionsPage = () => {
         }
 
         const fuse = new Fuse(byFilter, {
-            keys: [
-                `title.${language}`,
-                `excerpt.${language}`,
-                'category',
-                'slug',
-            ],
+            keys: [`title.${language}`, `excerpt.${language}`, 'category', 'slug'],
             threshold: 0.35,
         })
 
@@ -96,64 +91,68 @@ const ReflectionsPage = () => {
     }, [activeFilter, search, language])
 
     return (
-        <>
-            <div id="top"/>
-            <main id="main" tabIndex="-1">
-                <PageNav/>
+        <PageFrame>
+            <PageHero
+                id="top"
+                kicker={t('hero.kicker')}
+                title={t('hero.title')}
+                subtitle={t('hero.subtitle')}
+            />
 
-                <PageHero
-                    kicker={t('hero.kicker')}
-                    title={t('hero.title')}
-                    subtitle={t('hero.subtitle')}
-                />
+            <ReflectionsNav />
 
-                <ReflectionsNav/>
+            <ReflectionStats items={stats} />
 
-                <ReflectionStats items={stats}/>
+            <motion.section
+                id="themes"
+                className="reflexions-themes"
+                initial={{opacity: 0, y: 28, filter: 'blur(10px)'}}
+                whileInView={{opacity: 1, y: 0, filter: 'blur(0px)'}}
+                viewport={{once: true, amount: 0.25}}
+                transition={{duration: 0.65, ease: 'easeOut'}}
+            >
+                <p className="section-kicker">{t('themes.kicker')}</p>
+                <h2>{t('themes.title')}</h2>
 
-                <motion.section
-                    id="themes"
-                    className="reflexions-themes"
-                    initial={{opacity: 0, y: 28, filter: 'blur(10px)'}}
-                    whileInView={{opacity: 1, y: 0, filter: 'blur(0px)'}}
-                    viewport={{once: true, amount: 0.25}}
-                    transition={{duration: 0.65, ease: 'easeOut'}}
-                >
-                    <h5>{t('themes.kicker')}</h5>
-                    <h2>{t('themes.title')}</h2>
-
-                    <div className="container reflexion-search">
-                        <input
-                            type="text"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder={t('search.placeholder')}
-                        />
-                    </div>
-
-                    <ReflectionFilters
-                        filters={filters}
-                        activeFilter={activeFilter}
-                        onFilterChange={setActiveFilter}
+                <div className="container reflexion-search">
+                    <label className="sr-only" htmlFor="reflection-search">
+                        {t('search.label')}
+                    </label>
+                    <input
+                        id="reflection-search"
+                        type="text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder={t('search.placeholder')}
                     />
-                </motion.section>
+                </div>
 
-                <ReflectionList
-                    reflexions={filteredReflexions}
-                    language={language}
-                    categoryLabels={t('categories', {returnObjects: true})}
-                    readLabel={t('card.read')}
-                    featuredLabel={t('card.featured')}
-                    emptyTitle={t('empty.title')}
-                    emptyText={t('empty.text')}
-                    kicker={t('latest.kicker')}
-                    title={t('latest.title')}
+                <ReflectionFilters
+                    filters={filters}
+                    activeFilter={activeFilter}
+                    onFilterChange={setActiveFilter}
                 />
 
-                <ReflectionAuthor/>
-                <Footer/>
-            </main>
-        </>
+                <p className="sr-only" role="status">
+                    {t('search.results', {count: filteredReflexions.length})}
+                </p>
+            </motion.section>
+
+            <ReflectionList
+                reflexions={filteredReflexions}
+                language={language}
+                categoryLabels={t('categories', {returnObjects: true})}
+                readLabel={t('card.read')}
+                featuredLabel={t('card.featured')}
+                getReadingTimeLabel={(count) => t('article.readingTime', {count})}
+                emptyTitle={t('empty.title')}
+                emptyText={t('empty.text')}
+                kicker={t('latest.kicker')}
+                title={t('latest.title')}
+            />
+
+            <ReflectionAuthor />
+        </PageFrame>
     )
 }
 

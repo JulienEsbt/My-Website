@@ -11,6 +11,30 @@
     padding-bottom: 3.4rem;
 }
 
+.goals-carousel__autoplay {
+    width: fit-content;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.8rem auto 0;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 999px;
+    background: rgba(5, 12, 34, 0.78);
+    color: var(--color-white);
+    font: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.goals-carousel__autoplay:hover,
+.goals-carousel__autoplay:focus-visible {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
 .goals-carousel__swiper {
     padding: 1.2rem 0 3rem;
 }
@@ -28,19 +52,21 @@
     justify-content: flex-end;
     padding: 1.55rem;
     border-radius: 1.75rem;
-    background: radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
+    background:
+        radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.18), transparent 34%),
+        linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
     border: 1px solid rgba(77, 181, 255, 0.18);
     box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.28);
     overflow: hidden;
 }
 
 .goal-card::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(77, 181, 255, 0.12), transparent 42%),
-    radial-gradient(circle at 90% 12%, rgba(124, 92, 255, 0.13), transparent 34%);
+    background:
+        linear-gradient(135deg, rgba(77, 181, 255, 0.12), transparent 42%),
+        radial-gradient(circle at 90% 12%, rgba(124, 92, 255, 0.13), transparent 34%);
     opacity: 0.85;
     pointer-events: none;
 }
@@ -76,7 +102,7 @@
     display: inline-flex;
     margin-bottom: 0.55rem;
     color: var(--color-primary);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -103,7 +129,9 @@
 .goals-carousel .swiper-slide {
     opacity: 0.42;
     transform: scale(0.9);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
 }
 
 .goals-carousel .swiper-slide-active {
@@ -127,6 +155,13 @@
     width: 1.7rem;
     border-radius: 999px;
     background: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .goals-carousel .swiper-slide,
+    .goals-carousel .swiper-slide-active {
+        transition: none;
+    }
 }
 
 @media screen and (max-width: 760px) {

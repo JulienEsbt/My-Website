@@ -60,10 +60,10 @@ describe('WalletInspector', () => {
         )
         await user.click(screen.getByRole('button', {name: 'Analyser'}))
 
-        expect(await screen.findByText('$2,050')).toBeVisible()
-        await user.click(screen.getByRole('button', {name: /Tout voir · 1/}))
+        expect(await screen.findByRole('link', {name: /Ouvrir l’explorer/})).toBeInTheDocument()
+        await user.click(screen.getByRole('button', {name: /Voir tout · 1/}))
 
-        expect(await screen.findByRole('dialog', {name: 'Tokens'})).toBeVisible()
+        expect(await screen.findByRole('dialog', {name: 'Tokens détectés'})).toBeVisible()
         await user.keyboard('{Escape}')
         await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
     })

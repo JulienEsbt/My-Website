@@ -100,9 +100,7 @@ export default function ResumePage() {
                         </section>
 
                         <section aria-labelledby="resume-certifications-title">
-                            <h2 id="resume-certifications-title">
-                                {t('sections.certifications')}
-                            </h2>
+                            <h2 id="resume-certifications-title">{t('sections.certifications')}</h2>
                             <ul className="resume__compact-list">
                                 {certifications.map((certification) => (
                                     <li key={certification}>{certification}</li>
@@ -156,7 +154,9 @@ export default function ResumePage() {
                                             {item.school} · {item.period}
                                         </p>
                                         <p>{item.detail}</p>
-                                        {item.thesis && <p className="resume__thesis">{item.thesis}</p>}
+                                        {item.thesis && (
+                                            <p className="resume__thesis">{item.thesis}</p>
+                                        )}
                                     </article>
                                 ))}
                             </div>

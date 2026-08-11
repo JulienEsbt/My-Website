@@ -10,16 +10,12 @@ const TravelStats = () => {
     const completedTrips = trips.filter((trip) => !trip.isPlanned)
 
     const visitedCountries = new Set(
-        completedTrips
-            .filter((trip) => trip.isSovereignCountry)
-            .map((trip) => trip.countryCode)
+        completedTrips.filter((trip) => trip.isSovereignCountry).map((trip) => trip.countryCode)
     ).size
 
     const destinations = completedTrips.length
 
-    const livedPlaces = completedTrips.filter(
-        (trip) => trip.hasLivedThere
-    ).length
+    const livedPlaces = completedTrips.filter((trip) => trip.hasLivedThere).length
 
     const studyWorkExperiences = completedTrips.filter(
         (trip) => trip.isStudyTrip || trip.isWorkTrip
@@ -45,10 +41,10 @@ const TravelStats = () => {
     ]
 
     return (
-        <section id="travel-stats" className="travel-stats-section">
+        <div id="travel-stats" className="travel-stats-section">
             <div className="container travel-stats">
                 {stats.map((stat, index) => (
-                    <motion.article
+                    <motion.div
                         key={stat.label}
                         className="travel-stat"
                         initial={{opacity: 0, y: 28}}
@@ -61,10 +57,10 @@ const TravelStats = () => {
                     >
                         <span>{stat.label}</span>
                         <strong>{stat.value}</strong>
-                    </motion.article>
+                    </motion.div>
                 ))}
             </div>
-        </section>
+        </div>
     )
 }
 

@@ -1,13 +1,17 @@
-import img8563 from './IMG_8563.jpeg'
-import img8573 from './IMG_8573.jpeg'
-import img8579 from './IMG_8579.jpeg'
-import img8595 from './IMG_8595.jpeg'
-import img8650 from './IMG_8650.jpeg'
-import img8653 from './IMG_8653.jpeg'
-import img1101 from './IMG_1101.jpeg'
-import img1125 from './IMG_1125.jpeg'
-import img1145 from './IMG_1145.jpeg'
+import albumManifest from '../../../../generated/media/travels/saint-barth-2023.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img8563 = getTravelMedia('saint-barth-2023/IMG_8563.jpeg')
+const img8573 = getTravelMedia('saint-barth-2023/IMG_8573.jpeg')
+const img8579 = getTravelMedia('saint-barth-2023/IMG_8579.jpeg')
+const img8595 = getTravelMedia('saint-barth-2023/IMG_8595.jpeg')
+const img8650 = getTravelMedia('saint-barth-2023/IMG_8650.jpeg')
+const img8653 = getTravelMedia('saint-barth-2023/IMG_8653.jpeg')
+const img1101 = getTravelMedia('saint-barth-2023/IMG_1101.jpeg')
+const img1125 = getTravelMedia('saint-barth-2023/IMG_1125.jpeg')
+const img1145 = getTravelMedia('saint-barth-2023/IMG_1145.jpeg')
 const saintBarth2023Photos = [
     {src: img8563},
     {src: img8573},

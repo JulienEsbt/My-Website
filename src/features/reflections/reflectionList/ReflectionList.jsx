@@ -3,19 +3,20 @@ import ReflectionCard from '../reflectionCard/ReflectionCard.jsx'
 import './ReflectionList.css'
 
 const ReflectionList = ({
-                            reflexions,
-                            language,
-                            categoryLabels,
-                            readLabel,
-                            featuredLabel,
-                            emptyTitle,
-                            emptyText,
-                            kicker,
-                            title,
-                        }) => {
+    reflexions,
+    language,
+    categoryLabels,
+    readLabel,
+    featuredLabel,
+    getReadingTimeLabel,
+    emptyTitle,
+    emptyText,
+    kicker,
+    title,
+}) => {
     return (
         <section id="latest">
-            <h5>{kicker}</h5>
+            <p className="section-kicker">{kicker}</p>
             <h2>{title}</h2>
 
             {reflexions.length === 0 ? (
@@ -34,6 +35,7 @@ const ReflectionList = ({
                             categoryLabels={categoryLabels}
                             readLabel={readLabel}
                             featuredLabel={featuredLabel}
+                            readingTimeLabel={getReadingTimeLabel(reflexion.readingTime)}
                             featured={reflexion.featured}
                         />
                     ))}

@@ -46,10 +46,7 @@
         "Google Digital Marketing Fundamentals",
         "Generative AI Essentials"
     ],
-    "languages": [
-        "French — native",
-        "English — C1, academic and international proficiency"
-    ],
+    "languages": ["French — native", "English — C1, academic and international proficiency"],
     "experience": [
         {
             "role": "Software Developer and IT Analyst",
@@ -120,9 +117,21 @@
         }
     ],
     "projects": [
-        {"name": "Bruno Pizza — Production", "status": "Active product", "detail": "Production-management desktop product built with React, TypeScript, Electron, Express and SQLite."},
-        {"name": "My-Website", "status": "Active portfolio", "detail": "Bilingual React and Vite portfolio rebuilt with a documented RGAA accessibility approach."},
-        {"name": "Megalis", "status": "Academic prototype", "detail": "EVM prototype for timestamping document references on-chain with Solidity."}
+        {
+            "name": "Bruno Pizza — Production",
+            "status": "Active product",
+            "detail": "Production-management desktop product built with React, TypeScript, Electron, Express and SQLite."
+        },
+        {
+            "name": "My-Website",
+            "status": "Active portfolio",
+            "detail": "Bilingual React and Vite portfolio rebuilt with a documented RGAA accessibility approach."
+        },
+        {
+            "name": "Megalis",
+            "status": "Academic prototype",
+            "detail": "EVM prototype for timestamping document references on-chain with Solidity."
+        }
     ],
     "labels": {
         "period": "Period",

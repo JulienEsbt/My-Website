@@ -1,52 +1,73 @@
-import React, {useState} from 'react'
-import {Spin as Hamburger} from 'hamburger-react'
-import {Link} from 'react-router-dom'
+import React, {useCallback, useRef, useState} from 'react'
+import {NavLink} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import LanguageSwitcher from '../languageSwitcher/LanguageSwitcher.jsx'
-import {SITE_PAGES} from '../../../../config/pages.js'
+import useFocusTrap from '../../accessibility/useFocusTrap.js'
+import {SITE_PAGE_GROUPS} from '../../../../config/pages.js'
 import './PageNav.css'
 
 const PageNav = () => {
     const [isOpen, setOpen] = useState(false)
     const {t} = useTranslation('common')
+    const navigationRef = useRef(null)
+    const firstLinkRef = useRef(null)
 
-    const pages = [
-        {to: '/', label: t('pageNav.home')},
-        {to: '/web3', label: t('pageNav.web3')},
-        {to: '/travel', label: t('pageNav.travel')},
-        {to: '/reflections', label: t('pageNav.reflections')},
-    ]
+    const closeMenu = useCallback(() => setOpen(false), [])
 
-    const closeMenu = () => setOpen(false)
+    useFocusTrap({
+        active: isOpen,
+        containerRef: navigationRef,
+        initialFocusRef: firstLinkRef,
+        onDismiss: closeMenu,
+    })
 
     return (
         <>
             <div className="lang-wrapper">
-                <LanguageSwitcher/>
+                <LanguageSwitcher />
             </div>
 
-            <div className="pagenav">
-                <div className="pagenavbar">
-                    <div className="navbutton">
-                        <Hamburger toggled={isOpen} toggle={setOpen}/>
-                    </div>
+            <nav className="pagenav" aria-label={t('pageNav.aria')}>
+                <div ref={navigationRef} className="pagenavbar">
+                    <button
+                        type="button"
+                        className={`navbutton ${isOpen ? 'is-open' : ''}`}
+                        onClick={() => setOpen((open) => !open)}
+                        aria-expanded={isOpen}
+                        aria-controls="primary-navigation"
+                        aria-label={isOpen ? t('pageNav.close') : t('pageNav.open')}
+                    >
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
+                    </button>
 
                     {isOpen && (
-                        <div className="pagebar">
-                            {SITE_PAGES.map((page) => (
-                                <Link
-                                    key={page.path}
-                                    to={page.path}
-                                    className="pagetext"
-                                    onClick={closeMenu}
-                                >
-                                    {t(page.i18nKey)}
-                                </Link>
+                        <div className="pagebar" id="primary-navigation">
+                            {SITE_PAGE_GROUPS.map((group, groupIndex) => (
+                                <div className="pagebar__group" key={group.id}>
+                                    <span>{t(group.i18nKey)}</span>
+                                    {group.pages.map((page, pageIndex) => (
+                                        <NavLink
+                                            key={page.path}
+                                            ref={
+                                                groupIndex === 0 && pageIndex === 0
+                                                    ? firstLinkRef
+                                                    : undefined
+                                            }
+                                            to={page.path}
+                                            className="pagetext"
+                                            onClick={closeMenu}
+                                        >
+                                            {t(page.i18nKey)}
+                                        </NavLink>
+                                    ))}
+                                </div>
                             ))}
                         </div>
                     )}
                 </div>
-            </div>
+            </nav>
         </>
     )
 }

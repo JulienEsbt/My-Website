@@ -1,24 +1,28 @@
-import img0038 from './IMG_0038.jpeg'
-import imgFB35 from './FB35F932-9EA1-4864-B22C-C2AB8D9C2C5A.jpg'
-import img8241 from './IMG_8241.jpeg'
-import img0070 from './IMG_0070.jpeg'
-import img8253 from './IMG_8253.jpeg'
-import img8256 from './IMG_8256.jpeg'
-import img8263 from './IMG_8263.jpeg'
-import img8283 from './IMG_8283.jpeg'
-import img8290 from './IMG_8290.jpeg'
-import img8327 from './IMG_8327.jpeg'
-import img0127 from './IMG_0127.jpeg'
-import img8368 from './IMG_8368.jpeg'
-import img8371 from './IMG_8371.jpeg'
-import img8388 from './IMG_8388.jpeg'
-import img8540 from './IMG_8540.jpeg'
-import img8550 from './IMG_8550.jpeg'
-import img8557 from './IMG_8557.jpeg'
-import img8560 from './IMG_8560.jpeg'
-import img8575 from './IMG_8575.jpeg'
-import img1626 from './1626077d-e628-44e3-a12b-4280761bb6ba.jpg'
+import albumManifest from '../../../../generated/media/travels/spain-barcelona-2024.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img0038 = getTravelMedia('spain-barcelona-2024/IMG_0038.jpeg')
+const imgFB35 = getTravelMedia('spain-barcelona-2024/FB35F932-9EA1-4864-B22C-C2AB8D9C2C5A.jpg')
+const img8241 = getTravelMedia('spain-barcelona-2024/IMG_8241.jpeg')
+const img0070 = getTravelMedia('spain-barcelona-2024/IMG_0070.jpeg')
+const img8253 = getTravelMedia('spain-barcelona-2024/IMG_8253.jpeg')
+const img8256 = getTravelMedia('spain-barcelona-2024/IMG_8256.jpeg')
+const img8263 = getTravelMedia('spain-barcelona-2024/IMG_8263.jpeg')
+const img8283 = getTravelMedia('spain-barcelona-2024/IMG_8283.jpeg')
+const img8290 = getTravelMedia('spain-barcelona-2024/IMG_8290.jpeg')
+const img8327 = getTravelMedia('spain-barcelona-2024/IMG_8327.jpeg')
+const img0127 = getTravelMedia('spain-barcelona-2024/IMG_0127.jpeg')
+const img8368 = getTravelMedia('spain-barcelona-2024/IMG_8368.jpeg')
+const img8371 = getTravelMedia('spain-barcelona-2024/IMG_8371.jpeg')
+const img8388 = getTravelMedia('spain-barcelona-2024/IMG_8388.jpeg')
+const img8540 = getTravelMedia('spain-barcelona-2024/IMG_8540.jpeg')
+const img8550 = getTravelMedia('spain-barcelona-2024/IMG_8550.jpeg')
+const img8557 = getTravelMedia('spain-barcelona-2024/IMG_8557.jpeg')
+const img8560 = getTravelMedia('spain-barcelona-2024/IMG_8560.jpeg')
+const img8575 = getTravelMedia('spain-barcelona-2024/IMG_8575.jpeg')
+const img1626 = getTravelMedia('spain-barcelona-2024/1626077d-e628-44e3-a12b-4280761bb6ba.jpg')
 const spainBarcelona2024Photos = [
     {src: img0038},
     {src: imgFB35},

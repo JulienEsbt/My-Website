@@ -17,10 +17,14 @@
     position: relative;
     border-radius: 1.45rem;
     overflow: hidden;
-    background: radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.12), transparent 34%),
-    rgba(31, 31, 56, 0.62);
+    background:
+        radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.12), transparent 34%),
+        rgba(31, 31, 56, 0.62);
     border: 1px solid rgba(77, 181, 255, 0.14);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .portfolio__item:hover {
@@ -42,7 +46,9 @@
     height: 100%;
     object-fit: cover;
     transform: scale(1.02);
-    transition: transform 0.45s ease, filter 0.45s ease;
+    transition:
+        transform 0.45s ease,
+        filter 0.45s ease;
 }
 
 .portfolio__item:hover .portfolio__image img {
@@ -51,7 +57,7 @@
 }
 
 .portfolio__image::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, transparent 45%, rgba(7, 12, 34, 0.78));
@@ -81,7 +87,7 @@
     display: inline-flex;
     margin-bottom: 0.65rem;
     color: var(--color-primary);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -114,10 +120,19 @@
     color: var(--color-primary);
     background: rgba(77, 181, 255, 0.08);
     border: 1px solid rgba(77, 181, 255, 0.16);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
-.portfolio__link {
+.portfolio__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1rem;
+}
+
+.portfolio__link,
+.portfolio__case-study,
+.portfolio__demo {
     width: max-content;
     display: inline-flex;
     align-items: center;
@@ -126,7 +141,13 @@
     font-size: 0.82rem;
 }
 
-.portfolio__link:hover {
+.portfolio__case-study {
+    font-weight: 600;
+}
+
+.portfolio__link:hover,
+.portfolio__case-study:hover,
+.portfolio__demo:hover {
     text-decoration: underline;
 }
 

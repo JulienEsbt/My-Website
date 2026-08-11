@@ -21,7 +21,7 @@ async function walk(directory) {
         entries.map((entry) => {
             const path = resolve(directory, entry.name)
             return entry.isDirectory() ? walk(path) : [path]
-        }),
+        })
     )
     return nested.flat()
 }
@@ -36,7 +36,7 @@ async function selectSamples() {
         await Promise.all(
             (await walk(travelRoot))
                 .filter((file) => imageExtensions.has(extname(file).toLowerCase()))
-                .map(async (file) => ({file, bytes: (await stat(file)).size})),
+                .map(async (file) => ({file, bytes: (await stat(file)).size}))
         )
     ).sort((a, b) => a.bytes - b.bytes)
 
@@ -50,7 +50,7 @@ async function selectSamples() {
             id: 'home-about',
             source: resolve(
                 projectRoot,
-                'src/assets/images/home/about/D14F4D37-8AEF-4E9D-8CAE-DEDE412C2D64_1_105_c.jpeg',
+                'src/assets/images/home/about/D14F4D37-8AEF-4E9D-8CAE-DEDE412C2D64_1_105_c.jpeg'
             ),
             useCase: 'content',
         },
@@ -82,7 +82,7 @@ async function createTile(input, label) {
         .toBuffer()
     const escapedLabel = label.replaceAll('&', '&amp;').replaceAll('<', '&lt;')
     const caption = Buffer.from(
-        `<svg width="300" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="40" fill="#10182b"/><text x="12" y="25" fill="#e7eefc" font-family="Arial, sans-serif" font-size="13">${escapedLabel}</text></svg>`,
+        `<svg width="300" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="40" fill="#10182b"/><text x="12" y="25" fill="#e7eefc" font-family="Arial, sans-serif" font-size="13">${escapedLabel}</text></svg>`
     )
     return sharp({create: {width: 300, height: 220, channels: 3, background: '#050814'}})
         .composite([
@@ -114,11 +114,27 @@ for (const sample of samples) {
             .rotate()
             .resize({width, withoutEnlargement: true, fit: useCases[sample.useCase].fit})
         const formats = [
-            {name: 'avif', extension: 'avif', pipeline: base.clone().avif({quality: 60, effort: 4})},
-            {name: 'webp', extension: 'webp', pipeline: base.clone().webp({quality: 78, effort: 4})},
+            {
+                name: 'avif',
+                extension: 'avif',
+                pipeline: base.clone().avif({quality: 60, effort: 4}),
+            },
+            {
+                name: 'webp',
+                extension: 'webp',
+                pipeline: base.clone().webp({quality: 78, effort: 4}),
+            },
             sample.preserveTransparency
-                ? {name: 'fallback', extension: 'png', pipeline: base.clone().png({compressionLevel: 9})}
-                : {name: 'fallback', extension: 'jpg', pipeline: base.clone().jpeg({quality: 82, mozjpeg: true})},
+                ? {
+                      name: 'fallback',
+                      extension: 'png',
+                      pipeline: base.clone().png({compressionLevel: 9}),
+                  }
+                : {
+                      name: 'fallback',
+                      extension: 'jpg',
+                      pipeline: base.clone().jpeg({quality: 82, mozjpeg: true}),
+                  },
         ]
 
         for (const format of formats) {
@@ -136,18 +152,21 @@ for (const sample of samples) {
     }
 
     const previewWidth = widths.reduce((best, width) =>
-        Math.abs(width - 640) < Math.abs(best - 640) ? width : best,
+        Math.abs(width - 640) < Math.abs(best - 640) ? width : best
     )
     const previews = ['avif', 'webp', 'fallback'].map((format) =>
-        outputs.find((output) => output.width === previewWidth && output.format === format),
+        outputs.find((output) => output.width === previewWidth && output.format === format)
     )
     rows.push(
         await Promise.all([
             createTile(sample.source, `${sample.id} · source · ${formatBytes(sourceBytes)}`),
             ...previews.map((preview) =>
-                createTile(resolve(projectRoot, preview.path), `${preview.format} · ${preview.width}px · ${formatBytes(preview.bytes)}`),
+                createTile(
+                    resolve(projectRoot, preview.path),
+                    `${preview.format} · ${preview.width}px · ${formatBytes(preview.bytes)}`
+                )
             ),
-        ]),
+        ])
     )
     manifest.push({
         id: sample.id,
@@ -176,8 +195,8 @@ await sharp({
                 input,
                 top: rowIndex * tileHeight,
                 left: columnIndex * tileWidth,
-            })),
-        ),
+            }))
+        )
     )
     .jpeg({quality: 90})
     .toFile(resolve(outputRoot, 'comparison-sheet.jpg'))
@@ -190,6 +209,10 @@ for (const format of ['avif', 'webp', 'fallback']) {
         const largest = sample.outputs.filter((output) => output.format === format).at(-1)
         return sum + largest.bytes
     }, 0)
-    console.log(`${format}: ${formatBytes(comparableTotal)} contre ${formatBytes(sourceTotal)} pour les 5 sources`)
+    console.log(
+        `${format}: ${formatBytes(comparableTotal)} contre ${formatBytes(sourceTotal)} pour les 5 sources`
+    )
 }
-console.log(`Prototype généré dans ${relative(projectRoot, outputRoot)} avec ${manifest.reduce((sum, sample) => sum + sample.outputs.length, 0)} dérivés.`)
+console.log(
+    `Prototype généré dans ${relative(projectRoot, outputRoot)} avec ${manifest.reduce((sum, sample) => sum + sample.outputs.length, 0)} dérivés.`
+)

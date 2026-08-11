@@ -14,8 +14,9 @@
 .crypto-contact__intro,
 .crypto-contact__form {
     border-radius: 1.5rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.13), transparent 35%),
-    linear-gradient(135deg, rgba(44, 44, 108, 0.76), rgba(12, 17, 43, 0.9));
+    background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.13), transparent 35%),
+        linear-gradient(135deg, rgba(44, 44, 108, 0.76), rgba(12, 17, 43, 0.9));
     border: 1px solid rgba(77, 181, 255, 0.2);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.18);
 }
@@ -131,7 +132,6 @@
 
 .crypto-contact__field input:focus,
 .crypto-contact__field textarea:focus {
-    outline: none;
     border-color: var(--color-primary);
     background: rgba(31, 31, 56, 0.82);
 }
@@ -211,7 +211,7 @@
     }
 
     .crypto-contact__option small {
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         overflow-wrap: anywhere;
     }
 

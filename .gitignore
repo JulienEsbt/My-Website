@@ -17,6 +17,9 @@ pnpm-debug.log*
 
 # --- Tests ---
 coverage/
+.media-prototype/
+.media-manifest.json
+public/media/
 
 # --- IDE / OS ---
 .idea/

@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
-import {describe, expect, it, vi} from 'vitest'
+import {beforeEach, describe, expect, it, vi} from 'vitest'
+import i18n from 'i18next'
 import Footer from './Footer.jsx'
 
 vi.mock('gsap', () => ({
@@ -17,6 +18,10 @@ vi.mock('gsap', () => ({
 vi.mock('gsap/ScrollTrigger', () => ({ScrollTrigger: {}}))
 
 describe('Footer', () => {
+    beforeEach(async () => {
+        await i18n.changeLanguage('fr')
+    })
+
     it('annonce la page actuellement consultée', () => {
         render(
             <MemoryRouter initialEntries={['/travel']}>
@@ -24,7 +29,7 @@ describe('Footer', () => {
             </MemoryRouter>
         )
 
-        expect(screen.getByRole('link', {name: 'Voyages'})).toHaveAttribute(
+        expect(screen.getByRole('link', {name: 'Carnets de voyage'})).toHaveAttribute(
             'aria-current',
             'page'
         )

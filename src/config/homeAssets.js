@@ -1,4 +1,5 @@
-import CV from '../assets/documents/cv.pdf'
+import cvFr from '../assets/documents/Julien-Esterbet-CV-FR-2026.pdf'
+import resumeEn from '../assets/documents/Julien-Esterbet-Resume-EN-2026.pdf'
 import {getHomeMedia} from './homeMedia.js'
 
 export const HOME_ASSETS = {
@@ -9,9 +10,12 @@ export const HOME_ASSETS = {
         photo: getHomeMedia('about/D14F4D37-8AEF-4E9D-8CAE-DEDE412C2D64_1_105_c.jpeg'),
     },
     portfolio: {
+        brunoPizza: getHomeMedia('portfolio/BrunoPizza.png'),
+        myWebsite: getHomeMedia('portfolio/MyWebsite.png'),
         megalis: getHomeMedia('portfolio/Megalis.png'),
-        ffnn: getHomeMedia('portfolio/FFNN.png'),
-        wave: getHomeMedia('portfolio/Wave.png'),
     },
-    cv: CV,
+    resume: {
+        fr: cvFr,
+        en: resumeEn,
+    },
 }

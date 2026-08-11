@@ -76,7 +76,8 @@ src/
 │
 ├─ assets/
 │  ├─ documents/
-│  │  └─ cv.pdf
+│  │  ├─ Julien-Esterbet-CV-FR-2026.pdf
+│  │  └─ Julien-Esterbet-Resume-EN-2026.pdf
 │  └─ images/
 │     ├─ home/                           # Homepage images and portraits
 │     └─ web3/                           # Web3 / crypto visual assets

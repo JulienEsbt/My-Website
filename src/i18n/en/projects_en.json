@@ -5,6 +5,7 @@
             "kicker": "Product case study",
             "title": "Bruno Pizza — Production",
             "subtitle": "A local desktop application that turns an Excel plan into an actionable workshop production flow.",
+            "imageAlt": "Bruno Pizza production dashboard showing quantities by variety and distributor",
             "back": "Back to projects",
             "code": "View GitHub repository"
         },
@@ -26,9 +27,18 @@
             "title": "A guided local business workflow",
             "intro": "The application matches the Excel plan with a business catalogue and organizes work across three complementary areas.",
             "items": {
-                "dashboard": {"title": "Production dashboard", "body": "Excel import and validation, header, duplicate, quantity and total checks, followed by distribution by variety and distributor."},
-                "workshop": {"title": "Workshop flow", "body": "Ordered recipe, picture, progress and navigation to guide preparation pizza by pizza."},
-                "settings": {"title": "Business settings", "body": "Local management of pizzas, ingredients, recipes, pictures and distributors."}
+                "dashboard": {
+                    "title": "Production dashboard",
+                    "body": "Excel import and validation, header, duplicate, quantity and total checks, followed by distribution by variety and distributor."
+                },
+                "workshop": {
+                    "title": "Workshop flow",
+                    "body": "Ordered recipe, picture, progress and navigation to guide preparation pizza by pizza."
+                },
+                "settings": {
+                    "title": "Business settings",
+                    "body": "Local management of pizzas, ingredients, recipes, pictures and distributors."
+                }
             }
         },
         "architecture": {
@@ -46,9 +56,18 @@
             "kicker": "Decisions and trade-offs",
             "title": "Make local use reliable before expanding the scope",
             "items": {
-                "local": {"title": "Local operation", "body": "Data, pictures and settings remain on the machine. The server is not designed to be exposed directly to the Internet."},
-                "persistence": {"title": "Separated persistence", "body": "User data is stored outside installed files so an update can reuse the existing catalogue."},
-                "quality": {"title": "Verifiable delivery", "body": "Frontend, backend and desktop checks are grouped before release packages are built."}
+                "local": {
+                    "title": "Local operation",
+                    "body": "Data, pictures and settings remain on the machine. The server is not designed to be exposed directly to the Internet."
+                },
+                "persistence": {
+                    "title": "Separated persistence",
+                    "body": "User data is stored outside installed files so an update can reuse the existing catalogue."
+                },
+                "quality": {
+                    "title": "Verifiable delivery",
+                    "body": "Frontend, backend and desktop checks are grouped before release packages are built."
+                }
             }
         },
         "limits": {
@@ -64,6 +83,130 @@
         "next": {
             "title": "Next portfolio step",
             "body": "Document My-Website as an active portfolio, then keep the homepage focused on the most representative evidence.",
+            "cta": "Back to the selection"
+        }
+    },
+    "website": {
+        "meta": {"title": "My-Website — Portfolio case study | Julien Esterbet"},
+        "hero": {
+            "kicker": "Portfolio case study",
+            "title": "My-Website",
+            "subtitle": "The progressive rebuild of a content-rich React portfolio into a clearer, faster and verifiable professional showcase.",
+            "imageAlt": "My-Website homepage presenting Julien Esterbet and his full-stack positioning",
+            "back": "Back to projects",
+            "live": "View current public site",
+            "code": "View GitHub repository"
+        },
+        "overview": {
+            "statusLabel": "Status",
+            "status": "Active portfolio — local rebuild in progress",
+            "roleLabel": "Responsibility",
+            "role": "Design, development, content and quality",
+            "scopeLabel": "Scope",
+            "scope": "Bilingual SPA deployed on Vercel"
+        },
+        "problem": {
+            "kicker": "Context and problem",
+            "title": "Evolve a rich personal site without hiding its technical debt",
+            "body": "The portfolio already brought together projects, Web3, travel and writing, but that breadth relied on a structure that had become difficult to evolve: a heavy initial load, mixed responsibilities, oversized media, inconsistent navigation and unaudited accessibility. The rebuild aims to preserve useful content while making the architecture, professional evidence and current limitations clearer."
+        },
+        "solution": {
+            "kicker": "Response",
+            "title": "Rebuild in layers instead of rewriting blindly",
+            "intro": "The process begins with an audit of the actual code and addresses architecture, media, accessibility and professional content as separate workstreams.",
+            "items": {
+                "architecture": {
+                    "title": "Route-based architecture",
+                    "body": "A shared shell, route registry and domain modules separate navigation, pages, external services and localized content."
+                },
+                "media": {
+                    "title": "Responsible media pipeline",
+                    "body": "Sources are kept away from direct public exposure; responsive AVIF and WebP derivatives are generated with domain manifests and without sensitive metadata."
+                },
+                "quality": {
+                    "title": "Verifiable quality",
+                    "body": "Formatting, linting, tests, builds and performance budgets are grouped into a reproducible check, complemented by a documented RGAA audit matrix."
+                }
+            }
+        },
+        "architecture": {
+            "kicker": "Architecture",
+            "title": "Progressive loading around a shared application shell",
+            "steps": {
+                "entry": "Vite initializes React, internationalization and performance measurements.",
+                "shell": "AppShell owns the skip link, navigation, main content, loading states and global error handling.",
+                "routes": "Each page and its translation namespace are loaded on demand from a single route registry.",
+                "domains": "Home, Web3, Travel and Reflections remain organized by domain; external calls go through dedicated services.",
+                "media": "ResponsiveImage consumes generated manifests to select the appropriate format and width for each context.",
+                "vercel": "The static build targets Vercel; the repository currently defines the rewrite required for SPA routing."
+            }
+        },
+        "decisions": {
+            "kicker": "Decisions and trade-offs",
+            "title": "Improve the evidence without inventing a product that does not exist",
+            "items": {
+                "incremental": {
+                    "title": "Incremental rebuild",
+                    "body": "Existing content and interactions are preserved and then strengthened in slices, making each correction verifiable and limiting regressions."
+                },
+                "privacy": {
+                    "title": "Separate sources and derivatives",
+                    "body": "Originals remain working sources; only cleaned and optimized variants are intended for the public site."
+                },
+                "accessibility": {
+                    "title": "Audit before declaration",
+                    "body": "RGAA work uses a criterion matrix and manual evidence. Local results do not become a compliance statement before the deployed version is checked again."
+                },
+                "adapters": {
+                    "title": "Isolate external dependencies",
+                    "body": "Email, Mapbox, RPC, price data and wallet inspection go through adapters that separate the interface from providers."
+                }
+            }
+        },
+        "challenges": {
+            "kicker": "Challenges",
+            "title": "Work on a system larger than a simple landing page",
+            "items": {
+                "legacy": {
+                    "title": "Preserve existing content",
+                    "body": "The rebuild must clarify the code without removing the albums, writing and tools already gathered in the portfolio."
+                },
+                "interactive": {
+                    "title": "Make interaction accessible",
+                    "body": "The globe, map, timeline, carousels, dialogs and Web3 tools require text alternatives, keyboard navigation and careful focus management."
+                },
+                "editorial": {
+                    "title": "Remain credible",
+                    "body": "Active, academic and historical projects must be named by their real status, with results limited to what the code or audits can prove."
+                }
+            }
+        },
+        "results": {
+            "kicker": "Verifiable results",
+            "title": "A foundation that is now measured and documented",
+            "items": {
+                "delivery": "One command validates formatting, linting, tests, the production build and performance budgets.",
+                "performance": "Main routes and their translations load on demand; heavy map and globe features remain outside the initial load.",
+                "media": "The current pipeline processes 518 sources and generates 4,470 responsive derivatives in three formats without directly exposing source files.",
+                "rgaa": "The local RGAA 4.1.2 audit documents 66 compliant criteria and 40 non-applicable criteria; this count is not presented as a compliance rate."
+            }
+        },
+        "limits": {
+            "kicker": "Current limitations",
+            "title": "What this rebuild cannot claim yet",
+            "items": {
+                "deployment": "The public link opens the version currently online; the local rebuild described here still needs explicit validation and deployment.",
+                "mediaDelivery": "Responsive derivatives are currently generated locally and ignored by Git. Their generation or storage strategy for a clean Vercel deployment still needs to be finalized.",
+                "securityHeaders": "The current Vercel configuration covers the SPA rewrite but does not yet define the dedicated security headers planned for the deployment phase.",
+                "cv": "The current PDFs do not claim PDF/UA compliance; a bilingual semantic HTML alternative provides the same content before download.",
+                "font": "Poppins still depends on an external request; self-hosting remains planned.",
+                "fieldData": "Available measurements are local checks. Field data and post-deployment monitoring still need to be established."
+            }
+        },
+        "stack": {"kicker": "Stack", "title": "Core technologies and controls"},
+        "next": {
+            "title": "Next steps",
+            "body": "Finish secondary-page content, self-host the font, then run production checks before publishing any accessibility statement.",
             "cta": "Back to the selection"
         }
     }

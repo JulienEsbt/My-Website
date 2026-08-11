@@ -1,15 +1,24 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {gsap} from 'gsap'
+import {getPreferredScrollBehavior} from '../../accessibility/motionPreferences.js'
+import useReducedMotion from '../../accessibility/useReducedMotion.js'
 import './SectionNav.css'
 
 const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
     const navRef = useRef(null)
     const [active, setActive] = useState(`#${items[0]?.id ?? 'top'}`)
+    const [dismissedTooltip, setDismissedTooltip] = useState(null)
+    const reducedMotion = useReducedMotion()
 
     useEffect(() => {
         if (!navRef.current) return
 
-        gsap.fromTo(
+        if (reducedMotion) {
+            gsap.set(navRef.current, {clearProps: 'all'})
+            return undefined
+        }
+
+        const tween = gsap.fromTo(
             navRef.current,
             {
                 y: 24,
@@ -27,7 +36,9 @@ const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
                 ease: 'power3.out',
             }
         )
-    }, [])
+
+        return () => tween.kill()
+    }, [reducedMotion])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -66,19 +77,14 @@ const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
 
         window.scrollTo({
             top: target.getBoundingClientRect().top + window.scrollY - offset,
-            behavior: 'smooth',
+            behavior: getPreferredScrollBehavior(),
         })
 
         setActive(`#${id}`)
     }
 
     return (
-        <nav
-            ref={navRef}
-            className="section-nav"
-            role="navigation"
-            aria-label={ariaLabel}
-        >
+        <nav ref={navRef} className="section-nav" aria-label={ariaLabel}>
             {items.map((item) => {
                 const hash = `#${item.id}`
 
@@ -88,10 +94,20 @@ const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
                         href={hash}
                         className={active === hash ? 'active' : ''}
                         aria-label={item.label}
+                        aria-current={active === hash ? 'location' : undefined}
                         data-label={item.label}
+                        data-tooltip-dismissed={dismissedTooltip === item.id ? 'true' : undefined}
                         onClick={handleClick(item.id)}
+                        onFocus={() => setDismissedTooltip(null)}
+                        onPointerEnter={() => setDismissedTooltip(null)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Escape') {
+                                event.preventDefault()
+                                setDismissedTooltip(item.id)
+                            }
+                        }}
                     >
-                        {item.icon}
+                        <span aria-hidden="true">{item.icon}</span>
                     </a>
                 )
             })}

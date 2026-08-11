@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import {MemoryRouter, Route, Routes} from 'react-router-dom'
 import i18n from 'i18next'
@@ -21,10 +21,42 @@ describe('ReflectionArticlePage', () => {
             </MemoryRouter>
         )
 
-        expect(screen.getByText('Cette réflexion n’existe pas ou n’est plus disponible.')).toBeVisible()
+        expect(
+            screen.getByText('Cette réflexion n’existe pas ou n’est plus disponible.')
+        ).toBeInTheDocument()
         expect(screen.getByRole('link', {name: 'Voir les réflexions'})).toHaveAttribute(
             'href',
             '/reflections'
         )
+    })
+
+    it('renders the English MDX article without the French fallback notice', async () => {
+        await i18n.changeLanguage('en')
+
+        render(
+            <MemoryRouter initialEntries={['/reflections/verite-liberte-construction-de-soi']}>
+                <Routes>
+                    <Route path="/reflections/:slug" element={<ReflectionArticlePage />} />
+                </Routes>
+            </MemoryRouter>
+        )
+
+        expect(
+            await screen.findByRole('heading', {
+                level: 1,
+                name: 'Truth, freedom and self-construction',
+            })
+        ).toBeInTheDocument()
+        expect(
+            screen.getByRole('heading', {
+                level: 2,
+                name: 'The more I learn, the more wary I become of certainty.',
+            })
+        ).toBeVisible()
+        await waitFor(() => {
+            expect(
+                screen.queryByText('This article is currently available in French only.')
+            ).not.toBeInTheDocument()
+        })
     })
 })

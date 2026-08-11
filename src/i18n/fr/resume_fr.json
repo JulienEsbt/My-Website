@@ -99,7 +99,9 @@
             "role": "Manager — emploi étudiant",
             "organization": "McDonald’s Gare · Rennes",
             "period": "Octobre 2018 — mars 2022",
-            "bullets": ["Supervision opérationnelle, accompagnement d’équipe et gestion des priorités."],
+            "bullets": [
+                "Supervision opérationnelle, accompagnement d’équipe et gestion des priorités."
+            ],
             "skills": ""
         }
     ],
@@ -120,9 +122,21 @@
         }
     ],
     "projects": [
-        {"name": "Bruno Pizza — Production", "status": "Produit actif", "detail": "Produit desktop de gestion de production développé avec React, TypeScript, Electron, Express et SQLite."},
-        {"name": "My-Website", "status": "Portfolio actif", "detail": "Portfolio bilingue React et Vite refondu avec une démarche RGAA documentée."},
-        {"name": "Megalis", "status": "Prototype académique", "detail": "Prototype EVM d’horodatage de références documentaires on-chain avec Solidity."}
+        {
+            "name": "Bruno Pizza — Production",
+            "status": "Produit actif",
+            "detail": "Produit desktop de gestion de production développé avec React, TypeScript, Electron, Express et SQLite."
+        },
+        {
+            "name": "My-Website",
+            "status": "Portfolio actif",
+            "detail": "Portfolio bilingue React et Vite refondu avec une démarche RGAA documentée."
+        },
+        {
+            "name": "Megalis",
+            "status": "Prototype académique",
+            "detail": "Prototype EVM d’horodatage de références documentaires on-chain avec Solidity."
+        }
     ],
     "labels": {
         "period": "Période",

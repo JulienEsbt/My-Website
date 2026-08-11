@@ -2,9 +2,9 @@ import React from 'react'
 import {motion} from 'framer-motion'
 import './PageHero.css'
 
-const PageHero = ({kicker, title, subtitle, children}) => {
+const PageHero = ({id, kicker, title, subtitle, children}) => {
     return (
-        <section className="page-hero">
+        <section id={id} className="page-hero">
             <motion.div
                 className="container page-hero__container"
                 initial={{opacity: 0, y: 28}}

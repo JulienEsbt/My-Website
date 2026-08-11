@@ -1,17 +1,21 @@
-import img1980 from './IMG_1980.jpeg'
-import img1981 from './IMG_1981.jpeg'
-import img2307 from './IMG_2307.JPG'
-import rg9436 from './_RG_9436.jpg'
-import rg9641 from './_RG_9641.jpg'
-import img1995 from './IMG_1995.jpeg'
-import img2014 from './IMG_2014.jpeg'
-import img2199 from './IMG_2199.jpeg'
-import img2019 from './IMG_2019.JPG'
-import img2031 from './IMG_2031.jpeg'
-import img2043 from './IMG_2043.jpeg'
-import img2045 from './IMG_2045.jpeg'
-import img2049 from './IMG_2049.jpeg'
+import albumManifest from '../../../../generated/media/travels/estonia-2022.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img1980 = getTravelMedia('estonia-2022/IMG_1980.jpeg')
+const img1981 = getTravelMedia('estonia-2022/IMG_1981.jpeg')
+const img2307 = getTravelMedia('estonia-2022/IMG_2307.JPG')
+const rg9436 = getTravelMedia('estonia-2022/_RG_9436.jpg')
+const rg9641 = getTravelMedia('estonia-2022/_RG_9641.jpg')
+const img1995 = getTravelMedia('estonia-2022/IMG_1995.jpeg')
+const img2014 = getTravelMedia('estonia-2022/IMG_2014.jpeg')
+const img2199 = getTravelMedia('estonia-2022/IMG_2199.jpeg')
+const img2019 = getTravelMedia('estonia-2022/IMG_2019.JPG')
+const img2031 = getTravelMedia('estonia-2022/IMG_2031.jpeg')
+const img2043 = getTravelMedia('estonia-2022/IMG_2043.jpeg')
+const img2045 = getTravelMedia('estonia-2022/IMG_2045.jpeg')
+const img2049 = getTravelMedia('estonia-2022/IMG_2049.jpeg')
 const estonia2022Photos = [
     {src: img1980},
     {src: img1981},

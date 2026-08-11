@@ -1,22 +1,3 @@
-import england2017Photos from '../../assets/images/travels/england-2017/england2017'
-import croatia2021Photos from "../../assets/images/travels/croatia-2021/croatia2021.js";
-import germany2022Photos from "../../assets/images/travels/germany-2022/germany2022.js";
-import estonia2022Photos from "../../assets/images/travels/estonia-2022/estonia2022.js";
-import spainMadrid2023Photos from "../../assets/images/travels/spain-madrid-2023/spainMadrid2023.js";
-import saintMartin2023Photos from "../../assets/images/travels/saint-martin-2023/saintMartin2023.js";
-import saintBarth2023Photos from "../../assets/images/travels/saint-barth-2023/saintBarth2023.js";
-import hungary2023Photos from "../../assets/images/travels/hungary-2023/hungary2023.js";
-import italy2023Photos from "../../assets/images/travels/italy-2023/italy2023.js";
-import austria2023Photos from "../../assets/images/travels/austria-2023/austria2023.js";
-import spainBarcelona2024Photos from "../../assets/images/travels/spain-barcelona-2024/spainBarcelona2024.js";
-import portugal2025Photos from "../../assets/images/travels/portugal-2025/portugal2025.js";
-import hungary2025Photos from "../../assets/images/travels/hungary-2025/hungary2025.js";
-import slovakia2025Photos from "../../assets/images/travels/slovakia-2025/slovakia2025.js";
-import czechia2025Photos from "../../assets/images/travels/czechia-2025/czechia2025.js";
-import northMacedonia2025Photos from "../../assets/images/travels/north-macedonia-2025/northMacedonia2025.js";
-import guadeloupe2025Photos from "../../assets/images/travels/guadeloupe-2025/guadeloupe2025.js";
-import belgium2025Photos from "../../assets/images/travels/belgium-2025/belgium2025.js";
-
 const trips = [
     {
         id: 'brittany-life',
@@ -37,8 +18,10 @@ const trips = [
         continentEn: 'Europe',
         lat: 48.1173,
         lng: -1.6778,
-        description: 'La Bretagne, entre Rennes et Saint-Malo, là où j’ai grandi, étudié et construit mes premières années.',
-        descriptionEn: 'Brittany, between Rennes and Saint-Malo, where I grew up, studied and built the first years of my life.',
+        description:
+            'La Bretagne, entre Rennes et Saint-Malo, là où j’ai grandi, étudié et construit mes premières années.',
+        descriptionEn:
+            'Brittany, between Rennes and Saint-Malo, where I grew up, studied and built the first years of my life.',
         story: `Après être né à Alençon, j’ai grandi entre Rennes et Saint-Malo, où j’ai vécu de l’enfance jusqu’en 2024. C’est là que j’ai fait mon parcours scolaire, mes études, mes premières expériences et une grande partie de ma vie.
 
 Entre Rennes, la côte malouine, les souvenirs d’enfance, les années d’études et les départs successifs, la Bretagne reste le point de départ de presque tout ce qui a suivi.`,
@@ -46,7 +29,6 @@ Entre Rennes, la côte malouine, les souvenirs d’enfance, les années d’étu
 
 Between Rennes, the Saint-Malo coast, childhood memories, student years and all the departures that followed, Brittany remains the starting point of almost everything that came after.`,
         polarstepsUrl: '',
-        photos: [],
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -73,8 +55,10 @@ Between Rennes, the Saint-Malo coast, childhood memories, student years and all 
         continentEn: 'Africa',
         lat: 33.8869,
         lng: 9.5375,
-        description: 'Mon premier grand voyage familial, entre Tunis, Djerba, oasis, désert et souvenirs d’enfance.',
-        descriptionEn: 'My first big family trip, between Tunis, Djerba, oases, desert and childhood memories.',
+        description:
+            'Mon premier grand voyage familial, entre Tunis, Djerba, oasis, désert et souvenirs d’enfance.',
+        descriptionEn:
+            'My first big family trip, between Tunis, Djerba, oases, desert and childhood memories.',
         story: `Ce voyage en Tunisie reste mon premier grand souvenir de voyage à l’étranger. J’étais parti avec mon père, ma belle-mère, mes frères et ma grand-mère, pour environ une semaine de découverte.
 
 J’en garde des images très fortes : Tunis, Djerba, la côte, les oasis, le désert, les balades en dromadaire, les palmiers et les dattes cueillies dans les arbres. J’étais encore jeune, mais ce voyage m’a marqué. Aujourd’hui, j’aimerais beaucoup y retourner avec un regard d’adulte.`,
@@ -82,7 +66,6 @@ J’en garde des images très fortes : Tunis, Djerba, la côte, les oasis, le d�
 
 I still keep strong images from it: Tunis, Djerba, the coast, oases, the desert, camel rides, palm trees and dates picked from the trees. I was still young, but this trip left a mark on me. Today, I would love to go back with an adult’s perspective.`,
         polarstepsUrl: '',
-        photos: [],
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -109,8 +92,10 @@ I still keep strong images from it: Tunis, Djerba, the coast, oases, the desert,
         continentEn: 'Europe',
         lat: 49.2144,
         lng: -2.1313,
-        description: 'Quelques jours à Jersey, une première petite immersion anglophone au départ de Saint-Malo.',
-        descriptionEn: 'A few days in Jersey, a first small English-speaking immersion from Saint-Malo.',
+        description:
+            'Quelques jours à Jersey, une première petite immersion anglophone au départ de Saint-Malo.',
+        descriptionEn:
+            'A few days in Jersey, a first small English-speaking immersion from Saint-Malo.',
         story: `Jersey fut un court voyage scolaire, mais aussi une première petite ouverture vers le monde anglophone. Ce n’était pas très loin de Saint-Malo en bateau, pourtant l’ambiance, la langue et le cadre donnaient déjà l’impression de changer de monde.
 
 Un petit séjour, mais une étape intéressante dans cette curiosité progressive pour l’Angleterre et l’étranger.`,
@@ -118,7 +103,6 @@ Un petit séjour, mais une étape intéressante dans cette curiosité progressiv
 
 A small trip, but an interesting step in my growing curiosity for England and travelling abroad.`,
         polarstepsUrl: '',
-        photos: [],
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: false,
@@ -145,8 +129,10 @@ A small trip, but an interesting step in my growing curiosity for England and tr
         continentEn: 'Europe',
         lat: 52.9548,
         lng: -1.1581,
-        description: 'Une année en Angleterre, entre Nottingham, Londres, apprentissage de l’anglais et première vraie autonomie.',
-        descriptionEn: 'A year in England, between Nottingham, London, learning English and my first real experience of independence.',
+        description:
+            'Une année en Angleterre, entre Nottingham, Londres, apprentissage de l’anglais et première vraie autonomie.',
+        descriptionEn:
+            'A year in England, between Nottingham, London, learning English and my first real experience of independence.',
         story: `Avant même de partir vivre en Angleterre, j’avais déjà effectué plusieurs séjours de bénévolat dans des charity shops à Londres, notamment dans des boutiques dont les bénéfices allaient à la recherche contre le cancer. Ces expériences m’ont permis d’améliorer mon anglais et de commencer à me sentir plus à l’aise à l’étranger.
 
 Après le bac, je suis parti comme jeune au pair à Nottingham pour apprendre l’anglais, à une époque où je voulais devenir pilote de chasse. Mon quotidien était rythmé par le sport tôt le matin, les enfants dont je m’occupais, les révisions pour mes concours, les rencontres, les sorties et les découvertes. À 18 ans, loin de chez moi, entouré de personnes souvent plus âgées et venues d’horizons différents, cette année m’a énormément fait grandir.`,
@@ -154,7 +140,7 @@ Après le bac, je suis parti comme jeune au pair à Nottingham pour apprendre l�
 
 After high school, I moved to Nottingham as an au pair to learn English, at a time when I wanted to become a fighter pilot. My daily life was shaped by early morning workouts, taking care of the children, preparing for exams, meeting people, going out and discovering a new country. At 18, away from home and surrounded by people often older than me and from different backgrounds, that year helped me grow a lot.`,
         polarstepsUrl: '',
-        photos: england2017Photos,
+        photoAlbumId: 'england-2017',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -181,8 +167,10 @@ After high school, I moved to Nottingham as an au pair to learn English, at a ti
         continentEn: 'Europe',
         lat: 42.6507,
         lng: 18.0944,
-        description: 'Une semaine à Dubrovnik, entre vieille ville fortifiée, mer Adriatique et paysages croates.',
-        descriptionEn: 'One week in Dubrovnik, between the fortified old town, the Adriatic Sea and Croatian landscapes.',
+        description:
+            'Une semaine à Dubrovnik, entre vieille ville fortifiée, mer Adriatique et paysages croates.',
+        descriptionEn:
+            'One week in Dubrovnik, between the fortified old town, the Adriatic Sea and Croatian landscapes.',
         story: `Ce premier voyage à Dubrovnik reste associé à la beauté de la côte croate et de sa vieille ville entourée de remparts.
 
 J’ai découvert la Old Town, les remparts, les monastères, le musée maritime, le fort Lovrijenac, les ruelles en pierre, les hauteurs autour de la ville et l’île de Lokrum, avec son fort, ses jardins et ses coins plus sauvages. La mer Adriatique, la lumière, les pierres blanches et les paysages méditerranéens m’ont laissé un très beau souvenir.
@@ -194,7 +182,7 @@ I discovered the Old Town, the city walls, the monasteries, the Maritime Museum,
 
 It was a simple trip, but in a truly beautiful destination that I was happy to discover for the first time.`,
         polarstepsUrl: '',
-        photos: croatia2021Photos,
+        photoAlbumId: 'croatia-2021',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -221,8 +209,10 @@ It was a simple trip, but in a truly beautiful destination that I was happy to d
         continentEn: 'Europe',
         lat: 50.1109,
         lng: 8.6821,
-        description: 'Une courte escale à Francfort sur la route du séminaire de lancement de mon master.',
-        descriptionEn: 'A short stopover in Frankfurt on the way to the kick-off seminar of my master’s degree.',
+        description:
+            'Une courte escale à Francfort sur la route du séminaire de lancement de mon master.',
+        descriptionEn:
+            'A short stopover in Frankfurt on the way to the kick-off seminar of my master’s degree.',
         story: `Francfort n’était qu’une étape avant Tallinn, mais cette escale m’a permis de découvrir rapidement la ville. Le contraste entre les immeubles modernes, le centre historique et l’ambiance de grande ville allemande m’a marqué.
 
 Un passage bref, mais qui ouvrait déjà la porte à une aventure internationale beaucoup plus large.`,
@@ -230,7 +220,7 @@ Un passage bref, mais qui ouvrait déjà la porte à une aventure internationale
 
 A brief stop, but one that already opened the door to a much larger international adventure.`,
         polarstepsUrl: '',
-        photos: germany2022Photos,
+        photoAlbumId: 'germany-2022',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -257,8 +247,10 @@ A brief stop, but one that already opened the door to a much larger internationa
         continentEn: 'Europe',
         lat: 59.437,
         lng: 24.7536,
-        description: 'Le séminaire de lancement de mon master international, dans une Tallinn médiévale et magnifique.',
-        descriptionEn: 'The kick-off seminar of my international master’s degree, in a beautiful medieval Tallinn.',
+        description:
+            'Le séminaire de lancement de mon master international, dans une Tallinn médiévale et magnifique.',
+        descriptionEn:
+            'The kick-off seminar of my international master’s degree, in a beautiful medieval Tallinn.',
         story: `Tallinn a marqué le début concret de mon master international. Pendant plusieurs jours, nous avons alterné travail, séminaires et découverte de la ville avec des étudiants venus de différents pays.
 
 La vieille ville médiévale, les rues pavées, l’ambiance nordique et les premières rencontres du programme ont rendu ce séjour vraiment marquant. C’est aussi là que j’ai croisé certaines personnes qui allaient ensuite prendre une place importante dans mon parcours.`,
@@ -266,14 +258,15 @@ La vieille ville médiévale, les rues pavées, l’ambiance nordique et les pre
 
 The medieval old town, cobbled streets, northern atmosphere and first encounters of the programme made this stay memorable. It was also there that I first met some people who would later become important in my journey.`,
         polarstepsUrl: '',
-        photos: estonia2022Photos,
+        photoAlbumId: 'estonia-2022',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
         isStudyTrip: true,
         isWorkTrip: false,
         isPlanned: false,
-    }, {
+    },
+    {
         id: 'spain-madrid-2023',
         sortOrder: 202307,
         city: 'Madrid / Ségovie',
@@ -309,7 +302,7 @@ I discovered many of the city’s major places: the Royal Palace, Plaza Mayor, P
 
 We also visited Segovia, with its Roman aqueduct, Alcázar, gardens and historic streets. This Summer School allowed me to build friendships that still last today.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8595891-spain?mode=track',
-        photos: spainMadrid2023Photos,
+        photoAlbumId: 'spain-madrid-2023',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -349,8 +342,9 @@ Avec mon cousin, nous avons aussi vécu énormément d'expériences : flyboard, 
 During the day, while he was working, I often explored the island alone. I spent a lot of time hiking, exercising and taking pictures. I discovered beautiful beaches, wild monkeys, empty hiking trails and an incredibly peaceful lifestyle.
 
 Together we also enjoyed many experiences: flyboarding, jet skiing, catamaran trips, restaurants and sunsets. It remains one of the greatest trips of my life.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
-        photos: saintMartin2023Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
+        photoAlbumId: 'saint-martin-2023',
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: true,
@@ -386,8 +380,9 @@ J'y ai découvert une île magnifique, réputée pour son luxe, ses restaurants 
         storyEn: `From Saint Martin, we made several trips to Saint Barthélemy.
 
 I discovered a beautiful island famous for its luxury, restaurants and beaches. One highlight was spending a day on a catamaran with pilots and airport staff working with my cousin. I also visited Johnny Hallyday's grave.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
-        photos: saintBarth2023Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/8596930-saint-martin-sint-maarten-saint-bartelemey?mode=track',
+        photoAlbumId: 'saint-barth-2023',
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: false,
@@ -416,7 +411,7 @@ I discovered a beautiful island famous for its luxury, restaurants and beaches. 
         lat: 47.4979,
         lng: 19.0402,
         description: 'Six mois à Budapest dans le cadre de mon master international.',
-        descriptionEn: 'Six months living in Budapest as part of my international master\'s degree.',
+        descriptionEn: "Six months living in Budapest as part of my international master's degree.",
         story: `Budapest restera probablement l'une des villes les plus importantes de ma vie.
 
 J'y ai vécu six mois pour terminer mon master international à ELTE. J'y ai rencontré des personnes extraordinaires venues du monde entier, notamment Aleksandra, qui est aujourd'hui l'une de mes meilleures amies.
@@ -428,7 +423,7 @@ I lived there for six months while completing my international master's degree a
 
 Between classes, cafés, thermal baths, nightlife and countless Erasmus trips, this experience deeply changed the way I see the world.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: hungary2023Photos,
+        photoAlbumId: 'hungary-2023',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -469,7 +464,7 @@ Venice was obviously the highlight of the trip. I loved the almost unreal beauty
 
 We also explored Milan, Bergamo and Trento. The atmosphere was great, the weather was beautiful, the cities were not overcrowded and we truly enjoyed the journey. A simple, beautiful and joyful trip, full of stunning places and great memories.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: italy2023Photos,
+        photoAlbumId: 'italy-2023',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -506,7 +501,7 @@ Les marchés de Noël, la neige, les palais impériaux, les musées et l'atmosph
 
 The Christmas markets, snow, imperial palaces and museums made the city feel magical. It remains one of the most beautiful European cities I've visited during winter.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
-        photos: austria2023Photos,
+        photoAlbumId: 'austria-2023',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -543,7 +538,6 @@ J'y suis arrivé pour mon stage de fin d'études avant d'y commencer ma carrièr
 
 I first moved there for my end-of-studies internship before starting my professional career. Since then, I've been discovering its neighbourhoods, museums, monuments and cultural richness. Paris is now my new home base.`,
         polarstepsUrl: '',
-        photos: [],
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: true,
@@ -580,7 +574,7 @@ Nous avons découvert la ville, fait plusieurs randonnées, exploré les lieux i
 
 We explored the city, hiked, visited the main attractions and enjoyed a few days together. Even though I personally prefer Madrid, Barcelona is still a beautiful city to discover.`,
         polarstepsUrl: '',
-        photos: spainBarcelona2024Photos,
+        photoAlbumId: 'spain-barcelona-2024',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -607,8 +601,10 @@ We explored the city, hiked, visited the main attractions and enjoyed a few days
         continentEn: 'Europe',
         lat: 38.7223,
         lng: -9.1393,
-        description: 'Quelques jours à Lisbonne avec Hugo, entre découvertes, soirées et gastronomie.',
-        descriptionEn: 'A few days in Lisbon with Hugo, discovering the city, nightlife and Portuguese food.',
+        description:
+            'Quelques jours à Lisbonne avec Hugo, entre découvertes, soirées et gastronomie.',
+        descriptionEn:
+            'A few days in Lisbon with Hugo, discovering the city, nightlife and Portuguese food.',
         story: `Premier voyage de 2025, Lisbonne restera un excellent souvenir partagé avec Hugo, l'un de mes meilleurs amis.
 
 Nous avons parcouru les quartiers emblématiques de la ville, admiré les points de vue, profité de l'ambiance portugaise, découvert la gastronomie locale et beaucoup marché. Entre les visites, les soirées et les discussions jusque tard dans la nuit, ce voyage a parfaitement lancé mon année de découvertes.`,
@@ -616,7 +612,7 @@ Nous avons parcouru les quartiers emblématiques de la ville, admiré les points
 
 We explored the city's iconic districts, admired its viewpoints, enjoyed Portuguese food and walked for hours. Between sightseeing, nightlife and long conversations, this trip perfectly started my year of travelling.`,
         polarstepsUrl: '',
-        photos: portugal2025Photos,
+        photoAlbumId: 'portugal-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -644,16 +640,19 @@ We explored the city's iconic districts, admired its viewpoints, enjoyed Portugu
         continentEn: 'Europe',
         lat: 47.4979,
         lng: 19.0402,
-        description: 'Retour à Budapest avec Salomé, entre retrouvailles, Boiler Room et début d’un road trip en Europe centrale.',
-        descriptionEn: 'Back to Budapest with Salomé, combining reunions, Boiler Room and the beginning of a Central Europe road trip.',
+        description:
+            'Retour à Budapest avec Salomé, entre retrouvailles, Boiler Room et début d’un road trip en Europe centrale.',
+        descriptionEn:
+            'Back to Budapest with Salomé, combining reunions, Boiler Room and the beginning of a Central Europe road trip.',
         story: `À l'origine, Salomé et moi devions simplement passer une soirée à Budapest pour assister à une Boiler Room.
 
 Finalement, ce simple week-end s'est transformé en près de deux semaines de voyage à travers l'Europe centrale. J'en ai profité pour retrouver de nombreux amis rencontrés durant mon Erasmus, revisiter mes endroits préférés de Budapest et redécouvrir une ville qui compte énormément pour moi.`,
         storyEn: `Originally, Salomé and I only planned to spend one evening in Budapest to attend a Boiler Room event.
 
 Eventually, that simple weekend turned into a two-week journey across Central Europe. I reunited with many Erasmus friends, revisited my favourite places and rediscovered one of the cities that means the most to me.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: hungary2025Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
+        photoAlbumId: 'hungary-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -681,7 +680,8 @@ Eventually, that simple weekend turned into a two-week journey across Central Eu
         continentEn: 'Europe',
         lat: 48.1486,
         lng: 17.1077,
-        description: 'Découverte de Bratislava durant notre voyage en train à travers l’Europe centrale.',
+        description:
+            'Découverte de Bratislava durant notre voyage en train à travers l’Europe centrale.',
         descriptionEn: 'Discovery of Bratislava during our Central European rail trip.',
         story: `Depuis Budapest, nous avons poursuivi notre voyage en train jusqu'à Bratislava.
 
@@ -689,8 +689,9 @@ Même si le séjour fut relativement court, j'ai beaucoup apprécié découvrir 
         storyEn: `From Budapest, we continued by train to Bratislava.
 
 Although the stay was relatively short, I really enjoyed discovering this human-sized capital, its castle overlooking the Danube, its old streets and its relaxed atmosphere.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: slovakia2025Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
+        photoAlbumId: 'slovakia-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -726,8 +727,9 @@ Nous avons découvert la vieille ville, le pont Charles, le château, les quarti
         storyEn: `Prague was the final stop of this wonderful journey with Salomé.
 
 We explored the Old Town, Charles Bridge, Prague Castle and many historic districts. It is a beautiful city that I would gladly visit again someday.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
-        photos: czechia2025Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/16620443-central-europe-with-salome?mode=track',
+        photoAlbumId: 'czechia-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -755,8 +757,10 @@ We explored the Old Town, Charles Bridge, Prague Castle and many historic distri
         continentEn: 'Europe',
         lat: 41.9981,
         lng: 21.4254,
-        description: 'Une semaine chez Aleksandra pour découvrir la Macédoine du Nord de l’intérieur.',
-        descriptionEn: 'One week staying with Aleksandra to discover North Macedonia from the inside.',
+        description:
+            'Une semaine chez Aleksandra pour découvrir la Macédoine du Nord de l’intérieur.',
+        descriptionEn:
+            'One week staying with Aleksandra to discover North Macedonia from the inside.',
         story: `Je suis venu à Skopje rendre visite à Aleksandra, rencontrée durant mon master.
 
 En vivant plusieurs jours chez elle et sa famille, j'ai découvert bien plus qu'une destination touristique. J'ai découvert leur quotidien, leur culture, leur cuisine, leurs traditions et leur incroyable hospitalité. Cette immersion rend ce voyage très particulier parmi tous ceux que j'ai réalisés.`,
@@ -764,7 +768,7 @@ En vivant plusieurs jours chez elle et sa famille, j'ai découvert bien plus qu'
 
 Living with her and her family allowed me to discover much more than a tourist destination. I experienced their daily life, culture, food, traditions and incredible hospitality. This immersion makes this trip one of the most meaningful I've ever had.`,
         polarstepsUrl: '',
-        photos: northMacedonia2025Photos,
+        photoAlbumId: 'north-macedonia-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -800,8 +804,9 @@ Nous avons exploré les deux parties de l'île, découvert les cascades, les pla
         storyEn: `Two weeks with Guillaume and Maëlys, split between Basse-Terre and Grande-Terre.
 
 We explored both sides of the island, discovered waterfalls, paradise beaches, hiked, went jet skiing and enjoyed Caribbean sunsets and sunrises. A stunning destination where nature is everywhere.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/16967081-guadeloupe-avec-guigui-et-mael?mode=track',
-        photos: guadeloupe2025Photos,
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/16967081-guadeloupe-avec-guigui-et-mael?mode=track',
+        photoAlbumId: 'guadeloupe-2025',
         isSovereignCountry: false,
         isTerritory: true,
         hasLivedThere: false,
@@ -828,8 +833,10 @@ We explored both sides of the island, discovered waterfalls, paradise beaches, h
         continentEn: 'Asia / Europe',
         lat: 41.0082,
         lng: 28.9784,
-        description: 'Deux semaines à Istanbul avec Matéo et Yuna, entre visites, fou rires et découverte de la ville.',
-        descriptionEn: 'Two weeks in Istanbul with Matéo and Yuna, between sightseeing, laughter and discovering the city.',
+        description:
+            'Deux semaines à Istanbul avec Matéo et Yuna, entre visites, fou rires et découverte de la ville.',
+        descriptionEn:
+            'Two weeks in Istanbul with Matéo and Yuna, between sightseeing, laughter and discovering the city.',
         story: `Istanbul a été un voyage incroyable avec Matéo et Yuna.
 
 C'était ma première fois en Turquie et nous avons découvert une ville immense, vivante, pleine d'histoire et de contrastes. Nous avons visité de nombreuses mosquées, églises, monuments et quartiers emblématiques, tout en profitant énormément de l'ambiance de la ville.
@@ -840,8 +847,8 @@ Mais ce qui rend ce voyage vraiment marquant, c'est surtout l'énergie du groupe
 It was my first time in Turkey, and we discovered a huge, vibrant city full of history and contrasts. We visited many mosques, churches, monuments and iconic districts, while fully enjoying the city's atmosphere.
 
 But what made this trip truly special was the group's energy: we laughed constantly, joked around all the time and shared two weeks of unforgettable memories.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/21776559-istanbul-avec-mat-et-yuna?mode=track',
-        photos: [],
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/21776559-istanbul-avec-mat-et-yuna?mode=track',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -868,8 +875,10 @@ But what made this trip truly special was the group's energy: we laughed constan
         continentEn: 'Europe',
         lat: 50.8503,
         lng: 4.3517,
-        description: 'Quelques jours à Bruxelles avec ma copine, entre musées, balades et découverte de la Belgique.',
-        descriptionEn: 'A few days in Brussels with my girlfriend, between museums, walks and discovering Belgium.',
+        description:
+            'Quelques jours à Bruxelles avec ma copine, entre musées, balades et découverte de la Belgique.',
+        descriptionEn:
+            'A few days in Brussels with my girlfriend, between museums, walks and discovering Belgium.',
         story: `Bruxelles a été ma première vraie découverte de la Belgique.
 
 J'y suis parti quelques jours avec ma copine. Le séjour était court, mais très agréable : balades dans la ville, verres en terrasse, découverte du centre, musée de l'automobile, musée militaire et moments simples à deux.
@@ -881,7 +890,7 @@ I went there for a few days with my girlfriend. The stay was short but very plea
 
 A calm European break, but full of good memories.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/22238629-bruxelles?mode=track',
-        photos: belgium2025Photos,
+        photoAlbumId: 'belgium-2025',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -908,8 +917,10 @@ A calm European break, but full of good memories.`,
         continentEn: 'Europe',
         lat: 42.6507,
         lng: 18.0944,
-        description: 'Retour à Dubrovnik pour une semaine à dix, entre visites, fête, marche et ambiance d’été.',
-        descriptionEn: 'Back to Dubrovnik for one week with ten people, between sightseeing, partying, walking and summer vibes.',
+        description:
+            'Retour à Dubrovnik pour une semaine à dix, entre visites, fête, marche et ambiance d’été.',
+        descriptionEn:
+            'Back to Dubrovnik for one week with ten people, between sightseeing, partying, walking and summer vibes.',
         story: `En juin 2026, je suis retourné à Dubrovnik, cette fois avec ma copine et huit de ses amis.
 
 Nous étions dix pour une semaine complète, et le voyage a été incroyable. J’ai redécouvert la Old Town, les remparts, les monastères, le musée maritime, le fort Lovrijenac, les ruelles, les points de vue et l’île de Lokrum, avec son fort, ses jardins et ses coins plus sauvages.
@@ -925,7 +936,6 @@ We also spent a full day on a boat exploring the Elaphiti Islands, including Kol
 
 But above all, this trip was incredible on a human level. I got to know amazing people, had so much fun, walked a lot, laughed constantly, went out, watched World Cup matches and enjoyed a perfect summer atmosphere.`,
         polarstepsUrl: '',
-        photos: [],
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
@@ -960,8 +970,8 @@ Après l'avoir rencontrée pendant mon master et être allé la voir à Skopje e
         storyEn: `The next planned trip is a return to North Macedonia for Aleksandra's wedding.
 
 After meeting her during my master's degree and visiting her in Skopje in 2025, this future trip will obviously feel special. I am looking forward to seeing her family again, rediscovering the country and sharing such an important moment with her.`,
-        polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/17028595-visit-to-aleksandra?mode=track',
-        photos: [],
+        polarstepsUrl:
+            'https://www.polarsteps.com/JulienEsbt/17028595-visit-to-aleksandra?mode=track',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,

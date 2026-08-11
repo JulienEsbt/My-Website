@@ -1,4 +1,5 @@
-import {BrowserProvider, Contract, isAddress, parseUnits} from 'ethers'
+import {Contract, isAddress, parseUnits} from 'ethers'
+import {getInjectedBrowserProvider} from '../../../../services/web3/rpcProviderService.js'
 
 const ERC20_ABI = [
     'function transfer(address to, uint256 amount) returns (bool)',
@@ -21,7 +22,7 @@ export const sendDonationTransaction = async ({token, amount, receiver}) => {
 
     await switchNetwork(token)
 
-    const provider = new BrowserProvider(window.ethereum)
+    const provider = getInjectedBrowserProvider()
     const signer = await provider.getSigner()
 
     if (token.type === 'native') {
@@ -35,10 +36,7 @@ export const sendDonationTransaction = async ({token, amount, receiver}) => {
 
     const contract = new Contract(token.contract, ERC20_ABI, signer)
 
-    const tx = await contract.transfer(
-        receiver,
-        parseUnits(String(amount), token.decimals)
-    )
+    const tx = await contract.transfer(receiver, parseUnits(String(amount), token.decimals))
 
     return tx.hash
 }
@@ -53,7 +51,7 @@ export const importCustomErc20Token = async ({chainHex, contractAddress, chainNa
     const tokenForSwitch = {chainHex}
     await switchNetwork(tokenForSwitch)
 
-    const provider = new BrowserProvider(window.ethereum)
+    const provider = getInjectedBrowserProvider()
     const contract = new Contract(contractAddress, ERC20_ABI, provider)
 
     const [symbol, name, decimals] = await Promise.all([

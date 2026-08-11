@@ -15,16 +15,18 @@ vi.mock('../../../components/common/accessibility/useReducedMotion.js', () => ({
 
 vi.mock('react-globe.gl', async () => {
     const React = await import('react')
+    const MockGlobe = React.forwardRef((props, ref) => {
+        globeState.props = props
+        React.useImperativeHandle(ref, () => ({
+            controls: () => globeState.controls,
+            pointOfView: globeState.pointOfView,
+        }))
+        return <div data-testid="globe-canvas" />
+    })
+    MockGlobe.displayName = 'MockGlobe'
 
     return {
-        default: React.forwardRef((props, ref) => {
-            globeState.props = props
-            React.useImperativeHandle(ref, () => ({
-                controls: () => globeState.controls,
-                pointOfView: globeState.pointOfView,
-            }))
-            return <div data-testid="globe-canvas" />
-        }),
+        default: MockGlobe,
     }
 })
 
@@ -49,9 +51,19 @@ describe('TravelGlobe', () => {
         expect(globeState.props.ringsData).toEqual([])
         expect(globeState.props.arcDashAnimateTime).toBe(0)
         expect(globeState.props.arcsTransitionDuration).toBe(0)
-        expect(globeState.pointOfView).toHaveBeenCalledWith(
-            {altitude: 1.82, lat: 32, lng: 18},
-            0
-        )
+        expect(globeState.pointOfView).toHaveBeenCalledWith({altitude: 1.82, lat: 32, lng: 18}, 0)
+    })
+
+    it('sizes the WebGL scene from its responsive container', async () => {
+        const rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+            width: 320,
+            height: 336,
+        })
+
+        render(<TravelGlobe />)
+
+        await waitFor(() => expect(globeState.props.width).toBe(320))
+        expect(globeState.props.height).toBe(336)
+        rectSpy.mockRestore()
     })
 })

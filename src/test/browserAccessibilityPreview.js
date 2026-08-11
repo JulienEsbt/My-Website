@@ -23,10 +23,25 @@ if (params.has('rgaaSpacing')) {
 }
 
 if (params.has('rgaaNoCss')) {
-    window.requestAnimationFrame(() => {
+    const removePresentationStyles = () => {
         document.querySelectorAll('link[rel="stylesheet"], style').forEach((stylesheet) => {
             stylesheet.remove()
         })
+        document.querySelectorAll('[style]').forEach((element) => {
+            element.removeAttribute('style')
+        })
+    }
+
+    const observer = new MutationObserver(removePresentationStyles)
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['style'],
+        childList: true,
+        subtree: true,
+    })
+
+    window.requestAnimationFrame(() => {
+        removePresentationStyles()
         document.documentElement.dataset.rgaaNoCss = 'enabled'
     })
 }

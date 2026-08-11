@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom/vitest'
 import {cleanup} from '@testing-library/react'
-import {afterEach, vi} from 'vitest'
-import '../i18n/i18n.js'
+import {afterEach, beforeAll, vi} from 'vitest'
+import {loadNamespaces} from '../i18n/i18n.js'
+
+beforeAll(() => loadNamespaces(['home', 'web3', 'travel', 'reflections']))
 
 afterEach(() => {
     cleanup()
@@ -21,4 +23,11 @@ Object.defineProperty(window, 'matchMedia', {
     })),
 })
 
+globalThis.IntersectionObserver = class IntersectionObserverMock {
+    observe = vi.fn()
+    unobserve = vi.fn()
+    disconnect = vi.fn()
+}
+
 window.scrollTo = vi.fn()
+HTMLElement.prototype.scrollIntoView = vi.fn()

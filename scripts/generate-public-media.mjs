@@ -1,14 +1,17 @@
 import {createHash} from 'node:crypto'
 import {mkdir, readdir, rm, stat, writeFile} from 'node:fs/promises'
-import {basename, extname, relative, resolve, sep} from 'node:path'
+import {basename, dirname, extname, relative, resolve, sep} from 'node:path'
 import sharp from 'sharp'
 
 const projectRoot = process.cwd()
 const sourceRoot = resolve(projectRoot, 'src/assets/images')
 const outputRoot = resolve(projectRoot, 'public/media')
 const manifestPath = resolve(projectRoot, '.media-manifest.json')
+const appManifestPath = resolve(projectRoot, 'src/generated/mediaManifest.json')
+const appManifestDirectory = resolve(projectRoot, 'src/generated/media')
+const travelManifestDirectory = resolve(appManifestDirectory, 'travels')
 const imageExtensions = new Set(['.jpeg', '.jpg', '.png'])
-const concurrency = 4
+const concurrency = 8
 const profiles = {
     hero: {widths: [480, 768, 1024], fit: 'cover'},
     content: {widths: [480, 768, 1024], fit: 'inside'},
@@ -23,7 +26,7 @@ async function walk(directory) {
         entries.map((entry) => {
             const path = resolve(directory, entry.name)
             return entry.isDirectory() ? walk(path) : [path]
-        }),
+        })
     )
     return children.flat()
 }
@@ -70,11 +73,27 @@ async function generateImage(source) {
             .rotate()
             .resize({width, withoutEnlargement: true, fit: profile.fit})
         const formats = [
-            {format: 'avif', extension: 'avif', pipeline: base.clone().avif({quality: 60, effort: 4})},
-            {format: 'webp', extension: 'webp', pipeline: base.clone().webp({quality: 78, effort: 4})},
+            {
+                format: 'avif',
+                extension: 'avif',
+                pipeline: base.clone().avif({quality: 60, effort: 2}),
+            },
+            {
+                format: 'webp',
+                extension: 'webp',
+                pipeline: base.clone().webp({quality: 78, effort: 3}),
+            },
             preserveTransparency
-                ? {format: 'fallback', extension: 'png', pipeline: base.clone().png({compressionLevel: 9})}
-                : {format: 'fallback', extension: 'jpg', pipeline: base.clone().jpeg({quality: 82, mozjpeg: true})},
+                ? {
+                      format: 'fallback',
+                      extension: 'png',
+                      pipeline: base.clone().png({compressionLevel: 9}),
+                  }
+                : {
+                      format: 'fallback',
+                      extension: 'jpg',
+                      pipeline: base.clone().jpeg({quality: 82, mozjpeg: true}),
+                  },
         ]
 
         for (const outputFormat of formats) {
@@ -127,11 +146,50 @@ await mkdir(outputRoot, {recursive: true})
 
 const generated = await mapWithConcurrency(sources, generateImage, concurrency)
 await writeFile(manifestPath, `${JSON.stringify(generated, null, 2)}\n`)
+await mkdir(dirname(appManifestPath), {recursive: true})
+const appManifest = generated.map(({source, profile, variants}) => ({
+    source,
+    profile,
+    variants: variants.map(({format, url, width, height}) => ({format, url, width, height})),
+}))
+await writeFile(appManifestPath, `${JSON.stringify(appManifest)}\n`)
+await rm(appManifestDirectory, {recursive: true, force: true})
+await mkdir(appManifestDirectory, {recursive: true})
+
+for (const domain of ['home', 'travels', 'web3']) {
+    const domainManifest = appManifest.filter((media) =>
+        media.source.startsWith(`src/assets/images/${domain}/`)
+    )
+    await writeFile(
+        resolve(appManifestDirectory, `${domain}.json`),
+        `${JSON.stringify(domainManifest)}\n`
+    )
+}
+
+await mkdir(travelManifestDirectory, {recursive: true})
+const travelMedia = appManifest.filter((media) =>
+    media.source.startsWith('src/assets/images/travels/')
+)
+const travelAlbums = new Map()
+for (const media of travelMedia) {
+    const albumId = media.source.split('/')[4]
+    const albumManifest = travelAlbums.get(albumId) ?? []
+    albumManifest.push(media)
+    travelAlbums.set(albumId, albumManifest)
+}
+
+for (const [albumId, albumManifest] of travelAlbums) {
+    await writeFile(
+        resolve(travelManifestDirectory, `${albumId}.json`),
+        `${JSON.stringify(albumManifest)}\n`
+    )
+}
 
 const sourceBytes = generated.reduce((sum, image) => sum + image.sourceBytes, 0)
 const outputBytes = generated.reduce(
-    (sum, image) => sum + image.variants.reduce((variantSum, variant) => variantSum + variant.bytes, 0),
-    0,
+    (sum, image) =>
+        sum + image.variants.reduce((variantSum, variant) => variantSum + variant.bytes, 0),
+    0
 )
 const variantCount = generated.reduce((sum, image) => sum + image.variants.length, 0)
 

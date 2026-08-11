@@ -3,8 +3,9 @@ import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import gsap from 'gsap'
 import HeaderCTA from './HeaderCTA.jsx'
-import HeaderSocials from "../../../components/common/social/headerSocials/HeaderSocials.jsx";
-import {ASSETS} from '../../../config/assets.js'
+import HeaderSocials from '../../../components/common/social/headerSocials/HeaderSocials.jsx'
+import {HOME_ASSETS} from '../../../config/homeAssets.js'
+import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './Header.css'
 
 const Header = () => {
@@ -19,7 +20,6 @@ const Header = () => {
     const visual = useRef(null)
     const floating = useRef(null)
     const socials = useRef(null)
-    const scroll = useRef(null)
 
     useLayoutEffect(() => {
         const mm = gsap.matchMedia()
@@ -77,7 +77,7 @@ const Header = () => {
                     </div>
 
                     <div ref={cta}>
-                        <HeaderCTA/>
+                        <HeaderCTA />
                     </div>
                 </div>
 
@@ -90,9 +90,12 @@ const Header = () => {
                         className="home-hero__portrait-card"
                     >
                         <div className="home-hero__portrait-frame">
-                            <img
-                                src={ASSETS.home.header.me}
+                            <ResponsiveImage
+                                media={HOME_ASSETS.header.me}
                                 alt={t('header.portraitAlt')}
+                                sizes="(max-width: 700px) 78vw, 420px"
+                                loading="eager"
+                                fetchPriority="high"
                             />
                         </div>
 
@@ -116,7 +119,7 @@ const Header = () => {
                 </div>
 
                 <div ref={socials} className="home-hero__socials-wrapper">
-                    <HeaderSocials/>
+                    <HeaderSocials />
                 </div>
             </div>
         </header>

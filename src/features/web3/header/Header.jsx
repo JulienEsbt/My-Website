@@ -2,14 +2,15 @@ import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import gsap from 'gsap'
-import SocialsCTA from './SocialsCTA.jsx'
-import HeaderSocials from "../../../components/common/social/headerSocials/HeaderSocials.jsx";
-import {ASSETS} from '../../../config/assets.js'
+import Web3CTA from './Web3CTA.jsx'
+import HeaderSocials from '../../../components/common/social/headerSocials/HeaderSocials.jsx'
+import {WEB3_ASSETS} from '../../../config/web3Assets.js'
+import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './Header.css'
 
 const Header = () => {
     const {t} = useTranslation('web3')
-    const featuredNft = ASSETS.web3.nfts.soulware2173
+    const featuredNft = WEB3_ASSETS.nfts.soulware2173
 
     const root = useRef(null)
     const title = useRef(null)
@@ -24,11 +25,10 @@ const Header = () => {
         const mm = gsap.matchMedia()
         mm.add('(prefers-reduced-motion: no-preference)', () => {
             const tl = gsap.timeline({defaults: {ease: 'power3.out', duration: 0.7}})
-            tl
-                .from(title.current, {y: 20, opacity: 0})
+            tl.from(title.current, {y: 20, opacity: 0})
                 .from(name.current, {y: 20, opacity: 0}, '-=0.4')
                 .from(role.current, {y: 20, opacity: 0}, '-=0.45')
-                .from(cta.current, {y: 20, opacity: 0}, '-=0.45')
+                .from(cta.current, {y: 20}, '-=0.45')
                 .from(photo.current, {scale: 0.9, opacity: 0}, '-=0.45')
                 .from(socials.current, {x: -12, opacity: 0}, '-=0.5')
                 .from(scroll.current, {x: 12, opacity: 0}, '-=0.6')
@@ -37,19 +37,23 @@ const Header = () => {
     }, [])
 
     return (
-        <header className="hero" ref={root}>
+        <header id="top" className="hero" ref={root}>
             <div className="container header__container">
                 <div className="hero__copy">
-                    <h5 ref={title} className="eyebrow">{t('header.eyebrow')}</h5>
+                    <p ref={title} className="eyebrow">
+                        {t('header.eyebrow')}
+                    </p>
 
                     <h1 ref={name} className="hero__title">
                         <span className="stroke">Julien</span>esbt.eth
                     </h1>
 
-                    <p ref={role} className="hero__subtitle">{t('header.subtitle')}</p>
+                    <p ref={role} className="hero__subtitle">
+                        {t('header.subtitle')}
+                    </p>
 
                     <div ref={cta}>
-                        <SocialsCTA/>
+                        <Web3CTA />
                     </div>
                 </div>
 
@@ -60,22 +64,29 @@ const Header = () => {
                         whileHover={{y: -4}}
                         transition={{type: 'spring', stiffness: 200, damping: 15}}
                         className="me"
-                        aria-hidden
                     >
                         <a
                             href={featuredNft.openseaUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`View ${featuredNft.name} on OpenSea`}
+                            aria-label={t('accessibility.openOnOpenSea', {
+                                name: featuredNft.name,
+                            })}
                         >
-                            <img src={featuredNft.image} alt={featuredNft.name}/>
+                            <ResponsiveImage
+                                media={featuredNft.image}
+                                alt={featuredNft.name}
+                                sizes="(max-width: 700px) 72vw, 430px"
+                                loading="eager"
+                                fetchPriority="high"
+                            />
                         </a>
-                        <div className="glow" aria-hidden/>
+                        <div className="glow" aria-hidden />
                     </motion.div>
                 </div>
 
                 <div ref={socials} className="web3-header__socials-wrapper">
-                    <HeaderSocials/>
+                    <HeaderSocials />
                 </div>
 
                 <a
@@ -84,7 +95,7 @@ const Header = () => {
                     className="scroll__down"
                     aria-label={t('header.scrollAria')}
                 >
-                    <span className="scroll__dot"/>
+                    <span className="scroll__dot" />
                     <span>{t('header.scroll')}</span>
                 </a>
             </div>

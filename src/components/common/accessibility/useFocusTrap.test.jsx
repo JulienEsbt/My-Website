@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react'
-import {render, screen} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {describe, expect, it} from 'vitest'
 import useFocusTrap from './useFocusTrap.js'
@@ -21,6 +21,7 @@ const DialogFixture = () => {
             <button type="button" onClick={() => setOpen(true)}>
                 Ouvrir
             </button>
+            <a href="#background">Contenu en arrière-plan</a>
 
             {open && (
                 <div ref={dialogRef} role="dialog" aria-label="Exemple" tabIndex="-1">
@@ -42,13 +43,18 @@ describe('useFocusTrap', () => {
         const opener = screen.getByRole('button', {name: 'Ouvrir'})
         await user.click(opener)
 
-        expect(screen.getByRole('button', {name: 'Fermer'})).toHaveFocus()
+        await waitFor(() => expect(screen.getByRole('button', {name: 'Fermer'})).toHaveFocus())
+        expect(opener).toHaveAttribute('inert')
+        expect(opener).toHaveAttribute('aria-hidden', 'true')
+        expect(screen.getByRole('link', {name: 'Dernier élément'})).toBeVisible()
 
         await user.keyboard('{Shift>}{Tab}{/Shift}')
         expect(screen.getByRole('link', {name: 'Dernier élément'})).toHaveFocus()
 
         await user.keyboard('{Escape}')
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+        expect(opener).not.toHaveAttribute('inert')
+        expect(opener).not.toHaveAttribute('aria-hidden')
         expect(opener).toHaveFocus()
     })
 })

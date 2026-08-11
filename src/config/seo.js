@@ -104,11 +104,8 @@ const person = {
     name: 'Julien Esterbet',
     url: SITE_URL,
     jobTitle: 'Full-stack developer',
-    homeLocation: { '@type': 'Place', name: 'Paris, France' },
-    sameAs: [
-        'https://github.com/JulienEsbt',
-        'https://www.linkedin.com/in/julien-esterbet/',
-    ],
+    homeLocation: {'@type': 'Place', name: 'Paris, France'},
+    sameAs: ['https://github.com/JulienEsbt', 'https://www.linkedin.com/in/julien-esterbet/'],
 }
 
 const structuredDataFor = (key, path, language, metadata) => {
@@ -145,7 +142,7 @@ const structuredDataFor = (key, path, language, metadata) => {
             url: `${SITE_URL}${path}`,
             description: metadata.description,
             inLanguage: language,
-            author: {'@id': person['@id']},
+            author: person,
             ...(key === 'brunoPizza' ? {applicationCategory: 'BusinessApplication'} : {}),
         }
     }
@@ -184,7 +181,11 @@ export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
           }
         : content[language][key ?? 'notFound']
 
-    const path = isNotFound ? normalizedPath : reflection ? `/reflections/${reflection.slug}` : normalizedPath
+    const path = isNotFound
+        ? normalizedPath
+        : reflection
+          ? `/reflections/${reflection.slug}`
+          : normalizedPath
 
     return {
         ...metadata,
@@ -199,9 +200,7 @@ export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
         type: reflection ? 'article' : 'website',
         robots: isNotFound ? 'noindex, nofollow' : 'index, follow',
         isNotFound,
-        structuredData: isNotFound
-            ? null
-            : structuredDataFor(key, path, language, metadata),
+        structuredData: isNotFound ? null : structuredDataFor(key, path, language, metadata),
     }
 }
 

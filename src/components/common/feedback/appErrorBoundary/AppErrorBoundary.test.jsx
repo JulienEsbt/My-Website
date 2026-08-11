@@ -14,21 +14,29 @@ describe('AppErrorBoundary', () => {
 
     it('shows a safe recovery screen when a child crashes', () => {
         const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => undefined)
+        const preventExpectedError = (event) => event.preventDefault()
+        window.addEventListener('error', preventExpectedError)
 
-        render(
-            <AppErrorBoundary>
-                <BrokenComponent />
-            </AppErrorBoundary>
-        )
+        try {
+            render(
+                <AppErrorBoundary>
+                    <BrokenComponent />
+                </AppErrorBoundary>
+            )
 
-        expect(screen.getByRole('alert')).toBeVisible()
-        expect(
-            screen.getByRole('heading', {
-                name: 'Le portfolio n’a pas pu s’afficher correctement.',
-            })
-        ).toBeVisible()
-        expect(screen.getByRole('link', {name: 'Retour à l’accueil'})).toHaveAttribute('href', '/')
-
-        consoleSpy.mockRestore()
+            expect(screen.getByRole('alert')).toBeVisible()
+            expect(
+                screen.getByRole('heading', {
+                    name: 'Le portfolio n’a pas pu s’afficher correctement.',
+                })
+            ).toBeVisible()
+            expect(screen.getByRole('link', {name: 'Retour à l’accueil'})).toHaveAttribute(
+                'href',
+                '/'
+            )
+        } finally {
+            window.removeEventListener('error', preventExpectedError)
+            consoleSpy.mockRestore()
+        }
     })
 })

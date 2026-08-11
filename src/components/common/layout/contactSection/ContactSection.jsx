@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react'
-import emailjs from 'emailjs-com'
 import {motion} from 'framer-motion'
 import {MdOutlineEmail} from 'react-icons/md'
 import {FaLinkedin, FaTwitter} from 'react-icons/fa'
 import {FiArrowUpRight, FiSend} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
-import {LINKS} from "../../../../config/links.js";
+import {LINKS} from '../../../../config/links.js'
+import {sendContactForm} from '../../../../services/contact/contactService.js'
 import './ContactSection.css'
 
 const ContactSection = () => {
@@ -20,7 +20,7 @@ const ContactSection = () => {
     const options = [
         {
             id: 'email',
-            icon: <MdOutlineEmail/>,
+            icon: <MdOutlineEmail />,
             title: t('contact.options.email.title'),
             value: emailValue,
             href: mailtoHref,
@@ -28,7 +28,7 @@ const ContactSection = () => {
         },
         {
             id: 'linkedin',
-            icon: <FaLinkedin/>,
+            icon: <FaLinkedin />,
             title: t('contact.options.linkedin.title'),
             value: t('contact.options.linkedin.value'),
             href: LINKS.social.linkedin,
@@ -36,7 +36,7 @@ const ContactSection = () => {
         },
         {
             id: 'twitter',
-            icon: <FaTwitter/>,
+            icon: <FaTwitter />,
             title: t('contact.options.twitter.title'),
             value: t('contact.options.twitter.value'),
             href: LINKS.social.twitter,
@@ -49,12 +49,7 @@ const ContactSection = () => {
         setStatus('loading')
 
         try {
-            await emailjs.sendForm(
-                'service_rv27pzc',
-                'template_mwmosps',
-                form.current,
-                'QgbIYSLquY8PrqQho'
-            )
+            await sendContactForm(form.current)
 
             setStatus('success')
             event.target.reset()
@@ -66,7 +61,7 @@ const ContactSection = () => {
 
     return (
         <section id="contact">
-            <h5>{t('contact.kicker')}</h5>
+            <p className="section-kicker">{t('contact.kicker')}</p>
             <h2>{t('contact.title')}</h2>
 
             <div className="container crypto-contact">
@@ -96,9 +91,7 @@ const ContactSection = () => {
                                 viewport={{once: true}}
                                 transition={{duration: 0.4, delay: index * 0.08}}
                             >
-                                <span className="crypto-contact__option-icon">
-                                    {option.icon}
-                                </span>
+                                <span className="crypto-contact__option-icon">{option.icon}</span>
 
                                 <div>
                                     <strong>{option.title}</strong>
@@ -107,7 +100,7 @@ const ContactSection = () => {
 
                                 <em>
                                     {option.cta}
-                                    <FiArrowUpRight/>
+                                    <FiArrowUpRight />
                                 </em>
                             </motion.a>
                         ))}
@@ -129,6 +122,7 @@ const ContactSection = () => {
                             id="contact-name"
                             type="text"
                             name="name"
+                            autoComplete="name"
                             placeholder={t('contact.form.name')}
                             required
                         />
@@ -140,6 +134,7 @@ const ContactSection = () => {
                             id="contact-email"
                             type="email"
                             name="email"
+                            autoComplete="email"
                             placeholder={t('contact.form.email')}
                             required
                         />
@@ -156,21 +151,25 @@ const ContactSection = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" disabled={status === 'loading'}>
-                        <FiSend/>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={status === 'loading'}
+                    >
+                        <FiSend />
                         {status === 'loading'
                             ? t('contact.form.sending')
                             : t('contact.form.submit')}
                     </button>
 
                     {status === 'success' && (
-                        <p className="crypto-contact__status success">
+                        <p className="crypto-contact__status success" role="status">
                             {t('contact.form.success')}
                         </p>
                     )}
 
                     {status === 'error' && (
-                        <p className="crypto-contact__status error">
+                        <p className="crypto-contact__status error" role="alert">
                             {t('contact.form.error')}
                         </p>
                     )}
