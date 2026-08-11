@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JE">
+    <rect width="64" height="64" rx="15" fill="#071127" />
+    <path d="M0 45c15-8 25-3 37-11 9-6 14-14 27-19v49H0Z" fill="#124f82" />
+    <text x="32" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#fff">JE</text>
+</svg>

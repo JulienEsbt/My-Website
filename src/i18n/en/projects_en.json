@@ -1,0 +1,70 @@
+{
+    "bruno": {
+        "meta": {"title": "Bruno Pizza — Product case study | Julien Esterbet"},
+        "hero": {
+            "kicker": "Product case study",
+            "title": "Bruno Pizza — Production",
+            "subtitle": "A local desktop application that turns an Excel plan into an actionable workshop production flow.",
+            "back": "Back to projects",
+            "code": "View GitHub repository"
+        },
+        "overview": {
+            "statusLabel": "Status",
+            "status": "Active product — version 1.1.3",
+            "roleLabel": "Responsibility",
+            "role": "Full-stack design and development",
+            "scopeLabel": "Scope",
+            "scope": "Local desktop application"
+        },
+        "problem": {
+            "kicker": "Context",
+            "title": "From production file to workshop use",
+            "body": "The need is concrete: distribute pizza production across several distributors, validate imported quantities and then guide preparation variety by variety. A spreadsheet provides the data, but it is not an interface designed for the production workflow."
+        },
+        "solution": {
+            "kicker": "Solution",
+            "title": "A guided local business workflow",
+            "intro": "The application matches the Excel plan with a business catalogue and organizes work across three complementary areas.",
+            "items": {
+                "dashboard": {"title": "Production dashboard", "body": "Excel import and validation, header, duplicate, quantity and total checks, followed by distribution by variety and distributor."},
+                "workshop": {"title": "Workshop flow", "body": "Ordered recipe, picture, progress and navigation to guide preparation pizza by pizza."},
+                "settings": {"title": "Business settings", "body": "Local management of pizzas, ingredients, recipes, pictures and distributors."}
+            }
+        },
+        "architecture": {
+            "kicker": "Architecture",
+            "title": "A full-stack chain packaged with Electron",
+            "steps": {
+                "excel": "The Excel file remains the source of the production plan.",
+                "react": "React and TypeScript power the interface and presentation rules.",
+                "express": "Express exposes a strictly local API bound to 127.0.0.1.",
+                "sqlite": "SQLite stores the business catalogue and recipes on the machine.",
+                "electron": "Electron starts the backend on an available port and provides the desktop application."
+            }
+        },
+        "decisions": {
+            "kicker": "Decisions and trade-offs",
+            "title": "Make local use reliable before expanding the scope",
+            "items": {
+                "local": {"title": "Local operation", "body": "Data, pictures and settings remain on the machine. The server is not designed to be exposed directly to the Internet."},
+                "persistence": {"title": "Separated persistence", "body": "User data is stored outside installed files so an update can reuse the existing catalogue."},
+                "quality": {"title": "Verifiable delivery", "body": "Frontend, backend and desktop checks are grouped before release packages are built."}
+            }
+        },
+        "limits": {
+            "kicker": "Current limitations",
+            "title": "A deliberate scope",
+            "items": {
+                "excel": "Excel remains the only production source; Adial integration is not included yet.",
+                "trust": "The application targets trusted local use and does not include the authentication required for network exposure.",
+                "signing": "The Windows and macOS test releases are not signed yet."
+            }
+        },
+        "stack": {"kicker": "Stack", "title": "Core technologies"},
+        "next": {
+            "title": "Next portfolio step",
+            "body": "Document My-Website as an active portfolio, then keep the homepage focused on the most representative evidence.",
+            "cta": "Back to the selection"
+        }
+    }
+}

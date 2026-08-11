@@ -1,0 +1,17 @@
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 50%;
+    z-index: 10000;
+    padding: 0.75rem 1rem;
+    color: #020612;
+    background: var(--color-white);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transform: translate(-50%, calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+    color: #020612;
+    transform: translate(-50%, 0);
+}

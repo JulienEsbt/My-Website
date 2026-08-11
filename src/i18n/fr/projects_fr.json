@@ -1,0 +1,70 @@
+{
+    "bruno": {
+        "meta": {"title": "Bruno Pizza — Étude de cas produit | Julien Esterbet"},
+        "hero": {
+            "kicker": "Étude de cas produit",
+            "title": "Bruno Pizza — Production",
+            "subtitle": "Une application desktop locale pour transformer un plan Excel en parcours de production exploitable en atelier.",
+            "back": "Retour aux projets",
+            "code": "Voir le dépôt GitHub"
+        },
+        "overview": {
+            "statusLabel": "Statut",
+            "status": "Produit actif — version 1.1.3",
+            "roleLabel": "Responsabilité",
+            "role": "Conception et développement full-stack",
+            "scopeLabel": "Périmètre",
+            "scope": "Application desktop locale"
+        },
+        "problem": {
+            "kicker": "Contexte",
+            "title": "Du fichier de production à l’usage en atelier",
+            "body": "Le besoin est concret : répartir une production de pizzas entre plusieurs distributeurs, contrôler les quantités importées et guider ensuite la fabrication variété par variété. Un simple tableur fournit les données, mais ne constitue pas une interface adaptée au déroulement de la production."
+        },
+        "solution": {
+            "kicker": "Solution",
+            "title": "Un parcours métier local et guidé",
+            "intro": "L’application rapproche le plan Excel d’un catalogue métier et organise le travail dans trois espaces complémentaires.",
+            "items": {
+                "dashboard": {"title": "Tableau de production", "body": "Import et validation des fichiers Excel, contrôle des en-têtes, doublons, quantités et totaux, puis répartition par variété et distributeur."},
+                "workshop": {"title": "Parcours atelier", "body": "Recette ordonnée, photo, progression et navigation pour guider la fabrication pizza par pizza."},
+                "settings": {"title": "Paramètres métier", "body": "Gestion locale du catalogue de pizzas, des ingrédients, des recettes, des visuels et des distributeurs."}
+            }
+        },
+        "architecture": {
+            "kicker": "Architecture",
+            "title": "Une chaîne full-stack empaquetée avec Electron",
+            "steps": {
+                "excel": "Le fichier Excel reste la source du plan de production.",
+                "react": "React et TypeScript portent l’interface et les règles de présentation.",
+                "express": "Express expose une API strictement locale, liée à 127.0.0.1.",
+                "sqlite": "SQLite conserve le catalogue métier et les recettes sur la machine.",
+                "electron": "Electron démarre le backend sur un port disponible et fournit l’application desktop."
+            }
+        },
+        "decisions": {
+            "kicker": "Décisions et compromis",
+            "title": "Fiabiliser l’usage local avant d’élargir le périmètre",
+            "items": {
+                "local": {"title": "Fonctionnement local", "body": "Les données, images et paramètres restent sur la machine. Le serveur n’est pas conçu pour être exposé directement sur Internet."},
+                "persistence": {"title": "Persistance séparée", "body": "Les données utilisateur sont stockées hors des fichiers installés afin qu’une mise à jour puisse réutiliser le catalogue existant."},
+                "quality": {"title": "Livraison vérifiable", "body": "Les contrôles frontend, backend et desktop sont regroupés avant la construction des paquets de livraison."}
+            }
+        },
+        "limits": {
+            "kicker": "Limites actuelles",
+            "title": "Un périmètre assumé",
+            "items": {
+                "excel": "Excel reste l’unique source de production ; l’intégration Adial n’est pas encore incluse.",
+                "trust": "L’application vise un usage local de confiance et ne possède pas l’authentification requise pour une exposition réseau.",
+                "signing": "Les versions Windows et macOS de test ne sont pas encore signées."
+            }
+        },
+        "stack": {"kicker": "Stack", "title": "Technologies principales"},
+        "next": {
+            "title": "Prochaine étape du portfolio",
+            "body": "Documenter My-Website comme portfolio actif, puis réserver l’accueil aux preuves les plus représentatives.",
+            "cta": "Revenir à la sélection"
+        }
+    }
+}

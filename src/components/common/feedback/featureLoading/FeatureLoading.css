@@ -1,0 +1,34 @@
+.feature-loading {
+    min-height: 10rem;
+    display: grid;
+    place-items: center;
+}
+
+.feature-loading.fill {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background: rgba(5, 12, 34, 0.65);
+}
+
+.feature-loading__indicator {
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0.2rem solid rgba(77, 181, 255, 0.22);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: feature-loading-spin 0.8s linear infinite;
+}
+
+@keyframes feature-loading-spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feature-loading__indicator {
+        animation: none;
+        border-color: var(--color-primary);
+    }
+}
