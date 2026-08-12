@@ -6,3 +6,4 @@ src/assets/
 src/content/
 src/generated/
 *.md
+.env.example

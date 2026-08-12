@@ -26,7 +26,6 @@
     },
     "dependencies": {
         "@uniswap/default-token-list": "^21.3.0",
-        "emailjs-com": "^3.2.0",
         "embla-carousel-auto-scroll": "^8.6.0",
         "embla-carousel-react": "^8.6.0",
         "ethers": "^6.17.0",

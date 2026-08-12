@@ -13,6 +13,7 @@ const ContactSection = () => {
     const form = useRef(null)
 
     const [status, setStatus] = useState(null)
+    const [formStartedAt, setFormStartedAt] = useState(() => Date.now())
 
     const emailValue = t('contact.options.email.value')
     const mailtoHref = `mailto:${emailValue}`
@@ -46,15 +47,16 @@ const ContactSection = () => {
 
     const sendEmail = async (event) => {
         event.preventDefault()
+        const formElement = event.currentTarget
         setStatus('loading')
 
         try {
-            await sendContactForm(form.current)
+            await sendContactForm(formElement)
 
             setStatus('success')
-            event.target.reset()
-        } catch (error) {
-            console.error('EmailJS error:', error)
+            formElement.reset()
+            setFormStartedAt(Date.now())
+        } catch {
             setStatus('error')
         }
     }
@@ -111,11 +113,25 @@ const ContactSection = () => {
                     ref={form}
                     className="crypto-contact__form"
                     onSubmit={sendEmail}
+                    aria-busy={status === 'loading'}
                     initial={{opacity: 0, x: 32}}
                     whileInView={{opacity: 1, x: 0}}
                     viewport={{once: true}}
                     transition={{duration: 0.55, delay: 0.08}}
                 >
+                    <div className="crypto-contact__honeypot" aria-hidden="true">
+                        <label htmlFor="contact-website">Site web</label>
+                        <input
+                            id="contact-website"
+                            type="text"
+                            name="website"
+                            tabIndex="-1"
+                            autoComplete="off"
+                        />
+                    </div>
+
+                    <input type="hidden" name="startedAt" value={formStartedAt} />
+
                     <div className="crypto-contact__field">
                         <label htmlFor="contact-name">{t('contact.form.nameLabel')}</label>
                         <input
@@ -155,6 +171,7 @@ const ContactSection = () => {
                         type="submit"
                         className="btn btn-primary"
                         disabled={status === 'loading'}
+                        aria-describedby="contact-form-status"
                     >
                         <FiSend />
                         {status === 'loading'
@@ -162,15 +179,15 @@ const ContactSection = () => {
                             : t('contact.form.submit')}
                     </button>
 
-                    {status === 'success' && (
-                        <p className="crypto-contact__status success" role="status">
-                            {t('contact.form.success')}
-                        </p>
-                    )}
-
-                    {status === 'error' && (
-                        <p className="crypto-contact__status error" role="alert">
-                            {t('contact.form.error')}
+                    {status && (
+                        <p
+                            id="contact-form-status"
+                            className={`crypto-contact__status ${status}`}
+                            role={status === 'error' ? 'alert' : 'status'}
+                            aria-live={status === 'error' ? 'assertive' : 'polite'}
+                            aria-atomic="true"
+                        >
+                            {t(`contact.form.${status}`)}
                         </p>
                     )}
                 </motion.form>

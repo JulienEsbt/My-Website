@@ -52,9 +52,10 @@
             "email": "Your email",
             "message": "Your message",
             "submit": "Send email",
-            "sending": "Sending...",
+            "sending": "Sending…",
+            "loading": "Your message is being sent…",
             "success": "Message sent successfully. Thanks!",
-            "error": "Oops, something went wrong. Please try again."
+            "error": "Your message could not be sent. Please try again in a moment."
         }
     },
     "footer": {

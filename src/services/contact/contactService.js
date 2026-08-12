@@ -1,8 +1,22 @@
-import {CONTACT_PROVIDER_CONFIG} from '../../config/contact.js'
-
 export async function sendContactForm(form) {
-    const {default: emailjs} = await import('emailjs-com')
-    const {serviceId, templateId, publicKey} = CONTACT_PROVIDER_CONFIG
+    const payload = Object.fromEntries(new FormData(form).entries())
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 12_000)
 
-    return emailjs.sendForm(serviceId, templateId, form, publicKey)
+    try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+            signal: controller.signal,
+        })
+
+        if (!response.ok) {
+            throw new Error('Contact request failed')
+        }
+
+        return await response.json()
+    } finally {
+        window.clearTimeout(timeout)
+    }
 }
