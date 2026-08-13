@@ -399,6 +399,8 @@
         "tokens": "Tokens détectés",
         "noTokens": "Aucun token détecté sur ce réseau.",
         "unpriced": "Prix indisponible",
+        "partialData": "Valorisation partielle : certains prix ou certaines métadonnées sont indisponibles.",
+        "truncatedData": "Données partielles : seuls les {{count}} premiers tokens ont été analysés.",
         "nfts": "NFTs détectés",
         "allocation": "Allocation",
         "total": "Total",

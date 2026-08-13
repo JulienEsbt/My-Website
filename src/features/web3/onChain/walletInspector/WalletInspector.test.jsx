@@ -16,7 +16,11 @@ vi.mock('../../../../services/web3/walletInspectorService.js', () => ({
             nativeValueUsd: 2000,
             portfolioValueUsd: 2050,
             tokenCount: 1,
+            loadedTokenCount: 1,
             pricedTokenCount: 1,
+            tokenDataTruncated: false,
+            tokenMetadataFailures: 0,
+            valuationPartial: false,
             nftCount: 0,
             topHolding: {symbol: 'ETH', valueUsd: 2000, allocation: 97.56},
             topTokens: [

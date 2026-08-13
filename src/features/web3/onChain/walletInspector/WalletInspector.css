@@ -18,6 +18,17 @@
     margin: 0 !important;
 }
 
+.wallet-inspector__data-notice {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255, 184, 107, 0.32);
+    border-radius: 0.85rem;
+    background: rgba(255, 184, 107, 0.08);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
+}
+
 .wallet-inspector__searchbar {
     display: grid;
     grid-template-columns: 155px 1fr auto 125px 185px;

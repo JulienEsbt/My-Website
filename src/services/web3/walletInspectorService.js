@@ -1,7 +1,26 @@
 import {formatEther, formatUnits, isAddress} from 'ethers'
 import {callAlchemy, fetchWalletNfts} from './alchemyService.js'
 import {createReadOnlyProvider, getConnectedWalletAddress, getRpcUrl} from './rpcProviderService.js'
-import {fetchIndicativePrices, getIndicativeUsdPrice} from './priceService.js'
+import {fetchWalletPrices} from './priceService.js'
+
+const TOKEN_LIMIT = 120
+const METADATA_CONCURRENCY = 4
+
+async function mapWithConcurrency(items, limit, mapper) {
+    const results = new Array(items.length)
+    let nextIndex = 0
+
+    const worker = async () => {
+        while (nextIndex < items.length) {
+            const index = nextIndex
+            nextIndex += 1
+            results[index] = await mapper(items[index], index)
+        }
+    }
+
+    await Promise.all(Array.from({length: Math.min(limit, items.length)}, worker))
+    return results
+}
 
 const resolveWalletInput = async ({provider, input, network}) => {
     const cleanInput = input.trim()
@@ -38,48 +57,65 @@ const loadTokens = async ({rpcUrl, walletAddress, signal}) => {
         [walletAddress],
         signal
     )
-    const rawTokens = tokenBalances.tokenBalances
-        .filter((token) => token.tokenBalance && token.tokenBalance !== '0x0')
-        .slice(0, 120)
-
-    const tokens = await Promise.all(
-        rawTokens.map(async (token) => {
-            try {
-                const metadata = await callAlchemy(
-                    rpcUrl,
-                    'alchemy_getTokenMetadata',
-                    [token.contractAddress],
-                    signal
-                )
-                const balance = formatUnits(BigInt(token.tokenBalance), metadata.decimals ?? 18)
-                const balanceNumber = Number(balance)
-
-                if (!balanceNumber || balanceNumber <= 0) return null
-
-                return {
-                    contract: token.contractAddress,
-                    name: metadata.name || 'Unknown token',
-                    symbol: metadata.symbol || 'UNKNOWN',
-                    logo: metadata.logo,
-                    balance,
-                    balanceNumber,
-                }
-            } catch {
-                return null
-            }
-        })
+    const detectedTokens = tokenBalances.tokenBalances.filter(
+        (token) => token.tokenBalance && token.tokenBalance !== '0x0'
     )
+    const rawTokens = detectedTokens.slice(0, TOKEN_LIMIT)
+    let metadataFailures = 0
 
-    return tokens.filter(Boolean)
+    const tokens = await mapWithConcurrency(rawTokens, METADATA_CONCURRENCY, async (token) => {
+        try {
+            const metadata = await callAlchemy(
+                rpcUrl,
+                'alchemy_getTokenMetadata',
+                [token.contractAddress],
+                signal
+            )
+            const balance = formatUnits(BigInt(token.tokenBalance), metadata.decimals ?? 18)
+            const balanceNumber = Number(balance)
+
+            if (!balanceNumber || balanceNumber <= 0) return null
+
+            return {
+                contract: token.contractAddress,
+                name: metadata.name || 'Unknown token',
+                symbol: metadata.symbol || 'UNKNOWN',
+                logo: metadata.logo,
+                balance,
+                balanceNumber,
+            }
+        } catch (error) {
+            if (signal?.aborted) throw error
+            metadataFailures += 1
+            return null
+        }
+    })
+
+    return {
+        tokens: tokens.filter(Boolean),
+        detectedTokenCount: detectedTokens.length,
+        truncated: detectedTokens.length > TOKEN_LIMIT,
+        metadataFailures,
+    }
 }
 
-export const valueWalletPortfolio = ({nativeBalance, network, tokens, prices}) => {
-    const nativePriceUsd = getIndicativeUsdPrice(prices, network.symbol)
+export const valueWalletPortfolio = ({
+    nativeBalance,
+    network,
+    tokens,
+    nativePriceUsd,
+    tokenPricesByContract,
+}) => {
     const nativeValueUsd = nativeBalance * nativePriceUsd
     const valuedTokens = tokens
         .map((token) => {
-            const priceUsd = getIndicativeUsdPrice(prices, token.symbol)
-            return {...token, priceUsd, valueUsd: token.balanceNumber * priceUsd}
+            const priceUsd = tokenPricesByContract[token.contract.toLowerCase()] ?? 0
+            return {
+                ...token,
+                id: `${network.id}-${token.contract.toLowerCase()}`,
+                priceUsd,
+                valueUsd: token.balanceNumber * priceUsd,
+            }
         })
         .sort((a, b) => b.valueUsd - a.valueUsd)
     const pricedTokens = valuedTokens.filter((token) => token.valueUsd > 0)
@@ -95,18 +131,20 @@ export const valueWalletPortfolio = ({nativeBalance, network, tokens, prices}) =
     }))
     const holdings = [
         {
+            id: `native-${network.id}`,
             symbol: network.symbol,
             valueUsd: nativeValueUsd,
             allocation: portfolioValueUsd > 0 ? (nativeValueUsd / portfolioValueUsd) * 100 : 0,
         },
         ...pricedTokens.map((token) => ({
+            id: token.id,
             symbol: token.symbol,
             valueUsd: token.valueUsd,
             allocation: portfolioValueUsd > 0 ? (token.valueUsd / portfolioValueUsd) * 100 : 0,
         })),
     ].sort((a, b) => b.valueUsd - a.valueUsd)
     const allocationItems = [
-        holdings.find((item) => item.symbol === network.symbol),
+        holdings.find((item) => item.id === `native-${network.id}`),
         ...allTokens.filter((token) => token.valueUsd > 0),
     ]
         .filter((item) => item?.valueUsd > 0)
@@ -131,23 +169,33 @@ export const inspectWalletPortfolio = async ({walletInput, network, signal}) => 
     const wallet = await resolveWalletInput({provider, input: walletInput, network})
     if (!wallet) throw new Error('INVALID_ADDRESS')
 
-    const [nativeBalanceRaw, tokens, nfts] = await Promise.all([
+    const [nativeBalanceRaw, tokenResult, nfts] = await Promise.all([
         provider.getBalance(wallet.address),
         loadTokens({rpcUrl, walletAddress: wallet.address, signal}),
         fetchWalletNfts(rpcUrl, wallet.address, signal),
     ])
     const nativeBalance = Number(formatEther(nativeBalanceRaw))
-    const prices = await fetchIndicativePrices(
-        [network.symbol, ...tokens.map((token) => token.symbol)],
-        signal
-    )
-    const valuation = valueWalletPortfolio({nativeBalance, network, tokens, prices})
+    const prices = await fetchWalletPrices({
+        networkId: network.id,
+        tokenContracts: tokenResult.tokens.map((token) => token.contract),
+        signal,
+    })
+    const valuation = valueWalletPortfolio({
+        nativeBalance,
+        network,
+        tokens: tokenResult.tokens,
+        ...prices,
+    })
 
     return {
         ...wallet,
         network,
         nativeBalance,
-        tokenCount: tokens.length,
+        tokenCount: tokenResult.detectedTokenCount,
+        loadedTokenCount: tokenResult.tokens.length,
+        tokenDataTruncated: tokenResult.truncated,
+        tokenMetadataFailures: tokenResult.metadataFailures,
+        valuationPartial: prices.partial,
         nftCount: nfts.length,
         nfts,
         ...valuation,

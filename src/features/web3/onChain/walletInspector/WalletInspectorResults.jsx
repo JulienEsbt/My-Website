@@ -91,6 +91,15 @@ const WalletInspectorResults = ({result, onSelectNft, onShowAllNfts, onShowAllTo
             </div>
 
             <div className="wallet-inspector__main-grid">
+                {(result.valuationPartial ||
+                    result.tokenDataTruncated ||
+                    result.tokenMetadataFailures > 0) && (
+                    <p className="wallet-inspector__data-notice" role="status">
+                        {result.tokenDataTruncated
+                            ? t('walletInspector.truncatedData', {count: result.loadedTokenCount})
+                            : t('walletInspector.partialData')}
+                    </p>
+                )}
                 <article className="wallet-inspector__panel wallet-inspector__allocation">
                     <div className="wallet-inspector__panel-head">
                         <h3>{t('walletInspector.allocation')}</h3>
@@ -113,7 +122,7 @@ const WalletInspectorResults = ({result, onSelectNft, onShowAllNfts, onShowAllTo
 
                             <div className="allocation-legend">
                                 {result.allocationItems.map((item, index) => (
-                                    <div key={item.symbol} className="allocation-legend-row">
+                                    <div key={item.id} className="allocation-legend-row">
                                         <i className={`allocation-color color-${index}`} />
                                         <strong>{item.symbol}</strong>
                                         <span>{formatPercent(item.allocation, language)}</span>
