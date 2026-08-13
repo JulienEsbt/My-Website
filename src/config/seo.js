@@ -25,6 +25,11 @@ const content = {
             description:
                 'Parcours, expériences, compétences et projets de Julien Esterbet, développeur full-stack orienté produit basé à Paris.',
         },
+        privacy: {
+            title: 'Confidentialité — Julien Esterbet',
+            description:
+                'Informations sur les mesures de fréquentation, de performance et le formulaire de contact du portfolio de Julien Esterbet.',
+        },
         web3: {
             title: 'Labs Web3 — Julien Esterbet',
             description:
@@ -66,6 +71,11 @@ const content = {
             description:
                 'Experience, skills and selected projects of Julien Esterbet, a product-minded full-stack developer based in Paris.',
         },
+        privacy: {
+            title: 'Privacy — Julien Esterbet',
+            description:
+                'Information about audience measurement, performance monitoring and the contact form on Julien Esterbet’s portfolio.',
+        },
         web3: {
             title: 'Web3 labs — Julien Esterbet',
             description:
@@ -93,6 +103,7 @@ const staticRoutes = {
     '/projects/bruno-pizza': 'brunoPizza',
     '/projects/my-website': 'myWebsite',
     '/resume': 'resume',
+    '/privacy': 'privacy',
     '/web3': 'web3',
     '/travel': 'travel',
     '/reflections': 'reflections',

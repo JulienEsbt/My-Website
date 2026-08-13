@@ -5,6 +5,7 @@ export const ROUTE_PATHS = Object.freeze({
     brunoPizzaCaseStudy: '/projects/bruno-pizza',
     myWebsiteCaseStudy: '/projects/my-website',
     resume: '/resume',
+    privacy: '/privacy',
     web3: '/web3',
     travel: '/travel',
     reflections: '/reflections',

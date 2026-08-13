@@ -7,6 +7,7 @@ export type RoutePath =
     | '/projects/bruno-pizza'
     | '/projects/my-website'
     | '/resume'
+    | '/privacy'
     | '/web3'
     | '/travel'
     | '/reflections'

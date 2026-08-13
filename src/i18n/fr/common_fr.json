@@ -66,7 +66,24 @@
         "pages": "Pages",
         "socials": "Réseaux",
         "cta": "Me contacter",
+        "privacy": "Confidentialité",
         "copyright": "© Julien Esterbet — Tous droits réservés."
+    },
+    "privacy": {
+        "metaTitle": "Confidentialité — Julien Esterbet",
+        "kicker": "Transparence",
+        "title": "Confidentialité et mesures d’audience",
+        "intro": "Ce portfolio limite la collecte au nécessaire pour comprendre son usage, surveiller ses performances et répondre aux messages envoyés volontairement.",
+        "analyticsTitle": "Audience et performances",
+        "analyticsBody": "Vercel Web Analytics mesure les pages consultées et Speed Insights collecte des indicateurs Web Vitals. Le site n’ajoute aucun événement personnalisé et ne transmet à ces outils ni nom, ni adresse e-mail, ni message, ni adresse de wallet.",
+        "contactTitle": "Formulaire de contact",
+        "contactBody": "Le nom, l’adresse e-mail et le message saisis sont transmis à EmailJS uniquement pour livrer le message. Ils ne sont pas utilisés par le site pour établir un profil ou alimenter une base de données.",
+        "externalTitle": "Services externes",
+        "externalBody": "Mapbox, les fournisseurs RPC Alchemy et les sources de prix sont sollicités uniquement lorsque les fonctionnalités correspondantes sont utilisées. Les politiques de ces fournisseurs s’appliquent alors à leurs services.",
+        "controlTitle": "Vos choix",
+        "controlBody": "Vous pouvez utiliser les pages éditoriales sans remplir le formulaire ni connecter de wallet. Les bloqueurs de contenu peuvent empêcher les mesures Vercel sans bloquer le contenu principal.",
+        "contact": "Pour toute question concernant ces traitements, utilisez le formulaire de contact du portfolio.",
+        "updated": "Dernière mise à jour : août 2026."
     },
     "notFound": {
         "pageTitle": "Page introuvable — Julien Esterbet",

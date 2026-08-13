@@ -19,6 +19,10 @@ const routeLoaders = {
         namespace: 'resume',
         loadPage: () => import('../pages/ResumePage.jsx'),
     },
+    [ROUTE_PATHS.privacy]: {
+        namespace: 'common',
+        loadPage: () => import('../pages/PrivacyPage.jsx'),
+    },
     [ROUTE_PATHS.web3]: {
         namespace: 'web3',
         loadPage: () => import('../pages/Web3Page.jsx'),

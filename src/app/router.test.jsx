@@ -8,6 +8,7 @@ vi.mock('../pages/HomePage.jsx', () => ({default: () => <p>Home</p>}))
 vi.mock('../pages/BrunoPizzaCaseStudyPage.jsx', () => ({default: () => <p>Bruno Pizza</p>}))
 vi.mock('../pages/MyWebsiteCaseStudyPage.jsx', () => ({default: () => <p>My-Website</p>}))
 vi.mock('../pages/ResumePage.jsx', () => ({default: () => <p>Resume</p>}))
+vi.mock('../pages/PrivacyPage.jsx', () => ({default: () => <p>Privacy</p>}))
 vi.mock('../pages/Web3Page.jsx', () => ({default: () => <p>Web3</p>}))
 vi.mock('../pages/TravelPage.jsx', () => ({default: () => <p>Travel</p>}))
 vi.mock('../pages/ReflectionsPage.jsx', () => ({default: () => <p>Reflections</p>}))
@@ -63,6 +64,16 @@ describe('Router', () => {
         )
 
         expect(await screen.findByText('Resume')).toBeVisible()
+    })
+
+    it('loads the privacy information route asynchronously', async () => {
+        render(
+            <MemoryRouter initialEntries={['/privacy']}>
+                <Router />
+            </MemoryRouter>
+        )
+
+        expect(await screen.findByText('Privacy')).toBeVisible()
     })
 
     it('keeps an unknown URL and displays a real not-found page', () => {

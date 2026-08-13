@@ -34,5 +34,9 @@ describe('Footer', () => {
             'page'
         )
         expect(screen.getByRole('link', {name: 'Portfolio'})).not.toHaveAttribute('aria-current')
+        expect(screen.getByRole('link', {name: 'Confidentialité'})).toHaveAttribute(
+            'href',
+            '/privacy'
+        )
     })
 })

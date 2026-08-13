@@ -118,6 +118,7 @@ const Footer = () => {
 
             <div className="container footer-section__bottom">
                 <small>{t('footer.copyright')}</small>
+                <Link to="/privacy">{t('footer.privacy')}</Link>
             </div>
         </footer>
     )

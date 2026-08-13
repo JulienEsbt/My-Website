@@ -1,0 +1,42 @@
+.privacy-page {
+    padding-bottom: 2rem;
+}
+
+.privacy-page__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.privacy-page__grid section {
+    padding: 1.5rem;
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    border-radius: 1.25rem;
+    background: rgba(20, 23, 48, 0.78);
+}
+
+.privacy-page h3 {
+    margin-bottom: 0.75rem;
+    color: var(--color-white);
+}
+
+.privacy-page p {
+    margin: 0;
+    color: var(--color-light);
+    line-height: 1.75;
+}
+
+.privacy-page__contact {
+    margin-top: 1.5rem !important;
+}
+
+.privacy-page__updated {
+    margin-top: 0.5rem !important;
+    font-size: 0.85rem;
+}
+
+@media screen and (max-width: 700px) {
+    .privacy-page__grid {
+        grid-template-columns: 1fr;
+    }
+}

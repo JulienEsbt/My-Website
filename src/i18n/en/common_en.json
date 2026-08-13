@@ -66,7 +66,24 @@
         "pages": "Pages",
         "socials": "Socials",
         "cta": "Contact me",
+        "privacy": "Privacy",
         "copyright": "© Julien Esterbet — All rights reserved."
+    },
+    "privacy": {
+        "metaTitle": "Privacy — Julien Esterbet",
+        "kicker": "Transparency",
+        "title": "Privacy and audience measurement",
+        "intro": "This portfolio limits collection to what is needed to understand its use, monitor performance and answer messages sent voluntarily.",
+        "analyticsTitle": "Audience and performance",
+        "analyticsBody": "Vercel Web Analytics measures page views and Speed Insights collects Web Vitals. The site adds no custom event and sends these tools no name, email address, message or wallet address.",
+        "contactTitle": "Contact form",
+        "contactBody": "The name, email address and message entered are sent to EmailJS only to deliver the message. The site does not use them to build a profile or populate a database.",
+        "externalTitle": "External services",
+        "externalBody": "Mapbox, Alchemy RPC providers and price sources are contacted only when the corresponding features are used. Those providers’ policies then apply to their services.",
+        "controlTitle": "Your choices",
+        "controlBody": "You can browse the editorial pages without completing the form or connecting a wallet. Content blockers may prevent Vercel measurements without blocking the main content.",
+        "contact": "For any question about this processing, use the portfolio contact form.",
+        "updated": "Last updated: August 2026."
     },
     "notFound": {
         "pageTitle": "Page not found — Julien Esterbet",

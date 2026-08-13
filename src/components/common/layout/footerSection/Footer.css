@@ -183,6 +183,17 @@
     text-align: center;
 }
 
+.footer-section__bottom a {
+    display: inline-flex;
+    margin-left: 1rem;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+}
+
+.footer-section__bottom a:hover {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 900px) {
     .footer-section__container {
         grid-template-columns: 1fr;
