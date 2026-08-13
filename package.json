@@ -25,7 +25,7 @@
         "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run security:files && npm run build && npm run seo:check && npm run budget:check && npm run audit:prod"
     },
     "engines": {
-        "node": ">=22.12.0 <23"
+        "node": "24.x"
     },
     "dependencies": {
         "@uniswap/default-token-list": "^21.3.0",
@@ -51,6 +51,7 @@
     "devDependencies": {
         "@eslint/js": "^9.39.5",
         "@mdx-js/rollup": "^3.1.1",
+        "@noble/hashes": "^2.3.0",
         "@testing-library/jest-dom": "^7.0.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.3",
