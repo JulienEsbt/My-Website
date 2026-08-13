@@ -3,8 +3,10 @@ import {resolve} from 'node:path'
 import {describe, expect, it} from 'vitest'
 
 const vercelConfig = JSON.parse(readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'))
+const securityRoute = vercelConfig.routes.find((route) => route.src === '/(.*)' && route.headers)
+const assetRoute = vercelConfig.routes.find((route) => route.src === '/assets/(.*)')
 const headers = Object.fromEntries(
-    Object.entries(vercelConfig.routes[0].headers).map(([key, value]) => [key.toLowerCase(), value])
+    Object.entries(securityRoute.headers).map(([key, value]) => [key.toLowerCase(), value])
 )
 
 describe('Vercel security headers', () => {
@@ -30,8 +32,28 @@ describe('Vercel security headers', () => {
     })
 
     it('applies the policies before filesystem and 404 routing', () => {
-        expect(vercelConfig.routes[0]).toMatchObject({src: '/(.*)', continue: true})
-        expect(vercelConfig.routes[1]).toEqual({handle: 'filesystem'})
-        expect(vercelConfig.routes[2]).toMatchObject({status: 404, dest: '/404.html'})
+        const securityIndex = vercelConfig.routes.indexOf(securityRoute)
+        const filesystemIndex = vercelConfig.routes.findIndex(
+            (route) => route.handle === 'filesystem'
+        )
+        const notFoundIndex = vercelConfig.routes.findIndex((route) => route.status === 404)
+
+        expect(securityRoute).toMatchObject({src: '/(.*)', continue: true})
+        expect(securityIndex).toBeLessThan(filesystemIndex)
+        expect(filesystemIndex).toBeLessThan(notFoundIndex)
+        expect(vercelConfig.routes[notFoundIndex]).toMatchObject({dest: '/404.html'})
+    })
+
+    it('pins the reproducible Vite build and immutable hashed assets', () => {
+        expect(vercelConfig).toMatchObject({
+            framework: 'vite',
+            installCommand: 'npm ci',
+            buildCommand: 'npm run build',
+            outputDirectory: 'dist',
+        })
+        expect(assetRoute).toMatchObject({
+            headers: {'Cache-Control': 'public, max-age=31536000, immutable'},
+            continue: true,
+        })
     })
 })

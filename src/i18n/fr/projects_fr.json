@@ -138,7 +138,7 @@
                 "routes": "Chaque page et son espace de traduction sont chargés à la demande depuis un registre de routes unique.",
                 "domains": "Les fonctionnalités Home, Web3, Travel et Reflections restent organisées par domaine ; les appels externes passent par des services dédiés.",
                 "media": "ResponsiveImage consomme des manifests générés afin de choisir le format et la largeur adaptés au contexte.",
-                "vercel": "Le build statique est destiné à Vercel ; le dépôt définit actuellement la réécriture nécessaire au routage de la SPA."
+                "vercel": "Le build statique cible Vercel avec Node 24, une installation reproductible, une vraie 404 et un cache long réservé aux assets versionnés."
             }
         },
         "decisions": {
@@ -195,18 +195,18 @@
             "kicker": "Limites actuelles",
             "title": "Ce que cette refonte ne permet pas encore d’affirmer",
             "items": {
-                "deployment": "Le lien public mène à la version actuellement en ligne ; la refonte locale décrite ici doit encore être validée puis déployée explicitement.",
-                "mediaDelivery": "Les dérivés responsives sont aujourd’hui générés localement et ignorés par Git. Leur stratégie de génération ou de stockage pour un déploiement Vercel propre reste à finaliser.",
-                "securityHeaders": "Les en-têtes de sécurité et la CSP sont définis dans le code, mais doivent encore être validés sur un déploiement Preview avant la production.",
+                "deployment": "La refonte est validée automatiquement et déployée en Preview depuis develop ; sa promotion sur le domaine principal reste une décision explicite.",
+                "mediaDelivery": "Les 4 470 dérivés restent générés localement et hors Git. Le code accepte désormais une origine média HTTPS, mais le fournisseur et la migration complète restent à valider avant publication des photos.",
+                "securityHeaders": "Les en-têtes de sécurité, la CSP, la 404 et les règles de cache sont versionnés et testés ; une recette finale reste requise après promotion en production.",
                 "cv": "Les PDF actuels ne revendiquent pas une conformité PDF/UA ; une alternative HTML bilingue et sémantique fournit le même contenu avant leur téléchargement.",
                 "font": "La police externe a été retirée au profit d’une pile système locale ; le rendu final doit encore être validé sur les principaux navigateurs.",
-                "fieldData": "Les mesures disponibles sont des contrôles locaux. Les données de terrain et le suivi après déploiement restent à mettre en place."
+                "fieldData": "Web Analytics et Speed Insights sont intégrés sans événement personnalisé ; les tendances de terrain nécessitent encore suffisamment de visites réelles pour devenir représentatives."
             }
         },
         "stack": {"kicker": "Stack", "title": "Technologies et contrôles principaux"},
         "next": {
             "title": "Prochaines étapes",
-            "body": "Finaliser la livraison des médias, valider les protections sur Preview, puis effectuer les contrôles de production avant toute déclaration d’accessibilité.",
+            "body": "Valider un stockage média durable, publier les dérivés manquants, puis effectuer la recette du domaine principal avant toute déclaration d’accessibilité.",
             "cta": "Revenir à la sélection"
         }
     }

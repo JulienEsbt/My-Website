@@ -138,7 +138,7 @@
                 "routes": "Each page and its translation namespace are loaded on demand from a single route registry.",
                 "domains": "Home, Web3, Travel and Reflections remain organized by domain; external calls go through dedicated services.",
                 "media": "ResponsiveImage consumes generated manifests to select the appropriate format and width for each context.",
-                "vercel": "The static build targets Vercel; the repository currently defines the rewrite required for SPA routing."
+                "vercel": "The static build targets Vercel with Node 24, reproducible installs, a real 404 and long-lived caching limited to versioned assets."
             }
         },
         "decisions": {
@@ -195,18 +195,18 @@
             "kicker": "Current limitations",
             "title": "What this rebuild cannot claim yet",
             "items": {
-                "deployment": "The public link opens the version currently online; the local rebuild described here still needs explicit validation and deployment.",
-                "mediaDelivery": "Responsive derivatives are currently generated locally and ignored by Git. Their generation or storage strategy for a clean Vercel deployment still needs to be finalized.",
-                "securityHeaders": "Security headers and the CSP are defined in code but still need validation on a Preview deployment before production.",
+                "deployment": "The rebuild is automatically validated and deployed to Preview from develop; promotion to the primary domain remains an explicit decision.",
+                "mediaDelivery": "The 4,470 derivatives remain generated locally and outside Git. The code now supports an HTTPS media origin, but the provider and full migration still require validation before the photographs are published.",
+                "securityHeaders": "Security headers, the CSP, the 404 and cache rules are versioned and tested; a final acceptance pass is still required after production promotion.",
                 "cv": "The current PDFs do not claim PDF/UA compliance; a bilingual semantic HTML alternative provides the same content before download.",
                 "font": "The external font was removed in favour of a local system stack; final rendering still needs validation across the main browsers.",
-                "fieldData": "Available measurements are local checks. Field data and post-deployment monitoring still need to be established."
+                "fieldData": "Web Analytics and Speed Insights are integrated without custom events; field trends still need enough real visits to become representative."
             }
         },
         "stack": {"kicker": "Stack", "title": "Core technologies and controls"},
         "next": {
             "title": "Next steps",
-            "body": "Finalize media delivery, validate protections on Preview, then run production checks before publishing any accessibility statement.",
+            "body": "Validate durable media storage, publish the missing derivatives, then run acceptance checks on the primary domain before publishing any accessibility statement.",
             "cta": "Back to the selection"
         }
     }
