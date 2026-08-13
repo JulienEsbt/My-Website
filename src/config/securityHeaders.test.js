@@ -4,7 +4,7 @@ import {describe, expect, it} from 'vitest'
 
 const vercelConfig = JSON.parse(readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'))
 const headers = Object.fromEntries(
-    vercelConfig.headers[0].headers.map(({key, value}) => [key.toLowerCase(), value])
+    Object.entries(vercelConfig.routes[0].headers).map(([key, value]) => [key.toLowerCase(), value])
 )
 
 describe('Vercel security headers', () => {
@@ -27,5 +27,11 @@ describe('Vercel security headers', () => {
         expect(policy).not.toContain('unpkg.com')
         expect(policy).not.toContain('fonts.googleapis.com')
         expect(policy).not.toContain('api.emailjs.com')
+    })
+
+    it('applies the policies before filesystem and 404 routing', () => {
+        expect(vercelConfig.routes[0]).toMatchObject({src: '/(.*)', continue: true})
+        expect(vercelConfig.routes[1]).toEqual({handle: 'filesystem'})
+        expect(vercelConfig.routes[2]).toMatchObject({status: 404, dest: '/404.html'})
     })
 })
