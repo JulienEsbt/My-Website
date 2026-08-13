@@ -58,11 +58,23 @@ export interface ProjectSummary {
     technologies: readonly string[]
 }
 
+export interface PortfolioProject {
+    id: '1' | '2' | '3'
+    status: 'active' | 'portfolio' | 'academic'
+    image: unknown
+    repository: `https://github.com/${string}`
+    demo?: `https://${string}`
+    caseStudy?: RoutePath
+    tags: readonly string[]
+}
+
 export interface EditorialEntry {
+    id: string
     slug: string
     title: LocalizedText
     excerpt: LocalizedText
     category: 'philosophy' | 'politics' | 'society' | 'technology'
     date: string
+    readingTime: number
     featured?: boolean
 }

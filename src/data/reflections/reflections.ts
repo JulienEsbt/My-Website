@@ -1,11 +1,10 @@
+import type {EditorialEntry} from '../../types/domain'
+
 const reflections = [
     {
         id: 'charte-de-pensee-2025-05-11',
         slug: 'charte-de-pensee',
-        title: {
-            fr: 'Charte de pensée',
-            en: 'Charter of thought',
-        },
+        title: {fr: 'Charte de pensée', en: 'Charter of thought'},
         category: 'philosophy',
         featured: true,
         readingTime: 10,
@@ -38,15 +37,12 @@ const reflections = [
         date: '2026-02-02',
         readingTime: 15,
         featured: false,
-        title: {
-            fr: 'Se méfier des oppositions simples',
-            en: 'Being wary of simple oppositions',
-        },
+        title: {fr: 'Se méfier des oppositions simples', en: 'Being wary of simple oppositions'},
         excerpt: {
             fr: 'Une réflexion personnelle sur notre tendance à simplifier le réel, les oppositions binaires, la responsabilité, le déterminisme et la difficulté de comprendre sans excuser.',
             en: 'A personal reflection on our tendency to simplify reality, binary oppositions, responsibility, determinism and the difficulty of understanding without excusing.',
         },
     },
-]
+] as const satisfies readonly EditorialEntry[]
 
 export default reflections

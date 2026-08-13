@@ -1,3 +1,5 @@
+import type {RoutePath} from '../types/domain'
+
 export const ROUTE_PATHS = Object.freeze({
     home: '/',
     brunoPizzaCaseStudy: '/projects/bruno-pizza',
@@ -7,4 +9,4 @@ export const ROUTE_PATHS = Object.freeze({
     travel: '/travel',
     reflections: '/reflections',
     reflectionArticle: '/reflections/:slug',
-})
+} satisfies Record<string, RoutePath>)

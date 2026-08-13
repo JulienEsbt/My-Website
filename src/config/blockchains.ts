@@ -1,3 +1,5 @@
+import type {BlockchainNetwork} from '../types/domain'
+
 export const BLOCKCHAIN_NETWORKS = [
     {
         id: 'ethereum',
@@ -34,4 +36,4 @@ export const BLOCKCHAIN_NETWORKS = [
         rpcEnv: 'VITE_BNB_RPC_URL',
         explorer: 'https://bscscan.com',
     },
-]
+] as const satisfies readonly BlockchainNetwork[]

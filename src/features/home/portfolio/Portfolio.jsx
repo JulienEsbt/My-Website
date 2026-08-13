@@ -3,40 +3,14 @@ import {BsGithub} from 'react-icons/bs'
 import {FiArrowUpRight} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {Link} from 'react-router-dom'
-import {HOME_ASSETS} from '../../../config/homeAssets.js'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
-import {LINKS} from '../../../config/links.js'
-import {ROUTE_PATHS} from '../../../config/routes.js'
+import {PORTFOLIO_PROJECTS} from '../../../config/portfolioProjects.js'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import './Portfolio.css'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const ITEMS = [
-    {
-        id: '1',
-        image: HOME_ASSETS.portfolio.brunoPizza,
-        link: LINKS.projects.brunoPizza,
-        caseStudy: ROUTE_PATHS.brunoPizzaCaseStudy,
-        tags: ['react', 'typescript', 'electron', 'express', 'sqlite'],
-    },
-    {
-        id: '2',
-        image: HOME_ASSETS.portfolio.myWebsite,
-        link: LINKS.projects.myWebsite,
-        demo: LINKS.demos.myWebsite,
-        caseStudy: ROUTE_PATHS.myWebsiteCaseStudy,
-        tags: ['react', 'vite', 'i18n', 'accessibility', 'vercel'],
-    },
-    {
-        id: '3',
-        image: HOME_ASSETS.portfolio.megalis,
-        link: LINKS.projects.megalis,
-        tags: ['solidity', 'evm', 'storage'],
-    },
-]
 
 export default function Portfolio() {
     const {t} = useTranslation('home')
@@ -76,14 +50,14 @@ export default function Portfolio() {
             <p className="portfolio__intro">{t('portfolio.intro')}</p>
 
             <div className="container portfolio__container">
-                {ITEMS.map(({id, image, link, demo, caseStudy, tags}, index) => (
+                {PORTFOLIO_PROJECTS.map(({id, image, repository, demo, caseStudy, tags}, index) => (
                     <article
                         key={id}
                         className="portfolio__item"
                         ref={(el) => (cardsRef.current[index] = el)}
                     >
                         <a
-                            href={demo ?? link}
+                            href={demo ?? repository}
                             target="_blank"
                             rel="noreferrer"
                             className="portfolio__image"
@@ -139,7 +113,7 @@ export default function Portfolio() {
 
                                 <a
                                     className="portfolio__link"
-                                    href={link}
+                                    href={repository}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
