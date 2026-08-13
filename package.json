@@ -10,6 +10,7 @@
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
         "test": "vitest run",
         "test:watch": "vitest",
         "audit": "npm audit",
@@ -19,7 +20,7 @@
         "media:prototype": "node scripts/generate-media-prototype.mjs",
         "media:generate": "node scripts/generate-public-media.mjs",
         "budget:check": "node scripts/check-build-budgets.mjs",
-        "check": "npm run format:check && npm run lint && npm run test && npm run build && npm run budget:check"
+        "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run budget:check"
     },
     "engines": {
         "node": ">=22.12.0 <23"
@@ -51,6 +52,9 @@
         "@testing-library/jest-dom": "^7.0.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.3",
+        "@types/node": "^22.20.1",
+        "@types/react": "^18.3.31",
+        "@types/react-dom": "^18.3.7",
         "@vitejs/plugin-react": "^6.0.5",
         "axe-core": "^4.13.0",
         "eslint": "^9.39.5",
@@ -61,6 +65,7 @@
         "jsdom": "^29.1.1",
         "prettier": "^3.9.6",
         "sharp": "^0.35.3",
+        "typescript": "^6.0.3",
         "vite": "^8.2.1",
         "vitest": "^4.1.10"
     }
