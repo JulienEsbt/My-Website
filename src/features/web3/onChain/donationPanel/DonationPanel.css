@@ -97,6 +97,31 @@
     color: #ff8a8a;
 }
 
+.donation-panel__confirmation {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 184, 107, 0.4);
+    border-radius: 1rem;
+    background: rgba(255, 184, 107, 0.08);
+}
+
+.donation-panel__confirmation strong,
+.donation-panel__confirmation code {
+    color: var(--color-white);
+}
+
+.donation-panel__confirmation div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.donation-panel__success {
+    margin-top: 1rem;
+    color: #7cffb2;
+}
+
 @media screen and (max-width: 800px) {
     .donation-panel__content {
         grid-template-columns: 1fr;

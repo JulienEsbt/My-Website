@@ -3,14 +3,13 @@ import {motion} from 'framer-motion'
 import {FiCheck, FiCopy, FiExternalLink, FiSend} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {DONATION_RECEIVER, SUPPORTED_DONATION_TOKENS} from '../../../../config/wallet.js'
+import {CHAIN_METADATA} from '../../../../config/evmChains.js'
 import CustomTokenImport from './CustomTokenImport.jsx'
 import DonationTokenSelector from './DonationTokenSelector.jsx'
 import './DonationPanel.css'
 
 const DEFAULT_CUSTOM_FIELDS = {
     chainHex: '0x1',
-    chainName: 'Ethereum',
-    explorer: 'https://etherscan.io/',
     contract: '',
 }
 
@@ -21,7 +20,9 @@ const DonationPanel = () => {
     const [customTokens, setCustomTokens] = useState([])
     const [selectedTokenId, setSelectedTokenId] = useState(SUPPORTED_DONATION_TOKENS[0].id)
     const [amount, setAmount] = useState('')
-    const [txHash, setTxHash] = useState('')
+    const [transaction, setTransaction] = useState(null)
+    const [pendingDonation, setPendingDonation] = useState(null)
+    const [transactionStatus, setTransactionStatus] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [customFields, setCustomFields] = useState(DEFAULT_CUSTOM_FIELDS)
@@ -87,8 +88,6 @@ const DonationPanel = () => {
             const {importCustomErc20Token} = await import('../utils/tokenUtils.js')
             const importedToken = await importCustomErc20Token({
                 chainHex: customFields.chainHex,
-                chainName: customFields.chainName,
-                explorer: customFields.explorer,
                 contractAddress: customFields.contract,
             })
 
@@ -113,34 +112,52 @@ const DonationPanel = () => {
         }
     }
 
-    const sendDonation = async (event) => {
+    const prepareDonation = async (event) => {
         event.preventDefault()
         setError('')
-        setTxHash('')
+        setTransaction(null)
+        setTransactionStatus('')
 
         if (!selectedToken) {
             setError(t('donationPanel.errors.noToken'))
             return
         }
-        if (!amount || Number(amount) <= 0) {
-            setError(t('donationPanel.errors.invalidAmount'))
-            return
+        try {
+            const {validateDonation} = await import('../utils/tokenUtils.js')
+            validateDonation({token: selectedToken, amount, receiver: DONATION_RECEIVER})
+            setPendingDonation({token: selectedToken, amount})
+        } catch (validationError) {
+            setError(
+                validationError.message === 'INVALID_AMOUNT'
+                    ? t('donationPanel.errors.invalidAmount')
+                    : t('donationPanel.errors.invalidConfiguration')
+            )
         }
+    }
 
+    const confirmDonation = async () => {
+        if (!pendingDonation) return
         setLoading(true)
+        setError('')
         try {
             const {sendDonationTransaction} = await import('../utils/tokenUtils.js')
-            const hash = await sendDonationTransaction({
-                token: selectedToken,
-                amount,
+            const confirmedTransaction = await sendDonationTransaction({
+                token: pendingDonation.token,
+                amount: pendingDonation.amount,
                 receiver: DONATION_RECEIVER,
+                onStatus: setTransactionStatus,
             })
-            setTxHash(hash)
+            setTransaction(confirmedTransaction)
+            setTransactionStatus('confirmed')
+            setPendingDonation(null)
         } catch (transactionError) {
+            setTransactionStatus('')
             if (transactionError.message === 'NO_PROVIDER') {
                 setError(t('donationPanel.errors.noProvider'))
             } else if (transactionError.code === 4001) {
                 setError(t('donationPanel.errors.cancelled'))
+            } else if (transactionError.message === 'WRONG_NETWORK') {
+                setError(t('donationPanel.errors.wrongNetwork'))
             } else {
                 if (import.meta.env.DEV) console.error(transactionError)
                 setError(t('donationPanel.errors.failed'))
@@ -204,6 +221,7 @@ const DonationPanel = () => {
                     onSelect={setSelectedTokenId}
                 >
                     <CustomTokenImport
+                        chains={Object.values(CHAIN_METADATA)}
                         fields={customFields}
                         importing={importingToken}
                         open={showCustomImport}
@@ -213,7 +231,7 @@ const DonationPanel = () => {
                     />
                 </DonationTokenSelector>
 
-                <form className="donation-panel__form" onSubmit={sendDonation}>
+                <form className="donation-panel__form" onSubmit={prepareDonation}>
                     <input
                         type="number"
                         min="0"
@@ -232,16 +250,54 @@ const DonationPanel = () => {
                     />
                     <button type="submit" className="btn btn-primary" disabled={loading}>
                         <FiSend />
-                        {loading
-                            ? t('donationPanel.sending')
-                            : t('donationPanel.send', {symbol: selectedToken?.symbol ?? ''})}
+                        {t('donationPanel.review')}
                     </button>
                 </form>
 
-                {txHash && selectedToken?.explorer && (
+                {pendingDonation && (
+                    <div className="donation-panel__confirmation" role="alert">
+                        <strong>{t('donationPanel.confirmationTitle')}</strong>
+                        <p>
+                            {t('donationPanel.confirmationSummary', {
+                                amount: pendingDonation.amount,
+                                symbol: pendingDonation.token.symbol,
+                                network: pendingDonation.token.networkName,
+                            })}
+                        </p>
+                        <code>{DONATION_RECEIVER}</code>
+                        <div>
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={confirmDonation}
+                                disabled={loading}
+                            >
+                                {loading
+                                    ? t(`donationPanel.status.${transactionStatus || 'switching'}`)
+                                    : t('donationPanel.confirm')}
+                            </button>
+                            <button
+                                type="button"
+                                className="btn"
+                                onClick={() => setPendingDonation(null)}
+                                disabled={loading}
+                            >
+                                {t('donationPanel.cancel')}
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {transactionStatus === 'confirmed' && (
+                    <p className="donation-panel__success" role="status">
+                        {t('donationPanel.status.confirmed')}
+                    </p>
+                )}
+
+                {transaction?.explorerUrl && (
                     <a
                         className="donation-panel__tx"
-                        href={`${selectedToken.explorer}tx/${txHash}`}
+                        href={transaction.explorerUrl}
                         target="_blank"
                         rel="noreferrer"
                     >

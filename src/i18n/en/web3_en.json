@@ -346,6 +346,11 @@
         "amountLabel": "Donation amount in {{symbol}}",
         "send": "Send {{symbol}}",
         "sending": "Sending...",
+        "review": "Review transaction",
+        "confirmationTitle": "Confirmation required before opening the wallet",
+        "confirmationSummary": "You are about to request a real transfer of {{amount}} {{symbol}} on {{network}} to the following address:",
+        "confirm": "Open wallet and confirm",
+        "cancel": "Cancel",
         "viewTx": "View transaction",
         "copyAddress": "Copy receiver address",
         "quickOptions": "Quick options",
@@ -356,6 +361,8 @@
             "noProvider": "No wallet detected. Install MetaMask or use a Web3 browser.",
             "invalidAmount": "Please enter a valid amount.",
             "cancelled": "Transaction cancelled by user.",
+            "wrongNetwork": "The wallet is not connected to the requested network.",
+            "invalidConfiguration": "The network, token or receiver configuration is invalid.",
             "failed": "Transaction failed or network switch was rejected.",
             "invalidTokenAddress": "Invalid token contract address.",
             "importFailed": "Unable to import this token. Check the network and contract address."
@@ -364,8 +371,6 @@
             "title": "Import an ERC-20 token",
             "text": "Paste the token contract address on an EVM-compatible network. Symbol and decimals will be read directly on-chain.",
             "chainHex": "Hexadecimal Chain ID, e.g. 0x1",
-            "chainName": "Network name",
-            "explorer": "Explorer, e.g. https://etherscan.io/",
             "contract": "ERC-20 contract address",
             "import": "Import token",
             "importing": "Importing...",
@@ -377,6 +382,12 @@
             "custom": "Custom",
             "native": "Native",
             "erc20": "ERC-20"
+        },
+        "status": {
+            "switching": "Switching network…",
+            "signing": "Confirm inside your wallet…",
+            "confirming": "Transaction sent, waiting for confirmation…",
+            "confirmed": "Transaction confirmed on-chain."
         }
     },
     "walletInspector": {

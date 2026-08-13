@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next'
 
-const CustomTokenImport = ({fields, importing, open, onChange, onImport, onToggle}) => {
+const CustomTokenImport = ({chains, fields, importing, open, onChange, onImport, onToggle}) => {
     const {t} = useTranslation('web3')
 
     return (
@@ -21,16 +21,29 @@ const CustomTokenImport = ({fields, importing, open, onChange, onImport, onToggl
                     <p>{t('donationPanel.custom.text')}</p>
 
                     <div className="donation-panel__custom-grid">
-                        {Object.entries(fields).map(([name, value]) => (
-                            <input
-                                key={name}
-                                type="text"
-                                value={value}
-                                onChange={(event) => onChange(name, event.target.value)}
-                                placeholder={t(`donationPanel.custom.${name}`)}
-                                aria-label={t(`donationPanel.custom.${name}`)}
-                            />
-                        ))}
+                        <select
+                            value={fields.chainHex}
+                            onChange={(event) => onChange('chainHex', event.target.value)}
+                            aria-label={t('donationPanel.custom.chainHex')}
+                        >
+                            {chains.map((chain) => (
+                                <option key={chain.chainHex} value={chain.chainHex}>
+                                    {chain.name}
+                                </option>
+                            ))}
+                        </select>
+                        {Object.entries(fields)
+                            .filter(([name]) => name !== 'chainHex')
+                            .map(([name, value]) => (
+                                <input
+                                    key={name}
+                                    type="text"
+                                    value={value}
+                                    onChange={(event) => onChange(name, event.target.value)}
+                                    placeholder={t(`donationPanel.custom.${name}`)}
+                                    aria-label={t(`donationPanel.custom.${name}`)}
+                                />
+                            ))}
                     </div>
 
                     <button type="button" className="btn" onClick={onImport} disabled={importing}>
