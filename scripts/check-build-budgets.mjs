@@ -28,6 +28,15 @@ const listFiles = async (directory) => {
     return nestedFiles.flat()
 }
 
+const listFilesIfPresent = async (directory) => {
+    try {
+        return await listFiles(directory)
+    } catch (error) {
+        if (error?.code === 'ENOENT') return []
+        throw error
+    }
+}
+
 const isHeavyInteractiveChunk = (fileName) =>
     fileName.startsWith('TravelMapbox-') || fileName.startsWith('TravelGlobe-')
 
@@ -43,7 +52,7 @@ const initialJavaScriptGzip = initialBuffers.reduce(
 )
 
 const assetFiles = await listFiles(ASSET_DIRECTORY)
-const mediaFiles = await listFiles(MEDIA_DIRECTORY)
+const mediaFiles = await listFilesIfPresent(MEDIA_DIRECTORY)
 const failures = []
 
 const enforce = (label, actual, maximum) => {
@@ -75,17 +84,23 @@ for (const mediaPath of mediaFiles) {
     const size = (await stat(mediaPath)).size
     if (size > largestMediaFile.size) largestMediaFile = {path: mediaPath, size}
 }
-enforce(
-    `Média ${path.relative(MEDIA_DIRECTORY, largestMediaFile.path)}`,
-    largestMediaFile.size,
-    budgets.mediaFile
-)
+if (mediaFiles.length > 0) {
+    enforce(
+        `Média ${path.relative(MEDIA_DIRECTORY, largestMediaFile.path)}`,
+        largestMediaFile.size,
+        budgets.mediaFile
+    )
+}
 
 console.log('Budgets de performance :')
 console.log(
     `- JavaScript initial : ${formatSize(initialJavaScript)} (${formatSize(initialJavaScriptGzip)} gzip)`
 )
-console.log(`- Plus gros média : ${formatSize(largestMediaFile.size)}`)
+console.log(
+    mediaFiles.length > 0
+        ? `- Plus gros média : ${formatSize(largestMediaFile.size)}`
+        : '- Médias locaux : contrôle ignoré (dossier absent de cet environnement)'
+)
 console.log(`- Limite chunk JS standard : ${formatSize(budgets.standardJavaScriptChunk)}`)
 console.log(`- Limite CSS : ${formatSize(budgets.cssChunk)}`)
 
