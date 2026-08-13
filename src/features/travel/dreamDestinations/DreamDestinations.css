@@ -224,7 +224,7 @@
 }
 
 .dream-showcase__dots button.active::before {
-    width: 1.8rem;
+    width: 1.45rem;
     background: var(--color-primary);
     box-shadow: 0 0 1rem rgba(77, 181, 255, 0.55);
 }

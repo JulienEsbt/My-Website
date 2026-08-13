@@ -72,9 +72,9 @@
         "mapText": "Detailed map of my travels and places lived",
         "expandGlobe": "Expand globe",
         "expandMap": "Expand map",
-        "loadGlobe": "Load the 3D globe",
-        "loadMap": "Load the interactive map",
-        "loadHint": "Activate a visualization to explore it, then expand it when needed",
+        "loadHint": "Visualizations load as this section approaches and can then be expanded.",
+        "timelineAlternative": "Find trips and stories in the travel timeline.",
+        "dreamsAlternative": "Explore dream destinations separately.",
         "reduce": "Reduce",
         "hint": "Click on a map to expand it and explore in detail",
         "globeAccessibleLabel": "Graphical representation of trips and dream destinations on a globe",
@@ -88,13 +88,6 @@
         "globeMotion": {
             "pause": "Pause globe motion",
             "resume": "Resume globe motion"
-        },
-        "alternative": {
-            "summary": "View the text alternative for the globe and map",
-            "description": "This list provides the locations, dates, categories and descriptions shown in the visualizations. Each position can be opened in Google Maps.",
-            "trips": "Trips and places lived",
-            "dreams": "Dream destinations",
-            "openLocation": "Open {{location}} in Google Maps (new tab)"
         },
         "legend": {
             "home": "Home base",

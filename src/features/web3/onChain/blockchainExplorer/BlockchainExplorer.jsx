@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
-import {formatUnits} from 'ethers'
 import {motion} from 'framer-motion'
 import {
     FiChevronLeft,
@@ -13,15 +12,10 @@ import {
 } from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {BLOCKCHAIN_NETWORKS} from '../../../../config/blockchains.js'
-import {createReadOnlyProvider, getRpcUrl} from '../../../../services/web3/rpcProviderService.js'
 import useReducedMotion from '../../../../components/common/accessibility/useReducedMotion.js'
 import {formatNumber} from '../../../../i18n/formatters.js'
+import {fetchBlockchainStatuses} from '../../../../services/web3/blockchainStatusService.js'
 import './BlockchainExplorer.css'
-
-const formatGwei = (value) => {
-    if (!value) return null
-    return Number(formatUnits(value, 'gwei'))
-}
 
 const BlockchainExplorer = () => {
     const {t, i18n} = useTranslation('web3')
@@ -34,6 +28,7 @@ const BlockchainExplorer = () => {
     const [hasLoaded, setHasLoaded] = useState(false)
     const [autoScrollPaused, setAutoScrollPaused] = useState(false)
     const requestIdRef = useRef(0)
+    const abortControllerRef = useRef(null)
     const reducedMotion = useReducedMotion()
 
     const autoScrollPlugin = useMemo(
@@ -72,39 +67,23 @@ const BlockchainExplorer = () => {
 
     const loadNetworks = useCallback(async () => {
         const requestId = ++requestIdRef.current
+        abortControllerRef.current?.abort()
+        const controller = new AbortController()
+        abortControllerRef.current = controller
         setLoading(true)
 
-        const results = await Promise.all(
-            BLOCKCHAIN_NETWORKS.map(async (network) => {
-                const rpcUrl = getRpcUrl(network.rpcEnv)
-
-                if (!rpcUrl) {
-                    return {...network, status: 'missing-rpc'}
-                }
-
-                try {
-                    const provider = createReadOnlyProvider(rpcUrl)
-
-                    const [blockNumber, feeData, networkInfo] = await Promise.all([
-                        provider.getBlockNumber(),
-                        provider.getFeeData(),
-                        provider.getNetwork(),
-                    ])
-
-                    return {
-                        ...network,
-                        status: 'online',
-                        chainId: networkInfo.chainId.toString(),
-                        blockNumber,
-                        gasPrice: formatGwei(feeData.gasPrice),
-                        maxFee: formatGwei(feeData.maxFeePerGas),
-                        priorityFee: formatGwei(feeData.maxPriorityFeePerGas),
-                    }
-                } catch {
-                    return {...network, status: 'error'}
-                }
-            })
-        )
+        let results
+        try {
+            const statuses = await fetchBlockchainStatuses({signal: controller.signal})
+            const statusById = new Map(statuses.map((network) => [network.id, network]))
+            results = BLOCKCHAIN_NETWORKS.map((network) => ({
+                ...network,
+                ...(statusById.get(network.id) ?? {status: 'error'}),
+            }))
+        } catch {
+            if (controller.signal.aborted) return
+            results = BLOCKCHAIN_NETWORKS.map((network) => ({...network, status: 'error'}))
+        }
 
         if (requestId === requestIdRef.current) {
             setNetworks(results)
@@ -118,10 +97,13 @@ const BlockchainExplorer = () => {
         : Array.from({length: 4}).flatMap(() => networks)
 
     useEffect(() => {
+        loadNetworks()
+
         return () => {
+            abortControllerRef.current?.abort()
             requestIdRef.current += 1
         }
-    }, [])
+    }, [loadNetworks])
 
     useEffect(() => {
         const plugins = typeof emblaApi?.plugins === 'function' ? emblaApi.plugins() : null

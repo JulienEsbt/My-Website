@@ -10,10 +10,10 @@
         "portraitAlt": "Portrait de Julien Esterbet",
         "eyebrow": "Développeur full-stack orienté produit",
         "subtitle": "Applications métiers • FinTech • Web3",
-        "description": "Je conçois des applications web et des outils métiers, du backend Java / Spring aux interfaces React, avec un intérêt particulier pour les produits FinTech et les intégrations Web3.",
+        "description": "Je conçois des applications web et des outils métiers, de Java et SQL aux interfaces Angular et React, avec un intérêt particulier pour la FinTech et le Web3. J’aime construire des outils utiles, comprendre les systèmes qui nous entourent et réfléchir à la manière dont la technologie peut contribuer à quelque chose de plus juste.",
         "badges": {
             "badge1": "React & TypeScript",
-            "badge2": "Java & Spring",
+            "badge2": "Java & SQL",
             "badge3": "Solidity & ethers.js",
             "badge4": "Philosophie",
             "badge5": "Sociologie",
@@ -54,7 +54,7 @@
                 "title": "Backend & SI",
                 "description": "APIs, batchs, logique métier, traitements de données et intégration aux systèmes existants.",
                 "skills": {
-                    "java": "Java / Spring",
+                    "java": "Java",
                     "sql": "SQL",
                     "apis": "REST APIs",
                     "batch": "Batchs métiers"

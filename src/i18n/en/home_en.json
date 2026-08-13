@@ -10,10 +10,10 @@
         "portraitAlt": "Portrait of Julien Esterbet",
         "eyebrow": "Product-minded full-stack developer",
         "subtitle": "Business applications • FinTech • Web3",
-        "description": "I build web applications and business tools, from Java / Spring backends to React interfaces, with a particular interest in FinTech products and Web3 integrations.",
+        "description": "I build web applications and business tools, from Java and SQL to Angular and React interfaces, with a particular interest in FinTech and Web3. I enjoy building useful tools, understanding the systems around us and considering how technology can contribute to something fairer.",
         "badges": {
             "badge1": "React & TypeScript",
-            "badge2": "Java & Spring",
+            "badge2": "Java & SQL",
             "badge3": "Solidity & ethers.js",
             "badge4": "Philosophy",
             "badge5": "Sociology",
@@ -54,7 +54,7 @@
                 "title": "Backend & IS",
                 "description": "APIs, batch processes, business logic, data processing and integration with existing systems.",
                 "skills": {
-                    "java": "Java / Spring",
+                    "java": "Java",
                     "sql": "SQL",
                     "apis": "REST APIs",
                     "batch": "Business batches"

@@ -25,7 +25,7 @@ function addMarker(map, {className, coordinates, popup}) {
     marker.className = className
     marker.setAttribute('aria-label', `${popup.title} — ${popup.meta}`)
 
-    new mapboxgl.Marker(marker)
+    new mapboxgl.Marker({element: marker, anchor: 'center'})
         .setLngLat(coordinates)
         .setPopup(new mapboxgl.Popup({offset: 20}).setDOMContent(createPopupContent(popup)))
         .addTo(map)
@@ -47,9 +47,9 @@ export function createTravelMap({
         style: 'mapbox://styles/mapbox/satellite-streets-v12',
         center: [12, 43],
         zoom: expanded ? 3.2 : 2.35,
-        pitch: expanded ? 42 : 28,
-        bearing: -10,
-        projection: 'globe',
+        pitch: 0,
+        bearing: 0,
+        projection: 'mercator',
         attributionControl: false,
         locale: {
             'NavigationControl.ZoomIn': navigationLabels.zoomIn,
@@ -66,16 +66,7 @@ export function createTravelMap({
     canvas.tabIndex = -1
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-    map.on('load', () => map.resize())
-    map.on('style.load', () => {
-        map.setFog({
-            color: 'rgb(5, 10, 24)',
-            'high-color': 'rgb(77, 181, 255)',
-            'horizon-blend': 0.08,
-            'space-color': 'rgb(2, 6, 18)',
-            'star-intensity': 0.45,
-        })
-    })
+    map.on('load', () => requestAnimationFrame(() => map.resize()))
 
     trips.forEach((trip) => {
         const city = language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)

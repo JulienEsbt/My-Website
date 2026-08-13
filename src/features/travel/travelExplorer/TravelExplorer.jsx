@@ -1,12 +1,11 @@
-import React, {lazy, Suspense, useRef, useState} from 'react'
+import React, {lazy, Suspense, useEffect, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiMousePointer, FiPlay} from 'react-icons/fi'
+import {FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiMousePointer} from 'react-icons/fi'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
-import TravelVisualizationAlternative from './TravelVisualizationAlternative.jsx'
 import './TravelExplorer.css'
 
 const TravelGlobe = lazy(() => import('../travelGlobe/TravelGlobe.jsx'))
@@ -19,6 +18,7 @@ const TravelExplorer = () => {
     const [loadedViews, setLoadedViews] = useState({globe: false, map: false})
     const isMobile = useMediaQuery('(max-width: 600px), (max-height: 500px) and (max-width: 950px)')
     const expandedViewRef = useRef(null)
+    const sectionRef = useRef(null)
     const reduceButtonRef = useRef(null)
     const expandButtonRef = useRef(null)
     const showGlobe = !isMobile || mobileView === 'globe'
@@ -49,8 +49,42 @@ const TravelExplorer = () => {
 
     useBodyScrollLock(isMobile && Boolean(activeView))
 
+    useEffect(() => {
+        const section = sectionRef.current
+        if (!section) return undefined
+
+        const loadVisibleViews = () => {
+            setLoadedViews((current) => ({
+                globe: current.globe || !isMobile || mobileView === 'globe',
+                map: current.map || !isMobile || mobileView === 'map',
+            }))
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            loadVisibleViews()
+            return undefined
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) return
+                loadVisibleViews()
+                observer.disconnect()
+            },
+            {rootMargin: '320px 0px'}
+        )
+
+        observer.observe(section)
+        return () => observer.disconnect()
+    }, [isMobile, mobileView])
+
     return (
-        <section id="travel-explorer" className="travel-explorer-section">
+        <section
+            id="travel-explorer"
+            ref={sectionRef}
+            className="travel-explorer-section"
+            aria-describedby="travel-explorer-accessible-description"
+        >
             <p className="section-kicker">{t('explorer.kicker')}</p>
             <h2>{t('explorer.title')}</h2>
             <p className="travel-explorer__subtitle">{t('explorer.subtitle')}</p>
@@ -129,14 +163,7 @@ const TravelExplorer = () => {
                                                 <TravelGlobe />
                                             </Suspense>
                                         ) : (
-                                            <button
-                                                type="button"
-                                                className="travel-explorer__load"
-                                                onClick={() => loadView('globe')}
-                                            >
-                                                <FiPlay />
-                                                {t('explorer.loadGlobe')}
-                                            </button>
+                                            <FeatureLoading fill />
                                         )}
                                     </div>
                                 </article>
@@ -172,14 +199,7 @@ const TravelExplorer = () => {
                                                 <TravelMapbox />
                                             </Suspense>
                                         ) : (
-                                            <button
-                                                type="button"
-                                                className="travel-explorer__load"
-                                                onClick={() => loadView('map')}
-                                            >
-                                                <FiPlay />
-                                                {t('explorer.loadMap')}
-                                            </button>
+                                            <FeatureLoading fill />
                                         )}
                                     </div>
                                 </article>
@@ -236,11 +256,13 @@ const TravelExplorer = () => {
                     )}
                 </AnimatePresence>
 
-                <TravelVisualizationAlternative />
-
                 <div className="travel-explorer__hint">
                     <FiMousePointer />
-                    <span>{t('explorer.loadHint')}</span>
+                    <span id="travel-explorer-accessible-description">
+                        {t('explorer.loadHint')}{' '}
+                        <a href="#stories">{t('explorer.timelineAlternative')}</a>{' '}
+                        <a href="#dreams">{t('explorer.dreamsAlternative')}</a>
+                    </span>
                 </div>
             </div>
         </section>

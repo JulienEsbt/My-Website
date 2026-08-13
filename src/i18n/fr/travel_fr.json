@@ -72,9 +72,9 @@
         "mapText": "Carte détaillée de mes voyages et lieux de vie",
         "expandGlobe": "Agrandir le globe",
         "expandMap": "Agrandir la carte",
-        "loadGlobe": "Charger le globe 3D",
-        "loadMap": "Charger la carte interactive",
-        "loadHint": "Active une visualisation pour l’explorer, puis agrandis-la si nécessaire",
+        "loadHint": "Les visualisations se chargent à l’approche de cette section et peuvent être agrandies.",
+        "timelineAlternative": "Retrouver les voyages et récits dans la chronologie.",
+        "dreamsAlternative": "Consulter séparément les destinations rêvées.",
         "reduce": "Réduire",
         "hint": "Clique sur une carte pour l’agrandir et explorer en détail",
         "globeAccessibleLabel": "Représentation graphique des voyages et destinations rêvées sur un globe terrestre",
@@ -88,13 +88,6 @@
         "globeMotion": {
             "pause": "Mettre le globe en pause",
             "resume": "Relancer le globe"
-        },
-        "alternative": {
-            "summary": "Consulter l’alternative textuelle du globe et de la carte",
-            "description": "Cette liste restitue les lieux, périodes, catégories et descriptions présentés par les visualisations. Chaque position peut être ouverte dans Google Maps.",
-            "trips": "Voyages et lieux de vie",
-            "dreams": "Destinations rêvées",
-            "openLocation": "Ouvrir {{location}} dans Google Maps (nouvel onglet)"
         },
         "legend": {
             "home": "Lieu de vie",
