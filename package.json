@@ -20,7 +20,9 @@
         "media:prototype": "node scripts/generate-media-prototype.mjs",
         "media:generate": "node scripts/generate-public-media.mjs",
         "budget:check": "node scripts/check-build-budgets.mjs",
-        "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run budget:check"
+        "security:files": "node scripts/check-sensitive-files.mjs",
+        "seo:check": "node scripts/check-seo-build.mjs",
+        "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run security:files && npm run build && npm run seo:check && npm run budget:check && npm run audit:prod"
     },
     "engines": {
         "node": ">=22.12.0 <23"
