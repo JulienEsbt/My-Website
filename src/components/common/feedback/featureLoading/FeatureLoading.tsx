@@ -1,9 +1,12 @@
 import {useTranslation} from 'react-i18next'
 import './FeatureLoading.css'
 
-const FeatureLoading = ({fill = false}) => {
-    const {t} = useTranslation('common')
+interface FeatureLoadingProps {
+    fill?: boolean
+}
 
+const FeatureLoading = ({fill = false}: FeatureLoadingProps) => {
+    const {t} = useTranslation('common')
     return (
         <div
             className={`feature-loading ${fill ? 'fill' : ''}`}
