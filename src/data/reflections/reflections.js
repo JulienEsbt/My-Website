@@ -1,5 +1,6 @@
-import type {EditorialEntry} from '../../types/domain'
+// @ts-check
 
+/** @satisfies {readonly import('../../types/domain').EditorialEntry[]} */
 const reflections = [
     {
         id: 'charte-de-pensee-2025-05-11',
@@ -43,6 +44,6 @@ const reflections = [
             en: 'A personal reflection on our tendency to simplify reality, binary oppositions, responsibility, determinism and the difficulty of understanding without excusing.',
         },
     },
-] as const satisfies readonly EditorialEntry[]
+]
 
 export default reflections
