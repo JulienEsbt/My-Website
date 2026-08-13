@@ -197,16 +197,16 @@
             "items": {
                 "deployment": "The public link opens the version currently online; the local rebuild described here still needs explicit validation and deployment.",
                 "mediaDelivery": "Responsive derivatives are currently generated locally and ignored by Git. Their generation or storage strategy for a clean Vercel deployment still needs to be finalized.",
-                "securityHeaders": "The current Vercel configuration covers the SPA rewrite but does not yet define the dedicated security headers planned for the deployment phase.",
+                "securityHeaders": "Security headers and the CSP are defined in code but still need validation on a Preview deployment before production.",
                 "cv": "The current PDFs do not claim PDF/UA compliance; a bilingual semantic HTML alternative provides the same content before download.",
-                "font": "Poppins still depends on an external request; self-hosting remains planned.",
+                "font": "The external font was removed in favour of a local system stack; final rendering still needs validation across the main browsers.",
                 "fieldData": "Available measurements are local checks. Field data and post-deployment monitoring still need to be established."
             }
         },
         "stack": {"kicker": "Stack", "title": "Core technologies and controls"},
         "next": {
             "title": "Next steps",
-            "body": "Finish secondary-page content, self-host the font, then run production checks before publishing any accessibility statement.",
+            "body": "Finalize media delivery, validate protections on Preview, then run production checks before publishing any accessibility statement.",
             "cta": "Back to the selection"
         }
     }

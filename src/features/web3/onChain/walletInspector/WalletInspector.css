@@ -36,7 +36,7 @@
     background: rgba(10, 15, 39, 0.92);
     border: 1px solid rgba(77, 181, 255, 0.18);
     color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .wallet-inspector__searchbar button {

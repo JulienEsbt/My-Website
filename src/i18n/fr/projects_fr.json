@@ -197,16 +197,16 @@
             "items": {
                 "deployment": "Le lien public mène à la version actuellement en ligne ; la refonte locale décrite ici doit encore être validée puis déployée explicitement.",
                 "mediaDelivery": "Les dérivés responsives sont aujourd’hui générés localement et ignorés par Git. Leur stratégie de génération ou de stockage pour un déploiement Vercel propre reste à finaliser.",
-                "securityHeaders": "La configuration Vercel actuelle couvre la réécriture SPA mais ne définit pas encore les en-têtes de sécurité dédiés prévus dans la phase de déploiement.",
+                "securityHeaders": "Les en-têtes de sécurité et la CSP sont définis dans le code, mais doivent encore être validés sur un déploiement Preview avant la production.",
                 "cv": "Les PDF actuels ne revendiquent pas une conformité PDF/UA ; une alternative HTML bilingue et sémantique fournit le même contenu avant leur téléchargement.",
-                "font": "La police Poppins dépend encore d’un chargement externe ; son auto-hébergement reste planifié.",
+                "font": "La police externe a été retirée au profit d’une pile système locale ; le rendu final doit encore être validé sur les principaux navigateurs.",
                 "fieldData": "Les mesures disponibles sont des contrôles locaux. Les données de terrain et le suivi après déploiement restent à mettre en place."
             }
         },
         "stack": {"kicker": "Stack", "title": "Technologies et contrôles principaux"},
         "next": {
             "title": "Prochaines étapes",
-            "body": "Finaliser le contenu des pages secondaires, auto-héberger la police, puis effectuer les contrôles de production avant toute déclaration d’accessibilité.",
+            "body": "Finaliser la livraison des médias, valider les protections sur Preview, puis effectuer les contrôles de production avant toute déclaration d’accessibilité.",
             "cta": "Revenir à la sélection"
         }
     }

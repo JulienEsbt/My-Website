@@ -105,7 +105,7 @@ const DonationPanel = () => {
             } else if (importError.message === 'INVALID_TOKEN_ADDRESS') {
                 setError(t('donationPanel.errors.invalidTokenAddress'))
             } else {
-                console.error(importError)
+                if (import.meta.env.DEV) console.error(importError)
                 setError(t('donationPanel.errors.importFailed'))
             }
         } finally {
@@ -142,7 +142,7 @@ const DonationPanel = () => {
             } else if (transactionError.code === 4001) {
                 setError(t('donationPanel.errors.cancelled'))
             } else {
-                console.error(transactionError)
+                if (import.meta.env.DEV) console.error(transactionError)
                 setError(t('donationPanel.errors.failed'))
             }
         } finally {

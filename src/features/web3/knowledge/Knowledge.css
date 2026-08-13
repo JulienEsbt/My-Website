@@ -236,7 +236,7 @@
         margin-bottom: 1.5rem;
         color: var(--color-primary);
         background: transparent;
-        font-family: 'Poppins', sans-serif;
+        font-family: var(--font-sans);
         font-size: 0.95rem;
     }
 

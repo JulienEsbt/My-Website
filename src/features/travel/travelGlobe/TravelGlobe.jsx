@@ -170,8 +170,8 @@ const TravelGlobe = ({expanded = false}) => {
                     height={dimensions.height}
                     backgroundColor="rgba(0,0,0,0)"
 
-                    globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-                    bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+                    globeImageUrl="/textures/globe/earth-night.jpg"
+                    bumpImageUrl="/textures/globe/earth-topology.png"
                     showAtmosphere
                     atmosphereColor="#4db5ff"
                     atmosphereAltitude={0.26}

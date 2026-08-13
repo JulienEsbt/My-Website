@@ -70,7 +70,7 @@
     background: rgba(31, 31, 56, 0.75);
     border: 1px solid rgba(77, 181, 255, 0.18);
     color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .donation-panel__form input::placeholder {
@@ -133,7 +133,7 @@
     width: 100%;
     background: transparent;
     color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .donation-panel__tokens {
@@ -225,7 +225,7 @@
     color: var(--color-primary);
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .donation-panel__custom-toggle:hover {
@@ -265,7 +265,7 @@
     background: rgba(31, 31, 56, 0.75);
     border: 1px solid rgba(77, 181, 255, 0.18);
     color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 @media screen and (max-width: 600px) {

@@ -64,7 +64,10 @@ const WalletInspector = () => {
             if (requestId === requestIdRef.current) setResult(inspectedWallet)
         } catch (inspectionError) {
             if (abortController.signal.aborted || requestId !== requestIdRef.current) return
-            if (!['MISSING_RPC', 'INVALID_ADDRESS'].includes(inspectionError.message)) {
+            if (
+                import.meta.env.DEV &&
+                !['MISSING_RPC', 'INVALID_ADDRESS'].includes(inspectionError.message)
+            ) {
                 console.error(inspectionError)
             }
             setError(getTranslatedError(inspectionError.message))
@@ -115,7 +118,7 @@ const WalletInspector = () => {
             await inspectAddress(connectedAddress)
         } catch (connectionError) {
             if (requestId !== requestIdRef.current) return
-            console.error(connectionError)
+            if (import.meta.env.DEV) console.error(connectionError)
             setError(t('walletInspector.errors.failed'))
         } finally {
             if (requestId === requestIdRef.current) setLoading(false)
