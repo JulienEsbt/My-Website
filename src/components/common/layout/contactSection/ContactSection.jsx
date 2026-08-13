@@ -56,8 +56,8 @@ const ContactSection = () => {
             setStatus('success')
             formElement.reset()
             setFormStartedAt(Date.now())
-        } catch {
-            setStatus('error')
+        } catch (error) {
+            setStatus(error?.code === 'invalid_form' ? 'invalid' : 'error')
         }
     }
 
@@ -140,6 +140,8 @@ const ContactSection = () => {
                             name="name"
                             autoComplete="name"
                             placeholder={t('contact.form.name')}
+                            minLength="2"
+                            maxLength="80"
                             required
                         />
                     </div>
@@ -152,6 +154,7 @@ const ContactSection = () => {
                             name="email"
                             autoComplete="email"
                             placeholder={t('contact.form.email')}
+                            maxLength="254"
                             required
                         />
                     </div>
@@ -163,6 +166,8 @@ const ContactSection = () => {
                             name="message"
                             rows="7"
                             placeholder={t('contact.form.message')}
+                            minLength="10"
+                            maxLength="4000"
                             required
                         />
                     </div>
@@ -183,8 +188,10 @@ const ContactSection = () => {
                         <p
                             id="contact-form-status"
                             className={`crypto-contact__status ${status}`}
-                            role={status === 'error' ? 'alert' : 'status'}
-                            aria-live={status === 'error' ? 'assertive' : 'polite'}
+                            role={status === 'error' || status === 'invalid' ? 'alert' : 'status'}
+                            aria-live={
+                                status === 'error' || status === 'invalid' ? 'assertive' : 'polite'
+                            }
                             aria-atomic="true"
                         >
                             {t(`contact.form.${status}`)}

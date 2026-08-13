@@ -55,6 +55,7 @@
             "sending": "Envoi…",
             "loading": "Envoi du message en cours…",
             "success": "Message envoyé, merci !",
+            "invalid": "Vérifiez les champs : le nom doit contenir au moins 2 caractères et le message au moins 10 caractères.",
             "error": "Le message n’a pas pu être envoyé. Réessayez dans quelques instants."
         }
     },

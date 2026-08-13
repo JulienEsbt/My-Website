@@ -11,11 +11,15 @@ export async function sendContactForm(form) {
             signal: controller.signal,
         })
 
+        const result = await response.json().catch(() => ({ok: false, code: 'unknown_error'}))
+
         if (!response.ok) {
-            throw new Error('Contact request failed')
+            const error = new Error('Contact request failed')
+            error.code = result.code ?? 'unknown_error'
+            throw error
         }
 
-        return await response.json()
+        return result
     } finally {
         window.clearTimeout(timeout)
     }

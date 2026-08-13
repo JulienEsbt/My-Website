@@ -42,9 +42,15 @@ describe('sendContactForm', () => {
         })
     })
 
-    it('rejects a failed server response without exposing its body', async () => {
-        vi.spyOn(globalThis, 'fetch').mockResolvedValue({ok: false})
+    it('exposes only the safe server error code for a failed response', async () => {
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+            ok: false,
+            json: async () => ({ok: false, code: 'invalid_form'}),
+        })
 
-        await expect(sendContactForm(createForm())).rejects.toThrow('Contact request failed')
+        await expect(sendContactForm(createForm())).rejects.toMatchObject({
+            message: 'Contact request failed',
+            code: 'invalid_form',
+        })
     })
 })

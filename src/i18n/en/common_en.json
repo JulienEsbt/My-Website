@@ -55,6 +55,7 @@
             "sending": "Sending…",
             "loading": "Your message is being sent…",
             "success": "Message sent successfully. Thanks!",
+            "invalid": "Please check the fields: the name must contain at least 2 characters and the message at least 10 characters.",
             "error": "Your message could not be sent. Please try again in a moment."
         }
     },
