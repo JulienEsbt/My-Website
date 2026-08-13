@@ -1,5 +1,23 @@
 const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send'
 
+function classifyProviderError(status, details = '') {
+    const message = String(details).toLowerCase()
+
+    if (status === 429) return 'rate_limit'
+    if (message.includes('service_id') || message.includes('service id')) return 'service'
+    if (message.includes('template_id') || message.includes('template id')) return 'template'
+    if (message.includes('user_id') || message.includes('public key')) return 'public_key'
+    if (
+        message.includes('access token') ||
+        message.includes('private key') ||
+        message.includes('unauthorized') ||
+        message.includes('forbidden')
+    ) {
+        return 'authorization'
+    }
+    return 'provider'
+}
+
 export async function sendContactEmail(contact, {env = process.env, fetchImpl = fetch} = {}) {
     const serviceId = env.EMAILJS_SERVICE_ID
     const templateId = env.EMAILJS_TEMPLATE_ID
@@ -7,7 +25,9 @@ export async function sendContactEmail(contact, {env = process.env, fetchImpl = 
     const privateKey = env.EMAILJS_PRIVATE_KEY
 
     if (!serviceId || !templateId || !publicKey) {
-        throw new Error('Contact provider is not configured')
+        const error = new Error('Contact provider is not configured')
+        error.providerReason = !serviceId ? 'service' : !templateId ? 'template' : 'public_key'
+        throw error
     }
 
     const payload = {
@@ -32,6 +52,9 @@ export async function sendContactEmail(contact, {env = process.env, fetchImpl = 
     })
 
     if (!response.ok) {
-        throw new Error('Contact provider rejected the request')
+        const error = new Error('Contact provider rejected the request')
+        error.providerStatus = response.status
+        error.providerReason = classifyProviderError(response.status, await response.text())
+        throw error
     }
 }

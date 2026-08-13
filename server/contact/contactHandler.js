@@ -72,7 +72,11 @@ export function createContactHandler({
         try {
             await sendEmail(data, {env})
             return sendJson(response, 200, {ok: true})
-        } catch {
+        } catch (error) {
+            console.error('[contact] Email provider rejected the request', {
+                status: Number.isInteger(error?.providerStatus) ? error.providerStatus : null,
+                reason: error?.providerReason ?? 'provider',
+            })
             return sendJson(response, 502, {ok: false, code: 'delivery_failed'})
         }
     }

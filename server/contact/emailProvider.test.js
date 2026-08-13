@@ -37,6 +37,19 @@ describe('sendContactEmail', () => {
         })
     })
 
+    it('classifies a rejected service without exposing provider details', async () => {
+        const fetchImpl = vi.fn().mockResolvedValue({
+            ok: false,
+            status: 400,
+            text: vi.fn().mockResolvedValue('The service_id is invalid'),
+        })
+
+        await expect(sendContactEmail(contact, {env, fetchImpl})).rejects.toMatchObject({
+            providerStatus: 400,
+            providerReason: 'service',
+        })
+    })
+
     it('refuses to call the provider without server configuration', async () => {
         const fetchImpl = vi.fn()
 
