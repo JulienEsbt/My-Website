@@ -1,3 +1,5 @@
+import type {DonationToken} from '../types/web3'
+
 export const DONATION_RECEIVER =
     import.meta.env.VITE_DONATION_EVM_RECEIVER || '0x718a544638Fd113A58C1062E4b2E8a404b13D2eC'
 
@@ -86,4 +88,4 @@ export const SUPPORTED_DONATION_TOKENS = [
         contract: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
         explorer: 'https://bscscan.com/',
     },
-]
+] as const satisfies readonly DonationToken[]

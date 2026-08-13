@@ -1,8 +1,20 @@
 import mapboxgl from 'mapbox-gl'
+import type {
+    Coordinates,
+    TravelMapDreamDestination,
+    TravelMapNavigationLabels,
+    TravelMapTrip,
+} from '../../types/travel'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 
-function createPopupContent({title, meta, description}) {
+interface PopupContent {
+    title: string
+    meta: string
+    description: string
+}
+
+function createPopupContent({title, meta, description}: PopupContent): HTMLDivElement {
     const container = document.createElement('div')
     container.className = 'travel-mapbox-popup'
 
@@ -19,14 +31,21 @@ function createPopupContent({title, meta, description}) {
     return container
 }
 
-function addMarker(map, {className, coordinates, popup}) {
+function addMarker(
+    map: mapboxgl.Map,
+    {
+        className,
+        coordinates,
+        popup,
+    }: {className: string; coordinates: Coordinates; popup: PopupContent}
+): void {
     const marker = document.createElement('button')
     marker.type = 'button'
     marker.className = className
     marker.setAttribute('aria-label', `${popup.title} — ${popup.meta}`)
 
     new mapboxgl.Marker({element: marker, anchor: 'center'})
-        .setLngLat(coordinates)
+        .setLngLat([coordinates.lng, coordinates.lat])
         .setPopup(new mapboxgl.Popup({offset: 20}).setDOMContent(createPopupContent(popup)))
         .addTo(map)
 }
@@ -38,7 +57,15 @@ export function createTravelMap({
     dreamDestinations,
     language = 'fr',
     dreamLabel = 'Destination rêvée',
-    navigationLabels = {},
+    navigationLabels,
+}: {
+    container: HTMLElement
+    expanded: boolean
+    trips: readonly TravelMapTrip[]
+    dreamDestinations: readonly TravelMapDreamDestination[]
+    language?: 'fr' | 'en'
+    dreamLabel?: string
+    navigationLabels: TravelMapNavigationLabels
 }) {
     mapboxgl.accessToken = MAPBOX_TOKEN
 
@@ -56,7 +83,7 @@ export function createTravelMap({
             'NavigationControl.ZoomOut': navigationLabels.zoomOut,
             'NavigationControl.ResetBearing': navigationLabels.resetBearing,
             'Popup.CloseButton': navigationLabels.closePopup,
-        },
+        } as NonNullable<mapboxgl.MapOptions['locale']>,
     })
 
     const canvas = map.getCanvas()
@@ -77,12 +104,8 @@ export function createTravelMap({
 
         addMarker(map, {
             className: `mapbox-marker ${trip.category ?? 'visited'}`,
-            coordinates: [trip.lng, trip.lat],
-            popup: {
-                title: city,
-                meta: `${country} • ${dateLabel}`,
-                description,
-            },
+            coordinates: trip,
+            popup: {title: city, meta: `${country} • ${dateLabel}`, description},
         })
     })
 
@@ -95,12 +118,8 @@ export function createTravelMap({
 
         addMarker(map, {
             className: 'mapbox-marker dream',
-            coordinates: [destination.lng, destination.lat],
-            popup: {
-                title: name,
-                meta: `${dreamLabel} • ${country}`,
-                description,
-            },
+            coordinates: destination,
+            popup: {title: name, meta: `${dreamLabel} • ${country}`, description},
         })
     })
 
