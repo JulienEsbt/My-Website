@@ -1,7 +1,7 @@
 import React, {lazy, Suspense, useEffect, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiMousePointer} from 'react-icons/fi'
+import {FiMaximize2, FiMinimize2, FiGlobe, FiMap} from 'react-icons/fi'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
@@ -79,12 +79,7 @@ const TravelExplorer = () => {
     }, [isMobile, mobileView])
 
     return (
-        <section
-            id="travel-explorer"
-            ref={sectionRef}
-            className="travel-explorer-section"
-            aria-describedby="travel-explorer-accessible-description"
-        >
+        <section id="travel-explorer" ref={sectionRef} className="travel-explorer-section">
             <p className="section-kicker">{t('explorer.kicker')}</p>
             <h2>{t('explorer.title')}</h2>
             <p className="travel-explorer__subtitle">{t('explorer.subtitle')}</p>
@@ -255,15 +250,6 @@ const TravelExplorer = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
-
-                <div className="travel-explorer__hint">
-                    <FiMousePointer />
-                    <span id="travel-explorer-accessible-description">
-                        {t('explorer.loadHint')}{' '}
-                        <a href="#stories">{t('explorer.timelineAlternative')}</a>{' '}
-                        <a href="#dreams">{t('explorer.dreamsAlternative')}</a>
-                    </span>
-                </div>
             </div>
         </section>
     )

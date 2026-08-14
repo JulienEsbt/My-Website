@@ -234,26 +234,6 @@
     transform: scale(1.08);
 }
 
-/* ===== HINT ===== */
-
-.travel-explorer__hint {
-    width: max-content;
-    max-width: 100%;
-    margin: 1.4rem auto 0;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.8rem 1.2rem;
-    border-radius: 999px;
-    color: var(--color-light);
-    background: rgba(31, 31, 56, 0.6);
-    border: 1px solid rgba(77, 181, 255, 0.2);
-}
-
-.travel-explorer__hint svg {
-    color: var(--color-primary);
-}
-
 /* ===== TABLET ===== */
 
 @media screen and (max-width: 1024px) {
@@ -402,16 +382,6 @@
 
     .travel-explorer__expanded-visual {
         height: 31rem;
-    }
-
-    .travel-explorer__hint {
-        width: min(100%, 360px);
-        margin-top: 1rem;
-        padding: 0.8rem 1rem;
-        border-radius: 1.2rem;
-        justify-content: center;
-        text-align: center;
-        font-size: 0.85rem;
     }
 
     @keyframes travel-mobile-card-in {

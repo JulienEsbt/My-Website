@@ -58,8 +58,6 @@ describe('TravelExplorer', () => {
 
         expect(await screen.findByText('Globe chargé')).toBeInTheDocument()
         expect(screen.queryByText('Carte chargée')).not.toBeInTheDocument()
-        expect(
-            screen.getByRole('link', {name: 'Retrouver les voyages et récits dans la chronologie.'})
-        ).toHaveAttribute('href', '#stories')
+        expect(screen.queryByRole('link')).not.toBeInTheDocument()
     })
 })

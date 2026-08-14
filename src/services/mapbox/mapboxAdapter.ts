@@ -74,9 +74,9 @@ export function createTravelMap({
         style: 'mapbox://styles/mapbox/satellite-streets-v12',
         center: [12, 43],
         zoom: expanded ? 3.2 : 2.35,
-        pitch: 0,
-        bearing: 0,
-        projection: 'mercator',
+        pitch: expanded ? 42 : 28,
+        bearing: -10,
+        projection: 'globe',
         attributionControl: false,
         locale: {
             'NavigationControl.ZoomIn': navigationLabels.zoomIn,
@@ -94,6 +94,15 @@ export function createTravelMap({
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right')
     map.on('load', () => requestAnimationFrame(() => map.resize()))
+    map.on('style.load', () => {
+        map.setFog({
+            color: 'rgb(5, 10, 24)',
+            'high-color': 'rgb(77, 181, 255)',
+            'horizon-blend': 0.08,
+            'space-color': 'rgb(2, 6, 18)',
+            'star-intensity': 0.45,
+        })
+    })
 
     trips.forEach((trip) => {
         const city = language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)
