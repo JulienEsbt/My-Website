@@ -4,6 +4,8 @@ node_modules/
 .pnp.js
 .eslintcache
 .parcel-cache/
+.vercel/
+.wrangler/
 
 # --- Build / prod ---
 build/
@@ -39,9 +41,21 @@ src/assets/images/**/*.[pP][nN][gG]
 .env.development.local
 .env.test.local
 .env.production.local
+.dev.vars
 
 # --- Archives / artefacts ---
 *.zip
 *.tar
 *.tar.gz
 *.tgz
+
+# --- Documentation de travail locale ---
+/ACCESSIBILITY_AUDIT.md
+/ARCHITECTURE_DECISIONS.md
+/MEDIA_AUDIT_REPORT.md
+/MEDIA_GENERATION_REPORT.md
+/MEDIA_PRIVACY_POLICY.md
+/MEDIA_PROTOTYPE_REPORT.md
+/PERFORMANCE_REPORT.md
+/PROFESSIONAL_REFACTOR_ROADMAP.md
+/RGAA_AUDIT_MATRIX.md
