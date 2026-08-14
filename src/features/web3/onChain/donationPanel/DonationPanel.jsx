@@ -1,94 +1,110 @@
-import React, {useMemo, useState} from 'react'
-import {useTranslation} from 'react-i18next'
+import {useEffect, useMemo, useRef, useState} from 'react'
 import {motion} from 'framer-motion'
-import {FiExternalLink, FiSearch, FiSend, FiCopy, FiCheck} from 'react-icons/fi'
+import {FiCheck, FiCopy, FiExternalLink, FiSend} from 'react-icons/fi'
+import {useTranslation} from 'react-i18next'
 import {DONATION_RECEIVER, SUPPORTED_DONATION_TOKENS} from '../../../../config/wallet.js'
-import {TOKEN_CATALOG} from '../../../../config/tokenCatalog.js'
-import {
-    importCustomErc20Token,
-    sendDonationTransaction,
-} from '../utils/tokenUtils.js'
+import {CHAIN_METADATA} from '../../../../config/evmChains.js'
+import CustomTokenImport from './CustomTokenImport.jsx'
+import DonationTokenSelector from './DonationTokenSelector.jsx'
 import './DonationPanel.css'
+
+const DEFAULT_CUSTOM_FIELDS = {
+    chainHex: '0x1',
+    contract: '',
+}
 
 const DonationPanel = () => {
     const {t} = useTranslation('web3')
-
     const [search, setSearch] = useState('')
+    const [catalogTokens, setCatalogTokens] = useState(null)
     const [customTokens, setCustomTokens] = useState([])
     const [selectedTokenId, setSelectedTokenId] = useState(SUPPORTED_DONATION_TOKENS[0].id)
-
     const [amount, setAmount] = useState('')
-    const [txHash, setTxHash] = useState('')
+    const [transaction, setTransaction] = useState(null)
+    const [pendingDonation, setPendingDonation] = useState(null)
+    const [transactionStatus, setTransactionStatus] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-
-    const [customChainHex, setCustomChainHex] = useState('0x1')
-    const [customChainName, setCustomChainName] = useState('Ethereum')
-    const [customExplorer, setCustomExplorer] = useState('https://etherscan.io/')
-    const [customContract, setCustomContract] = useState('')
+    const [customFields, setCustomFields] = useState(DEFAULT_CUSTOM_FIELDS)
     const [importingToken, setImportingToken] = useState(false)
     const [showCustomImport, setShowCustomImport] = useState(false)
     const [copied, setCopied] = useState(false)
+    const copyTimerRef = useRef(null)
 
-    const allTokens = useMemo(
-        () => [...SUPPORTED_DONATION_TOKENS, ...TOKEN_CATALOG, ...customTokens],
-        [customTokens]
+    useEffect(
+        () => () => {
+            clearTimeout(copyTimerRef.current)
+        },
+        []
     )
 
+    useEffect(() => {
+        if (!search.trim() || catalogTokens) return undefined
+
+        let cancelled = false
+        import('../../../../config/tokenCatalog.js')
+            .then(({TOKEN_CATALOG}) => {
+                if (!cancelled) setCatalogTokens(TOKEN_CATALOG)
+            })
+            .catch(() => {
+                if (!cancelled) setCatalogTokens([])
+            })
+
+        return () => {
+            cancelled = true
+        }
+    }, [catalogTokens, search])
+
+    const allTokens = useMemo(
+        () => [...SUPPORTED_DONATION_TOKENS, ...(catalogTokens ?? []), ...customTokens],
+        [catalogTokens, customTokens]
+    )
     const selectedToken = useMemo(
         () => allTokens.find((token) => token.id === selectedTokenId),
         [allTokens, selectedTokenId]
     )
-
     const filteredTokens = useMemo(() => {
-        const q = search.trim().toLowerCase()
-
-        if (!q) {
-            return SUPPORTED_DONATION_TOKENS
-        }
+        const query = search.trim().toLowerCase()
+        if (!query) return SUPPORTED_DONATION_TOKENS
 
         return allTokens
             .filter((token) =>
                 `${token.networkName} ${token.symbol} ${token.name ?? ''}`
                     .toLowerCase()
-                    .includes(q)
+                    .includes(query)
             )
             .slice(0, 40)
     }, [allTokens, search])
 
+    const handleCustomFieldChange = (name, value) => {
+        setCustomFields((previous) => ({...previous, [name]: value}))
+    }
+
     const handleImportToken = async () => {
         setError('')
+        setImportingToken(true)
 
         try {
-            setImportingToken(true)
-
+            const {importCustomErc20Token} = await import('../utils/tokenUtils.js')
             const importedToken = await importCustomErc20Token({
-                chainHex: customChainHex,
-                chainName: customChainName,
-                explorer: customExplorer,
-                contractAddress: customContract,
+                chainHex: customFields.chainHex,
+                contractAddress: customFields.contract,
             })
 
-            setCustomTokens((previous) => {
-                const alreadyExists = previous.some((token) => token.id === importedToken.id)
-
-                if (alreadyExists) {
-                    return previous
-                }
-
-                return [...previous, importedToken]
-            })
-
+            setCustomTokens((previous) =>
+                previous.some((token) => token.id === importedToken.id)
+                    ? previous
+                    : [...previous, importedToken]
+            )
             setSelectedTokenId(importedToken.id)
-            setCustomContract('')
-        } catch (err) {
-            console.error(err)
-
-            if (err.message === 'NO_PROVIDER') {
+            setCustomFields((previous) => ({...previous, contract: ''}))
+        } catch (importError) {
+            if (importError.message === 'NO_PROVIDER') {
                 setError(t('donationPanel.errors.noProvider'))
-            } else if (err.message === 'INVALID_TOKEN_ADDRESS') {
+            } else if (importError.message === 'INVALID_TOKEN_ADDRESS') {
                 setError(t('donationPanel.errors.invalidTokenAddress'))
             } else {
+                if (import.meta.env.DEV) console.error(importError)
                 setError(t('donationPanel.errors.importFailed'))
             }
         } finally {
@@ -96,39 +112,54 @@ const DonationPanel = () => {
         }
     }
 
-    const sendDonation = async (event) => {
+    const prepareDonation = async (event) => {
         event.preventDefault()
         setError('')
-        setTxHash('')
+        setTransaction(null)
+        setTransactionStatus('')
 
         if (!selectedToken) {
             setError(t('donationPanel.errors.noToken'))
             return
         }
-
-        if (!amount || Number(amount) <= 0) {
-            setError(t('donationPanel.errors.invalidAmount'))
-            return
-        }
-
         try {
-            setLoading(true)
+            const {validateDonation} = await import('../utils/tokenUtils.js')
+            validateDonation({token: selectedToken, amount, receiver: DONATION_RECEIVER})
+            setPendingDonation({token: selectedToken, amount})
+        } catch (validationError) {
+            setError(
+                validationError.message === 'INVALID_AMOUNT'
+                    ? t('donationPanel.errors.invalidAmount')
+                    : t('donationPanel.errors.invalidConfiguration')
+            )
+        }
+    }
 
-            const hash = await sendDonationTransaction({
-                token: selectedToken,
-                amount,
+    const confirmDonation = async () => {
+        if (!pendingDonation) return
+        setLoading(true)
+        setError('')
+        try {
+            const {sendDonationTransaction} = await import('../utils/tokenUtils.js')
+            const confirmedTransaction = await sendDonationTransaction({
+                token: pendingDonation.token,
+                amount: pendingDonation.amount,
                 receiver: DONATION_RECEIVER,
+                onStatus: setTransactionStatus,
             })
-
-            setTxHash(hash)
-        } catch (err) {
-            console.error(err)
-
-            if (err.message === 'NO_PROVIDER') {
+            setTransaction(confirmedTransaction)
+            setTransactionStatus('confirmed')
+            setPendingDonation(null)
+        } catch (transactionError) {
+            setTransactionStatus('')
+            if (transactionError.message === 'NO_PROVIDER') {
                 setError(t('donationPanel.errors.noProvider'))
-            } else if (err.code === 4001) {
+            } else if (transactionError.code === 4001) {
                 setError(t('donationPanel.errors.cancelled'))
+            } else if (transactionError.message === 'WRONG_NETWORK') {
+                setError(t('donationPanel.errors.wrongNetwork'))
             } else {
+                if (import.meta.env.DEV) console.error(transactionError)
                 setError(t('donationPanel.errors.failed'))
             }
         } finally {
@@ -139,20 +170,17 @@ const DonationPanel = () => {
     const copyAddress = async () => {
         try {
             await navigator.clipboard.writeText(DONATION_RECEIVER)
-
             setCopied(true)
-
-            setTimeout(() => {
-                setCopied(false)
-            }, 2000)
-        } catch (err) {
-            console.error(err)
+            clearTimeout(copyTimerRef.current)
+            copyTimerRef.current = setTimeout(() => setCopied(false), 2000)
+        } catch {
+            setCopied(false)
         }
     }
 
     return (
         <section id="donation">
-            <h5>{t('donationPanel.kicker')}</h5>
+            <p className="section-kicker">{t('donationPanel.kicker')}</p>
             <h2>{t('donationPanel.title')}</h2>
 
             <motion.article
@@ -166,170 +194,122 @@ const DonationPanel = () => {
                     <div>
                         <h3>{t('donationPanel.heading')}</h3>
                         <p>{t('donationPanel.subtitle')}</p>
+                        <p className="donation-panel__warning">{t('donationPanel.warning')}</p>
                     </div>
 
                     <div className="donation-panel__receiver">
                         <span>{t('donationPanel.receiver')}</span>
-
                         <div className="donation-panel__receiver-line">
-                            <code title={DONATION_RECEIVER}>
-                                {DONATION_RECEIVER}
-                            </code>
-
+                            <code title={DONATION_RECEIVER}>{DONATION_RECEIVER}</code>
                             <button
                                 type="button"
                                 className="donation-panel__copy"
                                 onClick={copyAddress}
-                                aria-label="Copier l'adresse"
+                                aria-label={t('donationPanel.copyAddress')}
                             >
-                                {copied ? <FiCheck/> : <FiCopy/>}
+                                {copied ? <FiCheck /> : <FiCopy />}
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="donation-panel__selector">
-                    <label>{t('donationPanel.networkToken')}</label>
+                <DonationTokenSelector
+                    filteredTokens={filteredTokens}
+                    search={search}
+                    selectedTokenId={selectedTokenId}
+                    onSearch={setSearch}
+                    onSelect={setSelectedTokenId}
+                >
+                    <CustomTokenImport
+                        chains={Object.values(CHAIN_METADATA)}
+                        fields={customFields}
+                        importing={importingToken}
+                        open={showCustomImport}
+                        onChange={handleCustomFieldChange}
+                        onImport={handleImportToken}
+                        onToggle={() => setShowCustomImport((previous) => !previous)}
+                    />
+                </DonationTokenSelector>
 
-                    <div className="donation-panel__search">
-                        <FiSearch/>
-                        <input
-                            type="text"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder={t('donationPanel.searchPlaceholder')}
-                        />
-                    </div>
-
-                    <div className={`donation-panel__tokens ${search.trim() ? 'searching' : ''}`}>
-                        {filteredTokens.map((token) => (
-                            <button
-                                key={token.id}
-                                type="button"
-                                className={`donation-panel__token ${
-                                    selectedTokenId === token.id ? 'active' : ''
-                                }`}
-                                onClick={() => setSelectedTokenId(token.id)}
-                            >
-                                <div>
-                                    <strong>{token.symbol}</strong>
-                                    <span>{token.networkName}</span>
-                                </div>
-
-                                <small>
-                                    {token.catalog
-                                        ? t('donationPanel.badges.catalog')
-                                        : token.custom
-                                            ? t('donationPanel.badges.custom')
-                                            : token.type === 'native'
-                                                ? t('donationPanel.badges.native')
-                                                : t('donationPanel.badges.erc20')}
-                                </small>
-                            </button>
-                        ))}
-                    </div>
-
-                    {!search.trim() && (
-                        <p className="donation-panel__mobile-help">
-                            {t('donationPanel.mobileHelp')}
-                        </p>
-                    )}
-
-                    <div className={`donation-panel__custom ${showCustomImport ? 'open' : ''}`}>
-                        <button
-                            type="button"
-                            className="donation-panel__custom-toggle"
-                            onClick={() => setShowCustomImport((prev) => !prev)}
-                        >
-                            {showCustomImport
-                                ? t('donationPanel.custom.hide')
-                                : t('donationPanel.custom.show')}
-                        </button>
-
-                        {showCustomImport && (
-                            <div className="donation-panel__custom-content">
-                                <h4>{t('donationPanel.custom.title')}</h4>
-                                <p>{t('donationPanel.custom.text')}</p>
-
-                                <div className="donation-panel__custom-grid">
-                                    <input
-                                        type="text"
-                                        value={customChainHex}
-                                        onChange={(e) => setCustomChainHex(e.target.value)}
-                                        placeholder={t('donationPanel.custom.chainHex')}
-                                    />
-
-                                    <input
-                                        type="text"
-                                        value={customChainName}
-                                        onChange={(e) => setCustomChainName(e.target.value)}
-                                        placeholder={t('donationPanel.custom.chainName')}
-                                    />
-
-                                    <input
-                                        type="text"
-                                        value={customExplorer}
-                                        onChange={(e) => setCustomExplorer(e.target.value)}
-                                        placeholder={t('donationPanel.custom.explorer')}
-                                    />
-
-                                    <input
-                                        type="text"
-                                        value={customContract}
-                                        onChange={(e) => setCustomContract(e.target.value)}
-                                        placeholder={t('donationPanel.custom.contract')}
-                                    />
-                                </div>
-
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    onClick={handleImportToken}
-                                    disabled={importingToken}
-                                >
-                                    {importingToken
-                                        ? t('donationPanel.custom.importing')
-                                        : t('donationPanel.custom.import')}
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-
-                <form className="donation-panel__form" onSubmit={sendDonation}>
+                <form className="donation-panel__form" onSubmit={prepareDonation}>
                     <input
                         type="number"
                         min="0"
                         step="any"
+                        required
                         value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
+                        onChange={(event) => setAmount(event.target.value)}
                         placeholder={t('donationPanel.amountPlaceholder', {
                             symbol: selectedToken?.symbol ?? 'token',
                         })}
+                        aria-label={t('donationPanel.amountLabel', {
+                            symbol: selectedToken?.symbol ?? 'token',
+                        })}
+                        aria-invalid={error ? 'true' : undefined}
+                        aria-describedby={error ? 'donation-panel-error' : undefined}
                     />
-
                     <button type="submit" className="btn btn-primary" disabled={loading}>
-                        <FiSend/>
-                        {loading
-                            ? t('donationPanel.sending')
-                            : t('donationPanel.send', {
-                                symbol: selectedToken?.symbol ?? '',
-                            })}
+                        <FiSend />
+                        {t('donationPanel.review')}
                     </button>
                 </form>
 
-                {txHash && selectedToken?.explorer && (
+                {pendingDonation && (
+                    <div className="donation-panel__confirmation" role="alert">
+                        <strong>{t('donationPanel.confirmationTitle')}</strong>
+                        <p>
+                            {t('donationPanel.confirmationSummary', {
+                                amount: pendingDonation.amount,
+                                symbol: pendingDonation.token.symbol,
+                                network: pendingDonation.token.networkName,
+                            })}
+                        </p>
+                        <code>{DONATION_RECEIVER}</code>
+                        <div>
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={confirmDonation}
+                                disabled={loading}
+                            >
+                                {loading
+                                    ? t(`donationPanel.status.${transactionStatus || 'switching'}`)
+                                    : t('donationPanel.confirm')}
+                            </button>
+                            <button
+                                type="button"
+                                className="btn"
+                                onClick={() => setPendingDonation(null)}
+                                disabled={loading}
+                            >
+                                {t('donationPanel.cancel')}
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {transactionStatus === 'confirmed' && (
+                    <p className="donation-panel__success" role="status">
+                        {t('donationPanel.status.confirmed')}
+                    </p>
+                )}
+
+                {transaction?.explorerUrl && (
                     <a
                         className="donation-panel__tx"
-                        href={`${selectedToken.explorer}tx/${txHash}`}
+                        href={transaction.explorerUrl}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        {t('donationPanel.viewTx')} <FiExternalLink/>
+                        {t('donationPanel.viewTx')} <FiExternalLink />
                     </a>
                 )}
 
-                {error && <p className="donation-panel__error">{error}</p>}
+                {error && (
+                    <p id="donation-panel-error" className="donation-panel__error" role="alert">
+                        {error}
+                    </p>
+                )}
             </motion.article>
         </section>
     )

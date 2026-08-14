@@ -2,7 +2,7 @@
     margin-top: 5rem;
 }
 
-.travel-explorer-section > h5,
+.travel-explorer-section > .section-kicker,
 .travel-explorer-section > h2,
 .travel-explorer__subtitle {
     text-align: center;
@@ -100,16 +100,18 @@
     overflow: hidden;
     padding: 1rem;
     border-radius: 1.6rem;
-    background: radial-gradient(circle at 20% 10%, rgba(77, 181, 255, 0.12), transparent 28%),
-    linear-gradient(135deg, rgba(19, 27, 65, 0.92), rgba(12, 17, 43, 0.92));
+    background:
+        radial-gradient(circle at 20% 10%, rgba(77, 181, 255, 0.12), transparent 28%),
+        linear-gradient(135deg, rgba(19, 27, 65, 0.92), rgba(12, 17, 43, 0.92));
     border: 1px solid rgba(77, 181, 255, 0.25);
-    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.28),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    box-shadow:
+        0 2rem 5rem rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.035);
 }
 
 .travel-explorer__card::before,
 .travel-explorer__expanded::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(77, 181, 255, 0.06), transparent 45%);
@@ -200,24 +202,36 @@
     height: 42rem;
 }
 
-/* ===== HINT ===== */
-
-.travel-explorer__hint {
-    width: max-content;
-    max-width: 100%;
-    margin: 1.4rem auto 0;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.8rem 1.2rem;
-    border-radius: 999px;
-    color: var(--color-light);
-    background: rgba(31, 31, 56, 0.6);
-    border: 1px solid rgba(77, 181, 255, 0.2);
+.travel-explorer__load {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.9rem;
+    padding: 2rem;
+    background:
+        radial-gradient(circle, rgba(77, 181, 255, 0.16), transparent 42%),
+        linear-gradient(135deg, rgba(4, 10, 28, 0.9), rgba(9, 18, 48, 0.92));
+    color: var(--color-white);
+    font: inherit;
+    cursor: pointer;
 }
 
-.travel-explorer__hint svg {
-    color: var(--color-primary);
+.travel-explorer__load svg {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.8rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0 2rem rgba(77, 181, 255, 0.4);
+    transition: transform 180ms ease;
+}
+
+.travel-explorer__load:hover svg,
+.travel-explorer__load:focus-visible svg {
+    transform: scale(1.08);
 }
 
 /* ===== TABLET ===== */
@@ -230,7 +244,7 @@
 
 /* ===== MOBILE ===== */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px), screen and (max-height: 500px) and (max-width: 950px) {
     .travel-explorer-section {
         margin-top: 4rem;
     }
@@ -254,7 +268,7 @@
     }
 
     .travel-explorer__legend-item {
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         padding: 0.4rem 0.65rem;
     }
 
@@ -280,7 +294,7 @@
         border-radius: 999px;
         background: transparent;
         color: var(--color-light);
-        font-family: 'Poppins', sans-serif;
+        font-family: var(--font-sans);
         font-size: 0.82rem;
         cursor: pointer;
     }
@@ -341,9 +355,11 @@
     }
 
     .travel-explorer__expand-btn {
+        width: 2.75rem;
+        height: 2.75rem;
         justify-self: end;
         align-self: start;
-        flex: 0 0 2.35rem;
+        flex: 0 0 2.75rem;
     }
 
     .travel-explorer__visual {
@@ -366,16 +382,6 @@
 
     .travel-explorer__expanded-visual {
         height: 31rem;
-    }
-
-    .travel-explorer__hint {
-        width: min(100%, 360px);
-        margin-top: 1rem;
-        padding: 0.8rem 1rem;
-        border-radius: 1.2rem;
-        justify-content: center;
-        text-align: center;
-        font-size: 0.85rem;
     }
 
     @keyframes travel-mobile-card-in {

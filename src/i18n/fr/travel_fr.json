@@ -1,73 +1,107 @@
 {
-  "hero": {
-    "kicker": "Voyage",
-    "title": "Ma carte de voyage",
-    "subtitle": "Un espace personnel pour conserver mes lieux, souvenirs, photos et récits de voyage."
-  },
-  "intro": {
-    "title": "Explorer, comprendre, ressentir",
-    "text": "Chaque voyage est une manière de découvrir un lieu, mais aussi une manière de mieux se comprendre soi-même."
-  },
-  "actions": {
-    "map": "Voir la carte",
-    "stories": "Voir les récits"
-  },
-  "stats": {
-    "countries": "Pays visités",
-    "destinations": "Destinations visitées",
-    "lived": "Lieux de vie",
-    "studyWork": "Études / Travail"
-  },
-  "timeline": {
-    "kicker": "Mon parcours",
-    "title": "Chronologie de voyage",
-    "badges": {
-      "lived": "Vécu",
-      "study": "Études",
-      "work": "Travail",
-      "planned": "Prévu"
+    "meta": {
+        "title": "Carnets de voyage — Julien Esterbet"
     },
-    "details": {
-      "story": "À propos de ce voyage",
-      "location": "Localisation",
-      "polarsteps": "Voir sur Polarsteps",
-      "noStory": "Je n’ai pas encore ajouté de récit détaillé pour ce voyage.",
-      "back": "Retour aux voyages"
+    "hero": {
+        "kicker": "Carnets personnels",
+        "title": "Voyages et lieux de vie",
+        "subtitle": "Un espace secondaire du portfolio pour conserver mes lieux, souvenirs, photos et récits de voyage."
+    },
+    "intro": {
+        "title": "Explorer, comprendre, ressentir",
+        "text": "Chaque voyage est une manière de découvrir un lieu, mais aussi une manière de mieux se comprendre soi-même."
+    },
+    "actions": {
+        "map": "Voir la carte",
+        "stories": "Voir les récits"
+    },
+    "stats": {
+        "countries": "Pays visités",
+        "destinations": "Destinations visitées",
+        "lived": "Lieux de vie",
+        "studyWork": "Études / Travail"
+    },
+    "timeline": {
+        "kicker": "Mon parcours",
+        "title": "Chronologie de voyage",
+        "badges": {
+            "lived": "Vécu",
+            "study": "Études",
+            "work": "Travail",
+            "planned": "Prévu"
+        },
+        "details": {
+            "story": "À propos de ce voyage",
+            "location": "Localisation",
+            "polarsteps": "Voir sur Polarsteps",
+            "noStory": "Je n’ai pas encore ajouté de récit détaillé pour ce voyage.",
+            "back": "Retour aux voyages",
+            "scroll": "Afficher la suite du récit"
+        },
+        "gallery": {
+            "viewPhotos": "Voir les photos",
+            "openAll": "Ouvrir la galerie complète · {{count}} photos",
+            "loadError": "Les photos de ce voyage ne peuvent pas être chargées pour le moment.",
+            "close": "Fermer la galerie",
+            "previous": "Photo précédente",
+            "next": "Photo suivante",
+            "openPhoto": "Voir la photo {{number}}",
+            "photoAlt": "Souvenir de voyage à {{city}} — photo {{number}} sur {{total}}",
+            "title": "Galerie photo — {{city}}",
+            "instructions": "Utilisez les flèches gauche et droite pour changer de photo, et la touche Échap pour fermer la galerie."
+        }
+    },
+    "dreams": {
+        "kicker": "Prochains horizons",
+        "title": "Destinations rêvées",
+        "intro": "Quelques lieux qui m’attirent particulièrement, entre grands paysages, histoire, espace, culture et projets de vie.",
+        "aria": {
+            "list": "Sélection des destinations rêvées",
+            "previous": "Destination précédente",
+            "next": "Destination suivante",
+            "select": "Afficher {{destination}}"
+        }
+    },
+    "explorer": {
+        "kicker": "Monde interactif",
+        "title": "Globe & carte",
+        "subtitle": "Explore les lieux qui ont marqué mon parcours à travers le temps.",
+        "globeTitle": "Globe 3D",
+        "globeText": "Vue immersive de mes destinations",
+        "mapTitle": "Carte interactive",
+        "mapText": "Carte détaillée de mes voyages et lieux de vie",
+        "expandGlobe": "Agrandir le globe",
+        "expandMap": "Agrandir la carte",
+        "reduce": "Réduire",
+        "hint": "Clique sur une carte pour l’agrandir et explorer en détail",
+        "globeAccessibleLabel": "Représentation graphique des voyages et destinations rêvées sur un globe terrestre",
+        "mapAccessibleLabel": "Carte interactive des voyages et destinations rêvées",
+        "mapControls": {
+            "zoomIn": "Zoomer",
+            "zoomOut": "Dézoomer",
+            "resetBearing": "Réorienter la carte vers le nord",
+            "closePopup": "Fermer les informations du lieu"
+        },
+        "globeMotion": {
+            "pause": "Mettre le globe en pause",
+            "resume": "Relancer le globe"
+        },
+        "legend": {
+            "home": "Lieu de vie",
+            "lived": "Vécu",
+            "study": "Études",
+            "visited": "Visité",
+            "planned": "Prévu",
+            "dream": "Destination rêvée"
+        }
+    },
+    "nav": {
+        "aria": "Navigation voyage",
+        "items": {
+            "top": "Accueil",
+            "explorer": "Carte",
+            "timeline": "Parcours",
+            "dreams": "Rêves"
+        }
     }
-  },
-  "dreams": {
-    "kicker": "Prochains horizons",
-    "title": "Destinations rêvées",
-    "intro": "Quelques lieux qui m’attirent particulièrement, entre grands paysages, histoire, espace, culture et projets de vie."
-  },
-  "explorer": {
-    "kicker": "Monde interactif",
-    "title": "Globe & carte",
-    "subtitle": "Explore les lieux qui ont marqué mon parcours à travers le temps.",
-    "globeTitle": "Globe 3D",
-    "globeText": "Vue immersive de mes destinations",
-    "mapTitle": "Carte interactive",
-    "mapText": "Carte détaillée de mes voyages et lieux de vie",
-    "expandGlobe": "Agrandir le globe",
-    "expandMap": "Agrandir la carte",
-    "reduce": "Réduire",
-    "hint": "Clique sur une carte pour l’agrandir et explorer en détail",
-    "legend": {
-      "home": "Lieu de vie",
-      "lived": "Vécu",
-      "study": "Études",
-      "visited": "Visité",
-      "planned": "Prévu",
-      "dream": "Destination rêvée"
-    }
-  },
-  "nav": {
-    "aria": "Navigation voyage",
-    "items": {
-      "top": "Accueil",
-      "explorer": "Carte",
-      "timeline": "Parcours",
-      "dreams": "Rêves"
-    }
-  }
 }

@@ -1,0 +1,213 @@
+{
+    "bruno": {
+        "meta": {"title": "Bruno Pizza — Étude de cas produit | Julien Esterbet"},
+        "hero": {
+            "kicker": "Étude de cas produit",
+            "title": "Bruno Pizza — Production",
+            "subtitle": "Une application desktop locale pour transformer un plan Excel en parcours de production exploitable en atelier.",
+            "imageAlt": "Tableau de production de l’application Bruno Pizza présentant les quantités par variété et distributeur",
+            "back": "Retour aux projets",
+            "code": "Voir le dépôt GitHub"
+        },
+        "overview": {
+            "statusLabel": "Statut",
+            "status": "Produit actif — version 1.1.3",
+            "roleLabel": "Responsabilité",
+            "role": "Conception et développement full-stack",
+            "scopeLabel": "Périmètre",
+            "scope": "Application desktop locale"
+        },
+        "problem": {
+            "kicker": "Contexte",
+            "title": "Du fichier de production à l’usage en atelier",
+            "body": "Le besoin est concret : répartir une production de pizzas entre plusieurs distributeurs, contrôler les quantités importées et guider ensuite la fabrication variété par variété. Un simple tableur fournit les données, mais ne constitue pas une interface adaptée au déroulement de la production."
+        },
+        "solution": {
+            "kicker": "Solution",
+            "title": "Un parcours métier local et guidé",
+            "intro": "L’application rapproche le plan Excel d’un catalogue métier et organise le travail dans trois espaces complémentaires.",
+            "items": {
+                "dashboard": {
+                    "title": "Tableau de production",
+                    "body": "Import et validation des fichiers Excel, contrôle des en-têtes, doublons, quantités et totaux, puis répartition par variété et distributeur."
+                },
+                "workshop": {
+                    "title": "Parcours atelier",
+                    "body": "Recette ordonnée, photo, progression et navigation pour guider la fabrication pizza par pizza."
+                },
+                "settings": {
+                    "title": "Paramètres métier",
+                    "body": "Gestion locale du catalogue de pizzas, des ingrédients, des recettes, des visuels et des distributeurs."
+                }
+            }
+        },
+        "architecture": {
+            "kicker": "Architecture",
+            "title": "Une chaîne full-stack empaquetée avec Electron",
+            "steps": {
+                "excel": "Le fichier Excel reste la source du plan de production.",
+                "react": "React et TypeScript portent l’interface et les règles de présentation.",
+                "express": "Express expose une API strictement locale, liée à 127.0.0.1.",
+                "sqlite": "SQLite conserve le catalogue métier et les recettes sur la machine.",
+                "electron": "Electron démarre le backend sur un port disponible et fournit l’application desktop."
+            }
+        },
+        "decisions": {
+            "kicker": "Décisions et compromis",
+            "title": "Fiabiliser l’usage local avant d’élargir le périmètre",
+            "items": {
+                "local": {
+                    "title": "Fonctionnement local",
+                    "body": "Les données, images et paramètres restent sur la machine. Le serveur n’est pas conçu pour être exposé directement sur Internet."
+                },
+                "persistence": {
+                    "title": "Persistance séparée",
+                    "body": "Les données utilisateur sont stockées hors des fichiers installés afin qu’une mise à jour puisse réutiliser le catalogue existant."
+                },
+                "quality": {
+                    "title": "Livraison vérifiable",
+                    "body": "Les contrôles frontend, backend et desktop sont regroupés avant la construction des paquets de livraison."
+                }
+            }
+        },
+        "limits": {
+            "kicker": "Limites actuelles",
+            "title": "Un périmètre assumé",
+            "items": {
+                "excel": "Excel reste l’unique source de production ; l’intégration Adial n’est pas encore incluse.",
+                "trust": "L’application vise un usage local de confiance et ne possède pas l’authentification requise pour une exposition réseau.",
+                "signing": "Les versions Windows et macOS de test ne sont pas encore signées."
+            }
+        },
+        "stack": {"kicker": "Stack", "title": "Technologies principales"},
+        "next": {
+            "title": "Prochaine étape du portfolio",
+            "body": "Documenter My-Website comme portfolio actif, puis réserver l’accueil aux preuves les plus représentatives.",
+            "cta": "Revenir à la sélection"
+        }
+    },
+    "website": {
+        "meta": {"title": "My-Website — Étude de cas portfolio | Julien Esterbet"},
+        "hero": {
+            "kicker": "Étude de cas portfolio",
+            "title": "My-Website",
+            "subtitle": "La refonte progressive d’un portfolio React riche en contenus vers une vitrine plus lisible, performante et vérifiable.",
+            "imageAlt": "Page d’accueil du portfolio My-Website présentant Julien Esterbet et son positionnement full-stack",
+            "back": "Retour aux projets",
+            "live": "Voir le site public actuel",
+            "code": "Voir le dépôt GitHub"
+        },
+        "overview": {
+            "statusLabel": "Statut",
+            "status": "Portfolio actif — refonte locale en cours",
+            "roleLabel": "Responsabilité",
+            "role": "Conception, développement, contenus et qualité",
+            "scopeLabel": "Périmètre",
+            "scope": "SPA bilingue déployée sur Vercel"
+        },
+        "problem": {
+            "kicker": "Contexte et problème",
+            "title": "Faire évoluer un site personnel riche sans masquer sa dette technique",
+            "body": "Le portfolio réunissait déjà projets, Web3, voyages et réflexions, mais cette richesse reposait sur une structure devenue difficile à faire évoluer : chargement initial important, responsabilités mélangées, médias très lourds, navigation hétérogène et accessibilité non auditée. L’objectif de la refonte est de conserver les contenus utiles tout en rendant l’architecture, les preuves professionnelles et les limites du site plus claires."
+        },
+        "solution": {
+            "kicker": "Réponse",
+            "title": "Refondre par couches plutôt que réécrire à l’aveugle",
+            "intro": "La démarche part d’un audit réel du code et traite séparément l’architecture, les médias, l’accessibilité et le contenu professionnel.",
+            "items": {
+                "architecture": {
+                    "title": "Architecture par routes",
+                    "body": "Une coquille commune, un registre de routes et des modules fonctionnels séparent la navigation, les pages, les services externes et les contenus localisés."
+                },
+                "media": {
+                    "title": "Chaîne média responsable",
+                    "body": "Les sources restent hors de l’exposition publique directe ; des dérivés responsives AVIF et WebP sont générés avec des manifests par domaine et sans métadonnées sensibles."
+                },
+                "quality": {
+                    "title": "Qualité vérifiable",
+                    "body": "Formatage, lint, tests, build et budgets de performance sont regroupés dans une validation reproductible, complétée par une grille d’audit RGAA documentée."
+                }
+            }
+        },
+        "architecture": {
+            "kicker": "Architecture",
+            "title": "Un chargement progressif autour d’une coquille commune",
+            "steps": {
+                "entry": "Vite initialise React, l’internationalisation et les mesures de performance.",
+                "shell": "AppShell porte le lien d’évitement, la navigation, le contenu principal, les états de chargement et les erreurs globales.",
+                "routes": "Chaque page et son espace de traduction sont chargés à la demande depuis un registre de routes unique.",
+                "domains": "Les fonctionnalités Home, Web3, Travel et Reflections restent organisées par domaine ; les appels externes passent par des services dédiés.",
+                "media": "ResponsiveImage consomme des manifests générés afin de choisir le format et la largeur adaptés au contexte.",
+                "vercel": "Le build statique cible Vercel avec Node 24, une installation reproductible, une vraie 404 et un cache long réservé aux assets versionnés."
+            }
+        },
+        "decisions": {
+            "kicker": "Décisions et compromis",
+            "title": "Améliorer la preuve sans inventer un produit qui n’existe pas",
+            "items": {
+                "incremental": {
+                    "title": "Refonte incrémentale",
+                    "body": "Les contenus et interactions existants sont conservés puis fiabilisés par tranches, ce qui rend chaque correction vérifiable et limite les régressions."
+                },
+                "privacy": {
+                    "title": "Sources et dérivés séparés",
+                    "body": "Les originaux servent de sources de travail ; seules les variantes nettoyées et optimisées sont destinées au site public."
+                },
+                "accessibility": {
+                    "title": "Audit avant déclaration",
+                    "body": "Le RGAA est traité avec une matrice de critères et des preuves manuelles. Les résultats locaux ne deviennent pas une déclaration de conformité avant une contre-vérification de la version déployée."
+                },
+                "adapters": {
+                    "title": "Dépendances externes isolées",
+                    "body": "E-mail, Mapbox, RPC, données de prix et inspection de wallet passent par des adaptateurs afin de séparer l’interface des fournisseurs."
+                }
+            }
+        },
+        "challenges": {
+            "kicker": "Difficultés",
+            "title": "Travailler sur un ensemble plus large qu’une simple landing page",
+            "items": {
+                "legacy": {
+                    "title": "Préserver l’existant",
+                    "body": "La refonte doit clarifier le code sans supprimer les albums, écrits et outils que le portfolio rassemble déjà."
+                },
+                "interactive": {
+                    "title": "Rendre l’interactif accessible",
+                    "body": "Globe, carte, frise, carrousels, dialogues et outils Web3 demandent des alternatives textuelles, une navigation clavier et une gestion rigoureuse du focus."
+                },
+                "editorial": {
+                    "title": "Rester crédible",
+                    "body": "Les projets actifs, académiques et historiques doivent être nommés selon leur statut réel, et les résultats limités à ce que le code ou les audits permettent de prouver."
+                }
+            }
+        },
+        "results": {
+            "kicker": "Résultats vérifiables",
+            "title": "Un socle désormais mesuré et documenté",
+            "items": {
+                "delivery": "Une commande unique valide le formatage, le lint, les tests, le build de production et les budgets de performance.",
+                "performance": "Les routes principales et leurs traductions sont chargées à la demande ; les fonctions lourdes de carte et de globe restent séparées du chargement initial.",
+                "media": "La chaîne actuelle traite 518 sources et génère 4 470 dérivés responsives dans trois formats, sans exposer directement les fichiers sources.",
+                "rgaa": "L’audit RGAA 4.1.2 documente localement 66 critères conformes et 40 non applicables ; ce décompte n’est pas présenté comme un taux de conformité."
+            }
+        },
+        "limits": {
+            "kicker": "Limites actuelles",
+            "title": "Ce que cette refonte ne permet pas encore d’affirmer",
+            "items": {
+                "deployment": "La refonte est validée automatiquement et déployée en Preview depuis develop ; sa promotion sur le domaine principal reste une décision explicite.",
+                "mediaDelivery": "Les 4 470 dérivés restent générés localement et hors Git. Le code accepte désormais une origine média HTTPS, mais le fournisseur et la migration complète restent à valider avant publication des photos.",
+                "securityHeaders": "Les en-têtes de sécurité, la CSP, la 404 et les règles de cache sont versionnés et testés ; une recette finale reste requise après promotion en production.",
+                "cv": "Les PDF actuels ne revendiquent pas une conformité PDF/UA ; une alternative HTML bilingue et sémantique fournit le même contenu avant leur téléchargement.",
+                "font": "La police externe a été retirée au profit d’une pile système locale ; le rendu final doit encore être validé sur les principaux navigateurs.",
+                "fieldData": "Web Analytics et Speed Insights sont intégrés sans événement personnalisé ; les tendances de terrain nécessitent encore suffisamment de visites réelles pour devenir représentatives."
+            }
+        },
+        "stack": {"kicker": "Stack", "title": "Technologies et contrôles principaux"},
+        "next": {
+            "title": "Prochaines étapes",
+            "body": "Valider un stockage média durable, publier les dérivés manquants, puis effectuer la recette du domaine principal avant toute déclaration d’accessibilité.",
+            "cta": "Revenir à la sélection"
+        }
+    }
+}

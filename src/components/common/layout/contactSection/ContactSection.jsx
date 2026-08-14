@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react'
-import emailjs from 'emailjs-com'
 import {motion} from 'framer-motion'
 import {MdOutlineEmail} from 'react-icons/md'
 import {FaLinkedin, FaTwitter} from 'react-icons/fa'
 import {FiArrowUpRight, FiSend} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
-import {LINKS} from "../../../../config/links.js";
+import {LINKS} from '../../../../config/links.js'
+import {sendContactForm} from '../../../../services/contact/contactService.js'
 import './ContactSection.css'
 
 const ContactSection = () => {
@@ -13,6 +13,7 @@ const ContactSection = () => {
     const form = useRef(null)
 
     const [status, setStatus] = useState(null)
+    const [formStartedAt, setFormStartedAt] = useState(() => Date.now())
 
     const emailValue = t('contact.options.email.value')
     const mailtoHref = `mailto:${emailValue}`
@@ -20,7 +21,7 @@ const ContactSection = () => {
     const options = [
         {
             id: 'email',
-            icon: <MdOutlineEmail/>,
+            icon: <MdOutlineEmail />,
             title: t('contact.options.email.title'),
             value: emailValue,
             href: mailtoHref,
@@ -28,7 +29,7 @@ const ContactSection = () => {
         },
         {
             id: 'linkedin',
-            icon: <FaLinkedin/>,
+            icon: <FaLinkedin />,
             title: t('contact.options.linkedin.title'),
             value: t('contact.options.linkedin.value'),
             href: LINKS.social.linkedin,
@@ -36,7 +37,7 @@ const ContactSection = () => {
         },
         {
             id: 'twitter',
-            icon: <FaTwitter/>,
+            icon: <FaTwitter />,
             title: t('contact.options.twitter.title'),
             value: t('contact.options.twitter.value'),
             href: LINKS.social.twitter,
@@ -46,27 +47,23 @@ const ContactSection = () => {
 
     const sendEmail = async (event) => {
         event.preventDefault()
+        const formElement = event.currentTarget
         setStatus('loading')
 
         try {
-            await emailjs.sendForm(
-                'service_rv27pzc',
-                'template_mwmosps',
-                form.current,
-                'QgbIYSLquY8PrqQho'
-            )
+            await sendContactForm(formElement)
 
             setStatus('success')
-            event.target.reset()
+            formElement.reset()
+            setFormStartedAt(Date.now())
         } catch (error) {
-            console.error('EmailJS error:', error)
-            setStatus('error')
+            setStatus(error?.code === 'invalid_form' ? 'invalid' : 'error')
         }
     }
 
     return (
         <section id="contact">
-            <h5>{t('contact.kicker')}</h5>
+            <p className="section-kicker">{t('contact.kicker')}</p>
             <h2>{t('contact.title')}</h2>
 
             <div className="container crypto-contact">
@@ -96,9 +93,7 @@ const ContactSection = () => {
                                 viewport={{once: true}}
                                 transition={{duration: 0.4, delay: index * 0.08}}
                             >
-                                <span className="crypto-contact__option-icon">
-                                    {option.icon}
-                                </span>
+                                <span className="crypto-contact__option-icon">{option.icon}</span>
 
                                 <div>
                                     <strong>{option.title}</strong>
@@ -107,7 +102,7 @@ const ContactSection = () => {
 
                                 <em>
                                     {option.cta}
-                                    <FiArrowUpRight/>
+                                    <FiArrowUpRight />
                                 </em>
                             </motion.a>
                         ))}
@@ -118,18 +113,35 @@ const ContactSection = () => {
                     ref={form}
                     className="crypto-contact__form"
                     onSubmit={sendEmail}
+                    aria-busy={status === 'loading'}
                     initial={{opacity: 0, x: 32}}
                     whileInView={{opacity: 1, x: 0}}
                     viewport={{once: true}}
                     transition={{duration: 0.55, delay: 0.08}}
                 >
+                    <div className="crypto-contact__honeypot" aria-hidden="true">
+                        <label htmlFor="contact-website">Site web</label>
+                        <input
+                            id="contact-website"
+                            type="text"
+                            name="website"
+                            tabIndex="-1"
+                            autoComplete="off"
+                        />
+                    </div>
+
+                    <input type="hidden" name="startedAt" value={formStartedAt} />
+
                     <div className="crypto-contact__field">
                         <label htmlFor="contact-name">{t('contact.form.nameLabel')}</label>
                         <input
                             id="contact-name"
                             type="text"
                             name="name"
+                            autoComplete="name"
                             placeholder={t('contact.form.name')}
+                            minLength="2"
+                            maxLength="80"
                             required
                         />
                     </div>
@@ -140,7 +152,9 @@ const ContactSection = () => {
                             id="contact-email"
                             type="email"
                             name="email"
+                            autoComplete="email"
                             placeholder={t('contact.form.email')}
+                            maxLength="254"
                             required
                         />
                     </div>
@@ -152,26 +166,35 @@ const ContactSection = () => {
                             name="message"
                             rows="7"
                             placeholder={t('contact.form.message')}
+                            minLength="10"
+                            maxLength="4000"
                             required
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" disabled={status === 'loading'}>
-                        <FiSend/>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={status === 'loading'}
+                        aria-describedby="contact-form-status"
+                    >
+                        <FiSend />
                         {status === 'loading'
                             ? t('contact.form.sending')
                             : t('contact.form.submit')}
                     </button>
 
-                    {status === 'success' && (
-                        <p className="crypto-contact__status success">
-                            {t('contact.form.success')}
-                        </p>
-                    )}
-
-                    {status === 'error' && (
-                        <p className="crypto-contact__status error">
-                            {t('contact.form.error')}
+                    {status && (
+                        <p
+                            id="contact-form-status"
+                            className={`crypto-contact__status ${status}`}
+                            role={status === 'error' || status === 'invalid' ? 'alert' : 'status'}
+                            aria-live={
+                                status === 'error' || status === 'invalid' ? 'assertive' : 'polite'
+                            }
+                            aria-atomic="true"
+                        >
+                            {t(`contact.form.${status}`)}
                         </p>
                     )}
                 </motion.form>

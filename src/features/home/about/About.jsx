@@ -2,7 +2,9 @@ import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation, Trans} from 'react-i18next'
 import {FaCode} from 'react-icons/fa'
 import {FiCpu, FiGitBranch} from 'react-icons/fi'
-import {ASSETS} from '../../../config/assets.js'
+import {HOME_ASSETS} from '../../../config/homeAssets.js'
+import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
+import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import './About.css'
@@ -14,14 +16,25 @@ const About = () => {
 
     const sectionRef = useRef(null)
     const visualRef = useRef(null)
+    const reducedMotion = useReducedMotion()
 
     const cards = [
-        {icon: <FaCode/>, title: t('about.cards.expertiseTitle'), text: t('about.cards.expertiseText')},
-        {icon: <FiCpu/>, title: t('about.cards.collabTitle'), text: t('about.cards.collabText')},
-        {icon: <FiGitBranch/>, title: t('about.cards.innovationTitle'), text: t('about.cards.innovationText')},
+        {
+            icon: <FaCode />,
+            title: t('about.cards.expertiseTitle'),
+            text: t('about.cards.expertiseText'),
+        },
+        {icon: <FiCpu />, title: t('about.cards.collabTitle'), text: t('about.cards.collabText')},
+        {
+            icon: <FiGitBranch />,
+            title: t('about.cards.innovationTitle'),
+            text: t('about.cards.innovationText'),
+        },
     ]
 
     useLayoutEffect(() => {
+        if (reducedMotion) return undefined
+
         const ctx = gsap.context(() => {
             gsap.from(sectionRef.current, {
                 opacity: 0,
@@ -41,18 +54,22 @@ const About = () => {
         }, sectionRef)
 
         return () => ctx.revert()
-    }, [])
+    }, [reducedMotion])
 
     return (
         <section id="about" ref={sectionRef}>
-            <h5>{t('about.headingSmall')}</h5>
+            <p className="section-kicker">{t('about.headingSmall')}</p>
             <h2>{t('about.heading')}</h2>
 
             <div className="container about__container">
                 <aside className="about__visual" ref={visualRef}>
                     <div className="about__photo-card">
                         <div className="about__photo">
-                            <img src={ASSETS.home.about.photo} alt={t('header.portraitAlt')}/>
+                            <ResponsiveImage
+                                media={HOME_ASSETS.about.photo}
+                                alt={t('about.photoAlt')}
+                                sizes="(max-width: 700px) 88vw, 520px"
+                            />
                         </div>
 
                         <div className="about__caption">
@@ -75,7 +92,7 @@ const About = () => {
                 </div>
 
                 <div className="about__bio">
-                    <Trans i18nKey="about.bio" ns="home" components={{b: <b/>}}/>
+                    <Trans i18nKey="about.bio" ns="home" components={{b: <b />}} />
                 </div>
             </div>
         </section>

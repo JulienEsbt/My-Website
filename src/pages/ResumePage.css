@@ -1,0 +1,193 @@
+.resume {
+    padding-bottom: 7rem;
+}
+
+.resume__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.resume__summary,
+.resume__download-note {
+    max-width: 880px;
+    margin-right: auto;
+    margin-left: auto;
+    line-height: 1.8;
+}
+
+.resume__summary {
+    color: var(--color-white);
+    font-size: 1.1rem;
+}
+
+.resume__download-note {
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--color-primary);
+    color: var(--color-light);
+    background: rgba(31, 31, 56, 0.52);
+}
+
+.resume__layout {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.34fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    margin-top: 3rem;
+}
+
+.resume__sidebar,
+.resume__main > section {
+    border: 1px solid var(--liquid-border-soft);
+    border-radius: 1.25rem;
+    background: var(--liquid-bg);
+    box-shadow: var(--liquid-shadow);
+}
+
+.resume__sidebar {
+    position: sticky;
+    top: 6rem;
+    padding: 1.5rem;
+}
+
+.resume__sidebar section + section,
+.resume__main > section + section {
+    margin-top: 2.5rem;
+}
+
+.resume h2 {
+    margin-bottom: 1.25rem;
+    color: var(--color-white);
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    line-height: 1.25;
+}
+
+.resume h2::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 2px;
+    margin-top: 0.65rem;
+    background: var(--color-primary);
+}
+
+.resume__contact {
+    display: grid;
+    gap: 0.8rem;
+    font-style: normal;
+}
+
+.resume__contact p,
+.resume__contact a,
+.resume__definition-list dd,
+.resume__compact-list,
+.resume__entry p,
+.resume__entry li {
+    color: var(--color-light);
+    line-height: 1.65;
+}
+
+.resume__contact a {
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+}
+
+.resume__definition-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.resume__definition-list dt {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.resume__definition-list dd {
+    margin-top: 0.2rem;
+}
+
+.resume__compact-list {
+    display: grid;
+    gap: 0.7rem;
+    padding-left: 1.2rem;
+}
+
+.resume__main {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.resume__main > section {
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+}
+
+.resume__entries {
+    display: grid;
+    gap: 2rem;
+}
+
+.resume__entry h3 {
+    color: var(--color-white);
+    font-size: 1.15rem;
+    line-height: 1.35;
+}
+
+.resume__entry ul {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 0.8rem;
+    padding-left: 1.25rem;
+}
+
+.resume__meta {
+    margin-top: 0.35rem;
+    color: var(--color-primary) !important;
+    font-size: 0.95rem;
+}
+
+.resume__skills-used,
+.resume__thesis {
+    margin-top: 0.85rem;
+    font-style: italic;
+}
+
+.resume__status {
+    margin-bottom: 0.35rem;
+    color: var(--color-primary) !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.resume__entries--projects .resume__entry {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(77, 181, 255, 0.35);
+}
+
+@media screen and (max-width: 900px) {
+    .resume__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .resume__sidebar {
+        position: static;
+    }
+}
+
+@media print {
+    .resume__download-note,
+    .resume__button {
+        display: none;
+    }
+
+    .resume__layout {
+        grid-template-columns: 0.36fr 1fr;
+    }
+
+    .resume__sidebar {
+        position: static;
+    }
+}

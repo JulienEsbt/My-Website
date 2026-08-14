@@ -1,0 +1,140 @@
+{
+    "meta": {
+        "title": "Julien Esterbet Resume — Full-stack Developer, FinTech and Web3"
+    },
+    "hero": {
+        "kicker": "Accessible resume",
+        "title": "Julien Esterbet",
+        "role": "Product-minded full-stack developer",
+        "focus": "FinTech · Business applications · Web3",
+        "summary": "Full-stack developer and IT analyst turning business needs into reliable applications with Java, Angular, APIs and document workflows. My background combines FinTech, delivery quality and hands-on Web3 projects.",
+        "back": "Back to portfolio",
+        "download": "Download the resume as a PDF",
+        "downloadNote": "The PDF preserves the resume’s visual layout. The structured content below is its accessible alternative."
+    },
+    "sections": {
+        "contact": "Contact",
+        "skills": "Skills",
+        "certifications": "Certifications",
+        "languages": "Languages",
+        "experience": "Professional experience",
+        "education": "Education",
+        "projects": "Selected projects"
+    },
+    "contact": {
+        "location": "Paris, France",
+        "phone": "+33 7 88 27 27 16",
+        "phoneLabel": "Phone: +33 7 88 27 27 16",
+        "email": "julien.esterbet@gmail.com",
+        "emailLabel": "Email: julien.esterbet@gmail.com",
+        "linkedin": "linkedin.com/in/julien-esterbet",
+        "linkedinLabel": "Julien Esterbet’s LinkedIn profile",
+        "website": "julien-esterbet.com",
+        "websiteLabel": "Julien Esterbet’s portfolio",
+        "github": "github.com/JulienEsbt",
+        "githubLabel": "Julien Esterbet’s GitHub profile"
+    },
+    "skills": [
+        {"name": "Backend", "detail": "Java, REST APIs, SQL, XML and JSON, batch processing"},
+        {"name": "Frontend", "detail": "Angular, React, TypeScript"},
+        {"name": "Quality", "detail": "JUnit, Mockito, documentation, refactoring"},
+        {"name": "Tools", "detail": "GitLab, Jenkins, Jira, OpenText Content Server"},
+        {"name": "Web3", "detail": "Solidity, EVM, ethers.js"}
+    ],
+    "certifications": [
+        "Bloomberg Market Concepts",
+        "Google Digital Marketing Fundamentals",
+        "Generative AI Essentials"
+    ],
+    "languages": ["French — native", "English — C1, academic and international proficiency"],
+    "experience": [
+        {
+            "role": "Software Developer and IT Analyst",
+            "organization": "PREPAR-VIE · Permanent contract · Paris",
+            "period": "April 2025 — present",
+            "bullets": [
+                "Design, enhancement and maintenance of Java and Angular applications supporting unit-linked life insurance products.",
+                "Analysis of business requirements and translation into technical solutions with functional teams and partners.",
+                "Development of document batches, API integrations and SQL, XML and JSON data workflows.",
+                "JUnit and Mockito testing, GitLab/Jenkins integration, documentation, refactoring and production delivery support."
+            ],
+            "skills": "Java, Angular, REST APIs, SQL, software quality, CI/CD and functional-technical analysis."
+        },
+        {
+            "role": "Business Analyst",
+            "organization": "PREPAR-VIE · Fixed-term contract · Paris",
+            "period": "August 2024 — January 2025",
+            "bullets": [
+                "Requirements gathering, functional specifications and analysis of regulatory impacts.",
+                "User acceptance test coordination, defect follow-up and support for business teams through validation.",
+                "Document digitalisation through APIs and OpenText Content Server in a life insurance environment."
+            ],
+            "skills": "Business analysis, UAT, coordination, stakeholder communication and document management."
+        },
+        {
+            "role": "Financial Software Developer",
+            "organization": "PREPAR-VIE · Internship · Paris",
+            "period": "January 2024 — July 2024",
+            "bullets": [
+                "Enhanced and automated internal financial tools for market data and portfolio management.",
+                "Analysed user needs, improved processing reliability and streamlined workflows with business users."
+            ],
+            "skills": "Financial systems, automation, data analysis, business understanding and problem solving."
+        },
+        {
+            "role": "Blockchain Consultant and Developer",
+            "organization": "SIB · Internship · Rennes",
+            "period": "April 2022 — July 2022",
+            "bullets": [
+                "Applied research into Ethereum, smart contracts, data integrity and their use in healthcare.",
+                "Designed a Solidity and web prototype for certifying document references.",
+                "Presented technical choices while addressing security, traceability and confidentiality considerations."
+            ],
+            "skills": "Solidity, Ethereum, technical research, prototyping, data security and communication."
+        },
+        {
+            "role": "Manager — student position",
+            "organization": "McDonald’s Gare · Rennes",
+            "period": "October 2018 — March 2022",
+            "bullets": ["Operational supervision, team support and priority management."],
+            "skills": ""
+        }
+    ],
+    "education": [
+        {
+            "title": "European Master’s Programme in Financial Technologies",
+            "school": "University of Rennes and Eötvös Loránd University",
+            "period": "2022 — 2024",
+            "detail": "European dual programme taught in English; first year completed with honours and a study period in Budapest. FinTech, finance, machine learning, security, innovation and blockchain.",
+            "thesis": "Thesis: “Integrating Blockchain for Enhanced Security, Transparency, and Efficiency in Life Insurance Services at Prepar-Vie.”"
+        },
+        {
+            "title": "Bachelor’s Degree in Computer Science — MIAGE",
+            "school": "University of Rennes",
+            "period": "2019 — 2022",
+            "detail": "Degree awarded in 2022. Business-oriented computer science, data analysis, programming, economics, statistics and modelling.",
+            "thesis": ""
+        }
+    ],
+    "projects": [
+        {
+            "name": "Bruno Pizza — Production",
+            "status": "Active product",
+            "detail": "Production-management desktop product built with React, TypeScript, Electron, Express and SQLite."
+        },
+        {
+            "name": "My-Website",
+            "status": "Active portfolio",
+            "detail": "Bilingual React and Vite portfolio rebuilt with a documented RGAA accessibility approach."
+        },
+        {
+            "name": "Megalis",
+            "status": "Academic prototype",
+            "detail": "EVM prototype for timestamping document references on-chain with Solidity."
+        }
+    ],
+    "labels": {
+        "period": "Period",
+        "skills": "Skills used"
+    }
+}

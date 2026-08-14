@@ -17,6 +17,14 @@ pnpm-debug.log*
 
 # --- Tests ---
 coverage/
+.media-prototype/
+.media-manifest.json
+public/media/
+
+# Sources privées des médias publiés via leurs dérivés R2
+src/assets/images/**/*.[jJ][pP][eE][gG]
+src/assets/images/**/*.[jJ][pP][gG]
+src/assets/images/**/*.[pP][nN][gG]
 
 # --- IDE / OS ---
 .idea/

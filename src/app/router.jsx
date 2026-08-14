@@ -1,19 +1,18 @@
-import {Navigate, Route, Routes} from 'react-router-dom'
-import HomePage from '../pages/HomePage'
-import Web3Page from '../pages/Web3Page'
-import TravelPage from '../pages/TravelPage'
-import ReflectionsPage from '../pages/ReflectionsPage'
-import ReflectionArticlePage from '../pages/ReflectionArticlePage'
+import {Suspense} from 'react'
+import {Route, Routes} from 'react-router-dom'
+import NotFoundPage from '../pages/NotFoundPage.jsx'
+import RouteLoading from '../components/common/feedback/routeLoading/RouteLoading.jsx'
+import {APP_ROUTES} from './routeRegistry.jsx'
 
 const Router = () => (
-    <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/web3" element={<Web3Page/>}/>
-        <Route path="/travel" element={<TravelPage/>}/>
-        <Route path="/reflections" element={<ReflectionsPage/>}/>
-        <Route path="/reflections/:slug" element={<ReflectionArticlePage/>}/>
-        <Route path="*" element={<Navigate to="/" replace/>}/>
-    </Routes>
+    <Suspense fallback={<RouteLoading />}>
+        <Routes>
+            {APP_ROUTES.map(({path, Component}) => (
+                <Route key={path} path={path} element={<Component />} />
+            ))}
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+    </Suspense>
 )
 
 export default Router

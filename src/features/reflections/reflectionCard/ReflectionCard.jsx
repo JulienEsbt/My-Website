@@ -1,25 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {motion} from 'framer-motion'
+import {formatDate} from '../../../i18n/formatters.js'
 import './ReflectionCard.css'
 
-const formatDate = (date, language) => {
-    return new Intl.DateTimeFormat(language === 'fr' ? 'fr-FR' : 'en-US', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    }).format(new Date(date))
-}
-
 const ReflectionCard = ({
-                            reflexion,
-                            language,
-                            index,
-                            categoryLabels,
-                            readLabel,
-                            featuredLabel,
-                            featured,
-                        }) => {
+    reflexion,
+    language,
+    index,
+    categoryLabels,
+    readLabel,
+    featuredLabel,
+    readingTimeLabel,
+    featured,
+}) => {
     return (
         <motion.article
             className={`reflexion-card ${featured ? 'featured' : ''}`}
@@ -33,15 +27,9 @@ const ReflectionCard = ({
                     {categoryLabels?.[reflexion.category] ?? reflexion.category}
                 </span>
 
-                {featured && (
-                    <span className="reflexion-card__featured">
-                        {featuredLabel}
-                    </span>
-                )}
+                {featured && <span className="reflexion-card__featured">{featuredLabel}</span>}
 
-                <span className="reflexion-card__date">
-                    {formatDate(reflexion.date, language)}
-                </span>
+                <span className="reflexion-card__date">{formatDate(reflexion.date, language)}</span>
             </div>
 
             <h3>{reflexion.title[language]}</h3>
@@ -49,7 +37,7 @@ const ReflectionCard = ({
             <p>{reflexion.excerpt[language]}</p>
 
             <div className="reflexion-card__footer">
-                <span>{reflexion.readingTime} min</span>
+                <span>{readingTimeLabel}</span>
 
                 <Link to={`/reflections/${reflexion.slug}`} className="btn reflexion-card__button">
                     {readLabel} →

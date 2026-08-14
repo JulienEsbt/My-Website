@@ -1,185 +1,270 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
-import {JsonRpcProvider, formatUnits} from 'ethers'
 import {motion} from 'framer-motion'
-import {FiExternalLink, FiRefreshCw} from 'react-icons/fi'
+import {
+    FiChevronLeft,
+    FiChevronRight,
+    FiExternalLink,
+    FiPause,
+    FiPlay,
+    FiRefreshCw,
+} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {BLOCKCHAIN_NETWORKS} from '../../../../config/blockchains.js'
+import useReducedMotion from '../../../../components/common/accessibility/useReducedMotion.js'
+import {formatNumber} from '../../../../i18n/formatters.js'
+import {fetchBlockchainStatuses} from '../../../../services/web3/blockchainStatusService.js'
 import './BlockchainExplorer.css'
 
-const RPC_URLS = {
-    VITE_ETH_RPC_URL: import.meta.env.VITE_ETH_RPC_URL,
-    VITE_POLYGON_RPC_URL: import.meta.env.VITE_POLYGON_RPC_URL,
-    VITE_ARBITRUM_RPC_URL: import.meta.env.VITE_ARBITRUM_RPC_URL,
-    VITE_OPTIMISM_RPC_URL: import.meta.env.VITE_OPTIMISM_RPC_URL,
-    VITE_BNB_RPC_URL: import.meta.env.VITE_BNB_RPC_URL,
-}
-
-const getRpcUrl = (rpcEnv) => RPC_URLS[rpcEnv]
-
-const formatGwei = (value) => {
-    if (!value) return null
-    return Number(formatUnits(value, 'gwei')).toFixed(2)
-}
-
 const BlockchainExplorer = () => {
-    const {t} = useTranslation('web3')
+    const {t, i18n} = useTranslation('web3')
+    const language = i18n.resolvedLanguage ?? i18n.language
 
-    const [networks, setNetworks] = useState([])
+    const [networks, setNetworks] = useState(() =>
+        BLOCKCHAIN_NETWORKS.map((network) => ({...network, status: 'idle'}))
+    )
     const [loading, setLoading] = useState(false)
+    const [hasLoaded, setHasLoaded] = useState(false)
+    const [autoScrollPaused, setAutoScrollPaused] = useState(false)
+    const requestIdRef = useRef(0)
+    const abortControllerRef = useRef(null)
+    const reducedMotion = useReducedMotion()
 
-    const [emblaRef] = useEmblaCarousel(
+    const autoScrollPlugin = useMemo(
+        () =>
+            reducedMotion
+                ? null
+                : AutoScroll({
+                      speed: 0.7,
+                      stopOnInteraction: false,
+                      stopOnMouseEnter: true,
+                  }),
+        [reducedMotion]
+    )
+
+    const carouselPlugins = useMemo(
+        () => (autoScrollPlugin ? [autoScrollPlugin] : []),
+        [autoScrollPlugin]
+    )
+
+    const [emblaRef, emblaApi] = useEmblaCarousel(
         {
-            loop: true,
+            loop: !reducedMotion,
             align: 'start',
             dragFree: true,
-            containScroll: false,
+            containScroll: reducedMotion ? 'trimSnaps' : false,
         },
-        [
-            AutoScroll({
-                speed: 0.7,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-            }),
-        ]
+        carouselPlugins
     )
 
     const getStatusLabel = (status) => {
         if (status === 'online') return t('blockchainExplorer.status.online')
         if (status === 'missing-rpc') return t('blockchainExplorer.status.missingRpc')
+        if (status === 'idle') return t('blockchainExplorer.status.idle')
         return t('blockchainExplorer.status.error')
     }
 
-    const loadNetworks = async () => {
+    const loadNetworks = useCallback(async () => {
+        const requestId = ++requestIdRef.current
+        abortControllerRef.current?.abort()
+        const controller = new AbortController()
+        abortControllerRef.current = controller
         setLoading(true)
 
-        const results = await Promise.all(
-            BLOCKCHAIN_NETWORKS.map(async (network) => {
-                const rpcUrl = getRpcUrl(network.rpcEnv)
+        let results
+        try {
+            const statuses = await fetchBlockchainStatuses({signal: controller.signal})
+            const statusById = new Map(statuses.map((network) => [network.id, network]))
+            results = BLOCKCHAIN_NETWORKS.map((network) => ({
+                ...network,
+                ...(statusById.get(network.id) ?? {status: 'error'}),
+            }))
+        } catch {
+            if (controller.signal.aborted) return
+            results = BLOCKCHAIN_NETWORKS.map((network) => ({...network, status: 'error'}))
+        }
 
-                if (!rpcUrl) {
-                    return {...network, status: 'missing-rpc'}
-                }
+        if (requestId === requestIdRef.current) {
+            setNetworks(results)
+            setLoading(false)
+            setHasLoaded(true)
+        }
+    }, [])
 
-                try {
-                    const provider = new JsonRpcProvider(rpcUrl)
-
-                    const [blockNumber, feeData, networkInfo] = await Promise.all([
-                        provider.getBlockNumber(),
-                        provider.getFeeData(),
-                        provider.getNetwork(),
-                    ])
-
-                    return {
-                        ...network,
-                        status: 'online',
-                        chainId: networkInfo.chainId.toString(),
-                        blockNumber,
-                        gasPrice: formatGwei(feeData.gasPrice),
-                        maxFee: formatGwei(feeData.maxFeePerGas),
-                        priorityFee: formatGwei(feeData.maxPriorityFeePerGas),
-                    }
-                } catch (error) {
-                    console.error(`Error loading ${network.name}`, error)
-                    return {...network, status: 'error'}
-                }
-            })
-        )
-
-        setNetworks(results)
-        setLoading(false)
-    }
-
-    const carouselNetworks = networks.length > 0
-        ? Array.from({length: 4}).flatMap(() => networks)
-        : []
+    const carouselNetworks = reducedMotion
+        ? networks
+        : Array.from({length: 4}).flatMap(() => networks)
 
     useEffect(() => {
         loadNetworks()
-    }, [])
+
+        return () => {
+            abortControllerRef.current?.abort()
+            requestIdRef.current += 1
+        }
+    }, [loadNetworks])
+
+    useEffect(() => {
+        const plugins = typeof emblaApi?.plugins === 'function' ? emblaApi.plugins() : null
+        const autoScroll = plugins?.autoScroll
+        if (!autoScroll) return
+
+        if (autoScrollPaused) autoScroll.stop()
+        else autoScroll.play()
+    }, [autoScrollPaused, emblaApi])
 
     return (
-        <section id="blockchain-explorer" className="blockchain-section">
-            <h5>{t('blockchainExplorer.kicker')}</h5>
+        <section id="blockchain-explorer" className="blockchain-section" aria-busy={loading}>
+            <p className="section-kicker">{t('blockchainExplorer.kicker')}</p>
             <h2>{t('blockchainExplorer.title')}</h2>
 
             <div className="container blockchain-explorer__top">
                 <p>{t('blockchainExplorer.description')}</p>
 
-                <button className="btn" onClick={loadNetworks} disabled={loading}>
-                    <FiRefreshCw/>
-                    {loading
-                        ? t('blockchainExplorer.refreshing')
-                        : t('blockchainExplorer.refresh')}
+                <button type="button" className="btn" onClick={loadNetworks} disabled={loading}>
+                    <FiRefreshCw aria-hidden="true" />
+                    {loading ? t('blockchainExplorer.refreshing') : t('blockchainExplorer.refresh')}
                 </button>
             </div>
 
+            <p className="sr-only" role="status">
+                {loading
+                    ? t('blockchainExplorer.refreshing')
+                    : hasLoaded
+                      ? t('blockchainExplorer.updated')
+                      : ''}
+            </p>
+
             <div className="container blockchain-embla">
-                <div className="blockchain-embla__viewport" ref={emblaRef}>
+                <div
+                    className="blockchain-embla__viewport"
+                    ref={emblaRef}
+                    role="region"
+                    aria-label={t('blockchainExplorer.carouselAria')}
+                >
                     <div className="blockchain-embla__container">
-                        {carouselNetworks.map((network, index) => (
-                            <motion.article
-                                key={`${network.id}-${index}`}
-                                className="blockchain-card"
-                                initial={{opacity: 0, y: 24}}
-                                whileInView={{opacity: 1, y: 0}}
-                                viewport={{once: true}}
-                                transition={{duration: 0.4, delay: index * 0.05}}
-                            >
-                                <div className="blockchain-card__header">
-                                    <div>
-                                        <h3>{network.name}</h3>
-                                        <span>{network.symbol}</span>
-                                    </div>
+                        {carouselNetworks.map((network, index) => {
+                            const isDuplicate = !reducedMotion && index >= networks.length
 
-                                    <small className={`status ${network.status}`}>
-                                        {getStatusLabel(network.status)}
-                                    </small>
-                                </div>
-
-                                <div className="blockchain-card__main">
-                                    <span>{t('blockchainExplorer.latestBlock')}</span>
-                                    <strong>{network.blockNumber ?? '-'}</strong>
-                                </div>
-
-                                <div className="blockchain-card__stats">
-                                    <div>
-                                        <span>{t('blockchainExplorer.chain')}</span>
-                                        <strong>{network.chainId ?? '-'}</strong>
-                                    </div>
-
-                                    <div>
-                                        <span>{t('blockchainExplorer.gas')}</span>
-                                        <strong>{network.gasPrice ?? '-'}</strong>
-                                    </div>
-
-                                    <div>
-                                        <span>{t('blockchainExplorer.max')}</span>
-                                        <strong>{network.maxFee ?? '-'}</strong>
-                                    </div>
-
-                                    <div>
-                                        <span>{t('blockchainExplorer.priority')}</span>
-                                        <strong>{network.priorityFee ?? '-'}</strong>
-                                    </div>
-                                </div>
-
-                                <small className="blockchain-card__unit">
-                                    {t('blockchainExplorer.unit')}
-                                </small>
-
-                                <a
-                                    href={network.explorer}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="blockchain-card__link"
+                            return (
+                                <motion.article
+                                    key={`${network.id}-${index}`}
+                                    className="blockchain-card"
+                                    initial={{opacity: 0, y: 24}}
+                                    whileInView={{opacity: 1, y: 0}}
+                                    viewport={{once: true}}
+                                    transition={{duration: 0.4, delay: index * 0.05}}
+                                    aria-hidden={isDuplicate ? 'true' : undefined}
                                 >
-                                    {t('blockchainExplorer.openExplorer')} <FiExternalLink/>
-                                </a>
-                            </motion.article>
-                        ))}
+                                    <div className="blockchain-card__header">
+                                        <div>
+                                            <h3>{network.name}</h3>
+                                            <span>{network.symbol}</span>
+                                        </div>
+
+                                        <small className={`status ${network.status}`}>
+                                            {getStatusLabel(network.status)}
+                                        </small>
+                                    </div>
+
+                                    <div className="blockchain-card__main">
+                                        <span>{t('blockchainExplorer.latestBlock')}</span>
+                                        <strong>
+                                            {network.blockNumber == null
+                                                ? '-'
+                                                : formatNumber(network.blockNumber, language)}
+                                        </strong>
+                                    </div>
+
+                                    <div className="blockchain-card__stats">
+                                        <div>
+                                            <span>{t('blockchainExplorer.chain')}</span>
+                                            <strong>{network.chainId ?? '-'}</strong>
+                                        </div>
+
+                                        <div>
+                                            <span>{t('blockchainExplorer.gas')}</span>
+                                            <strong>
+                                                {network.gasPrice == null
+                                                    ? '-'
+                                                    : formatNumber(network.gasPrice, language, {
+                                                          maximumFractionDigits: 2,
+                                                      })}
+                                            </strong>
+                                        </div>
+
+                                        <div>
+                                            <span>{t('blockchainExplorer.max')}</span>
+                                            <strong>
+                                                {network.maxFee == null
+                                                    ? '-'
+                                                    : formatNumber(network.maxFee, language, {
+                                                          maximumFractionDigits: 2,
+                                                      })}
+                                            </strong>
+                                        </div>
+
+                                        <div>
+                                            <span>{t('blockchainExplorer.priority')}</span>
+                                            <strong>
+                                                {network.priorityFee == null
+                                                    ? '-'
+                                                    : formatNumber(network.priorityFee, language, {
+                                                          maximumFractionDigits: 2,
+                                                      })}
+                                            </strong>
+                                        </div>
+                                    </div>
+
+                                    <small className="blockchain-card__unit">
+                                        {t('blockchainExplorer.unit')}
+                                    </small>
+
+                                    <a
+                                        href={network.explorer}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="blockchain-card__link"
+                                        tabIndex={isDuplicate ? -1 : undefined}
+                                    >
+                                        {t('blockchainExplorer.openExplorer')}{' '}
+                                        <FiExternalLink aria-hidden="true" />
+                                    </a>
+                                </motion.article>
+                            )
+                        })}
                     </div>
+                </div>
+
+                <div className="blockchain-embla__controls">
+                    <button
+                        type="button"
+                        onClick={() => emblaApi?.scrollPrev()}
+                        aria-label={t('blockchainExplorer.previous')}
+                    >
+                        <FiChevronLeft aria-hidden="true" />
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => emblaApi?.scrollNext()}
+                        aria-label={t('blockchainExplorer.next')}
+                    >
+                        <FiChevronRight aria-hidden="true" />
+                    </button>
+                    {!reducedMotion && (
+                        <button
+                            type="button"
+                            onClick={() => setAutoScrollPaused((paused) => !paused)}
+                            aria-label={
+                                autoScrollPaused
+                                    ? t('blockchainExplorer.resume')
+                                    : t('blockchainExplorer.pause')
+                            }
+                        >
+                            {autoScrollPaused ? <FiPlay /> : <FiPause />}
+                        </button>
+                    )}
                 </div>
             </div>
         </section>

@@ -63,17 +63,46 @@
     padding: 0.4rem 0 1.2rem;
 }
 
+.blockchain-embla__controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.blockchain-embla__controls button {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 50%;
+    background: rgba(5, 12, 34, 0.78);
+    color: var(--color-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.blockchain-embla__controls button:hover,
+.blockchain-embla__controls button:focus-visible {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
 .blockchain-card {
     flex: 0 0 310px;
     min-width: 0;
 
     padding: 1.4rem;
     border-radius: 1.4rem;
-    background: radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.16), transparent 34%),
-    linear-gradient(135deg, rgba(44, 44, 108, 0.78), rgba(8, 14, 38, 0.9));
+    background:
+        radial-gradient(circle at 20% 0%, rgba(77, 181, 255, 0.16), transparent 34%),
+        linear-gradient(135deg, rgba(44, 44, 108, 0.78), rgba(8, 14, 38, 0.9));
     border: 1px solid rgba(77, 181, 255, 0.22);
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.22),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    box-shadow:
+        0 1.5rem 4rem rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.035);
     transition: var(--transition);
 }
 
@@ -103,7 +132,7 @@
     height: max-content;
     border-radius: 999px;
     padding: 0.25rem 0.55rem;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
 .status.online {
@@ -162,7 +191,7 @@
 .blockchain-card__unit {
     display: block;
     color: var(--color-light);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     margin-bottom: 1.2rem;
 }
 

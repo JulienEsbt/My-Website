@@ -1,24 +1,28 @@
-import img8491 from './IMG_8491.jpeg'
-import img8546 from './IMG_8546.jpeg'
-import img8558 from './IMG_8558.jpeg'
-import img8579 from './IMG_8579.jpeg'
-import img8606 from './IMG_8606.jpeg'
-import img8609 from './IMG_8609.jpeg'
-import img8619 from './IMG_8619.jpeg'
-import img8623 from './IMG_8623.jpeg'
-import img8672 from './IMG_8672.jpeg'
-import img8684 from './IMG_8684.jpeg'
-import img8690 from './IMG_8690.jpeg'
-import img8723 from './IMG_8723.jpeg'
-import img8752 from './IMG_8752.jpeg'
-import img8757 from './IMG_8757.jpeg'
-import img8768 from './IMG_8768.jpeg'
-import img8808 from './IMG_8808.jpeg'
-import img8937 from './IMG_8937.jpeg'
-import img8978 from './IMG_8978.jpeg'
-import img9011 from './IMG_9011.jpeg'
-import img9053 from './IMG_9053.jpeg'
+import albumManifest from '../../../../generated/media/travels/italy-2023.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img8491 = getTravelMedia('italy-2023/IMG_8491.jpeg')
+const img8546 = getTravelMedia('italy-2023/IMG_8546.jpeg')
+const img8558 = getTravelMedia('italy-2023/IMG_8558.jpeg')
+const img8579 = getTravelMedia('italy-2023/IMG_8579.jpeg')
+const img8606 = getTravelMedia('italy-2023/IMG_8606.jpeg')
+const img8609 = getTravelMedia('italy-2023/IMG_8609.jpeg')
+const img8619 = getTravelMedia('italy-2023/IMG_8619.jpeg')
+const img8623 = getTravelMedia('italy-2023/IMG_8623.jpeg')
+const img8672 = getTravelMedia('italy-2023/IMG_8672.jpeg')
+const img8684 = getTravelMedia('italy-2023/IMG_8684.jpeg')
+const img8690 = getTravelMedia('italy-2023/IMG_8690.jpeg')
+const img8723 = getTravelMedia('italy-2023/IMG_8723.jpeg')
+const img8752 = getTravelMedia('italy-2023/IMG_8752.jpeg')
+const img8757 = getTravelMedia('italy-2023/IMG_8757.jpeg')
+const img8768 = getTravelMedia('italy-2023/IMG_8768.jpeg')
+const img8808 = getTravelMedia('italy-2023/IMG_8808.jpeg')
+const img8937 = getTravelMedia('italy-2023/IMG_8937.jpeg')
+const img8978 = getTravelMedia('italy-2023/IMG_8978.jpeg')
+const img9011 = getTravelMedia('italy-2023/IMG_9011.jpeg')
+const img9053 = getTravelMedia('italy-2023/IMG_9053.jpeg')
 const italy2023Photos = [
     {src: img8491},
     {src: img8546},

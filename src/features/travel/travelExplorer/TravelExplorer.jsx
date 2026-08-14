@@ -1,38 +1,95 @@
-import React, {useState} from 'react'
+import React, {lazy, Suspense, useEffect, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiMousePointer} from 'react-icons/fi'
-import TravelGlobe from '../travelGlobe/TravelGlobe.jsx'
-import TravelMapbox from '../travelMapbox/TravelMapbox.jsx'
+import {FiMaximize2, FiMinimize2, FiGlobe, FiMap} from 'react-icons/fi'
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
+import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
+import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import './TravelExplorer.css'
+
+const TravelGlobe = lazy(() => import('../travelGlobe/TravelGlobe.jsx'))
+const TravelMapbox = lazy(() => import('../travelMapbox/TravelMapbox.jsx'))
 
 const TravelExplorer = () => {
     const {t} = useTranslation('travel')
     const [activeView, setActiveView] = useState(null)
     const [mobileView, setMobileView] = useState('globe')
+    const [loadedViews, setLoadedViews] = useState({globe: false, map: false})
+    const isMobile = useMediaQuery('(max-width: 600px), (max-height: 500px) and (max-width: 950px)')
+    const expandedViewRef = useRef(null)
+    const sectionRef = useRef(null)
+    const reduceButtonRef = useRef(null)
+    const expandButtonRef = useRef(null)
+    const showGlobe = !isMobile || mobileView === 'globe'
+    const showMap = !isMobile || mobileView === 'map'
 
-    const currentTitle = activeView === 'globe'
-        ? t('explorer.globeTitle')
-        : t('explorer.mapTitle')
+    const currentTitle = activeView === 'globe' ? t('explorer.globeTitle') : t('explorer.mapTitle')
 
-    const currentText = activeView === 'globe'
-        ? t('explorer.globeText')
-        : t('explorer.mapText')
+    const currentText = activeView === 'globe' ? t('explorer.globeText') : t('explorer.mapText')
+
+    const loadView = (view) => {
+        setLoadedViews((current) => (current[view] ? current : {...current, [view]: true}))
+    }
+
+    const expandView = (view) => {
+        loadView(view)
+        setActiveView(view)
+    }
+
+    const closeExpandedView = () => setActiveView(null)
+
+    useFocusTrap({
+        active: isMobile && Boolean(activeView),
+        containerRef: expandedViewRef,
+        initialFocusRef: reduceButtonRef,
+        onDismiss: closeExpandedView,
+        returnFocusRef: expandButtonRef,
+    })
+
+    useBodyScrollLock(isMobile && Boolean(activeView))
+
+    useEffect(() => {
+        const section = sectionRef.current
+        if (!section) return undefined
+
+        const loadVisibleViews = () => {
+            setLoadedViews((current) => ({
+                globe: current.globe || !isMobile || mobileView === 'globe',
+                map: current.map || !isMobile || mobileView === 'map',
+            }))
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            loadVisibleViews()
+            return undefined
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) return
+                loadVisibleViews()
+                observer.disconnect()
+            },
+            {rootMargin: '320px 0px'}
+        )
+
+        observer.observe(section)
+        return () => observer.disconnect()
+    }, [isMobile, mobileView])
 
     return (
-        <section id="travel-explorer" className="travel-explorer-section">
-            <h5>{t('explorer.kicker')}</h5>
+        <section id="travel-explorer" ref={sectionRef} className="travel-explorer-section">
+            <p className="section-kicker">{t('explorer.kicker')}</p>
             <h2>{t('explorer.title')}</h2>
-            <p className="travel-explorer__subtitle">
-                {t('explorer.subtitle')}
-            </p>
+            <p className="travel-explorer__subtitle">{t('explorer.subtitle')}</p>
 
-            <div className="travel-explorer__divider"/>
+            <div className="travel-explorer__divider" />
 
             <div className="travel-explorer__legend">
                 {['home', 'lived', 'study', 'visited', 'planned', 'dream'].map((category) => (
                     <span key={category} className="travel-explorer__legend-item">
-                        <i className={`travel-explorer__legend-dot ${category}`}/>
+                        <i className={`travel-explorer__legend-dot ${category}`} />
                         {t(`explorer.legend.${category}`)}
                     </span>
                 ))}
@@ -43,8 +100,9 @@ const TravelExplorer = () => {
                     type="button"
                     className={mobileView === 'globe' ? 'active' : ''}
                     onClick={() => setMobileView('globe')}
+                    aria-pressed={mobileView === 'globe'}
                 >
-                    <FiGlobe/>
+                    <FiGlobe />
                     {t('explorer.globeTitle')}
                 </button>
 
@@ -52,8 +110,9 @@ const TravelExplorer = () => {
                     type="button"
                     className={mobileView === 'map' ? 'active' : ''}
                     onClick={() => setMobileView('map')}
+                    aria-pressed={mobileView === 'map'}
                 >
-                    <FiMap/>
+                    <FiMap />
                     {t('explorer.mapTitle')}
                 </button>
             </div>
@@ -69,106 +128,128 @@ const TravelExplorer = () => {
                             exit={{opacity: 0, y: -20}}
                             transition={{duration: 0.35}}
                         >
-                            <article
-                                className={`travel-explorer__card travel-explorer__card--globe ${mobileView === 'globe' ? 'mobile-active' : ''}`}>
-                                <div className="travel-explorer__card-header">
-                                    <div className="travel-explorer__title-row">
-                                        <span className="travel-explorer__icon">
-                                            <FiGlobe/>
-                                        </span>
-                                        <div>
-                                            <h3>{t('explorer.globeTitle')}</h3>
-                                            <p>{t('explorer.globeText')}</p>
+                            {showGlobe && (
+                                <article className="travel-explorer__card travel-explorer__card--globe mobile-active">
+                                    <div className="travel-explorer__card-header">
+                                        <div className="travel-explorer__title-row">
+                                            <span className="travel-explorer__icon">
+                                                <FiGlobe />
+                                            </span>
+                                            <div>
+                                                <h3>{t('explorer.globeTitle')}</h3>
+                                                <p>{t('explorer.globeText')}</p>
+                                            </div>
                                         </div>
+
+                                        <button
+                                            ref={expandButtonRef}
+                                            type="button"
+                                            className="travel-explorer__expand-btn"
+                                            onClick={() => expandView('globe')}
+                                            aria-label={t('explorer.expandGlobe')}
+                                        >
+                                            <FiMaximize2 />
+                                        </button>
                                     </div>
 
-                                    <button
-                                        className="travel-explorer__expand-btn"
-                                        onClick={() => setActiveView('globe')}
-                                        aria-label={t('explorer.expandGlobe')}
-                                    >
-                                        <FiMaximize2/>
-                                    </button>
-                                </div>
+                                    <div className="travel-explorer__visual travel-explorer__visual--globe">
+                                        {loadedViews.globe ? (
+                                            <Suspense fallback={<FeatureLoading fill />}>
+                                                <TravelGlobe />
+                                            </Suspense>
+                                        ) : (
+                                            <FeatureLoading fill />
+                                        )}
+                                    </div>
+                                </article>
+                            )}
 
-                                <div className="travel-explorer__visual travel-explorer__visual--globe">
-                                    <TravelGlobe/>
-                                </div>
-                            </article>
-
-                            <article
-                                className={`travel-explorer__card travel-explorer__card--map ${mobileView === 'map' ? 'mobile-active' : ''}`}>
-                                <div className="travel-explorer__card-header">
-                                    <div className="travel-explorer__title-row">
-                                        <span className="travel-explorer__icon">
-                                            <FiMap/>
-                                        </span>
-                                        <div>
-                                            <h3>{t('explorer.mapTitle')}</h3>
-                                            <p>{t('explorer.mapText')}</p>
+                            {showMap && (
+                                <article className="travel-explorer__card travel-explorer__card--map mobile-active">
+                                    <div className="travel-explorer__card-header">
+                                        <div className="travel-explorer__title-row">
+                                            <span className="travel-explorer__icon">
+                                                <FiMap />
+                                            </span>
+                                            <div>
+                                                <h3>{t('explorer.mapTitle')}</h3>
+                                                <p>{t('explorer.mapText')}</p>
+                                            </div>
                                         </div>
+
+                                        <button
+                                            ref={expandButtonRef}
+                                            type="button"
+                                            className="travel-explorer__expand-btn"
+                                            onClick={() => expandView('map')}
+                                            aria-label={t('explorer.expandMap')}
+                                        >
+                                            <FiMaximize2 />
+                                        </button>
                                     </div>
 
-                                    <button
-                                        className="travel-explorer__expand-btn"
-                                        onClick={() => setActiveView('map')}
-                                        aria-label={t('explorer.expandMap')}
-                                    >
-                                        <FiMaximize2/>
-                                    </button>
-                                </div>
-
-                                <div className="travel-explorer__visual">
-                                    <TravelMapbox/>
-                                </div>
-                            </article>
+                                    <div className="travel-explorer__visual">
+                                        {loadedViews.map ? (
+                                            <Suspense fallback={<FeatureLoading fill />}>
+                                                <TravelMapbox />
+                                            </Suspense>
+                                        ) : (
+                                            <FeatureLoading fill />
+                                        )}
+                                    </div>
+                                </article>
+                            )}
                         </motion.div>
                     )}
 
                     {activeView && (
                         <motion.div
+                            ref={expandedViewRef}
                             key={activeView}
                             className="travel-explorer__expanded"
                             initial={{opacity: 0, scale: 0.96, y: 30}}
                             animate={{opacity: 1, scale: 1, y: 0}}
                             exit={{opacity: 0, scale: 0.96, y: -20}}
                             transition={{duration: 0.35}}
+                            role={isMobile ? 'dialog' : undefined}
+                            aria-modal={isMobile ? 'true' : undefined}
+                            aria-labelledby="travel-explorer-expanded-title"
+                            tabIndex={isMobile ? -1 : undefined}
                         >
                             <div className="travel-explorer__card-header">
                                 <div className="travel-explorer__title-row">
                                     <span className="travel-explorer__icon">
-                                        {activeView === 'globe' ? <FiGlobe/> : <FiMap/>}
+                                        {activeView === 'globe' ? <FiGlobe /> : <FiMap />}
                                     </span>
                                     <div>
-                                        <h3>{currentTitle}</h3>
+                                        <h3 id="travel-explorer-expanded-title">{currentTitle}</h3>
                                         <p>{currentText}</p>
                                     </div>
                                 </div>
 
                                 <button
+                                    ref={reduceButtonRef}
+                                    type="button"
                                     className="travel-explorer__expand-btn"
-                                    onClick={() => setActiveView(null)}
+                                    onClick={closeExpandedView}
                                     aria-label={t('explorer.reduce')}
                                 >
-                                    <FiMinimize2/>
+                                    <FiMinimize2 />
                                 </button>
                             </div>
 
                             <div className="travel-explorer__expanded-visual">
-                                {activeView === 'globe' ? (
-                                    <TravelGlobe expanded/>
-                                ) : (
-                                    <TravelMapbox expanded/>
-                                )}
+                                <Suspense fallback={<FeatureLoading fill />}>
+                                    {activeView === 'globe' ? (
+                                        <TravelGlobe expanded />
+                                    ) : (
+                                        <TravelMapbox expanded />
+                                    )}
+                                </Suspense>
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
-
-                <div className="travel-explorer__hint">
-                    <FiMousePointer/>
-                    <span>{t('explorer.hint')}</span>
-                </div>
             </div>
         </section>
     )

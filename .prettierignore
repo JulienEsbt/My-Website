@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+package-lock.json
+src/assets/
+src/content/
+src/generated/
+*.md
+.env.example

@@ -52,7 +52,9 @@
 }
 
 .travel-timeline__item.active {
-    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.28), 0 0 1.4rem rgba(77, 181, 255, 0.14);
+    box-shadow:
+        0 1.2rem 3.5rem rgba(0, 0, 0, 0.28),
+        0 0 1.4rem rgba(77, 181, 255, 0.14);
 }
 
 .travel-timeline__dot {
@@ -64,7 +66,9 @@
     transform: translateY(-50%);
     border-radius: 50%;
     background: var(--color-primary);
-    box-shadow: 0 0 0 6px rgba(77, 181, 255, 0.12), 0 0 18px rgba(77, 181, 255, 0.8);
+    box-shadow:
+        0 0 0 6px rgba(77, 181, 255, 0.12),
+        0 0 18px rgba(77, 181, 255, 0.8);
 }
 
 .travel-timeline__main {
@@ -158,7 +162,9 @@
     flex-direction: column;
     padding: 1.6rem;
     border-radius: 1.5rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 34%), linear-gradient(145deg, rgba(8, 18, 45, 0.84), rgba(5, 12, 34, 0.72));
+    background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 34%),
+        linear-gradient(145deg, rgba(8, 18, 45, 0.84), rgba(5, 12, 34, 0.72));
     border: 1px solid rgba(77, 181, 255, 0.18);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
 }
@@ -258,8 +264,8 @@
     left: 50%;
     bottom: 0.75rem;
     transform: translateX(-50%);
-    width: 2rem;
-    height: 2rem;
+    width: 2.75rem;
+    height: 2.75rem;
     display: grid;
     place-items: center;
     border-radius: 50%;
@@ -277,7 +283,8 @@
 }
 
 @keyframes travel-scroll-cue {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.55;
         transform: translateX(-50%) translateY(0);
     }
@@ -317,7 +324,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease,
+        opacity 0.35s ease;
 }
 
 .travel-timeline__photo-hero span {
@@ -329,7 +339,7 @@
     border-radius: 999px;
     color: var(--color-white);
     background: rgba(5, 12, 34, 0.72);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
 }
 
@@ -341,7 +351,7 @@
 
 .travel-timeline__photo-hero::after,
 .travel-timeline__photo-thumb::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: rgba(77, 181, 255, 0);
@@ -400,7 +410,9 @@
 }
 
 .travel-timeline__mini-map.no-map {
-    background: radial-gradient(circle at center, rgba(77, 181, 255, 0.18), transparent 45%), rgba(5, 12, 34, 0.72);
+    background:
+        radial-gradient(circle at center, rgba(77, 181, 255, 0.18), transparent 45%),
+        rgba(5, 12, 34, 0.72);
 }
 
 .travel-timeline__mini-map span {
@@ -638,7 +650,7 @@
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 700px), screen and (max-height: 500px) and (max-width: 950px) {
     .travel-timeline__list {
         padding-left: 2rem;
     }
@@ -675,10 +687,13 @@
         width: 100%;
         height: 100svh;
         min-height: 100svh;
-        padding: calc(env(safe-area-inset-top) + 5rem) 1.3rem calc(env(safe-area-inset-bottom) + 7rem);
+        padding: calc(env(safe-area-inset-top) + 5rem) 1.3rem
+            calc(env(safe-area-inset-bottom) + 7rem);
         border-radius: 0;
         background: #020612;
-        background-image: radial-gradient(circle at top left, rgba(77, 181, 255, 0.14), transparent 38%), linear-gradient(135deg, rgba(13, 22, 55, 0.98), rgba(5, 10, 28, 1));
+        background-image:
+            radial-gradient(circle at top left, rgba(77, 181, 255, 0.14), transparent 38%),
+            linear-gradient(135deg, rgba(13, 22, 55, 0.98), rgba(5, 10, 28, 1));
         animation: timeline-detail-in 0.28s ease both;
     }
 
@@ -690,10 +705,11 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
+        min-height: 2.75rem;
         margin-bottom: 1.5rem;
         color: var(--color-primary);
         background: transparent;
-        font-family: 'Poppins', sans-serif;
+        font-family: var(--font-sans);
         font-size: 0.95rem;
         cursor: pointer;
     }
@@ -711,7 +727,8 @@
         height: 100svh;
         align-items: center;
         justify-content: center;
-        padding: calc(env(safe-area-inset-top) + 0.75rem) 0.75rem calc(env(safe-area-inset-bottom) + 5.4rem);
+        padding: calc(env(safe-area-inset-top) + 0.75rem) 0.75rem
+            calc(env(safe-area-inset-bottom) + 5.4rem);
         background: #020612;
     }
 
@@ -779,7 +796,7 @@
 
     .travel-timeline__lightbox-strip button {
         flex-basis: 3.55rem;
-        height: 2.25rem;
+        height: 2.75rem;
         border-radius: 0.55rem;
     }
 }

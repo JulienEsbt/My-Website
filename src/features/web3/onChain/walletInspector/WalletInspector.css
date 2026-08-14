@@ -2,8 +2,9 @@
     max-width: 1240px;
     padding: 1rem 1.25rem 1.1rem;
     border-radius: 1.6rem;
-    background: radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.12), transparent 28%),
-    linear-gradient(135deg, rgba(25, 33, 84, 0.86), rgba(6, 11, 34, 0.96));
+    background:
+        radial-gradient(circle at 12% 0%, rgba(77, 181, 255, 0.12), transparent 28%),
+        linear-gradient(135deg, rgba(25, 33, 84, 0.86), rgba(6, 11, 34, 0.96));
     border: 1px solid rgba(77, 181, 255, 0.22);
     box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.32);
     display: flex;
@@ -15,6 +16,17 @@
 .wallet-inspector__overview,
 .wallet-inspector__main-grid {
     margin: 0 !important;
+}
+
+.wallet-inspector__data-notice {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255, 184, 107, 0.32);
+    border-radius: 0.85rem;
+    background: rgba(255, 184, 107, 0.08);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
 }
 
 .wallet-inspector__searchbar {
@@ -35,7 +47,7 @@
     background: rgba(10, 15, 39, 0.92);
     border: 1px solid rgba(77, 181, 255, 0.18);
     color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .wallet-inspector__searchbar button {
@@ -135,14 +147,14 @@
 .wallet-inspector__identity-card span,
 .wallet-inspector__identity-card small {
     color: var(--color-light);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
 }
 
 .wallet-inspector__metric span,
 .wallet-inspector__metric small {
     display: block;
     color: var(--color-light);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
 .wallet-inspector__metric strong {
@@ -240,7 +252,7 @@
 
 .allocation-donut span {
     color: var(--color-light);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
 }
 
 .allocation-legend {
@@ -263,7 +275,7 @@
 .allocation-legend-row span,
 .allocation-legend-row em {
     color: var(--color-light);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-style: normal;
 }
 
@@ -330,7 +342,7 @@
 .wallet-token-row span,
 .wallet-token-row em {
     color: var(--color-light);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-style: normal;
 }
 
@@ -379,13 +391,13 @@
 
 .wallet-nft-card strong {
     color: var(--color-white);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     margin-top: 0.4rem;
 }
 
 .wallet-nft-card span {
     color: var(--color-light);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     padding-bottom: 0.45rem;
 }
 
@@ -408,8 +420,9 @@
     overflow: hidden;
     padding: 1.2rem;
     border-radius: 1.4rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.16), transparent 32%),
-    linear-gradient(135deg, rgba(35, 42, 105, 0.96), rgba(8, 14, 38, 0.98));
+    background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.16), transparent 32%),
+        linear-gradient(135deg, rgba(35, 42, 105, 0.96), rgba(8, 14, 38, 0.98));
     border: 1px solid rgba(77, 181, 255, 0.22);
     box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.45);
 }

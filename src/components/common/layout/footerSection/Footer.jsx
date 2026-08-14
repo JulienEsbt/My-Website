@@ -3,10 +3,12 @@ import {FaInstagram, FaTwitter} from 'react-icons/fa'
 import {BsGithub, BsLinkedin} from 'react-icons/bs'
 import {FiArrowUpRight} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
+import {Link, NavLink} from 'react-router-dom'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {LINKS} from '../../../../config/links.js'
-import {SITE_PAGES} from '../../../../config/pages.js'
+import {SITE_PAGE_GROUPS} from '../../../../config/pages.js'
+import useReducedMotion from '../../accessibility/useReducedMotion.js'
 import './Footer.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -15,17 +17,20 @@ const Footer = () => {
     const {t} = useTranslation('common')
     const footerRef = useRef(null)
     const elementsRef = useRef([])
+    const reducedMotion = useReducedMotion()
 
-    const instagramUrl = LINKS.social.instagramPersonal ?? LINKS.social.instagram
+    const instagramUrl = LINKS.social.instagramPersonal
 
     const socials = [
-        {label: 'Instagram', href: instagramUrl, icon: <FaInstagram/>},
-        {label: 'Twitter / X', href: LINKS.social.twitter, icon: <FaTwitter/>},
-        {label: 'LinkedIn', href: LINKS.social.linkedin, icon: <BsLinkedin/>},
-        {label: 'GitHub', href: LINKS.social.github, icon: <BsGithub/>},
+        {label: 'Instagram', href: instagramUrl, icon: <FaInstagram />},
+        {label: 'Twitter / X', href: LINKS.social.twitter, icon: <FaTwitter />},
+        {label: 'LinkedIn', href: LINKS.social.linkedin, icon: <BsLinkedin />},
+        {label: 'GitHub', href: LINKS.social.github, icon: <BsGithub />},
     ]
 
     useLayoutEffect(() => {
+        if (reducedMotion) return undefined
+
         const ctx = gsap.context(() => {
             gsap.from(footerRef.current, {
                 opacity: 0,
@@ -46,33 +51,43 @@ const Footer = () => {
         }, footerRef)
 
         return () => ctx.revert()
-    }, [])
+    }, [reducedMotion])
 
     return (
         <footer className="footer-section" ref={footerRef}>
             <div className="container footer-section__container">
                 <div className="footer-section__brand" ref={(el) => (elementsRef.current[0] = el)}>
-                    <a href="/" className="footer-section__logo">
+                    <Link to="/" className="footer-section__logo">
                         {t('footer.logo')}
-                    </a>
+                    </Link>
 
                     <p>{t('footer.description')}</p>
                 </div>
 
                 <nav className="footer-section__nav" aria-label={t('footer.aria')}>
-                    <span ref={(el) => (elementsRef.current[1] = el)}>
-                        {t('footer.pages')}
-                    </span>
+                    <span ref={(el) => (elementsRef.current[1] = el)}>{t('footer.pages')}</span>
 
-                    <div className="footer-section__links">
-                        {SITE_PAGES.map((page, index) => (
-                            <a
-                                key={page.path}
-                                href={page.path}
-                                ref={(el) => (elementsRef.current[index + 2] = el)}
-                            >
-                                {t(page.i18nKey)}
-                            </a>
+                    <div className="footer-section__nav-groups">
+                        {SITE_PAGE_GROUPS.map((group, groupIndex) => (
+                            <div className="footer-section__nav-group" key={group.id}>
+                                <strong>{t(group.i18nKey)}</strong>
+                                <div className="footer-section__links">
+                                    {group.pages.map((page, pageIndex) => (
+                                        <NavLink
+                                            key={page.path}
+                                            to={page.path}
+                                            end={page.path === '/'}
+                                            ref={(el) =>
+                                                (elementsRef.current[
+                                                    groupIndex * 2 + pageIndex + 2
+                                                ] = el)
+                                            }
+                                        >
+                                            {t(page.i18nKey)}
+                                        </NavLink>
+                                    ))}
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </nav>
@@ -94,15 +109,16 @@ const Footer = () => {
                         ))}
                     </div>
 
-                    <a href="#contact" className="footer-section__cta">
+                    <Link to="/#contact" className="footer-section__cta">
                         {t('footer.cta')}
-                        <FiArrowUpRight/>
-                    </a>
+                        <FiArrowUpRight />
+                    </Link>
                 </div>
             </div>
 
             <div className="container footer-section__bottom">
                 <small>{t('footer.copyright')}</small>
+                <Link to="/privacy">{t('footer.privacy')}</Link>
             </div>
         </footer>
     )

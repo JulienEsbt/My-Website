@@ -1,28 +1,32 @@
-import img2701 from './IMG_2701.jpeg'
-import img3001 from './IMG_3001.jpeg'
-import img3006 from './IMG_3006.jpeg'
-import img3061 from './IMG_3061.jpeg'
-import img3015 from './IMG_3015.jpeg'
-import img3019 from './IMG_3019.jpeg'
-import img3025 from './IMG_3025.jpeg'
-import img3030 from './IMG_3030.jpeg'
-import img3039 from './IMG_3039.jpeg'
-import img3040 from './IMG_3040.jpeg'
-import img2751 from './IMG_2751.jpeg'
-import img3080 from './IMG_3080.jpeg'
-import img3083 from './IMG_3083.jpeg'
-import img3100 from './IMG_3100.jpeg'
-import img3103 from './IMG_3103.jpeg'
-import img3106 from './IMG_3106.jpeg'
-import img3107 from './IMG_3107.jpeg'
-import img3115 from './IMG_3115.jpeg'
-import img3125 from './IMG_3125.jpeg'
-import img3130 from './IMG_3130.jpeg'
-import img3132 from './IMG_3132.jpeg'
-import img3136 from './IMG_3136.jpeg'
-import img3139 from './IMG_3139.jpeg'
-import img3142 from './IMG_3142.jpeg'
+import albumManifest from '../../../../generated/media/travels/slovakia-2025.json'
+import {createMediaResolver} from '../../../../config/media.js'
 
+const getTravelMedia = createMediaResolver(albumManifest, 'travels')
+
+const img2701 = getTravelMedia('slovakia-2025/IMG_2701.jpeg')
+const img3001 = getTravelMedia('slovakia-2025/IMG_3001.jpeg')
+const img3006 = getTravelMedia('slovakia-2025/IMG_3006.jpeg')
+const img3061 = getTravelMedia('slovakia-2025/IMG_3061.jpeg')
+const img3015 = getTravelMedia('slovakia-2025/IMG_3015.jpeg')
+const img3019 = getTravelMedia('slovakia-2025/IMG_3019.jpeg')
+const img3025 = getTravelMedia('slovakia-2025/IMG_3025.jpeg')
+const img3030 = getTravelMedia('slovakia-2025/IMG_3030.jpeg')
+const img3039 = getTravelMedia('slovakia-2025/IMG_3039.jpeg')
+const img3040 = getTravelMedia('slovakia-2025/IMG_3040.jpeg')
+const img2751 = getTravelMedia('slovakia-2025/IMG_2751.jpeg')
+const img3080 = getTravelMedia('slovakia-2025/IMG_3080.jpeg')
+const img3083 = getTravelMedia('slovakia-2025/IMG_3083.jpeg')
+const img3100 = getTravelMedia('slovakia-2025/IMG_3100.jpeg')
+const img3103 = getTravelMedia('slovakia-2025/IMG_3103.jpeg')
+const img3106 = getTravelMedia('slovakia-2025/IMG_3106.jpeg')
+const img3107 = getTravelMedia('slovakia-2025/IMG_3107.jpeg')
+const img3115 = getTravelMedia('slovakia-2025/IMG_3115.jpeg')
+const img3125 = getTravelMedia('slovakia-2025/IMG_3125.jpeg')
+const img3130 = getTravelMedia('slovakia-2025/IMG_3130.jpeg')
+const img3132 = getTravelMedia('slovakia-2025/IMG_3132.jpeg')
+const img3136 = getTravelMedia('slovakia-2025/IMG_3136.jpeg')
+const img3139 = getTravelMedia('slovakia-2025/IMG_3139.jpeg')
+const img3142 = getTravelMedia('slovakia-2025/IMG_3142.jpeg')
 const slovakia2025Photos = [
     {src: img2701},
     {src: img3001},

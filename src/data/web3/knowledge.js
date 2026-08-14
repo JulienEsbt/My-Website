@@ -4,7 +4,11 @@ export const CRYPTO_KNOWLEDGE = [
         icon: '⛓️',
         level: 'advanced',
         items: [
-            {id: 'bitcoin', icon: '₿', tags: ['proofOfWork', 'limitedSupply', 'lightning', 'storeOfValue']},
+            {
+                id: 'bitcoin',
+                icon: '₿',
+                tags: ['proofOfWork', 'limitedSupply', 'lightning', 'storeOfValue'],
+            },
             {id: 'ethereum', icon: 'Ξ', tags: ['evm', 'smartContracts', 'defi', 'layer2']},
             {id: 'polkadot', icon: '●', tags: ['parachains', 'interoperability', 'staking']},
             {id: 'solana', icon: '◎', tags: ['highThroughput', 'lowFees', 'defi', 'nfts']},

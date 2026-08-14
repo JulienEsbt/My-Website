@@ -2,6 +2,7 @@ import React, {useMemo, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
+import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import dreamDestinations from '../../../data/travel/dreamDestinations.js'
 import './DreamDestinations.css'
 
@@ -16,7 +17,7 @@ const DreamDestinations = () => {
         requestAnimationFrame(() => {
             const item = railRef.current?.children?.[index]
             item?.scrollIntoView({
-                behavior: 'smooth',
+                behavior: getPreferredScrollBehavior(),
                 inline: 'center',
                 block: 'nearest',
             })
@@ -27,7 +28,7 @@ const DreamDestinations = () => {
 
     const getText = (destination, field) => {
         if (!destination) return ''
-        return isFr ? destination[field] : destination[`${field}En`] ?? destination[field]
+        return isFr ? destination[field] : (destination[`${field}En`] ?? destination[field])
     }
 
     const next = () => {
@@ -53,12 +54,17 @@ const DreamDestinations = () => {
 
     return (
         <section id="dreams" className="dream-section">
-            <h5>{t('dreams.kicker')}</h5>
+            <p className="section-kicker">{t('dreams.kicker')}</p>
             <h2>{t('dreams.title')}</h2>
             <p className="dream-section__intro">{t('dreams.intro')}</p>
 
             <div className="container dream-showcase">
-                <div ref={railRef} className="dream-showcase__rail" aria-label="Destinations rêvées">
+                <div
+                    ref={railRef}
+                    className="dream-showcase__rail"
+                    role="group"
+                    aria-label={t('dreams.aria.list')}
+                >
                     {dreamDestinations.map((destination, index) => (
                         <button
                             key={destination.id}
@@ -68,8 +74,9 @@ const DreamDestinations = () => {
                                 setActiveIndex(index)
                                 syncRail(index)
                             }}
+                            aria-pressed={activeIndex === index}
                         >
-                            <span>{destination.emoji}</span>
+                            <span aria-hidden="true">{destination.emoji}</span>
                             <strong>{getText(destination, 'name')}</strong>
                             <small>{getText(destination, 'label')}</small>
                         </button>
@@ -86,13 +93,11 @@ const DreamDestinations = () => {
                         transition={{duration: 0.35, ease: 'easeOut'}}
                     >
                         <div className="dream-showcase__top">
-                            <span className="dream-showcase__emoji">
+                            <span className="dream-showcase__emoji" aria-hidden="true">
                                 {activeDestination.emoji}
                             </span>
 
-                            <span className="dream-showcase__counter">
-                                {activeProgress}
-                            </span>
+                            <span className="dream-showcase__counter">{activeProgress}</span>
                         </div>
 
                         <div className="dream-showcase__tags">
@@ -112,8 +117,12 @@ const DreamDestinations = () => {
                         </p>
 
                         <div className="dream-showcase__controls">
-                            <button type="button" onClick={previous} aria-label="Destination précédente">
-                                <FiArrowLeft/>
+                            <button
+                                type="button"
+                                onClick={previous}
+                                aria-label={t('dreams.aria.previous')}
+                            >
+                                <FiArrowLeft />
                             </button>
 
                             <div className="dream-showcase__dots">
@@ -126,13 +135,16 @@ const DreamDestinations = () => {
                                             setActiveIndex(index)
                                             syncRail(index)
                                         }}
-                                        aria-label={`Destination ${index + 1}`}
+                                        aria-label={t('dreams.aria.select', {
+                                            destination: getText(destination, 'name'),
+                                        })}
+                                        aria-pressed={activeIndex === index}
                                     />
                                 ))}
                             </div>
 
-                            <button type="button" onClick={next} aria-label="Destination suivante">
-                                <FiArrowRight/>
+                            <button type="button" onClick={next} aria-label={t('dreams.aria.next')}>
+                                <FiArrowRight />
                             </button>
                         </div>
                     </motion.article>

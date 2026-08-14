@@ -2,7 +2,7 @@
     position: relative;
 
     width: 88px;
-    height: 40px;
+    height: 44px;
     border-radius: 999px;
 
     display: flex;
@@ -17,20 +17,22 @@
     backdrop-filter: blur(var(--liquid-blur)) saturate(210%) brightness(0.92);
     -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(210%) brightness(0.92);
 
-    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.40),
-    0 0 22px rgba(77, 181, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+    box-shadow:
+        0 14px 38px rgba(0, 0, 0, 0.4),
+        0 0 22px rgba(77, 181, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.14);
 }
 
 .lang-switch::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 1px;
     border-radius: inherit;
 
-    background: radial-gradient(circle at 26% 0%, rgba(255, 255, 255, 0.17), transparent 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 58%);
+    background:
+        radial-gradient(circle at 26% 0%, rgba(255, 255, 255, 0.17), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 58%);
 
     pointer-events: none;
 }
@@ -38,9 +40,15 @@
 .lang-switch:hover {
     border-color: rgba(255, 255, 255, 0.25);
 
-    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.46),
-    0 0 20px rgba(77, 181, 255, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    box-shadow:
+        0 18px 46px rgba(0, 0, 0, 0.46),
+        0 0 20px rgba(77, 181, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.lang-switch:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
 }
 
 .lang-slider {
@@ -80,7 +88,9 @@
 
 .lang-labels span {
     opacity: 0.52;
-    transition: color 0.25s ease, opacity 0.25s ease;
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
 }
 
 .lang-labels span.active {

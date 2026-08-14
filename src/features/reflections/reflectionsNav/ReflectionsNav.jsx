@@ -8,13 +8,13 @@ const ReflectionsNav = () => {
     const {t} = useTranslation('reflections')
 
     const items = [
-        {id: 'top', label: t('nav.items.top'), icon: <AiOutlineHome/>},
-        {id: 'themes', label: t('nav.items.themes'), icon: <BiCategoryAlt/>},
-        {id: 'latest', label: t('nav.items.latest'), icon: <BiBookOpen/>},
-        {id: 'author', label: t('nav.items.author'), icon: <BiUser/>},
+        {id: 'top', label: t('nav.items.top'), icon: <AiOutlineHome />},
+        {id: 'themes', label: t('nav.items.themes'), icon: <BiCategoryAlt />},
+        {id: 'latest', label: t('nav.items.latest'), icon: <BiBookOpen />},
+        {id: 'author', label: t('nav.items.author'), icon: <BiUser />},
     ]
 
-    return <SectionNav items={items} ariaLabel={t('nav.aria')}/>
+    return <SectionNav items={items} ariaLabel={t('nav.aria')} />
 }
 
 export default ReflectionsNav

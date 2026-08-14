@@ -9,15 +9,15 @@ const TravelNav = () => {
     const {t} = useTranslation('travel')
 
     const items = [
-        {id: 'top', label: t('nav.items.top'), icon: <AiOutlineHome/>},
-        {id: 'travel-explorer', label: t('nav.items.explorer'), icon: <BiMapAlt/>},
-        {id: 'stories', label: t('nav.items.timeline'), icon: <BiTimeFive/>},
-        {id: 'dreams', label: t('nav.items.dreams'), icon: <PiCompassBold/>},
+        {id: 'top', label: t('nav.items.top'), icon: <AiOutlineHome />},
+        {id: 'travel-explorer', label: t('nav.items.explorer'), icon: <BiMapAlt />},
+        {id: 'stories', label: t('nav.items.timeline'), icon: <BiTimeFive />},
+        {id: 'dreams', label: t('nav.items.dreams'), icon: <PiCompassBold />},
     ]
 
     return (
         <div className="travel-nav">
-            <SectionNav items={items} ariaLabel={t('nav.aria')}/>
+            <SectionNav items={items} ariaLabel={t('nav.aria')} />
         </div>
     )
 }

@@ -4,6 +4,7 @@ import {FaReact, FaServer} from 'react-icons/fa'
 import {SiEthereum} from 'react-icons/si'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import './Experience.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -11,17 +12,17 @@ gsap.registerPlugin(ScrollTrigger)
 const GROUPS = [
     {
         id: 'frontend',
-        icon: <FaReact/>,
+        icon: <FaReact />,
         skills: ['react', 'typescript', 'angular', 'motion'],
     },
     {
         id: 'backend',
-        icon: <FaServer/>,
+        icon: <FaServer />,
         skills: ['java', 'sql', 'apis', 'batch'],
     },
     {
         id: 'web3',
-        icon: <SiEthereum/>,
+        icon: <SiEthereum />,
         skills: ['solidity', 'ethers', 'hardhat', 'onchain'],
     },
 ]
@@ -30,8 +31,11 @@ const Experience = () => {
     const {t} = useTranslation('home')
     const sectionRef = useRef(null)
     const cardsRef = useRef([])
+    const reducedMotion = useReducedMotion()
 
     useLayoutEffect(() => {
+        if (reducedMotion) return undefined
+
         const ctx = gsap.context(() => {
             gsap.from(sectionRef.current, {
                 opacity: 0,
@@ -52,11 +56,11 @@ const Experience = () => {
         }, sectionRef)
 
         return () => ctx.revert()
-    }, [])
+    }, [reducedMotion])
 
     return (
         <section id="experience" ref={sectionRef}>
-            <h5>{t('experience.kicker')}</h5>
+            <p className="section-kicker">{t('experience.kicker')}</p>
             <h2>{t('experience.title')}</h2>
             <p className="experience__intro">{t('experience.intro')}</p>
 
@@ -68,7 +72,9 @@ const Experience = () => {
                         ref={(el) => (cardsRef.current[index] = el)}
                     >
                         <div className="experience__card-head">
-                            <div className="experience__icon">{group.icon}</div>
+                            <div className="experience__icon" aria-hidden="true">
+                                {group.icon}
+                            </div>
 
                             <div>
                                 <h3>{t(`experience.groups.${group.id}.title`)}</h3>

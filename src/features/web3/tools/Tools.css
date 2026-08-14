@@ -1,14 +1,23 @@
 .tools-v2 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.4rem;
+}
+
+.tools-v2__intro {
+    width: min(760px, 88vw);
+    margin: -1rem auto 2.4rem;
+    color: var(--color-light);
+    line-height: 1.7;
+    text-align: center;
 }
 
 .tools-v2__card {
     overflow: hidden;
     border-radius: 1.5rem;
-    background: radial-gradient(circle at top left, rgba(77, 181, 255, 0.13), transparent 35%),
-    linear-gradient(135deg, rgba(44, 44, 108, 0.76), rgba(12, 17, 43, 0.9));
+    background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.13), transparent 35%),
+        linear-gradient(135deg, rgba(44, 44, 108, 0.76), rgba(12, 17, 43, 0.9));
     border: 1px solid rgba(77, 181, 255, 0.2);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.18);
     transition: var(--transition);
@@ -65,7 +74,7 @@
 
 .tools-v2__list li a {
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 0.7rem;
     padding: 0.85rem;
@@ -95,14 +104,6 @@
 .tools-v2__list strong {
     font-size: 0.9rem;
     font-weight: 500;
-}
-
-.tools-v2__list small {
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary-variant);
-    border-radius: 999px;
-    padding: 0.15rem 0.45rem;
-    font-size: 0.65rem;
 }
 
 .tools-v2__external {
@@ -161,9 +162,5 @@
     .tools-v2__list li a {
         grid-template-columns: auto 1fr auto;
         padding: 0.8rem;
-    }
-
-    .tools-v2__list small {
-        display: none;
     }
 }

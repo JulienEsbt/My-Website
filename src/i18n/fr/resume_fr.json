@@ -1,0 +1,145 @@
+{
+    "meta": {
+        "title": "CV de Julien Esterbet — Développeur full-stack, FinTech et Web3"
+    },
+    "hero": {
+        "kicker": "CV accessible",
+        "title": "Julien Esterbet",
+        "role": "Développeur full-stack orienté produit",
+        "focus": "FinTech · Applications métier · Web3",
+        "summary": "Développeur full-stack et analyste programmeur, je transforme des besoins métier en applications fiables avec Java, Angular, APIs et traitements documentaires. Mon parcours associe FinTech, qualité de livraison et projets Web3.",
+        "back": "Retour au portfolio",
+        "download": "Télécharger le CV au format PDF",
+        "downloadNote": "Le PDF conserve la mise en page visuelle du CV. Le contenu structuré ci-dessous constitue son alternative accessible."
+    },
+    "sections": {
+        "contact": "Contact",
+        "skills": "Compétences",
+        "certifications": "Certifications",
+        "languages": "Langues",
+        "experience": "Expérience professionnelle",
+        "education": "Formation",
+        "projects": "Projets sélectionnés"
+    },
+    "contact": {
+        "location": "Paris, France",
+        "phone": "+33 7 88 27 27 16",
+        "phoneLabel": "Téléphone : +33 7 88 27 27 16",
+        "email": "julien.esterbet@gmail.com",
+        "emailLabel": "E-mail : julien.esterbet@gmail.com",
+        "linkedin": "linkedin.com/in/julien-esterbet",
+        "linkedinLabel": "Profil LinkedIn de Julien Esterbet",
+        "website": "julien-esterbet.com",
+        "websiteLabel": "Portfolio de Julien Esterbet",
+        "github": "github.com/JulienEsbt",
+        "githubLabel": "Profil GitHub de Julien Esterbet"
+    },
+    "skills": [
+        {"name": "Backend", "detail": "Java, APIs REST, SQL, XML et JSON, traitements batch"},
+        {"name": "Frontend", "detail": "Angular, React, TypeScript"},
+        {"name": "Qualité", "detail": "JUnit, Mockito, documentation, refactoring"},
+        {"name": "Outils", "detail": "GitLab, Jenkins, Jira, OpenText Content Server"},
+        {"name": "Web3", "detail": "Solidity, EVM, ethers.js"}
+    ],
+    "certifications": [
+        "Bloomberg Market Concepts",
+        "Google Digital Marketing Fundamentals",
+        "Generative AI Essentials"
+    ],
+    "languages": [
+        "Français — langue maternelle",
+        "Anglais — niveau C1, pratique académique et internationale"
+    ],
+    "experience": [
+        {
+            "role": "Analyste Programmeur — Technique et Fonctionnel",
+            "organization": "PREPAR-VIE · CDI · Paris",
+            "period": "Avril 2025 — aujourd’hui",
+            "bullets": [
+                "Conception, évolution et maintenance d’applications Java et Angular liées aux unités de compte en assurance-vie.",
+                "Analyse des besoins métier et traduction en solutions techniques, en lien avec les équipes fonctionnelles et les partenaires.",
+                "Développement de batchs documentaires, intégrations d’APIs et traitements de données SQL, XML et JSON.",
+                "Tests avec JUnit et Mockito, intégration GitLab/Jenkins, documentation, refactoring et accompagnement des mises en production."
+            ],
+            "skills": "Java, Angular, APIs REST, SQL, qualité logicielle, CI/CD et analyse technico-fonctionnelle."
+        },
+        {
+            "role": "Analyste AMOA",
+            "organization": "PREPAR-VIE · CDD · Paris",
+            "period": "Août 2024 — janvier 2025",
+            "bullets": [
+                "Recueil et formalisation des besoins, rédaction de spécifications fonctionnelles et analyse d’impacts réglementaires.",
+                "Coordination des recettes, suivi des anomalies et accompagnement des équipes métier jusqu’à la validation.",
+                "Digitalisation de documents via APIs et OpenText Content Server dans un environnement assurance-vie."
+            ],
+            "skills": "Analyse fonctionnelle, AMOA, recette, coordination, communication métier et gestion documentaire."
+        },
+        {
+            "role": "Développeur logiciel financier",
+            "organization": "PREPAR-VIE · Stage · Paris",
+            "period": "Janvier 2024 — juillet 2024",
+            "bullets": [
+                "Évolution et automatisation d’outils financiers internes dédiés aux données de marché et à la gestion de portefeuille.",
+                "Analyse des usages, fiabilisation des traitements et amélioration des processus avec les utilisateurs métier."
+            ],
+            "skills": "Systèmes financiers, automatisation, analyse de données, compréhension métier et résolution de problèmes."
+        },
+        {
+            "role": "Consultant et développeur blockchain",
+            "organization": "SIB · Stage · Rennes",
+            "period": "Avril 2022 — juillet 2022",
+            "bullets": [
+                "Recherche appliquée sur Ethereum, les smart contracts, l’intégrité des données et leurs usages dans la santé.",
+                "Conception d’un prototype de certification de références documentaires avec Solidity et une interface web.",
+                "Restitution des choix techniques et prise en compte des enjeux de sécurité, de traçabilité et de confidentialité."
+            ],
+            "skills": "Solidity, Ethereum, recherche technique, prototypage, sécurité des données et communication."
+        },
+        {
+            "role": "Manager — emploi étudiant",
+            "organization": "McDonald’s Gare · Rennes",
+            "period": "Octobre 2018 — mars 2022",
+            "bullets": [
+                "Supervision opérationnelle, accompagnement d’équipe et gestion des priorités."
+            ],
+            "skills": ""
+        }
+    ],
+    "education": [
+        {
+            "title": "Programme européen de Master en Financial Technologies",
+            "school": "Université de Rennes et Eötvös Loránd University",
+            "period": "2022 — 2024",
+            "detail": "Double cursus européen suivi en anglais ; première année validée avec mention et mobilité à Budapest. FinTech, finance, machine learning, sécurité, innovation et blockchain.",
+            "thesis": "Mémoire : « Integrating Blockchain for Enhanced Security, Transparency, and Efficiency in Life Insurance Services at Prepar-Vie. »"
+        },
+        {
+            "title": "Licence Informatique — parcours MIAGE",
+            "school": "Université de Rennes",
+            "period": "2019 — 2022",
+            "detail": "Diplôme obtenu en 2022. Informatique appliquée à la gestion, analyse de données, programmation, économie, statistiques et modélisation.",
+            "thesis": ""
+        }
+    ],
+    "projects": [
+        {
+            "name": "Bruno Pizza — Production",
+            "status": "Produit actif",
+            "detail": "Produit desktop de gestion de production développé avec React, TypeScript, Electron, Express et SQLite."
+        },
+        {
+            "name": "My-Website",
+            "status": "Portfolio actif",
+            "detail": "Portfolio bilingue React et Vite refondu avec une démarche RGAA documentée."
+        },
+        {
+            "name": "Megalis",
+            "status": "Prototype académique",
+            "detail": "Prototype EVM d’horodatage de références documentaires on-chain avec Solidity."
+        }
+    ],
+    "labels": {
+        "period": "Période",
+        "skills": "Compétences mobilisées"
+    }
+}

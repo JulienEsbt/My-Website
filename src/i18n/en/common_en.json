@@ -1,53 +1,104 @@
 {
-  "pageNav": {
-    "home": "Portfolio",
-    "web3": "Web3",
-    "travel": "Travel",
-    "reflections": "Reflections"
-  },
-  "contact": {
-    "kicker": "Get in touch",
-    "title": "Contact me",
-    "options": {
-      "email": {
-        "title": "Email",
-        "value": "julien.esterbet@gmail.com",
-        "cta": "Send a message"
-      },
-      "linkedin": {
-        "title": "LinkedIn",
-        "value": "julien-esterbet",
-        "cta": "Write me"
-      },
-      "twitter": {
-        "title": "Twitter",
-        "value": "Julien Esbt Crypto",
-        "cta": "DM me"
-      }
+    "accessibility": {
+        "skipToContent": "Skip to main content",
+        "quickAccess": "Quick access",
+        "socialNavigation": "Social media"
     },
-    "badge": "Available",
-    "heading": "An idea, a project or a discussion?",
-    "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
-    "form": {
-      "nameLabel": "Name",
-      "emailLabel": "Email",
-      "messageLabel": "Message",
-      "name": "Your full name",
-      "email": "Your email",
-      "message": "Your message",
-      "submit": "Send email",
-      "sending": "Sending...",
-      "success": "Message sent successfully. Thanks!",
-      "error": "Oops, something went wrong. Please try again."
+    "loading": {
+        "route": "Loading page",
+        "feature": "Loading interactive content"
+    },
+    "pageNav": {
+        "aria": "Primary navigation",
+        "open": "Open navigation",
+        "close": "Close navigation",
+        "home": "Portfolio",
+        "web3": "Web3 Labs",
+        "travel": "Travel journals",
+        "reflections": "Writing and reflections",
+        "groups": {
+            "primary": "Portfolio and labs",
+            "editorial": "Explore further"
+        }
+    },
+    "contact": {
+        "kicker": "Get in touch",
+        "title": "Contact me",
+        "options": {
+            "email": {
+                "title": "Email",
+                "value": "julien.esterbet@gmail.com",
+                "cta": "Send a message"
+            },
+            "linkedin": {
+                "title": "LinkedIn",
+                "value": "julien-esterbet",
+                "cta": "Write me"
+            },
+            "twitter": {
+                "title": "Twitter",
+                "value": "Julien Esbt Crypto",
+                "cta": "DM me"
+            }
+        },
+        "badge": "Available",
+        "heading": "An idea, a project or a discussion?",
+        "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
+        "form": {
+            "nameLabel": "Name",
+            "emailLabel": "Email",
+            "messageLabel": "Message",
+            "name": "Your full name",
+            "email": "Your email",
+            "message": "Your message",
+            "submit": "Send email",
+            "sending": "Sending…",
+            "loading": "Your message is being sent…",
+            "success": "Message sent successfully. Thanks!",
+            "invalid": "Please check the fields: the name must contain at least 2 characters and the message at least 10 characters.",
+            "error": "Your message could not be sent. Please try again in a moment."
+        }
+    },
+    "footer": {
+        "logo": "Julien ESTERBET",
+        "description": "A product-minded full-stack developer portfolio, complemented by Web3 experiments and personal content available at a secondary level.",
+        "aria": "Footer navigation",
+        "pages": "Pages",
+        "socials": "Socials",
+        "cta": "Contact me",
+        "privacy": "Privacy",
+        "copyright": "© Julien Esterbet — All rights reserved."
+    },
+    "privacy": {
+        "metaTitle": "Privacy — Julien Esterbet",
+        "kicker": "Transparency",
+        "title": "Privacy and audience measurement",
+        "intro": "This portfolio limits collection to what is needed to understand its use, monitor performance and answer messages sent voluntarily.",
+        "analyticsTitle": "Audience and performance",
+        "analyticsBody": "Vercel Web Analytics measures page views and Speed Insights collects Web Vitals. The site adds no custom event and sends these tools no name, email address, message or wallet address.",
+        "contactTitle": "Contact form",
+        "contactBody": "The name, email address and message entered are sent to EmailJS only to deliver the message. The site does not use them to build a profile or populate a database.",
+        "externalTitle": "External services",
+        "externalBody": "Mapbox, Alchemy RPC providers and price sources are contacted only when the corresponding features are used. Those providers’ policies then apply to their services.",
+        "controlTitle": "Your choices",
+        "controlBody": "You can browse the editorial pages without completing the form or connecting a wallet. Content blockers may prevent Vercel measurements without blocking the main content.",
+        "contact": "For any question about this processing, use the portfolio contact form.",
+        "updated": "Last updated: August 2026."
+    },
+    "notFound": {
+        "pageTitle": "Page not found — Julien Esterbet",
+        "kicker": "Page not found",
+        "title": "This page does not exist or is no longer available.",
+        "description": "The address may be incorrect, or the content may have moved.",
+        "reflection": "This reflection does not exist or is no longer available.",
+        "home": "Back to the portfolio",
+        "reflections": "View reflections"
+    },
+    "errorBoundary": {
+        "kicker": "Unexpected error",
+        "title": "The portfolio could not be displayed correctly.",
+        "description": "No sensitive data was displayed. You can try again or return home.",
+        "home": "Back home",
+        "retry": "Try again"
     }
-  },
-  "footer": {
-    "logo": "Julien ESTERBET",
-    "description": "Personal portfolio focused on software development, Web3, technology, travel and the ideas that shape who I am.",
-    "aria": "Footer navigation",
-    "pages": "Pages",
-    "socials": "Socials",
-    "cta": "Contact me",
-    "copyright": "© Julien Esterbet — All rights reserved."
-  }
 }
