@@ -66,12 +66,16 @@ const TravelExplorer = () => {
         [filteredLocations]
     )
 
-    const resetExplorer = () => {
-        setQuery('')
-        setCategory('all')
+    const resetView = useCallback(() => {
         setSelectedLocation(null)
         setResetSignal((value) => value + 1)
-    }
+    }, [])
+
+    const resetExplorer = useCallback(() => {
+        setQuery('')
+        setCategory('all')
+        resetView()
+    }, [resetView])
 
     const selectLocation = useCallback((location) => {
         setSelectedLocation(location)
@@ -82,6 +86,7 @@ const TravelExplorer = () => {
         dreamDestinations: filteredDreams,
         selectedLocation,
         onSelectLocation: selectLocation,
+        onResetView: resetView,
         resetSignal,
     }
 

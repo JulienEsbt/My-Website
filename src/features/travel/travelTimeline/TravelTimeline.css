@@ -484,7 +484,7 @@
 
 .travel-timeline__gallery-overview header {
     position: sticky;
-    top: 0;
+    top: 0.5rem;
     z-index: 3;
     width: min(100%, 1380px);
     display: flex;
@@ -492,8 +492,22 @@
     justify-content: space-between;
     gap: 1rem;
     margin: 0 auto 1.5rem;
-    padding: 0.75rem 0;
-    background: linear-gradient(180deg, #020612 72%, rgba(2, 6, 18, 0));
+    padding: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+.travel-timeline__gallery-overview header > div {
+    width: max-content;
+    max-width: calc(100% - 4rem);
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    border-radius: 1rem;
+    background: rgba(5, 12, 34, 0.86);
+    box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    pointer-events: auto;
 }
 
 .travel-timeline__gallery-overview header p {
@@ -522,6 +536,8 @@
     cursor: pointer;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.28);
+    pointer-events: auto;
 }
 
 .travel-timeline__gallery-back-to-top {

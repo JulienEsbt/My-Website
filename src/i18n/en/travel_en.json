@@ -90,6 +90,7 @@
             "results": "Accessible list · {{count}} places"
         },
         "mapControls": {
+            "overview": "Overview",
             "zoomIn": "Zoom in",
             "zoomOut": "Zoom out",
             "resetBearing": "Reset the map bearing to north",

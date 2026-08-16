@@ -90,6 +90,7 @@
             "results": "Liste accessible · {{count}} lieux"
         },
         "mapControls": {
+            "overview": "Vue d’ensemble",
             "zoomIn": "Zoomer",
             "zoomOut": "Dézoomer",
             "resetBearing": "Réorienter la carte vers le nord",

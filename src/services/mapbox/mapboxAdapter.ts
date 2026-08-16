@@ -44,17 +44,21 @@ function addMarker(
         popup: PopupContent
         onSelect: ((location: Coordinates) => void) | undefined
     }
-): void {
+): mapboxgl.Popup {
     const marker = document.createElement('button')
     marker.type = 'button'
     marker.className = className
     marker.setAttribute('aria-label', `${popup.title} — ${popup.meta}`)
     marker.addEventListener('click', () => onSelect?.(coordinates))
 
+    const markerPopup = new mapboxgl.Popup({offset: 20}).setDOMContent(createPopupContent(popup))
+
     new mapboxgl.Marker({element: marker, anchor: 'center'})
         .setLngLat([coordinates.lng, coordinates.lat])
-        .setPopup(new mapboxgl.Popup({offset: 20}).setDOMContent(createPopupContent(popup)))
+        .setPopup(markerPopup)
         .addTo(map)
+
+    return markerPopup
 }
 
 export function createTravelMap({
@@ -113,6 +117,8 @@ export function createTravelMap({
         })
     })
 
+    const popups: mapboxgl.Popup[] = []
+
     trips.forEach((trip) => {
         const city = language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)
         const country = language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
@@ -120,12 +126,14 @@ export function createTravelMap({
         const description =
             language === 'fr' ? trip.description : (trip.descriptionEn ?? trip.description)
 
-        addMarker(map, {
-            className: `mapbox-marker ${trip.category ?? 'visited'}`,
-            coordinates: trip,
-            popup: {title: city, meta: `${country} • ${dateLabel}`, description},
-            onSelect: onSelectLocation,
-        })
+        popups.push(
+            addMarker(map, {
+                className: `mapbox-marker ${trip.category ?? 'visited'}`,
+                coordinates: trip,
+                popup: {title: city, meta: `${country} • ${dateLabel}`, description},
+                onSelect: onSelectLocation,
+            })
+        )
     })
 
     dreamDestinations.forEach((destination) => {
@@ -135,12 +143,14 @@ export function createTravelMap({
         const description =
             language === 'fr' ? destination.reason : (destination.reasonEn ?? destination.reason)
 
-        addMarker(map, {
-            className: 'mapbox-marker dream',
-            coordinates: destination,
-            popup: {title: name, meta: `${dreamLabel} • ${country}`, description},
-            onSelect: onSelectLocation,
-        })
+        popups.push(
+            addMarker(map, {
+                className: 'mapbox-marker dream',
+                coordinates: destination,
+                popup: {title: name, meta: `${dreamLabel} • ${country}`, description},
+                onSelect: onSelectLocation,
+            })
+        )
     })
 
     const resizeObserver = new ResizeObserver(() => map.resize())
@@ -156,14 +166,16 @@ export function createTravelMap({
                 bearing: 0,
                 essential: true,
             }),
-        reset: () =>
+        reset: () => {
+            popups.forEach((popup) => popup.remove())
             map.flyTo({
                 center: [12, 43],
                 zoom: expanded ? 3.2 : 2.35,
                 pitch: expanded ? 42 : 28,
                 bearing: 0,
                 essential: true,
-            }),
+            })
+        },
         destroy: () => {
             resizeObserver.disconnect()
             map.remove()

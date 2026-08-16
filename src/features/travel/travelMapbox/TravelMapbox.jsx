@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
+import {FiCrosshair} from 'react-icons/fi'
 import {createTravelMap} from '../../../services/mapbox/mapboxAdapter.js'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './TravelMapbox.css'
@@ -10,6 +11,7 @@ const TravelMapbox = ({
     dreamDestinations = [],
     selectedLocation = null,
     onSelectLocation,
+    onResetView,
     resetSignal = 0,
 }) => {
     const {t, i18n} = useTranslation('travel')
@@ -75,12 +77,23 @@ const TravelMapbox = ({
     }, [expanded])
 
     return (
-        <div
-            ref={mapContainer}
-            className={`travel-mapbox ${expanded ? 'expanded' : ''}`}
-            role="region"
-            aria-label={t('explorer.mapAccessibleLabel')}
-        />
+        <div className="travel-mapbox__shell">
+            <div
+                ref={mapContainer}
+                className={`travel-mapbox ${expanded ? 'expanded' : ''}`}
+                role="region"
+                aria-label={t('explorer.mapAccessibleLabel')}
+            />
+            <button
+                type="button"
+                className="travel-mapbox__overview"
+                onClick={onResetView}
+                aria-label={t('explorer.mapControls.overview')}
+            >
+                <FiCrosshair aria-hidden="true" />
+                {t('explorer.mapControls.overview')}
+            </button>
+        </div>
     )
 }
 
