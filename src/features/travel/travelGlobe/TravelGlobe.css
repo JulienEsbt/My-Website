@@ -23,11 +23,18 @@
     justify-content: center;
 }
 
-.travel-globe__motion-control {
+.travel-globe__controls {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
     z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.travel-globe__controls button {
     min-height: 2.75rem;
     padding: 0.55rem 0.9rem;
     border: 1px solid rgba(77, 181, 255, 0.38);
@@ -41,8 +48,8 @@
     cursor: pointer;
 }
 
-.travel-globe__motion-control:hover,
-.travel-globe__motion-control:focus-visible {
+.travel-globe__controls button:hover,
+.travel-globe__controls button:focus-visible {
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
@@ -58,5 +65,17 @@
 
     .travel-globe__shell.expanded {
         min-height: 31rem;
+    }
+
+    .travel-globe__controls {
+        right: 0.65rem;
+        bottom: 0.65rem;
+        left: 0.65rem;
+    }
+
+    .travel-globe__controls button {
+        flex: 1 1 auto;
+        padding-inline: 0.7rem;
+        font-size: 0.72rem;
     }
 }

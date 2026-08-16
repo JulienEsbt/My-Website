@@ -21,6 +21,7 @@ const TravelGlobe = ({
     selectedLocation = null,
     resetSignal = 0,
     showArcs = true,
+    onToggleArcs,
 }) => {
     const globeRef = useRef()
     const shellRef = useRef(null)
@@ -241,17 +242,22 @@ const TravelGlobe = ({
                 />
             </div>
 
-            {!reducedMotion && (
-                <button
-                    type="button"
-                    className="travel-globe__motion-control"
-                    onClick={() => setMotionPaused((paused) => !paused)}
-                >
-                    {motionPaused
-                        ? t('explorer.globeMotion.resume')
-                        : t('explorer.globeMotion.pause')}
-                </button>
-            )}
+            <div className="travel-globe__controls">
+                {onToggleArcs && (
+                    <button type="button" onClick={onToggleArcs} aria-pressed={showArcs}>
+                        {showArcs
+                            ? t('explorer.controls.hideArcs')
+                            : t('explorer.controls.showArcs')}
+                    </button>
+                )}
+                {!reducedMotion && (
+                    <button type="button" onClick={() => setMotionPaused((paused) => !paused)}>
+                        {motionPaused
+                            ? t('explorer.globeMotion.resume')
+                            : t('explorer.globeMotion.pause')}
+                    </button>
+                )}
+            </div>
         </div>
     )
 }

@@ -178,13 +178,6 @@ const TravelExplorer = () => {
                         ))}
                     </select>
                 </label>
-                <button
-                    type="button"
-                    onClick={() => setShowArcs((value) => !value)}
-                    aria-pressed={showArcs}
-                >
-                    {showArcs ? t('explorer.controls.hideArcs') : t('explorer.controls.showArcs')}
-                </button>
                 <button type="button" onClick={resetExplorer}>
                     <FiCrosshair aria-hidden="true" />
                     {t('explorer.controls.recenter')}
@@ -285,6 +278,9 @@ const TravelExplorer = () => {
                                                 <TravelGlobe
                                                     {...explorerProps}
                                                     showArcs={showArcs}
+                                                    onToggleArcs={() =>
+                                                        setShowArcs((value) => !value)
+                                                    }
                                                 />
                                             </Suspense>
                                         ) : (
@@ -375,6 +371,7 @@ const TravelExplorer = () => {
                                             expanded
                                             {...explorerProps}
                                             showArcs={showArcs}
+                                            onToggleArcs={() => setShowArcs((value) => !value)}
                                         />
                                     ) : (
                                         <TravelMapbox expanded {...explorerProps} />
