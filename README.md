@@ -13,6 +13,7 @@ Product-focused full-stack portfolio built with React and Vite. It presents sele
 - Web3 experiments: blockchain status, wallet inspection, resources, and optional donations.
 - A travel timeline, galleries, Mapbox map, and 3D globe.
 - Searchable MDX reflections and individual article pages.
+- A chronological Journal with category filters and generated RSS/Atom feeds.
 - Privacy information, semantic error pages, technical SEO, and responsive navigation.
 
 ## Technology
@@ -48,6 +49,7 @@ src/
 ├── services/                External-service and domain adapters
 └── types/                   Shared TypeScript domain types
 scripts/                     Quality, SEO, security and media tooling
+docs/                        Public architecture, editorial and policy documentation
 public/                      Static metadata, OG images and lightweight textures
 ```
 
@@ -96,7 +98,7 @@ Values prefixed with `VITE_` are bundled into browser code and must be treated a
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Start the Vite development server. |
-| `npm run build` | Build the application and generate static SEO route documents. |
+| `npm run build` | Build the application and generate static SEO documents plus RSS/Atom feeds. |
 | `npm run preview` | Serve the production build locally. |
 | `npm run format` | Format the repository with Prettier. |
 | `npm run format:check` | Check formatting without modifying files. |
@@ -142,6 +144,8 @@ The application sets a restrictive Content Security Policy, denies framing, limi
 ## Repository workflow
 
 Changes are prepared on a focused branch, reviewed against `develop`, and promoted from `develop` to `main` only after the quality gate and review environment are validated. Stage exact files when committing so private media, environment files, and internal audit documents are never included accidentally.
+
+Durable public documentation lives in [`docs`](docs/README.md). Temporary roadmaps, generated audits, private media inventories, and one-off investigation reports remain local and are explicitly ignored; verified conclusions that still help external readers are summarized in public documentation instead.
 
 ## License
 
