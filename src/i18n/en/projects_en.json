@@ -81,8 +81,8 @@
         },
         "stack": {"kicker": "Stack", "title": "Core technologies"},
         "next": {
-            "title": "Next portfolio step",
-            "body": "Document My-Website as an active portfolio, then keep the homepage focused on the most representative evidence.",
+            "title": "An application designed for the workshop",
+            "body": "The public repository documents the complete flow, from Excel plan import to local persistence and desktop packaging.",
             "cta": "Back to the selection"
         }
     },
@@ -91,7 +91,7 @@
         "hero": {
             "kicker": "Portfolio case study",
             "title": "My-Website",
-            "subtitle": "The progressive rebuild of a content-rich React portfolio into a clearer, faster and verifiable professional showcase.",
+            "subtitle": "A bilingual, interactive portfolio bringing together my projects, experiments and more personal work.",
             "imageAlt": "My-Website homepage presenting Julien Esterbet and his full-stack positioning",
             "back": "Back to projects",
             "live": "View current public site",
@@ -99,39 +99,39 @@
         },
         "overview": {
             "statusLabel": "Status",
-            "status": "Active portfolio — local rebuild in progress",
+            "status": "Active portfolio — version 2 published",
             "roleLabel": "Responsibility",
             "role": "Design, development, content and quality",
             "scopeLabel": "Scope",
             "scope": "Bilingual SPA deployed on Vercel"
         },
         "problem": {
-            "kicker": "Context and problem",
-            "title": "Evolve a rich personal site without hiding its technical debt",
-            "body": "The portfolio already brought together projects, Web3, travel and writing, but that breadth relied on a structure that had become difficult to evolve: a heavy initial load, mixed responsibilities, oversized media, inconsistent navigation and unaudited accessibility. The rebuild aims to preserve useful content while making the architecture, professional evidence and current limitations clearer."
+            "kicker": "The project",
+            "title": "Present my work without reducing myself to a list of technologies",
+            "body": "My-Website is both my professional portfolio and a space for exploration. It presents products I have actually built, makes my technical decisions visible and also opens onto Web3, travel and writing. A recruiter can understand my profile quickly, while curious visitors can explore the site at several levels."
         },
         "solution": {
-            "kicker": "Response",
-            "title": "Rebuild in layers instead of rewriting blindly",
-            "intro": "The process begins with an audit of the actual code and addresses architecture, media, accessibility and professional content as separate workstreams.",
+            "kicker": "Experience",
+            "title": "A professional showcase that remains personal",
+            "intro": "The site organizes content into distinct worlds and gives each one the right format: product case study, interactive prototype, travel journal or reflection.",
             "items": {
                 "architecture": {
-                    "title": "Route-based architecture",
-                    "body": "A shared shell, route registry and domain modules separate navigation, pages, external services and localized content."
+                    "title": "Navigation by world",
+                    "body": "Portfolio, Web3, travel and reflections each have their own page, local navigation and bilingual content while sharing a coherent visual identity."
                 },
                 "media": {
-                    "title": "Responsible media pipeline",
-                    "body": "Sources are kept away from direct public exposure; responsive AVIF and WebP derivatives are generated with domain manifests and without sensitive metadata."
+                    "title": "Images for every screen",
+                    "body": "Portraits, screenshots and albums are served in several sizes and modern formats to preserve quality without sending original files to visitors."
                 },
                 "quality": {
-                    "title": "Verifiable quality",
-                    "body": "Formatting, linting, tests, builds and performance budgets are grouped into a reproducible check, complemented by a documented RGAA audit matrix."
+                    "title": "Useful interactions",
+                    "body": "The map, globe, galleries, timelines, Web3 tools and language switch enrich the visit while preserving keyboard paths and readable alternatives."
                 }
             }
         },
         "architecture": {
             "kicker": "Architecture",
-            "title": "Progressive loading around a shared application shell",
+            "title": "How the site works",
             "steps": {
                 "entry": "Vite initializes React, internationalization and performance measurements.",
                 "shell": "AppShell owns the skip link, navigation, main content, loading states and global error handling.",
@@ -143,11 +143,11 @@
         },
         "decisions": {
             "kicker": "Decisions and trade-offs",
-            "title": "Improve the evidence without inventing a product that does not exist",
+            "title": "Choices aligned with the content",
             "items": {
                 "incremental": {
-                    "title": "Incremental rebuild",
-                    "body": "Existing content and interactions are preserved and then strengthened in slices, making each correction verifiable and limiting regressions."
+                    "title": "Continuous evolution",
+                    "body": "The site is a living product: projects, trips and articles can grow without requiring the entire architecture to be rebuilt."
                 },
                 "privacy": {
                     "title": "Separate sources and derivatives",
@@ -164,12 +164,12 @@
             }
         },
         "challenges": {
-            "kicker": "Challenges",
-            "title": "Work on a system larger than a simple landing page",
+            "kicker": "Design challenges",
+            "title": "Bring several experiences together in one site",
             "items": {
                 "legacy": {
-                    "title": "Preserve existing content",
-                    "body": "The rebuild must clarify the code without removing the albums, writing and tools already gathered in the portfolio."
+                    "title": "Preserve consistency",
+                    "body": "Very different albums, articles, tools and case studies must remain identifiable without fragmenting the overall experience."
                 },
                 "interactive": {
                     "title": "Make interaction accessible",
@@ -182,31 +182,31 @@
             }
         },
         "results": {
-            "kicker": "Verifiable results",
-            "title": "A foundation that is now measured and documented",
+            "kicker": "Features",
+            "title": "What visitors can do today",
             "items": {
-                "delivery": "One command validates formatting, linting, tests, the production build and performance budgets.",
-                "performance": "Main routes and their translations load on demand; heavy map and globe features remain outside the initial load.",
-                "media": "The current pipeline processes 518 sources and generates 4,470 responsive derivatives in three formats without directly exposing source files.",
-                "rgaa": "The local RGAA 4.1.2 audit documents 66 compliant criteria and 40 non-applicable criteria; this count is not presented as a compliance rate."
+                "delivery": "Read case studies explaining the need, behaviour, architecture and trade-offs behind each project.",
+                "performance": "Explore Web3 prototypes, inspect public addresses and understand the technical areas that interest me.",
+                "media": "Navigate my trips through a globe, a map, a timeline and responsive photo galleries.",
+                "rgaa": "Read longer reflections in a bilingual interface designed for keyboard navigation and small screens."
             }
         },
         "limits": {
-            "kicker": "Current limitations",
-            "title": "What this rebuild cannot claim yet",
+            "kicker": "Technical scope",
+            "title": "The principles behind the product",
             "items": {
-                "deployment": "The rebuild is automatically validated and deployed to Preview from develop; promotion to the primary domain remains an explicit decision.",
-                "mediaDelivery": "The 4,470 derivatives remain generated locally and outside Git. The code now supports an HTTPS media origin, but the provider and full migration still require validation before the photographs are published.",
-                "securityHeaders": "Security headers, the CSP, the 404 and cache rules are versioned and tested; a final acceptance pass is still required after production promotion.",
-                "cv": "The current PDFs do not claim PDF/UA compliance; a bilingual semantic HTML alternative provides the same content before download.",
-                "font": "The external font was removed in favour of a local system stack; final rendering still needs validation across the main browsers.",
-                "fieldData": "Web Analytics and Speed Insights are integrated without custom events; field trends still need enough real visits to become representative."
+                "deployment": "React and React Router structure a single-page application split into routes loaded on demand.",
+                "mediaDelivery": "Vite produces the static build deployed on Vercel, with SEO pages generated for the main routes.",
+                "securityHeaders": "Mapbox, blockchain RPC, price and email calls go through dedicated services rather than interface components.",
+                "cv": "i18next powers the French and English versions, while travel and project content lives in structured data.",
+                "font": "Vitest, Testing Library, axe-core, ESLint and TypeScript protect important behaviour before builds.",
+                "fieldData": "Responsive media, build budgets and lazy loading control the cost of the richest pages."
             }
         },
         "stack": {"kicker": "Stack", "title": "Core technologies and controls"},
         "next": {
-            "title": "Next steps",
-            "body": "Validate durable media storage, publish the missing derivatives, then run acceptance checks on the primary domain before publishing any accessibility statement.",
+            "title": "A portfolio built as a product",
+            "body": "The public repository exposes the architecture, data, tests and delivery choices behind the visible experience.",
             "cta": "Back to the selection"
         }
     }

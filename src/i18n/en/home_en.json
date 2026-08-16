@@ -9,8 +9,8 @@
         },
         "portraitAlt": "Portrait of Julien Esterbet",
         "eyebrow": "Product-minded full-stack developer",
-        "subtitle": "Business applications • FinTech • Web3",
-        "description": "I build web applications and business tools, from Java and SQL to Angular and React interfaces, with a particular interest in FinTech and Web3. I enjoy building useful tools, understanding the systems around us and considering how technology can contribute to something fairer.",
+        "subtitle": "Business applications • Web products • Experiments",
+        "description": "I design web applications and business tools, from Java and SQL to Angular and React interfaces. I enjoy turning concrete needs into useful, clear and reliable products, and using technology in service of fair, meaningful projects.",
         "badges": {
             "badge1": "React & TypeScript",
             "badge2": "Java & SQL",
@@ -111,7 +111,7 @@
     "portfolio": {
         "kicker": "Selected projects",
         "title": "What I have built",
-        "intro": "An active business product, this continuously evolving portfolio and an academic Web3 prototype, each presented with its actual status.",
+        "intro": "An active business product, this interactive portfolio and an academic Web3 prototype, each presented through its purpose, architecture and actual status.",
         "cta": "View code",
         "caseStudy": "View case study",
         "demo": "View site",
@@ -138,7 +138,7 @@
             "2": {
                 "type": "Active portfolio",
                 "title": "My-Website",
-                "description": "A bilingual React and Vite portfolio currently being rebuilt around route-based architecture, responsive media and a documented RGAA approach."
+                "description": "A bilingual React and Vite portfolio bringing together projects, Web3 experiments, travel stories and reflections in a responsive, accessible experience."
             },
             "3": {
                 "type": "Academic prototype",

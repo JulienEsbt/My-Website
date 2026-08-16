@@ -9,8 +9,8 @@
         },
         "portraitAlt": "Portrait de Julien Esterbet",
         "eyebrow": "Développeur full-stack orienté produit",
-        "subtitle": "Applications métiers • FinTech • Web3",
-        "description": "Je conçois des applications web et des outils métiers, de Java et SQL aux interfaces Angular et React, avec un intérêt particulier pour la FinTech et le Web3. J’aime construire des outils utiles, comprendre les systèmes qui nous entourent et réfléchir à la manière dont la technologie peut contribuer à quelque chose de plus juste.",
+        "subtitle": "Applications métiers • Produits web • Expérimentations",
+        "description": "Je conçois des applications web et des outils métiers, de Java et SQL aux interfaces Angular et React. J’aime transformer des besoins concrets en produits utiles, lisibles et fiables, et mettre la technique au service de projets justes qui ont du sens.",
         "badges": {
             "badge1": "React & TypeScript",
             "badge2": "Java & SQL",
@@ -111,7 +111,7 @@
     "portfolio": {
         "kicker": "Projets sélectionnés",
         "title": "Ce que j’ai construit",
-        "intro": "Un produit métier actif, ce portfolio en refonte continue et un prototype académique Web3, chacun présenté avec son statut réel.",
+        "intro": "Un produit métier actif, ce portfolio interactif et un prototype académique Web3, chacun présenté avec son usage, son architecture et son statut réel.",
         "cta": "Voir le code",
         "caseStudy": "Voir l’étude de cas",
         "demo": "Voir le site",
@@ -138,7 +138,7 @@
             "2": {
                 "type": "Portfolio actif",
                 "title": "My-Website",
-                "description": "Portfolio React et Vite bilingue, actuellement refondu autour d’une architecture par routes, de médias responsives et d’une démarche RGAA documentée."
+                "description": "Portfolio React et Vite bilingue réunissant projets, expérimentations Web3, récits de voyage et réflexions dans une expérience responsive et accessible."
             },
             "3": {
                 "type": "Prototype académique",

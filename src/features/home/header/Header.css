@@ -70,6 +70,7 @@
     color: var(--color-white);
     font-size: clamp(1.05rem, 2vw, 1.45rem);
     margin-bottom: 1rem;
+    min-height: 2.2em;
 }
 
 .home-hero__description {
@@ -77,6 +78,7 @@
     color: var(--color-light);
     line-height: 1.85;
     margin-bottom: 1.25rem;
+    min-height: 8em;
 }
 
 .home-hero__badges {
@@ -319,6 +321,7 @@
 
     .home-hero__description {
         max-width: 100%;
+        min-height: 0;
     }
 
     .home-hero__badges {
@@ -373,7 +376,31 @@
     }
 
     .home-hero__floating {
-        display: none;
+        display: block;
+        z-index: 3;
+    }
+
+    .home-hero__floating-pill {
+        max-width: 8.5rem;
+        padding: 0.38rem 0.58rem;
+        white-space: normal;
+        font-size: 0.65rem;
+        line-height: 1.25;
+    }
+
+    .pill-build {
+        top: 9%;
+        left: -0.55rem;
+    }
+
+    .pill-systems {
+        top: 37%;
+        right: -0.55rem;
+    }
+
+    .pill-human {
+        bottom: 28%;
+        left: -0.55rem;
     }
 
     #about {
