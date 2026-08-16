@@ -24,7 +24,7 @@ const PageNav = () => {
 
             event.preventDefault()
             closeMenu()
-            window.requestAnimationFrame(() => menuButtonRef.current?.focus())
+            menuButtonRef.current?.focus()
         }
 
         const handlePointerDown = (event) => {
