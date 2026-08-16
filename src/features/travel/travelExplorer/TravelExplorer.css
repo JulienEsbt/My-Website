@@ -80,6 +80,92 @@
     box-shadow: 0 0 0.8rem rgba(255, 159, 67, 0.8);
 }
 
+.travel-explorer__controls {
+    display: grid;
+    grid-template-columns: minmax(15rem, 1.5fr) minmax(12rem, 1fr) auto auto;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.travel-explorer__controls label,
+.travel-explorer__controls button,
+.travel-explorer__controls select {
+    min-height: 2.9rem;
+}
+
+.travel-explorer__controls label,
+.travel-explorer__controls button {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0 0.9rem;
+    border: 1px solid rgba(77, 181, 255, 0.25);
+    border-radius: 0.9rem;
+    background: rgba(5, 12, 34, 0.72);
+    color: var(--color-light);
+}
+
+.travel-explorer__controls input,
+.travel-explorer__controls select {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--color-white);
+    font: inherit;
+}
+
+.travel-explorer__controls button {
+    cursor: pointer;
+    font: inherit;
+    white-space: nowrap;
+}
+
+.travel-explorer__controls button[aria-pressed='true'] {
+    border-color: rgba(77, 181, 255, 0.58);
+    color: var(--color-primary);
+}
+
+.travel-explorer__accessible-list {
+    margin-bottom: 1.4rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    border-radius: 1rem;
+    background: rgba(5, 12, 34, 0.46);
+    color: var(--color-light);
+}
+
+.travel-explorer__accessible-list summary {
+    cursor: pointer;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.travel-explorer__accessible-list ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    margin-top: 0.8rem;
+}
+
+.travel-explorer__accessible-list button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem;
+    border-radius: 0.7rem;
+    background: rgba(77, 181, 255, 0.06);
+    color: var(--color-light);
+    text-align: left;
+    cursor: pointer;
+}
+
+.travel-explorer__accessible-list button:hover,
+.travel-explorer__accessible-list button:focus-visible {
+    background: rgba(77, 181, 255, 0.15);
+    color: var(--color-white);
+}
+
 /* ===== SWITCH MOBILE ===== */
 
 .travel-explorer__mobile-switch {
@@ -237,6 +323,14 @@
 /* ===== TABLET ===== */
 
 @media screen and (max-width: 1024px) {
+    .travel-explorer__controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .travel-explorer__accessible-list ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .travel-explorer__grid {
         grid-template-columns: 1fr;
     }
@@ -270,6 +364,19 @@
     .travel-explorer__legend-item {
         font-size: 0.75rem;
         padding: 0.4rem 0.65rem;
+    }
+
+    .travel-explorer__controls {
+        grid-template-columns: 1fr;
+        width: min(100% - 2rem, 390px);
+    }
+
+    .travel-explorer__accessible-list {
+        width: min(100% - 2rem, 390px);
+    }
+
+    .travel-explorer__accessible-list ul {
+        grid-template-columns: 1fr;
     }
 
     .travel-explorer__mobile-switch {

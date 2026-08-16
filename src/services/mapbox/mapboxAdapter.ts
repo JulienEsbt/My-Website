@@ -137,6 +137,22 @@ export function createTravelMap({
 
     return {
         resize: () => map.resize(),
+        focus: ({lng, lat}: Coordinates) =>
+            map.flyTo({
+                center: [lng, lat],
+                zoom: expanded ? 5.4 : 4.2,
+                pitch: expanded ? 34 : 22,
+                bearing: 0,
+                essential: true,
+            }),
+        reset: () =>
+            map.flyTo({
+                center: [12, 43],
+                zoom: expanded ? 3.2 : 2.35,
+                pitch: expanded ? 42 : 28,
+                bearing: 0,
+                essential: true,
+            }),
         destroy: () => {
             resizeObserver.disconnect()
             map.remove()

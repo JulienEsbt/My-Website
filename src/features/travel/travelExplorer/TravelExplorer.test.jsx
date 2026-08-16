@@ -60,4 +60,17 @@ describe('TravelExplorer', () => {
         expect(screen.queryByText('Carte chargée')).not.toBeInTheDocument()
         expect(screen.queryByRole('link')).not.toBeInTheDocument()
     })
+
+    it('filters destinations and exposes an accessible focus list', async () => {
+        const user = userEvent.setup()
+        render(<TravelExplorer />)
+
+        await user.type(
+            screen.getByRole('searchbox', {name: 'Rechercher une destination'}),
+            'Népal'
+        )
+
+        expect(screen.getByText('Liste accessible · 1 lieux')).toBeInTheDocument()
+        expect(screen.getByRole('button', {name: /Népal.*Hewa/})).toBeInTheDocument()
+    })
 })

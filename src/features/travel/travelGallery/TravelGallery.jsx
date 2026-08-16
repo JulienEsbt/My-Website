@@ -3,6 +3,7 @@ import {createPortal} from 'react-dom'
 import {useTranslation} from 'react-i18next'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
@@ -13,9 +14,12 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     const [photos, setPhotos] = useState([])
     const [status, setStatus] = useState('loading')
     const [activePhotoIndex, setActivePhotoIndex] = useState(null)
+    const [galleryOpen, setGalleryOpen] = useState(false)
     const lightboxStripRef = useRef(null)
     const lightboxRef = useRef(null)
     const lightboxCloseRef = useRef(null)
+    const triggerRef = useRef(null)
+    const isOverlayOpen = galleryOpen || activePhotoIndex !== null
 
     useEffect(() => {
         let cancelled = false
@@ -39,11 +43,21 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }, [albumId])
 
     const openPhoto = (index) => {
+        if (!isOverlayOpen) triggerRef.current = document.activeElement
+        setGalleryOpen(false)
         setActivePhotoIndex(index)
         onOpenChange(true)
     }
 
-    const closePhoto = useCallback(() => {
+    const openGallery = () => {
+        triggerRef.current = document.activeElement
+        setGalleryOpen(true)
+        setActivePhotoIndex(null)
+        onOpenChange(true)
+    }
+
+    const closeOverlay = useCallback(() => {
+        setGalleryOpen(false)
         setActivePhotoIndex(null)
         onOpenChange(false)
     }, [onOpenChange])
@@ -57,13 +71,15 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }, [photos.length])
 
     useFocusTrap({
-        active: activePhotoIndex !== null,
+        active: isOverlayOpen,
         containerRef: lightboxRef,
         initialFocusRef: lightboxCloseRef,
-        onDismiss: closePhoto,
+        onDismiss: closeOverlay,
+        returnFocusRef: triggerRef,
     })
 
-    useBodyScrollLock(activePhotoIndex !== null)
+    useBodyScrollLock(isOverlayOpen)
+    useImmersiveNavigation(isOverlayOpen)
 
     useEffect(() => {
         if (activePhotoIndex === null) return undefined
@@ -85,7 +101,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }, [activePhotoIndex, nextPhoto, previousPhoto])
 
     useEffect(() => {
-        if (activePhotoIndex === null) return undefined
+        if (!isOverlayOpen) return undefined
 
         document.documentElement.classList.add('lightbox-open')
         document.body.classList.add('lightbox-open')
@@ -104,7 +120,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
             document.documentElement.classList.remove('lightbox-open')
             document.body.classList.remove('lightbox-open')
         }
-    }, [activePhotoIndex])
+    }, [isOverlayOpen])
 
     useEffect(() => {
         if (activePhotoIndex === null) return
@@ -114,25 +130,6 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
             inline: 'center',
             block: 'nearest',
         })
-    }, [activePhotoIndex])
-
-    useEffect(() => {
-        const isOpen = activePhotoIndex !== null
-        const navigationElements = [
-            document.querySelector('.lang-wrapper'),
-            document.querySelector('.pagenav'),
-            document.querySelector('.travel-nav'),
-        ]
-
-        navigationElements.forEach((element) => {
-            if (element) element.style.display = isOpen ? 'none' : ''
-        })
-
-        return () => {
-            navigationElements.forEach((element) => {
-                if (element) element.style.display = ''
-            })
-        }
     }, [activePhotoIndex])
 
     if (status === 'loading') return <FeatureLoading />
@@ -182,19 +179,67 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                     <button
                         type="button"
                         className="travel-timeline__photo-more-wide"
-                        onClick={() => openPhoto(Math.min(4, photos.length - 1))}
+                        onClick={openGallery}
                     >
                         {t('timeline.gallery.openAll', {count: photos.length})}
                     </button>
                 )}
             </div>
 
+            {galleryOpen &&
+                createPortal(
+                    <div
+                        ref={lightboxRef}
+                        className="travel-timeline__gallery-overview"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="travel-gallery-overview-title"
+                    >
+                        <header>
+                            <div>
+                                <p>{t('timeline.gallery.overviewKicker')}</p>
+                                <h2 id="travel-gallery-overview-title">
+                                    {t('timeline.gallery.title', {city})}
+                                </h2>
+                            </div>
+                            <button
+                                ref={lightboxCloseRef}
+                                type="button"
+                                onClick={closeOverlay}
+                                aria-label={t('timeline.gallery.close')}
+                            >
+                                ×
+                            </button>
+                        </header>
+                        <div className="travel-timeline__gallery-mosaic">
+                            {photos.map((photo, index) => (
+                                <button
+                                    key={`${photo.src.id}-overview`}
+                                    type="button"
+                                    onClick={() => openPhoto(index)}
+                                    aria-label={t('timeline.gallery.openPhoto', {
+                                        number: index + 1,
+                                    })}
+                                >
+                                    <ResponsiveImage
+                                        media={photo.src}
+                                        alt=""
+                                        sizes="(max-width: 700px) 48vw, 28vw"
+                                    />
+                                    <span>{index + 1}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>,
+                    document.body
+                )}
+
             {activePhotoIndex !== null &&
                 createPortal(
                     <div
                         ref={lightboxRef}
                         className="travel-timeline__lightbox"
-                        onClick={closePhoto}
+                        onClick={closeOverlay}
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="travel-gallery-title"
@@ -214,7 +259,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                             className="travel-timeline__lightbox-close"
                             onClick={(event) => {
                                 event.stopPropagation()
-                                closePhoto()
+                                closeOverlay()
                             }}
                             aria-label={t('timeline.gallery.close')}
                         >

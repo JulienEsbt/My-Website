@@ -9,6 +9,9 @@ vi.mock('../../../data/travel/photoAlbums.js', () => ({
         Promise.resolve([
             {src: {id: 'photo-1', variants: [{url: '/photo-1.avif'}]}},
             {src: {id: 'photo-2', variants: [{url: '/photo-2.avif'}]}},
+            {src: {id: 'photo-3', variants: [{url: '/photo-3.avif'}]}},
+            {src: {id: 'photo-4', variants: [{url: '/photo-4.avif'}]}},
+            {src: {id: 'photo-5', variants: [{url: '/photo-5.avif'}]}},
         ])
     ),
 }))
@@ -39,17 +42,35 @@ describe('TravelGallery', () => {
             )
         ).toBeInTheDocument()
         expect(
-            screen.getByRole('img', {name: 'Souvenir de voyage à Ville test — photo 1 sur 2'})
+            screen.getByRole('img', {name: 'Souvenir de voyage à Ville test — photo 1 sur 5'})
         ).toBeVisible()
 
         await user.keyboard('{ArrowRight}')
         expect(
-            screen.getByRole('img', {name: 'Souvenir de voyage à Ville test — photo 2 sur 2'})
+            screen.getByRole('img', {name: 'Souvenir de voyage à Ville test — photo 2 sur 5'})
         ).toBeVisible()
 
         await user.keyboard('{Escape}')
         await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
         expect(onOpenChange).toHaveBeenLastCalledWith(false)
         expect(openButton).toHaveFocus()
+    })
+
+    it('opens the complete gallery as a mosaic before selecting a photo', async () => {
+        const user = userEvent.setup()
+
+        render(<TravelGallery albumId="test-album" city="Ville test" onOpenChange={vi.fn()} />)
+
+        await user.click(
+            await screen.findByRole('button', {name: 'Ouvrir la galerie complète · 5 photos'})
+        )
+
+        expect(screen.getByRole('dialog', {name: 'Galerie photo — Ville test'})).toBeVisible()
+        expect(screen.getAllByRole('button', {name: /Voir la photo/})).toHaveLength(5)
+
+        await user.click(screen.getByRole('button', {name: 'Voir la photo 5'}))
+        expect(
+            screen.getByRole('img', {name: 'Souvenir de voyage à Ville test — photo 5 sur 5'})
+        ).toBeVisible()
     })
 })
