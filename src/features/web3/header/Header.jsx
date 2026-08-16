@@ -65,6 +65,8 @@ const Header = () => {
                         transition={{type: 'spring', stiffness: 200, damping: 15}}
                         className="me"
                     >
+                        <span className="me__orbit me__orbit--one" aria-hidden="true" />
+                        <span className="me__orbit me__orbit--two" aria-hidden="true" />
                         <a
                             href={featuredNft.openseaUrl}
                             target="_blank"
@@ -81,7 +83,17 @@ const Header = () => {
                                 fetchPriority="high"
                             />
                         </a>
-                        <div className="glow" aria-hidden />
+
+                        <div className="me__meta">
+                            <span>{t('header.visualLabel')}</span>
+                            <strong>{t('header.visualValue')}</strong>
+                        </div>
+
+                        <div className="me__chain" aria-hidden="true">
+                            <span>ETH</span>
+                            <span>EVM</span>
+                            <span>RPC</span>
+                        </div>
                     </motion.div>
                 </div>
 

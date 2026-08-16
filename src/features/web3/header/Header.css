@@ -1,24 +1,50 @@
-header {
-    height: 100vh;
+.hero {
+    min-height: 100vh;
     overflow: hidden;
+    display: grid;
+    align-items: center;
 }
 
 .header__container {
-    text-align: center;
-    height: 100%;
+    min-height: 100vh;
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
 }
 
 .hero__copy {
-    padding-top: clamp(6rem, 13vh, 9rem);
+    position: relative;
+    z-index: 2;
+    padding-block: 8rem;
+    text-align: left;
+}
+
+.hero__copy .eyebrow {
+    text-align: left;
+}
+
+.hero__title {
+    font-size: clamp(3.4rem, 7vw, 6.8rem);
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+}
+
+.hero__subtitle {
+    max-width: 46rem;
+    min-height: 3.5em;
+    margin-top: 1.25rem;
+    color: var(--color-light);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
 /* ==================== HeaderCTA ==================== */
-.cta {
+.hero .cta {
     margin-top: 2.5rem;
     display: flex;
     gap: 1.2rem;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .web3-cta {
@@ -32,17 +58,141 @@ header {
     gap: 0.55rem;
 }
 
-/* ==================== ME ==================== */
+.hero__visual {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+}
+
 .me {
-    background: linear-gradient(var(--color-primary), transparent);
-    width: 22rem;
-    height: 30rem;
+    position: relative;
+    width: min(27rem, 36vw);
+    aspect-ratio: 0.78;
+    padding: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 2.4rem 2.4rem 6rem 2.4rem;
+    background:
+        radial-gradient(circle at 18% 8%, rgba(77, 181, 255, 0.28), transparent 34%),
+        linear-gradient(145deg, rgba(25, 33, 84, 0.94), rgba(3, 8, 26, 0.96));
+    box-shadow:
+        0 3rem 7rem rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    isolation: isolate;
+}
+
+.me::before {
+    content: '';
     position: absolute;
-    left: calc(50% - 11rem);
-    margin-top: 4rem;
-    border-radius: 12rem 12rem 0 0;
+    inset: 12% -16% -10% 22%;
+    z-index: -2;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(77, 181, 255, 0.22), transparent 68%);
+    filter: blur(10px);
+}
+
+.me a {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    padding: 5rem 1.5rem 1.5rem 1.5rem;
+    border-radius: 1.7rem 1.7rem 5.2rem 1.7rem;
+    background: rgba(77, 181, 255, 0.08);
+}
+
+.me a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(2, 6, 18, 0.72));
+    pointer-events: none;
+}
+
+.me a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.me__meta {
+    position: absolute;
+    left: -2.4rem;
+    bottom: 2.5rem;
+    z-index: 2;
+    width: min(16rem, 72%);
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 1.1rem;
+    background: rgba(5, 12, 34, 0.74);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.me__meta span,
+.me__meta strong {
+    display: block;
+}
+
+.me__meta span {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.me__meta strong {
+    margin-top: 0.2rem;
+    color: var(--color-white);
+    font-size: 0.84rem;
+}
+
+.me__chain {
+    position: absolute;
+    top: 2rem;
+    right: -1.7rem;
+    z-index: 2;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.me__chain span {
+    min-width: 3.2rem;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid rgba(77, 181, 255, 0.3);
+    border-radius: 999px;
+    color: var(--color-primary);
+    background: rgba(5, 12, 34, 0.78);
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    backdrop-filter: blur(12px);
+}
+
+.me__orbit {
+    position: absolute;
+    z-index: -1;
+    border: 1px solid rgba(77, 181, 255, 0.18);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.me__orbit--one {
+    width: 10rem;
+    height: 10rem;
+    top: -3rem;
+    left: -4rem;
+}
+
+.me__orbit--two {
+    width: 16rem;
+    height: 16rem;
+    right: -6rem;
+    bottom: -5rem;
 }
 
 /* ==================== SCROLL DOWN ==================== */
@@ -57,23 +207,52 @@ header {
 
 /* ==================== MEDIA QUERIES (MEDIUM DEVICES) ==================== */
 @media screen and (max-width: 1024px) {
-    header {
-        height: 68vh;
+    .hero {
+        min-height: auto;
+    }
+
+    .header__container {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding-block: 7rem 6rem;
     }
 
     .hero__copy {
-        padding-top: clamp(4.5rem, 10vh, 6.5rem);
+        padding: 0;
+        text-align: center;
+    }
+
+    .hero__copy .eyebrow {
+        text-align: center;
+    }
+
+    .hero__subtitle {
+        margin-inline: auto;
+    }
+
+    .hero .cta {
+        justify-content: center;
+    }
+
+    .me {
+        width: min(24rem, 70vw);
     }
 }
 
 /* ==================== MEDIA QUERIES (SMALL DEVICES) ==================== */
 @media screen and (max-width: 600px) {
-    header {
-        height: 100vh;
+    .header__container {
+        width: min(100% - 2rem, 390px);
+        padding-block: calc(env(safe-area-inset-top) + 6rem) 5rem;
     }
 
-    .hero__copy {
-        padding-top: 5.5rem;
+    .hero__title {
+        font-size: clamp(2.75rem, 15vw, 4rem);
+    }
+
+    .hero__subtitle {
+        min-height: 0;
     }
 
     .web3-cta {
@@ -83,6 +262,27 @@ header {
 
     .web3-cta__button {
         width: min(100%, 18rem);
+    }
+
+    .me {
+        width: min(18rem, 78vw);
+        border-radius: 1.7rem 1.7rem 4rem 1.7rem;
+    }
+
+    .me a {
+        border-radius: 1.15rem 1.15rem 3.4rem 1.15rem;
+    }
+
+    .me__meta {
+        left: -0.65rem;
+        bottom: 1.2rem;
+        width: 78%;
+        padding: 0.65rem 0.75rem;
+    }
+
+    .me__chain {
+        top: 1.2rem;
+        right: -0.6rem;
     }
 
     .scroll__down {
@@ -99,7 +299,7 @@ header {
 
 @media (max-width: 1400px) {
     .web3-header__socials-wrapper {
-        left: 2rem;
+        left: -8rem;
     }
 }
 
@@ -107,16 +307,4 @@ header {
     .web3-header__socials-wrapper {
         display: none;
     }
-}
-
-.me a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.me a img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }

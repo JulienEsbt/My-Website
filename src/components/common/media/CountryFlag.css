@@ -1,0 +1,16 @@
+.country-flag {
+    width: 1.55em;
+    height: 1.15em;
+    display: inline-block;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 0.18em;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.country-flag--fallback {
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    line-height: 1;
+}

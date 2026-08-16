@@ -15,7 +15,7 @@ const toolLinks = {
         {name: 'ChainList', url: 'https://chainlist.org/'},
     ],
     explorers: [
-        {name: 'Bitcoin', url: 'https://bitcoinexplorer.org/'},
+        {name: 'Bitcoin', url: 'https://mempool.space/'},
         {name: 'Ethereum', url: 'https://etherscan.io/'},
         {name: 'Binance Smart Chain', url: 'https://www.bscscan.com/'},
         {name: 'Elrond', url: 'https://explorer.elrond.com/'},

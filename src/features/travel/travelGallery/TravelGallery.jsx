@@ -182,7 +182,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                     <button
                         type="button"
                         className="travel-timeline__photo-more-wide"
-                        onClick={() => openPhoto(0)}
+                        onClick={() => openPhoto(Math.min(4, photos.length - 1))}
                     >
                         {t('timeline.gallery.openAll', {count: photos.length})}
                     </button>

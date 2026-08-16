@@ -12,15 +12,15 @@ describe('LanguageSwitcher', () => {
 
     it('is keyboard accessible and switches to English', async () => {
         const user = userEvent.setup()
-        render(<LanguageSwitcher />)
+        const {container} = render(<LanguageSwitcher />)
 
         const switcher = screen.getByRole('button', {name: 'Switch to English'})
-        expect(screen.getByText('🇫🇷')).toBeInTheDocument()
+        expect(container.querySelector('.country-flag')).toHaveAttribute('src', '/flags/fr.svg')
         switcher.focus()
         await user.keyboard('{Enter}')
 
         await waitFor(() => expect(i18n.resolvedLanguage).toBe('en'))
-        expect(screen.getByText('🇬🇧')).toBeInTheDocument()
+        expect(container.querySelector('.country-flag')).toHaveAttribute('src', '/flags/gb.svg')
         expect(document.documentElement).toHaveAttribute('lang', 'en')
         expect(window.location.search).toBe('?lang=en')
     })

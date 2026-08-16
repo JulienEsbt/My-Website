@@ -8,6 +8,8 @@
     "header": {
         "eyebrow": "Labs Web3 • Prototypes • EVM",
         "subtitle": "Expérimentations techniques autour de Solidity, des wallets et des données on-chain",
+        "visualLabel": "Identité on-chain",
+        "visualValue": "Un objet numérique, pas une photo de profil",
         "scroll": "Défiler",
         "scrollAria": "Faire défiler jusqu’à la section Contact",
         "altPortrait": "Avatar crypto de Julien (Julienesbt.eth)"
