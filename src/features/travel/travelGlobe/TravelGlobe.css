@@ -25,16 +25,15 @@
 
 .travel-globe__controls {
     position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+    inset: 0;
     z-index: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0.5rem;
+    pointer-events: none;
 }
 
 .travel-globe__controls button {
+    position: absolute;
+    bottom: 1rem;
+    pointer-events: auto;
     min-height: 2.75rem;
     padding: 0.55rem 0.9rem;
     border: 1px solid rgba(77, 181, 255, 0.38);
@@ -46,6 +45,14 @@
     font: inherit;
     font-size: 0.78rem;
     cursor: pointer;
+}
+
+.travel-globe__control--routes {
+    left: 1rem;
+}
+
+.travel-globe__control--motion {
+    right: 1rem;
 }
 
 .travel-globe__controls button:hover,
@@ -67,15 +74,18 @@
         min-height: 31rem;
     }
 
-    .travel-globe__controls {
-        right: 0.65rem;
+    .travel-globe__controls button {
         bottom: 0.65rem;
+        max-width: calc(50% - 1rem);
+        padding-inline: 0.7rem;
+        font-size: 0.72rem;
+    }
+
+    .travel-globe__control--routes {
         left: 0.65rem;
     }
 
-    .travel-globe__controls button {
-        flex: 1 1 auto;
-        padding-inline: 0.7rem;
-        font-size: 0.72rem;
+    .travel-globe__control--motion {
+        right: 0.65rem;
     }
 }

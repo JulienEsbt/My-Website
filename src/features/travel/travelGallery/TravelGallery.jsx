@@ -107,6 +107,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
         document.body.classList.add('lightbox-open')
 
         const preventPageScroll = (event) => {
+            if (galleryOpen && lightboxRef.current?.contains(event.target)) return
             if (lightboxStripRef.current?.contains(event.target)) return
             event.preventDefault()
         }
@@ -120,7 +121,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
             document.documentElement.classList.remove('lightbox-open')
             document.body.classList.remove('lightbox-open')
         }
-    }, [isOverlayOpen])
+    }, [galleryOpen, isOverlayOpen])
 
     useEffect(() => {
         if (activePhotoIndex === null) return

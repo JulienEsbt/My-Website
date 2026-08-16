@@ -244,14 +244,23 @@ const TravelGlobe = ({
 
             <div className="travel-globe__controls">
                 {onToggleArcs && (
-                    <button type="button" onClick={onToggleArcs} aria-pressed={showArcs}>
+                    <button
+                        type="button"
+                        className="travel-globe__control travel-globe__control--routes"
+                        onClick={onToggleArcs}
+                        aria-pressed={showArcs}
+                    >
                         {showArcs
                             ? t('explorer.controls.hideArcs')
                             : t('explorer.controls.showArcs')}
                     </button>
                 )}
                 {!reducedMotion && (
-                    <button type="button" onClick={() => setMotionPaused((paused) => !paused)}>
+                    <button
+                        type="button"
+                        className="travel-globe__control travel-globe__control--motion"
+                        onClick={() => setMotionPaused((paused) => !paused)}
+                    >
                         {motionPaused
                             ? t('explorer.globeMotion.resume')
                             : t('explorer.globeMotion.pause')}

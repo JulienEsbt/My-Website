@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from '@testing-library/react'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import i18n from 'i18next'
@@ -67,6 +67,15 @@ describe('TravelGallery', () => {
 
         expect(screen.getByRole('dialog', {name: 'Galerie photo — Ville test'})).toBeVisible()
         expect(screen.getAllByRole('button', {name: /Voir la photo/})).toHaveLength(5)
+
+        const gallery = screen.getByRole('dialog', {name: 'Galerie photo — Ville test'})
+        const wheelEvent = new WheelEvent('wheel', {bubbles: true, cancelable: true})
+        gallery.dispatchEvent(wheelEvent)
+        expect(wheelEvent.defaultPrevented).toBe(false)
+
+        const touchMoveEvent = new Event('touchmove', {bubbles: true, cancelable: true})
+        fireEvent(gallery, touchMoveEvent)
+        expect(touchMoveEvent.defaultPrevented).toBe(false)
 
         await user.click(screen.getByRole('button', {name: 'Voir la photo 5'}))
         expect(

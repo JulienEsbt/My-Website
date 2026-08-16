@@ -140,8 +140,8 @@ export function createTravelMap({
         focus: ({lng, lat}: Coordinates) =>
             map.flyTo({
                 center: [lng, lat],
-                zoom: expanded ? 5.4 : 4.2,
-                pitch: expanded ? 34 : 22,
+                zoom: expanded ? 12 : 10.5,
+                pitch: expanded ? 42 : 34,
                 bearing: 0,
                 essential: true,
             }),
