@@ -26,13 +26,13 @@ const HeaderCTA = () => {
 
     return (
         <div className="cta" role="group" aria-label={t('cta.aria')}>
-            <Btn href="#contact" className="btn btn-primary">
-                {t('cta.contact')}
-            </Btn>
+            <Btn href="#contact">{t('cta.contact')}</Btn>
 
             <RouteBtn to="/web3">{t('cta.web3')}</RouteBtn>
 
-            <RouteBtn to="/resume">{t('cta.cv')}</RouteBtn>
+            <RouteBtn to="/resume" className="btn btn-primary">
+                {t('cta.cv')}
+            </RouteBtn>
         </div>
     )
 }

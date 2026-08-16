@@ -269,17 +269,19 @@ a:hover {
 }
 
 .btn-primary {
-    color: #dff3ff;
-    border-color: rgba(77, 181, 255, 0.56);
-    background: rgba(77, 181, 255, 0.16);
+    color: #031329;
+    border-color: rgba(173, 224, 255, 0.82);
+    background: #63baff;
     box-shadow:
-        0 0.65rem 1.4rem rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 0.7rem 1.6rem rgba(35, 140, 225, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 .btn-primary:hover:not(:disabled) {
-    color: var(--color-white);
-    background: rgba(77, 181, 255, 0.24);
+    color: #020d1d;
+    border-color: #d8f1ff;
+    background: #82c9ff;
+    box-shadow: 0 0.85rem 1.8rem rgba(35, 140, 225, 0.34);
 }
 
 .btn:focus-visible {

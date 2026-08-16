@@ -23,8 +23,54 @@
     flex: 0 0 auto;
 }
 
+.blockchain-explorer__refresh {
+    min-width: 10.5rem;
+    white-space: nowrap;
+}
+
+.blockchain-explorer__refresh:disabled {
+    opacity: 1;
+}
+
+.blockchain-explorer__refresh.is-loading svg {
+    animation: blockchain-refresh-spin 800ms linear infinite;
+}
+
+@keyframes blockchain-refresh-spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blockchain-explorer__refresh.is-loading svg {
+        animation: none;
+    }
+}
+
 .blockchain-embla {
     position: relative;
+}
+
+.blockchain-embla::before,
+.blockchain-embla::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 1.2rem;
+    z-index: 2;
+    width: clamp(1.5rem, 2.5vw, 3rem);
+    pointer-events: none;
+}
+
+.blockchain-embla::before {
+    left: 0;
+    background: linear-gradient(90deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
+}
+
+.blockchain-embla::after {
+    right: 0;
+    background: linear-gradient(270deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
 }
 
 .blockchain-embla__viewport {
