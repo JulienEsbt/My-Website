@@ -1,23 +1,24 @@
 .hero {
-    min-height: 100vh;
+    min-height: auto;
     overflow: hidden;
     display: grid;
     align-items: center;
 }
 
 .header__container {
-    min-height: 100vh;
+    min-height: auto;
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
     align-items: center;
     gap: clamp(2rem, 6vw, 6rem);
+    padding-block: clamp(8rem, 13vh, 10rem) clamp(3rem, 6vh, 5rem);
 }
 
 .hero__copy {
     position: relative;
     z-index: 2;
-    padding-block: 8rem;
+    padding-block: 0;
     text-align: left;
 }
 

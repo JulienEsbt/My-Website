@@ -1,6 +1,6 @@
 .home-hero {
-    min-height: 100vh;
-    padding-top: clamp(6rem, 9vh, 8rem);
+    min-height: auto;
+    padding-block: clamp(8rem, 13vh, 10rem) clamp(3rem, 6vh, 5rem);
     display: grid;
     place-items: center;
     position: relative;

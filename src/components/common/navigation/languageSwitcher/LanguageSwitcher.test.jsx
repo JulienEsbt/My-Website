@@ -15,13 +15,14 @@ describe('LanguageSwitcher', () => {
         const {container} = render(<LanguageSwitcher />)
 
         const switcher = screen.getByRole('button', {name: 'Switch to English'})
-        expect(container.querySelector('.lang-labels .active')).toHaveTextContent('FR')
-        expect(container.querySelector('.country-flag')).not.toBeInTheDocument()
+        expect(container.querySelector('.lang-switch__label')).toHaveTextContent('FR')
+        expect(container.querySelector('.country-flag')).toHaveAttribute('src', '/flags/fr.svg')
         switcher.focus()
         await user.keyboard('{Enter}')
 
         await waitFor(() => expect(i18n.resolvedLanguage).toBe('en'))
-        expect(container.querySelector('.lang-labels .active')).toHaveTextContent('EN')
+        expect(container.querySelector('.lang-switch__label')).toHaveTextContent('EN')
+        expect(container.querySelector('.country-flag')).toHaveAttribute('src', '/flags/gb.svg')
         expect(document.documentElement).toHaveAttribute('lang', 'en')
         expect(window.location.search).toBe('?lang=en')
     })
