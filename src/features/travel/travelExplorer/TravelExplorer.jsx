@@ -5,6 +5,7 @@ import {FiMaximize2, FiMinimize2, FiGlobe, FiMap} from 'react-icons/fi'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import './TravelExplorer.css'
 
@@ -48,6 +49,7 @@ const TravelExplorer = () => {
     })
 
     useBodyScrollLock(isMobile && Boolean(activeView))
+    useImmersiveNavigation(isMobile && Boolean(activeView))
 
     useEffect(() => {
         const section = sectionRef.current

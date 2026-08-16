@@ -1,8 +1,7 @@
-import React, {useCallback, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import LanguageSwitcher from '../languageSwitcher/LanguageSwitcher.jsx'
-import useFocusTrap from '../../accessibility/useFocusTrap.js'
 import {SITE_PAGE_GROUPS} from '../../../../config/pages.js'
 import './PageNav.css'
 
@@ -10,16 +9,37 @@ const PageNav = () => {
     const [isOpen, setOpen] = useState(false)
     const {t} = useTranslation('common')
     const navigationRef = useRef(null)
+    const menuButtonRef = useRef(null)
     const firstLinkRef = useRef(null)
 
     const closeMenu = useCallback(() => setOpen(false), [])
 
-    useFocusTrap({
-        active: isOpen,
-        containerRef: navigationRef,
-        initialFocusRef: firstLinkRef,
-        onDismiss: closeMenu,
-    })
+    useEffect(() => {
+        if (!isOpen) return undefined
+
+        const focusFrame = window.requestAnimationFrame(() => firstLinkRef.current?.focus())
+
+        const handleKeyDown = (event) => {
+            if (event.key !== 'Escape') return
+
+            event.preventDefault()
+            closeMenu()
+            window.requestAnimationFrame(() => menuButtonRef.current?.focus())
+        }
+
+        const handlePointerDown = (event) => {
+            if (!navigationRef.current?.contains(event.target)) closeMenu()
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('pointerdown', handlePointerDown)
+
+        return () => {
+            window.cancelAnimationFrame(focusFrame)
+            document.removeEventListener('keydown', handleKeyDown)
+            document.removeEventListener('pointerdown', handlePointerDown)
+        }
+    }, [closeMenu, isOpen])
 
     return (
         <>
@@ -30,6 +50,7 @@ const PageNav = () => {
             <nav className="pagenav" aria-label={t('pageNav.aria')}>
                 <div ref={navigationRef} className="pagenavbar">
                     <button
+                        ref={menuButtonRef}
                         type="button"
                         className={`navbutton ${isOpen ? 'is-open' : ''}`}
                         onClick={() => setOpen((open) => !open)}

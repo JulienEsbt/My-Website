@@ -31,7 +31,7 @@
 
 .wallet-inspector__searchbar {
     display: grid;
-    grid-template-columns: 155px 1fr auto 125px 185px;
+    grid-template-columns: 155px minmax(0, 1fr) 125px 185px;
     gap: 0.75rem;
     align-items: center;
     padding: 0.35rem;
@@ -50,6 +50,19 @@
     font-family: var(--font-sans);
 }
 
+.wallet-inspector__address-field {
+    position: relative;
+    min-width: 0;
+}
+
+.wallet-inspector__address-field input {
+    width: 100%;
+}
+
+.wallet-inspector__address-field:has(.wallet-inspector__ens-valid) input {
+    padding-right: 4.3rem;
+}
+
 .wallet-inspector__searchbar button {
     height: 3rem;
     display: inline-flex;
@@ -60,6 +73,10 @@
 }
 
 .wallet-inspector__ens-valid {
+    position: absolute;
+    top: 50%;
+    right: 0.85rem;
+    transform: translateY(-50%);
     color: #7cffb2;
     font-size: 0.78rem;
     white-space: nowrap;
@@ -484,6 +501,10 @@
 @media screen and (max-width: 1180px) {
     .wallet-inspector__searchbar {
         grid-template-columns: 1fr 2fr;
+    }
+
+    .wallet-inspector__address-field {
+        min-width: 0;
     }
 
     .wallet-inspector__overview {

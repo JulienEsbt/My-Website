@@ -240,7 +240,7 @@
         grid-column: 1 / -1;
         grid-row: 2;
         display: grid;
-        grid-template-columns: repeat(3, 2.85rem);
+        grid-template-columns: repeat(6, minmax(2.5rem, 2.85rem));
         justify-content: center;
     }
 

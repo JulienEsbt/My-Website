@@ -375,13 +375,19 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        overflow-y: auto;
-        padding: 5rem 1rem 7rem;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        overscroll-behavior: none;
+        padding: calc(env(safe-area-inset-top) + 1rem) 1rem calc(env(safe-area-inset-bottom) + 1rem);
         border-radius: 0;
     }
 
     .travel-explorer__expanded-visual {
-        height: 31rem;
+        flex: 1;
+        min-height: 0;
+        height: auto;
     }
 
     @keyframes travel-mobile-card-in {

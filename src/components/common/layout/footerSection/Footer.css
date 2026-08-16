@@ -71,6 +71,10 @@
     gap: 0.6rem;
 }
 
+.footer-section__nav-group:last-child .footer-section__links {
+    flex-wrap: nowrap;
+}
+
 .footer-section__nav-group strong {
     color: var(--color-light);
     font-size: 0.78rem;

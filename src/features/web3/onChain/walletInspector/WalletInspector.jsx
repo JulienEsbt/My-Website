@@ -151,22 +151,24 @@ const WalletInspector = () => {
                         ))}
                     </select>
 
-                    <label className="sr-only" htmlFor="wallet-address">
-                        {t('walletInspector.addressLabel')}
-                    </label>
-                    <input
-                        id="wallet-address"
-                        type="text"
-                        autoComplete="off"
-                        required
-                        value={address}
-                        onChange={(event) => setAddress(event.target.value)}
-                        placeholder={t('walletInspector.placeholder')}
-                        aria-invalid={error ? 'true' : undefined}
-                        aria-describedby={error ? 'wallet-inspector-error' : undefined}
-                    />
+                    <div className="wallet-inspector__address-field">
+                        <label className="sr-only" htmlFor="wallet-address">
+                            {t('walletInspector.addressLabel')}
+                        </label>
+                        <input
+                            id="wallet-address"
+                            type="text"
+                            autoComplete="off"
+                            required
+                            value={address}
+                            onChange={(event) => setAddress(event.target.value)}
+                            placeholder={t('walletInspector.placeholder')}
+                            aria-invalid={error ? 'true' : undefined}
+                            aria-describedby={error ? 'wallet-inspector-error' : undefined}
+                        />
 
-                    {result?.ens && <span className="wallet-inspector__ens-valid">✓ ENS</span>}
+                        {result?.ens && <span className="wallet-inspector__ens-valid">✓ ENS</span>}
+                    </div>
 
                     <button className="btn btn-primary" disabled={loading}>
                         <FiSearch />

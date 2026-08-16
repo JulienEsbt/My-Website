@@ -75,7 +75,7 @@ export function createTravelMap({
         center: [12, 43],
         zoom: expanded ? 3.2 : 2.35,
         pitch: expanded ? 42 : 28,
-        bearing: -10,
+        bearing: 0,
         projection: 'globe',
         attributionControl: false,
         locale: {

@@ -134,11 +134,26 @@ body.lightbox-open {
     background: #020612;
 }
 
+body.immersive-navigation-open .pagenav,
+body.immersive-navigation-open .lang-wrapper,
+body.immersive-navigation-open .travel-nav {
+    display: none;
+}
+
 @supports (-webkit-touch-callout: none) {
     html,
     body,
     #root {
         background-color: #020612;
+    }
+
+    html,
+    body {
+        overscroll-behavior-y: none;
+    }
+
+    body {
+        background-attachment: scroll;
     }
 
     .travel-timeline__lightbox {

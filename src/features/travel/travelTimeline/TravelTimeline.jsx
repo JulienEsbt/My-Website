@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next'
 import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen, FiArrowLeft} from 'react-icons/fi'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
@@ -80,6 +81,7 @@ const TravelTimeline = () => {
     })
 
     useBodyScrollLock(isMobileDetail && mobileDetailOpen)
+    useImmersiveNavigation(isMobileDetail && mobileDetailOpen)
 
     const updateDetailScrollState = () => {
         const el = detailScrollRef.current

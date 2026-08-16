@@ -23,18 +23,22 @@ const TravelStats = () => {
 
     const stats = [
         {
+            id: 'countries',
             label: t('stats.countries'),
             value: visitedCountries,
         },
         {
+            id: 'destinations',
             label: t('stats.destinations'),
             value: destinations,
         },
         {
+            id: 'lived',
             label: t('stats.lived'),
             value: livedPlaces,
         },
         {
+            id: 'study-work',
             label: t('stats.studyWork'),
             value: studyWorkExperiences,
         },
@@ -45,7 +49,7 @@ const TravelStats = () => {
             <div className="container travel-stats">
                 {stats.map((stat, index) => (
                     <motion.div
-                        key={stat.label}
+                        key={stat.id}
                         className="travel-stat"
                         initial={{opacity: 0, y: 28}}
                         whileInView={{opacity: 1, y: 0}}
