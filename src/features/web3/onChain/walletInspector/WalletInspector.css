@@ -31,7 +31,10 @@
 
 .wallet-inspector__searchbar {
     display: grid;
-    grid-template-columns: 155px minmax(0, 1fr) 125px 185px;
+    grid-template-columns: minmax(9.5rem, 0.22fr) minmax(18rem, 1fr) minmax(8rem, auto) minmax(
+            12rem,
+            auto
+        );
     gap: 0.75rem;
     align-items: center;
     padding: 0.35rem;
@@ -70,6 +73,7 @@
     justify-content: center;
     gap: 0.45rem;
     white-space: nowrap;
+    width: 100%;
 }
 
 .wallet-inspector__ens-valid {
@@ -587,6 +591,10 @@
 @media screen and (max-width: 1180px) {
     .wallet-inspector__searchbar {
         grid-template-columns: 1fr 2fr;
+    }
+
+    .wallet-inspector__searchbar button {
+        min-width: 0;
     }
 
     .wallet-inspector__address-field {
