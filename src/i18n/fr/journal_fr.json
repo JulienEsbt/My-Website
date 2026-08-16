@@ -1,0 +1,33 @@
+{
+    "meta": {"title": "Journal — Julien Esterbet"},
+    "hero": {
+        "kicker": "Au fil du temps",
+        "title": "Journal",
+        "subtitle": "Un fil chronologique pour réunir les projets, les voyages, les réflexions et, lorsqu’il y aura quelque chose de pertinent à raconter, le sport."
+    },
+    "feed": {
+        "kicker": "Dernières publications",
+        "title": "Nouveautés",
+        "results": "{{count}} publications affichées",
+        "read": "Découvrir"
+    },
+    "feeds": {"aria": "Flux de syndication"},
+    "filters": {
+        "aria": "Filtrer le journal",
+        "all": "Tout",
+        "project": "Projets",
+        "travel": "Voyages",
+        "reflection": "Réflexions",
+        "sport": "Sport"
+    },
+    "empty": {
+        "title": "Pas encore de publication dans cette catégorie",
+        "text": "Cette rubrique reste volontairement vide tant qu’il n’y a pas de contenu réel et utile à partager."
+    },
+    "follow": {
+        "kicker": "Suivre les nouveautés",
+        "title": "Un flux ouvert, sans inscription",
+        "text": "Le journal est disponible en RSS et Atom. Aucune adresse e-mail n’est collectée aujourd’hui ; une newsletter ne sera envisagée qu’avec une cadence éditoriale régulière et un consentement explicite.",
+        "cta": "Ouvrir le flux RSS"
+    }
+}

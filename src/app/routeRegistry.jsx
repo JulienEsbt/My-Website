@@ -35,6 +35,10 @@ const routeLoaders = {
         namespace: 'reflections',
         loadPage: () => import('../pages/ReflectionsPage.jsx'),
     },
+    [ROUTE_PATHS.journal]: {
+        namespace: 'journal',
+        loadPage: () => import('../pages/JournalPage.jsx'),
+    },
     [ROUTE_PATHS.reflectionArticle]: {
         namespace: 'reflections',
         loadPage: () => import('../pages/ReflectionArticlePage.jsx'),

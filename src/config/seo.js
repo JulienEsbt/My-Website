@@ -45,6 +45,11 @@ const content = {
             description:
                 'Textes personnels de Julien Esterbet autour de la philosophie, de la société, du doute et de la construction de soi.',
         },
+        journal: {
+            title: 'Journal — Julien Esterbet',
+            description:
+                'Fil chronologique des projets, voyages, réflexions et nouvelles publications de Julien Esterbet, disponible en RSS et Atom.',
+        },
         notFound: {
             title: 'Page introuvable — Julien Esterbet',
             description: 'Cette page n’existe pas ou a été déplacée.',
@@ -91,6 +96,11 @@ const content = {
             description:
                 'Personal writing by Julien Esterbet about philosophy, society, doubt and self-construction.',
         },
+        journal: {
+            title: 'Journal — Julien Esterbet',
+            description:
+                'A chronological feed of Julien Esterbet’s projects, travels, reflections and new publications, available through RSS and Atom.',
+        },
         notFound: {
             title: 'Page not found — Julien Esterbet',
             description: 'This page does not exist or has been moved.',
@@ -107,6 +117,7 @@ const staticRoutes = {
     '/web3': 'web3',
     '/travel': 'travel',
     '/reflections': 'reflections',
+    '/journal': 'journal',
 }
 
 const person = {

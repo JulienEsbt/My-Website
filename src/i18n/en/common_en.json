@@ -16,6 +16,7 @@
         "web3": "Web3 Labs",
         "travel": "Travel journals",
         "reflections": "Writing and reflections",
+        "journal": "Journal",
         "groups": {
             "primary": "Portfolio and labs",
             "editorial": "Explore further"
@@ -81,7 +82,7 @@
         "externalTitle": "External services",
         "externalBody": "Mapbox, Alchemy RPC providers and price sources are contacted only when the corresponding features are used. Those providers’ policies then apply to their services.",
         "controlTitle": "Your choices",
-        "controlBody": "You can browse the editorial pages without completing the form or connecting a wallet. Content blockers may prevent Vercel measurements without blocking the main content.",
+        "controlBody": "You can browse the editorial pages and follow the RSS or Atom feeds without completing the form, sharing an email address or connecting a wallet. The site currently offers no newsletter sign-up. Content blockers may prevent Vercel measurements without blocking the main content.",
         "contact": "For any question about this processing, use the portfolio contact form.",
         "updated": "Last updated: August 2026."
     },
