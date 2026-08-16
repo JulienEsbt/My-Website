@@ -1,5 +1,5 @@
 .dream-section {
-    margin-top: 6rem;
+    margin-top: var(--section-spacing);
 }
 
 .dream-section__intro {
@@ -282,7 +282,7 @@
 
 @media screen and (max-width: 600px) {
     .dream-section {
-        margin-top: 4rem;
+        margin-top: var(--section-spacing);
     }
 
     .dream-section__intro {

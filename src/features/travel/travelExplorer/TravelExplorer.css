@@ -1,5 +1,5 @@
 .travel-explorer-section {
-    margin-top: 5rem;
+    margin-top: var(--section-spacing);
 }
 
 .travel-explorer-section > .section-kicker,
@@ -340,7 +340,7 @@
 
 @media screen and (max-width: 600px), screen and (max-height: 500px) and (max-width: 950px) {
     .travel-explorer-section {
-        margin-top: 4rem;
+        margin-top: var(--section-spacing);
     }
 
     .travel-explorer__subtitle {

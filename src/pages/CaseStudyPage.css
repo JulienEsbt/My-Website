@@ -56,7 +56,7 @@
 }
 
 .case-study__section {
-    margin-top: 7rem;
+    margin-top: var(--section-spacing);
 }
 
 .case-study__section > h2 {
@@ -184,7 +184,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    margin-top: 7rem;
+    margin-top: var(--section-spacing);
     padding: 2rem;
     border-radius: 1.4rem;
 }
@@ -200,11 +200,6 @@
     .case-study__grid--two-columns {
         grid-template-columns: 1fr;
     }
-
-    .case-study__section,
-    .case-study__next {
-        margin-top: 5rem;
-    }
 }
 
 @media screen and (max-width: 650px) {
@@ -216,14 +211,10 @@
         border-radius: 1rem;
     }
 
-    .case-study__section {
-        margin-top: 4rem;
-    }
-
     .case-study__next {
         align-items: flex-start;
         flex-direction: column;
-        margin-top: 4rem;
+        margin-top: var(--section-spacing);
         padding: 1.35rem;
     }
 }

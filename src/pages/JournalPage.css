@@ -1,5 +1,6 @@
 .journal-page {
-    padding-block: 2rem 5rem;
+    margin-top: var(--section-spacing);
+    padding-bottom: 5rem;
 }
 
 .journal-page__toolbar {
@@ -105,6 +106,7 @@
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 1.25rem;
+    margin-top: var(--section-spacing);
     margin-bottom: 5rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid rgba(77, 181, 255, 0.28);

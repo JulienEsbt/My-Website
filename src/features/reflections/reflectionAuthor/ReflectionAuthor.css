@@ -1,5 +1,5 @@
 .reflexion-author {
-    margin-top: 5rem;
+    margin-top: var(--section-spacing);
     margin-bottom: 6rem;
 }
 

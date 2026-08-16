@@ -1,5 +1,5 @@
 .travel-timeline-section {
-    margin-top: 6rem;
+    margin-top: var(--section-spacing);
 }
 
 .travel-timeline {
