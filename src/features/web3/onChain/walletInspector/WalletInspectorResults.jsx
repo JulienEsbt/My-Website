@@ -1,4 +1,4 @@
-import {FiExternalLink} from 'react-icons/fi'
+import {FiArrowDownLeft, FiArrowUpRight, FiExternalLink} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import WalletTokenRow from './WalletTokenRow.jsx'
 import {formatUsd, shortenAddress} from './walletFormatters.js'
@@ -19,7 +19,13 @@ const getAllocationGradient = (items) => {
     return `conic-gradient(${segments.join(', ')})`
 }
 
-const WalletInspectorResults = ({result, onSelectNft, onShowAllNfts, onShowAllTokens}) => {
+const WalletInspectorResults = ({
+    result,
+    comparison,
+    onSelectNft,
+    onShowAllNfts,
+    onShowAllTokens,
+}) => {
     const {t, i18n} = useTranslation('web3')
     const language = i18n.resolvedLanguage ?? i18n.language
 
@@ -122,7 +128,10 @@ const WalletInspectorResults = ({result, onSelectNft, onShowAllNfts, onShowAllTo
 
                             <div className="allocation-legend">
                                 {result.allocationItems.map((item, index) => (
-                                    <div key={item.id} className="allocation-legend-row">
+                                    <div
+                                        key={item.id ?? `${item.symbol}-${index}`}
+                                        className="allocation-legend-row"
+                                    >
                                         <i className={`allocation-color color-${index}`} />
                                         <strong>{item.symbol}</strong>
                                         <span>{formatPercent(item.allocation, language)}</span>
@@ -188,6 +197,74 @@ const WalletInspectorResults = ({result, onSelectNft, onShowAllNfts, onShowAllTo
                         </div>
                     )}
                 </article>
+
+                <article className="wallet-inspector__panel wallet-inspector__activity-panel">
+                    <div className="wallet-inspector__panel-head">
+                        <h3>{t('walletInspector.activity')}</h3>
+                        <span>{t('walletInspector.latestTransfers')}</span>
+                    </div>
+                    {result.recentTransfers?.length ? (
+                        <div className="wallet-activity-list">
+                            {result.recentTransfers.map((transfer) => (
+                                <a
+                                    key={transfer.id}
+                                    href={`${result.network.explorer}/tx/${transfer.hash}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="wallet-activity-row"
+                                >
+                                    {transfer.direction === 'in' ? (
+                                        <FiArrowDownLeft />
+                                    ) : (
+                                        <FiArrowUpRight />
+                                    )}
+                                    <span>
+                                        <strong>
+                                            {t(`walletInspector.direction.${transfer.direction}`)}
+                                        </strong>
+                                        <small>{shortenAddress(transfer.counterparty)}</small>
+                                    </span>
+                                    <em>
+                                        {transfer.value ?? '—'} {transfer.asset}
+                                    </em>
+                                </a>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>{t('walletInspector.noActivity')}</p>
+                    )}
+                </article>
+
+                {comparison.length > 0 && (
+                    <article className="wallet-inspector__panel wallet-inspector__comparison-panel">
+                        <div className="wallet-inspector__panel-head">
+                            <h3>{t('walletInspector.comparison')}</h3>
+                            <span>{t('walletInspector.nativeOnly')}</span>
+                        </div>
+                        <div className="wallet-network-comparison">
+                            {comparison.map((snapshot) => (
+                                <div key={snapshot.network.id}>
+                                    <strong>{snapshot.network.name}</strong>
+                                    {snapshot.status === 'available' ? (
+                                        <span>
+                                            {formatNumber(snapshot.nativeBalance, language, {
+                                                maximumFractionDigits: 5,
+                                            })}{' '}
+                                            {snapshot.network.symbol} ·{' '}
+                                            {formatUsd(snapshot.nativeValueUsd, language)}
+                                        </span>
+                                    ) : (
+                                        <span>
+                                            {t(
+                                                `walletInspector.comparisonStatus.${snapshot.status}`
+                                            )}
+                                        </span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </article>
+                )}
             </div>
         </>
     )

@@ -13,6 +13,13 @@ const DEFAULT_CUSTOM_FIELDS = {
     contract: '',
 }
 
+const getPresetAmounts = (token) => {
+    if (!token) return []
+    if (['USDC', 'USDT', 'DAI'].includes(token.symbol)) return ['5', '10', '25']
+    if (token.type === 'native') return ['0.005', '0.01', '0.025']
+    return ['1', '5', '10']
+}
+
 const DonationPanel = () => {
     const {t} = useTranslation('web3')
     const [search, setSearch] = useState('')
@@ -75,6 +82,7 @@ const DonationPanel = () => {
             )
             .slice(0, 40)
     }, [allTokens, search])
+    const presetAmounts = useMemo(() => getPresetAmounts(selectedToken), [selectedToken])
 
     const handleCustomFieldChange = (name, value) => {
         setCustomFields((previous) => ({...previous, [name]: value}))
@@ -232,6 +240,21 @@ const DonationPanel = () => {
                 </DonationTokenSelector>
 
                 <form className="donation-panel__form" onSubmit={prepareDonation}>
+                    <div
+                        className="donation-panel__presets"
+                        aria-label={t('donationPanel.presets')}
+                    >
+                        {presetAmounts.map((preset) => (
+                            <button
+                                key={preset}
+                                type="button"
+                                className={amount === preset ? 'active' : ''}
+                                onClick={() => setAmount(preset)}
+                            >
+                                {preset} {selectedToken?.symbol}
+                            </button>
+                        ))}
+                    </div>
                     <input
                         type="number"
                         min="0"
@@ -265,6 +288,20 @@ const DonationPanel = () => {
                             })}
                         </p>
                         <code>{DONATION_RECEIVER}</code>
+                        <dl className="donation-panel__review-grid">
+                            <div>
+                                <dt>{t('donationPanel.reviewLabels.network')}</dt>
+                                <dd>{pendingDonation.token.networkName}</dd>
+                            </div>
+                            <div>
+                                <dt>{t('donationPanel.reviewLabels.token')}</dt>
+                                <dd>{pendingDonation.token.symbol}</dd>
+                            </div>
+                            <div>
+                                <dt>{t('donationPanel.reviewLabels.amount')}</dt>
+                                <dd>{pendingDonation.amount}</dd>
+                            </div>
+                        </dl>
                         <div>
                             <button
                                 type="button"
@@ -293,6 +330,16 @@ const DonationPanel = () => {
                         {t('donationPanel.status.confirmed')}
                     </p>
                 )}
+
+                <ol className="donation-panel__steps" aria-label={t('donationPanel.steps.label')}>
+                    <li className={selectedToken ? 'active' : ''}>
+                        {t('donationPanel.steps.asset')}
+                    </li>
+                    <li className={amount ? 'active' : ''}>{t('donationPanel.steps.amount')}</li>
+                    <li className={pendingDonation || transaction ? 'active' : ''}>
+                        {t('donationPanel.steps.confirmation')}
+                    </li>
+                </ol>
 
                 {transaction?.explorerUrl && (
                     <a

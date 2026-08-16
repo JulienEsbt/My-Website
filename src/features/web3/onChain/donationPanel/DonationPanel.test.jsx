@@ -54,4 +54,14 @@ describe('DonationPanel', () => {
             `https://etherscan.io/tx/0x${'a'.repeat(64)}`
         )
     })
+
+    it('offers token-aware preset amounts without opening the wallet', async () => {
+        const user = userEvent.setup()
+        render(<DonationPanel />)
+
+        await user.click(screen.getByRole('button', {name: '0.01 ETH'}))
+
+        expect(screen.getByLabelText('Montant de la donation en ETH')).toHaveValue(0.01)
+        expect(sendDonationTransaction).not.toHaveBeenCalled()
+    })
 })

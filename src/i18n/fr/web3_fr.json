@@ -355,9 +355,21 @@
         "cancel": "Annuler",
         "viewTx": "Voir la transaction",
         "copyAddress": "Copier l’adresse de réception",
+        "presets": "Montants suggérés",
         "quickOptions": "Options rapides",
         "customHint": "Recherche un token connu ou importe-le via son contrat.",
         "mobileHelp": "Utilise la recherche pour trouver un autre réseau ou token.",
+        "reviewLabels": {
+            "network": "Réseau",
+            "token": "Token",
+            "amount": "Montant"
+        },
+        "steps": {
+            "label": "Étapes de la donation",
+            "asset": "Choisir le réseau et le token",
+            "amount": "Définir le montant",
+            "confirmation": "Vérifier puis confirmer dans le wallet"
+        },
         "errors": {
             "noToken": "Sélectionne un token.",
             "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",
@@ -421,6 +433,26 @@
         "noNfts": "Aucun NFT détecté.",
         "viewAll": "Voir tout",
         "closeDialog": "Fermer la fenêtre",
+        "actions": "Actions sur le rapport du wallet",
+        "compare": "Comparer les réseaux",
+        "comparing": "Comparaison…",
+        "comparison": "Comparaison multi-réseaux",
+        "nativeOnly": "Soldes natifs indicatifs",
+        "export": "Exporter le rapport",
+        "exportNotice": "Rapport local indicatif construit à partir de données publiques on-chain. Les prix et métadonnées peuvent être partiels.",
+        "filterTokens": "Filtrer les tokens par nom, symbole ou contrat",
+        "filterNfts": "Filtrer les NFTs par nom ou collection",
+        "activity": "Activité récente",
+        "latestTransfers": "Cinq transferts maximum",
+        "noActivity": "Aucun transfert récent n’a pu être chargé sur ce réseau.",
+        "direction": {
+            "in": "Reçu",
+            "out": "Envoyé"
+        },
+        "comparisonStatus": {
+            "missing-rpc": "RPC non configuré",
+            "error": "Données indisponibles"
+        },
         "errors": {
             "invalidAddress": "Adresse ou ENS invalide.",
             "missingRpc": "RPC manquant pour ce réseau.",

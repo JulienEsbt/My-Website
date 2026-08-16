@@ -74,6 +74,24 @@ export interface WalletIdentity {
     avatar: string | null
 }
 
+export interface WalletTransfer {
+    id: string
+    hash: string
+    direction: 'in' | 'out'
+    counterparty: string
+    asset: string
+    value: number | null
+    category: string
+    timestamp: string | null
+}
+
+export interface WalletNetworkSnapshot {
+    network: WalletNetwork
+    status: 'available' | 'missing-rpc' | 'error'
+    nativeBalance?: number
+    nativeValueUsd?: number
+}
+
 export interface WalletValuationInput {
     nativeBalance: number
     network: Pick<WalletNetwork, 'id' | 'symbol'>

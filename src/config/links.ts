@@ -18,7 +18,7 @@ const toolLinks = {
         {name: 'Bitcoin', url: 'https://mempool.space/'},
         {name: 'Ethereum', url: 'https://etherscan.io/'},
         {name: 'Binance Smart Chain', url: 'https://www.bscscan.com/'},
-        {name: 'Elrond', url: 'https://explorer.elrond.com/'},
+        {name: 'MultiversX', url: 'https://explorer.multiversx.com/'},
         {name: 'Solana', url: 'https://explorer.solana.com/'},
         {name: 'Polkadot', url: 'https://polkadot.subscan.io/'},
         {name: 'Cosmos', url: 'https://www.mintscan.io/cosmos'},

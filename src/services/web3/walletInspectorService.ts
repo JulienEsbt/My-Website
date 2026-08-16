@@ -11,12 +11,30 @@ import type {
     ValuedWalletToken,
     WalletIdentity,
     WalletNetwork,
+    WalletNetworkSnapshot,
     WalletToken,
+    WalletTransfer,
     WalletValuationInput,
 } from '../../types/web3'
 
 const TOKEN_LIMIT = 120
 const METADATA_CONCURRENCY = 4
+const RECENT_TRANSFER_LIMIT = 5
+
+interface AlchemyTransfer {
+    uniqueId?: string
+    hash?: string
+    from?: string
+    to?: string
+    value?: number | null
+    asset?: string | null
+    category?: string
+    metadata?: {blockTimestamp?: string}
+}
+
+interface AlchemyTransfersResult {
+    transfers?: AlchemyTransfer[]
+}
 
 async function mapWithConcurrency<T, R>(
     items: readonly T[],
@@ -128,6 +146,71 @@ async function loadTokens({
     }
 }
 
+async function loadRecentTransfers({
+    rpcUrl,
+    walletAddress,
+    signal,
+}: {
+    rpcUrl: string
+    walletAddress: string
+    signal?: AbortSignal
+}): Promise<WalletTransfer[]> {
+    const baseParams = {
+        fromBlock: '0x0',
+        toBlock: 'latest',
+        category: ['external', 'erc20', 'erc721', 'erc1155'],
+        excludeZeroValue: true,
+        withMetadata: true,
+        order: 'desc',
+        maxCount: `0x${RECENT_TRANSFER_LIMIT.toString(16)}`,
+    }
+
+    try {
+        const [outgoing, incoming] = await Promise.all([
+            callAlchemy<AlchemyTransfersResult>(
+                rpcUrl,
+                'alchemy_getAssetTransfers',
+                [{...baseParams, fromAddress: walletAddress}],
+                signal
+            ),
+            callAlchemy<AlchemyTransfersResult>(
+                rpcUrl,
+                'alchemy_getAssetTransfers',
+                [{...baseParams, toAddress: walletAddress}],
+                signal
+            ),
+        ])
+        const wallet = walletAddress.toLowerCase()
+        const transfers = [...(outgoing.transfers ?? []), ...(incoming.transfers ?? [])]
+        const uniqueTransfers = new Map<string, WalletTransfer>()
+
+        for (const transfer of transfers) {
+            if (!transfer.hash) continue
+            const direction = transfer.from?.toLowerCase() === wallet ? 'out' : 'in'
+            const counterparty = direction === 'out' ? transfer.to : transfer.from
+            const id =
+                transfer.uniqueId ?? `${transfer.hash}-${direction}-${transfer.asset ?? 'asset'}`
+            uniqueTransfers.set(id, {
+                id,
+                hash: transfer.hash,
+                direction,
+                counterparty: counterparty ?? '',
+                asset: transfer.asset || transfer.category || 'Asset',
+                value: typeof transfer.value === 'number' ? transfer.value : null,
+                category: transfer.category ?? 'transfer',
+                timestamp: transfer.metadata?.blockTimestamp ?? null,
+            })
+        }
+
+        return [...uniqueTransfers.values()]
+            .sort((a, b) => (b.timestamp ?? '').localeCompare(a.timestamp ?? ''))
+            .slice(0, RECENT_TRANSFER_LIMIT)
+    } catch (error) {
+        if (signal?.aborted) throw error
+        return []
+    }
+}
+
 export function valueWalletPortfolio({
     nativeBalance,
     network,
@@ -207,10 +290,11 @@ export async function inspectWalletPortfolio({
     const wallet = await resolveWalletInput({provider, input: walletInput, network})
     if (!wallet) throw new Error('INVALID_ADDRESS')
 
-    const [nativeBalanceRaw, tokenResult, nfts] = await Promise.all([
+    const [nativeBalanceRaw, tokenResult, nfts, recentTransfers] = await Promise.all([
         provider.getBalance(wallet.address),
         loadTokens({rpcUrl, walletAddress: wallet.address, ...(signal ? {signal} : {})}),
         fetchWalletNfts(rpcUrl, wallet.address, signal),
+        loadRecentTransfers({rpcUrl, walletAddress: wallet.address, ...(signal ? {signal} : {})}),
     ])
     const nativeBalance = Number(formatEther(nativeBalanceRaw))
     const prices = await fetchWalletPrices({
@@ -236,8 +320,41 @@ export async function inspectWalletPortfolio({
         valuationPartial: prices.partial,
         nftCount: nfts.length,
         nfts,
+        recentTransfers,
         ...valuation,
     }
+}
+
+export async function compareWalletNetworks({
+    walletAddress,
+    networks,
+}: {
+    walletAddress: string
+    networks: readonly WalletNetwork[]
+}): Promise<WalletNetworkSnapshot[]> {
+    return Promise.all(
+        networks.map(async (network): Promise<WalletNetworkSnapshot> => {
+            const rpcUrl = getRpcUrl(network.rpcEnv)
+            if (!rpcUrl) return {network, status: 'missing-rpc'}
+
+            try {
+                const provider = createReadOnlyProvider(rpcUrl)
+                const nativeBalance = Number(formatEther(await provider.getBalance(walletAddress)))
+                const {nativePriceUsd} = await fetchWalletPrices({
+                    networkId: network.id,
+                    tokenContracts: [],
+                })
+                return {
+                    network,
+                    status: 'available',
+                    nativeBalance,
+                    nativeValueUsd: nativeBalance * nativePriceUsd,
+                }
+            } catch {
+                return {network, status: 'error'}
+            }
+        })
+    )
 }
 
 export const connectInjectedWallet = (): Promise<string> => getConnectedWalletAddress()

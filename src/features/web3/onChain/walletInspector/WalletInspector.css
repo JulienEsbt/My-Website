@@ -87,6 +87,19 @@
     margin: 0;
 }
 
+.wallet-inspector__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    padding-inline: 0.35rem;
+}
+
+.wallet-inspector__actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
 /* OVERVIEW */
 .wallet-inspector__overview {
     display: grid;
@@ -196,6 +209,68 @@
     grid-template-columns: 0.82fr 1fr 1.25fr;
     gap: 0.85rem;
     align-items: stretch;
+}
+
+.wallet-inspector__activity-panel,
+.wallet-inspector__comparison-panel {
+    grid-column: 1 / -1;
+}
+
+.wallet-activity-list,
+.wallet-network-comparison {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.wallet-activity-list {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.wallet-activity-row,
+.wallet-network-comparison > div {
+    min-width: 0;
+    padding: 0.75rem;
+    border-radius: 0.9rem;
+    background: rgba(44, 44, 108, 0.42);
+    border: 1px solid rgba(77, 181, 255, 0.12);
+}
+
+.wallet-activity-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.wallet-activity-row span,
+.wallet-activity-row strong,
+.wallet-activity-row small {
+    display: block;
+    min-width: 0;
+}
+
+.wallet-activity-row small {
+    color: var(--color-light);
+}
+
+.wallet-activity-row em {
+    color: var(--color-white);
+    font-size: 0.78rem;
+    font-style: normal;
+}
+
+.wallet-network-comparison {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.wallet-network-comparison strong,
+.wallet-network-comparison span {
+    display: block;
+}
+
+.wallet-network-comparison span {
+    color: var(--color-light);
+    font-size: 0.8rem;
 }
 
 .wallet-inspector__panel {
@@ -449,6 +524,17 @@
     margin-bottom: 1rem;
 }
 
+.wallet-inspector__modal-filter {
+    width: min(28rem, calc(100% - 3rem));
+    margin-bottom: 1rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.75rem;
+    color: var(--color-white);
+    background: rgba(7, 12, 34, 0.78);
+    border: 1px solid rgba(77, 181, 255, 0.22);
+    font: inherit;
+}
+
 .wallet-inspector__modal-content--wide {
     display: flex;
     flex-direction: column;
@@ -542,6 +628,14 @@
 
     .wallet-nft-gallery {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wallet-activity-row {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .wallet-activity-row em {
+        grid-column: 2;
     }
 }
 
