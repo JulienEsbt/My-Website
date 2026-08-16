@@ -1,13 +1,13 @@
 {
     "meta": {
-        "title": "CV de Julien Esterbet — Développeur full-stack, FinTech et Web3"
+        "title": "CV de Julien Esterbet — Développeur full-stack orienté produit"
     },
     "hero": {
         "kicker": "CV accessible",
         "title": "Julien Esterbet",
         "role": "Développeur full-stack orienté produit",
-        "focus": "FinTech · Applications métier · Web3",
-        "summary": "Développeur full-stack et analyste programmeur, je transforme des besoins métier en applications fiables avec Java, Angular, APIs et traitements documentaires. Mon parcours associe FinTech, qualité de livraison et projets Web3.",
+        "focus": "Applications métier · Produits web · Web3",
+        "summary": "Développeur full-stack et analyste programmeur, je transforme des besoins métier en applications utiles et fiables avec Java, Angular, APIs et traitements documentaires. Mon parcours associe compréhension produit, qualité de livraison et expérimentations Web3.",
         "back": "Retour au portfolio",
         "download": "Télécharger le CV au format PDF",
         "downloadNote": "Le PDF conserve la mise en page visuelle du CV. Le contenu structuré ci-dessous constitue son alternative accessible."

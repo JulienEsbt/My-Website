@@ -20,12 +20,19 @@ const About = () => {
 
     const cards = [
         {
+            id: 'develop',
             icon: <FaCode />,
             title: t('about.cards.expertiseTitle'),
             text: t('about.cards.expertiseText'),
         },
-        {icon: <FiCpu />, title: t('about.cards.collabTitle'), text: t('about.cards.collabText')},
         {
+            id: 'understand',
+            icon: <FiCpu />,
+            title: t('about.cards.collabTitle'),
+            text: t('about.cards.collabText'),
+        },
+        {
+            id: 'connect',
             icon: <FiGitBranch />,
             title: t('about.cards.innovationTitle'),
             text: t('about.cards.innovationText'),
@@ -81,7 +88,7 @@ const About = () => {
 
                 <div className="about__cards">
                     {cards.map((card) => (
-                        <article className="about__card" key={card.title}>
+                        <article className="about__card" key={card.id}>
                             <div className="about__icon">{card.icon}</div>
                             <div>
                                 <h3>{card.title}</h3>

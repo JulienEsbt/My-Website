@@ -205,9 +205,15 @@ section > h2,
     color: var(--color-light);
 }
 
+.section-kicker {
+    min-block-size: 1.7em;
+}
+
 section > h2 {
     color: var(--color-primary);
     margin-bottom: 3rem;
+    min-block-size: 1.7em;
+    text-wrap: balance;
 }
 
 .text-light {
