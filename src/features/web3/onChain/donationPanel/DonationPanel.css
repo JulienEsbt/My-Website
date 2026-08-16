@@ -71,12 +71,10 @@
 .donation-panel__presets button {
     padding: 0.55rem 0.8rem;
     border-radius: 999px;
-    color: #a8dcff;
-    background: linear-gradient(180deg, rgba(27, 47, 86, 0.68), rgba(8, 20, 48, 0.74));
+    color: rgba(255, 255, 255, 0.88);
+    background: rgba(5, 12, 34, 0.76);
     border: 1px solid rgba(77, 181, 255, 0.28);
-    box-shadow:
-        0 0.45rem 1.2rem rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.18);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     font: inherit;
@@ -266,7 +264,7 @@
     text-align: left;
     padding: 0.85rem 0.9rem;
     border-radius: 0.95rem;
-    background: linear-gradient(180deg, rgba(28, 42, 82, 0.62), rgba(12, 23, 53, 0.72));
+    background: rgba(14, 25, 58, 0.66);
     border: 1px solid rgba(77, 181, 255, 0.22);
     box-shadow:
         0 0.65rem 1.5rem rgba(0, 0, 0, 0.18),

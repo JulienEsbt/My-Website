@@ -238,21 +238,20 @@ a:hover {
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    color: #a8dcff;
-    background: linear-gradient(180deg, rgba(31, 52, 94, 0.7), rgba(8, 18, 45, 0.8));
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(5, 12, 34, 0.78);
     padding: 0.78rem 1.25rem;
     border-radius: 999px;
     cursor: pointer;
-    border: 1px solid rgba(126, 202, 255, 0.3);
+    border: 1px solid rgba(77, 181, 255, 0.32);
     font: inherit;
     font-weight: 600;
     line-height: 1.2;
-    backdrop-filter: blur(20px) saturate(145%);
-    -webkit-backdrop-filter: blur(20px) saturate(145%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-shadow:
-        0 0.75rem 1.8rem rgba(0, 0, 0, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.13),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+        0 0.65rem 1.4rem rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     transition:
         transform 180ms ease,
         color 180ms ease,
@@ -262,29 +261,25 @@ a:hover {
 }
 
 .btn:hover:not(:disabled) {
-    color: var(--color-white);
-    border-color: rgba(139, 212, 255, 0.58);
-    background: linear-gradient(180deg, rgba(43, 72, 124, 0.78), rgba(10, 25, 60, 0.88));
-    box-shadow:
-        0 0.9rem 2rem rgba(0, 0, 0, 0.26),
-        0 0 1.25rem rgba(77, 181, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.17);
+    color: var(--color-primary);
+    border-color: rgba(77, 181, 255, 0.68);
+    background: rgba(11, 27, 62, 0.88);
+    box-shadow: 0 0.75rem 1.6rem rgba(0, 0, 0, 0.24);
     transform: translateY(-1px);
 }
 
 .btn-primary {
-    color: #051126;
-    border-color: rgba(181, 226, 255, 0.68);
-    background: linear-gradient(180deg, rgba(139, 212, 255, 0.96), rgba(77, 181, 255, 0.9));
+    color: #dff3ff;
+    border-color: rgba(77, 181, 255, 0.56);
+    background: rgba(77, 181, 255, 0.16);
     box-shadow:
-        0 0.75rem 1.8rem rgba(77, 181, 255, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.42),
-        inset 0 -1px 0 rgba(0, 42, 86, 0.16);
+        0 0.65rem 1.4rem rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:hover:not(:disabled) {
-    color: #020919;
-    background: linear-gradient(180deg, rgba(171, 226, 255, 0.98), rgba(94, 191, 255, 0.94));
+    color: var(--color-white);
+    background: rgba(77, 181, 255, 0.24);
 }
 
 .btn:focus-visible {

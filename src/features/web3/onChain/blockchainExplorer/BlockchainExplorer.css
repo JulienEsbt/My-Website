@@ -27,27 +27,6 @@
     position: relative;
 }
 
-.blockchain-embla::before,
-.blockchain-embla::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 5rem;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.blockchain-embla::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--color-bg), transparent);
-}
-
-.blockchain-embla::after {
-    right: 0;
-    background: linear-gradient(270deg, var(--color-bg), transparent);
-}
-
 .blockchain-embla__viewport {
     overflow: hidden;
     cursor: grab;
