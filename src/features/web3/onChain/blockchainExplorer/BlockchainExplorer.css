@@ -24,28 +24,12 @@
 }
 
 .blockchain-explorer__refresh {
-    min-width: 10.5rem;
+    width: 10.5rem;
     white-space: nowrap;
 }
 
 .blockchain-explorer__refresh:disabled {
     opacity: 1;
-}
-
-.blockchain-explorer__refresh.is-loading svg {
-    animation: blockchain-refresh-spin 800ms linear infinite;
-}
-
-@keyframes blockchain-refresh-spin {
-    to {
-        transform: rotate(1turn);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .blockchain-explorer__refresh.is-loading svg {
-        animation: none;
-    }
 }
 
 .blockchain-embla {

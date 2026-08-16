@@ -124,12 +124,17 @@ const BlockchainExplorer = () => {
 
                 <button
                     type="button"
-                    className={`btn blockchain-explorer__refresh ${loading ? 'is-loading' : ''}`}
+                    className="btn blockchain-explorer__refresh"
                     onClick={loadNetworks}
                     disabled={loading}
+                    aria-label={
+                        loading
+                            ? t('blockchainExplorer.refreshing')
+                            : t('blockchainExplorer.refresh')
+                    }
                 >
                     <FiRefreshCw aria-hidden="true" />
-                    {loading ? t('blockchainExplorer.refreshing') : t('blockchainExplorer.refresh')}
+                    {t('blockchainExplorer.refresh')}
                 </button>
             </div>
 

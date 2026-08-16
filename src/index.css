@@ -245,7 +245,8 @@ a:hover {
     cursor: pointer;
     border: 1px solid rgba(77, 181, 255, 0.32);
     font: inherit;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 500;
     line-height: 1.2;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);

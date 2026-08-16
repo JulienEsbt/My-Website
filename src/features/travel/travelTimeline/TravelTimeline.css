@@ -534,6 +534,23 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.28);
+    transition:
+        transform 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.travel-timeline__gallery-overview header button:hover,
+.travel-timeline__gallery-overview header button:focus-visible {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(14, 34, 76, 0.92);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.travel-timeline__gallery-overview header button:active {
+    transform: scale(0.94);
 }
 
 .travel-timeline__gallery-back-to-top {
