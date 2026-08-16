@@ -71,17 +71,27 @@
 .donation-panel__presets button {
     padding: 0.55rem 0.8rem;
     border-radius: 999px;
-    color: var(--color-primary);
-    background: rgba(77, 181, 255, 0.08);
-    border: 1px solid rgba(77, 181, 255, 0.2);
+    color: #9ed7ff;
+    background:
+        radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.13), transparent 48%),
+        rgba(8, 20, 48, 0.7);
+    border: 1px solid rgba(77, 181, 255, 0.28);
+    box-shadow:
+        0 0.45rem 1.2rem rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     font: inherit;
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .donation-panel__presets button:hover,
 .donation-panel__presets button.active {
-    color: var(--color-bg);
-    background: var(--color-primary);
+    color: var(--color-white);
+    background: rgba(77, 181, 255, 0.2);
+    border-color: rgba(139, 212, 255, 0.72);
+    transform: translateY(-2px);
 }
 
 .donation-panel__form input,
@@ -258,8 +268,15 @@
     text-align: left;
     padding: 0.85rem 0.9rem;
     border-radius: 0.95rem;
-    background: rgba(31, 31, 56, 0.58);
-    border: 1px solid rgba(77, 181, 255, 0.14);
+    background:
+        radial-gradient(circle at 24% 0%, rgba(255, 255, 255, 0.1), transparent 44%),
+        rgba(14, 25, 58, 0.66);
+    border: 1px solid rgba(77, 181, 255, 0.22);
+    box-shadow:
+        0 0.65rem 1.5rem rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     cursor: pointer;
     transition: var(--transition);
 }

@@ -65,6 +65,13 @@
         "description": "Développeur full-stack orienté produit. Je construis des applications métiers et des expériences web utiles, puis j’ouvre le portfolio sur le Web3, les voyages et l’écriture.",
         "aria": "Navigation du pied de page",
         "pages": "Pages",
+        "shortPages": {
+            "home": "Portfolio",
+            "web3": "Labs Web3",
+            "travel": "Voyages",
+            "reflections": "Réflexions",
+            "journal": "Journal"
+        },
         "socials": "Réseaux",
         "cta": "Me contacter",
         "privacy": "Confidentialité",

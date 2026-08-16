@@ -83,7 +83,9 @@ const Footer = () => {
                                                 ] = el)
                                             }
                                         >
-                                            {t(page.i18nKey)}
+                                            {t(`footer.shortPages.${page.id}`, {
+                                                defaultValue: t(page.i18nKey),
+                                            })}
                                         </NavLink>
                                     ))}
                                 </div>

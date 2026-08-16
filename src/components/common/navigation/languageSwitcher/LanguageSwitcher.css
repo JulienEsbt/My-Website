@@ -1,15 +1,12 @@
 .lang-switch {
     position: relative;
 
-    min-width: 106px;
-    height: 48px;
+    width: 88px;
+    height: 44px;
     border-radius: 999px;
 
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 0.35rem 0.45rem 0.35rem 1rem;
 
     overflow: hidden;
     cursor: pointer;
@@ -54,36 +51,49 @@
     outline-offset: 4px;
 }
 
-.lang-switch__label,
-.lang-switch__flag {
-    position: relative;
+.lang-slider {
+    position: absolute;
+    inset: 0;
     z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 10px;
+    color: #fff;
+    font-size: 1.08rem;
+
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
 }
 
-.lang-switch__label {
+.lang-labels {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 12px;
+
     font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.07em;
-    color: #9ed7ff;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+
+    color: rgba(255, 255, 255, 0.52);
 }
 
-.lang-switch__flag {
-    width: 2.35rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.55rem;
-    background: rgba(255, 255, 255, 0.06);
-    box-shadow:
-        0 0.4rem 1rem rgba(0, 0, 0, 0.26),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+.lang-labels span {
+    opacity: 0.52;
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
 }
 
-.lang-switch__flag .country-flag {
-    width: 1.8rem;
-    height: 1.35rem;
-    border-radius: 0.18rem;
-    filter: saturate(0.95) contrast(1.02) drop-shadow(0 0.12rem 0.18rem rgba(0, 0, 0, 0.32));
+.lang-labels span.active {
+    color: #8bd4ff;
+    opacity: 1;
 }

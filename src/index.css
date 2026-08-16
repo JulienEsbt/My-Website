@@ -233,26 +233,77 @@ a:hover {
 
 .btn {
     width: max-content;
-    display: inline-block;
-    color: var(--color-primary);
-    background: rgba(5, 12, 34, 0.72);
-    padding: 0.75rem 1.2rem;
-    border-radius: 0.4rem;
+    min-height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    color: #9ed7ff;
+    background:
+        radial-gradient(circle at 28% 0%, rgba(255, 255, 255, 0.14), transparent 45%),
+        linear-gradient(145deg, rgba(24, 40, 78, 0.78), rgba(5, 12, 34, 0.82));
+    padding: 0.78rem 1.25rem;
+    border-radius: 999px;
     cursor: pointer;
-    border: 1px solid var(--color-primary);
+    border: 1px solid rgba(77, 181, 255, 0.34);
     font: inherit;
-    transition: var(--transition);
+    font-weight: 600;
+    line-height: 1.2;
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    box-shadow:
+        0 0.8rem 2rem rgba(0, 0, 0, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+    transition:
+        transform 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
 }
 
-.btn:hover {
-    background: var(--color-white);
-    color: var(--color-bg);
-    border-color: transparent;
+.btn:hover:not(:disabled) {
+    color: var(--color-white);
+    border-color: rgba(139, 212, 255, 0.72);
+    background:
+        radial-gradient(circle at 28% 0%, rgba(255, 255, 255, 0.2), transparent 48%),
+        linear-gradient(145deg, rgba(42, 74, 128, 0.86), rgba(8, 23, 58, 0.9));
+    box-shadow:
+        0 1rem 2.4rem rgba(0, 0, 0, 0.32),
+        0 0 1.6rem rgba(77, 181, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
 }
 
 .btn-primary {
-    background: var(--color-primary);
-    color: var(--color-bg);
+    color: #061126;
+    border-color: rgba(175, 225, 255, 0.78);
+    background:
+        radial-gradient(circle at 25% 0%, rgba(255, 255, 255, 0.58), transparent 42%),
+        linear-gradient(135deg, #8bd4ff, #4db5ff 68%, #3a8fe2);
+    box-shadow:
+        0 0.85rem 2.2rem rgba(77, 181, 255, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.58),
+        inset 0 -1px 0 rgba(0, 42, 86, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+    color: #020919;
+    background:
+        radial-gradient(circle at 25% 0%, rgba(255, 255, 255, 0.7), transparent 44%),
+        linear-gradient(135deg, #b7e7ff, #65c0ff 68%, #4da3ee);
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(139, 212, 255, 0.9);
+    outline-offset: 3px;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+    transform: none;
 }
 
 img {

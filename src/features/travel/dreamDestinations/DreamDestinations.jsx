@@ -3,7 +3,6 @@ import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
-import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import dreamDestinations from '../../../data/travel/dreamDestinations.js'
 import './DreamDestinations.css'
 
@@ -77,9 +76,7 @@ const DreamDestinations = () => {
                             }}
                             aria-pressed={activeIndex === index}
                         >
-                            <span aria-hidden="true">
-                                <CountryFlag code={destination.countryCode} />
-                            </span>
+                            <span aria-hidden="true">{destination.emoji}</span>
                             <strong>{getText(destination, 'name')}</strong>
                             <small>{getText(destination, 'label')}</small>
                         </button>
@@ -97,7 +94,7 @@ const DreamDestinations = () => {
                     >
                         <div className="dream-showcase__top">
                             <span className="dream-showcase__emoji" aria-hidden="true">
-                                <CountryFlag code={activeDestination.countryCode} />
+                                {activeDestination.emoji}
                             </span>
 
                             <span className="dream-showcase__counter">{activeProgress}</span>

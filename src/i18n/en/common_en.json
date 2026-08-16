@@ -65,6 +65,13 @@
         "description": "Product-minded full-stack developer building useful business applications and web experiences, with further explorations across Web3, travel and writing.",
         "aria": "Footer navigation",
         "pages": "Pages",
+        "shortPages": {
+            "home": "Portfolio",
+            "web3": "Web3 Labs",
+            "travel": "Travel",
+            "reflections": "Reflections",
+            "journal": "Journal"
+        },
         "socials": "Socials",
         "cta": "Contact me",
         "privacy": "Privacy",
