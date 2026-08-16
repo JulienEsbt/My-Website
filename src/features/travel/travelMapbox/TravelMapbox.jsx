@@ -9,6 +9,7 @@ const TravelMapbox = ({
     trips = [],
     dreamDestinations = [],
     selectedLocation = null,
+    onSelectLocation,
     resetSignal = 0,
 }) => {
     const {t, i18n} = useTranslation('travel')
@@ -30,6 +31,7 @@ const TravelMapbox = ({
                 dreamDestinations,
                 language,
                 dreamLabel: t('explorer.legend.dream'),
+                onSelectLocation,
                 navigationLabels: {
                     zoomIn: t('explorer.mapControls.zoomIn'),
                     zoomOut: t('explorer.mapControls.zoomOut'),
@@ -45,7 +47,7 @@ const TravelMapbox = ({
             mapRef.current?.destroy()
             mapRef.current = null
         }
-    }, [dreamDestinations, language, t, trips])
+    }, [dreamDestinations, language, onSelectLocation, t, trips])
 
     useEffect(() => {
         if (!selectedLocation) return

@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import React, {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {FiCrosshair, FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiSearch} from 'react-icons/fi'
@@ -73,10 +73,15 @@ const TravelExplorer = () => {
         setResetSignal((value) => value + 1)
     }
 
+    const selectLocation = useCallback((location) => {
+        setSelectedLocation(location)
+    }, [])
+
     const explorerProps = {
         trips: filteredTrips,
         dreamDestinations: filteredDreams,
         selectedLocation,
+        onSelectLocation: selectLocation,
         resetSignal,
     }
 
@@ -202,7 +207,7 @@ const TravelExplorer = () => {
                             : (location.countryEn ?? location.country)
                         return (
                             <li key={`${location.kind}-${location.id}`}>
-                                <button type="button" onClick={() => setSelectedLocation(location)}>
+                                <button type="button" onClick={() => selectLocation(location)}>
                                     <span aria-hidden="true">
                                         {location.kind === 'trip' ? location.flag : location.emoji}
                                     </span>

@@ -37,12 +37,19 @@ function addMarker(
         className,
         coordinates,
         popup,
-    }: {className: string; coordinates: Coordinates; popup: PopupContent}
+        onSelect,
+    }: {
+        className: string
+        coordinates: Coordinates
+        popup: PopupContent
+        onSelect: ((location: Coordinates) => void) | undefined
+    }
 ): void {
     const marker = document.createElement('button')
     marker.type = 'button'
     marker.className = className
     marker.setAttribute('aria-label', `${popup.title} — ${popup.meta}`)
+    marker.addEventListener('click', () => onSelect?.(coordinates))
 
     new mapboxgl.Marker({element: marker, anchor: 'center'})
         .setLngLat([coordinates.lng, coordinates.lat])
@@ -58,6 +65,7 @@ export function createTravelMap({
     language = 'fr',
     dreamLabel = 'Destination rêvée',
     navigationLabels,
+    onSelectLocation,
 }: {
     container: HTMLElement
     expanded: boolean
@@ -66,6 +74,7 @@ export function createTravelMap({
     language?: 'fr' | 'en'
     dreamLabel?: string
     navigationLabels: TravelMapNavigationLabels
+    onSelectLocation?: (location: Coordinates) => void
 }) {
     mapboxgl.accessToken = MAPBOX_TOKEN
 
@@ -115,6 +124,7 @@ export function createTravelMap({
             className: `mapbox-marker ${trip.category ?? 'visited'}`,
             coordinates: trip,
             popup: {title: city, meta: `${country} • ${dateLabel}`, description},
+            onSelect: onSelectLocation,
         })
     })
 
@@ -129,6 +139,7 @@ export function createTravelMap({
             className: 'mapbox-marker dream',
             coordinates: destination,
             popup: {title: name, meta: `${dreamLabel} • ${country}`, description},
+            onSelect: onSelectLocation,
         })
     })
 

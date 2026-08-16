@@ -67,6 +67,7 @@ describe('TravelGallery', () => {
 
         expect(screen.getByRole('dialog', {name: 'Galerie photo — Ville test'})).toBeVisible()
         expect(screen.getAllByRole('button', {name: /Voir la photo/})).toHaveLength(5)
+        expect(screen.getByRole('button', {name: 'Revenir en haut de la galerie'})).toBeVisible()
 
         const gallery = screen.getByRole('dialog', {name: 'Galerie photo — Ville test'})
         const wheelEvent = new WheelEvent('wheel', {bubbles: true, cancelable: true})

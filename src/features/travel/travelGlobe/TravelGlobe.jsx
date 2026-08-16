@@ -19,6 +19,7 @@ const TravelGlobe = ({
     trips = [],
     dreamDestinations = [],
     selectedLocation = null,
+    onSelectLocation,
     resetSignal = 0,
     showArcs = true,
     onToggleArcs,
@@ -36,6 +37,7 @@ const TravelGlobe = ({
     const points = useMemo(() => {
         const tripPoints = visibleTrips.map((trip) => ({
             id: trip.id,
+            kind: 'trip',
             lat: trip.lat,
             lng: trip.lng,
             size: trip.hasLivedThere ? 0.9 : 0.48,
@@ -51,6 +53,7 @@ const TravelGlobe = ({
 
         const dreamPoints = dreamDestinations.map((destination) => ({
             id: destination.id,
+            kind: 'dream',
             lat: destination.lat,
             lng: destination.lng,
             size: 0.7,
@@ -166,6 +169,14 @@ const TravelGlobe = ({
         [expanded, reducedMotion]
     )
 
+    const selectPoint = useCallback(
+        (point) => {
+            focusPoint(point)
+            onSelectLocation?.(point)
+        },
+        [focusPoint, onSelectLocation]
+    )
+
     useEffect(() => {
         if (!selectedLocation || !globeRef.current) return
 
@@ -201,7 +212,7 @@ const TravelGlobe = ({
                     pointLabel="label"
                     pointResolution={20}
                     pointsMerge={false}
-                    onPointClick={focusPoint}
+                    onPointClick={selectPoint}
 
                     labelsData={labelPoints}
                     labelLat="lat"
@@ -214,7 +225,7 @@ const TravelGlobe = ({
                     labelIncludeDot={false}
                     labelDotRadius={0.18}
                     labelLabel="label"
-                    onLabelClick={focusPoint}
+                    onLabelClick={selectPoint}
 
                     ringsData={reducedMotion || motionPaused ? [] : ringPoints}
                     ringLat="lat"

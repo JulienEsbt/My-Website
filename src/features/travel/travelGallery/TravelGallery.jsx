@@ -62,6 +62,13 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
         onOpenChange(false)
     }, [onOpenChange])
 
+    const scrollGalleryToTop = () => {
+        lightboxRef.current?.scrollTo({
+            top: 0,
+            behavior: getPreferredScrollBehavior(),
+        })
+    }
+
     const previousPhoto = useCallback(() => {
         setActivePhotoIndex((index) => (index === 0 ? photos.length - 1 : index - 1))
     }, [photos.length])
@@ -231,6 +238,14 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                                 </button>
                             ))}
                         </div>
+                        <button
+                            type="button"
+                            className="travel-timeline__gallery-back-to-top"
+                            onClick={scrollGalleryToTop}
+                            aria-label={t('timeline.gallery.backToTop')}
+                        >
+                            ↑
+                        </button>
                     </div>,
                     document.body
                 )}

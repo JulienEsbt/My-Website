@@ -43,6 +43,7 @@
             "openAll": "Ouvrir la galerie complète · {{count}} photos",
             "loadError": "Les photos de ce voyage ne peuvent pas être chargées pour le moment.",
             "close": "Fermer la galerie",
+            "backToTop": "Revenir en haut de la galerie",
             "previous": "Photo précédente",
             "next": "Photo suivante",
             "openPhoto": "Voir la photo {{number}}",

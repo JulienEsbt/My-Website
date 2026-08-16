@@ -483,12 +483,17 @@
 }
 
 .travel-timeline__gallery-overview header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
     width: min(100%, 1380px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     margin: 0 auto 1.5rem;
+    padding: 0.75rem 0;
+    background: linear-gradient(180deg, #020612 72%, rgba(2, 6, 18, 0));
 }
 
 .travel-timeline__gallery-overview header p {
@@ -515,6 +520,39 @@
     color: var(--color-white);
     font-size: 1.8rem;
     cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.travel-timeline__gallery-back-to-top {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 4;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(126, 202, 255, 0.38);
+    color: var(--color-white);
+    background: linear-gradient(180deg, rgba(34, 56, 98, 0.86), rgba(7, 17, 43, 0.9));
+    box-shadow:
+        0 0.75rem 1.8rem rgba(0, 0, 0, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    font: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.travel-timeline__gallery-back-to-top:hover,
+.travel-timeline__gallery-back-to-top:focus-visible {
+    color: var(--color-primary);
+    border-color: rgba(139, 212, 255, 0.72);
+    transform: translateY(-2px);
 }
 
 .travel-timeline__gallery-mosaic {
