@@ -1,13 +1,13 @@
 {
     "meta": {
-        "title": "Julien Esterbet Resume — Product-minded Full-stack Developer"
+        "title": "Julien Esterbet Resume — Full-stack Developer, FinTech and Web3"
     },
     "hero": {
         "kicker": "Accessible resume",
         "title": "Julien Esterbet",
         "role": "Product-minded full-stack developer",
-        "focus": "Business applications · Web products · Web3",
-        "summary": "Full-stack developer and IT analyst turning business needs into useful, reliable applications with Java, Angular, APIs and document workflows. My background combines product understanding, delivery quality and hands-on Web3 experiments.",
+        "focus": "FinTech · Business applications · Web3",
+        "summary": "Full-stack developer and IT analyst turning business needs into reliable applications with Java, Angular, APIs and document workflows. My background combines FinTech, delivery quality and hands-on Web3 projects.",
         "back": "Back to portfolio",
         "download": "Download the resume as a PDF",
         "downloadNote": "The PDF preserves the resume’s visual layout. The structured content below is its accessible alternative."
@@ -125,7 +125,7 @@
         {
             "name": "My-Website",
             "status": "Active portfolio",
-            "detail": "Bilingual React and Vite portfolio rebuilt with a documented accessibility approach informed by RGAA."
+            "detail": "Bilingual React and Vite portfolio rebuilt with a documented RGAA accessibility approach."
         },
         {
             "name": "Megalis",
