@@ -2,7 +2,6 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import CountryFlag from '../../media/CountryFlag.jsx'
 import './LanguageSwitcher.css'
 
 export default function LanguageSwitcher() {
@@ -29,23 +28,12 @@ export default function LanguageSwitcher() {
             onClick={toggleLanguage}
             aria-label={next === 'fr' ? 'Passer en français' : 'Switch to English'}
         >
-            <motion.div
-                className="lang-slider"
-                layout
-                transition={{type: 'spring', stiffness: 500, damping: 30}}
-                // Le curseur se place du côté de la langue à venir (plus logique visuellement)
-                style={{justifyContent: next === 'fr' ? 'flex-start' : 'flex-end'}}
-            >
-                <motion.div
-                    key={current} // pour animer le changement
-                    initial={{opacity: 0, y: 6}}
-                    animate={{opacity: 1, y: 0}}
-                    exit={{opacity: 0, y: -6}}
-                    transition={{duration: 0.2}}
-                >
-                    <CountryFlag code={current === 'fr' ? 'FR' : 'GB'} />
-                </motion.div>
-            </motion.div>
+            <motion.span
+                className="lang-active-indicator"
+                aria-hidden="true"
+                animate={{x: current === 'fr' ? 0 : 40}}
+                transition={{type: 'spring', stiffness: 500, damping: 34}}
+            />
 
             <div className="lang-labels">
                 <span className={current === 'fr' ? 'active' : ''}>FR</span>

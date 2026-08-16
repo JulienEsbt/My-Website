@@ -55,6 +55,10 @@ const Header = () => {
                     <div ref={cta}>
                         <Web3CTA />
                     </div>
+
+                    <div ref={socials} className="web3-header__socials-wrapper">
+                        <HeaderSocials />
+                    </div>
                 </div>
 
                 <div className="hero__visual">
@@ -95,10 +99,6 @@ const Header = () => {
                             <span>RPC</span>
                         </div>
                     </motion.div>
-                </div>
-
-                <div ref={socials} className="web3-header__socials-wrapper">
-                    <HeaderSocials />
                 </div>
 
                 <a

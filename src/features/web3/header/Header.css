@@ -291,20 +291,29 @@
 }
 
 .web3-header__socials-wrapper {
-    position: absolute;
-    left: 15rem;
-    top: 40%;
-    z-index: 10;
+    width: max-content;
+    margin-top: 1.35rem;
 }
 
-@media (max-width: 1400px) {
-    .web3-header__socials-wrapper {
-        left: -8rem;
-    }
+.web3-header__socials-wrapper .header-socials {
+    width: auto;
+    height: 3.5rem;
+    flex-direction: row;
+    gap: 0.35rem;
+    padding-inline: 0.45rem;
+}
+
+.web3-header__socials-wrapper .header-socials::after {
+    display: none;
+}
+
+.web3-header__socials-wrapper .header-socials a {
+    width: 2.65rem;
+    height: 2.65rem;
 }
 
 @media (max-width: 1024px) {
     .web3-header__socials-wrapper {
-        display: none;
+        margin-inline: auto;
     }
 }

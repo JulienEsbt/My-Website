@@ -3,9 +3,9 @@
     height: 1.15em;
     display: inline-block;
     flex: 0 0 auto;
-    object-fit: cover;
-    border-radius: 0.18em;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+    object-fit: contain;
+    border-radius: 0.1em;
+    filter: saturate(0.88) contrast(0.96) drop-shadow(0 0.18em 0.28em rgba(0, 0, 0, 0.3));
 }
 
 .country-flag--fallback {

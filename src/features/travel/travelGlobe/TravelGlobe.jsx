@@ -40,7 +40,7 @@ const TravelGlobe = ({
             size: trip.hasLivedThere ? 0.9 : 0.48,
             altitude: trip.hasLivedThere ? 0.11 : 0.075,
             color: CATEGORY_COLORS[trip.category] ?? CATEGORY_COLORS.visited,
-            label: `${trip.flag} ${isFr ? trip.city : (trip.cityEn ?? trip.city)}, ${
+            label: `${isFr ? trip.city : (trip.cityEn ?? trip.city)}, ${
                 isFr ? trip.country : (trip.countryEn ?? trip.country)
             } — ${isFr ? trip.type : (trip.typeEn ?? trip.type)}`,
             shortLabel: isFr ? trip.city : (trip.cityEn ?? trip.city),
