@@ -77,7 +77,9 @@ const DreamDestinations = () => {
                             }}
                             aria-pressed={activeIndex === index}
                         >
-                            <CountryFlag code={destination.countryCode} />
+                            <span className="dream-showcase__thumb-flag" aria-hidden="true">
+                                <CountryFlag code={destination.countryCode} />
+                            </span>
                             <strong>{getText(destination, 'name')}</strong>
                             <small>{getText(destination, 'label')}</small>
                         </button>

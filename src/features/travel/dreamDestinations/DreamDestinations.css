@@ -46,10 +46,10 @@
     border-color: rgba(77, 181, 255, 0.48);
 }
 
-.dream-showcase__thumb span {
+.dream-showcase__thumb-flag {
     grid-row: span 2;
-    width: 2.9rem;
-    height: 2.9rem;
+    width: 3.4rem;
+    height: 3.4rem;
     display: grid;
     place-items: center;
     border-radius: 0.95rem;
@@ -119,13 +119,15 @@
 }
 
 .dream-showcase__emoji .country-flag {
-    width: 2.75rem;
-    height: 2.05rem;
+    width: 4.4rem;
+    height: 3.3rem;
+    transform: scale(1.25);
 }
 
 .dream-showcase__thumb .country-flag {
-    width: 2rem;
-    height: 1.5rem;
+    width: 3.2rem;
+    height: 2.4rem;
+    transform: scale(1.35);
 }
 
 .dream-showcase__counter {
