@@ -1,8 +1,6 @@
-import React, {useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
 import Globe from 'react-globe.gl'
 import {useTranslation} from 'react-i18next'
-import trips from '../../../data/travel/trips.js'
-import dreamDestinations from '../../../data/travel/dreamDestinations.js'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import './TravelGlobe.css'
 
@@ -16,7 +14,16 @@ const CATEGORY_COLORS = {
     dream: '#ff9f43',
 }
 
-const TravelGlobe = ({expanded = false}) => {
+const TravelGlobe = ({
+    expanded = false,
+    trips = [],
+    dreamDestinations = [],
+    selectedLocation = null,
+    onSelectLocation,
+    resetSignal = 0,
+    showArcs = true,
+    onToggleArcs,
+}) => {
     const globeRef = useRef()
     const shellRef = useRef(null)
     const [dimensions, setDimensions] = useState({width: 1, height: 1})
@@ -25,17 +32,18 @@ const TravelGlobe = ({expanded = false}) => {
     const reducedMotion = useReducedMotion()
     const [motionPaused, setMotionPaused] = useState(reducedMotion)
 
-    const visibleTrips = useMemo(() => trips.filter((trip) => !trip.isPlanned), [])
+    const visibleTrips = useMemo(() => trips.filter((trip) => !trip.isPlanned), [trips])
 
     const points = useMemo(() => {
         const tripPoints = visibleTrips.map((trip) => ({
             id: trip.id,
+            kind: 'trip',
             lat: trip.lat,
             lng: trip.lng,
             size: trip.hasLivedThere ? 0.9 : 0.48,
             altitude: trip.hasLivedThere ? 0.11 : 0.075,
             color: CATEGORY_COLORS[trip.category] ?? CATEGORY_COLORS.visited,
-            label: `${trip.flag} ${isFr ? trip.city : (trip.cityEn ?? trip.city)}, ${
+            label: `${isFr ? trip.city : (trip.cityEn ?? trip.city)}, ${
                 isFr ? trip.country : (trip.countryEn ?? trip.country)
             } — ${isFr ? trip.type : (trip.typeEn ?? trip.type)}`,
             shortLabel: isFr ? trip.city : (trip.cityEn ?? trip.city),
@@ -45,23 +53,22 @@ const TravelGlobe = ({expanded = false}) => {
 
         const dreamPoints = dreamDestinations.map((destination) => ({
             id: destination.id,
+            kind: 'dream',
             lat: destination.lat,
             lng: destination.lng,
             size: 0.7,
             altitude: 0.095,
             color: CATEGORY_COLORS.dream,
-            label: `${destination.emoji} ${
-                isFr ? destination.name : (destination.nameEn ?? destination.name)
-            }, ${isFr ? destination.country : (destination.countryEn ?? destination.country)} — ${t(
-                'explorer.legend.dream'
-            )}`,
+            label: `${isFr ? destination.name : (destination.nameEn ?? destination.name)}, ${
+                isFr ? destination.country : (destination.countryEn ?? destination.country)
+            } — ${t('explorer.legend.dream')}`,
             shortLabel: isFr ? destination.name : (destination.nameEn ?? destination.name),
             category: 'dream',
             important: true,
         }))
 
         return [...tripPoints, ...dreamPoints]
-    }, [isFr, t, visibleTrips])
+    }, [dreamDestinations, isFr, t, visibleTrips])
 
     const labelPoints = useMemo(() => points.filter((point) => point.important), [points])
 
@@ -136,26 +143,43 @@ const TravelGlobe = ({expanded = false}) => {
             },
             reducedMotion ? 0 : 900
         )
-    }, [expanded, motionPaused, reducedMotion])
+    }, [expanded, motionPaused, reducedMotion, resetSignal])
 
     useEffect(() => {
         if (reducedMotion) setMotionPaused(true)
     }, [reducedMotion])
 
-    const focusPoint = (point) => {
-        if (!globeRef.current) return
+    const focusPoint = useCallback(
+        (point) => {
+            if (!globeRef.current) return
 
-        globeRef.current.controls().autoRotate = false
+            globeRef.current.controls().autoRotate = false
 
-        globeRef.current.pointOfView(
-            {
-                lat: point.lat,
-                lng: point.lng,
-                altitude: expanded ? 1.05 : 1.25,
-            },
-            reducedMotion ? 0 : 900
-        )
-    }
+            globeRef.current.pointOfView(
+                {
+                    lat: point.lat,
+                    lng: point.lng,
+                    altitude: expanded ? 1.05 : 1.25,
+                },
+                reducedMotion ? 0 : 900
+            )
+        },
+        [expanded, reducedMotion]
+    )
+
+    const selectPoint = useCallback(
+        (point) => {
+            focusPoint(point)
+            onSelectLocation?.(point)
+        },
+        [focusPoint, onSelectLocation]
+    )
+
+    useEffect(() => {
+        if (!selectedLocation || !globeRef.current) return
+
+        focusPoint(selectedLocation)
+    }, [focusPoint, selectedLocation])
 
     return (
         <div ref={shellRef} className={`travel-globe__shell ${expanded ? 'expanded' : ''}`}>
@@ -186,7 +210,7 @@ const TravelGlobe = ({expanded = false}) => {
                     pointLabel="label"
                     pointResolution={20}
                     pointsMerge={false}
-                    onPointClick={focusPoint}
+                    onPointClick={selectPoint}
 
                     labelsData={labelPoints}
                     labelLat="lat"
@@ -199,7 +223,7 @@ const TravelGlobe = ({expanded = false}) => {
                     labelIncludeDot={false}
                     labelDotRadius={0.18}
                     labelLabel="label"
-                    onLabelClick={focusPoint}
+                    onLabelClick={selectPoint}
 
                     ringsData={reducedMotion || motionPaused ? [] : ringPoints}
                     ringLat="lat"
@@ -210,7 +234,7 @@ const TravelGlobe = ({expanded = false}) => {
                     ringRepeatPeriod={(d) => (d.category === 'dream' ? 1700 : 2400)}
                     ringResolution={48}
 
-                    arcsData={arcs}
+                    arcsData={showArcs ? arcs : []}
                     arcStartLat="startLat"
                     arcStartLng="startLng"
                     arcEndLat="endLat"
@@ -227,17 +251,31 @@ const TravelGlobe = ({expanded = false}) => {
                 />
             </div>
 
-            {!reducedMotion && (
-                <button
-                    type="button"
-                    className="travel-globe__motion-control"
-                    onClick={() => setMotionPaused((paused) => !paused)}
-                >
-                    {motionPaused
-                        ? t('explorer.globeMotion.resume')
-                        : t('explorer.globeMotion.pause')}
-                </button>
-            )}
+            <div className="travel-globe__controls">
+                {onToggleArcs && (
+                    <button
+                        type="button"
+                        className="travel-globe__control travel-globe__control--routes"
+                        onClick={onToggleArcs}
+                        aria-pressed={showArcs}
+                    >
+                        {showArcs
+                            ? t('explorer.controls.hideArcs')
+                            : t('explorer.controls.showArcs')}
+                    </button>
+                )}
+                {!reducedMotion && (
+                    <button
+                        type="button"
+                        className="travel-globe__control travel-globe__control--motion"
+                        onClick={() => setMotionPaused((paused) => !paused)}
+                    >
+                        {motionPaused
+                            ? t('explorer.globeMotion.resume')
+                            : t('explorer.globeMotion.pause')}
+                    </button>
+                )}
+            </div>
         </div>
     )
 }

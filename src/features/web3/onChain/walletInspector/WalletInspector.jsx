@@ -1,6 +1,6 @@
 import {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
 import {motion} from 'framer-motion'
-import {FiSearch} from 'react-icons/fi'
+import {FiDownload, FiLayers, FiSearch} from 'react-icons/fi'
 import {TbWallet} from 'react-icons/tb'
 import {useTranslation} from 'react-i18next'
 import FeatureLoading from '../../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
@@ -20,6 +20,8 @@ const WalletInspector = () => {
     const [showAllNfts, setShowAllNfts] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [comparison, setComparison] = useState([])
+    const [comparing, setComparing] = useState(false)
     const requestIdRef = useRef(0)
     const abortControllerRef = useRef(null)
 
@@ -51,6 +53,7 @@ const WalletInspector = () => {
         setLoading(true)
         setError('')
         setResult(null)
+        setComparison([])
 
         try {
             const {inspectWalletPortfolio} =
@@ -127,6 +130,37 @@ const WalletInspector = () => {
 
     const hasOpenDialog = showAllTokens || showAllNfts || Boolean(selectedNft)
 
+    const compareNetworks = async () => {
+        if (!result) return
+        setComparing(true)
+        const {compareWalletNetworks} =
+            await import('../../../../services/web3/walletInspectorService.js')
+        setComparison(
+            await compareWalletNetworks({
+                walletAddress: result.address,
+                networks: BLOCKCHAIN_NETWORKS,
+            })
+        )
+        setComparing(false)
+    }
+
+    const exportReport = () => {
+        if (!result) return
+        const report = {
+            exportedAt: new Date().toISOString(),
+            notice: t('walletInspector.exportNotice'),
+            wallet: result,
+            networkComparison: comparison,
+        }
+        const blob = new Blob([JSON.stringify(report, null, 2)], {type: 'application/json'})
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `wallet-report-${result.address.slice(0, 8)}.json`
+        link.click()
+        URL.revokeObjectURL(url)
+    }
+
     return (
         <section id="wallet-inspector">
             <p className="section-kicker">{t('walletInspector.kicker')}</p>
@@ -151,22 +185,24 @@ const WalletInspector = () => {
                         ))}
                     </select>
 
-                    <label className="sr-only" htmlFor="wallet-address">
-                        {t('walletInspector.addressLabel')}
-                    </label>
-                    <input
-                        id="wallet-address"
-                        type="text"
-                        autoComplete="off"
-                        required
-                        value={address}
-                        onChange={(event) => setAddress(event.target.value)}
-                        placeholder={t('walletInspector.placeholder')}
-                        aria-invalid={error ? 'true' : undefined}
-                        aria-describedby={error ? 'wallet-inspector-error' : undefined}
-                    />
+                    <div className="wallet-inspector__address-field">
+                        <label className="sr-only" htmlFor="wallet-address">
+                            {t('walletInspector.addressLabel')}
+                        </label>
+                        <input
+                            id="wallet-address"
+                            type="text"
+                            autoComplete="off"
+                            required
+                            value={address}
+                            onChange={(event) => setAddress(event.target.value)}
+                            placeholder={t('walletInspector.placeholder')}
+                            aria-invalid={error ? 'true' : undefined}
+                            aria-describedby={error ? 'wallet-inspector-error' : undefined}
+                        />
 
-                    {result?.ens && <span className="wallet-inspector__ens-valid">✓ ENS</span>}
+                        {result?.ens && <span className="wallet-inspector__ens-valid">✓ ENS</span>}
+                    </div>
 
                     <button className="btn btn-primary" disabled={loading}>
                         <FiSearch />
@@ -191,12 +227,34 @@ const WalletInspector = () => {
                 )}
 
                 {result && (
-                    <WalletInspectorResults
-                        result={result}
-                        onSelectNft={setSelectedNft}
-                        onShowAllNfts={() => setShowAllNfts(true)}
-                        onShowAllTokens={() => setShowAllTokens(true)}
-                    />
+                    <>
+                        <div
+                            className="wallet-inspector__actions"
+                            aria-label={t('walletInspector.actions')}
+                        >
+                            <button
+                                type="button"
+                                className="btn"
+                                onClick={compareNetworks}
+                                disabled={comparing}
+                            >
+                                <FiLayers />
+                                {comparing
+                                    ? t('walletInspector.comparing')
+                                    : t('walletInspector.compare')}
+                            </button>
+                            <button type="button" className="btn" onClick={exportReport}>
+                                <FiDownload /> {t('walletInspector.export')}
+                            </button>
+                        </div>
+                        <WalletInspectorResults
+                            result={result}
+                            comparison={comparison}
+                            onSelectNft={setSelectedNft}
+                            onShowAllNfts={() => setShowAllNfts(true)}
+                            onShowAllTokens={() => setShowAllTokens(true)}
+                        />
+                    </>
                 )}
             </motion.div>
 

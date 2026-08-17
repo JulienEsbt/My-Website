@@ -1,8 +1,10 @@
 .crypto-about {
+    max-width: 86rem;
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(22rem, 27rem) minmax(0, 1fr);
+    gap: clamp(3rem, 4vw, 4.5rem);
     align-items: center;
+    justify-content: center;
 }
 
 .crypto-about__visual {
@@ -64,12 +66,12 @@
 
 .crypto-about__floating-card--top {
     top: 3rem;
-    right: 0;
+    right: -1.25rem;
 }
 
 .crypto-about__floating-card--bottom {
     bottom: 3.4rem;
-    left: 0;
+    left: -1.25rem;
 }
 
 .crypto-about__content {
@@ -174,7 +176,9 @@
     }
 
     .crypto-about__visual {
+        width: min(28rem, 100%);
         min-height: 25rem;
+        margin-inline: auto;
     }
 
     .crypto-about__orb {

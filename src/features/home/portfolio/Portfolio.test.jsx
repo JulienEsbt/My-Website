@@ -45,4 +45,17 @@ describe('Portfolio', () => {
             'https://github.com/JulienEsbt/bruno-pizza-production'
         )
     })
+
+    it('uses the repository for the My-Website project image', () => {
+        render(
+            <MemoryRouter>
+                <Portfolio />
+            </MemoryRouter>
+        )
+
+        expect(screen.getByRole('link', {name: 'Voir le code · My-Website'})).toHaveAttribute(
+            'href',
+            'https://github.com/JulienEsbt/My-Website'
+        )
+    })
 })

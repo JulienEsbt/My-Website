@@ -8,7 +8,7 @@ const content = {
         home: {
             title: 'Julien Esterbet — Développeur full-stack orienté produit',
             description:
-                'Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, FinTech, React, Angular, Java et expérimentations Web3.',
+                'Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web fiables, React, Angular, Java et expérimentations Web3.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Étude de cas produit | Julien Esterbet',
@@ -18,10 +18,10 @@ const content = {
         myWebsite: {
             title: 'My-Website — Étude de cas portfolio | Julien Esterbet',
             description:
-                'Étude de cas de la refonte progressive du portfolio React et Vite de Julien Esterbet : architecture, accessibilité, médias et qualité.',
+                'Présentation du portfolio React et Vite de Julien Esterbet : architecture, accessibilité, contenus, médias, qualité et expériences interactives.',
         },
         resume: {
-            title: 'CV de Julien Esterbet — Développeur full-stack, FinTech et Web3',
+            title: 'CV de Julien Esterbet — Développeur full-stack orienté produit',
             description:
                 'Parcours, expériences, compétences et projets de Julien Esterbet, développeur full-stack orienté produit basé à Paris.',
         },
@@ -45,6 +45,11 @@ const content = {
             description:
                 'Textes personnels de Julien Esterbet autour de la philosophie, de la société, du doute et de la construction de soi.',
         },
+        journal: {
+            title: 'Journal — Julien Esterbet',
+            description:
+                'Fil chronologique des projets, voyages, réflexions et nouvelles publications de Julien Esterbet, disponible en RSS et Atom.',
+        },
         notFound: {
             title: 'Page introuvable — Julien Esterbet',
             description: 'Cette page n’existe pas ou a été déplacée.',
@@ -54,7 +59,7 @@ const content = {
         home: {
             title: 'Julien Esterbet — Product-minded full-stack developer',
             description:
-                'Julien Esterbet’s portfolio: product-minded full-stack development across business applications, FinTech, React, Angular, Java and Web3 experiments.',
+                'Julien Esterbet’s portfolio: product-minded full-stack development across reliable business applications, web products, React, Angular, Java and Web3 experiments.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Product case study | Julien Esterbet',
@@ -64,10 +69,10 @@ const content = {
         myWebsite: {
             title: 'My-Website — Portfolio case study | Julien Esterbet',
             description:
-                'Case study of Julien Esterbet’s incremental React and Vite portfolio refactor: architecture, accessibility, media and quality.',
+                'Presentation of Julien Esterbet’s React and Vite portfolio: architecture, accessibility, content, media, quality and interactive experiences.',
         },
         resume: {
-            title: 'Julien Esterbet’s résumé — Full-stack, FinTech and Web3',
+            title: 'Julien Esterbet’s résumé — Product-minded full-stack developer',
             description:
                 'Experience, skills and selected projects of Julien Esterbet, a product-minded full-stack developer based in Paris.',
         },
@@ -91,6 +96,11 @@ const content = {
             description:
                 'Personal writing by Julien Esterbet about philosophy, society, doubt and self-construction.',
         },
+        journal: {
+            title: 'Journal — Julien Esterbet',
+            description:
+                'A chronological feed of Julien Esterbet’s projects, travels, reflections and new publications, available through RSS and Atom.',
+        },
         notFound: {
             title: 'Page not found — Julien Esterbet',
             description: 'This page does not exist or has been moved.',
@@ -107,6 +117,7 @@ const staticRoutes = {
     '/web3': 'web3',
     '/travel': 'travel',
     '/reflections': 'reflections',
+    '/journal': 'journal',
 }
 
 const person = {

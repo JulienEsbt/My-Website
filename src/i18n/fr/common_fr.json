@@ -16,6 +16,7 @@
         "web3": "Labs Web3",
         "travel": "Carnets de voyage",
         "reflections": "Écrits et réflexions",
+        "journal": "Journal",
         "groups": {
             "primary": "Portfolio et labs",
             "editorial": "À explorer"
@@ -61,9 +62,16 @@
     },
     "footer": {
         "logo": "Julien ESTERBET",
-        "description": "Portfolio de développeur full-stack orienté produit, complété par des expérimentations Web3 et des contenus personnels à explorer au second niveau.",
+        "description": "Développeur full-stack orienté produit. Je construis des applications métiers et des expériences web utiles, puis j’ouvre le portfolio sur le Web3, les voyages et l’écriture.",
         "aria": "Navigation du pied de page",
         "pages": "Pages",
+        "shortPages": {
+            "home": "Portfolio",
+            "web3": "Labs Web3",
+            "travel": "Voyages",
+            "reflections": "Réflexions",
+            "journal": "Journal"
+        },
         "socials": "Réseaux",
         "cta": "Me contacter",
         "privacy": "Confidentialité",
@@ -81,7 +89,7 @@
         "externalTitle": "Services externes",
         "externalBody": "Mapbox, les fournisseurs RPC Alchemy et les sources de prix sont sollicités uniquement lorsque les fonctionnalités correspondantes sont utilisées. Les politiques de ces fournisseurs s’appliquent alors à leurs services.",
         "controlTitle": "Vos choix",
-        "controlBody": "Vous pouvez utiliser les pages éditoriales sans remplir le formulaire ni connecter de wallet. Les bloqueurs de contenu peuvent empêcher les mesures Vercel sans bloquer le contenu principal.",
+        "controlBody": "Vous pouvez utiliser les pages éditoriales et suivre les flux RSS ou Atom sans remplir le formulaire, communiquer d’adresse e-mail ni connecter de wallet. Le site ne propose actuellement aucune inscription à une newsletter. Les bloqueurs de contenu peuvent empêcher les mesures Vercel sans bloquer le contenu principal.",
         "contact": "Pour toute question concernant ces traitements, utilisez le formulaire de contact du portfolio.",
         "updated": "Dernière mise à jour : août 2026."
     },

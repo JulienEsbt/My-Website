@@ -1,4 +1,4 @@
-import {useRef} from 'react'
+import {useMemo, useRef, useState} from 'react'
 import {FiX} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import useFocusTrap from '../../../../components/common/accessibility/useFocusTrap.js'
@@ -20,6 +20,22 @@ const WalletInspectorDialogs = ({
     const nftsCloseRef = useRef(null)
     const nftModalRef = useRef(null)
     const nftCloseRef = useRef(null)
+    const [tokenFilter, setTokenFilter] = useState('')
+    const [nftFilter, setNftFilter] = useState('')
+    const filteredTokens = useMemo(() => {
+        const query = tokenFilter.trim().toLowerCase()
+        if (!query) return result?.allTokens ?? []
+        return (result?.allTokens ?? []).filter((token) =>
+            `${token.symbol} ${token.name ?? ''} ${token.contract}`.toLowerCase().includes(query)
+        )
+    }, [result, tokenFilter])
+    const filteredNfts = useMemo(() => {
+        const query = nftFilter.trim().toLowerCase()
+        if (!query) return result?.nfts ?? []
+        return (result?.nfts ?? []).filter((nft) =>
+            `${nft.name} ${nft.collection}`.toLowerCase().includes(query)
+        )
+    }, [nftFilter, result])
 
     useFocusTrap({
         active: showAllTokens && Boolean(result),
@@ -63,8 +79,16 @@ const WalletInspectorDialogs = ({
                             <FiX />
                         </button>
                         <h3 id="wallet-tokens-title">{t('walletInspector.tokens')}</h3>
+                        <input
+                            className="wallet-inspector__modal-filter"
+                            type="search"
+                            value={tokenFilter}
+                            onChange={(event) => setTokenFilter(event.target.value)}
+                            placeholder={t('walletInspector.filterTokens')}
+                            aria-label={t('walletInspector.filterTokens')}
+                        />
                         <div className="wallet-token-list wallet-token-list--modal">
-                            {result.allTokens.map((token) => (
+                            {filteredTokens.map((token) => (
                                 <WalletTokenRow key={token.contract} token={token} />
                             ))}
                         </div>
@@ -93,8 +117,16 @@ const WalletInspectorDialogs = ({
                             <FiX />
                         </button>
                         <h3 id="wallet-nfts-title">{t('walletInspector.nfts')}</h3>
+                        <input
+                            className="wallet-inspector__modal-filter"
+                            type="search"
+                            value={nftFilter}
+                            onChange={(event) => setNftFilter(event.target.value)}
+                            placeholder={t('walletInspector.filterNfts')}
+                            aria-label={t('walletInspector.filterNfts')}
+                        />
                         <div className="wallet-nft-gallery">
-                            {result.nfts.map((nft) => (
+                            {filteredNfts.map((nft) => (
                                 <button
                                     key={nft.id}
                                     type="button"

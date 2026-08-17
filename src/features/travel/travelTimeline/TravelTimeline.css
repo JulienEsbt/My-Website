@@ -1,5 +1,5 @@
 .travel-timeline-section {
-    margin-top: 6rem;
+    margin-top: var(--section-spacing);
 }
 
 .travel-timeline {
@@ -182,6 +182,16 @@
 
 .travel-timeline__detail-flag {
     font-size: 2.5rem;
+}
+
+.travel-timeline__flag .country-flag {
+    width: 2.25rem;
+    height: 1.7rem;
+}
+
+.travel-timeline__detail-flag .country-flag {
+    width: 3.75rem;
+    height: 2.8rem;
 }
 
 .travel-timeline__detail h3 {
@@ -457,6 +467,172 @@
     background: #020612;
 }
 
+.travel-timeline__gallery-overview {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    overflow-y: auto;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    padding: clamp(1rem, 4vw, 3.5rem);
+    background: #020612;
+}
+
+.travel-timeline__gallery-overview header {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 1380px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 auto 1.5rem;
+    padding: 0;
+    background: transparent;
+}
+
+.travel-timeline__gallery-overview header > div {
+    width: max-content;
+    max-width: calc(100% - 4rem);
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    border-radius: 1rem;
+    background: rgba(5, 12, 34, 0.86);
+    box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.travel-timeline__gallery-overview header p {
+    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.travel-timeline__gallery-overview header h2 {
+    margin: 0;
+    color: var(--color-white);
+}
+
+.travel-timeline__gallery-overview header button {
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid rgba(77, 181, 255, 0.4);
+    background: rgba(8, 18, 45, 0.82);
+    color: var(--color-white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.28);
+    transition:
+        transform 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.travel-timeline__gallery-overview header button:hover,
+.travel-timeline__gallery-overview header button:focus-visible {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(14, 34, 76, 0.92);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.travel-timeline__gallery-overview header button:active {
+    transform: scale(0.94);
+}
+
+.travel-timeline__gallery-back-to-top {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 4;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(126, 202, 255, 0.38);
+    color: var(--color-white);
+    background: linear-gradient(180deg, rgba(34, 56, 98, 0.86), rgba(7, 17, 43, 0.9));
+    box-shadow:
+        0 0.75rem 1.8rem rgba(0, 0, 0, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    font: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.travel-timeline__gallery-back-to-top:hover,
+.travel-timeline__gallery-back-to-top:focus-visible {
+    color: var(--color-primary);
+    border-color: rgba(139, 212, 255, 0.72);
+    transform: translateY(-2px);
+}
+
+.travel-timeline__gallery-mosaic {
+    width: min(100%, 1380px);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 0.75rem;
+    margin: 0 auto;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+.travel-timeline__gallery-mosaic button {
+    position: relative;
+    min-height: 13rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(77, 181, 255, 0.2);
+    background: rgba(8, 18, 45, 0.7);
+    cursor: pointer;
+}
+
+.travel-timeline__gallery-mosaic button:nth-child(7n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.travel-timeline__gallery-mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 240ms ease;
+}
+
+.travel-timeline__gallery-mosaic button:hover img,
+.travel-timeline__gallery-mosaic button:focus-visible img {
+    transform: scale(1.035);
+}
+
+.travel-timeline__gallery-mosaic span {
+    position: absolute;
+    right: 0.65rem;
+    bottom: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(2, 6, 18, 0.78);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
 .travel-timeline__lightbox-content {
     width: min(100%, 1380px);
     height: calc(100vh - 9.2rem);
@@ -651,6 +827,15 @@
 }
 
 @media screen and (max-width: 700px), screen and (max-height: 500px) and (max-width: 950px) {
+    .travel-timeline__gallery-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .travel-timeline__gallery-mosaic button {
+        min-height: 9.5rem;
+    }
+
     .travel-timeline__list {
         padding-left: 2rem;
     }
@@ -707,8 +892,14 @@
         gap: 0.5rem;
         min-height: 2.75rem;
         margin-bottom: 1.5rem;
+        padding: 0.55rem 0.9rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
         color: var(--color-primary);
-        background: transparent;
+        background: var(--liquid-bg);
+        box-shadow: var(--liquid-shadow);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
         font-family: var(--font-sans);
         font-size: 0.95rem;
         cursor: pointer;

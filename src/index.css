@@ -57,6 +57,8 @@
     --container-width-1g: 75%;
     --container-width-md: 86%;
     --container-width-sm: 90%;
+    --section-spacing: clamp(6rem, 9vw, 8.75rem);
+    --section-heading-spacing: clamp(2rem, 3vw, 3rem);
 
     --liquid-bg:
         linear-gradient(
@@ -134,11 +136,26 @@ body.lightbox-open {
     background: #020612;
 }
 
+body.immersive-navigation-open .pagenav,
+body.immersive-navigation-open .lang-wrapper,
+body.immersive-navigation-open .travel-nav {
+    display: none;
+}
+
 @supports (-webkit-touch-callout: none) {
     html,
     body,
     #root {
         background-color: #020612;
+    }
+
+    html,
+    body {
+        overscroll-behavior-y: none;
+    }
+
+    body {
+        background-attachment: scroll;
     }
 
     .travel-timeline__lightbox {
@@ -181,7 +198,7 @@ h1 {
 }
 
 section {
-    margin-top: 8rem;
+    margin-top: var(--section-spacing);
 }
 
 section > h2,
@@ -190,9 +207,15 @@ section > h2,
     color: var(--color-light);
 }
 
+.section-kicker {
+    min-block-size: 1.7em;
+}
+
 section > h2 {
     color: var(--color-primary);
-    margin-bottom: 3rem;
+    margin-bottom: var(--section-heading-spacing);
+    min-block-size: 1.7em;
+    text-wrap: balance;
 }
 
 .text-light {
@@ -210,26 +233,67 @@ a:hover {
 
 .btn {
     width: max-content;
-    display: inline-block;
-    color: var(--color-primary);
-    background: rgba(5, 12, 34, 0.72);
-    padding: 0.75rem 1.2rem;
-    border-radius: 0.4rem;
+    min-height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(5, 12, 34, 0.78);
+    padding: 0.78rem 1.25rem;
+    border-radius: 999px;
     cursor: pointer;
-    border: 1px solid var(--color-primary);
+    border: 1px solid rgba(77, 181, 255, 0.32);
     font: inherit;
-    transition: var(--transition);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.2;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        0 0.65rem 1.4rem rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition:
+        transform 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
 }
 
-.btn:hover {
-    background: var(--color-white);
-    color: var(--color-bg);
-    border-color: transparent;
+.btn:hover:not(:disabled) {
+    color: var(--color-primary);
+    border-color: rgba(77, 181, 255, 0.68);
+    background: rgba(11, 27, 62, 0.88);
+    box-shadow: 0 0.75rem 1.6rem rgba(0, 0, 0, 0.24);
+    transform: translateY(-1px);
 }
 
 .btn-primary {
-    background: var(--color-primary);
-    color: var(--color-bg);
+    color: #031329;
+    border-color: rgba(173, 224, 255, 0.82);
+    background: #63baff;
+    box-shadow:
+        0 0.7rem 1.6rem rgba(35, 140, 225, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.btn-primary:hover:not(:disabled) {
+    color: #020d1d;
+    border-color: #d8f1ff;
+    background: #82c9ff;
+    box-shadow: 0 0.85rem 1.8rem rgba(35, 140, 225, 0.34);
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(139, 212, 255, 0.9);
+    outline-offset: 3px;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+    transform: none;
 }
 
 img {
@@ -242,10 +306,6 @@ img {
 @media screen and (max-width: 1024px) {
     .container {
         width: var(--container-width-md);
-    }
-
-    section {
-        margin-top: 6rem;
     }
 }
 
@@ -261,5 +321,5 @@ img {
 }
 
 .reflexions-themes {
-    margin-top: 4rem;
+    margin-top: var(--section-spacing);
 }

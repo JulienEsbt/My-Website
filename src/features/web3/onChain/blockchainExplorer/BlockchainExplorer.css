@@ -23,6 +23,15 @@
     flex: 0 0 auto;
 }
 
+.blockchain-explorer__refresh {
+    width: 10.5rem;
+    white-space: nowrap;
+}
+
+.blockchain-explorer__refresh:disabled {
+    opacity: 1;
+}
+
 .blockchain-embla {
     position: relative;
 }
@@ -32,20 +41,20 @@
     content: '';
     position: absolute;
     top: 0;
-    width: 5rem;
-    height: 100%;
+    bottom: 1.2rem;
     z-index: 2;
+    width: clamp(1.5rem, 2.5vw, 3rem);
     pointer-events: none;
 }
 
 .blockchain-embla::before {
     left: 0;
-    background: linear-gradient(90deg, var(--color-bg), transparent);
+    background: linear-gradient(90deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
 }
 
 .blockchain-embla::after {
     right: 0;
-    background: linear-gradient(270deg, var(--color-bg), transparent);
+    background: linear-gradient(270deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
 }
 
 .blockchain-embla__viewport {

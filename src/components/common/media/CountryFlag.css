@@ -1,0 +1,8 @@
+.country-flag {
+    width: 1.55em;
+    height: 1.15em;
+    display: inline-block;
+    flex: 0 0 auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0.18em 0.28em rgba(0, 0, 0, 0.24));
+}

@@ -4,9 +4,11 @@ import {useTranslation} from 'react-i18next'
 import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen, FiArrowLeft} from 'react-icons/fi'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
+import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import trips from '../../../data/travel/trips.js'
 import {getStaticTravelMapUrl} from '../../../services/mapbox/mapboxStaticService.js'
 import './TravelTimeline.css'
@@ -80,6 +82,7 @@ const TravelTimeline = () => {
     })
 
     useBodyScrollLock(isMobileDetail && mobileDetailOpen)
+    useImmersiveNavigation(isMobileDetail && mobileDetailOpen)
 
     const updateDetailScrollState = () => {
         const el = detailScrollRef.current
@@ -127,7 +130,7 @@ const TravelTimeline = () => {
 
                             <span className="travel-timeline__main">
                                 <span className="travel-timeline__flag" aria-hidden="true">
-                                    {trip.flag}
+                                    <CountryFlag code={trip.countryCode} />
                                 </span>
 
                                 <span>
@@ -182,7 +185,7 @@ const TravelTimeline = () => {
                         </button>
                         <div className="travel-timeline__detail-header">
                             <span className="travel-timeline__detail-flag" aria-hidden="true">
-                                {activeTrip.flag}
+                                <CountryFlag code={activeTrip.countryCode} />
                             </span>
 
                             <div>

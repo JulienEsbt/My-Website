@@ -48,7 +48,7 @@ describe('PageNav', () => {
         expect(openButton).toHaveFocus()
     })
 
-    it('keeps keyboard focus inside the open navigation', async () => {
+    it('keeps controls outside the open navigation interactive', async () => {
         const user = userEvent.setup()
 
         render(
@@ -59,8 +59,9 @@ describe('PageNav', () => {
 
         await user.click(screen.getByRole('button', {name: 'Ouvrir la navigation'}))
         await waitFor(() => expect(screen.getByRole('link', {name: 'Portfolio'})).toHaveFocus())
-        await user.keyboard('{Shift>}{Tab}{/Shift}')
+        await user.click(screen.getByRole('button', {name: 'Switch to English'}))
 
-        expect(screen.getByRole('button', {name: 'Fermer la navigation'})).toHaveFocus()
+        expect(i18n.resolvedLanguage).toBe('en')
+        expect(screen.queryByRole('link', {name: 'Labs Web3'})).not.toBeInTheDocument()
     })
 })

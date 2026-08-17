@@ -90,8 +90,8 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-skills-title">
                             <h2 id="resume-skills-title">{t('sections.skills')}</h2>
                             <dl className="resume__definition-list">
-                                {skills.map((skill) => (
-                                    <div key={skill.name}>
+                                {skills.map((skill, index) => (
+                                    <div key={skill.id ?? index}>
                                         <dt>{skill.name}</dt>
                                         <dd>{skill.detail}</dd>
                                     </div>
@@ -102,8 +102,8 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-certifications-title">
                             <h2 id="resume-certifications-title">{t('sections.certifications')}</h2>
                             <ul className="resume__compact-list">
-                                {certifications.map((certification) => (
-                                    <li key={certification}>{certification}</li>
+                                {certifications.map((certification, index) => (
+                                    <li key={index}>{certification}</li>
                                 ))}
                             </ul>
                         </section>
@@ -111,8 +111,8 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-languages-title">
                             <h2 id="resume-languages-title">{t('sections.languages')}</h2>
                             <ul className="resume__compact-list">
-                                {languages.map((item) => (
-                                    <li key={item}>{item}</li>
+                                {languages.map((item, index) => (
+                                    <li key={index}>{item}</li>
                                 ))}
                             </ul>
                         </section>
@@ -122,15 +122,15 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-experience-title">
                             <h2 id="resume-experience-title">{t('sections.experience')}</h2>
                             <div className="resume__entries">
-                                {experiences.map((experience) => (
-                                    <article className="resume__entry" key={experience.role}>
+                                {experiences.map((experience, index) => (
+                                    <article className="resume__entry" key={experience.id ?? index}>
                                         <h3>{experience.role}</h3>
                                         <p className="resume__meta">
                                             {experience.organization} · {experience.period}
                                         </p>
                                         <ul>
-                                            {experience.bullets.map((bullet) => (
-                                                <li key={bullet}>{bullet}</li>
+                                            {experience.bullets.map((bullet, bulletIndex) => (
+                                                <li key={bulletIndex}>{bullet}</li>
                                             ))}
                                         </ul>
                                         {experience.skills && (
@@ -147,8 +147,8 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-education-title">
                             <h2 id="resume-education-title">{t('sections.education')}</h2>
                             <div className="resume__entries">
-                                {education.map((item) => (
-                                    <article className="resume__entry" key={item.title}>
+                                {education.map((item, index) => (
+                                    <article className="resume__entry" key={item.id ?? index}>
                                         <h3>{item.title}</h3>
                                         <p className="resume__meta">
                                             {item.school} · {item.period}
@@ -165,8 +165,8 @@ export default function ResumePage() {
                         <section aria-labelledby="resume-projects-title">
                             <h2 id="resume-projects-title">{t('sections.projects')}</h2>
                             <div className="resume__entries resume__entries--projects">
-                                {projects.map((project) => (
-                                    <article className="resume__entry" key={project.name}>
+                                {projects.map((project, index) => (
+                                    <article className="resume__entry" key={project.id ?? index}>
                                         <p className="resume__status">{project.status}</p>
                                         <h3>{project.name}</h3>
                                         <p>{project.detail}</p>

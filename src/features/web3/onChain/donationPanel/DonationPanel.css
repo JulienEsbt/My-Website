@@ -61,6 +61,35 @@
     flex-wrap: wrap;
 }
 
+.donation-panel__presets {
+    flex: 1 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.donation-panel__presets button {
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.88);
+    background: rgba(5, 12, 34, 0.76);
+    border: 1px solid rgba(77, 181, 255, 0.28);
+    box-shadow: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.donation-panel__presets button:hover,
+.donation-panel__presets button.active {
+    color: var(--color-white);
+    background: rgba(77, 181, 255, 0.2);
+    border-color: rgba(139, 212, 255, 0.72);
+    transform: translateY(-2px);
+}
+
 .donation-panel__form input,
 .donation-panel__form select {
     flex: 1;
@@ -115,6 +144,57 @@
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 1rem;
+}
+
+.donation-panel__review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.donation-panel__review-grid > div {
+    padding: 0.65rem;
+    border-radius: 0.75rem;
+    background: rgba(7, 12, 34, 0.45);
+}
+
+.donation-panel__review-grid dt {
+    color: var(--color-light);
+    font-size: 0.72rem;
+}
+
+.donation-panel__review-grid dd {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.donation-panel__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    counter-reset: donation-step;
+}
+
+.donation-panel__steps li {
+    counter-increment: donation-step;
+    padding: 0.65rem;
+    border-radius: 0.8rem;
+    color: var(--color-light);
+    background: rgba(7, 12, 34, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.78rem;
+}
+
+.donation-panel__steps li::before {
+    content: counter(donation-step) '. ';
+    color: var(--color-primary);
+}
+
+.donation-panel__steps li.active {
+    color: var(--color-white);
+    border-color: rgba(77, 181, 255, 0.35);
 }
 
 .donation-panel__success {
@@ -184,8 +264,13 @@
     text-align: left;
     padding: 0.85rem 0.9rem;
     border-radius: 0.95rem;
-    background: rgba(31, 31, 56, 0.58);
-    border: 1px solid rgba(77, 181, 255, 0.14);
+    background: rgba(14, 25, 58, 0.66);
+    border: 1px solid rgba(77, 181, 255, 0.22);
+    box-shadow:
+        0 0.65rem 1.5rem rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     cursor: pointer;
     transition: var(--transition);
 }
@@ -369,6 +454,11 @@
 
     .donation-panel__tokens:not(.searching) {
         margin-bottom: 0.9rem;
+    }
+
+    .donation-panel__review-grid,
+    .donation-panel__steps {
+        grid-template-columns: 1fr;
     }
 }
 

@@ -6,6 +6,16 @@ import WalletInspector from './WalletInspector.jsx'
 
 vi.mock('../../../../services/web3/walletInspectorService.js', () => ({
     connectInjectedWallet: vi.fn(),
+    compareWalletNetworks: vi.fn(() =>
+        Promise.resolve([
+            {
+                network: {id: 'polygon', name: 'Polygon', symbol: 'POL'},
+                status: 'available',
+                nativeBalance: 4,
+                nativeValueUsd: 2,
+            },
+        ])
+    ),
     inspectWalletPortfolio: vi.fn(() =>
         Promise.resolve({
             address: '0x1234567890123456789012345678901234567890',
@@ -70,5 +80,21 @@ describe('WalletInspector', () => {
         expect(await screen.findByRole('dialog', {name: 'Tokens détectés'})).toBeVisible()
         await user.keyboard('{Escape}')
         await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+    })
+
+    it('compares the inspected public address across configured networks on demand', async () => {
+        const user = userEvent.setup()
+        render(<WalletInspector />)
+
+        await user.type(
+            screen.getByLabelText('Adresse de wallet ou nom ENS'),
+            '0x1234567890123456789012345678901234567890'
+        )
+        await user.click(screen.getByRole('button', {name: 'Analyser'}))
+        await screen.findByRole('link', {name: /Ouvrir l’explorer/})
+        await user.click(screen.getByRole('button', {name: 'Comparer les réseaux'}))
+
+        expect(await screen.findByText('Comparaison multi-réseaux')).toBeInTheDocument()
+        expect(screen.getByText(/4 POL/)).toBeInTheDocument()
     })
 })

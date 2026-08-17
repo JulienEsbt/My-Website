@@ -55,6 +55,10 @@ const Header = () => {
                     <div ref={cta}>
                         <Web3CTA />
                     </div>
+
+                    <div ref={socials} className="web3-header__socials-wrapper">
+                        <HeaderSocials />
+                    </div>
                 </div>
 
                 <div className="hero__visual">
@@ -65,6 +69,8 @@ const Header = () => {
                         transition={{type: 'spring', stiffness: 200, damping: 15}}
                         className="me"
                     >
+                        <span className="me__orbit me__orbit--one" aria-hidden="true" />
+                        <span className="me__orbit me__orbit--two" aria-hidden="true" />
                         <a
                             href={featuredNft.openseaUrl}
                             target="_blank"
@@ -81,12 +87,18 @@ const Header = () => {
                                 fetchPriority="high"
                             />
                         </a>
-                        <div className="glow" aria-hidden />
-                    </motion.div>
-                </div>
 
-                <div ref={socials} className="web3-header__socials-wrapper">
-                    <HeaderSocials />
+                        <div className="me__meta">
+                            <span>{t('header.visualLabel')}</span>
+                            <strong>{t('header.visualValue')}</strong>
+                        </div>
+
+                        <div className="me__chain" aria-hidden="true">
+                            <span>ETH</span>
+                            <span>EVM</span>
+                            <span>RPC</span>
+                        </div>
+                    </motion.div>
                 </div>
 
                 <a

@@ -29,10 +29,7 @@ describe('Footer', () => {
             </MemoryRouter>
         )
 
-        expect(screen.getByRole('link', {name: 'Carnets de voyage'})).toHaveAttribute(
-            'aria-current',
-            'page'
-        )
+        expect(screen.getByRole('link', {name: 'Voyages'})).toHaveAttribute('aria-current', 'page')
         expect(screen.getByRole('link', {name: 'Portfolio'})).not.toHaveAttribute('aria-current')
         expect(screen.getByRole('link', {name: 'Confidentialité'})).toHaveAttribute(
             'href',

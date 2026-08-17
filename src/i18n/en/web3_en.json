@@ -8,6 +8,8 @@
     "header": {
         "eyebrow": "Web3 Labs • Prototypes • EVM",
         "subtitle": "Technical experiments with Solidity, wallets and on-chain data",
+        "visualLabel": "On-chain identity",
+        "visualValue": "A digital object, not a profile picture",
         "scroll": "Scroll",
         "scrollAria": "Scroll to the Contact section",
         "altPortrait": "Crypto avatar of Julien (Julienesbt.eth)"
@@ -353,9 +355,21 @@
         "cancel": "Cancel",
         "viewTx": "View transaction",
         "copyAddress": "Copy receiver address",
+        "presets": "Suggested amounts",
         "quickOptions": "Quick options",
         "customHint": "Search a known token or import it using its contract.",
         "mobileHelp": "Use search to find another network or token.",
+        "reviewLabels": {
+            "network": "Network",
+            "token": "Token",
+            "amount": "Amount"
+        },
+        "steps": {
+            "label": "Donation steps",
+            "asset": "Choose the network and token",
+            "amount": "Set the amount",
+            "confirmation": "Review, then confirm in the wallet"
+        },
         "errors": {
             "noToken": "Please select a token.",
             "noProvider": "No wallet detected. Install MetaMask or use a Web3 browser.",
@@ -419,6 +433,26 @@
         "noNfts": "No NFT detected.",
         "viewAll": "View all",
         "closeDialog": "Close dialog",
+        "actions": "Wallet report actions",
+        "compare": "Compare networks",
+        "comparing": "Comparing…",
+        "comparison": "Multi-network comparison",
+        "nativeOnly": "Indicative native balances",
+        "export": "Export report",
+        "exportNotice": "Indicative local report built from public on-chain data. Prices and metadata may be partial.",
+        "filterTokens": "Filter tokens by name, symbol or contract",
+        "filterNfts": "Filter NFTs by name or collection",
+        "activity": "Recent activity",
+        "latestTransfers": "Up to five transfers",
+        "noActivity": "No recent transfer could be loaded on this network.",
+        "direction": {
+            "in": "Received",
+            "out": "Sent"
+        },
+        "comparisonStatus": {
+            "missing-rpc": "RPC not configured",
+            "error": "Data unavailable"
+        },
         "errors": {
             "invalidAddress": "Invalid address or ENS.",
             "missingRpc": "Missing RPC for this network.",

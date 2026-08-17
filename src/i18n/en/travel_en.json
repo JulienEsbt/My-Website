@@ -43,11 +43,13 @@
             "openAll": "Open the full gallery · {{count}} photos",
             "loadError": "The photos from this trip cannot be loaded right now.",
             "close": "Close gallery",
+            "backToTop": "Back to the top of the gallery",
             "previous": "Previous photo",
             "next": "Next photo",
             "openPhoto": "View photo {{number}}",
             "photoAlt": "Travel memory from {{city}} — photo {{number}} of {{total}}",
             "title": "Photo gallery — {{city}}",
+            "overviewKicker": "All photos",
             "instructions": "Use the left and right arrow keys to change photos, and the Escape key to close the gallery."
         }
     },
@@ -76,7 +78,19 @@
         "hint": "Click on a map to expand it and explore in detail",
         "globeAccessibleLabel": "Graphical representation of trips and dream destinations on a globe",
         "mapAccessibleLabel": "Interactive map of trips and dream destinations",
+        "controls": {
+            "label": "Travel exploration tools",
+            "searchLabel": "Search for a destination",
+            "searchPlaceholder": "Search for a city or country…",
+            "categoryLabel": "Filter by category",
+            "all": "All categories",
+            "hideArcs": "Hide routes",
+            "showArcs": "Show routes",
+            "recenter": "Recenter",
+            "results": "Accessible list · {{count}} places"
+        },
         "mapControls": {
+            "overview": "Overview",
             "zoomIn": "Zoom in",
             "zoomOut": "Zoom out",
             "resetBearing": "Reset the map bearing to north",

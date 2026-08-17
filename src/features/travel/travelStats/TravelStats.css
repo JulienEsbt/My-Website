@@ -41,6 +41,7 @@
 
 .travel-stat span {
     display: block;
+    min-height: 2.9em;
     color: var(--color-light);
     font-size: 0.85rem;
     margin-bottom: 0.25rem;
@@ -74,6 +75,7 @@
     }
 
     .travel-stat span {
+        min-height: 2.7em;
         font-size: 0.78rem;
         line-height: 1.35;
         margin-bottom: 0.15rem;

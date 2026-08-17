@@ -1,16 +1,25 @@
 import React, {useEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
-import trips from '../../../data/travel/trips.js'
-import dreamDestinations from '../../../data/travel/dreamDestinations.js'
+import {FiCrosshair} from 'react-icons/fi'
 import {createTravelMap} from '../../../services/mapbox/mapboxAdapter.js'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './TravelMapbox.css'
 
-const TravelMapbox = ({expanded = false}) => {
+const TravelMapbox = ({
+    expanded = false,
+    trips = [],
+    dreamDestinations = [],
+    selectedLocation = null,
+    onSelectLocation,
+    onResetView,
+    resetSignal = 0,
+}) => {
     const {t, i18n} = useTranslation('travel')
     const mapContainer = useRef(null)
     const mapRef = useRef(null)
     const initialExpanded = useRef(expanded)
+    const selectedLocationRef = useRef(selectedLocation)
+    selectedLocationRef.current = selectedLocation
     const language = i18n.resolvedLanguage?.startsWith('fr') ? 'fr' : 'en'
 
     useEffect(() => {
@@ -24,6 +33,7 @@ const TravelMapbox = ({expanded = false}) => {
                 dreamDestinations,
                 language,
                 dreamLabel: t('explorer.legend.dream'),
+                onSelectLocation,
                 navigationLabels: {
                     zoomIn: t('explorer.mapControls.zoomIn'),
                     zoomOut: t('explorer.mapControls.zoomOut'),
@@ -31,6 +41,7 @@ const TravelMapbox = ({expanded = false}) => {
                     closePopup: t('explorer.mapControls.closePopup'),
                 },
             })
+            if (selectedLocationRef.current) mapRef.current.focus(selectedLocationRef.current)
         }, 100)
 
         return () => {
@@ -38,7 +49,17 @@ const TravelMapbox = ({expanded = false}) => {
             mapRef.current?.destroy()
             mapRef.current = null
         }
-    }, [language, t])
+    }, [dreamDestinations, language, onSelectLocation, t, trips])
+
+    useEffect(() => {
+        if (!selectedLocation) return
+        mapRef.current?.focus(selectedLocation)
+    }, [selectedLocation])
+
+    useEffect(() => {
+        if (resetSignal === 0) return
+        mapRef.current?.reset()
+    }, [resetSignal])
 
     useEffect(() => {
         const resize = () => mapRef.current?.resize()
@@ -56,12 +77,23 @@ const TravelMapbox = ({expanded = false}) => {
     }, [expanded])
 
     return (
-        <div
-            ref={mapContainer}
-            className={`travel-mapbox ${expanded ? 'expanded' : ''}`}
-            role="region"
-            aria-label={t('explorer.mapAccessibleLabel')}
-        />
+        <div className="travel-mapbox__shell">
+            <div
+                ref={mapContainer}
+                className={`travel-mapbox ${expanded ? 'expanded' : ''}`}
+                role="region"
+                aria-label={t('explorer.mapAccessibleLabel')}
+            />
+            <button
+                type="button"
+                className="travel-mapbox__overview"
+                onClick={onResetView}
+                aria-label={t('explorer.mapControls.overview')}
+            >
+                <FiCrosshair aria-hidden="true" />
+                {t('explorer.mapControls.overview')}
+            </button>
+        </div>
     )
 }
 

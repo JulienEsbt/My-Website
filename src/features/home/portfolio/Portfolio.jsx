@@ -57,11 +57,11 @@ export default function Portfolio() {
                         ref={(el) => (cardsRef.current[index] = el)}
                     >
                         <a
-                            href={demo ?? repository}
+                            href={repository}
                             target="_blank"
                             rel="noreferrer"
                             className="portfolio__image"
-                            aria-label={`${t(demo ? 'portfolio.demo' : 'portfolio.cta')} · ${t(`portfolio.items.${id}.title`)}`}
+                            aria-label={`${t('portfolio.cta')} · ${t(`portfolio.items.${id}.title`)}`}
                         >
                             <ResponsiveImage
                                 media={image}

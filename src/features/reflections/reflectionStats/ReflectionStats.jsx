@@ -8,7 +8,7 @@ const ReflectionStats = ({items}) => {
             <div className="container reflexion-stats">
                 {items.map((item, index) => (
                     <motion.div
-                        key={item.label}
+                        key={item.id ?? index}
                         className="reflexion-stat"
                         initial={{opacity: 0, y: 28}}
                         whileInView={{opacity: 1, y: 0}}

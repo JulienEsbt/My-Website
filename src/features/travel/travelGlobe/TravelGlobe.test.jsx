@@ -66,4 +66,30 @@ describe('TravelGlobe', () => {
         expect(globeState.props.height).toBe(336)
         rectSpy.mockRestore()
     })
+
+    it('shares a clicked globe destination with the other explorer view', async () => {
+        const onSelectLocation = vi.fn()
+        const trip = {
+            id: 'tallinn',
+            city: 'Tallinn',
+            country: 'Estonie',
+            type: 'Séminaire',
+            category: 'study',
+            lat: 59.437,
+            lng: 24.7536,
+        }
+
+        render(<TravelGlobe trips={[trip]} onSelectLocation={onSelectLocation} />)
+
+        await waitFor(() => expect(globeState.props.pointsData).toHaveLength(1))
+        globeState.props.onPointClick(globeState.props.pointsData[0])
+
+        expect(onSelectLocation).toHaveBeenCalledWith(
+            expect.objectContaining({id: 'tallinn', lat: 59.437, lng: 24.7536})
+        )
+        expect(globeState.pointOfView).toHaveBeenLastCalledWith(
+            {altitude: 1.25, lat: 59.437, lng: 24.7536},
+            0
+        )
+    })
 })

@@ -1,21 +1,30 @@
-import React, {lazy, Suspense, useEffect, useRef, useState} from 'react'
+import React, {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiMaximize2, FiMinimize2, FiGlobe, FiMap} from 'react-icons/fi'
+import {FiCrosshair, FiMaximize2, FiMinimize2, FiGlobe, FiMap, FiSearch} from 'react-icons/fi'
+import trips from '../../../data/travel/trips.js'
+import dreamDestinations from '../../../data/travel/dreamDestinations.js'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
+import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import './TravelExplorer.css'
 
 const TravelGlobe = lazy(() => import('../travelGlobe/TravelGlobe.jsx'))
 const TravelMapbox = lazy(() => import('../travelMapbox/TravelMapbox.jsx'))
 
 const TravelExplorer = () => {
-    const {t} = useTranslation('travel')
+    const {t, i18n} = useTranslation('travel')
     const [activeView, setActiveView] = useState(null)
     const [mobileView, setMobileView] = useState('globe')
     const [loadedViews, setLoadedViews] = useState({globe: false, map: false})
+    const [query, setQuery] = useState('')
+    const [category, setCategory] = useState('all')
+    const [selectedLocation, setSelectedLocation] = useState(null)
+    const [resetSignal, setResetSignal] = useState(0)
+    const [showArcs, setShowArcs] = useState(true)
     const isMobile = useMediaQuery('(max-width: 600px), (max-height: 500px) and (max-width: 950px)')
     const expandedViewRef = useRef(null)
     const sectionRef = useRef(null)
@@ -23,6 +32,64 @@ const TravelExplorer = () => {
     const expandButtonRef = useRef(null)
     const showGlobe = !isMobile || mobileView === 'globe'
     const showMap = !isMobile || mobileView === 'map'
+    const isFr = i18n.resolvedLanguage?.startsWith('fr')
+
+    const filteredLocations = useMemo(() => {
+        const normalizedQuery = query.trim().toLocaleLowerCase(isFr ? 'fr' : 'en')
+        const tripLocations = trips.map((trip) => ({...trip, kind: 'trip'}))
+        const dreamLocations = dreamDestinations.map((destination) => ({
+            ...destination,
+            kind: 'dream',
+            category: 'dream',
+        }))
+
+        return [...tripLocations, ...dreamLocations].filter((location) => {
+            if (category !== 'all' && location.category !== category) return false
+            if (!normalizedQuery) return true
+
+            const searchable =
+                location.kind === 'trip'
+                    ? [location.city, location.cityEn, location.country, location.countryEn]
+                    : [location.name, location.nameEn, location.country, location.countryEn]
+
+            return searchable.some((value) =>
+                value?.toLocaleLowerCase(isFr ? 'fr' : 'en').includes(normalizedQuery)
+            )
+        })
+    }, [category, isFr, query])
+
+    const filteredTrips = useMemo(
+        () => filteredLocations.filter((location) => location.kind === 'trip'),
+        [filteredLocations]
+    )
+    const filteredDreams = useMemo(
+        () => filteredLocations.filter((location) => location.kind === 'dream'),
+        [filteredLocations]
+    )
+
+    const resetView = useCallback(() => {
+        setSelectedLocation(null)
+        setResetSignal((value) => value + 1)
+    }, [])
+
+    const resetExplorer = useCallback(() => {
+        setQuery('')
+        setCategory('all')
+        resetView()
+    }, [resetView])
+
+    const selectLocation = useCallback((location) => {
+        setSelectedLocation(location)
+    }, [])
+
+    const explorerProps = {
+        trips: filteredTrips,
+        dreamDestinations: filteredDreams,
+        selectedLocation,
+        onSelectLocation: selectLocation,
+        onResetView: resetView,
+        resetSignal,
+    }
 
     const currentTitle = activeView === 'globe' ? t('explorer.globeTitle') : t('explorer.mapTitle')
 
@@ -48,6 +115,7 @@ const TravelExplorer = () => {
     })
 
     useBodyScrollLock(isMobile && Boolean(activeView))
+    useImmersiveNavigation(isMobile && Boolean(activeView))
 
     useEffect(() => {
         const section = sectionRef.current
@@ -94,6 +162,68 @@ const TravelExplorer = () => {
                     </span>
                 ))}
             </div>
+
+            <div
+                className="container travel-explorer__controls"
+                aria-label={t('explorer.controls.label')}
+            >
+                <label className="travel-explorer__search">
+                    <FiSearch aria-hidden="true" />
+                    <span className="sr-only">{t('explorer.controls.searchLabel')}</span>
+                    <input
+                        type="search"
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        placeholder={t('explorer.controls.searchPlaceholder')}
+                    />
+                </label>
+                <label>
+                    <span className="sr-only">{t('explorer.controls.categoryLabel')}</span>
+                    <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                        <option value="all">{t('explorer.controls.all')}</option>
+                        {['home', 'lived', 'study', 'visited', 'planned', 'dream'].map((item) => (
+                            <option key={item} value={item}>
+                                {t(`explorer.legend.${item}`)}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <button type="button" onClick={resetExplorer}>
+                    <FiCrosshair aria-hidden="true" />
+                    {t('explorer.controls.recenter')}
+                </button>
+            </div>
+
+            <details className="container travel-explorer__accessible-list">
+                <summary>
+                    {t('explorer.controls.results', {count: filteredLocations.length})}
+                </summary>
+                <ul>
+                    {filteredLocations.map((location) => {
+                        const name =
+                            location.kind === 'trip'
+                                ? isFr
+                                    ? location.city
+                                    : (location.cityEn ?? location.city)
+                                : isFr
+                                  ? location.name
+                                  : (location.nameEn ?? location.name)
+                        const countryName = isFr
+                            ? location.country
+                            : (location.countryEn ?? location.country)
+                        return (
+                            <li key={`${location.kind}-${location.id}`}>
+                                <button type="button" onClick={() => selectLocation(location)}>
+                                    <CountryFlag code={location.countryCode} />
+                                    <span>
+                                        <strong>{name}</strong> — {countryName}
+                                    </span>
+                                </button>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </details>
 
             <div className="travel-explorer__mobile-switch">
                 <button
@@ -155,7 +285,13 @@ const TravelExplorer = () => {
                                     <div className="travel-explorer__visual travel-explorer__visual--globe">
                                         {loadedViews.globe ? (
                                             <Suspense fallback={<FeatureLoading fill />}>
-                                                <TravelGlobe />
+                                                <TravelGlobe
+                                                    {...explorerProps}
+                                                    showArcs={showArcs}
+                                                    onToggleArcs={() =>
+                                                        setShowArcs((value) => !value)
+                                                    }
+                                                />
                                             </Suspense>
                                         ) : (
                                             <FeatureLoading fill />
@@ -191,7 +327,7 @@ const TravelExplorer = () => {
                                     <div className="travel-explorer__visual">
                                         {loadedViews.map ? (
                                             <Suspense fallback={<FeatureLoading fill />}>
-                                                <TravelMapbox />
+                                                <TravelMapbox {...explorerProps} />
                                             </Suspense>
                                         ) : (
                                             <FeatureLoading fill />
@@ -241,9 +377,14 @@ const TravelExplorer = () => {
                             <div className="travel-explorer__expanded-visual">
                                 <Suspense fallback={<FeatureLoading fill />}>
                                     {activeView === 'globe' ? (
-                                        <TravelGlobe expanded />
+                                        <TravelGlobe
+                                            expanded
+                                            {...explorerProps}
+                                            showArcs={showArcs}
+                                            onToggleArcs={() => setShowArcs((value) => !value)}
+                                        />
                                     ) : (
-                                        <TravelMapbox expanded />
+                                        <TravelMapbox expanded {...explorerProps} />
                                     )}
                                 </Suspense>
                             </div>

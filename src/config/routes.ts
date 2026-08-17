@@ -9,5 +9,6 @@ export const ROUTE_PATHS = Object.freeze({
     web3: '/web3',
     travel: '/travel',
     reflections: '/reflections',
+    journal: '/journal',
     reflectionArticle: '/reflections/:slug',
 } satisfies Record<string, RoutePath>)

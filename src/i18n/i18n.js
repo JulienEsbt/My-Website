@@ -29,6 +29,10 @@ const namespaceLoaders = {
         en: () => import('./en/reflections_en.json'),
         fr: () => import('./fr/reflections_fr.json'),
     },
+    journal: {
+        en: () => import('./en/journal_en.json'),
+        fr: () => import('./fr/journal_fr.json'),
+    },
 }
 
 const namespacePromises = new Map()

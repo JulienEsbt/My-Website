@@ -1,0 +1,33 @@
+{
+    "meta": {"title": "Journal — Julien Esterbet"},
+    "hero": {
+        "kicker": "Over time",
+        "title": "Journal",
+        "subtitle": "A chronological feed bringing together projects, travels, reflections and, when there is something meaningful to share, sport."
+    },
+    "feed": {
+        "kicker": "Latest publications",
+        "title": "What’s new",
+        "results": "{{count}} publications displayed",
+        "read": "Discover"
+    },
+    "feeds": {"aria": "Syndication feeds"},
+    "filters": {
+        "aria": "Filter the journal",
+        "all": "All",
+        "project": "Projects",
+        "travel": "Travel",
+        "reflection": "Reflections",
+        "sport": "Sport"
+    },
+    "empty": {
+        "title": "No publication in this category yet",
+        "text": "This section intentionally remains empty until there is real and useful content to share."
+    },
+    "follow": {
+        "kicker": "Follow updates",
+        "title": "An open feed, with no sign-up",
+        "text": "The journal is available through RSS and Atom. No email address is collected today; a newsletter will only be considered with a regular editorial cadence and explicit consent.",
+        "cta": "Open the RSS feed"
+    }
+}

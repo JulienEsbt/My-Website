@@ -43,11 +43,13 @@
             "openAll": "Ouvrir la galerie complète · {{count}} photos",
             "loadError": "Les photos de ce voyage ne peuvent pas être chargées pour le moment.",
             "close": "Fermer la galerie",
+            "backToTop": "Revenir en haut de la galerie",
             "previous": "Photo précédente",
             "next": "Photo suivante",
             "openPhoto": "Voir la photo {{number}}",
             "photoAlt": "Souvenir de voyage à {{city}} — photo {{number}} sur {{total}}",
             "title": "Galerie photo — {{city}}",
+            "overviewKicker": "Toutes les photos",
             "instructions": "Utilisez les flèches gauche et droite pour changer de photo, et la touche Échap pour fermer la galerie."
         }
     },
@@ -76,7 +78,19 @@
         "hint": "Clique sur une carte pour l’agrandir et explorer en détail",
         "globeAccessibleLabel": "Représentation graphique des voyages et destinations rêvées sur un globe terrestre",
         "mapAccessibleLabel": "Carte interactive des voyages et destinations rêvées",
+        "controls": {
+            "label": "Outils d’exploration des voyages",
+            "searchLabel": "Rechercher une destination",
+            "searchPlaceholder": "Rechercher une ville ou un pays…",
+            "categoryLabel": "Filtrer par catégorie",
+            "all": "Toutes les catégories",
+            "hideArcs": "Masquer les trajets",
+            "showArcs": "Afficher les trajets",
+            "recenter": "Recentrer",
+            "results": "Liste accessible · {{count}} lieux"
+        },
         "mapControls": {
+            "overview": "Vue d’ensemble",
             "zoomIn": "Zoomer",
             "zoomOut": "Dézoomer",
             "resetBearing": "Réorienter la carte vers le nord",

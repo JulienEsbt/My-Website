@@ -4,6 +4,7 @@ import {motion} from 'framer-motion'
 import {FiArrowLeft} from 'react-icons/fi'
 import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.js'
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
+import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {CRYPTO_KNOWLEDGE} from '../../../data/web3/knowledge.js'
 import './Knowledge.css'
@@ -14,7 +15,6 @@ const Knowledge = () => {
     const [activeCategoryId, setActiveCategoryId] = useState(CRYPTO_KNOWLEDGE[0].id)
     const [activeItemId, setActiveItemId] = useState(CRYPTO_KNOWLEDGE[0].items[0].id)
     const [mobilePanelOpen, setMobilePanelOpen] = useState(false)
-    const [panelAnimationKey, setPanelAnimationKey] = useState(0)
     const [isClosingPanel, setIsClosingPanel] = useState(false)
     const closeTimerRef = useRef(null)
     const panelRef = useRef(null)
@@ -45,7 +45,6 @@ const Knowledge = () => {
         setActiveCategoryId(category.id)
         setActiveItemId(category.items[0].id)
         setMobilePanelOpen(true)
-        setPanelAnimationKey((key) => key + 1)
     }
 
     const closeMobilePanel = () => {
@@ -66,6 +65,7 @@ const Knowledge = () => {
     })
 
     useBodyScrollLock(isMobilePanel && mobilePanelOpen)
+    useImmersiveNavigation(isMobilePanel && mobilePanelOpen)
 
     return (
         <section id="knowledge">
@@ -103,7 +103,6 @@ const Knowledge = () => {
                 {activeCategory && activeItem && (
                     <motion.article
                         ref={panelRef}
-                        key={`${activeCategory.id}-${activeItem.id}-${panelAnimationKey}`}
                         className={`knowledge-v3__panel ${mobilePanelOpen ? 'mobile-open' : ''} ${isClosingPanel ? 'closing' : ''}`}
                         initial={{opacity: 0, y: 24}}
                         animate={{opacity: 1, y: 0}}
@@ -146,7 +145,6 @@ const Knowledge = () => {
                                     onClick={() => {
                                         setActiveItemId(item.id)
                                         setMobilePanelOpen(true)
-                                        setPanelAnimationKey((key) => key + 1)
                                     }}
                                     aria-pressed={activeItem.id === item.id}
                                 >

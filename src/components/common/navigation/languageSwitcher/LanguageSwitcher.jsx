@@ -2,6 +2,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
+import CountryFlag from '../../media/CountryFlag.jsx'
 import './LanguageSwitcher.css'
 
 export default function LanguageSwitcher() {
@@ -32,18 +33,16 @@ export default function LanguageSwitcher() {
                 className="lang-slider"
                 layout
                 transition={{type: 'spring', stiffness: 500, damping: 30}}
-                // Le curseur se place du côté de la langue à venir (plus logique visuellement)
                 style={{justifyContent: next === 'fr' ? 'flex-start' : 'flex-end'}}
             >
                 <motion.div
-                    key={current} // pour animer le changement
+                    key={current}
                     initial={{opacity: 0, y: 6}}
                     animate={{opacity: 1, y: 0}}
                     exit={{opacity: 0, y: -6}}
                     transition={{duration: 0.2}}
                 >
-                    {/* Conserve l'association visuelle historique : FR + drapeau français, EN + drapeau anglais. */}
-                    {current === 'fr' ? '🇫🇷' : '🇬🇧'}
+                    <CountryFlag code={current === 'fr' ? 'FR' : 'GB'} />
                 </motion.div>
             </motion.div>
 

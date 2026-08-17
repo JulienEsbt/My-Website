@@ -3,7 +3,7 @@
     grid-template-columns: 0.9fr 1.1fr;
     gap: 1.4rem;
     max-width: 980px;
-    margin-top: 2.5rem;
+    margin-top: var(--section-spacing);
     padding: 1.35rem;
     border: 1px solid rgba(77, 181, 255, 0.26);
     border-radius: 1.4rem;
@@ -63,7 +63,7 @@
 @media screen and (max-width: 800px) {
     .web3-lab-notice {
         grid-template-columns: 1fr;
-        margin-top: 2rem;
+        margin-top: var(--section-spacing);
         padding: 1.1rem;
     }
 }

@@ -1,5 +1,5 @@
 .dream-section {
-    margin-top: 6rem;
+    margin-top: var(--section-spacing);
 }
 
 .dream-section__intro {
@@ -46,10 +46,10 @@
     border-color: rgba(77, 181, 255, 0.48);
 }
 
-.dream-showcase__thumb span {
+.dream-showcase__thumb-flag {
     grid-row: span 2;
-    width: 2.9rem;
-    height: 2.9rem;
+    width: 3.4rem;
+    height: 3.4rem;
     display: grid;
     place-items: center;
     border-radius: 0.95rem;
@@ -108,14 +108,23 @@
 }
 
 .dream-showcase__emoji {
-    width: 4.2rem;
+    width: 5.5rem;
     height: 4.2rem;
     display: grid;
     place-items: center;
-    border-radius: 1.25rem;
     font-size: 2.25rem;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dream-showcase__emoji .country-flag {
+    width: 4.4rem;
+    height: 3.3rem;
+    transform: scale(1.25);
+}
+
+.dream-showcase__thumb .country-flag {
+    width: 3.2rem;
+    height: 2.4rem;
+    transform: scale(1.35);
 }
 
 .dream-showcase__counter {
@@ -240,7 +249,7 @@
         grid-column: 1 / -1;
         grid-row: 2;
         display: grid;
-        grid-template-columns: repeat(3, 2.85rem);
+        grid-template-columns: repeat(6, minmax(2.5rem, 2.85rem));
         justify-content: center;
     }
 
@@ -272,7 +281,7 @@
 
 @media screen and (max-width: 600px) {
     .dream-section {
-        margin-top: 4rem;
+        margin-top: var(--section-spacing);
     }
 
     .dream-section__intro {

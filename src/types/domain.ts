@@ -11,10 +11,11 @@ export type RoutePath =
     | '/web3'
     | '/travel'
     | '/reflections'
+    | '/journal'
     | '/reflections/:slug'
 
 export interface NavigationPage {
-    id: 'home' | 'web3' | 'travel' | 'reflections'
+    id: 'home' | 'web3' | 'travel' | 'reflections' | 'journal'
     path: RoutePath
     i18nKey: string
 }
