@@ -307,6 +307,14 @@
         line-height: 1.65;
     }
 
+    .footer-section__nav-groups {
+        row-gap: 2.25rem;
+    }
+
+    .footer-section__nav-group {
+        row-gap: 0.35rem;
+    }
+
     .footer-section__links {
         flex-wrap: wrap;
         gap: 0.65rem;
