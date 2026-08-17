@@ -59,11 +59,9 @@ const TravelGlobe = ({
             size: 0.7,
             altitude: 0.095,
             color: CATEGORY_COLORS.dream,
-            label: `${destination.emoji} ${
-                isFr ? destination.name : (destination.nameEn ?? destination.name)
-            }, ${isFr ? destination.country : (destination.countryEn ?? destination.country)} — ${t(
-                'explorer.legend.dream'
-            )}`,
+            label: `${isFr ? destination.name : (destination.nameEn ?? destination.name)}, ${
+                isFr ? destination.country : (destination.countryEn ?? destination.country)
+            } — ${t('explorer.legend.dream')}`,
             shortLabel: isFr ? destination.name : (destination.nameEn ?? destination.name),
             category: 'dream',
             important: true,

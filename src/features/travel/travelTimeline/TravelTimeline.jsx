@@ -8,6 +8,7 @@ import useImmersiveNavigation from '../../../components/common/accessibility/use
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
+import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import trips from '../../../data/travel/trips.js'
 import {getStaticTravelMapUrl} from '../../../services/mapbox/mapboxStaticService.js'
 import './TravelTimeline.css'
@@ -129,7 +130,7 @@ const TravelTimeline = () => {
 
                             <span className="travel-timeline__main">
                                 <span className="travel-timeline__flag" aria-hidden="true">
-                                    {trip.flag}
+                                    <CountryFlag code={trip.countryCode} />
                                 </span>
 
                                 <span>
@@ -184,7 +185,7 @@ const TravelTimeline = () => {
                         </button>
                         <div className="travel-timeline__detail-header">
                             <span className="travel-timeline__detail-flag" aria-hidden="true">
-                                {activeTrip.flag}
+                                <CountryFlag code={activeTrip.countryCode} />
                             </span>
 
                             <div>

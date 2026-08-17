@@ -149,6 +149,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.85rem;
+    width: min(100%, 75ch);
     margin-bottom: 1.25rem;
 }
 
@@ -236,12 +237,14 @@
 
     .about__cards {
         grid-template-columns: repeat(3, 1fr);
+        margin-inline: auto;
     }
 }
 
 @media screen and (max-width: 760px) {
     .about__cards {
         grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .about__card {

@@ -9,7 +9,8 @@
     min-height: auto;
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+    grid-template-columns: minmax(0, 46rem) minmax(20rem, 27rem);
+    justify-content: center;
     align-items: center;
     gap: clamp(2rem, 6vw, 6rem);
     padding-block: clamp(8rem, 13vh, 10rem) clamp(3rem, 6vh, 5rem);

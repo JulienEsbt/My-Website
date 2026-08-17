@@ -9,6 +9,7 @@ import useFocusTrap from '../../../components/common/accessibility/useFocusTrap.
 import useBodyScrollLock from '../../../components/common/accessibility/useBodyScrollLock.js'
 import useImmersiveNavigation from '../../../components/common/accessibility/useImmersiveNavigation.js'
 import FeatureLoading from '../../../components/common/feedback/featureLoading/FeatureLoading.jsx'
+import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import './TravelExplorer.css'
 
 const TravelGlobe = lazy(() => import('../travelGlobe/TravelGlobe.jsx'))
@@ -213,9 +214,7 @@ const TravelExplorer = () => {
                         return (
                             <li key={`${location.kind}-${location.id}`}>
                                 <button type="button" onClick={() => selectLocation(location)}>
-                                    <span aria-hidden="true">
-                                        {location.kind === 'trip' ? location.flag : location.emoji}
-                                    </span>
+                                    <CountryFlag code={location.countryCode} />
                                     <span>
                                         <strong>{name}</strong> — {countryName}
                                     </span>

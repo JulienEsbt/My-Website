@@ -2,6 +2,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
+import CountryFlag from '../../media/CountryFlag.jsx'
 import './LanguageSwitcher.css'
 
 export default function LanguageSwitcher() {
@@ -41,7 +42,7 @@ export default function LanguageSwitcher() {
                     exit={{opacity: 0, y: -6}}
                     transition={{duration: 0.2}}
                 >
-                    {current === 'fr' ? '🇫🇷' : '🇬🇧'}
+                    <CountryFlag code={current === 'fr' ? 'FR' : 'GB'} />
                 </motion.div>
             </motion.div>
 

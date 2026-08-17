@@ -109,6 +109,19 @@
     visibility: visible;
 }
 
+@media screen and (min-width: 1500px) {
+    .footer-section__container {
+        --footer-column-gap: clamp(2.75rem, 3vw, 4rem);
+
+        width: min(90%, 100rem);
+        grid-template-columns: minmax(22rem, 26rem) max-content minmax(13.5rem, 14rem);
+    }
+
+    .footer-section__brand p {
+        max-width: 25rem;
+    }
+}
+
 @media screen and (max-width: 1180px) {
     .footer-section__container {
         grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.5fr) minmax(10rem, 0.7fr);

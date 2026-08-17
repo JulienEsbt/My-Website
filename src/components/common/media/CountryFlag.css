@@ -4,13 +4,5 @@
     display: inline-block;
     flex: 0 0 auto;
     object-fit: contain;
-    border-radius: 0.1em;
-    filter: saturate(0.88) contrast(0.96) drop-shadow(0 0.18em 0.28em rgba(0, 0, 0, 0.3));
-}
-
-.country-flag--fallback {
-    height: auto;
-    border-radius: 0;
-    box-shadow: none;
-    line-height: 1;
+    filter: drop-shadow(0 0.18em 0.28em rgba(0, 0, 0, 0.24));
 }
