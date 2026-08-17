@@ -67,8 +67,9 @@
 }
 
 .lang-slider .country-flag {
-    width: 1.55rem;
-    height: 1.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    transform: scale(1.12);
 }
 
 .lang-labels {
@@ -96,6 +97,10 @@
     transition:
         color 0.25s ease,
         opacity 0.25s ease;
+}
+
+.lang-labels span:not(.active) {
+    opacity: 0;
 }
 
 .lang-labels span.active {
