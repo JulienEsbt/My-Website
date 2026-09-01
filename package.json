@@ -28,7 +28,7 @@
         "node": "24.x"
     },
     "dependencies": {
-        "@uniswap/default-token-list": "^21.3.0",
+        "@uniswap/default-token-list": "^22.14.0",
         "@vercel/analytics": "^2.0.1",
         "@vercel/speed-insights": "^2.0.0",
         "embla-carousel-auto-scroll": "^8.6.0",
