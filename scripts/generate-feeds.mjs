@@ -2,7 +2,7 @@ import {mkdir, writeFile} from 'node:fs/promises'
 import {resolve} from 'node:path'
 import journalEntries from '../src/data/journal/journalEntries.js'
 
-const SITE_URL = 'https://www.julien-esterbet.com'
+const SITE_URL = 'https://www.julienesterbet.com'
 const OUTPUT_DIR = resolve(process.cwd(), 'dist')
 
 const escapeXml = (value) =>

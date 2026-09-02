@@ -1,6 +1,6 @@
 import reflections from '../data/reflections/reflections.js'
 
-export const SITE_URL = 'https://www.julien-esterbet.com'
+export const SITE_URL = 'https://www.julienesterbet.com'
 export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
 
 const content = {

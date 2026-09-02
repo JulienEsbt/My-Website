@@ -15,18 +15,26 @@ const escapeHtml = (value) =>
 
 const replaceAttribute = (html, selector, attribute, value) => {
     const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    const pattern = new RegExp(`(<meta[^>]+${escapedSelector}[^>]+${attribute}=")[^"]*(")`, 'i')
-    return html.replace(pattern, `$1${escapeHtml(value)}$2`)
+    const tagPattern = new RegExp(`<meta(?=[^>]*${escapedSelector})[^>]*>`, 'i')
+
+    return html.replace(tagPattern, (tag) => {
+        const attributePattern = new RegExp(`(${attribute}=")[^"]*(")`, 'i')
+        return tag.replace(attributePattern, `$1${escapeHtml(value)}$2`)
+    })
 }
 
+const replaceCanonical = (html, value) =>
+    html.replace(/<link(?=[^>]*rel="canonical")[^>]*>/i, (tag) =>
+        tag.replace(/(href=")[^"]*(")/i, `$1${escapeHtml(value)}$2`)
+    )
+
 const renderMetadata = (template, seo) => {
-    let html = template
-        .replace(/<html lang="[^"]+">/, `<html lang="${seo.language}">`)
-        .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(seo.title)}</title>`)
-        .replace(
-            /<link rel="canonical" href="[^"]+" \/>/,
-            `<link rel="canonical" href="${escapeHtml(seo.canonicalUrl)}" />`
-        )
+    let html = replaceCanonical(
+        template
+            .replace(/<html lang="[^"]+">/, `<html lang="${seo.language}">`)
+            .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(seo.title)}</title>`),
+        seo.canonicalUrl
+    )
 
     const values = [
         ['name="description"', 'content', seo.description],
