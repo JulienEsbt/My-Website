@@ -9,12 +9,12 @@ updates:
       groups:
           routine-updates:
               patterns:
-                  - "*"
+                  - '*'
               update-types:
                   - minor
                   - patch
       ignore:
-          - dependency-name: "*"
+          - dependency-name: '*'
             update-types:
                 - version-update:semver-major
 
@@ -27,11 +27,11 @@ updates:
       groups:
           routine-actions:
               patterns:
-                  - "*"
+                  - '*'
               update-types:
                   - minor
                   - patch
       ignore:
-          - dependency-name: "*"
+          - dependency-name: '*'
             update-types:
                 - version-update:semver-major
