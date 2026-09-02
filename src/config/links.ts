@@ -33,7 +33,7 @@ export const LINKS = {
         instagramPersonal: 'https://www.instagram.com/julien.esbt/',
     },
     tools: toolLinks,
-    mail: {personal: 'julien.esterbet@gmail.com'},
+    mail: {professional: 'pro@julienesterbet.com'},
     projects: {
         brunoPizza: 'https://github.com/JulienEsbt/bruno-pizza-production',
         myWebsite: 'https://github.com/JulienEsbt/My-Website',
