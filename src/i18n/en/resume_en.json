@@ -29,17 +29,32 @@
         "emailLabel": "Email: julien.esterbet@gmail.com",
         "linkedin": "linkedin.com/in/julien-esterbet",
         "linkedinLabel": "Julien Esterbet’s LinkedIn profile",
-        "website": "julien-esterbet.com",
+        "website": "julienesterbet.com",
         "websiteLabel": "Julien Esterbet’s portfolio",
         "github": "github.com/JulienEsbt",
         "githubLabel": "Julien Esterbet’s GitHub profile"
     },
     "skills": [
-        {"name": "Backend", "detail": "Java, REST APIs, SQL, XML and JSON, batch processing"},
-        {"name": "Frontend", "detail": "Angular, React, TypeScript"},
-        {"name": "Quality", "detail": "JUnit, Mockito, documentation, refactoring"},
-        {"name": "Tools", "detail": "GitLab, Jenkins, Jira, OpenText Content Server"},
-        {"name": "Web3", "detail": "Solidity, EVM, ethers.js"}
+        {
+            "name": "Backend",
+            "detail": "Java, REST APIs, SQL, XML and JSON, batch processing"
+        },
+        {
+            "name": "Frontend",
+            "detail": "Angular, React, TypeScript"
+        },
+        {
+            "name": "Quality",
+            "detail": "JUnit, Mockito, documentation, refactoring"
+        },
+        {
+            "name": "Tools",
+            "detail": "GitLab, Jenkins, Jira, OpenText Content Server"
+        },
+        {
+            "name": "Web3",
+            "detail": "Solidity, EVM, ethers.js"
+        }
     ],
     "certifications": [
         "Bloomberg Market Concepts",

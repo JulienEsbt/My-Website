@@ -39,5 +39,5 @@ export const LINKS = {
         myWebsite: 'https://github.com/JulienEsbt/My-Website',
         megalis: 'https://github.com/JulienEsbt/Megalis-Smart-Contract',
     },
-    demos: {myWebsite: 'https://www.julien-esterbet.com'},
+    demos: {myWebsite: 'https://www.julienesterbet.com'},
 } as const

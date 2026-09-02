@@ -22,7 +22,7 @@ describe('SeoManager', () => {
             'desktop application'
         )
         expect(document.head.querySelector('link[rel="canonical"]')?.href).toBe(
-            'https://www.julien-esterbet.com/projects/bruno-pizza'
+            'https://www.julienesterbet.com/projects/bruno-pizza'
         )
         expect(document.head.querySelector('meta[property="og:image"]')?.content).toContain(
             '/og/julien-esterbet-portfolio.png'

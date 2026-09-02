@@ -4,6 +4,7 @@ import {getSeoMetadata, INDEXABLE_PATHS, SITE_URL} from '../src/config/seo.js'
 
 const dist = join(process.cwd(), 'dist')
 const errors = []
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 for (const path of INDEXABLE_PATHS) {
     const output = path === '/' ? 'index.html' : `${path.slice(1)}.html`
@@ -16,11 +17,14 @@ for (const path of INDEXABLE_PATHS) {
     const html = readFileSync(file, 'utf8')
     const metadata = getSeoMetadata(path, 'fr')
     const expectedCanonical = `${SITE_URL}${path}`
-    if (!html.includes(`<link rel="canonical" href="${expectedCanonical}"`))
-        errors.push(`${output}: URL canonique incorrecte`)
-    if (!/<meta\s+name="description"\s+content="[^"\s][^"]+"/su.test(html))
+    const canonicalPattern = new RegExp(
+        `<link(?=[^>]*rel="canonical")(?=[^>]*href="${escapeRegExp(expectedCanonical)}")[^>]*>`,
+        'i'
+    )
+    if (!canonicalPattern.test(html)) errors.push(`${output}: URL canonique incorrecte`)
+    if (!/<meta(?=[^>]*name="description")(?=[^>]*content="[^"\s][^"]+")[^>]*>/isu.test(html))
         errors.push(`${output}: description absente`)
-    if (!html.includes('<meta name="robots" content="index, follow"'))
+    if (!/<meta(?=[^>]*name="robots")(?=[^>]*content="index, follow")[^>]*>/i.test(html))
         errors.push(`${output}: directive robots incorrecte`)
     if (metadata.structuredData && !html.includes('<script type="application/ld+json">'))
         errors.push(`${output}: données structurées absentes`)
@@ -28,7 +32,11 @@ for (const path of INDEXABLE_PATHS) {
 
 const notFoundFile = join(dist, '404.html')
 if (!existsSync(notFoundFile)) errors.push('404.html: page absente')
-else if (!readFileSync(notFoundFile, 'utf8').includes('noindex, nofollow'))
+else if (
+    !/<meta(?=[^>]*name="robots")(?=[^>]*content="noindex, nofollow")[^>]*>/i.test(
+        readFileSync(notFoundFile, 'utf8')
+    )
+)
     errors.push('404.html: directive noindex absente')
 
 const sitemapFile = join(dist, 'sitemap.xml')
