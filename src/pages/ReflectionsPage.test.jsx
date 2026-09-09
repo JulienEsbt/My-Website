@@ -49,18 +49,14 @@ describe('ReflectionsPage', () => {
         expect(screen.getByRole('status')).toHaveTextContent('1 réflexion trouvée')
     })
 
-    it('combines the active category and search without leaking other results', async () => {
-        const user = userEvent.setup()
+    it('offers only populated categories and sorts latest articles by date', () => {
         renderPage()
-
-        await user.click(screen.getByRole('button', {name: 'Politique (0)'}))
-
-        expect(screen.getByRole('heading', {name: 'Aucune réflexion trouvée'})).toBeVisible()
-        expect(screen.getByRole('button', {name: 'Politique (0)'})).toHaveAttribute(
-            'aria-pressed',
-            'true'
+        expect(screen.queryByRole('button', {name: 'Politique (0)'})).not.toBeInTheDocument()
+        expect(screen.getByRole('button', {name: 'Philosophie (3)'})).toBeInTheDocument()
+        const list = screen.getByRole('heading', {name: 'Dernières réflexions'}).closest('section')
+        expect(within(list).getAllByRole('article')[0]).toHaveTextContent(
+            'Se méfier des oppositions simples'
         )
-        expect(screen.getByRole('status')).toHaveTextContent('0 réflexion trouvée')
     })
 
     it('updates the visible content after a complete language change', async () => {
