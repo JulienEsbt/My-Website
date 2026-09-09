@@ -48,7 +48,7 @@ describe('ReflectionArticlePage', () => {
             })
         ).toBeInTheDocument()
         expect(
-            screen.getByRole('heading', {
+            await screen.findByRole('heading', {
                 level: 2,
                 name: 'The more I learn, the more wary I become of certainty.',
             })

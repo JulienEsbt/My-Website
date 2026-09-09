@@ -1,22 +1,23 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {lazy, Suspense, useEffect, useMemo, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {FiArrowLeft, FiArrowUp, FiArrowDown} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import {getPreferredScrollBehavior} from '../components/common/accessibility/motionPreferences.js'
 import reflections from '../data/reflections/reflections.js'
+import FeatureLoading from '../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import {formatDate} from '../i18n/formatters.js'
 import './ReflectionArticlePage.css'
 
-const mdxModules = import.meta.glob('../content/reflections/*.mdx', {
-    eager: true,
-})
-
+const mdxModules = import.meta.glob('../content/reflections/*.mdx')
+const articleComponents = new Map()
 const getMdxArticle = (slug, language) => {
     const key = `../content/reflections/${slug}.${language}.mdx`
-    return mdxModules[key]?.default
+    if (!mdxModules[key]) return undefined
+    if (!articleComponents.has(key)) articleComponents.set(key, lazy(mdxModules[key]))
+    return articleComponents.get(key)
 }
 
 const ReflectionArticlePage = () => {
@@ -129,7 +130,9 @@ const ReflectionArticlePage = () => {
 
                     <div className="reflexion-article__content">
                         {MdxContent ? (
-                            <MdxContent />
+                            <Suspense fallback={<FeatureLoading />}>
+                                <MdxContent />
+                            </Suspense>
                         ) : (
                             (reflection.content?.[language] ?? []).map((paragraph, index) => (
                                 <p key={index}>{paragraph}</p>
