@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build && node scripts/generate-seo-pages.mjs && node scripts/generate-feeds.mjs",
+        "build": "vite build && node scripts/generate-seo-pages.mjs && node scripts/prerender-pages.mjs && node scripts/generate-feeds.mjs",
         "preview": "vite preview",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
@@ -22,7 +22,10 @@
         "budget:check": "node scripts/check-build-budgets.mjs",
         "security:files": "node scripts/check-sensitive-files.mjs",
         "seo:check": "node scripts/check-seo-build.mjs",
-        "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run security:files && npm run build && npm run seo:check && npm run budget:check && npm run audit:prod"
+        "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run security:files && npm run media:manifests && npm run build && npm run seo:check && npm run budget:check && npm run audit:prod",
+        "test:e2e": "playwright test",
+        "media:manifests": "node scripts/check-media-manifests.mjs",
+        "media:remote": "node scripts/check-media-manifests.mjs --remote"
     },
     "engines": {
         "node": "24.x"
@@ -52,6 +55,7 @@
         "@eslint/js": "^9.39.5",
         "@mdx-js/rollup": "^3.1.1",
         "@noble/hashes": "^2.3.0",
+        "@playwright/test": "1.63.0",
         "@testing-library/jest-dom": "^7.0.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.3",

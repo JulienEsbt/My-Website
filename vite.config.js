@@ -49,9 +49,11 @@ export default defineConfig(({mode}) => {
     return {
         plugins: [react(), mdx(), blockchainStatusDevApi(env)],
         server: {port: 3000},
+        build: {manifest: true},
         assetsInclude: ['**/*.JPG', '**/*.PNG'],
         test: {
             environment: 'jsdom',
+            exclude: ['e2e/**', 'node_modules/**', 'dist/**', 'dist-ssr/**'],
             setupFiles: './src/test/setup.js',
             css: true,
         },

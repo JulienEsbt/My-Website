@@ -323,3 +323,16 @@ img {
 .reflexions-themes {
     margin-top: var(--section-spacing);
 }
+
+/* Keep readable HTML visible until the interactive page has mounted. */
+#prerendered-content ~ #root {
+    display: none;
+}
+#prerendered-content .swiper-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+#prerendered-content .swiper-slide {
+    flex: 1 1 16rem;
+}

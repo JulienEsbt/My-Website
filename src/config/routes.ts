@@ -1,14 +1,4 @@
-import type {RoutePath} from '../types/domain'
-
-export const ROUTE_PATHS = Object.freeze({
-    home: '/',
-    brunoPizzaCaseStudy: '/projects/bruno-pizza',
-    myWebsiteCaseStudy: '/projects/my-website',
-    resume: '/resume',
-    privacy: '/privacy',
-    web3: '/web3',
-    travel: '/travel',
-    reflections: '/reflections',
-    journal: '/journal',
-    reflectionArticle: '/reflections/:slug',
-} satisfies Record<string, RoutePath>)
+import {ROUTE_CATALOG} from './routeCatalog.js'
+export const ROUTE_PATHS = Object.freeze(
+    Object.fromEntries(Object.entries(ROUTE_CATALOG).map(([id, route]) => [id, route.path]))
+) as {[K in keyof typeof ROUTE_CATALOG]: (typeof ROUTE_CATALOG)[K]['path']}

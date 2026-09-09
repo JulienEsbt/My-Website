@@ -70,15 +70,13 @@ describe('fetchWalletNfts', () => {
 
     it('bounds pagination and preserves the provider total', async () => {
         let page = 0
-        const fetch = vi
-            .spyOn(globalThis, 'fetch')
-            .mockImplementation(async () =>
-                response({
-                    ownedNfts: [nft(String(++page))],
-                    totalCount: 1000,
-                    pageKey: String(page),
-                })
-            )
+        const fetch = vi.spyOn(globalThis, 'fetch').mockImplementation(async () =>
+            response({
+                ownedNfts: [nft(String(++page))],
+                totalCount: 1000,
+                pageKey: String(page),
+            })
+        )
         const result = await fetchWalletNfts(rpcUrl, '0xowner')
         expect(result).toMatchObject({totalCount: 1000, status: 'partial'})
         expect(fetch).toHaveBeenCalledTimes(5)

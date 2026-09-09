@@ -59,3 +59,6 @@ src/assets/images/**/*.[pP][nN][gG]
 /PERFORMANCE_REPORT.md
 /PROFESSIONAL_REFACTOR_ROADMAP.md
 /RGAA_AUDIT_MATRIX.md
+
+playwright-report/
+test-results/

@@ -1,3 +1,4 @@
+import {ROUTE_CATALOG} from './routeCatalog.js'
 import {languageFromPath, localizedPath, unlocalizedPath} from './localizedPaths.js'
 import reflections from '../data/reflections/reflections.js'
 
@@ -109,17 +110,11 @@ const content = {
     },
 }
 
-const staticRoutes = {
-    '/': 'home',
-    '/projects/bruno-pizza': 'brunoPizza',
-    '/projects/my-website': 'myWebsite',
-    '/resume': 'resume',
-    '/privacy': 'privacy',
-    '/web3': 'web3',
-    '/travel': 'travel',
-    '/reflections': 'reflections',
-    '/journal': 'journal',
-}
+const staticRoutes = Object.fromEntries(
+    Object.values(ROUTE_CATALOG)
+        .filter(({path}) => !path.includes(':'))
+        .map(({path, seoKey}) => [path, seoKey])
+)
 
 const person = {
     '@type': 'Person',

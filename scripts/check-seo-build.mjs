@@ -1,3 +1,4 @@
+import {JSDOM} from 'jsdom'
 import {existsSync, readFileSync} from 'node:fs'
 import {join} from 'node:path'
 import {getSeoMetadata, INDEXABLE_PATHS, SITE_URL} from '../src/config/seo.js'
@@ -15,6 +16,22 @@ for (const path of INDEXABLE_PATHS) {
     }
 
     const html = readFileSync(file, 'utf8')
+    const dom = new JSDOM(html)
+    const document = dom.window.document
+    const content = document.querySelector('#prerendered-content main')
+    if (!content?.querySelector('h1') || content.textContent.trim().length < 200)
+        errors.push(`${output}: contenu HTML absent ou insuffisant`)
+    if (
+        /\/reflections\/[^/]+$/.test(path) &&
+        !content?.querySelector('.reflexion-article__content h2')
+    )
+        errors.push(`${output}: corps de l’article absent`)
+    for (const asset of document.querySelectorAll('link[rel="stylesheet"], a[href$=".pdf"]')) {
+        const href = asset.getAttribute('href')
+        if (href?.startsWith('/assets/') && !existsSync(join(dist, href)))
+            errors.push(`${output}: ressource absente ${href}`)
+    }
+    dom.window.close()
     const metadata = getSeoMetadata(path)
     if (!html.includes(`<html lang="${metadata.language}">`))
         errors.push(`${output}: langue incorrecte`)
