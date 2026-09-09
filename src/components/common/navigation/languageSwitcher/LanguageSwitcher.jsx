@@ -2,7 +2,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {languageSwitchUrl} from '../../../../config/localizedPaths.js'
 import CountryFlag from '../../media/CountryFlag.jsx'
 import './LanguageSwitcher.css'
@@ -15,9 +15,9 @@ export default function LanguageSwitcher() {
     const next = current === 'fr' ? 'en' : 'fr'
 
     return (
-        <a
+        <Link
             className="lang-switch"
-            href={languageSwitchUrl(`${pathname}${search}${hash}`, next)}
+            to={languageSwitchUrl(`${pathname}${search}${hash}`, next)}
             hrefLang={next}
             aria-label={next === 'fr' ? 'Passer en français' : 'Switch to English'}
         >
@@ -42,6 +42,6 @@ export default function LanguageSwitcher() {
                 <span className={current === 'fr' ? 'active' : ''}>FR</span>
                 <span className={current === 'en' ? 'active' : ''}>EN</span>
             </div>
-        </a>
+        </Link>
     )
 }

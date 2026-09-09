@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import {motion} from 'framer-motion'
 import {formatDate} from '../../../i18n/formatters.js'
 import './ReflectionCard.css'

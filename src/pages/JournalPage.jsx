@@ -1,6 +1,6 @@
 import {useMemo, useState} from 'react'
 import {FiArrowUpRight, FiRss} from 'react-icons/fi'
-import {Link} from 'react-router-dom'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'

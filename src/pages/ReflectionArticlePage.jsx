@@ -1,5 +1,6 @@
 import React, {lazy, Suspense, useEffect, useMemo, useState} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
+import {useParams} from 'react-router-dom'
 import {FiArrowLeft, FiArrowUp, FiArrowDown} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'

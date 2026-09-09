@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink} from '../LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import LanguageSwitcher from '../languageSwitcher/LanguageSwitcher.jsx'
 import {SITE_PAGE_GROUPS} from '../../../../config/pages.js'
