@@ -18,7 +18,13 @@ const HomeNav = () => {
         {id: 'contact', label: t('nav.items.contact'), icon: <BiMessageSquareDetail />},
     ]
 
-    return <SectionNav items={items} ariaLabel={t('nav.aria', 'Section navigation')} />
+    return (
+        <SectionNav
+            avoidSelector=".home-hero .cta"
+            items={items}
+            ariaLabel={t('nav.aria', 'Section navigation')}
+        />
+    )
 }
 
 export default HomeNav
