@@ -32,6 +32,17 @@ describe('ContactSection', () => {
         expect(document.querySelector('input[name="website"]')).toHaveAttribute('tabindex', '-1')
     })
 
+    it('does not claim an email was sent for a local simulation', async () => {
+        const user = userEvent.setup()
+        sendContactForm.mockResolvedValue({ok: true, delivery: 'simulated'})
+        render(<ContactSection />)
+        await user.type(screen.getByLabelText('Nom'), 'Local Test')
+        await user.type(screen.getByLabelText('Email'), 'test@example.com')
+        await user.type(screen.getByLabelText('Message'), 'Un message de test local.')
+        await user.click(screen.getByRole('button', {name: 'Envoyer l’email'}))
+        expect(await screen.findByRole('status')).toHaveTextContent('Aucun email n’a été envoyé.')
+    })
+
     it('shows a validation message for a rejected form', async () => {
         const user = userEvent.setup()
         const error = new Error('Contact request failed')

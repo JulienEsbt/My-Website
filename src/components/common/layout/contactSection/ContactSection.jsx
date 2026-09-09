@@ -51,9 +51,9 @@ const ContactSection = () => {
         setStatus('loading')
 
         try {
-            await sendContactForm(formElement)
+            const delivery = await sendContactForm(formElement)
 
-            setStatus('success')
+            setStatus(delivery?.delivery === 'simulated' ? 'simulated' : 'success')
             formElement.reset()
             setFormStartedAt(Date.now())
         } catch (error) {

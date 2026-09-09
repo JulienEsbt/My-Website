@@ -1,6 +1,7 @@
 import {defineConfig, loadEnv} from 'vite'
 import react from '@vitejs/plugin-react'
 import mdx from '@mdx-js/rollup'
+import {createContactDevMiddleware} from './server/contact/contactDevMiddleware.js'
 import {createBlockchainStatusHandler} from './server/web3/blockchainStatusHandler.js'
 
 function blockchainStatusDevApi(env) {
@@ -9,6 +10,20 @@ function blockchainStatusDevApi(env) {
     return {
         name: 'blockchain-status-dev-api',
         configureServer(server) {
+            const contactHandlers = new Map()
+            server.middlewares.use('/api/contact', async (request, response) => {
+                const origin = request.headers.origin
+                const allowedOrigins = server.resolvedUrls?.local ?? []
+                if (!allowedOrigins.some((url) => new URL(url).origin === origin)) {
+                    response.statusCode = 403
+                    response.setHeader('Content-Type', 'application/json')
+                    response.end(JSON.stringify({ok: false, code: 'origin_not_allowed'}))
+                    return
+                }
+                if (!contactHandlers.has(origin))
+                    contactHandlers.set(origin, createContactDevMiddleware({origin}))
+                await contactHandlers.get(origin)(request, response)
+            })
             server.middlewares.use('/api/blockchain-status', async (request, response) => {
                 const adapter = {
                     setHeader: (name, value) => response.setHeader(name, value),
