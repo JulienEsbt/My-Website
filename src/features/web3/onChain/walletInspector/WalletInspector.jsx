@@ -22,6 +22,8 @@ const WalletInspector = () => {
     const [error, setError] = useState('')
     const [comparison, setComparison] = useState([])
     const [comparing, setComparing] = useState(false)
+    const comparisonIdRef = useRef(0)
+    const comparisonControllerRef = useRef(null)
     const requestIdRef = useRef(0)
     const abortControllerRef = useRef(null)
 
@@ -32,6 +34,8 @@ const WalletInspector = () => {
 
     useEffect(
         () => () => {
+            comparisonIdRef.current += 1
+            comparisonControllerRef.current?.abort()
             requestIdRef.current += 1
             abortControllerRef.current?.abort()
         },
@@ -44,7 +48,19 @@ const WalletInspector = () => {
         return t('walletInspector.errors.failed')
     }
 
+    const resetComparison = () => {
+        comparisonIdRef.current += 1
+        comparisonControllerRef.current?.abort()
+        comparisonControllerRef.current = null
+        setComparison([])
+        setComparing(false)
+        setSelectedNft(null)
+        setShowAllTokens(false)
+        setShowAllNfts(false)
+    }
+
     const inspectAddress = async (walletInput) => {
+        resetComparison()
         const requestId = ++requestIdRef.current
         abortControllerRef.current?.abort()
         const abortController = new AbortController()
@@ -83,6 +99,7 @@ const WalletInspector = () => {
     }
 
     const changeNetwork = (event) => {
+        resetComparison()
         requestIdRef.current += 1
         abortControllerRef.current?.abort()
         abortControllerRef.current = null
@@ -98,6 +115,8 @@ const WalletInspector = () => {
     }
 
     const connectCurrentWallet = async () => {
+        resetComparison()
+        setResult(null)
         const requestId = ++requestIdRef.current
         abortControllerRef.current?.abort()
         abortControllerRef.current = null
@@ -132,16 +151,32 @@ const WalletInspector = () => {
 
     const compareNetworks = async () => {
         if (!result) return
+        const comparisonId = ++comparisonIdRef.current
+        comparisonControllerRef.current?.abort()
+        const controller = new AbortController()
+        comparisonControllerRef.current = controller
         setComparing(true)
-        const {compareWalletNetworks} =
-            await import('../../../../services/web3/walletInspectorService.js')
-        setComparison(
-            await compareWalletNetworks({
+        setError('')
+        try {
+            const {compareWalletNetworks} =
+                await import('../../../../services/web3/walletInspectorService.js')
+            controller.signal.throwIfAborted()
+            const snapshots = await compareWalletNetworks({
                 walletAddress: result.address,
                 networks: BLOCKCHAIN_NETWORKS,
+                signal: controller.signal,
             })
-        )
-        setComparing(false)
+            if (comparisonId === comparisonIdRef.current) setComparison(snapshots)
+        } catch {
+            if (!controller.signal.aborted && comparisonId === comparisonIdRef.current) {
+                setError(t('walletInspector.errors.failed'))
+            }
+        } finally {
+            if (comparisonId === comparisonIdRef.current) {
+                setComparing(false)
+                comparisonControllerRef.current = null
+            }
+        }
     }
 
     const exportReport = () => {

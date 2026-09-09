@@ -1,8 +1,9 @@
-import {render, screen, waitFor} from '@testing-library/react'
+import {act, render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import i18n from 'i18next'
 import WalletInspector from './WalletInspector.jsx'
+import {compareWalletNetworks} from '../../../../services/web3/walletInspectorService.js'
 
 vi.mock('../../../../services/web3/walletInspectorService.js', () => ({
     connectInjectedWallet: vi.fn(),
@@ -96,5 +97,56 @@ describe('WalletInspector', () => {
 
         expect(await screen.findByText('Comparaison multi-réseaux')).toBeInTheDocument()
         expect(screen.getByText(/4 POL/)).toBeInTheDocument()
+    })
+    it('discards a late comparison after changing network and inspecting again', async () => {
+        let resolveComparison
+        compareWalletNetworks.mockImplementationOnce(
+            () =>
+                new Promise((resolve) => {
+                    resolveComparison = resolve
+                })
+        )
+        const user = userEvent.setup()
+        render(<WalletInspector />)
+        await user.type(
+            screen.getByLabelText('Adresse de wallet ou nom ENS'),
+            '0x1234567890123456789012345678901234567890'
+        )
+        await user.click(screen.getByRole('button', {name: 'Analyser'}))
+        await screen.findByRole('link', {name: /Ouvrir l’explorer/})
+        await user.click(screen.getByRole('button', {name: 'Comparer les réseaux'}))
+        await waitFor(() => expect(resolveComparison).toBeTypeOf('function'))
+        const signal = compareWalletNetworks.mock.lastCall[0].signal
+        await user.selectOptions(screen.getByRole('combobox'), 'polygon')
+        expect(signal.aborted).toBe(true)
+        await user.click(screen.getByRole('button', {name: 'Analyser'}))
+        await screen.findByRole('link', {name: /Ouvrir l’explorer/})
+        await act(async () =>
+            resolveComparison([
+                {
+                    network: {id: 'old', name: 'Stale network', symbol: 'OLD'},
+                    status: 'available',
+                    nativeBalance: 99,
+                    nativeValueUsd: 99,
+                },
+            ])
+        )
+        expect(screen.queryByText('Stale network')).not.toBeInTheDocument()
+        expect(screen.getByRole('button', {name: 'Comparer les réseaux'})).toBeEnabled()
+    })
+
+    it('restores the comparison button when its service rejects', async () => {
+        compareWalletNetworks.mockRejectedValueOnce(new Error('Unavailable'))
+        const user = userEvent.setup()
+        render(<WalletInspector />)
+        await user.type(
+            screen.getByLabelText('Adresse de wallet ou nom ENS'),
+            '0x1234567890123456789012345678901234567890'
+        )
+        await user.click(screen.getByRole('button', {name: 'Analyser'}))
+        await screen.findByRole('link', {name: /Ouvrir l’explorer/})
+        await user.click(screen.getByRole('button', {name: 'Comparer les réseaux'}))
+        expect(await screen.findByRole('alert')).toHaveTextContent(/.+/)
+        expect(screen.getByRole('button', {name: 'Comparer les réseaux'})).toBeEnabled()
     })
 })

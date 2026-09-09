@@ -328,21 +328,26 @@ export async function inspectWalletPortfolio({
 export async function compareWalletNetworks({
     walletAddress,
     networks,
+    signal,
 }: {
     walletAddress: string
+    signal?: AbortSignal
     networks: readonly WalletNetwork[]
 }): Promise<WalletNetworkSnapshot[]> {
     return Promise.all(
         networks.map(async (network): Promise<WalletNetworkSnapshot> => {
+            signal?.throwIfAborted()
             const rpcUrl = getRpcUrl(network.rpcEnv)
             if (!rpcUrl) return {network, status: 'missing-rpc'}
 
             try {
                 const provider = createReadOnlyProvider(rpcUrl)
                 const nativeBalance = Number(formatEther(await provider.getBalance(walletAddress)))
+                signal?.throwIfAborted()
                 const {nativePriceUsd} = await fetchWalletPrices({
                     networkId: network.id,
                     tokenContracts: [],
+                    ...(signal ? {signal} : {}),
                 })
                 return {
                     network,
@@ -350,7 +355,8 @@ export async function compareWalletNetworks({
                     nativeBalance,
                     nativeValueUsd: nativeBalance * nativePriceUsd,
                 }
-            } catch {
+            } catch (error) {
+                if (signal?.aborted) throw error
                 return {network, status: 'error'}
             }
         })
