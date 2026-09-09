@@ -458,7 +458,11 @@
             "missingRpc": "RPC manquant pour ce réseau.",
             "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",
             "failed": "Impossible d’analyser ce wallet."
-        }
+        },
+        "nftsUnavailable": "Les NFT sont momentanément indisponibles. Cela ne signifie pas que ce wallet n’en possède aucun.",
+        "nftsPartial": "Collection partiellement chargée : {{count}} NFT disponibles dans cette analyse.",
+        "nftsNotLoaded": "Les éléments de la collection n’ont pas pu être chargés.",
+        "nftNoImage": "Visuel indisponible"
     },
     "nav": {
         "aria": "Navigation des Labs Web3",

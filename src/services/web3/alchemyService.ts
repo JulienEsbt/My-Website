@@ -1,4 +1,9 @@
-import type {AlchemyTokenBalancesResult, AlchemyTokenMetadata, WalletNft} from '../../types/web3'
+import type {
+    AlchemyTokenBalancesResult,
+    AlchemyTokenMetadata,
+    WalletNft,
+    WalletNftResult,
+} from '../../types/web3'
 
 interface JsonRpcError {
     message: string
@@ -42,7 +47,7 @@ function getAlchemyNftUrl(rpcUrl: string, owner: string): string | null {
         const network = url.hostname.split('.g.alchemy.com')[0]
         if (!apiKey || !network || !url.hostname.endsWith('.g.alchemy.com')) return null
 
-        return `https://${network}.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${encodeURIComponent(owner)}&withMetadata=true&pageSize=12`
+        return `https://${network}.g.alchemy.com/nft/v3/${apiKey}/getNFTsForOwner?owner=${encodeURIComponent(owner)}&withMetadata=true&pageSize=100`
     } catch {
         return null
     }
@@ -61,7 +66,7 @@ function parseNft(value: unknown): WalletNft | null {
     const imageUrl = [image.cachedUrl, image.pngUrl, image.thumbnailUrl, metadata.image].find(
         (candidate): candidate is string => typeof candidate === 'string' && candidate.length > 0
     )
-    if (!imageUrl) return null
+    if (!contractAddress || !tokenId) return null
 
     return {
         id: `${contractAddress ?? 'unknown'}-${tokenId ?? 'unknown'}`,
@@ -73,30 +78,74 @@ function parseNft(value: unknown): WalletNft | null {
             (typeof collection.name === 'string' && collection.name) ||
             (typeof contract.name === 'string' && contract.name) ||
             'Unknown collection',
-        image: imageUrl,
+        image: imageUrl ?? '',
         ...(contractAddress ? {contract: contractAddress} : {}),
         ...(tokenId ? {tokenId} : {}),
     }
 }
 
+// Bound provider work while explicitly reporting incomplete collections.
+const MAX_NFT_PAGES = 5
+
 export async function fetchWalletNfts(
     rpcUrl: string,
     owner: string,
     signal?: AbortSignal
-): Promise<WalletNft[]> {
+): Promise<WalletNftResult> {
+    const items = new Map<string, WalletNft>()
+    let totalCount: number | null = null
+    let pagesLoaded = 0
+    let skippedItems = false
+    const incomplete = (): WalletNftResult => ({
+        items: [...items.values()],
+        totalCount,
+        status: pagesLoaded > 0 ? 'partial' : 'unavailable',
+    })
     try {
-        const url = getAlchemyNftUrl(rpcUrl, owner)
-        if (!url) return []
-
-        const response = await fetch(url, signal ? {signal} : undefined)
-        if (!response.ok) return []
-
-        const data: unknown = await response.json()
-        if (!isRecord(data) || !Array.isArray(data.ownedNfts)) return []
-        return data.ownedNfts.map(parseNft).filter((nft): nft is WalletNft => nft !== null)
+        const baseUrl = getAlchemyNftUrl(rpcUrl, owner)
+        if (!baseUrl) return incomplete()
+        let pageKey: string | undefined
+        const seenPageKeys = new Set<string>()
+        for (let page = 0; page < MAX_NFT_PAGES; page += 1) {
+            signal?.throwIfAborted()
+            const url = new URL(baseUrl)
+            if (pageKey) url.searchParams.set('pageKey', pageKey)
+            const response = await fetch(url.toString(), signal ? {signal} : undefined)
+            if (!response.ok) return incomplete()
+            const data: unknown = await response.json()
+            if (!isRecord(data) || !Array.isArray(data.ownedNfts)) return incomplete()
+            pagesLoaded += 1
+            if (
+                typeof data.totalCount === 'number' &&
+                Number.isSafeInteger(data.totalCount) &&
+                data.totalCount >= 0
+            ) {
+                totalCount = data.totalCount
+            }
+            for (const value of data.ownedNfts) {
+                const nft = parseNft(value)
+                if (nft) items.set(nft.id, nft)
+                else skippedItems = true
+            }
+            pageKey = typeof data.pageKey === 'string' && data.pageKey ? data.pageKey : undefined
+            if (!pageKey) {
+                const status =
+                    skippedItems || (totalCount !== null && totalCount > items.size)
+                        ? 'partial'
+                        : 'complete'
+                return {
+                    items: [...items.values()],
+                    totalCount: totalCount ?? (status === 'complete' ? items.size : null),
+                    status,
+                }
+            }
+            if (seenPageKeys.has(pageKey)) return incomplete()
+            seenPageKeys.add(pageKey)
+        }
+        return incomplete()
     } catch (error) {
         if (signal?.aborted) throw error
-        return []
+        return incomplete()
     }
 }
 

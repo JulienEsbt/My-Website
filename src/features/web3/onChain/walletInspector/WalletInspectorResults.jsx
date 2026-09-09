@@ -73,7 +73,9 @@ const WalletInspectorResults = ({
 
                 <div className="wallet-inspector__metric">
                     <span>{t('walletInspector.nfts')}</span>
-                    <strong>{formatNumber(result.nftCount, language)}</strong>
+                    <strong>
+                        {result.nftCount === null ? '—' : formatNumber(result.nftCount, language)}
+                    </strong>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -174,12 +176,25 @@ const WalletInspectorResults = ({
                             className="wallet-inspector__view-all"
                             onClick={onShowAllNfts}
                         >
-                            {t('walletInspector.viewAll')} · {result.nftCount}
+                            {t('walletInspector.viewAll')} · {result.nfts.length}
                         </button>
                     </div>
 
+                    {result.nftStatus === 'partial' && (
+                        <p role="status">
+                            {t('walletInspector.nftsPartial', {count: result.nfts.length})}
+                        </p>
+                    )}
                     {result.nfts.length === 0 ? (
-                        <p>{t('walletInspector.noNfts')}</p>
+                        <p>
+                            {t(
+                                result.nftStatus === 'unavailable'
+                                    ? 'walletInspector.nftsUnavailable'
+                                    : result.nftStatus === 'partial'
+                                      ? 'walletInspector.nftsNotLoaded'
+                                      : 'walletInspector.noNfts'
+                            )}
+                        </p>
                     ) : (
                         <div className="wallet-nft-strip">
                             {result.nfts.slice(0, 4).map((nft) => (
@@ -189,7 +204,13 @@ const WalletInspectorResults = ({
                                     className="wallet-nft-card"
                                     onClick={() => onSelectNft(nft)}
                                 >
-                                    <img src={nft.image} alt={nft.name} />
+                                    {nft.image ? (
+                                        <img src={nft.image} alt={nft.name} />
+                                    ) : (
+                                        <span className="wallet-nft-placeholder">
+                                            {t('walletInspector.nftNoImage')}
+                                        </span>
+                                    )}
                                     <strong>{nft.name}</strong>
                                     <span>{nft.collection}</span>
                                 </button>

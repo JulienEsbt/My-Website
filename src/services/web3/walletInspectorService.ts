@@ -290,7 +290,7 @@ export async function inspectWalletPortfolio({
     const wallet = await resolveWalletInput({provider, input: walletInput, network})
     if (!wallet) throw new Error('INVALID_ADDRESS')
 
-    const [nativeBalanceRaw, tokenResult, nfts, recentTransfers] = await Promise.all([
+    const [nativeBalanceRaw, tokenResult, nftResult, recentTransfers] = await Promise.all([
         provider.getBalance(wallet.address),
         loadTokens({rpcUrl, walletAddress: wallet.address, ...(signal ? {signal} : {})}),
         fetchWalletNfts(rpcUrl, wallet.address, signal),
@@ -318,8 +318,9 @@ export async function inspectWalletPortfolio({
         tokenDataTruncated: tokenResult.truncated,
         tokenMetadataFailures: tokenResult.metadataFailures,
         valuationPartial: prices.partial,
-        nftCount: nfts.length,
-        nfts,
+        nftCount: nftResult.totalCount,
+        nftStatus: nftResult.status,
+        nfts: nftResult.items,
         recentTransfers,
         ...valuation,
     }

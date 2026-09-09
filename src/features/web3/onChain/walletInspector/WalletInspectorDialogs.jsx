@@ -136,7 +136,13 @@ const WalletInspectorDialogs = ({
                                         onSelectNft(nft)
                                     }}
                                 >
-                                    <img src={nft.image} alt={nft.name} />
+                                    {nft.image ? (
+                                        <img src={nft.image} alt={nft.name} />
+                                    ) : (
+                                        <span className="wallet-nft-placeholder">
+                                            {t('walletInspector.nftNoImage')}
+                                        </span>
+                                    )}
                                     <strong>{nft.name}</strong>
                                     <span>{nft.collection}</span>
                                 </button>
@@ -166,7 +172,13 @@ const WalletInspectorDialogs = ({
                         >
                             <FiX />
                         </button>
-                        <img src={selectedNft.image} alt={selectedNft.name} />
+                        {selectedNft.image ? (
+                            <img src={selectedNft.image} alt={selectedNft.name} />
+                        ) : (
+                            <span className="wallet-nft-placeholder">
+                                {t('walletInspector.nftNoImage')}
+                            </span>
+                        )}
                         <h3 id="wallet-nft-title">{selectedNft.name}</h3>
                         <p>{selectedNft.collection}</p>
                     </div>

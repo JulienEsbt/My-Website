@@ -458,7 +458,11 @@
             "missingRpc": "Missing RPC for this network.",
             "noProvider": "No wallet detected. Install MetaMask or use a Web3 browser.",
             "failed": "Unable to inspect this wallet."
-        }
+        },
+        "nftsUnavailable": "NFT data is currently unavailable. This does not mean this wallet owns no NFTs.",
+        "nftsPartial": "Collection partially loaded: {{count}} NFTs available in this inspection.",
+        "nftsNotLoaded": "The collection items could not be loaded.",
+        "nftNoImage": "Image unavailable"
     },
     "nav": {
         "aria": "Web3 Labs navigation",

@@ -650,3 +650,12 @@
 .wallet-inspector__main-grid > * {
     margin: 0 !important;
 }
+
+.wallet-nft-placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 8rem;
+    padding: 1rem;
+    background: var(--color-bg-variant);
+    color: var(--color-light);
+}
