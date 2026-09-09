@@ -1,4 +1,5 @@
 import React, {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen, FiArrowLeft} from 'react-icons/fi'
@@ -16,13 +17,17 @@ import './TravelTimeline.css'
 const TravelGallery = lazy(() => import('../travelGallery/TravelGallery.jsx'))
 
 const TravelTimeline = () => {
+    const {search} = useLocation()
+    const navigate = useNavigate()
+    const requestedTripId = new URLSearchParams(search).get('trip')
+    const validRequestedTrip = trips.find(({id}) => id === requestedTripId)
     const {t, i18n} = useTranslation('travel')
     const isFr = i18n.resolvedLanguage?.startsWith('fr')
 
     const sortedTrips = useMemo(() => [...trips].sort((a, b) => a.sortOrder - b.sortOrder), [])
 
-    const [activeTripId, setActiveTripId] = useState(sortedTrips[0]?.id)
-    const [mobileDetailOpen, setMobileDetailOpen] = useState(false)
+    const [activeTripId, setActiveTripId] = useState(validRequestedTrip?.id ?? sortedTrips[0]?.id)
+    const [mobileDetailOpen, setMobileDetailOpen] = useState(Boolean(validRequestedTrip))
     const activeTrip = sortedTrips.find((trip) => trip.id === activeTripId) ?? sortedTrips[0]
     const [detailAnimationKey, setDetailAnimationKey] = useState(0)
     const [isClosingDetail, setIsClosingDetail] = useState(false)
@@ -38,6 +43,22 @@ const TravelTimeline = () => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false)
     const hasOpenedGalleryRef = useRef(false)
     const isDetailUnavailable = isGalleryOpen || (isMobileDetail && !mobileDetailOpen)
+
+    useEffect(() => {
+        if (!validRequestedTrip) return
+        setActiveTripId(validRequestedTrip.id)
+        setMobileDetailOpen(true)
+        setIsClosingDetail(false)
+        setIsGalleryOpen(false)
+        clearTimeout(closeDetailTimerRef.current)
+    }, [validRequestedTrip])
+
+    const updateTripUrl = (tripId, replace = false) => {
+        const params = new URLSearchParams(search)
+        if (tripId) params.set('trip', tripId)
+        else params.delete('trip')
+        navigate({search: params.toString(), hash: '#stories'}, {replace, preventScrollReset: true})
+    }
 
     const handleGalleryOpenChange = useCallback((isOpen) => {
         hasOpenedGalleryRef.current ||= isOpen
@@ -62,6 +83,7 @@ const TravelTimeline = () => {
     }
 
     const closeMobileDetail = () => {
+        updateTripUrl(null, true)
         setIsClosingDetail(true)
 
         clearTimeout(closeDetailTimerRef.current)
@@ -116,6 +138,7 @@ const TravelTimeline = () => {
                             onClick={() => {
                                 hasOpenedGalleryRef.current = false
                                 setIsGalleryOpen(false)
+                                updateTripUrl(trip.id)
                                 setActiveTripId(trip.id)
                                 setMobileDetailOpen(true)
                                 setDetailAnimationKey((key) => key + 1)

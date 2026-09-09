@@ -1,10 +1,6 @@
 import reflections from '../reflections/reflections.js'
 import trips from '../travel/trips.js'
 
-const latestTrip = [...trips]
-    .filter((trip) => !trip.isPlanned)
-    .sort((a, b) => b.sortOrder - a.sortOrder)[0]
-
 const projectEntries = [
     {
         id: 'portfolio-v2-2026-08-16',
@@ -22,22 +18,30 @@ const projectEntries = [
     },
 ]
 
-const travelEntries = latestTrip
-    ? [
-          {
-              id: `travel-${latestTrip.id}`,
-              category: 'travel',
-              date: `${latestTrip.year}-06-01`,
-              datePrecision: 'month',
-              title: {fr: latestTrip.city, en: latestTrip.cityEn ?? latestTrip.city},
-              excerpt: {
-                  fr: latestTrip.description,
-                  en: latestTrip.descriptionEn ?? latestTrip.description,
-              },
-              href: '/travel#timeline',
-          },
-      ]
-    : []
+// Explicit publication records preserve history when later trips are added.
+// The source gives June 2026, not an exact day; keep month precision.
+const travelPublications = [
+    {
+        tripId: 'croatia-2026',
+        date: '2026-06-01',
+        datePrecision: 'month',
+        feedId: '/travel#timeline',
+    },
+]
+const travelEntries = travelPublications.map(({tripId, date, datePrecision, feedId}) => {
+    const trip = trips.find(({id}) => id === tripId)
+    if (!trip) throw new Error(`Unknown journal trip: ${tripId}`)
+    return {
+        id: `travel-${trip.id}`,
+        category: 'travel',
+        date,
+        datePrecision,
+        feedId,
+        title: {fr: trip.city, en: trip.cityEn ?? trip.city},
+        excerpt: {fr: trip.description, en: trip.descriptionEn ?? trip.description},
+        href: `/travel?trip=${encodeURIComponent(trip.id)}#stories`,
+    }
+})
 
 const reflectionEntries = reflections.map((reflection) => ({
     id: `reflection-${reflection.id}`,

@@ -22,7 +22,7 @@ const rssItems = journalEntries
         (entry) => `        <item>
             <title>${escapeXml(entry.title.fr)}</title>
             <link>${escapeXml(absoluteUrl(entry.href))}</link>
-            <guid isPermaLink="true">${escapeXml(absoluteUrl(entry.href))}</guid>
+            <guid isPermaLink="false">${escapeXml(absoluteUrl(entry.feedId ?? entry.href))}</guid>
             <pubDate>${publishedAt(entry)}</pubDate>
             <category>${escapeXml(entry.category)}</category>
             <description>${escapeXml(entry.excerpt.fr)}</description>
@@ -47,7 +47,7 @@ const atomEntries = journalEntries
     .map(
         (entry) => `    <entry>
         <title>${escapeXml(entry.title.fr)}</title>
-        <id>${escapeXml(absoluteUrl(entry.href))}</id>
+        <id>${escapeXml(absoluteUrl(entry.feedId ?? entry.href))}</id>
         <link href="${escapeXml(absoluteUrl(entry.href))}" />
         <updated>${new Date(`${entry.date}T12:00:00Z`).toISOString()}</updated>
         <category term="${escapeXml(entry.category)}" />
