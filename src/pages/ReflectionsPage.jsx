@@ -10,11 +10,9 @@ import Fuse from 'fuse.js'
 import reflections from '../data/reflections/reflections.js'
 import ReflectionsNav from '../features/reflections/reflectionsNav/ReflectionsNav.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 
 const ReflectionsPage = () => {
     const {t, i18n} = useTranslation('reflections')
-    useDocumentTitle(t('meta.title'))
     const [activeFilter, setActiveFilter] = useState('all')
     const [search, setSearch] = useState('')
 

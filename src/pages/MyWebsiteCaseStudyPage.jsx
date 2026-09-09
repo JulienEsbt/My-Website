@@ -6,7 +6,6 @@ import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import {HOME_ASSETS} from '../config/homeAssets.js'
 import {LINKS} from '../config/links.js'
 import './CaseStudyPage.css'
@@ -21,7 +20,6 @@ const STACK = ['React', 'Vite', 'React Router', 'i18next', 'Vitest', 'axe-core',
 
 export default function MyWebsiteCaseStudyPage() {
     const {t} = useTranslation('projects')
-    useDocumentTitle(t('website.meta.title'))
 
     return (
         <PageFrame>

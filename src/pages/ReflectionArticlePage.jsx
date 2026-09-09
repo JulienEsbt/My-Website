@@ -7,7 +7,6 @@ import {getPreferredScrollBehavior} from '../components/common/accessibility/mot
 import reflections from '../data/reflections/reflections.js'
 import NotFoundPage from './NotFoundPage.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import {formatDate} from '../i18n/formatters.js'
 import './ReflectionArticlePage.css'
 
@@ -26,9 +25,6 @@ const ReflectionArticlePage = () => {
 
     const language = i18n.language?.startsWith('fr') ? 'fr' : 'en'
     const reflection = reflections.find((item) => item.slug === slug)
-    useDocumentTitle(
-        reflection ? `${reflection.title[language] ?? reflection.title.fr} — Julien Esterbet` : null
-    )
 
     const MdxContent = getMdxArticle(slug, language) || getMdxArticle(slug, 'fr')
     const isFallbackFrench = language !== 'fr' && !getMdxArticle(slug, language)

@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import journalEntries from '../data/journal/journalEntries.js'
 import './JournalPage.css'
 
@@ -14,7 +13,6 @@ export default function JournalPage() {
     const {t, i18n} = useTranslation('journal')
     const [activeCategory, setActiveCategory] = useState('all')
     const language = i18n.resolvedLanguage?.startsWith('fr') ? 'fr' : 'en'
-    useDocumentTitle(t('meta.title'))
 
     const entries = useMemo(
         () =>

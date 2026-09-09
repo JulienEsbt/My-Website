@@ -26,7 +26,7 @@ for (const path of INDEXABLE_PATHS) {
         errors.push(`${output}: description absente`)
     if (!/<meta(?=[^>]*name="robots")(?=[^>]*content="index, follow")[^>]*>/i.test(html))
         errors.push(`${output}: directive robots incorrecte`)
-    if (metadata.structuredData && !html.includes('<script type="application/ld+json">'))
+    if (metadata.structuredData && !html.includes('data-seo-json-ld="true"'))
         errors.push(`${output}: données structurées absentes`)
 }
 

@@ -1,5 +1,4 @@
 import React, {lazy, Suspense} from 'react'
-import {useTranslation} from 'react-i18next'
 import Header from '../features/web3/header/Header'
 import Web3Nav from '../features/web3/web3Nav/Web3Nav.jsx'
 import About from '../features/web3/about/About'
@@ -8,7 +7,6 @@ import Tools from '../features/web3/tools/Tools'
 import ContactSection from '../components/common/layout/contactSection/ContactSection.jsx'
 import FeatureLoading from '../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import LabNotice from '../features/web3/labNotice/LabNotice.jsx'
 
 const BlockchainExplorer = lazy(
@@ -20,9 +18,6 @@ const WalletInspector = lazy(
 const DonationPanel = lazy(() => import('../features/web3/onChain/donationPanel/DonationPanel.jsx'))
 
 const Web3Page = () => {
-    const {t} = useTranslation('web3')
-    useDocumentTitle(t('meta.title'))
-
     return (
         <PageFrame>
             <Header />

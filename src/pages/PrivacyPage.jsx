@@ -2,14 +2,12 @@ import React from 'react'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import './PrivacyPage.css'
 
 const SECTIONS = ['analytics', 'contact', 'external', 'control']
 
 export default function PrivacyPage() {
     const {t} = useTranslation('common')
-    useDocumentTitle(t('privacy.metaTitle'))
 
     return (
         <PageFrame>

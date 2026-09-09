@@ -7,11 +7,9 @@ import DreamDestinations from '../features/travel/dreamDestinations/DreamDestina
 import TravelExplorer from '../features/travel/travelExplorer/TravelExplorer.jsx'
 import TravelNav from '../features/travel/travelNav/TravelNav.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 
 const TravelPage = () => {
     const {t} = useTranslation('travel')
-    useDocumentTitle(t('meta.title'))
 
     return (
         <PageFrame>

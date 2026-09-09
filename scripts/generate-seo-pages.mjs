@@ -59,7 +59,7 @@ const renderMetadata = (template, seo) => {
         const json = JSON.stringify(seo.structuredData).replaceAll('<', '\\u003c')
         html = html.replace(
             '</head>',
-            `        <script type="application/ld+json">${json}</script>\n    </head>`
+            `        <script type="application/ld+json" data-seo-json-ld="true">${json}</script>\n    </head>`
         )
     }
 

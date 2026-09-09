@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import {HOME_ASSETS} from '../config/homeAssets.js'
 import './ResumePage.css'
 
@@ -19,8 +18,6 @@ export default function ResumePage() {
     const skills = asArray(t('skills', {returnObjects: true}))
     const certifications = asArray(t('certifications', {returnObjects: true}))
     const languages = asArray(t('languages', {returnObjects: true}))
-
-    useDocumentTitle(t('meta.title'))
 
     return (
         <PageFrame>
