@@ -9,7 +9,9 @@
     "routes": [
         {
             "src": "/assets/(.*)",
-            "headers": {"Cache-Control": "public, max-age=31536000, immutable"},
+            "headers": {
+                "Cache-Control": "public, max-age=31536000, immutable"
+            },
             "continue": true
         },
         {
@@ -24,7 +26,18 @@
             },
             "continue": true
         },
-        {"handle": "filesystem"},
-        {"src": "/(.*)", "status": 404, "dest": "/404.html"}
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/en(/.*)?",
+            "status": 404,
+            "dest": "/en/404.html"
+        },
+        {
+            "src": "/(.*)",
+            "status": 404,
+            "dest": "/404.html"
+        }
     ]
 }

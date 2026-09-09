@@ -41,7 +41,8 @@ describe('Vercel security headers', () => {
         expect(securityRoute).toMatchObject({src: '/(.*)', continue: true})
         expect(securityIndex).toBeLessThan(filesystemIndex)
         expect(filesystemIndex).toBeLessThan(notFoundIndex)
-        expect(vercelConfig.routes[notFoundIndex]).toMatchObject({dest: '/404.html'})
+        expect(vercelConfig.routes[notFoundIndex]).toMatchObject({dest: '/en/404.html'})
+        expect(vercelConfig.routes.at(-1)).toMatchObject({dest: '/404.html', status: 404})
     })
 
     it('pins the reproducible Vite build and immutable hashed assets', () => {

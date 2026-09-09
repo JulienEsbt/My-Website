@@ -1,9 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import './i18n/i18n.js'
+import i18n from './i18n/i18n.js'
+import {languageSwitchUrl} from './config/localizedPaths.js'
 import App from './App'
 import {initializePerformanceMetrics} from './services/observability/performanceMetrics.js'
+
+// Preserve older shared ?lang= links while making language URLs deterministic.
+const requestedLanguage = new URLSearchParams(window.location.search).get('lang')
+if (requestedLanguage === 'fr' || requestedLanguage === 'en') {
+    window.history.replaceState(
+        window.history.state,
+        '',
+        languageSwitchUrl(window.location.href, requestedLanguage)
+    )
+    await i18n.changeLanguage(requestedLanguage)
+}
 
 initializePerformanceMetrics()
 

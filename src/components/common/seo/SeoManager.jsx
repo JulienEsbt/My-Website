@@ -66,6 +66,15 @@ const SeoManager = () => {
         })
         setLink('link[rel="canonical"]', {rel: 'canonical', href: seo.canonicalUrl})
 
+        document.head.querySelectorAll('link[hreflang]').forEach((link) => link.remove())
+        seo.alternates.forEach(({language, url}) => {
+            setLink(`link[hreflang="${language}"]`, {
+                rel: 'alternate',
+                hreflang: language,
+                href: url,
+            })
+        })
+
         const previousJsonLd = document.head.querySelector('script[data-seo-json-ld]')
         previousJsonLd?.remove()
         if (seo.structuredData) {

@@ -55,6 +55,10 @@ const renderMetadata = (template, seo) => {
         html = replaceAttribute(html, selector, attribute, value)
     })
 
+    html = html.replace(
+        '</head>',
+        `${seo.alternates.map(({language, url}) => `<link rel="alternate" hreflang="${language}" href="${escapeHtml(url)}">`).join('\n')}\n</head>`
+    )
     if (seo.structuredData) {
         const json = JSON.stringify(seo.structuredData).replaceAll('<', '\\u003c')
         html = html.replace(
@@ -73,15 +77,25 @@ for (const path of INDEXABLE_PATHS) {
     if (path === '/') continue
     const output = join(dist, `${path.slice(1)}.html`)
     await mkdir(dirname(output), {recursive: true})
-    await writeFile(output, renderMetadata(template, getSeoMetadata(path, 'fr')))
+    await writeFile(output, renderMetadata(template, getSeoMetadata(path)))
 }
 
 const notFound = getSeoMetadata('/404', 'fr')
 await writeFile(join(dist, '404.html'), renderMetadata(template, notFound))
+await mkdir(join(dist, 'en'), {recursive: true})
+await writeFile(join(dist, 'en/404.html'), renderMetadata(template, getSeoMetadata('/en/404')))
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${INDEXABLE_PATHS.map((path) => `    <url><loc>${SITE_URL}${path}</loc></url>`).join('\n')}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${INDEXABLE_PATHS.map(
+    (path) =>
+        `    <url><loc>${SITE_URL}${path}</loc>${getSeoMetadata(path)
+            .alternates.map(
+                ({language, url}) =>
+                    `<xhtml:link rel="alternate" hreflang="${language}" href="${url}" />`
+            )
+            .join('')}</url>`
+).join('\n')}
 </urlset>
 `
 await writeFile(join(dist, 'sitemap.xml'), sitemap)

@@ -15,7 +15,13 @@ for (const path of INDEXABLE_PATHS) {
     }
 
     const html = readFileSync(file, 'utf8')
-    const metadata = getSeoMetadata(path, 'fr')
+    const metadata = getSeoMetadata(path)
+    if (!html.includes(`<html lang="${metadata.language}">`))
+        errors.push(`${output}: langue incorrecte`)
+    for (const alternate of metadata.alternates) {
+        if (!html.includes(`hreflang="${alternate.language}" href="${alternate.url}"`))
+            errors.push(`${output}: alternative ${alternate.language} absente`)
+    }
     const expectedCanonical = `${SITE_URL}${path}`
     const canonicalPattern = new RegExp(
         `<link(?=[^>]*rel="canonical")(?=[^>]*href="${escapeRegExp(expectedCanonical)}")[^>]*>`,

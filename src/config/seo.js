@@ -1,3 +1,4 @@
+import {languageFromPath, localizedPath, unlocalizedPath} from './localizedPaths.js'
 import reflections from '../data/reflections/reflections.js'
 
 export const SITE_URL = 'https://www.julienesterbet.com'
@@ -145,8 +146,8 @@ const structuredDataFor = (key, path, language, metadata) => {
                 },
                 {
                     '@type': 'ProfilePage',
-                    '@id': `${SITE_URL}/#profile`,
-                    url: SITE_URL,
+                    '@id': `${SITE_URL}${path}#profile`,
+                    url: `${SITE_URL}${path}`,
                     name: metadata.title,
                     description: metadata.description,
                     inLanguage: language,
@@ -185,8 +186,9 @@ const structuredDataFor = (key, path, language, metadata) => {
     return null
 }
 
-export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
+export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pathname)) => {
     const language = requestedLanguage?.startsWith('en') ? 'en' : 'fr'
+    pathname = unlocalizedPath(pathname)
     const reflectionMatch = pathname.match(/^\/reflections\/([^/]+)\/?$/)
     const reflection = reflectionMatch
         ? reflections.find(({slug}) => slug === reflectionMatch[1])
@@ -203,14 +205,22 @@ export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
           }
         : content[language][key ?? 'notFound']
 
-    const path = isNotFound
+    const basePath = isNotFound
         ? normalizedPath
         : reflection
           ? `/reflections/${reflection.slug}`
           : normalizedPath
 
+    const path = localizedPath(basePath, language)
+    const alternates = isNotFound
+        ? []
+        : ['fr', 'en', 'x-default'].map((locale) => ({
+              language: locale,
+              url: `${SITE_URL}${localizedPath(basePath, locale)}`,
+          }))
     return {
         ...metadata,
+        alternates,
         path,
         canonicalUrl: `${SITE_URL}${path}`,
         imageUrl: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
@@ -226,7 +236,12 @@ export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
     }
 }
 
-export const INDEXABLE_PATHS = [
+export const BASE_INDEXABLE_PATHS = [
     ...Object.keys(staticRoutes),
     ...reflections.map(({slug}) => `/reflections/${slug}`),
 ]
+
+export const INDEXABLE_PATHS = BASE_INDEXABLE_PATHS.flatMap((path) => [
+    path,
+    localizedPath(path, 'en'),
+])

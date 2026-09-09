@@ -1,35 +1,35 @@
-import {render, screen, waitFor} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import {render, screen} from '@testing-library/react'
+import {MemoryRouter} from 'react-router-dom'
 import {beforeEach, describe, expect, it} from 'vitest'
 import i18n from 'i18next'
 import LanguageSwitcher from './LanguageSwitcher.jsx'
 
 describe('LanguageSwitcher', () => {
     beforeEach(async () => {
-        window.history.replaceState({}, '', '/?lang=fr')
         await i18n.changeLanguage('fr')
     })
-
-    it('is keyboard accessible and switches to English', async () => {
-        const user = userEvent.setup()
-        const {container} = render(<LanguageSwitcher />)
-
-        const switcher = screen.getByRole('button', {name: 'Switch to English'})
-        expect(container.querySelector('.lang-slider .country-flag')).toHaveAttribute(
-            'src',
-            '/emoji-flags/fr.png'
+    it('links to a stable English URL and preserves trip selection and anchor', () => {
+        render(
+            <MemoryRouter initialEntries={['/travel?trip=croatia-2026&lang=fr#stories']}>
+                <LanguageSwitcher />
+            </MemoryRouter>
         )
-        expect(container.querySelector('.lang-labels .active')).toHaveTextContent('FR')
-        switcher.focus()
-        await user.keyboard('{Enter}')
-
-        await waitFor(() => expect(i18n.resolvedLanguage).toBe('en'))
-        expect(container.querySelector('.lang-slider .country-flag')).toHaveAttribute(
-            'src',
-            '/emoji-flags/gb.png'
+        const link = screen.getByRole('link', {name: 'Switch to English'})
+        expect(link).toHaveAttribute('href', '/en/travel?trip=croatia-2026#stories')
+        expect(link).toHaveAttribute('hreflang', 'en')
+        link.focus()
+        expect(link).toHaveFocus()
+    })
+    it('links back to the existing French URL', async () => {
+        await i18n.changeLanguage('en')
+        render(
+            <MemoryRouter initialEntries={['/reflections/charte-de-pensee']}>
+                <LanguageSwitcher />
+            </MemoryRouter>
         )
-        expect(container.querySelector('.lang-labels .active')).toHaveTextContent('EN')
-        expect(document.documentElement).toHaveAttribute('lang', 'en')
-        expect(window.location.search).toBe('?lang=en')
+        expect(screen.getByRole('link', {name: 'Passer en français'})).toHaveAttribute(
+            'href',
+            '/reflections/charte-de-pensee'
+        )
     })
 })

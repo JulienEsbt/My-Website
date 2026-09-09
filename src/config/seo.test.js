@@ -7,7 +7,7 @@ describe('SEO metadata', () => {
 
         expect(metadata.title).toContain('Bruno Pizza')
         expect(metadata.description).toContain('desktop application')
-        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/projects/bruno-pizza`)
+        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/en/projects/bruno-pizza`)
         expect(metadata.robots).toBe('index, follow')
         expect(metadata.structuredData['@type']).toBe('SoftwareApplication')
     })
@@ -34,5 +34,16 @@ describe('SEO metadata', () => {
         expect(INDEXABLE_PATHS).toContain('/journal')
         expect(INDEXABLE_PATHS).toContain('/privacy')
         expect(INDEXABLE_PATHS).toContain('/reflections/mefiance-opposition-simple')
+    })
+    it('infers English from the URL and supplies reciprocal alternatives', () => {
+        const seo = getSeoMetadata('/en/reflections/charte-de-pensee')
+        expect(seo.language).toBe('en')
+        expect(seo.isNotFound).toBe(false)
+        expect(seo.alternates).toContainEqual({
+            language: 'fr',
+            url: `${SITE_URL}/reflections/charte-de-pensee`,
+        })
+        expect(seo.alternates).toContainEqual({language: 'en', url: seo.canonicalUrl})
+        expect(getSeoMetadata('/en').canonicalUrl).toBe(`${SITE_URL}/en`)
     })
 })

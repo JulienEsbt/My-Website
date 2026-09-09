@@ -1,6 +1,6 @@
 import i18n from 'i18next'
 import {initReactI18next} from 'react-i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
+import {languageFromPath} from '../config/localizedPaths.js'
 import common_en from './en/common_en.json'
 import common_fr from './fr/common_fr.json'
 
@@ -37,30 +37,24 @@ const namespaceLoaders = {
 
 const namespacePromises = new Map()
 
-i18n.use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        resources: {
-            en: {
-                common: common_en,
-            },
-            fr: {
-                common: common_fr,
-            },
+i18n.use(initReactI18next).init({
+    resources: {
+        en: {
+            common: common_en,
         },
-        ns: ['common'],
-        defaultNS: 'common',
-        fallbackLng: 'en',
-        supportedLngs: ['en', 'fr'],
-        detection: {
-            order: ['querystring', 'localStorage', 'navigator'],
-            lookupQuerystring: 'lang',
-            caches: ['localStorage'],
+        fr: {
+            common: common_fr,
         },
-        interpolation: {escapeValue: false},
-        returnNull: false,
-        react: {useSuspense: false},
-    })
+    },
+    ns: ['common'],
+    defaultNS: 'common',
+    fallbackLng: 'en',
+    supportedLngs: ['en', 'fr'],
+    lng: typeof window === 'undefined' ? 'fr' : languageFromPath(window.location.pathname),
+    interpolation: {escapeValue: false},
+    returnNull: false,
+    react: {useSuspense: false},
+})
 
 const updateDocumentLanguage = (language) => {
     if (typeof document === 'undefined') return
