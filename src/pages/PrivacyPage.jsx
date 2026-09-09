@@ -4,7 +4,7 @@ import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import './PrivacyPage.css'
 
-const SECTIONS = ['analytics', 'contact', 'external', 'control']
+const SECTIONS = ['analytics', 'performance', 'contact', 'external', 'control']
 
 export default function PrivacyPage() {
     const {t} = useTranslation('common')
@@ -27,6 +27,16 @@ export default function PrivacyPage() {
                         <section key={section}>
                             <h3>{t(`privacy.${section}Title`)}</h3>
                             <p>{t(`privacy.${section}Body`)}</p>
+                            {section === 'analytics' && (
+                                <a href="https://vercel.com/docs/analytics/privacy-policy">
+                                    Vercel Web Analytics
+                                </a>
+                            )}
+                            {section === 'performance' && (
+                                <a href="https://vercel.com/docs/speed-insights/privacy-policy">
+                                    Vercel Speed Insights
+                                </a>
+                            )}
                         </section>
                     ))}
                 </div>
