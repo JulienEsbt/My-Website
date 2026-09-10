@@ -29,6 +29,7 @@ export default function LanguageSwitcher() {
             >
                 <motion.div
                     key={current}
+                    className="lang-flag"
                     initial={{opacity: 0, y: 6}}
                     animate={{opacity: 1, y: 0}}
                     exit={{opacity: 0, y: -6}}
