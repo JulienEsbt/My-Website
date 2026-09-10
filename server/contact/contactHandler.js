@@ -53,6 +53,12 @@ export function createContactHandler({
             return sendJson(response, 413, {ok: false, code: 'payload_too_large'})
         }
 
+        // Do not trust Content-Length: chunked requests can omit it entirely.
+        const actualBodyBytes = Buffer.byteLength(JSON.stringify(request.body ?? null), 'utf8')
+        if (actualBodyBytes > MAXIMUM_BODY_BYTES) {
+            return sendJson(response, 413, {ok: false, code: 'payload_too_large'})
+        }
+
         const validation = validateContactPayload(request.body)
         if (!validation.ok) {
             return sendJson(response, 400, {ok: false, code: 'invalid_form'})

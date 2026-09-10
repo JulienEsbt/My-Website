@@ -126,6 +126,29 @@ describe('contact handler', () => {
         expect(response.body).toEqual({ok: false, code: 'payload_too_large'})
     })
 
+    it('rejects a large body even when its declared length is missing or false', async () => {
+        for (const headers of [{}, {'content-length': '10'}]) {
+            const sendEmail = vi.fn()
+            const handler = createContactHandler({env, sendEmail, now: () => 3000})
+            const response = createResponse()
+            await handler(createRequest(validBody({extra: 'x'.repeat(17000)}), {headers}), response)
+            expect(response.statusCode).toBe(413)
+            expect(sendEmail).not.toHaveBeenCalled()
+        }
+    })
+
+    it('rejects structured fields instead of coercing them to text', async () => {
+        const sendEmail = vi.fn()
+        const handler = createContactHandler({env, sendEmail, now: () => 3000})
+        const response = createResponse()
+        await handler(
+            createRequest(validBody({message: ['a sufficiently long message']})),
+            response
+        )
+        expect(response.statusCode).toBe(400)
+        expect(sendEmail).not.toHaveBeenCalled()
+    })
+
     it('limits repeated requests from the same client', async () => {
         const rateLimiter = createMemoryRateLimiter({limit: 1, now: () => 3000})
         const sendEmail = vi.fn().mockResolvedValue(undefined)
