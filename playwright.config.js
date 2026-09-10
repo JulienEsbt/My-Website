@@ -8,6 +8,7 @@ export default defineConfig({
     reporter: 'list',
     use: {
         baseURL: 'http://localhost:4173',
+        locale: 'fr-FR',
         viewport: {width: 1280, height: 720},
         reducedMotion: 'reduce',
         trace: 'retain-on-failure',

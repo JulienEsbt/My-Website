@@ -325,6 +325,9 @@ img {
 }
 
 /* Keep readable HTML visible until the interactive page has mounted. */
+[data-language-entry-pending] #prerendered-content {
+    visibility: hidden;
+}
 #prerendered-content ~ #root {
     display: none;
 }

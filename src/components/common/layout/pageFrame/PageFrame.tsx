@@ -11,6 +11,7 @@ interface PageFrameProps {
 const PageFrame = ({children}: PageFrameProps) => {
     useClientLayoutEffect(() => {
         document.getElementById('prerendered-content')?.remove()
+        document.documentElement.removeAttribute('data-language-entry-pending')
     }, [])
     return (
         <>

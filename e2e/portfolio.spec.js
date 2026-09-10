@@ -7,6 +7,116 @@ test.beforeEach(async ({page}) => {
     )
 })
 
+const silenceLocalMeasurements = (context) =>
+    context.route('**/_vercel/**', (route) =>
+        route.fulfill({status: 200, contentType: 'application/javascript', body: ''})
+    )
+
+test('the neutral home follows the primary browser language', async ({browser}) => {
+    for (const [locale, expectedPath, expectedLanguage] of [
+        ['fr-CA', '/', 'fr'],
+        ['en-GB', '/en', 'en'],
+        ['de-DE', '/en', 'en'],
+    ]) {
+        const context = await browser.newContext({locale})
+        await silenceLocalMeasurements(context)
+        const page = await context.newPage()
+        await page.goto('/')
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        await expect(page).toHaveURL(
+            new RegExp(`${expectedPath === '/' ? '/$' : `${expectedPath}$`}`)
+        )
+        await expect(page.locator('html')).toHaveAttribute('lang', expectedLanguage)
+        await context.close()
+    }
+})
+
+test('an English entry never exposes the French prerender', async ({browser}) => {
+    const context = await browser.newContext({locale: 'en-GB'})
+    await silenceLocalMeasurements(context)
+    let releaseScripts
+    const scriptsCanLoad = new Promise((resolve) => {
+        releaseScripts = resolve
+    })
+    await context.route('**/assets/*.js', async (route) => {
+        await scriptsCanLoad
+        await route.continue()
+    })
+    const page = await context.newPage()
+
+    try {
+        await page.goto('/', {waitUntil: 'commit'})
+        const prerender = page.locator('#prerendered-content')
+        await prerender.waitFor({state: 'attached'})
+        await expect(page.locator('html')).toHaveAttribute('data-language-entry-pending', 'en')
+        await expect(prerender).toBeHidden()
+        releaseScripts()
+        await prerender.waitFor({state: 'detached'})
+        await expect(page).toHaveURL(/\/en$/)
+    } finally {
+        releaseScripts()
+        await context.close()
+    }
+})
+
+test('explicit URLs win and a manual home choice is remembered', async ({browser}) => {
+    const context = await browser.newContext({locale: 'en-GB'})
+    await silenceLocalMeasurements(context)
+    const page = await context.newPage()
+
+    await page.goto('/reflections')
+    await expect(page).toHaveURL(/\/reflections$/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
+    await page.goto('/en')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+    await page.getByRole('link', {name: 'Passer en français'}).click()
+    await expect(page).toHaveURL(/\/$/)
+    await page.goto('/en/reflections')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+    await page.goto('/')
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
+    await context.close()
+})
+
+test('historical query links persist a choice without requiring storage', async ({browser}) => {
+    const context = await browser.newContext({locale: 'fr-FR'})
+    await silenceLocalMeasurements(context)
+    const page = await context.newPage()
+    await page.goto('/reflections?filter=essai&lang=en#articles')
+    await expect(page).toHaveURL(/\/en\/reflections\?filter=essai#articles$/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+    await page.goto('/')
+    await expect(page).toHaveURL(/\/en$/)
+    await context.close()
+
+    const blockedContext = await browser.newContext({locale: 'de-DE'})
+    await blockedContext.addInitScript(() => {
+        Storage.prototype.getItem = () => {
+            throw new DOMException('Blocked', 'SecurityError')
+        }
+        Storage.prototype.setItem = () => {
+            throw new DOMException('Blocked', 'SecurityError')
+        }
+    })
+    await silenceLocalMeasurements(blockedContext)
+    const blockedPage = await blockedContext.newPage()
+    await blockedPage.goto('/')
+    await expect(blockedPage).toHaveURL(/\/en$/)
+    await expect(blockedPage.locator('html')).toHaveAttribute('lang', 'en')
+    await blockedContext.close()
+})
+
+test('the French prerender remains readable without JavaScript', async ({browser}) => {
+    const context = await browser.newContext({javaScriptEnabled: false, locale: 'de-DE'})
+    const page = await context.newPage()
+    await page.goto('/')
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
+    await expect(page.getByRole('heading', {level: 1})).toBeVisible()
+    await context.close()
+})
+
 test('language switches preserve the document, draft, scroll and browser history', async ({
     page,
 }) => {

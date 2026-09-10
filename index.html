@@ -8,6 +8,39 @@
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
 
+        <script>
+            ;(() => {
+                try {
+                    const url = new URL(window.location.href)
+                    const queryLanguage = ['fr', 'en'].includes(url.searchParams.get('lang'))
+                        ? url.searchParams.get('lang')
+                        : null
+                    const pathLanguage = /^\/en(?:\/|$)/.test(url.pathname) ? 'en' : 'fr'
+                    let language = queryLanguage ?? pathLanguage
+
+                    if (!queryLanguage && url.pathname === '/') {
+                        let preference = null
+                        try {
+                            const stored = window.localStorage.getItem('julienesterbet.language')
+                            preference = ['fr', 'en'].includes(stored) ? stored : null
+                        } catch {
+                            // Browser language remains available when storage is blocked.
+                        }
+                        const primaryLanguage = navigator.languages?.[0] ?? navigator.language
+                        language =
+                            preference ??
+                            (primaryLanguage?.toLowerCase().startsWith('fr') ? 'fr' : 'en')
+                    }
+
+                    if (language !== pathLanguage) {
+                        document.documentElement.dataset.languageEntryPending = language
+                    }
+                } catch {
+                    // The readable French HTML remains the no-JavaScript/error fallback.
+                }
+            })()
+        </script>
+
         <meta
             content="Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web utiles, React, Angular, Java et expérimentations Web3."
             name="description"

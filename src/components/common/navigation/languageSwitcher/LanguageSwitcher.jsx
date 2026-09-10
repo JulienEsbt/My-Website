@@ -4,6 +4,7 @@ import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {Link, useLocation} from 'react-router-dom'
 import {languageSwitchUrl} from '../../../../config/localizedPaths.js'
+import {rememberLanguagePreference} from '../../../../i18n/entryLanguage.js'
 import CountryFlag from '../../media/CountryFlag.jsx'
 import './LanguageSwitcher.css'
 
@@ -20,6 +21,7 @@ export default function LanguageSwitcher() {
             to={languageSwitchUrl(`${pathname}${search}${hash}`, next)}
             hrefLang={next}
             aria-label={next === 'fr' ? 'Passer en français' : 'Switch to English'}
+            onClick={() => rememberLanguagePreference(next)}
         >
             <motion.div
                 className="lang-slider"
