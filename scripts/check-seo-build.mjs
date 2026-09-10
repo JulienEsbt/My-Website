@@ -51,6 +51,11 @@ for (const path of INDEXABLE_PATHS) {
         errors.push(`${output}: directive robots incorrecte`)
     if (metadata.structuredData && !html.includes('data-seo-json-ld="true"'))
         errors.push(`${output}: données structurées absentes`)
+    if (metadata.imageUrl.startsWith(`${SITE_URL}/og/travel/`)) {
+        const imagePath = metadata.imageUrl.slice(SITE_URL.length + 1)
+        if (!existsSync(join(dist, imagePath)))
+            errors.push(`${output}: aperçu social absent ${imagePath}`)
+    }
 }
 
 const notFoundFile = join(dist, '404.html')

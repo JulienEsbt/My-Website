@@ -1,5 +1,6 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
+import {useParams} from 'react-router-dom'
 import PageHero from '../components/common/layout/pageHero/PageHero'
 import TravelStats from '../features/travel/travelStats/TravelStats'
 import TravelTimeline from '../features/travel/travelTimeline/TravelTimeline'
@@ -7,9 +8,14 @@ import DreamDestinations from '../features/travel/dreamDestinations/DreamDestina
 import TravelExplorer from '../features/travel/travelExplorer/TravelExplorer.jsx'
 import TravelNav from '../features/travel/travelNav/TravelNav.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
+import NotFoundPage from './NotFoundPage.jsx'
+import trips from '../data/travel/trips.js'
 
 const TravelPage = () => {
     const {t} = useTranslation('travel')
+    const {tripId} = useParams()
+
+    if (tripId && !trips.some(({id}) => id === tripId)) return <NotFoundPage />
 
     return (
         <PageFrame>
@@ -22,7 +28,7 @@ const TravelPage = () => {
             <TravelNav />
             <TravelStats />
             <TravelExplorer />
-            <TravelTimeline />
+            <TravelTimeline routeTripId={tripId} />
             <DreamDestinations />
         </PageFrame>
     )

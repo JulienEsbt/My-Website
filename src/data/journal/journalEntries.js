@@ -39,7 +39,7 @@ const travelEntries = travelPublications.map(({tripId, date, datePrecision, feed
         feedId,
         title: {fr: trip.city, en: trip.cityEn ?? trip.city},
         excerpt: {fr: trip.description, en: trip.descriptionEn ?? trip.description},
-        href: `/travel?trip=${encodeURIComponent(trip.id)}#stories`,
+        href: `/travel/${encodeURIComponent(trip.id)}#stories`,
     }
 })
 

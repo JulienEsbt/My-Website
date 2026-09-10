@@ -16,6 +16,12 @@ export const ROUTE_CATALOG = /** @type {const} */ ({
     privacy: {path: '/privacy', seoKey: 'privacy', page: 'PrivacyPage', namespace: 'common'},
     web3: {path: '/web3', seoKey: 'web3', page: 'Web3Page', namespace: 'web3'},
     travel: {path: '/travel', seoKey: 'travel', page: 'TravelPage', namespace: 'travel'},
+    travelStory: {
+        path: '/travel/:tripId',
+        seoKey: 'travelStory',
+        page: 'TravelPage',
+        namespace: 'travel',
+    },
     reflections: {
         path: '/reflections',
         seoKey: 'reflections',

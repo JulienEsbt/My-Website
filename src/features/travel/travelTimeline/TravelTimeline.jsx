@@ -12,15 +12,17 @@ import FeatureLoading from '../../../components/common/feedback/featureLoading/F
 import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import trips from '../../../data/travel/trips.js'
 import {getStaticTravelMapUrl} from '../../../services/mapbox/mapboxStaticService.js'
+import {languageFromPath, localizedPath} from '../../../config/localizedPaths.js'
 import './TravelTimeline.css'
 
 const TravelGallery = lazy(() => import('../travelGallery/TravelGallery.jsx'))
 
-const TravelTimeline = () => {
-    const {search} = useLocation()
+const TravelTimeline = ({routeTripId}) => {
+    const {pathname, search} = useLocation()
     const navigate = useNavigate()
     const requestedTripId = new URLSearchParams(search).get('trip')
-    const validRequestedTrip = trips.find(({id}) => id === requestedTripId)
+    const urlTripId = routeTripId ?? requestedTripId
+    const validRequestedTrip = trips.find(({id}) => id === urlTripId)
     const {t, i18n} = useTranslation('travel')
     const isFr = i18n.resolvedLanguage?.startsWith('fr')
 
@@ -45,20 +47,52 @@ const TravelTimeline = () => {
     const isDetailUnavailable = isGalleryOpen || (isMobileDetail && !mobileDetailOpen)
 
     useEffect(() => {
-        if (!validRequestedTrip) return
+        if (!validRequestedTrip) {
+            if (!urlTripId) {
+                setMobileDetailOpen(false)
+                setIsClosingDetail(false)
+                setIsGalleryOpen(false)
+                clearTimeout(closeDetailTimerRef.current)
+            }
+            return
+        }
         setActiveTripId(validRequestedTrip.id)
         setMobileDetailOpen(true)
         setIsClosingDetail(false)
         setIsGalleryOpen(false)
         clearTimeout(closeDetailTimerRef.current)
-    }, [validRequestedTrip])
+    }, [urlTripId, validRequestedTrip])
 
-    const updateTripUrl = (tripId, replace = false) => {
-        const params = new URLSearchParams(search)
-        if (tripId) params.set('trip', tripId)
-        else params.delete('trip')
-        navigate({search: params.toString(), hash: '#stories'}, {replace, preventScrollReset: true})
-    }
+    const updateTripUrl = useCallback(
+        (tripId, replace = false) => {
+            const params = new URLSearchParams(search)
+            params.delete('trip')
+            const nextSearch = params.toString()
+            const basePath = tripId ? `/travel/${tripId}` : '/travel'
+
+            navigate(
+                {
+                    pathname: localizedPath(basePath, languageFromPath(pathname)),
+                    search: nextSearch ? `?${nextSearch}` : '',
+                    hash: '#stories',
+                },
+                {replace, preventScrollReset: true}
+            )
+        },
+        [navigate, pathname, search]
+    )
+
+    useEffect(() => {
+        if (!routeTripId && validRequestedTrip) updateTripUrl(validRequestedTrip.id, true)
+    }, [routeTripId, updateTripUrl, validRequestedTrip])
+
+    useEffect(() => {
+        if (!routeTripId || !validRequestedTrip) return
+        const frame = requestAnimationFrame(() => {
+            document.getElementById('stories')?.scrollIntoView?.({block: 'start'})
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [routeTripId, validRequestedTrip])
 
     const handleGalleryOpenChange = useCallback((isOpen) => {
         hasOpenedGalleryRef.current ||= isOpen

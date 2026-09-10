@@ -20,6 +20,31 @@ describe('SEO metadata', () => {
         expect(metadata.structuredData['@type']).toBe('Article')
     })
 
+    it('creates localized metadata and a specific preview for a travel story', () => {
+        const metadata = getSeoMetadata('/en/travel/croatia-2026')
+
+        expect(metadata.title).toContain('Dubrovnik, Croatia')
+        expect(metadata.description).toContain('Back to Dubrovnik')
+        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/en/travel/croatia-2026`)
+        expect(metadata.imageUrl).toBe(`${SITE_URL}/og/travel/en/croatia-2026.png`)
+        expect(metadata.type).toBe('article')
+        expect(metadata.structuredData).toMatchObject({
+            '@type': 'Article',
+            about: {'@type': 'Place', name: 'Dubrovnik, Croatia'},
+        })
+        expect(metadata.alternates).toContainEqual({
+            language: 'fr',
+            url: `${SITE_URL}/travel/croatia-2026`,
+        })
+    })
+
+    it('does not index an unknown travel story', () => {
+        const metadata = getSeoMetadata('/travel/voyage-inconnu')
+
+        expect(metadata.isNotFound).toBe(true)
+        expect(metadata.robots).toBe('noindex, nofollow')
+    })
+
     it('marks unknown routes as non-indexable', () => {
         const metadata = getSeoMetadata('/route-inconnue', 'fr')
 
@@ -35,6 +60,8 @@ describe('SEO metadata', () => {
         expect(INDEXABLE_PATHS).not.toContain('/en/journal')
         expect(INDEXABLE_PATHS).toContain('/privacy')
         expect(INDEXABLE_PATHS).toContain('/reflections/mefiance-opposition-simple')
+        expect(INDEXABLE_PATHS).toContain('/travel/croatia-2026')
+        expect(INDEXABLE_PATHS).toContain('/en/travel/croatia-2026')
     })
     it('infers English from the URL and supplies reciprocal alternatives', () => {
         const seo = getSeoMetadata('/en/reflections/charte-de-pensee')

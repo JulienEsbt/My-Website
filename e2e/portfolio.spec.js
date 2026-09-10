@@ -191,11 +191,42 @@ test('article navigation replaces structured data and unknown pages are noindex'
     )
 })
 
-test('a journal link opens the matching trip', async ({page}) => {
+test('travel stories have clean, localized and backward-compatible URLs', async ({page}) => {
     await page.goto('/travel?trip=croatia-2026#stories')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
     await expect(page.locator('.travel-timeline__item[aria-pressed=true]')).toContainText('2026')
+    await expect(page).toHaveURL(/\/travel\/croatia-2026#stories$/)
+
+    await page.goto('/travel')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page
+        .locator('.travel-timeline__item', {hasText: 'Dubrovnik'})
+        .filter({hasText: 'Juin 2026'})
+        .click()
+    await expect(page).toHaveURL(/\/travel\/croatia-2026#stories$/)
+    await page.goBack()
+    await expect(page).toHaveURL(/\/travel$/)
+
+    await page.goto('/en/travel/croatia-2026')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
+    await expect(page).toHaveTitle(/Dubrovnik, Croatia/)
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+        'content',
+        /\/og\/travel\/en\/croatia-2026\.png$/
+    )
+    await page.getByRole('link', {name: 'Passer en français'}).click()
+    await expect(page).toHaveURL(/\/travel\/croatia-2026$/)
+
+    await page.goto('/travel/voyage-inconnu')
+    await expect(page.getByRole('heading', {level: 1})).toHaveText(
+        'Cette page n’existe pas ou plus.'
+    )
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+        'content',
+        'noindex, nofollow'
+    )
 })
 
 test('local contact uses the real API adapter without sending email', async ({page}) => {

@@ -36,6 +36,16 @@ describe('Router', () => {
         expect(await screen.findByText('Travel')).toBeVisible()
     })
 
+    it('loads a travel story through its clean localized route', async () => {
+        render(
+            <MemoryRouter initialEntries={['/en/travel/croatia-2026']}>
+                <Router />
+            </MemoryRouter>
+        )
+
+        expect(await screen.findByText('Travel')).toBeVisible()
+    })
+
     it('loads the Bruno Pizza case study route asynchronously', async () => {
         render(
             <MemoryRouter initialEntries={['/projects/bruno-pizza']}>

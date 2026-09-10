@@ -1,6 +1,7 @@
 import {ROUTE_CATALOG} from './routeCatalog.js'
 import {languageFromPath, localizedPath, unlocalizedPath} from './localizedPaths.js'
 import reflections from '../data/reflections/reflections.js'
+import trips from '../data/travel/trips.js'
 
 export const SITE_URL = 'https://www.julienesterbet.com'
 export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
@@ -155,7 +156,7 @@ const structuredDataFor = (key, path, language, metadata) => {
         }
     }
 
-    if (key === 'reflection') {
+    if (key === 'reflection' || key === 'travelStory') {
         return {
             '@context': 'https://schema.org',
             '@type': 'Article',
@@ -164,7 +165,8 @@ const structuredDataFor = (key, path, language, metadata) => {
             url: `${SITE_URL}${path}`,
             inLanguage: language,
             author: person,
-            datePublished: metadata.date,
+            ...(metadata.date ? {datePublished: metadata.date} : {}),
+            ...(metadata.place ? {about: {'@type': 'Place', name: metadata.place}} : {}),
         }
     }
 
@@ -178,8 +180,10 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
     const reflection = reflectionMatch
         ? reflections.find(({slug}) => slug === reflectionMatch[1])
         : null
+    const travelMatch = pathname.match(/^\/travel\/([^/]+)\/?$/)
+    const trip = travelMatch ? trips.find(({id}) => id === travelMatch[1]) : null
     const normalizedPath = pathname !== '/' ? pathname.replace(/\/$/, '') : '/'
-    const key = reflection ? 'reflection' : staticRoutes[normalizedPath]
+    const key = reflection ? 'reflection' : trip ? 'travelStory' : staticRoutes[normalizedPath]
     const isNotFound = !key
 
     const metadata = reflection
@@ -188,13 +192,28 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
               description: reflection.excerpt[language] ?? reflection.excerpt.fr,
               date: reflection.date,
           }
-        : content[language][key ?? 'notFound']
+        : trip
+          ? {
+                title: `${language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)}, ${
+                    language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
+                } — ${
+                    language === 'fr' ? trip.dateLabel : (trip.dateLabelEn ?? trip.dateLabel)
+                } | Julien Esterbet`,
+                description:
+                    language === 'fr' ? trip.description : (trip.descriptionEn ?? trip.description),
+                place: `${language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)}, ${
+                    language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
+                }`,
+            }
+          : content[language][key ?? 'notFound']
 
     const basePath = isNotFound
         ? normalizedPath
         : reflection
           ? `/reflections/${reflection.slug}`
-          : normalizedPath
+          : trip
+            ? `/travel/${trip.id}`
+            : normalizedPath
 
     const path = localizedPath(basePath, language)
     const alternates = isNotFound
@@ -208,13 +227,16 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
         alternates,
         path,
         canonicalUrl: `${SITE_URL}${path}`,
-        imageUrl: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
-        imageAlt:
-            language === 'fr'
-                ? 'Julien Esterbet — développeur full-stack orienté produit'
-                : 'Julien Esterbet — product-minded full-stack developer',
+        imageUrl: `${SITE_URL}${trip ? `/og/travel/${language}/${trip.id}.png` : DEFAULT_SOCIAL_IMAGE}`,
+        imageAlt: trip
+            ? language === 'fr'
+                ? `Carnet de voyage à ${trip.city}, ${trip.country}`
+                : `Travel journal in ${trip.cityEn ?? trip.city}, ${trip.countryEn ?? trip.country}`
+            : language === 'fr'
+              ? 'Julien Esterbet — développeur full-stack orienté produit'
+              : 'Julien Esterbet — product-minded full-stack developer',
         language,
-        type: reflection ? 'article' : 'website',
+        type: reflection || trip ? 'article' : 'website',
         robots: isNotFound ? 'noindex, nofollow' : 'index, follow',
         isNotFound,
         structuredData: isNotFound ? null : structuredDataFor(key, path, language, metadata),
@@ -224,6 +246,7 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
 export const BASE_INDEXABLE_PATHS = [
     ...Object.keys(staticRoutes),
     ...reflections.map(({slug}) => `/reflections/${slug}`),
+    ...trips.map(({id}) => `/travel/${id}`),
 ]
 
 export const INDEXABLE_PATHS = BASE_INDEXABLE_PATHS.flatMap((path) => [

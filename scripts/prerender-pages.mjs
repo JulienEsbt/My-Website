@@ -58,7 +58,9 @@ for (const path of [...INDEXABLE_PATHS, '/404', '/en/404']) {
         Object.values(ROUTE_CATALOG).find(({path}) => path === basePath)?.page ??
         (basePath.startsWith('/reflections/')
             ? ROUTE_CATALOG.reflectionArticle.page
-            : 'NotFoundPage')
+            : basePath.startsWith('/travel/')
+              ? ROUTE_CATALOG.travelStory.page
+              : 'NotFoundPage')
     const existingStyles = new Set(
         [...template.matchAll(/<link[^>]+href="\/([^"]+\.css)"/g)].map((match) => match[1])
     )
