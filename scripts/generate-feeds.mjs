@@ -33,8 +33,8 @@ const rssItems = journalEntries
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
     <channel>
-        <title>Journal de Julien Esterbet</title>
-        <link>${SITE_URL}/journal</link>
+        <title>Publications de Julien Esterbet</title>
+        <link>${SITE_URL}</link>
         <description>Projets, voyages et réflexions de Julien Esterbet.</description>
         <language>fr</language>
         <lastBuildDate>${publishedAt(journalEntries[0])}</lastBuildDate>
@@ -58,9 +58,9 @@ const atomEntries = journalEntries
 
 const atom = `<?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
-    <title>Journal de Julien Esterbet</title>
+    <title>Publications de Julien Esterbet</title>
     <id>${SITE_URL}/journal</id>
-    <link href="${SITE_URL}/journal" />
+    <link href="${SITE_URL}" />
     <link href="${SITE_URL}/atom.xml" rel="self" />
     <updated>${updatedAt}</updated>
     <subtitle>Projets, voyages et réflexions de Julien Esterbet.</subtitle>

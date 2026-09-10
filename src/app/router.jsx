@@ -1,5 +1,5 @@
 import {Suspense, useEffect, useLayoutEffect} from 'react'
-import {Route, Routes, useLocation} from 'react-router-dom'
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom'
 import i18n from '../i18n/i18n.js'
 import {languageFromPath} from '../config/localizedPaths.js'
 import NotFoundPage from '../pages/NotFoundPage.jsx'
@@ -23,6 +23,8 @@ const Router = () => {
                         element={<Component />}
                     />
                 ))}
+                <Route path="/journal" element={<Navigate to="/" replace />} />
+                <Route path="/en/journal" element={<Navigate to="/en" replace />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>

@@ -16,7 +16,6 @@
         "web3": "Labs Web3",
         "travel": "Carnets de voyage",
         "reflections": "Écrits et réflexions",
-        "journal": "Journal",
         "groups": {
             "primary": "Portfolio et labs",
             "editorial": "À explorer"
@@ -70,8 +69,7 @@
             "home": "Portfolio",
             "web3": "Labs Web3",
             "travel": "Voyages",
-            "reflections": "Réflexions",
-            "journal": "Journal"
+            "reflections": "Réflexions"
         },
         "socials": "Réseaux",
         "cta": "Me contacter",

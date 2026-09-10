@@ -9,7 +9,7 @@ import Router from './app/router.jsx'
 
 export async function renderPage(pathname) {
     const language = languageFromPath(pathname)
-    await loadNamespaces(['home', 'projects', 'resume', 'web3', 'travel', 'reflections', 'journal'])
+    await loadNamespaces(['home', 'projects', 'resume', 'web3', 'travel', 'reflections'])
     await i18n.changeLanguage(language)
     return new Promise((resolve, reject) => {
         const output = new PassThrough()

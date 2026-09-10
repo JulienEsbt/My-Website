@@ -22,7 +22,6 @@ export const ROUTE_CATALOG = /** @type {const} */ ({
         page: 'ReflectionsPage',
         namespace: 'reflections',
     },
-    journal: {path: '/journal', seoKey: 'journal', page: 'JournalPage', namespace: 'journal'},
     reflectionArticle: {
         path: '/reflections/:slug',
         seoKey: 'reflection',

@@ -31,7 +31,8 @@ describe('SEO metadata', () => {
     it('lists every public static and editorial route once', () => {
         expect(new Set(INDEXABLE_PATHS).size).toBe(INDEXABLE_PATHS.length)
         expect(INDEXABLE_PATHS).toContain('/resume')
-        expect(INDEXABLE_PATHS).toContain('/journal')
+        expect(INDEXABLE_PATHS).not.toContain('/journal')
+        expect(INDEXABLE_PATHS).not.toContain('/en/journal')
         expect(INDEXABLE_PATHS).toContain('/privacy')
         expect(INDEXABLE_PATHS).toContain('/reflections/mefiance-opposition-simple')
     })
