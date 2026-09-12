@@ -257,3 +257,27 @@ test('local contact uses the real API adapter without sending email', async ({pa
     await page.getByRole('button', {name: 'Envoyer l’email'}).click()
     await expect(page.getByRole('status')).toContainText('Aucun email n’a été envoyé.')
 })
+
+test('home introduces the person before projects and opens selected localized stories', async ({
+    page,
+}) => {
+    for (const path of ['/', '/en']) {
+        await page.goto(path)
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        const order = await page
+            .locator('#about, #portfolio, #home-reflections, #home-travel')
+            .evaluateAll((nodes) => nodes.map((node) => node.id))
+        expect(order).toEqual(['about', 'portfolio', 'home-reflections', 'home-travel'])
+        const prefix = path === '/en' ? '/en' : ''
+        const writing = page.locator('#home-reflections h3 a').first()
+        await expect(writing).toHaveAttribute(
+            'href',
+            `${prefix}/reflections/mefiance-opposition-simple`
+        )
+        await writing.click()
+        await expect(page.getByRole('heading', {level: 1})).toBeVisible()
+        await page.goBack()
+        await page.locator(`#home-travel a[href="${prefix}/travel/croatia-2021"]`).click()
+        await expect(page).toHaveURL(new RegExp(`${prefix}/travel/croatia-2021$`))
+    }
+})

@@ -9,9 +9,9 @@ export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
 const content = {
     fr: {
         home: {
-            title: 'Julien Esterbet — Développeur full-stack orienté produit',
+            title: 'Julien Esterbet — Analyste programmeur, projets et réflexions',
             description:
-                'Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web fiables, React, Angular, Java et expérimentations Web3.',
+                'Julien Esterbet, analyste programmeur : applications métiers, projets logiciels, réflexions personnelles et récits de voyage.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Étude de cas produit | Julien Esterbet',
@@ -55,9 +55,9 @@ const content = {
     },
     en: {
         home: {
-            title: 'Julien Esterbet — Product-minded full-stack developer',
+            title: 'Julien Esterbet — Software developer, projects and reflections',
             description:
-                'Julien Esterbet’s portfolio: product-minded full-stack development across reliable business applications, web products, React, Angular, Java and Web3 experiments.',
+                'Julien Esterbet, software developer and IT analyst: business applications, software projects, personal reflections and travel stories.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Product case study | Julien Esterbet',

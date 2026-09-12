@@ -8,9 +8,9 @@
             "last": "Esterbet"
         },
         "portraitAlt": "Portrait de Julien Esterbet",
-        "eyebrow": "Développeur full-stack orienté produit",
+        "eyebrow": "Analyste programmeur — Technique & fonctionnel",
         "subtitle": "Applications métiers • Produits web • Expérimentations",
-        "description": "Je conçois des applications web et des outils métiers, de Java et SQL aux interfaces Angular et React. J’aime transformer des besoins concrets en produits utiles, lisibles et fiables, et mettre la technique au service de projets justes qui ont du sens.",
+        "description": "Je conçois et fais évoluer des applications métiers, de l’analyse des besoins au développement et aux tests. Mon travail s’appuie sur la rigueur, la compréhension des usages et une curiosité qui dépasse le logiciel.",
         "badges": {
             "badge1": "React & TypeScript",
             "badge2": "Java & SQL",
@@ -171,8 +171,8 @@
     },
     "about": {
         "photoAlt": "Julien et deux étudiants pendant une présentation de projet",
-        "headingSmall": "Faisons connaissance",
-        "heading": "À propos",
+        "headingSmall": "À propos",
+        "heading": "Comprendre pour agir librement.",
         "caption": {
             "title": "Profil hybride",
             "text": "Entre développement logiciel, systèmes métiers et réflexion critique."
@@ -182,10 +182,10 @@
             "expertiseText": "Applications métiers, interfaces web, batchs et APIs",
             "collabTitle": "Comprendre",
             "collabText": "Systèmes techniques, organisations et enjeux humains",
-            "innovationTitle": "Relier",
-            "innovationText": "Code, idées, usages et impact concret"
+            "innovationTitle": "Confronter les idées",
+            "innovationText": "Écouter les arguments opposés et comprendre les désaccords réels"
         },
-        "bio": "Je suis développeur logiciel, avec une formation à la croisée de l’<b>informatique</b>, de la <b>finance</b> et des <b>technologies Web3</b>. Aujourd’hui, je travaille dans le secteur de l’assurance-vie, où je participe à des projets métiers, des interfaces web, des batchs et des systèmes documentaires.<br/><br/>Mais mon intérêt ne s’arrête pas au code. J’aime comprendre les systèmes : techniques, économiques, sociaux, politiques. Ce qui me motive, c’est de construire des outils utiles, mais aussi de réfléchir au rôle que la technologie peut jouer dans nos vies et dans la société.<br/><br/>Ce portfolio rassemble donc plusieurs facettes : mon parcours de développeur, mes projets, mon intérêt pour le Web3, mais aussi mes réflexions, mes voyages et les idées qui me construisent."
+        "bio": "Analyste programmeur chez PREPAR-VIE, je travaille sur des applications métiers dans le secteur de l’assurance-vie. Mon parcours associe <b>informatique et finance</b>, analyse des besoins, développement et compréhension des contraintes opérationnelles.<br/><br/>Ce qui m’anime dépasse largement ce cadre : les <b>questions humaines et collectives</b>, les comportements, la qualité du débat public et la participation démocratique. Mes réflexions se nourrissent de psychologie, de sociologie, de philosophie et de géopolitique, ainsi que des questions de liberté, de responsabilité et de souveraineté individuelle et numérique.<br/><br/>J’accorde une place centrale aux discussions approfondies, à l’écoute d’arguments opposés et au pluralisme. La technologie est aussi un objet de réflexion critique : ses possibilités m’intéressent autant que les dépendances, les rapports de pouvoir et les formes de surveillance qu’elle peut produire.<br/><br/>Je souhaite contribuer à des projets exigeants et porteurs de sens, numériques ou non. Mes écrits et mes voyages ont leur place ici : ils font partie de ce que j’apprends, de ce que je questionne et de la manière dont mon regard évolue."
     },
     "goals": {
         "kicker": "Un peu plus personnel",
@@ -227,7 +227,18 @@
             "experience": "Compétences",
             "portfolio": "Projets",
             "goals": "Objectifs",
-            "contact": "Contact"
+            "contact": "Contact",
+            "reflections": "Écrits",
+            "travel": "Voyages"
         }
+    },
+    "discover": {
+        "reflectionsTitle": "Écrits et réflexions",
+        "reflectionsIntro": "Des textes personnels pour examiner les idées, expliciter les doutes et approfondir les désaccords.",
+        "allReflections": "Toutes les réflexions",
+        "travelTitle": "Voyages et regards",
+        "travelIntro": "Des lieux, des rencontres et des souvenirs qui nourrissent mon regard.",
+        "readStory": "Lire ce récit",
+        "allTravel": "Explorer les voyages"
     }
 }

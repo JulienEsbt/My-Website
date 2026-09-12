@@ -43,7 +43,7 @@
         },
         "badge": "Available",
         "heading": "An idea, a project or a discussion?",
-        "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
+        "description": "For a project, a professional opportunity or a discussion about ideas and shared interests, you can reach me here.",
         "form": {
             "nameLabel": "Name",
             "emailLabel": "Email",
@@ -62,7 +62,7 @@
     },
     "footer": {
         "logo": "Julien ESTERBET",
-        "description": "Product-minded full-stack developer building useful business applications and web experiences, with further explorations across Web3, travel and writing.",
+        "description": "Software developer and IT analyst. Business applications, projects and experiments; writing and travels around what I discover and question.",
         "aria": "Footer navigation",
         "pages": "Pages",
         "shortPages": {

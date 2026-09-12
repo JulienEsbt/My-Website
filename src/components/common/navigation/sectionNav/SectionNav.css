@@ -173,3 +173,30 @@
         transform: translateY(0);
     }
 }
+
+.section-nav--labelled a {
+    width: 3.8rem;
+    height: 3.3rem;
+    border-radius: 1rem;
+    align-content: center;
+    gap: 0.15rem;
+}
+.section-nav--labelled a small {
+    font-size: 0.65rem;
+    line-height: 1.2;
+}
+.section-nav--labelled a::after {
+    display: none !important;
+}
+@media (max-width: 650px) {
+    .section-nav--labelled {
+        gap: 0.25rem;
+    }
+    .section-nav--labelled a {
+        width: 2.75rem;
+        height: 3rem;
+    }
+    .section-nav--labelled a small {
+        font-size: 0.58rem;
+    }
+}

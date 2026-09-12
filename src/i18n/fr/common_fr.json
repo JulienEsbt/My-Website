@@ -43,7 +43,7 @@
         },
         "badge": "Disponible",
         "heading": "Une idée, un projet ou une discussion ?",
-        "description": "Que ce soit pour un projet, une opportunité professionnelle, une collaboration ou simplement pour échanger autour de la technologie, du Web3 ou d’autres sujets qui nous passionnent, n’hésitez pas à me contacter.",
+        "description": "Pour un projet, une opportunité professionnelle ou une discussion autour des idées et des sujets qui nous intéressent, vous pouvez m’écrire ici.",
         "form": {
             "nameLabel": "Nom",
             "emailLabel": "Email",
@@ -62,7 +62,7 @@
     },
     "footer": {
         "logo": "Julien ESTERBET",
-        "description": "Développeur full-stack orienté produit. Je construis des applications métiers et des expériences web utiles, puis j’ouvre le portfolio sur le Web3, les voyages et l’écriture.",
+        "description": "Analyste programmeur. Applications métiers, projets et expérimentations ; écrits et voyages autour de ce que je découvre et questionne.",
         "aria": "Navigation du pied de page",
         "pages": "Pages",
         "shortPages": {
