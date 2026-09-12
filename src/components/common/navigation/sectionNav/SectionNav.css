@@ -197,6 +197,18 @@
         height: 3rem;
     }
     .section-nav--labelled a small {
-        font-size: 0.58rem;
+        font-size: 0.65rem;
     }
+}
+
+.section-nav--labelled {
+    background: rgba(13, 21, 36, 0.94);
+    border-color: rgba(166, 201, 234, 0.24);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
+}
+.section-nav--labelled a {
+    color: #b5c1d2;
+}
+.section-nav--labelled a.active {
+    color: #07111f;
 }

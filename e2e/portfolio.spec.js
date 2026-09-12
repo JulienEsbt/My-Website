@@ -268,6 +268,14 @@ test('home introduces the person before projects and opens selected localized st
             .locator('#about, #portfolio, #home-reflections, #home-travel')
             .evaluateAll((nodes) => nodes.map((node) => node.id))
         expect(order).toEqual(['about', 'portfolio', 'home-reflections', 'home-travel'])
+        for (const [before, after] of [
+            ['#portfolio', '#home-reflections'],
+            ['#home-reflections', '#home-travel'],
+        ]) {
+            const previous = await page.locator(before).boundingBox()
+            const next = await page.locator(after).boundingBox()
+            expect(next.y - previous.y - previous.height).toBeGreaterThanOrEqual(48)
+        }
         const prefix = path === '/en' ? '/en' : ''
         const writing = page.locator('#home-reflections h3 a').first()
         await expect(writing).toHaveAttribute(

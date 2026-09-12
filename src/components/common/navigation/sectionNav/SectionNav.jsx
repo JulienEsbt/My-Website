@@ -101,7 +101,7 @@ const SectionNav = ({
         const target = document.getElementById(id)
         if (!target) return
 
-        const offset = 30
+        const offset = Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 30
 
         window.scrollTo({
             top: target.getBoundingClientRect().top + window.scrollY - offset,

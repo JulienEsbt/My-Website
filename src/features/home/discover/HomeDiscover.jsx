@@ -1,4 +1,5 @@
 import React from 'react'
+import {FiArrowUpRight, FiArrowRight, FiClock, FiMapPin} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import reflections from '../../../data/reflections/reflections.js'
@@ -21,52 +22,84 @@ export default function HomeDiscover() {
     return (
         <>
             <section id="home-reflections" className="container home-discover">
-                <h2>{t('discover.reflectionsTitle')}</h2>
-                <p className="home-discover__intro">{t('discover.reflectionsIntro')}</p>
+                <div className="home-discover__heading">
+                    <div>
+                        <h2>{t('discover.reflectionsTitle')}</h2>
+                        <p className="home-discover__intro">{t('discover.reflectionsIntro')}</p>
+                    </div>
+                    <Link className="home-discover__all" to="/reflections">
+                        {t('discover.allReflections')} <FiArrowUpRight aria-hidden="true" />
+                    </Link>
+                </div>
                 <div className="home-discover__grid">
-                    {selected.map((entry) => (
-                        <article key={entry.slug}>
-                            <time dateTime={entry.date}>{formatDate(entry.date, language)}</time>
+                    {selected.map((entry, index) => (
+                        <article className="home-discover__essay" key={entry.slug}>
+                            <div className="home-discover__meta">
+                                <span className="home-discover__index" aria-hidden="true">
+                                    0{index + 1}
+                                </span>
+                                <span className="home-discover__duration">
+                                    <FiClock aria-hidden="true" />
+                                    {entry.readingTime} min
+                                </span>
+                            </div>
                             <h3>
                                 <Link to={`/reflections/${entry.slug}`}>
                                     {entry.title[language]}
                                 </Link>
                             </h3>
-                            <p>{entry.excerpt[language]}</p>
+                            <p className="home-discover__excerpt">{entry.excerpt[language]}</p>
+                            <div className="home-discover__essay-footer">
+                                <time dateTime={entry.date}>
+                                    {formatDate(entry.date, language)}
+                                </time>
+                                <span className="home-discover__arrow" aria-hidden="true">
+                                    <FiArrowUpRight />
+                                </span>
+                            </div>
                         </article>
                     ))}
                 </div>
-                <Link className="btn" to="/reflections">
-                    {t('discover.allReflections')}
-                </Link>
             </section>
             <section id="home-travel" className="container home-discover">
-                <h2>{t('discover.travelTitle')}</h2>
-                <p className="home-discover__intro">{t('discover.travelIntro')}</p>
-                <article className="home-discover__travel">
-                    <ResponsiveImage
-                        media={travelPhoto}
-                        alt={
-                            fr
-                                ? 'Souvenir de voyage à Dubrovnik, 2021'
-                                : 'Travel memory from Dubrovnik, 2021'
-                        }
-                        sizes="(max-width: 700px) 88vw, 520px"
-                    />
+                <div className="home-discover__heading">
                     <div>
-                        <p>{fr ? trip.dateLabel : trip.dateLabelEn}</p>
+                        <h2>{t('discover.travelTitle')}</h2>
+                        <p className="home-discover__intro">{t('discover.travelIntro')}</p>
+                    </div>
+                    <Link className="home-discover__all" to="/travel">
+                        {t('discover.allTravel')} <FiArrowUpRight aria-hidden="true" />
+                    </Link>
+                </div>
+                <article className="home-discover__travel">
+                    <div className="home-discover__photo">
+                        <ResponsiveImage
+                            media={travelPhoto}
+                            alt={
+                                fr
+                                    ? 'Souvenir de voyage à Dubrovnik, 2021'
+                                    : 'Travel memory from Dubrovnik, 2021'
+                            }
+                            sizes="(max-width: 700px) 90vw, 44vw"
+                        />
+                        <span className="home-discover__location">
+                            <FiMapPin aria-hidden="true" />
+                            {fr ? trip.country : trip.countryEn} · {trip.year}
+                        </span>
+                    </div>
+                    <div className="home-discover__travel-copy">
+                        <p className="home-discover__date">
+                            {fr ? trip.dateLabel : trip.dateLabelEn}
+                        </p>
                         <h3>
                             {fr ? trip.city : trip.cityEn} · {fr ? trip.country : trip.countryEn}
                         </h3>
                         <p>{fr ? trip.description : trip.descriptionEn}</p>
-                        <Link className="btn" to={`/travel/${trip.id}`}>
-                            {t('discover.readStory')}
+                        <Link className="home-discover__story-link" to={`/travel/${trip.id}`}>
+                            {t('discover.readStory')} <FiArrowRight aria-hidden="true" />
                         </Link>
                     </div>
                 </article>
-                <Link className="btn" to="/travel">
-                    {t('discover.allTravel')}
-                </Link>
             </section>
         </>
     )
