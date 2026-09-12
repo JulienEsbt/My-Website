@@ -33,6 +33,209 @@
     box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.3);
 }
 
+.portfolio__intent {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    border-radius: 1.45rem;
+    background:
+        radial-gradient(circle at 8% 20%, rgba(77, 181, 255, 0.16), transparent 30%),
+        linear-gradient(135deg, rgba(31, 31, 56, 0.76), rgba(10, 16, 39, 0.9));
+    border: 1px solid rgba(77, 181, 255, 0.2);
+}
+
+.portfolio__intent-overview {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1.58fr);
+    align-items: stretch;
+}
+
+.portfolio__intent-mark {
+    position: relative;
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(77, 181, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 181, 255, 0.15) 1px, transparent 1px), rgba(7, 12, 34, 0.5);
+    background-size: 36px 36px;
+    border-right: 1px solid rgba(77, 181, 255, 0.14);
+}
+
+.portfolio__intent-mark::before,
+.portfolio__intent-mark::after {
+    content: '';
+    position: absolute;
+    width: 9rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77, 181, 255, 0.64), transparent);
+    transform-origin: center;
+}
+
+.portfolio__intent-mark::before {
+    transform: rotate(28deg);
+}
+
+.portfolio__intent-mark::after {
+    transform: rotate(-28deg);
+}
+
+.portfolio__intent-icon {
+    position: relative;
+    z-index: 2;
+    width: 5rem;
+    height: 5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--color-primary);
+    background: rgba(7, 12, 34, 0.92);
+    border: 1px solid rgba(77, 181, 255, 0.44);
+    box-shadow: 0 0 3rem rgba(77, 181, 255, 0.2);
+    font-size: 2rem;
+}
+
+.portfolio__intent-node {
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 1rem rgba(77, 181, 255, 0.75);
+}
+
+.portfolio__intent-node--one {
+    left: 24%;
+    top: 28%;
+}
+
+.portfolio__intent-node--two {
+    right: 22%;
+    top: 32%;
+}
+
+.portfolio__intent-node--three {
+    right: 29%;
+    bottom: 23%;
+}
+
+.portfolio__intent-copy {
+    padding: 1.5rem 1.65rem;
+}
+
+.portfolio__intent-copy h3 {
+    margin: 0 0 0.7rem;
+    color: var(--color-white);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.25;
+}
+
+.portfolio__intent-copy > p {
+    max-width: 780px;
+    margin: 0;
+    color: var(--color-light);
+    line-height: 1.7;
+}
+
+.portfolio__intent-principles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.15rem;
+}
+
+.portfolio__intent-principles li {
+    padding: 0.42rem 0.65rem;
+    border-radius: 999px;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid rgba(77, 181, 255, 0.16);
+    font-size: 0.76rem;
+}
+
+.portfolio__intent-details {
+    border-top: 1px solid rgba(77, 181, 255, 0.14);
+}
+
+.portfolio__intent-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.65rem;
+    color: var(--color-white);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.2s ease;
+}
+
+.portfolio__intent-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.portfolio__intent-details summary:hover {
+    background: rgba(77, 181, 255, 0.07);
+}
+
+.portfolio__intent-details summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -4px;
+}
+
+.portfolio__intent-details summary svg {
+    flex: 0 0 auto;
+    color: var(--color-primary);
+    transition: transform 0.25s ease;
+}
+
+.portfolio__intent-details[open] summary svg {
+    transform: rotate(180deg);
+}
+
+.portfolio__intent-content {
+    padding: 0.3rem 1.65rem 1.65rem;
+}
+
+.portfolio__intent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.portfolio__intent-grid section,
+.portfolio__intent-status,
+.portfolio__intent-open-questions {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: rgba(7, 12, 34, 0.38);
+    border: 1px solid rgba(77, 181, 255, 0.1);
+}
+
+.portfolio__intent-content h4 {
+    margin: 0 0 0.55rem;
+    color: var(--color-white);
+    font-size: 0.9rem;
+}
+
+.portfolio__intent-content p {
+    margin: 0;
+    color: var(--color-light);
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+.portfolio__intent-status,
+.portfolio__intent-open-questions {
+    margin-top: 0.8rem;
+}
+
+.portfolio__intent-status {
+    background: rgba(77, 181, 255, 0.07);
+    border-color: rgba(77, 181, 255, 0.18);
+}
+
 .portfolio__image {
     position: relative;
     display: block;
@@ -160,6 +363,15 @@
         width: min(720px, 100%);
         margin: 0 auto;
     }
+
+    .portfolio__intent {
+        width: min(720px, 100%);
+        margin: 0 auto;
+    }
+
+    .portfolio__intent-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -169,5 +381,22 @@
 
     .portfolio__body {
         padding: 1rem;
+    }
+
+    .portfolio__intent-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio__intent-mark {
+        min-height: 150px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(77, 181, 255, 0.14);
+    }
+
+    .portfolio__intent-copy,
+    .portfolio__intent-details summary,
+    .portfolio__intent-content {
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
 }

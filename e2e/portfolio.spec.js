@@ -160,6 +160,24 @@ test('home actions remain clickable on desktop and the page fits a mobile viewpo
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })
 
+test('Agora is presented as a private project intent in both languages', async ({page}) => {
+    await page.goto('/#portfolio')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+
+    const project = page.locator('.portfolio__intent')
+    await expect(project.getByRole('heading', {name: 'Agora — Graphe des débats'})).toBeVisible()
+    await expect(project.getByRole('link')).toHaveCount(0)
+    await expect(project.locator('details')).not.toHaveAttribute('open', '')
+
+    await project.getByText('Découvrir l’intention du projet').click()
+    await expect(project.locator('details')).toHaveAttribute('open', '')
+    await expect(project.getByText(/Un prototype local non publié/)).toBeVisible()
+
+    await page.getByRole('link', {name: 'Switch to English'}).click()
+    await expect(project.getByRole('heading', {name: 'Agora — Debate graph'})).toBeVisible()
+    await expect(project.getByText('Project in preparation')).toBeVisible()
+})
+
 test('English articles have readable HTML without JavaScript', async ({browser}) => {
     const context = await browser.newContext({javaScriptEnabled: false})
     const page = await context.newPage()

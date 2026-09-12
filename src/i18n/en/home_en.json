@@ -111,7 +111,7 @@
     "portfolio": {
         "kicker": "Selected projects",
         "title": "What I have built",
-        "intro": "An active business product, this interactive portfolio and an academic Web3 prototype, each presented through its purpose, architecture and actual status.",
+        "intro": "Products, prototypes and projects in preparation, each presented through its purpose, architecture and actual status.",
         "cta": "View code",
         "caseStudy": "View case study",
         "demo": "View site",
@@ -145,6 +145,24 @@
                 "title": "On-chain file archiving",
                 "description": "An academic EVM prototype exploring the timestamping of public document references through a smart contract."
             }
+        },
+        "agora": {
+            "type": "Project in preparation",
+            "title": "Agora — Debate graph",
+            "description": "An exploration of how to make public disagreements easier to understand by connecting arguments, objections, responses, facts and sources without imposing a conclusion.",
+            "principlesLabel": "Agora’s essential principles",
+            "principles": ["Contrasting arguments", "Visible sources", "Explicit uncertainty"],
+            "toggle": "Explore the project’s intent",
+            "whyTitle": "Why this project?",
+            "why": "Public debate often mixes facts, interpretations, causal claims, predictions and values. Agora aims to make these differences visible so that people can better understand where a disagreement actually lies.",
+            "objectiveTitle": "Objective",
+            "objective": "Organize a public question as a graph of supporting and opposing arguments, objections, responses, evidence and sources. The goal is not to tell people what to think, but to make reasoning easier to examine and challenge.",
+            "designTitle": "Design principles",
+            "design": "Present the strongest arguments from different positions, preserve original sources, make uncertainty visible and avoid simplistic truth scores when a controversy also involves values.",
+            "statusTitle": "Current state",
+            "status": "An unpublished local prototype already makes it possible to explore a demonstration debate through a graph and an accessible text view, search and filter its elements, consult their sources and prepare a contribution that remains in the browser. It does not yet include accounts, remote collaboration or a public moderation system.",
+            "questionsTitle": "Open questions",
+            "questions": "The initial audience, editorial governance, contribution verification, moderation, hosting and future connections with Reflection Studio and the Democratic Observatory remain to be defined."
         }
     },
     "about": {

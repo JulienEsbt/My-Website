@@ -8,6 +8,7 @@ import {PORTFOLIO_PROJECTS} from '../../../config/portfolioProjects.js'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
+import AgoraProjectCard from './AgoraProjectCard.jsx'
 import './Portfolio.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -124,6 +125,10 @@ export default function Portfolio() {
                         </div>
                     </article>
                 ))}
+
+                <AgoraProjectCard
+                    cardRef={(element) => (cardsRef.current[PORTFOLIO_PROJECTS.length] = element)}
+                />
             </div>
         </section>
     )

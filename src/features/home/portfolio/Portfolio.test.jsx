@@ -1,4 +1,5 @@
 import {render, screen, within} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import {MemoryRouter} from 'react-router-dom'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import i18n from 'i18next'
@@ -57,5 +58,41 @@ describe('Portfolio', () => {
             'href',
             'https://github.com/JulienEsbt/My-Website'
         )
+    })
+
+    it('presents Agora as a private project intent without a public link', async () => {
+        const user = userEvent.setup()
+        render(
+            <MemoryRouter>
+                <Portfolio />
+            </MemoryRouter>
+        )
+
+        const project = screen
+            .getByRole('heading', {name: 'Agora — Graphe des débats'})
+            .closest('article')
+        const details = project.querySelector('details')
+
+        expect(within(project).queryByRole('link')).not.toBeInTheDocument()
+        expect(details).not.toHaveAttribute('open')
+
+        await user.click(within(project).getByText('Découvrir l’intention du projet'))
+
+        expect(details).toHaveAttribute('open')
+        expect(within(project).getByText(/Un prototype local non publié/)).toBeVisible()
+        expect(within(project).getByText(/ni comptes, ni collaboration distante/)).toBeVisible()
+    })
+
+    it('provides the approved English Agora copy', async () => {
+        await i18n.changeLanguage('en')
+        render(
+            <MemoryRouter>
+                <Portfolio />
+            </MemoryRouter>
+        )
+
+        expect(screen.getByRole('heading', {name: 'Agora — Debate graph'})).toBeVisible()
+        expect(screen.getByText('Project in preparation')).toBeVisible()
+        expect(screen.getByText('Explore the project’s intent')).toBeVisible()
     })
 })

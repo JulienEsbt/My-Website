@@ -111,7 +111,7 @@
     "portfolio": {
         "kicker": "Projets sélectionnés",
         "title": "Ce que j’ai construit",
-        "intro": "Un produit métier actif, ce portfolio interactif et un prototype académique Web3, chacun présenté avec son usage, son architecture et son statut réel.",
+        "intro": "Des produits, prototypes et projets en préparation présentés avec leur usage, leur architecture et leur statut réel.",
         "cta": "Voir le code",
         "caseStudy": "Voir l’étude de cas",
         "demo": "Voir le site",
@@ -145,6 +145,28 @@
                 "title": "Archivage de fichiers on-chain",
                 "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract."
             }
+        },
+        "agora": {
+            "type": "Projet en préparation",
+            "title": "Agora — Graphe des débats",
+            "description": "Une exploration de la manière de rendre les désaccords publics plus lisibles, en reliant arguments, objections, réponses, faits et sources sans imposer de conclusion.",
+            "principlesLabel": "Principes essentiels d’Agora",
+            "principles": [
+                "Arguments contradictoires",
+                "Sources visibles",
+                "Incertitudes explicites"
+            ],
+            "toggle": "Découvrir l’intention du projet",
+            "whyTitle": "Pourquoi ce projet ?",
+            "why": "Le débat public mélange souvent faits, interprétations, causalités, prévisions et valeurs. Agora cherche à rendre ces différences visibles pour mieux comprendre où se situe réellement un désaccord.",
+            "objectiveTitle": "Objectif",
+            "objective": "Organiser une question publique sous forme de graphe : arguments favorables et défavorables, objections, réponses, éléments de preuve et sources. L’objectif n’est pas de dire quoi penser, mais de rendre le raisonnement plus facile à examiner et à confronter.",
+            "designTitle": "Principes de conception",
+            "design": "Présenter les meilleurs arguments des différentes positions, conserver les sources originales, signaler les incertitudes et éviter les scores simplistes lorsqu’une controverse porte aussi sur des valeurs.",
+            "statusTitle": "État actuel",
+            "status": "Un prototype local non publié permet déjà d’explorer un débat démonstrateur sous forme de graphe et de vue textuelle, de rechercher et filtrer ses éléments, de consulter leurs sources et de préparer une contribution qui reste dans le navigateur. Il ne comporte encore ni comptes, ni collaboration distante, ni système de modération public.",
+            "questionsTitle": "Questions encore ouvertes",
+            "questions": "Le premier public, la gouvernance éditoriale, la vérification des contributions, la modération, l’hébergement et les liens futurs avec Reflection Studio et l’Observatoire démocratique restent à définir."
         }
     },
     "about": {
