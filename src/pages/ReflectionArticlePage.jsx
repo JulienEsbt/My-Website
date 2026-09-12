@@ -10,7 +10,14 @@ import FeatureLoading from '../components/common/feedback/featureLoading/Feature
 import NotFoundPage from './NotFoundPage.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import {formatDate} from '../i18n/formatters.js'
+import {
+    AuthorNotesProvider,
+    ArticleNotes,
+    Passage,
+} from '../features/reflections/authorNotes/AuthorNotes.jsx'
 import './ReflectionArticlePage.css'
+
+const authorNoteComponents = {Passage}
 
 const mdxModules = import.meta.glob('../content/reflections/*.mdx')
 const articleComponents = new Map()
@@ -129,17 +136,20 @@ const ReflectionArticlePage = () => {
                         <p className="reflexion-article__notice">{t('article.frenchOnly')}</p>
                     )}
 
-                    <div className="reflexion-article__content">
-                        {MdxContent ? (
-                            <Suspense fallback={<FeatureLoading />}>
-                                <MdxContent />
-                            </Suspense>
-                        ) : (
-                            (reflection.content?.[language] ?? []).map((paragraph, index) => (
-                                <p key={index}>{paragraph}</p>
-                            ))
-                        )}
-                    </div>
+                    <AuthorNotesProvider slug={slug} language={isFallbackFrench ? 'fr' : language}>
+                        <div className="reflexion-article__content">
+                            {MdxContent ? (
+                                <Suspense fallback={<FeatureLoading />}>
+                                    <MdxContent components={authorNoteComponents} />
+                                </Suspense>
+                            ) : (
+                                (reflection.content?.[language] ?? []).map((paragraph, index) => (
+                                    <p key={index}>{paragraph}</p>
+                                ))
+                            )}
+                        </div>
+                        <ArticleNotes />
+                    </AuthorNotesProvider>
                     <div className="reflexion-article__next">
                         <span>{t('article.finished')}</span>
 
