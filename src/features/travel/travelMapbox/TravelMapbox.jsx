@@ -1,20 +1,23 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiCrosshair} from 'react-icons/fi'
 import {createTravelMap} from '../../../services/mapbox/mapboxAdapter.js'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './TravelMapbox.css'
 
+const EMPTY_LOCATIONS = []
+
 const TravelMapbox = ({
     expanded = false,
-    trips = [],
-    dreamDestinations = [],
+    trips = EMPTY_LOCATIONS,
+    dreamDestinations = EMPTY_LOCATIONS,
     selectedLocation = null,
     onSelectLocation,
     onResetView,
     resetSignal = 0,
 }) => {
     const {t, i18n} = useTranslation('travel')
+    const [mapIssue, setMapIssue] = useState(false)
     const mapContainer = useRef(null)
     const mapRef = useRef(null)
     const initialExpanded = useRef(expanded)
@@ -26,22 +29,28 @@ const TravelMapbox = ({
         if (!mapContainer.current || mapRef.current) return
 
         const initTimer = setTimeout(() => {
-            mapRef.current = createTravelMap({
-                container: mapContainer.current,
-                expanded: initialExpanded.current,
-                trips,
-                dreamDestinations,
-                language,
-                dreamLabel: t('explorer.legend.dream'),
-                onSelectLocation,
-                navigationLabels: {
-                    zoomIn: t('explorer.mapControls.zoomIn'),
-                    zoomOut: t('explorer.mapControls.zoomOut'),
-                    resetBearing: t('explorer.mapControls.resetBearing'),
-                    closePopup: t('explorer.mapControls.closePopup'),
-                },
-            })
-            if (selectedLocationRef.current) mapRef.current.focus(selectedLocationRef.current)
+            setMapIssue(false)
+            try {
+                mapRef.current = createTravelMap({
+                    container: mapContainer.current,
+                    expanded: initialExpanded.current,
+                    trips,
+                    dreamDestinations,
+                    language,
+                    dreamLabel: t('explorer.legend.dream'),
+                    onSelectLocation,
+                    onError: () => setMapIssue(true),
+                    navigationLabels: {
+                        zoomIn: t('explorer.mapControls.zoomIn'),
+                        zoomOut: t('explorer.mapControls.zoomOut'),
+                        resetBearing: t('explorer.mapControls.resetBearing'),
+                        closePopup: t('explorer.mapControls.closePopup'),
+                    },
+                })
+                if (selectedLocationRef.current) mapRef.current.focus(selectedLocationRef.current)
+            } catch {
+                setMapIssue(true)
+            }
         }, 100)
 
         return () => {
@@ -78,6 +87,11 @@ const TravelMapbox = ({
 
     return (
         <div className="travel-mapbox__shell">
+            {mapIssue && (
+                <p role="status" className="travel-mapbox__status">
+                    {t('explorer.mapLoadIssue')}
+                </p>
+            )}
             <div
                 ref={mapContainer}
                 className={`travel-mapbox ${expanded ? 'expanded' : ''}`}

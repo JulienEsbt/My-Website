@@ -281,3 +281,16 @@ test('home introduces the person before projects and opens selected localized st
         await expect(page).toHaveURL(new RegExp(`${prefix}/travel/croatia-2021$`))
     }
 })
+
+test('a Mapbox denial is explained while the selected story stays readable', async ({page}) => {
+    await page.route('https://api.mapbox.com/**', (route) =>
+        route.fulfill({status: 403, body: 'Forbidden'})
+    )
+    await page.goto('/travel/croatia-2021')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await expect(page.locator('.travel-mapbox__status')).toContainText(
+        'Certaines données de la carte'
+    )
+    await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
+    await expect(page.getByRole('link', {name: 'Switch to English'})).toBeVisible()
+})

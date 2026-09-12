@@ -107,7 +107,8 @@
             "visited": "Visited",
             "planned": "Planned",
             "dream": "Dream destination"
-        }
+        },
+        "mapLoadIssue": "Some map data could not be loaded. You can still explore the destinations and read the stories below."
     },
     "nav": {
         "aria": "Travel navigation",

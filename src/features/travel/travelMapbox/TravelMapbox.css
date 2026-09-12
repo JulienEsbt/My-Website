@@ -191,3 +191,12 @@
         font-size: 0.72rem;
     }
 }
+
+.travel-mapbox__status {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 0.75rem;
+    color: var(--color-white);
+    background: var(--color-bg);
+}
