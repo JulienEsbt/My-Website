@@ -29,3 +29,10 @@ global site block, external datastore or paid subscription was added.
 
 - [Project rules](https://vercel.com/julien-esterbets-projects/my-website/firewall/rules)
 - [Vercel rate limiting](https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting)
+
+## Rechecked on 2026-09-12
+
+The authenticated Vercel dashboard still shows one staged change. Review Change
+explicitly says it is not live and offers Publish for the observation rule above.
+No publication or rule change was performed. Julien must publish the observation
+step before traffic review and shared rate limiting can be completed.
