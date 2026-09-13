@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useMemo, useState} from 'react'
+import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useLocation, useParams} from 'react-router-dom'
 import {FiArrowLeft, FiArrowUp, FiArrowDown} from 'react-icons/fi'
@@ -17,6 +17,8 @@ import {
 } from '../features/reflections/authorNotes/AuthorNotes.jsx'
 import './ReflectionArticlePage.css'
 
+import ReaderComments from '../features/reflections/comments/ReaderComments.jsx'
+
 const authorNoteComponents = {Passage}
 
 const mdxModules = import.meta.glob('../content/reflections/*.mdx')
@@ -30,6 +32,7 @@ const getMdxArticle = (slug, language) => {
 
 const ReflectionArticlePage = () => {
     const {slug} = useParams()
+    const contentRef = useRef(null)
     const {state} = useLocation()
     const fromHome = state?.fromHome === 'reflections'
     const {t, i18n} = useTranslation('reflections')
@@ -145,7 +148,7 @@ const ReflectionArticlePage = () => {
                     )}
 
                     <AuthorNotesProvider slug={slug} language={isFallbackFrench ? 'fr' : language}>
-                        <div className="reflexion-article__content">
+                        <div className="reflexion-article__content" ref={contentRef}>
                             {MdxContent ? (
                                 <Suspense fallback={<FeatureLoading />}>
                                     <MdxContent components={authorNoteComponents} />
@@ -158,6 +161,12 @@ const ReflectionArticlePage = () => {
                         </div>
                         <ArticleNotes />
                     </AuthorNotesProvider>
+                    <ReaderComments
+                        key={`${slug}-${language}`}
+                        slug={slug}
+                        language={isFallbackFrench ? 'fr' : language}
+                        contentRef={contentRef}
+                    />
                     <div className="reflexion-article__next">
                         <span>{t('article.finished')}</span>
 

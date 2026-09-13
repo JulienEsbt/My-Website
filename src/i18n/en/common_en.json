@@ -92,7 +92,9 @@
         "contact": "For any question about this processing, use the portfolio contact form.",
         "updated": "Last updated: September 2026.",
         "performanceTitle": "Performance and excluded data",
-        "performanceBody": "Vercel Speed Insights receives Web Vitals measurements with the page, device type, browser, operating system, country and connection information. This site removes query parameters and fragments from measured URLs and masks unknown paths. It adds no custom events and does not intentionally send form fields or wallet addresses to these two tools."
+        "performanceBody": "Vercel Speed Insights receives Web Vitals measurements with the page, device type, browser, operating system, country and connection information. This site removes query parameters and fragments from measured URLs and masks unknown paths. It adds no custom events and does not intentionally send form fields or wallet addresses to these two tools.",
+        "commentsTitle": "Public comments",
+        "commentsBody": "When the service is available, comments, pseudonyms, selected quotations and dates are public immediately. No account or email is required. A key stored in your browser lets you remove your comments; Julien can also remove them. A temporary fingerprint of the network address is used to limit spam without publishing the address. Pseudonyms do not verify identity. Avoid posting sensitive personal information."
     },
     "notFound": {
         "pageTitle": "Page not found — Julien Esterbet",

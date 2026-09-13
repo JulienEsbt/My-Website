@@ -4,7 +4,7 @@ import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import './PrivacyPage.css'
 
-const SECTIONS = ['analytics', 'performance', 'contact', 'external', 'control']
+const SECTIONS = ['analytics', 'performance', 'contact', 'comments', 'external', 'control']
 
 export default function PrivacyPage() {
     const {t} = useTranslation('common')
