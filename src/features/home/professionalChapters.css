@@ -1,6 +1,13 @@
 .professional-chapter__number {
-    display: block;
-    color: rgba(112, 184, 242, 0.6);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2rem;
+    border: 1px solid #4db5ff35;
+    border-radius: 999px;
+    background: #4db5ff0a;
+    color: #89c9f7;
     font-size: 0.8rem;
     letter-spacing: 0.2em;
     margin-bottom: 1rem;
@@ -24,9 +31,14 @@
     }
     .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__heading {
         position: sticky;
-        top: 8rem;
+        top: 0;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
         text-align: left;
-        padding-bottom: 3rem;
+        padding-block: 5rem;
     }
     .professional-chapter:not(.professional-chapter--portfolio)
         .professional-chapter__heading::after {
@@ -36,13 +48,6 @@
         height: 2px;
         margin-top: 2rem;
         background: linear-gradient(90deg, #4db5ff, #ac8cea);
-    }
-    .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__number {
-        font-size: clamp(2.4rem, 4vw, 4rem);
-        font-weight: 700;
-        line-height: 1;
-        color: #4db5ff20;
-        -webkit-text-stroke: 1px #4db5ff55;
     }
     .professional-chapter:not(.professional-chapter--portfolio) .section-kicker {
         text-align: left;
@@ -60,14 +65,14 @@
     .professional-chapter :is(.experience__container, .services__container) {
         width: 100%;
         grid-template-columns: 1fr;
-        gap: 1.3rem;
+        gap: 1rem;
     }
     .professional-chapter :is(.experience__card, .service) {
-        padding: clamp(1.3rem, 2vw, 1.8rem);
+        padding: 1.2rem;
         min-height: 0;
     }
     .professional-chapter :is(.experience__card h3, .service__head h3) {
-        font-size: 1.45rem;
+        font-size: 1.15rem;
     }
     .professional-chapter :is(.experience__card-head, .service__head) {
         grid-template-columns: auto 1fr;
@@ -84,6 +89,8 @@
 @media (prefers-reduced-motion: reduce) {
     .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__heading {
         position: static;
+        min-height: auto;
+        padding-block: 0;
     }
 }
 
@@ -98,23 +105,23 @@
     #services .services__container {
         grid-column: 1;
         grid-row: 1;
-        gap: 0;
+        gap: 1rem;
         border-left: 1px solid #4db5ff40;
         padding-left: 1.6rem;
     }
     #services .service {
         border: 0;
-        border-bottom: 1px solid #4db5ff26;
-        border-radius: 0;
-        background: transparent;
-        padding: 1.6rem 0;
+        border: 1px solid #4db5ff18;
+        border-radius: 1rem;
+        background: linear-gradient(120deg, #4db5ff09, #9984ff05);
+        padding: 1.3rem;
         overflow: visible;
     }
     #services .service:first-child {
-        padding-top: 0;
+        padding-top: 1.3rem;
     }
     #services .service:last-child {
-        border-bottom: 0;
+        border-bottom: 1px solid #4db5ff18;
     }
     #services .service::before {
         display: none;

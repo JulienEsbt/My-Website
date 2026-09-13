@@ -155,7 +155,7 @@ test('dock labels are contextual and professional chapters remain readable', asy
         await page.screenshot({path: `/tmp/chapters-${section}.png`})
     }
     await page.locator('#about').scrollIntoViewIfNeeded()
-    expect((await page.locator('.about__visual').boundingBox()).width).toBeGreaterThan(400)
+    expect((await page.locator('.about__visual').boundingBox()).width).toBeGreaterThan(350)
     await page.screenshot({path: '/tmp/chapters-about.png'})
     await page.setViewportSize({width: 390, height: 844})
     await page.locator('#services').scrollIntoViewIfNeeded()

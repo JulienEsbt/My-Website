@@ -297,7 +297,7 @@
 
 @media (min-width: 1300px) and (min-height: 900px) {
     .about__container {
-        grid-template-columns: minmax(340px, 410px) minmax(0, 1fr);
+        grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
         gap: 1.5rem 3rem;
     }
 }
