@@ -18,7 +18,7 @@ import './TravelTimeline.css'
 const TravelGallery = lazy(() => import('../travelGallery/TravelGallery.jsx'))
 
 const TravelTimeline = ({routeTripId}) => {
-    const {pathname, search} = useLocation()
+    const {pathname, search, state} = useLocation()
     const navigate = useNavigate()
     const requestedTripId = new URLSearchParams(search).get('trip')
     const urlTripId = routeTripId ?? requestedTripId
@@ -234,11 +234,24 @@ const TravelTimeline = ({routeTripId}) => {
                         <button
                             ref={detailBackRef}
                             type="button"
-                            className="travel-timeline__back"
-                            onClick={closeMobileDetail}
+                            className={`travel-timeline__back${state?.fromHome === 'travel' ? ' travel-timeline__back--home' : ''}`}
+                            onClick={
+                                state?.fromHome === 'travel'
+                                    ? () =>
+                                          navigate(
+                                              localizedPath('/', languageFromPath(pathname)) +
+                                                  '#home-travel',
+                                              {state: {homeTrip: activeTripId}}
+                                          )
+                                    : closeMobileDetail
+                            }
                         >
                             <FiArrowLeft />
-                            {t('timeline.details.back')}
+                            {state?.fromHome === 'travel'
+                                ? isFr
+                                    ? 'Retour à l’accueil'
+                                    : 'Back to home'
+                                : t('timeline.details.back')}
                         </button>
                         <div className="travel-timeline__detail-header">
                             <span className="travel-timeline__detail-flag" aria-hidden="true">

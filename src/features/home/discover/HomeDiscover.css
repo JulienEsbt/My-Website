@@ -1,130 +1,132 @@
 .home-discover {
     margin-top: var(--section-spacing);
     scroll-margin-top: 8rem;
-    --discover-border: rgba(147, 194, 235, 0.18);
-    --discover-muted: #a7b3c4;
+    --discover-border: rgba(77, 181, 255, 0.18);
+    --discover-muted: var(--color-light);
 }
 .home-discover__heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
-    margin-bottom: 2.25rem;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
 }
 .home-discover__heading h2 {
-    color: var(--color-white);
-    font-size: clamp(1.65rem, 2.8vw, 2.5rem);
-    letter-spacing: -0.035em;
-    line-height: 1.2;
-    text-align: left;
-    margin: 0;
+    color: var(--color-primary);
+    margin: 0.4rem 0 1rem;
 }
 .home-discover__intro {
-    max-width: 38rem;
-    margin: 1rem 0 0;
+    max-width: 44rem;
     color: var(--discover-muted);
     line-height: 1.75;
 }
 .home-discover__all {
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    flex-shrink: 0;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--discover-border);
-    color: #c8e9ff;
-    font-size: 0.86rem;
+    gap: 0.6rem;
+    color: var(--color-primary);
     min-height: 44px;
-}
-.home-discover__all:hover {
-    color: white;
-    border-color: var(--color-primary);
+    font-size: 0.85rem;
 }
 .home-discover__all svg {
-    flex-shrink: 0;
-    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+.home-discover__all:hover svg {
+    transform: translate(2px, -2px);
 }
 .home-discover__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.4rem;
+    gap: 1.2rem;
 }
 .home-discover__essay {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: clamp(1.5rem, 3vw, 2.4rem);
+    padding: 1.6rem;
     border: 1px solid var(--discover-border);
-    border-radius: 1.4rem;
-    background: linear-gradient(145deg, rgba(77, 181, 255, 0.07), rgba(21, 26, 43, 0.6));
+    border-radius: 1.45rem;
+    background: linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
     transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        transform 0.2s ease;
+        border-color 0.25s,
+        box-shadow 0.25s;
+    overflow: hidden;
+}
+.home-discover__essay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at top right, rgba(77, 181, 255, 0.13), transparent 60%);
+    opacity: 0.4;
+    transition: opacity 0.25s;
 }
 .home-discover__essay:hover,
 .home-discover__essay:focus-within {
-    border-color: rgba(120, 201, 255, 0.55);
-    background-color: rgba(77, 181, 255, 0.035);
+    border-color: rgba(77, 181, 255, 0.5);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+}
+.home-discover__essay:hover::before {
+    opacity: 1;
 }
 .home-discover__meta {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1.3rem;
 }
 .home-discover__index {
-    color: #8296af;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    background: rgba(77, 181, 255, 0.08);
+    border: 1px solid var(--discover-border);
+    border-radius: 0.9rem;
+    color: var(--color-primary);
+    font-size: 1.2rem;
 }
 .home-discover__duration {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.4rem;
     color: var(--discover-muted);
     font-size: 0.8rem;
 }
 .home-discover__essay h3 {
-    font-size: clamp(1.3rem, 2.1vw, 1.85rem);
-    line-height: 1.35;
-    letter-spacing: -0.025em;
-    max-width: 24ch;
+    font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+    line-height: 1.45;
 }
 .home-discover__essay h3 a {
-    color: #edf5ff;
+    color: var(--color-white);
 }
 .home-discover__essay h3 a::after {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 1.4rem;
+    border-radius: 1.45rem;
 }
-.home-discover__essay h3 a:focus-visible {
-    outline: none;
-}
-.home-discover__essay h3 a:focus-visible::after {
+.home-discover__essay:focus-within {
     outline: 2px solid var(--color-primary);
-    outline-offset: 4px;
+    outline-offset: 3px;
 }
 .home-discover__excerpt {
     color: var(--discover-muted);
-    margin: 1.25rem 0 2.2rem;
-    line-height: 1.8;
-    font-size: 0.94rem;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.75;
+    font-size: 0.88rem;
 }
 .home-discover__essay-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
     margin-top: auto;
-    padding-top: 1.1rem;
+    gap: 1rem;
     border-top: 1px solid var(--discover-border);
+    padding-top: 1rem;
 }
 .home-discover__essay-footer time {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--discover-muted);
 }
 .home-discover__arrow {
@@ -134,27 +136,31 @@
     height: 2.4rem;
     border: 1px solid var(--discover-border);
     border-radius: 50%;
-    color: #b8e4ff;
+    color: var(--color-primary);
     transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+        transform 0.25s,
+        background 0.25s;
 }
-.home-discover__essay:hover .home-discover__arrow,
-.home-discover__essay:focus-within .home-discover__arrow {
-    background: #b8e4ff;
-    color: #081426;
+.home-discover__essay:hover .home-discover__arrow {
+    transform: rotate(-12deg);
+    background: rgba(77, 181, 255, 0.15);
+}
+.home-travel-carousel {
+    border: 1px solid var(--discover-border);
+    border-radius: 1.45rem;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(31, 31, 56, 0.82), rgba(7, 12, 34, 0.96));
 }
 .home-discover__travel {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    border: 1px solid var(--discover-border);
-    border-radius: 1.5rem;
-    overflow: hidden;
-    background: linear-gradient(120deg, rgba(77, 181, 255, 0.05), rgba(20, 27, 44, 0.75));
+    animation: discover-reveal 0.45s ease;
 }
 .home-discover__photo {
     position: relative;
-    min-height: 350px;
+    min-height: 360px;
+    overflow: hidden;
+    background: rgba(77, 181, 255, 0.06);
 }
 .home-discover__photo .responsive-picture {
     display: block;
@@ -166,20 +172,23 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    transition: transform 0.7s ease;
+}
+.home-discover__travel:hover .home-discover__photo img {
+    transform: scale(1.035);
 }
 .home-discover__location {
     position: absolute;
-    left: 1.5rem;
-    bottom: 1.5rem;
+    left: 1.2rem;
+    bottom: 1.2rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.55rem 0.85rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--discover-border);
     border-radius: 999px;
-    background: rgba(5, 13, 25, 0.82);
-    color: #f4f8ff;
+    background: rgba(5, 12, 30, 0.86);
+    color: white;
     font-size: 0.8rem;
 }
 .home-discover__travel-copy {
@@ -187,49 +196,83 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: clamp(1.5rem, 3.5vw, 3.5rem);
+    padding: 2rem;
+    min-height: 360px;
 }
 .home-discover__date {
-    color: var(--discover-muted);
+    color: var(--color-primary);
     font-size: 0.8rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
 }
 .home-discover__travel-copy h3 {
-    color: #edf5ff;
-    font-size: clamp(1.5rem, 2.4vw, 2.2rem);
-    letter-spacing: -0.035em;
-    line-height: 1.25;
+    color: var(--color-white);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    line-height: 1.3;
 }
 .home-discover__travel-copy > p:not(.home-discover__date) {
-    margin: 1.4rem 0 2rem;
+    margin: 1rem 0 1.5rem;
     color: var(--discover-muted);
-    line-height: 1.8;
-    font-size: 0.95rem;
+    line-height: 1.75;
+    font-size: 0.88rem;
 }
 .home-discover__story-link {
     display: inline-flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+}
+.home-travel-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--discover-border);
+}
+.home-travel-carousel__destinations,
+.home-travel-carousel__arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+.home-travel-carousel button {
     min-height: 44px;
-    border-bottom: 1px solid rgba(120, 201, 255, 0.5);
-    padding: 0.6rem 0;
-    color: #c8e9ff;
+    color: var(--color-light);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
 }
-.home-discover__story-link:hover {
-    color: white;
-    border-color: white;
+.home-travel-carousel button:hover,
+.home-travel-carousel button[aria-pressed='true'] {
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.1);
+    border-color: var(--discover-border);
 }
-.home-discover__all:focus-visible,
-.home-discover__story-link:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 5px;
-    border-radius: 2px;
+.home-travel-carousel__destinations button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
 }
-@media (max-width: 1000px) {
-    .home-discover__heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.7rem;
+.home-travel-carousel__destinations button span {
+    opacity: 0.55;
+    margin-right: 0.3rem;
+    font-size: 0.7rem;
+}
+.home-travel-carousel__arrows button {
+    width: 44px;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    border-color: var(--discover-border);
+}
+@keyframes discover-reveal {
+    from {
+        opacity: 0.35;
+    }
+    to {
+        opacity: 1;
     }
 }
 @media (max-width: 700px) {
@@ -237,26 +280,34 @@
     .home-discover__travel {
         grid-template-columns: 1fr;
     }
-    .home-discover__heading {
-        margin-bottom: 1.6rem;
-    }
-    .home-discover__meta {
-        margin-bottom: 1.5rem;
-    }
     .home-discover__photo {
         min-height: 0;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16/10;
     }
     .home-discover__travel-copy {
-        padding: 1.7rem;
+        padding: 1.5rem;
+        min-height: 300px;
     }
-    .home-discover__location {
-        bottom: 1rem;
-        left: 1rem;
+    .home-travel-carousel__controls {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 0.8rem;
+    }
+    .home-travel-carousel__destinations button {
+        padding: 0.4rem 0.55rem;
+    }
+    .home-travel-carousel__destinations button span {
+        display: none;
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    .home-discover * {
-        transition: none;
+    .home-discover *,
+    .home-discover *::before {
+        animation: none !important;
+        transition: none !important;
+    }
+    .home-discover__travel:hover .home-discover__photo img,
+    .home-discover__essay:hover .home-discover__arrow {
+        transform: none;
     }
 }

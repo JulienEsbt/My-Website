@@ -1,6 +1,6 @@
 import React, {lazy, Suspense, useEffect, useMemo, useState} from 'react'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
-import {useParams} from 'react-router-dom'
+import {useLocation, useParams} from 'react-router-dom'
 import {FiArrowLeft, FiArrowUp, FiArrowDown} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
@@ -30,8 +30,16 @@ const getMdxArticle = (slug, language) => {
 
 const ReflectionArticlePage = () => {
     const {slug} = useParams()
+    const {state} = useLocation()
+    const fromHome = state?.fromHome === 'reflections'
     const {t, i18n} = useTranslation('reflections')
 
+    const backTo = fromHome ? '/#home-reflections' : '/reflections'
+    const backLabel = fromHome
+        ? i18n.language?.startsWith('fr')
+            ? 'Retour à l’accueil'
+            : 'Back to home'
+        : t('article.back')
     const language = i18n.language?.startsWith('fr') ? 'fr' : 'en'
     const reflection = reflections.find((item) => item.slug === slug)
 
@@ -117,8 +125,8 @@ const ReflectionArticlePage = () => {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: 0.65, ease: 'easeOut'}}
             >
-                <Link to="/reflections" className="reflexion-article__back">
-                    ← {t('article.back')}
+                <Link to={backTo} className="reflexion-article__back">
+                    ← {backLabel}
                 </Link>
 
                 <div className="reflexion-article__shell">
@@ -189,9 +197,9 @@ const ReflectionArticlePage = () => {
                     </button>
                 )}
 
-                <Link to="/reflections" aria-label={t('article.back')}>
+                <Link to={backTo} aria-label={backLabel}>
                     <FiArrowLeft />
-                    <span>{t('article.back')}</span>
+                    <span>{backLabel}</span>
                 </Link>
 
                 {showTop && (

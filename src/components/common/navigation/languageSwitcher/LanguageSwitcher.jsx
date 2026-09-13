@@ -10,7 +10,7 @@ import './LanguageSwitcher.css'
 
 export default function LanguageSwitcher() {
     const {i18n} = useTranslation()
-    const {pathname, search, hash} = useLocation()
+    const {pathname, search, hash, state} = useLocation()
     // Normalise: 'fr-FR' -> 'fr'
     const current = (i18n.resolvedLanguage || i18n.language || 'en').slice(0, 2)
     const next = current === 'fr' ? 'en' : 'fr'
@@ -18,6 +18,7 @@ export default function LanguageSwitcher() {
     return (
         <Link
             className="lang-switch"
+            state={state}
             to={languageSwitchUrl(`${pathname}${search}${hash}`, next)}
             hrefLang={next}
             aria-label={next === 'fr' ? 'Passer en français' : 'Switch to English'}
