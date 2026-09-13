@@ -1,6 +1,15 @@
 # Commentaires publics des réflexions
 
-Interface FR/EN : sélectionner un passage (jusqu’à 1 000 caractères), ouvrir le formulaire, choisir un pseudonyme et publier. Les réactions générales sont également possibles. Publication immédiate, sans compte ; les pseudonymes ne certifient aucune identité.
+Interface FR/EN : sélectionner un passage (jusqu’à 1 000 caractères), utiliser le bouton contextuel, choisir un pseudonyme et publier. Publication immédiate, sans compte ; les pseudonymes ne certifient aucune identité.
+
+## Commenter pendant la lecture
+
+- Sur grand écran, le formulaire et les échanges s’ouvrent dans la marge, à côté du texte, sans masquer l’article. Sur les écrans plus étroits, un panneau apparaît en bas de l’écran.
+- Les passages commentés sont repérés dans le texte ; une bulle indique le nombre de contributions sur la même citation. Cliquer sur la bulle ouvre les échanges. Le passage actif est surligné.
+- Les commentaires sur la réflexion entière restent sous l’article. Les annotations de passage sont consultables dans leurs fils.
+- Une citation devenue introuvable ou ambiguë après modification du texte reste accessible dans les passages non retrouvés, avec une explication.
+- Les commentaires et annotations sont chargés par pages ; le bouton de chargement permet de récupérer les contributions suivantes.
+- Échap ferme le formulaire ou le fil actif. La fermeture du formulaire conserve son brouillon tant que le passage sélectionné ne change pas.
 
 ## Réglages de l’écran « Install Integration »
 

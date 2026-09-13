@@ -186,3 +186,199 @@
     color: white;
     box-shadow: 0 8px 28px #0006;
 }
+
+/* A reading margin, not an overlay over the article. */
+@media (min-width: 1280px) {
+    .reflexion-article.reflexion-article--annotated {
+        width: calc(100% - 64px);
+        max-width: 1320px;
+    }
+    .reflexion-article--annotated .reflexion-article__content {
+        margin-left: 0;
+        margin-right: 360px;
+    }
+}
+.passage-highlights {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+.passage-highlights span {
+    position: absolute;
+    background: #4db5ff12;
+    border-bottom: 1px solid #4db5ff77;
+    border-radius: 3px;
+}
+.passage-highlights span.is-active {
+    background: #4db5ff28;
+    border-bottom-color: #8cd4ff;
+}
+.passage-marker {
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 34px;
+    min-height: 34px;
+    border: 1px solid #4db5ff55;
+    border-radius: 11px;
+    color: #9ad6ff;
+    background: #11233b;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px #0003;
+}
+.passage-marker:hover,
+.passage-marker.is-active {
+    background: #235277;
+    color: white;
+    border-color: #8cd4ff;
+}
+.passage-thread {
+    position: fixed;
+    z-index: 1200;
+    width: 308px;
+    max-height: min(70svh, calc(100svh - var(--thread-top, 88px) - 24px));
+    overflow: auto;
+    padding: 1rem;
+    border-radius: 1.2rem;
+    border: 1px solid #4db5ff50;
+    background: linear-gradient(145deg, #14253b, #0b1423);
+    box-shadow: 0 14px 45px #0005;
+    color: white;
+}
+.passage-thread__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+}
+.passage-thread__head button {
+    display: grid;
+    place-items: center;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 50%;
+    background: #4db5ff12;
+    color: white;
+    cursor: pointer;
+}
+.passage-thread blockquote {
+    margin: 1rem 0 0.4rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid #4db5ff;
+    max-height: 110px;
+    overflow: auto;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #b8c9db;
+    overflow-wrap: anywhere;
+}
+.passage-thread__jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #7fcbff;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+}
+.passage-thread .reader-comments__item {
+    padding-top: 0.8rem;
+    margin-top: 0.8rem;
+}
+.passage-thread .reader-comments__item header {
+    gap: 0.35rem;
+    font-size: 0.85rem;
+}
+.passage-thread .reader-comments__item p {
+    margin: 0.7rem 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+.passage-thread .btn {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+}
+.passage-thread > .btn {
+    margin-top: 1rem;
+    width: 100%;
+}
+.passage-orphans {
+    margin-top: 1.5rem;
+}
+.passage-orphans summary {
+    cursor: pointer;
+    color: var(--color-light);
+}
+.reader-comments__dialog--passage {
+    z-index: 1200;
+    position: fixed;
+    margin: 0;
+    width: 308px;
+    left: var(--passage-left, auto);
+    top: var(--passage-top, 90px);
+    padding: 1rem;
+    max-height: calc(100svh - 104px);
+    background: linear-gradient(145deg, #14253b, #0b1423);
+    box-shadow: 0 14px 45px #0005;
+}
+.reader-comments__dialog--passage h2 {
+    font-size: 1.05rem;
+}
+.reader-comments__dialog--passage label {
+    font-size: 0.85rem;
+}
+.reader-comments__dialog--passage .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+}
+@media (max-width: 1279px) {
+    .passage-thread,
+    .reader-comments__dialog--passage {
+        left: 12px !important;
+        right: 12px;
+        top: auto !important;
+        bottom: 12px;
+        width: auto;
+        max-height: 65svh;
+        padding: 1.2rem;
+        border-radius: 1.3rem;
+        box-shadow: 0 -8px 40px #0006;
+    }
+    .passage-marker {
+        min-height: 40px;
+        width: 38px;
+    }
+}
+
+.passage-reading-hint {
+    color: #9fb8cf;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    max-width: 740px;
+    margin: 0 auto 1.6rem;
+    padding: 0.7rem 0.9rem;
+    border-left: 2px solid #4db5ff50;
+    background: #4db5ff06;
+}
+@media (min-width: 1280px) {
+    .reflexion-article--annotated .passage-reading-hint {
+        margin-left: 0;
+        margin-right: 360px;
+    }
+}
+
+.passage-thread__feedback {
+    font-size: 0.8rem;
+    color: #9bd8bc;
+    padding: 0.6rem 0;
+}
+.passage-marker:disabled {
+    cursor: default;
+}

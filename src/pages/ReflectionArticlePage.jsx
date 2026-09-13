@@ -148,6 +148,11 @@ const ReflectionArticlePage = () => {
                     )}
 
                     <AuthorNotesProvider slug={slug} language={isFallbackFrench ? 'fr' : language}>
+                        <p className="passage-reading-hint">
+                            {language === 'fr'
+                                ? 'Une idée à discuter ? Sélectionne un passage pour le commenter. Les bulles dans la marge ouvrent les échanges.'
+                                : 'An idea to discuss? Select a passage to comment. Margin bubbles open the conversation.'}
+                        </p>
                         <div className="reflexion-article__content" ref={contentRef}>
                             {MdxContent ? (
                                 <Suspense fallback={<FeatureLoading />}>

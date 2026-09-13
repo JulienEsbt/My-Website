@@ -1,13 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {createPortal} from 'react-dom'
+import {createPortal, flushSync} from 'react-dom'
 import {FiMessageCircle} from 'react-icons/fi'
 import './ReaderComments.css'
+import PassageLayer from './PassageLayer.jsx'
+import {findPassage, passageKey} from './passageAnchors.js'
 
 export default function ReaderComments({slug, language, contentRef}) {
     const fr = language === 'fr'
     const [selection, setSelection] = useState(null)
     const [selectionPosition, setSelectionPosition] = useState(null)
     const [anchor, setAnchor] = useState(null)
+    const [activePassage, setActivePassage] = useState(null)
+    const [drafting, setDrafting] = useState(false)
     const [comments, setComments] = useState([])
     const [status, setStatus] = useState('loading')
     const [hasMore, setHasMore] = useState(false)
@@ -106,10 +110,31 @@ export default function ReaderComments({slug, language, contentRef}) {
         return () => clearTimeout(timer)
     }, [published])
     const open = (value) => {
-        setAnchor(value)
-        setSelectionPosition(null)
-        setMessage('')
-        dialog.current.showModal()
+        // Apply the fixed non-modal layout before native dialog focus can scroll the document.
+        flushSync(() => {
+            setAnchor(value)
+            setSelectionPosition(null)
+            setMessage('')
+            setActivePassage(value)
+            setDrafting(!!value)
+        })
+        const panel = dialog.current
+        if (passageKey(value || {}) !== passageKey(anchor || {}))
+            panel.querySelector('form').reset()
+        if (value) {
+            panel.show()
+            const root = contentRef.current
+            const rect = findPassage(root, value)?.getBoundingClientRect()
+            panel.style.setProperty(
+                '--passage-left',
+                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 48)}px`
+            )
+            panel.style.setProperty(
+                '--passage-top',
+                `${Math.max(80, Math.min(rect?.top ?? 100, innerHeight - panel.offsetHeight - 24))}px`
+            )
+        } else panel.showModal()
+        window.getSelection()?.removeAllRanges()
     }
     const save = async (event) => {
         event.preventDefault()
@@ -140,6 +165,8 @@ export default function ReaderComments({slug, language, contentRef}) {
             }
             setComments((items) => [result.comment, ...items])
             dialog.current.close()
+            setDrafting(false)
+            event.target.reset()
             setPublished(true)
         } catch (error) {
             setMessage(
@@ -168,6 +195,13 @@ export default function ReaderComments({slug, language, contentRef}) {
             })
             if (!response.ok) throw new Error()
             setComments((items) => items.filter((item) => item.id !== id))
+            if (
+                activePassage &&
+                !comments.some(
+                    (item) => item.id !== id && passageKey(item) === passageKey(activePassage)
+                )
+            )
+                setActivePassage(null)
         } catch {
             setMessage(
                 fr ? 'Impossible de retirer ce commentaire.' : 'Unable to remove this comment.'
@@ -190,44 +224,56 @@ export default function ReaderComments({slug, language, contentRef}) {
             setBusy(false)
         }
     }
-    const locate = (comment) => {
-        const root = contentRef.current
-        if (!root || !comment.quote) return
-        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
-        const nodes = []
-        let text = ''
-        let node
-        while ((node = walker.nextNode())) {
-            nodes.push({node, start: text.length})
-            text += node.textContent
-        }
-        let start = text.indexOf(comment.quote)
-        while (
-            start >= 0 &&
-            ((comment.prefix && !text.slice(0, start).endsWith(comment.prefix)) ||
-                (comment.suffix &&
-                    !text.slice(start + comment.quote.length).startsWith(comment.suffix)))
-        )
-            start = text.indexOf(comment.quote, start + 1)
-        if (start < 0) {
-            setMessage(
-                fr
-                    ? 'Ce passage a été modifié depuis ce commentaire. La citation originale est conservée.'
-                    : 'This passage has changed. The original quotation is preserved.'
+    useEffect(() => {
+        if (!drafting || !anchor) return undefined
+        const position = () => {
+            const root = contentRef.current
+            const range = findPassage(root, anchor)
+            const rect = range?.getBoundingClientRect()
+            const panel = dialog.current
+            if (!root || !panel) return
+            panel.style.setProperty(
+                '--passage-left',
+                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 48)}px`
             )
-            return
+            panel.style.setProperty(
+                '--passage-top',
+                `${Math.max(80, Math.min(rect?.top ?? 100, innerHeight - panel.offsetHeight - 24))}px`
+            )
         }
-        const first = nodes.find((item) => item.start + item.node.length > start)
-        const end = start + comment.quote.length
-        const last = nodes.find((item) => item.start + item.node.length >= end)
-        const range = document.createRange()
-        range.setStart(first.node, start - first.start)
-        range.setEnd(last.node, end - last.start)
-        const selection = window.getSelection()
-        selection.removeAllRanges()
-        selection.addRange(range)
-        first.node.parentElement.scrollIntoView({block: 'center', behavior: 'instant'})
-    }
+        position()
+        window.addEventListener('resize', position)
+        window.addEventListener('scroll', position, {passive: true})
+        return () => {
+            window.removeEventListener('resize', position)
+            window.removeEventListener('scroll', position)
+        }
+    }, [drafting, anchor, contentRef])
+    useEffect(() => {
+        const escape = (event) => {
+            if (event.key !== 'Escape') return
+            if (dialog.current?.open) dialog.current.close()
+            else setActivePassage(null)
+        }
+        document.addEventListener('keydown', escape)
+        return () => document.removeEventListener('keydown', escape)
+    }, [])
+    const renderComment = (comment) => (
+        <article className="reader-comments__item" key={comment.id}>
+            <header>
+                <strong>{comment.pseudonym}</strong>
+                <time dateTime={comment.createdAt}>
+                    {new Date(comment.createdAt).toLocaleDateString(language)}
+                </time>
+            </header>
+            <p>{comment.body}</p>
+            {(tokens[comment.id] || adminToken) && (
+                <button className="btn" disabled={busy} onClick={() => remove(comment.id)}>
+                    {fr ? 'Retirer ce commentaire' : 'Remove this comment'}
+                </button>
+            )}
+        </article>
+    )
     return (
         <section className="reader-comments" aria-labelledby="reader-comments-title">
             <div className="reader-comments__heading">
@@ -272,6 +318,7 @@ export default function ReaderComments({slug, language, contentRef}) {
                     document.body
                 )}
             {published &&
+                !activePassage &&
                 createPortal(
                     <p className="reader-comments__confirmation" role="status">
                         <FiMessageCircle aria-hidden="true" />{' '}
@@ -280,31 +327,30 @@ export default function ReaderComments({slug, language, contentRef}) {
                     document.body
                 )}
             <p role="status">{message}</p>
-            {comments.map((comment) => (
-                <article className="reader-comments__item" key={comment.id}>
-                    <header>
-                        <strong>{comment.pseudonym}</strong>
-                        <time dateTime={comment.createdAt}>
-                            {new Date(comment.createdAt).toLocaleDateString(language)}
-                        </time>
-                    </header>
-                    {comment.quote && (
-                        <button className="reader-comments__quote" onClick={() => locate(comment)}>
-                            <q>{comment.quote}</q>
-                            <span>{fr ? 'Retrouver le passage ↑' : 'Find the passage ↑'}</span>
-                        </button>
-                    )}
-                    <p>{comment.body}</p>
-                    {(tokens[comment.id] || adminToken) && (
-                        <button className="btn" disabled={busy} onClick={() => remove(comment.id)}>
-                            {fr ? 'Retirer ce commentaire' : 'Remove this comment'}
-                        </button>
-                    )}
-                </article>
-            ))}
+            {comments.filter((comment) => !comment.quote).map(renderComment)}
+            <PassageLayer
+                contentRef={contentRef}
+                comments={comments}
+                active={activePassage}
+                onActive={setActivePassage}
+                onReply={open}
+                renderComment={renderComment}
+                language={language}
+                drafting={drafting}
+                feedback={
+                    message ||
+                    (published
+                        ? fr
+                            ? 'Ton commentaire est publié.'
+                            : 'Your comment is published.'
+                        : '')
+                }
+            />
             {hasMore && (
                 <button className="btn" disabled={busy} onClick={more}>
-                    {fr ? 'Voir les commentaires suivants' : 'Load more comments'}
+                    {fr
+                        ? 'Charger d’autres commentaires et annotations'
+                        : 'Load more comments and annotations'}
                 </button>
             )}
             <details className="reader-comments__moderation">
@@ -324,67 +370,90 @@ export default function ReaderComments({slug, language, contentRef}) {
                         : 'For Julien only. The key stays in memory during this visit and allows comment removal.'}
                 </p>
             </details>
-            <dialog
-                ref={dialog}
-                className={`reader-comments__dialog ${anchor ? 'reader-comments__dialog--passage' : ''}`}
-                aria-labelledby="comment-form-title"
-            >
-                <form onSubmit={save}>
-                    <h2 id="comment-form-title">
-                        {anchor
-                            ? fr
-                                ? 'Commenter ce passage'
-                                : 'Comment on this passage'
-                            : fr
-                              ? 'Commenter la réflexion'
-                              : 'Comment on the article'}
-                    </h2>
-                    {anchor && <blockquote>{anchor.quote}</blockquote>}
-                    <label>
-                        {fr ? 'Pseudonyme' : 'Pseudonym'}
-                        <input
-                            name="pseudonym"
-                            required
-                            minLength={2}
-                            maxLength={40}
-                            autoComplete="nickname"
-                        />
-                    </label>
-                    <label>
-                        {fr ? 'Ton commentaire' : 'Your comment'}
-                        <textarea name="body" required minLength={3} maxLength={2000} rows={5} />
-                    </label>
-                    <label className="reader-comments__trap" aria-hidden="true">
-                        Website
-                        <input name="website" tabIndex={-1} autoComplete="off" />
-                    </label>
-                    <p>
-                        {fr
-                            ? 'Publication publique immédiate · 2 000 caractères maximum. Évite toute information personnelle sensible.'
-                            : 'Published publicly immediately · 2,000 characters maximum. Avoid sensitive personal information.'}
-                    </p>
-                    {status !== 'ready' && (
-                        <p>
-                            {fr
-                                ? 'La publication sera disponible une fois le service connecté.'
-                                : 'Publishing will be available once the service is connected.'}
-                        </p>
-                    )}
-                    <p role="status">{message}</p>
-                    <div className="reader-comments__actions">
-                        <button
-                            className="btn"
-                            type="button"
-                            onClick={() => dialog.current.close()}
-                        >
-                            {fr ? 'Fermer' : 'Close'}
-                        </button>
-                        <button className="btn btn-primary" disabled={busy || status !== 'ready'}>
-                            {busy ? '…' : fr ? 'Publier' : 'Publish'}
-                        </button>
-                    </div>
-                </form>
-            </dialog>
+            {typeof document !== 'undefined' &&
+                createPortal(
+                    <dialog
+                        ref={dialog}
+                        onClose={() => {
+                            setDrafting(false)
+                            if (
+                                activePassage &&
+                                !comments.some(
+                                    (item) => passageKey(item) === passageKey(activePassage)
+                                )
+                            )
+                                setActivePassage(null)
+                        }}
+                        className={`reader-comments__dialog ${anchor ? 'reader-comments__dialog--passage' : ''}`}
+                        aria-labelledby="comment-form-title"
+                    >
+                        <form onSubmit={save}>
+                            <h2 id="comment-form-title">
+                                {anchor
+                                    ? fr
+                                        ? 'Commenter ce passage'
+                                        : 'Comment on this passage'
+                                    : fr
+                                      ? 'Commenter la réflexion'
+                                      : 'Comment on the article'}
+                            </h2>
+                            {anchor && <blockquote>{anchor.quote}</blockquote>}
+                            <label>
+                                {fr ? 'Pseudonyme' : 'Pseudonym'}
+                                <input
+                                    name="pseudonym"
+                                    required
+                                    minLength={2}
+                                    maxLength={40}
+                                    autoComplete="nickname"
+                                />
+                            </label>
+                            <label>
+                                {fr ? 'Ton commentaire' : 'Your comment'}
+                                <textarea
+                                    name="body"
+                                    required
+                                    minLength={3}
+                                    maxLength={2000}
+                                    rows={5}
+                                />
+                            </label>
+                            <label className="reader-comments__trap" aria-hidden="true">
+                                Website
+                                <input name="website" tabIndex={-1} autoComplete="off" />
+                            </label>
+                            <p>
+                                {fr
+                                    ? 'Publication publique immédiate · 2 000 caractères maximum. Évite toute information personnelle sensible.'
+                                    : 'Published publicly immediately · 2,000 characters maximum. Avoid sensitive personal information.'}
+                            </p>
+                            {status !== 'ready' && (
+                                <p>
+                                    {fr
+                                        ? 'La publication sera disponible une fois le service connecté.'
+                                        : 'Publishing will be available once the service is connected.'}
+                                </p>
+                            )}
+                            <p role="status">{message}</p>
+                            <div className="reader-comments__actions">
+                                <button
+                                    className="btn"
+                                    type="button"
+                                    onClick={() => dialog.current.close()}
+                                >
+                                    {fr ? 'Fermer' : 'Close'}
+                                </button>
+                                <button
+                                    className="btn btn-primary"
+                                    disabled={busy || status !== 'ready'}
+                                >
+                                    {busy ? '…' : fr ? 'Publier' : 'Publish'}
+                                </button>
+                            </div>
+                        </form>
+                    </dialog>,
+                    document.body
+                )}
         </section>
     )
 }
