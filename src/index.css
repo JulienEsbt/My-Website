@@ -182,7 +182,7 @@ body,
 #root {
     background-image:
         radial-gradient(
-            ellipse 460px 360px at 8% 280px,
+            ellipse 460px 360px at 8% 400px,
             rgba(22, 105, 181, 0.28),
             transparent 100%
         ),
