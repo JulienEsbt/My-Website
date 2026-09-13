@@ -1,16 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react'
+import {createPortal} from 'react-dom'
 import {FiMessageCircle} from 'react-icons/fi'
 import './ReaderComments.css'
 
 export default function ReaderComments({slug, language, contentRef}) {
     const fr = language === 'fr'
     const [selection, setSelection] = useState(null)
+    const [selectionPosition, setSelectionPosition] = useState(null)
     const [anchor, setAnchor] = useState(null)
     const [comments, setComments] = useState([])
     const [status, setStatus] = useState('loading')
     const [hasMore, setHasMore] = useState(false)
     const [busy, setBusy] = useState(false)
     const [message, setMessage] = useState('')
+    const [published, setPublished] = useState(false)
     const [tokens, setTokens] = useState({})
     const [adminToken, setAdminToken] = useState('')
     const dialog = useRef(null)
@@ -37,6 +40,8 @@ export default function ReaderComments({slug, language, contentRef}) {
     }, [endpoint])
     useEffect(() => {
         const capture = () => {
+            if (dialog.current?.open) return
+            setSelectionPosition(null)
             const selected = window.getSelection()
             const root = contentRef.current
             if (!selected?.rangeCount || selected.isCollapsed || !root) {
@@ -54,6 +59,18 @@ export default function ReaderComments({slug, language, contentRef}) {
                 setSelection(null)
                 return
             }
+            const rects = [...range.getClientRects()].filter(
+                (rect) => rect.bottom > 70 && rect.top < innerHeight - 70
+            )
+            const rect = rects.at(-1)
+            if (rect)
+                setSelectionPosition({
+                    left: Math.max(12, Math.min(innerWidth - 252, rect.left)),
+                    top:
+                        rect.bottom + 56 < innerHeight - 65
+                            ? rect.bottom + 8
+                            : Math.max(70, rect.top - 52),
+                })
             const before = range.cloneRange()
             before.selectNodeContents(root)
             before.setEnd(range.startContainer, range.startOffset)
@@ -69,11 +86,28 @@ export default function ReaderComments({slug, language, contentRef}) {
                 suffix: (rawQuote.slice(rawQuote.trimEnd().length) + after.toString()).slice(0, 80),
             })
         }
+        const dismiss = (event) => {
+            if (event.key === 'Escape') setSelectionPosition(null)
+        }
         document.addEventListener('selectionchange', capture)
-        return () => document.removeEventListener('selectionchange', capture)
+        window.addEventListener('scroll', capture, {passive: true})
+        window.addEventListener('resize', capture)
+        document.addEventListener('keydown', dismiss)
+        return () => {
+            document.removeEventListener('selectionchange', capture)
+            window.removeEventListener('scroll', capture)
+            window.removeEventListener('resize', capture)
+            document.removeEventListener('keydown', dismiss)
+        }
     }, [contentRef])
+    useEffect(() => {
+        if (!published) return undefined
+        const timer = setTimeout(() => setPublished(false), 6000)
+        return () => clearTimeout(timer)
+    }, [published])
     const open = (value) => {
         setAnchor(value)
+        setSelectionPosition(null)
         setMessage('')
         dialog.current.showModal()
     }
@@ -106,6 +140,7 @@ export default function ReaderComments({slug, language, contentRef}) {
             }
             setComments((items) => [result.comment, ...items])
             dialog.current.close()
+            setPublished(true)
         } catch (error) {
             setMessage(
                 error.message === 'rate'
@@ -221,15 +256,29 @@ export default function ReaderComments({slug, language, contentRef}) {
             <button className="btn" onClick={() => open(null)}>
                 {fr ? 'Commenter la réflexion' : 'Comment on the article'}
             </button>
-            {selection && (
-                <button
-                    className="btn btn-primary reader-comments__selection"
-                    onPointerDown={(event) => event.preventDefault()}
-                    onClick={() => open(selection)}
-                >
-                    {fr ? 'Commenter ce passage' : 'Comment on this passage'}
-                </button>
-            )}
+            {selection &&
+                selectionPosition &&
+                createPortal(
+                    <button
+                        className="btn btn-primary reader-comments__selection"
+                        style={selectionPosition}
+                        onPointerDown={(event) => event.preventDefault()}
+                        onClick={() => open(selection)}
+                        aria-haspopup="dialog"
+                    >
+                        <FiMessageCircle aria-hidden="true" />
+                        {fr ? 'Commenter ce passage' : 'Comment on this passage'}
+                    </button>,
+                    document.body
+                )}
+            {published &&
+                createPortal(
+                    <p className="reader-comments__confirmation" role="status">
+                        <FiMessageCircle aria-hidden="true" />{' '}
+                        {fr ? 'Ton commentaire est publié.' : 'Your comment is published.'}
+                    </p>,
+                    document.body
+                )}
             <p role="status">{message}</p>
             {comments.map((comment) => (
                 <article className="reader-comments__item" key={comment.id}>
@@ -277,7 +326,7 @@ export default function ReaderComments({slug, language, contentRef}) {
             </details>
             <dialog
                 ref={dialog}
-                className="reader-comments__dialog"
+                className={`reader-comments__dialog ${anchor ? 'reader-comments__dialog--passage' : ''}`}
                 aria-labelledby="comment-form-title"
             >
                 <form onSubmit={save}>
