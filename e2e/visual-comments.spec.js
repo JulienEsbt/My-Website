@@ -2,7 +2,7 @@ import {test, expect} from '@playwright/test'
 test.beforeEach(async ({page}) => {
     await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
 })
-test('six trips keep whole photographs and Tallinn last', async ({page}) => {
+test('six trips fill their photo frame and keep Tallinn last', async ({page}) => {
     await page.goto('/')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     const carousel = page.locator('.home-travel-carousel')
@@ -12,12 +12,16 @@ test('six trips keep whole photographs and Tallinn last', async ({page}) => {
     await expect(buttons.last()).toContainText('Estonie')
     for (let i = 0; i < 6; i++) {
         await buttons.nth(i).click()
-        await expect(carousel.locator('img')).toHaveCSS('object-fit', 'contain')
+        await expect(carousel.locator('img')).toHaveCSS('object-fit', 'cover')
         await expect
             .poll(() =>
                 carousel.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)
             )
             .toBe(true)
+        await expect(carousel.locator('img')).toHaveCSS('padding-top', '0px')
+        await carousel
+            .locator('.home-discover__photo')
+            .screenshot({path: `/tmp/travel-crop-${i}.png`})
     }
     await page.screenshot({path: '/tmp/portfolio-travel-desktop.png'})
     await page.setViewportSize({width: 390, height: 844})
@@ -95,4 +99,29 @@ test('production story respects motion preferences and scrolls natively', async 
     await page.screenshot({path: '/tmp/portfolio-production-story.png'})
     await page.emulateMedia({reducedMotion: 'reduce'})
     await expect(story.locator('.production-story__visual')).toHaveCSS('position', 'static')
+})
+
+test('additional scroll stories preserve content and simplify on mobile', async ({page}) => {
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.setViewportSize({width: 1440, height: 1000})
+    await page.goto('/')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.locator('#about').scrollIntoViewIfNeeded()
+    await expect(page.locator('.about__visual')).toHaveCSS('position', 'sticky')
+    await expect(page.locator('.about__visual img')).toBeVisible()
+    await page.screenshot({path: '/tmp/about-scroll.png'})
+    await page.goto('/projects/my-website')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    const story = page.locator('.production-story')
+    await expect(story.locator('.production-story__step')).toHaveCount(3)
+    await story.locator('.production-story__step').nth(1).scrollIntoViewIfNeeded()
+    await expect(story).not.toContainText('website.solution.')
+    await page.screenshot({path: '/tmp/website-scroll.png'})
+    await page.setViewportSize({width: 390, height: 844})
+    await expect(story.locator('.production-story__visual')).toHaveCSS('position', 'static')
+    await expect
+        .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+        .toBe(true)
+    await page.emulateMedia({reducedMotion: 'reduce'})
+    await expect(story.locator('.production-story__step').first()).toHaveCSS('transform', 'none')
 })

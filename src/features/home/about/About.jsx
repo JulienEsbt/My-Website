@@ -60,7 +60,23 @@ const About = () => {
             })
         }, sectionRef)
 
-        return () => ctx.revert()
+        const media = gsap.matchMedia()
+        media.add('(min-width: 1100px) and (min-height: 800px)', () => {
+            gsap.to(visualRef.current.querySelector('img'), {
+                scale: 1.08,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 25%',
+                    end: 'bottom 75%',
+                    scrub: 0.6,
+                },
+            })
+        })
+        return () => {
+            media.revert()
+            ctx.revert()
+        }
     }, [reducedMotion])
 
     return (

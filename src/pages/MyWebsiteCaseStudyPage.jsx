@@ -1,6 +1,13 @@
 import React from 'react'
 import {BsGithub} from 'react-icons/bs'
-import {FiArrowLeft, FiArrowUpRight, FiExternalLink} from 'react-icons/fi'
+import {
+    FiArrowLeft,
+    FiArrowUpRight,
+    FiExternalLink,
+    FiLayers,
+    FiImage,
+    FiCheckCircle,
+} from 'react-icons/fi'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
@@ -10,7 +17,12 @@ import {HOME_ASSETS} from '../config/homeAssets.js'
 import {LINKS} from '../config/links.js'
 import './CaseStudyPage.css'
 
-const SOLUTION_ITEMS = ['architecture', 'media', 'quality']
+import ProductionStory from '../features/projects/productionStory/ProductionStory.jsx'
+const SOLUTION_ITEMS = [
+    ['architecture', FiLayers],
+    ['media', FiImage],
+    ['quality', FiCheckCircle],
+]
 const ARCHITECTURE_STEPS = ['entry', 'shell', 'routes', 'domains', 'media', 'vercel']
 const DECISION_ITEMS = ['incremental', 'privacy', 'accessibility', 'adapters']
 const CHALLENGE_ITEMS = ['legacy', 'interactive', 'editorial']
@@ -83,14 +95,12 @@ export default function MyWebsiteCaseStudyPage() {
                     <p className="section-kicker">{t('website.solution.kicker')}</p>
                     <h2>{t('website.solution.title')}</h2>
                     <p className="case-study__lead">{t('website.solution.intro')}</p>
-                    <div className="case-study__grid">
-                        {SOLUTION_ITEMS.map((item) => (
-                            <div key={item} className="case-study__card">
-                                <h3>{t(`website.solution.items.${item}.title`)}</h3>
-                                <p>{t(`website.solution.items.${item}.body`)}</p>
-                            </div>
-                        ))}
-                    </div>
+                    <ProductionStory
+                        t={t}
+                        namespace="website"
+                        media={HOME_ASSETS.portfolio.myWebsite}
+                        items={SOLUTION_ITEMS}
+                    />
                 </section>
 
                 <section className="container case-study__section">

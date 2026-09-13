@@ -11,7 +11,7 @@ const stages = [
     ['workshop', FiList],
     ['settings', FiSettings],
 ]
-function StoryStep({item, index, t, reduced}) {
+function StoryStep({item, index, t, reduced, namespace}) {
     const root = useRef(null)
     const {scrollYProgress} = useScroll({target: root, offset: ['start end', 'end start']})
     const y = useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -30])
@@ -21,12 +21,17 @@ function StoryStep({item, index, t, reduced}) {
             <span className="production-story__number">
                 <Icon aria-hidden="true" /> 0{index + 1}
             </span>
-            <h3>{t(`bruno.solution.items.${key}.title`)}</h3>
-            <p>{t(`bruno.solution.items.${key}.body`)}</p>
+            <h3>{t(`${namespace}.solution.items.${key}.title`)}</h3>
+            <p>{t(`${namespace}.solution.items.${key}.body`)}</p>
         </motion.div>
     )
 }
-export default function ProductionStory({t}) {
+export default function ProductionStory({
+    t,
+    namespace = 'bruno',
+    media = HOME_ASSETS.portfolio.brunoPizza,
+    items = stages,
+}) {
     const root = useRef(null)
     const reduced = useReducedMotion()
     const {scrollYProgress} = useScroll({target: root, offset: ['start center', 'end center']})
@@ -37,19 +42,32 @@ export default function ProductionStory({t}) {
             <div className="production-story__visual">
                 <motion.figure style={reduced ? undefined : {scale, rotateX}}>
                     <ResponsiveImage
-                        media={HOME_ASSETS.portfolio.brunoPizza}
-                        alt={t('bruno.hero.imageAlt')}
+                        media={media}
+                        alt={t(`${namespace}.hero.imageAlt`)}
                         sizes="(max-width: 800px) 90vw, 55vw"
                     />
-                    <figcaption>{t('bruno.solution.items.dashboard.title')}</figcaption>
+                    <figcaption>
+                        {t(
+                            namespace === 'bruno'
+                                ? 'bruno.solution.items.dashboard.title'
+                                : 'website.hero.imageAlt'
+                        )}
+                    </figcaption>
                 </motion.figure>
                 <div className="production-story__track" aria-hidden="true">
                     <motion.span style={{scaleX: reduced ? 1 : scrollYProgress}} />
                 </div>
             </div>
             <div className="production-story__steps">
-                {stages.map((item, index) => (
-                    <StoryStep key={item[0]} item={item} index={index} t={t} reduced={reduced} />
+                {items.map((item, index) => (
+                    <StoryStep
+                        key={item[0]}
+                        item={item}
+                        index={index}
+                        t={t}
+                        reduced={reduced}
+                        namespace={namespace}
+                    />
                 ))}
             </div>
         </div>
