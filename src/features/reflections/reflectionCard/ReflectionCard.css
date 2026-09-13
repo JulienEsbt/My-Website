@@ -2,7 +2,7 @@
     position: relative;
     overflow: hidden;
 
-    padding: 1.7rem;
+    padding: 0;
     border-radius: 1.5rem;
 
     background: var(--liquid-bg);
@@ -134,4 +134,19 @@
         grid-column: span 1;
         min-height: auto;
     }
+}
+
+.reflexion-card__link {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 1.7rem;
+    color: inherit;
+}
+.reflexion-card__footer {
+    margin-top: auto;
+}
+.reflexion-card:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
 }
