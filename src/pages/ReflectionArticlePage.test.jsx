@@ -1,5 +1,5 @@
 import {render, screen, waitFor} from '@testing-library/react'
-import {beforeEach, describe, expect, it, vi} from 'vitest'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 import {MemoryRouter, Route, Routes} from 'react-router-dom'
 import i18n from 'i18next'
 import ReflectionArticlePage from './ReflectionArticlePage.jsx'
@@ -8,7 +8,16 @@ vi.mock('../components/common/navigation/pageNav/PageNav.jsx', () => ({default: 
 vi.mock('../components/common/layout/footerSection/Footer.jsx', () => ({default: () => null}))
 
 describe('ReflectionArticlePage', () => {
+    afterEach(() => vi.unstubAllGlobals())
+
     beforeEach(async () => {
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                observe() {}
+                disconnect() {}
+            }
+        )
         await i18n.changeLanguage('fr')
     })
 

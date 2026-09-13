@@ -398,8 +398,20 @@
     color: #051527;
     border: 2px solid #b9e6ff;
     font-weight: 750;
-    box-shadow: 0 0 0 4px #4db5ff20, 0 5px 18px #0006;
+    box-shadow:
+        0 0 0 4px #4db5ff20,
+        0 5px 18px #0006;
 }
-.passage-marker svg { width: 19px; height: 19px; }
-.passage-marker:focus-visible { outline: 3px solid white; outline-offset: 4px; }
-.passage-reading-hint strong { display: block; color: #d5edff; margin-bottom: .35rem; }
+.passage-marker svg {
+    width: 19px;
+    height: 19px;
+}
+.passage-marker:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+.passage-reading-hint strong {
+    display: block;
+    color: #d5edff;
+    margin-bottom: 0.35rem;
+}
