@@ -8,12 +8,18 @@ import {createMediaResolver} from '../../../config/media.js'
 import trips from '../../../data/travel/trips.js'
 import portugal from '../../../generated/media/travels/portugal-2025.json'
 import guadeloupe from '../../../generated/media/travels/guadeloupe-2025.json'
+import italy from '../../../generated/media/travels/italy-2023.json'
+import austria from '../../../generated/media/travels/austria-2023.json'
+import saintMartin from '../../../generated/media/travels/saint-martin-2023.json'
 import estonia from '../../../generated/media/travels/estonia-2022.json'
 
 const destinations = [
-    ['portugal-2025', portugal, 'IMG_2144.jpeg', 'center'],
-    ['guadeloupe-2025', guadeloupe, 'IMG_3915.jpeg', 'center 85%'],
-    ['estonia-2022', estonia, 'IMG_1980.jpeg', 'center 45%'],
+    ['portugal-2025', portugal, 'IMG_1949.jpeg', 'center'],
+    ['guadeloupe-2025', guadeloupe, 'IMG_1682.jpeg', 'center'],
+    ['italy-2023', italy, 'IMG_8723.jpeg', 'center'],
+    ['austria-2023', austria, 'IMG_2908.jpeg', 'center'],
+    ['saint-martin-2023', saintMartin, 'IMG_1808.jpeg', 'center'],
+    ['estonia-2022', estonia, 'IMG_2043.jpeg', 'center'],
 ].map(([id, manifest, filename, photoPosition]) => ({
     ...trips.find((trip) => trip.id === id),
     photoPosition,

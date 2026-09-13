@@ -171,12 +171,10 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s ease;
+    object-fit: contain;
+    padding: 1rem;
 }
-.home-discover__travel:hover .home-discover__photo img {
-    transform: scale(1.035);
-}
+
 .home-discover__location {
     position: absolute;
     left: 1.2rem;
@@ -310,4 +308,14 @@
     .home-discover__essay:hover .home-discover__arrow {
         transform: none;
     }
+}
+
+.home-travel-carousel__destinations {
+    flex-wrap: wrap;
+}
+.home-travel-carousel__arrows {
+    flex-shrink: 0;
+}
+.home-discover__photo {
+    background: radial-gradient(ellipse at center, #183345, #070d1d 80%);
 }

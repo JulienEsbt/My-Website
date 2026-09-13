@@ -178,17 +178,31 @@ body,
     background-color: #020612;
 }
 
-/* Subtle ambient light shared by every page, without moving the content. */
-#root::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 0% 24%, rgba(64, 139, 220, 0.1), transparent 48%),
-        radial-gradient(ellipse at 100% 66%, rgba(116, 82, 192, 0.105), transparent 48%),
-        radial-gradient(ellipse at 42% 100%, rgba(44, 132, 153, 0.055), transparent 48%);
+/* Colored pools repeat along the document, including below the first viewport. */
+#root {
+    background-image:
+        radial-gradient(
+            ellipse 460px 360px at 8% 280px,
+            rgba(22, 105, 181, 0.28),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 440px 420px at 96% 900px,
+            rgba(109, 54, 174, 0.28),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 380px 300px at 18% 1580px,
+            rgba(22, 121, 130, 0.19),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 330px 320px at 78% 2080px,
+            rgba(62, 74, 168, 0.25),
+            transparent 100%
+        );
+    background-size: 100% 2400px;
+    background-repeat: repeat-y;
 }
 
 /* ==================== GENERAL STYLES ==================== */
