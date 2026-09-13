@@ -28,7 +28,6 @@
 }
 
 .portfolio__item:hover {
-    transform: translateY(-6px);
     border-color: rgba(77, 181, 255, 0.38);
     box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.3);
 }
@@ -398,5 +397,93 @@
     .portfolio__intent-content {
         padding-right: 1rem;
         padding-left: 1rem;
+    }
+}
+
+/* Keep every project on a shared baseline, including its actions. */
+.portfolio__item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.portfolio__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.portfolio__image {
+    flex-shrink: 0;
+}
+.portfolio__actions {
+    margin-top: auto;
+}
+.portfolio__intent {
+    margin-top: 1rem;
+}
+.portfolio__intent-overview {
+    grid-template-columns: 190px minmax(0, 1fr);
+}
+.portfolio__intent-mark {
+    min-height: 190px;
+}
+.portfolio__intent-content section {
+    margin: 0;
+}
+.portfolio__intent-content {
+    display: grid;
+    gap: 0.8rem;
+}
+.portfolio__intent-principles li,
+.portfolio__intent-icon,
+.portfolio__intent-node,
+.portfolio__intent-grid section {
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+.portfolio__intent-principles li:hover,
+.portfolio__intent-grid section:hover {
+    border-color: rgba(77, 181, 255, 0.5);
+    transform: translateY(-2px);
+}
+.portfolio__intent-mark:hover .portfolio__intent-icon {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px rgba(77, 181, 255, 0.24);
+}
+.portfolio__intent-mark:hover .portfolio__intent-node {
+    transform: scale(1.35);
+}
+.portfolio__intent-details[open] .portfolio__intent-content {
+    animation: intent-reveal 0.25s ease-out;
+}
+@keyframes intent-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width: 600px) {
+    .portfolio__intent-overview {
+        grid-template-columns: 1fr;
+    }
+    .portfolio__intent-mark {
+        min-height: 130px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .portfolio__intent-details[open] .portfolio__intent-content {
+        animation: none;
+    }
+    .portfolio__intent-principles li,
+    .portfolio__intent-icon,
+    .portfolio__intent-node,
+    .portfolio__intent-grid section {
+        transition: none;
+        transform: none !important;
     }
 }

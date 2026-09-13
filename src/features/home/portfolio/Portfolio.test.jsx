@@ -47,17 +47,16 @@ describe('Portfolio', () => {
         )
     })
 
-    it('uses the repository for the My-Website project image', () => {
+    it('opens the case study from project images and keeps code links explicit', () => {
         render(
             <MemoryRouter>
                 <Portfolio />
             </MemoryRouter>
         )
 
-        expect(screen.getByRole('link', {name: 'Voir le code · My-Website'})).toHaveAttribute(
-            'href',
-            'https://github.com/JulienEsbt/My-Website'
-        )
+        expect(
+            screen.getByRole('link', {name: 'Voir l’étude de cas · My-Website'})
+        ).toHaveAttribute('href', '/projects/my-website')
     })
 
     it('presents Agora as a private project intent without a public link', async () => {

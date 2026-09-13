@@ -17,10 +17,10 @@ const HomePage = () => {
             <HomeNav />
             <About />
             <Portfolio />
-            <HomeDiscover />
             <Experience />
             <Services />
             <Goals />
+            <HomeDiscover />
             <ContactSection />
         </PageFrame>
     )

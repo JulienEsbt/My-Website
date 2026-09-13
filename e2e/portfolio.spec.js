@@ -302,3 +302,42 @@ test('a Mapbox denial is explained while the selected story stays readable', asy
     await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
     await expect(page.getByRole('link', {name: 'Switch to English'})).toBeVisible()
 })
+
+test('project images open studies and the expanded Agora stays compact and aligned', async ({
+    page,
+}) => {
+    await page.goto('/#portfolio')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    const cards = page.locator('.portfolio__item')
+    const boxes = await cards.evaluateAll((nodes) =>
+        nodes.map((n) => {
+            const b = n.getBoundingClientRect()
+            return {top: b.top, bottom: b.bottom}
+        })
+    )
+    expect(
+        Math.max(...boxes.map((b) => b.top)) - Math.min(...boxes.map((b) => b.top))
+    ).toBeLessThan(1)
+    expect(
+        Math.max(...boxes.map((b) => b.bottom)) - Math.min(...boxes.map((b) => b.bottom))
+    ).toBeLessThan(1)
+    await expect(cards.nth(0).locator('a.portfolio__image')).toHaveAttribute(
+        'href',
+        '/projects/bruno-pizza'
+    )
+    await expect(cards.nth(1).locator('a.portfolio__image')).toHaveAttribute(
+        'href',
+        '/projects/my-website'
+    )
+    await expect(cards.nth(2).locator('a.portfolio__image')).toHaveCount(0)
+    await page.locator('.portfolio__intent summary').click()
+    const summary = await page.locator('.portfolio__intent summary').boundingBox()
+    const first = await page.locator('.portfolio__intent-grid section').first().boundingBox()
+    expect(first.y - summary.y - summary.height).toBeLessThan(24)
+    const order = await page
+        .locator('#goals, #home-reflections, #home-travel, #contact')
+        .evaluateAll((nodes) => nodes.map((n) => n.id))
+    expect(order).toEqual(['goals', 'home-reflections', 'home-travel', 'contact'])
+    await cards.nth(0).locator('a.portfolio__image').click()
+    await expect(page).toHaveURL(/\/projects\/bruno-pizza$/)
+})

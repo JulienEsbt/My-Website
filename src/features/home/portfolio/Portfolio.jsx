@@ -13,6 +13,19 @@ import './Portfolio.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+function ProjectImage({caseStudy, title, label, children}) {
+    return caseStudy ? (
+        <Link to={caseStudy} className="portfolio__image" aria-label={`${label} · ${title}`}>
+            {children}
+            <span className="portfolio__open" aria-hidden="true">
+                <FiArrowUpRight />
+            </span>
+        </Link>
+    ) : (
+        <div className="portfolio__image">{children}</div>
+    )
+}
+
 export default function Portfolio() {
     const {t} = useTranslation('home')
     const sectionRef = useRef(null)
@@ -57,12 +70,10 @@ export default function Portfolio() {
                         className="portfolio__item"
                         ref={(el) => (cardsRef.current[index] = el)}
                     >
-                        <a
-                            href={repository}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="portfolio__image"
-                            aria-label={`${t('portfolio.cta')} · ${t(`portfolio.items.${id}.title`)}`}
+                        <ProjectImage
+                            caseStudy={caseStudy}
+                            title={t(`portfolio.items.${id}.title`)}
+                            label={t('portfolio.caseStudy')}
                         >
                             <ResponsiveImage
                                 media={image}
@@ -71,11 +82,7 @@ export default function Portfolio() {
                                 loading="lazy"
                                 decoding="async"
                             />
-
-                            <span className="portfolio__open">
-                                <FiArrowUpRight />
-                            </span>
-                        </a>
+                        </ProjectImage>
 
                         <div className="portfolio__body">
                             <span className="portfolio__type">
