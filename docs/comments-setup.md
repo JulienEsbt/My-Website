@@ -2,6 +2,17 @@
 
 Interface FR/EN : sélectionner un passage (jusqu’à 1 000 caractères), ouvrir le formulaire, choisir un pseudonyme et publier. Les réactions générales sont également possibles. Publication immédiate, sans compte ; les pseudonymes ne certifient aucune identité.
 
+## Connexion guidée pour Julien
+
+1. Dans le projet **my-website** sur Vercel, ouvrir **Storage**, choisir Neon via le Marketplace et connecter la ressource au projet. Vérifier l’offre et la région affichées avant de valider ; aucune formule payante n’est souscrite par le code.
+2. Depuis Neon, bouton **Connect**, récupérer l’URL PostgreSQL de la branche de développement/prévisualisation, avec TLS. La coller uniquement dans `COMMENTS_DATABASE_URL` du fichier local `.env.local`, jamais dans la conversation ni Notion.
+3. Les réglages privés locaux peuvent être préparés avec `node scripts/prepare-comments-env.mjs`. Ce script conserve les valeurs existantes, génère les deux clés manquantes, vérifie que le fichier est ignoré par Git et n’affiche aucun secret.
+4. Exécuter `node --env-file=.env.local scripts/setup-comments.mjs`. Puis redémarrer le serveur local. Tester publication, lecture depuis un second navigateur et suppression. Utiliser une base de test, pas des contributions réelles pour cette vérification.
+5. Pour Vercel, renseigner les quatre variables décrites ci-dessous côté serveur dans l’environnement concerné. Séparer les bases Preview et Production ; ne pas brancher automatiquement les essais sur la base publique.
+6. La mise en ligne du code reste une opération distincte. Après publication autorisée, vérifier aussi les origines du site et le retrait par modération.
+
+Sources : [stockage Vercel](https://vercel.com/docs/marketplace-storage), [intégration Neon](https://vercel.com/marketplace/neon/neon).
+
 ## Connexion avant publication
 
 1. Créer ou choisir une base PostgreSQL, par exemple Neon via Vercel Marketplace. Aucun service n’a été créé par ce chantier.
