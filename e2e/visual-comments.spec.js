@@ -205,15 +205,42 @@ test('professional chapters keep the centered title pinned while cards progress'
         await page.setViewportSize(size)
         for (const id of ['experience', 'services']) {
             const section = page.locator(`#${id}`)
-            const top = await section.evaluate((el) => el.getBoundingClientRect().top + scrollY)
-            await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), top + 150)
             const heading = section.locator('.professional-chapter__heading')
-            await expect.poll(async () => Math.abs((await heading.boundingBox()).y)).toBeLessThan(3)
-            const first = await section.locator('.professional-chapter__step').first().boundingBox()
-            await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), top + 450)
-            await expect.poll(async () => Math.abs((await heading.boundingBox()).y)).toBeLessThan(3)
-            const next = await section.locator('.professional-chapter__step').first().boundingBox()
-            expect(first.y - next.y).toBeGreaterThan(250)
+            const geometry = await section.evaluate((el) => {
+                const h = el.querySelector('.professional-chapter__heading')
+                return {
+                    top: el.getBoundingClientRect().top + scrollY,
+                    height: el.offsetHeight,
+                    headingHeight: h.offsetHeight,
+                    inset: parseFloat(getComputedStyle(h).top),
+                }
+            })
+            const range = geometry.height - geometry.headingHeight
+            expect(range).toBeGreaterThan(150)
+            for (const progress of [0.2, 0.7]) {
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - geometry.inset + range * progress
+                )
+                await expect
+                    .poll(async () => Math.abs((await heading.boundingBox()).y - geometry.inset))
+                    .toBeLessThan(3)
+                const box = await heading.boundingBox()
+                expect(Math.abs(box.y + box.height / 2 - size.height / 2)).toBeLessThan(3)
+            }
+            const gaps = await section
+                .locator('.professional-chapter__step')
+                .evaluateAll((steps) =>
+                    steps
+                        .slice(1)
+                        .map(
+                            (step, i) => step.offsetTop - steps[i].offsetTop - steps[i].offsetHeight
+                        )
+                )
+            for (const gap of gaps) {
+                expect(gap).toBeGreaterThanOrEqual(0)
+                expect(gap).toBeLessThanOrEqual(24)
+            }
             await page.screenshot({path: `/tmp/restored-${id}-${size.width}.png`})
         }
     }

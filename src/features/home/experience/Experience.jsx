@@ -10,6 +10,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import './Experience.css'
 import '../professionalChapters.css'
+import useChapterHeading from '../useChapterHeading.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -56,6 +57,7 @@ const Experience = () => {
     }
     const sectionRef = useRef(null)
     const cardsRef = useRef([])
+    useChapterHeading(sectionRef)
     const reducedMotion = useReducedMotion()
 
     useLayoutEffect(() => {
