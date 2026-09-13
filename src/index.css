@@ -178,6 +178,19 @@ body,
     background-color: #020612;
 }
 
+/* Subtle ambient light shared by every page, without moving the content. */
+#root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 0% 24%, rgba(64, 139, 220, 0.1), transparent 48%),
+        radial-gradient(ellipse at 100% 66%, rgba(116, 82, 192, 0.105), transparent 48%),
+        radial-gradient(ellipse at 42% 100%, rgba(44, 132, 153, 0.055), transparent 48%);
+}
+
 /* ==================== GENERAL STYLES ==================== */
 .container {
     width: var(--container-width-1g);
