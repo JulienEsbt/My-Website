@@ -14,6 +14,18 @@ Interface FR/EN : sélectionner un passage (jusqu’à 1 000 caractères), ouvri
 
 Références : [Neon dans Vercel Marketplace](https://vercel.com/marketplace/neon/neon), [latence selon les régions](https://neon.com/demos/regional-latency).
 
+## Écran « Connect a Project »
+
+Pour la phase actuelle de validation :
+
+1. Projet : `my-website`.
+2. Environments : Preview et Development cochés ; Production décoché pour le moment.
+3. Create database branch for deployment : Preview coché, Production décoché.
+4. Custom Prefix : saisir `COMMENTS_DATABASE` dans le champ de la capture, dont le suffixe affiché est `_URL`. Vérifier après connexion que la variable créée se nomme exactement `COMMENTS_DATABASE_URL`.
+5. Sensitive : garder activé pour les environnements qui l’acceptent, puis Connect.
+6. Récupérer l’URL de la branche destinée au développement dans le fichier local `.env.local`. Le raccordement Vercel ne remplit pas ce fichier automatiquement. Ne pas utiliser l’URL d’une branche Preview temporaire pour une future production.
+7. Exécuter la préparation des tables puis la recette à deux navigateurs. Connecter la production séparément quand la publication sera décidée.
+
 ## Connexion guidée pour Julien
 
 1. Dans le projet **my-website** sur Vercel, ouvrir **Storage**, choisir Neon via le Marketplace et connecter la ressource au projet. Vérifier l’offre et la région affichées avant de valider ; aucune formule payante n’est souscrite par le code.
