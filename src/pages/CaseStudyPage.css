@@ -218,3 +218,7 @@
         padding: 1.35rem;
     }
 }
+
+.case-study__section[id] {
+    scroll-margin-top: 6rem;
+}

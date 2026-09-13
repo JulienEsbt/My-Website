@@ -41,4 +41,22 @@ describe('TravelMapbox', () => {
         expect(onResetView).toHaveBeenCalledOnce()
         expect(mapState.createTravelMap).toHaveBeenCalledOnce()
     })
+    it('reports provider failures without restarting or hiding the map', () => {
+        render(<TravelMapbox />)
+        act(() => vi.advanceTimersByTime(100))
+        act(() => mapState.createTravelMap.mock.calls[0][0].onError())
+        expect(screen.getByRole('status')).toHaveTextContent('Certaines données de la carte')
+        expect(screen.getByRole('region')).toBeInTheDocument()
+        act(() => vi.advanceTimersByTime(1000))
+        expect(mapState.createTravelMap).toHaveBeenCalledOnce()
+    })
+    it('keeps navigation available when initialization fails', () => {
+        mapState.createTravelMap.mockImplementationOnce(() => {
+            throw new Error('Provider unavailable')
+        })
+        render(<TravelMapbox />)
+        act(() => vi.advanceTimersByTime(100))
+        expect(screen.getByRole('status')).toBeInTheDocument()
+        expect(screen.getByRole('button', {name: 'Vue d’ensemble'})).toBeInTheDocument()
+    })
 })

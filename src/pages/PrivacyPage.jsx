@@ -2,14 +2,12 @@ import React from 'react'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import './PrivacyPage.css'
 
-const SECTIONS = ['analytics', 'contact', 'external', 'control']
+const SECTIONS = ['analytics', 'performance', 'contact', 'comments', 'external', 'control']
 
 export default function PrivacyPage() {
     const {t} = useTranslation('common')
-    useDocumentTitle(t('privacy.metaTitle'))
 
     return (
         <PageFrame>
@@ -29,6 +27,16 @@ export default function PrivacyPage() {
                         <section key={section}>
                             <h3>{t(`privacy.${section}Title`)}</h3>
                             <p>{t(`privacy.${section}Body`)}</p>
+                            {section === 'analytics' && (
+                                <a href="https://vercel.com/docs/analytics/privacy-policy">
+                                    Vercel Web Analytics
+                                </a>
+                            )}
+                            {section === 'performance' && (
+                                <a href="https://vercel.com/docs/speed-insights/privacy-policy">
+                                    Vercel Speed Insights
+                                </a>
+                            )}
                         </section>
                     ))}
                 </div>

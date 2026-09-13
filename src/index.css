@@ -178,6 +178,33 @@ body,
     background-color: #020612;
 }
 
+/* Colored pools repeat along the document, including below the first viewport. */
+#root {
+    background-image:
+        radial-gradient(
+            ellipse 460px 360px at 8% 400px,
+            rgba(22, 105, 181, 0.28),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 440px 420px at 96% 900px,
+            rgba(109, 54, 174, 0.28),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 380px 300px at 18% 1580px,
+            rgba(22, 121, 130, 0.19),
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 330px 320px at 78% 2080px,
+            rgba(62, 74, 168, 0.25),
+            transparent 100%
+        );
+    background-size: 100% 2400px;
+    background-repeat: repeat-y;
+}
+
 /* ==================== GENERAL STYLES ==================== */
 .container {
     width: var(--container-width-1g);
@@ -322,4 +349,65 @@ img {
 
 .reflexions-themes {
     margin-top: var(--section-spacing);
+}
+
+/* Keep readable HTML visible until the interactive page has mounted. */
+[data-language-entry-pending] #prerendered-content {
+    visibility: hidden;
+}
+#prerendered-content ~ #root {
+    display: none;
+}
+#prerendered-content .swiper-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+#prerendered-content .swiper-slide {
+    flex: 1 1 16rem;
+}
+
+/* Consistent feedback for informational chips and their interactive counterparts. */
+:root
+    :is(
+        .home-hero__badges span,
+        .home-hero__floating-pill,
+        .portfolio__tags span,
+        .experience__skills span,
+        .portfolio__intent-principles li,
+        .knowledge-v3__tags span,
+        .knowledge-v3__item,
+        .reflexion-article__meta span,
+        .reflexion-filter,
+        .travel-timeline__detail-badges span,
+        .home-discover__location,
+        .home-travel-carousel__destinations button
+    ) {
+    transition:
+        translate 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    :root
+        :is(
+            .home-hero__badges span,
+            .home-hero__floating-pill,
+            .portfolio__tags span,
+            .experience__skills span,
+            .portfolio__intent-principles li,
+            .knowledge-v3__tags span,
+            .knowledge-v3__item,
+            .reflexion-article__meta span,
+            .reflexion-filter,
+            .travel-timeline__detail-badges span,
+            .home-discover__location,
+            .home-travel-carousel__destinations button
+        ):hover {
+        translate: 0 -2px;
+        border-color: rgba(77, 181, 255, 0.55);
+        box-shadow: 0 5px 18px rgba(77, 181, 255, 0.13);
+        background-color: rgba(77, 181, 255, 0.14);
+    }
 }

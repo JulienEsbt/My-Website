@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './Tools.css'
-import {BiCheck} from 'react-icons/bi'
+import ResourceLogo from './ResourceLogo.jsx'
+import {FiCompass, FiSearch} from 'react-icons/fi'
 import {FiChevronDown, FiExternalLink} from 'react-icons/fi'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
@@ -14,7 +15,7 @@ const buildTools = (items = []) =>
 
 const Tools = () => {
     const {t} = useTranslation('web3')
-    const [openGroups, setOpenGroups] = useState([])
+    const [openGroups, setOpenGroups] = useState(['others', 'explorers'])
 
     const toggleGroup = (groupId) => {
         setOpenGroups((current) =>
@@ -65,7 +66,9 @@ const Tools = () => {
                                 aria-expanded={isOpen}
                                 aria-controls={`tools-${group.id}`}
                             >
-                                <span>{groupIndex + 1}</span>
+                                <span aria-hidden="true">
+                                    {group.id === 'others' ? <FiSearch /> : <FiCompass />}
+                                </span>
                                 <h3>{group.title}</h3>
                                 <FiChevronDown className="tools-v2__chevron" />
                             </button>
@@ -74,6 +77,7 @@ const Tools = () => {
                                 id={`tools-${group.id}`}
                                 className="tools-v2__list"
                                 aria-label={group.aria}
+                                hidden={!isOpen}
                             >
                                 {group.items.map((tool) => (
                                     <li key={tool.label}>
@@ -84,10 +88,18 @@ const Tools = () => {
                                             aria-label={t('tools.aria.open', {site: tool.label})}
                                         >
                                             <span className="tools-v2__icon">
-                                                <BiCheck aria-hidden="true" />
+                                                <ResourceLogo name={tool.label} />
                                             </span>
 
-                                            <strong>{tool.label}</strong>
+                                            <span className="tools-v2__label">
+                                                <strong>{tool.label}</strong>
+                                                <small>
+                                                    {new URL(tool.href).hostname.replace(
+                                                        /^www\./,
+                                                        ''
+                                                    )}
+                                                </small>
+                                            </span>
 
                                             <FiExternalLink
                                                 className="tools-v2__external"

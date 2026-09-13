@@ -2,15 +2,30 @@ import React, {useLayoutEffect, useRef} from 'react'
 import {BsGithub} from 'react-icons/bs'
 import {FiArrowUpRight} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
-import {Link} from 'react-router-dom'
+import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import {PORTFOLIO_PROJECTS} from '../../../config/portfolioProjects.js'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
+import AgoraProjectCard from './AgoraProjectCard.jsx'
 import './Portfolio.css'
+import '../professionalChapters.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+function ProjectImage({caseStudy, title, label, children}) {
+    return caseStudy ? (
+        <Link to={caseStudy} className="portfolio__image" aria-label={`${label} · ${title}`}>
+            {children}
+            <span className="portfolio__open" aria-hidden="true">
+                <FiArrowUpRight />
+            </span>
+        </Link>
+    ) : (
+        <div className="portfolio__image">{children}</div>
+    )
+}
 
 export default function Portfolio() {
     const {t} = useTranslation('home')
@@ -44,10 +59,19 @@ export default function Portfolio() {
     }, [reducedMotion])
 
     return (
-        <section id="portfolio" ref={sectionRef}>
-            <p className="section-kicker">{t('portfolio.kicker')}</p>
-            <h2>{t('portfolio.title')}</h2>
-            <p className="portfolio__intro">{t('portfolio.intro')}</p>
+        <section
+            id="portfolio"
+            className="professional-chapter professional-chapter--portfolio"
+            ref={sectionRef}
+        >
+            <div className="professional-chapter__heading">
+                <span className="professional-chapter__number" aria-hidden="true">
+                    01
+                </span>
+                <p className="section-kicker">{t('portfolio.kicker')}</p>
+                <h2>{t('portfolio.title')}</h2>
+                <p className="portfolio__intro">{t('portfolio.intro')}</p>
+            </div>
 
             <div className="container portfolio__container">
                 {PORTFOLIO_PROJECTS.map(({id, image, repository, demo, caseStudy, tags}, index) => (
@@ -56,12 +80,10 @@ export default function Portfolio() {
                         className="portfolio__item"
                         ref={(el) => (cardsRef.current[index] = el)}
                     >
-                        <a
-                            href={repository}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="portfolio__image"
-                            aria-label={`${t('portfolio.cta')} · ${t(`portfolio.items.${id}.title`)}`}
+                        <ProjectImage
+                            caseStudy={caseStudy}
+                            title={t(`portfolio.items.${id}.title`)}
+                            label={t('portfolio.caseStudy')}
                         >
                             <ResponsiveImage
                                 media={image}
@@ -70,11 +92,7 @@ export default function Portfolio() {
                                 loading="lazy"
                                 decoding="async"
                             />
-
-                            <span className="portfolio__open">
-                                <FiArrowUpRight />
-                            </span>
-                        </a>
+                        </ProjectImage>
 
                         <div className="portfolio__body">
                             <span className="portfolio__type">
@@ -124,6 +142,10 @@ export default function Portfolio() {
                         </div>
                     </article>
                 ))}
+
+                <AgoraProjectCard
+                    cardRef={(element) => (cardsRef.current[PORTFOLIO_PROJECTS.length] = element)}
+                />
             </div>
         </section>
     )

@@ -54,7 +54,7 @@ async function mapWithConcurrency<T, R>(
     return results
 }
 
-async function resolveWalletInput({
+export async function resolveWalletInput({
     provider,
     input,
     network,
@@ -74,7 +74,9 @@ async function resolveWalletInput({
         return {address: cleanInput, ens, avatar}
     }
     if (network.id !== 'ethereum' || !cleanInput.endsWith('.eth')) return null
-    const address = await provider.resolveName(cleanInput).catch(() => null)
+    const address = await provider.resolveName(cleanInput).catch(() => {
+        throw new Error('ENS_UNAVAILABLE')
+    })
     if (!address) return null
     return {
         address,
@@ -290,7 +292,7 @@ export async function inspectWalletPortfolio({
     const wallet = await resolveWalletInput({provider, input: walletInput, network})
     if (!wallet) throw new Error('INVALID_ADDRESS')
 
-    const [nativeBalanceRaw, tokenResult, nfts, recentTransfers] = await Promise.all([
+    const [nativeBalanceRaw, tokenResult, nftResult, recentTransfers] = await Promise.all([
         provider.getBalance(wallet.address),
         loadTokens({rpcUrl, walletAddress: wallet.address, ...(signal ? {signal} : {})}),
         fetchWalletNfts(rpcUrl, wallet.address, signal),
@@ -318,8 +320,9 @@ export async function inspectWalletPortfolio({
         tokenDataTruncated: tokenResult.truncated,
         tokenMetadataFailures: tokenResult.metadataFailures,
         valuationPartial: prices.partial,
-        nftCount: nfts.length,
-        nfts,
+        nftCount: nftResult.totalCount,
+        nftStatus: nftResult.status,
+        nfts: nftResult.items,
         recentTransfers,
         ...valuation,
     }
@@ -328,21 +331,26 @@ export async function inspectWalletPortfolio({
 export async function compareWalletNetworks({
     walletAddress,
     networks,
+    signal,
 }: {
     walletAddress: string
+    signal?: AbortSignal
     networks: readonly WalletNetwork[]
 }): Promise<WalletNetworkSnapshot[]> {
     return Promise.all(
         networks.map(async (network): Promise<WalletNetworkSnapshot> => {
+            signal?.throwIfAborted()
             const rpcUrl = getRpcUrl(network.rpcEnv)
             if (!rpcUrl) return {network, status: 'missing-rpc'}
 
             try {
                 const provider = createReadOnlyProvider(rpcUrl)
                 const nativeBalance = Number(formatEther(await provider.getBalance(walletAddress)))
+                signal?.throwIfAborted()
                 const {nativePriceUsd} = await fetchWalletPrices({
                     networkId: network.id,
                     tokenContracts: [],
+                    ...(signal ? {signal} : {}),
                 })
                 return {
                     network,
@@ -350,7 +358,8 @@ export async function compareWalletNetworks({
                     nativeBalance,
                     nativeValueUsd: nativeBalance * nativePriceUsd,
                 }
-            } catch {
+            } catch (error) {
+                if (signal?.aborted) throw error
                 return {network, status: 'error'}
             }
         })

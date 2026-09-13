@@ -7,7 +7,7 @@ describe('SEO metadata', () => {
 
         expect(metadata.title).toContain('Bruno Pizza')
         expect(metadata.description).toContain('desktop application')
-        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/projects/bruno-pizza`)
+        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/en/projects/bruno-pizza`)
         expect(metadata.robots).toBe('index, follow')
         expect(metadata.structuredData['@type']).toBe('SoftwareApplication')
     })
@@ -18,6 +18,31 @@ describe('SEO metadata', () => {
         expect(metadata.title).toBe('Charte de pensée — Julien Esterbet')
         expect(metadata.type).toBe('article')
         expect(metadata.structuredData['@type']).toBe('Article')
+    })
+
+    it('creates localized metadata and a specific preview for a travel story', () => {
+        const metadata = getSeoMetadata('/en/travel/croatia-2026')
+
+        expect(metadata.title).toContain('Dubrovnik, Croatia')
+        expect(metadata.description).toContain('Back to Dubrovnik')
+        expect(metadata.canonicalUrl).toBe(`${SITE_URL}/en/travel/croatia-2026`)
+        expect(metadata.imageUrl).toBe(`${SITE_URL}/og/travel/en/croatia-2026.png`)
+        expect(metadata.type).toBe('article')
+        expect(metadata.structuredData).toMatchObject({
+            '@type': 'Article',
+            about: {'@type': 'Place', name: 'Dubrovnik, Croatia'},
+        })
+        expect(metadata.alternates).toContainEqual({
+            language: 'fr',
+            url: `${SITE_URL}/travel/croatia-2026`,
+        })
+    })
+
+    it('does not index an unknown travel story', () => {
+        const metadata = getSeoMetadata('/travel/voyage-inconnu')
+
+        expect(metadata.isNotFound).toBe(true)
+        expect(metadata.robots).toBe('noindex, nofollow')
     })
 
     it('marks unknown routes as non-indexable', () => {
@@ -31,8 +56,22 @@ describe('SEO metadata', () => {
     it('lists every public static and editorial route once', () => {
         expect(new Set(INDEXABLE_PATHS).size).toBe(INDEXABLE_PATHS.length)
         expect(INDEXABLE_PATHS).toContain('/resume')
-        expect(INDEXABLE_PATHS).toContain('/journal')
+        expect(INDEXABLE_PATHS).not.toContain('/journal')
+        expect(INDEXABLE_PATHS).not.toContain('/en/journal')
         expect(INDEXABLE_PATHS).toContain('/privacy')
         expect(INDEXABLE_PATHS).toContain('/reflections/mefiance-opposition-simple')
+        expect(INDEXABLE_PATHS).toContain('/travel/croatia-2026')
+        expect(INDEXABLE_PATHS).toContain('/en/travel/croatia-2026')
+    })
+    it('infers English from the URL and supplies reciprocal alternatives', () => {
+        const seo = getSeoMetadata('/en/reflections/charte-de-pensee')
+        expect(seo.language).toBe('en')
+        expect(seo.isNotFound).toBe(false)
+        expect(seo.alternates).toContainEqual({
+            language: 'fr',
+            url: `${SITE_URL}/reflections/charte-de-pensee`,
+        })
+        expect(seo.alternates).toContainEqual({language: 'en', url: seo.canonicalUrl})
+        expect(getSeoMetadata('/en').canonicalUrl).toBe(`${SITE_URL}/en`)
     })
 })

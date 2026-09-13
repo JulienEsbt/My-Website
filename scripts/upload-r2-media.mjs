@@ -1,3 +1,4 @@
+import sharp from 'sharp'
 import {spawn} from 'node:child_process'
 import {readFileSync, statSync} from 'node:fs'
 import {extname, resolve} from 'node:path'
@@ -155,6 +156,13 @@ console.log(
 )
 
 if (!verifyOnly) {
+    await mapWithConcurrency(mediaFiles, verificationConcurrency, async ({path}) => {
+        const metadata = await sharp(path).metadata()
+        if (metadata.exif || metadata.iptc || metadata.xmp)
+            throw new Error(
+                'Upload refused: embedded metadata detected. Private values are not displayed.'
+            )
+    })
     const terminal = createInterface({input: process.stdin, output: process.stdout})
     const endpointInput = await terminal.question(
         'Endpoint S3 R2 (https://<ACCOUNT_ID>.r2.cloudflarestorage.com) : '

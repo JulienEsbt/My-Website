@@ -8,12 +8,18 @@ const COINGECKO_NETWORKS = Object.freeze({
     bnb: {nativeId: 'binancecoin', platformId: 'binance-smart-chain'},
 } satisfies Record<NetworkId, {nativeId: string; platformId: string}>)
 
-const CONTRACT_BATCH_SIZE = 35
+const CONTRACT_BATCH_SIZE = 1
+const TOKEN_PRICE_LOOKUP_LIMIT = 20
 const REQUEST_TIMEOUT_MS = 8000
 const RETRY_DELAY_MS = 250
 
 type FetchImplementation = (input: string, init?: RequestInit) => Promise<Response>
 type PricePayload = Record<string, {usd?: number}>
+const PRICE_CACHE_TTL_MS = 60_000
+const priceCaches = new WeakMap<
+    FetchImplementation,
+    Map<string, {expires: number; payload: PricePayload}>
+>()
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
     Boolean(value) && typeof value === 'object' && !Array.isArray(value)
@@ -51,9 +57,30 @@ async function fetchJsonWithRetry(
     signal: AbortSignal | undefined,
     fetchImpl: FetchImplementation
 ): Promise<PricePayload> {
+    signal?.throwIfAborted()
+    let cache = priceCaches.get(fetchImpl)
+    if (!cache) {
+        cache = new Map()
+        priceCaches.set(fetchImpl, cache)
+    }
+    const cached = cache.get(url)
+    if (cached && cached.expires > Date.now()) return cached.payload
+    cache.delete(url)
     for (let attempt = 0; attempt < 2; attempt += 1) {
         const response = await fetchImpl(url, {signal: withTimeout(signal)})
-        if (response.ok) return parsePricePayload(await response.json())
+        if (response.ok) {
+            const payload = parsePricePayload(await response.json())
+            signal?.throwIfAborted()
+            if (
+                Object.values(payload).some(
+                    (price) => Number.isFinite(price.usd) && (price.usd ?? 0) > 0
+                )
+            ) {
+                if (cache.size >= 100) cache.delete(cache.keys().next().value!)
+                cache.set(url, {payload, expires: Date.now() + PRICE_CACHE_TTL_MS})
+            }
+            return payload
+        }
 
         const canRetry = attempt === 0 && (response.status === 429 || response.status >= 500)
         if (!canRetry) throw new Error(`PRICE_PROVIDER_${response.status}`)
@@ -85,7 +112,7 @@ export async function fetchWalletPrices({
     const contracts = [
         ...new Set(tokenContracts.map((contract) => contract?.toLowerCase()).filter(Boolean)),
     ] as string[]
-    let partial = false
+    let partial = contracts.length > TOKEN_PRICE_LOOKUP_LIMIT
 
     const nativePromise = fetchJsonWithRetry(
         `https://api.coingecko.com/api/v3/simple/price?ids=${configuration.nativeId}&vs_currencies=usd`,
@@ -98,7 +125,7 @@ export async function fetchWalletPrices({
     })
 
     const tokenPricesByContract: Record<string, number> = {}
-    const batches = chunk(contracts, CONTRACT_BATCH_SIZE)
+    const batches = chunk(contracts.slice(0, TOKEN_PRICE_LOOKUP_LIMIT), CONTRACT_BATCH_SIZE)
     for (let index = 0; index < batches.length; index += 2) {
         const results = await Promise.all(
             batches.slice(index, index + 2).map(async (addresses) => {

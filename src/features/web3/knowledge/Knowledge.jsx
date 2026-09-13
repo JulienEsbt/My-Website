@@ -44,7 +44,7 @@ const Knowledge = () => {
     const selectCategory = (category) => {
         setActiveCategoryId(category.id)
         setActiveItemId(category.items[0].id)
-        setMobilePanelOpen(true)
+        setMobilePanelOpen(isMobilePanel)
     }
 
     const closeMobilePanel = () => {
@@ -144,7 +144,7 @@ const Knowledge = () => {
                                     }`}
                                     onClick={() => {
                                         setActiveItemId(item.id)
-                                        setMobilePanelOpen(true)
+                                        setMobilePanelOpen(isMobilePanel)
                                     }}
                                     aria-pressed={activeItem.id === item.id}
                                 >

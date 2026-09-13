@@ -3,19 +3,10 @@ export type SupportedLanguage = 'fr' | 'en'
 export type LocalizedText = Readonly<Record<SupportedLanguage, string>>
 
 export type RoutePath =
-    | '/'
-    | '/projects/bruno-pizza'
-    | '/projects/my-website'
-    | '/resume'
-    | '/privacy'
-    | '/web3'
-    | '/travel'
-    | '/reflections'
-    | '/journal'
-    | '/reflections/:slug'
+    (typeof import('../config/routeCatalog.js').ROUTE_CATALOG)[keyof typeof import('../config/routeCatalog.js').ROUTE_CATALOG]['path']
 
 export interface NavigationPage {
-    id: 'home' | 'web3' | 'travel' | 'reflections' | 'journal'
+    id: 'home' | 'web3' | 'travel' | 'reflections'
     path: RoutePath
     i18nKey: string
 }

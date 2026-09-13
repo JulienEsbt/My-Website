@@ -16,7 +16,6 @@
         "web3": "Labs Web3",
         "travel": "Carnets de voyage",
         "reflections": "Écrits et réflexions",
-        "journal": "Journal",
         "groups": {
             "primary": "Portfolio et labs",
             "editorial": "À explorer"
@@ -44,7 +43,7 @@
         },
         "badge": "Disponible",
         "heading": "Une idée, un projet ou une discussion ?",
-        "description": "Que ce soit pour un projet, une opportunité professionnelle, une collaboration ou simplement pour échanger autour de la technologie, du Web3 ou d’autres sujets qui nous passionnent, n’hésitez pas à me contacter.",
+        "description": "Pour un projet, une opportunité professionnelle ou une discussion autour des idées et des sujets qui nous intéressent, vous pouvez m’écrire ici.",
         "form": {
             "nameLabel": "Nom",
             "emailLabel": "Email",
@@ -57,20 +56,20 @@
             "loading": "Envoi du message en cours…",
             "success": "Message envoyé, merci !",
             "invalid": "Vérifiez les champs : le nom doit contenir au moins 2 caractères et le message au moins 10 caractères.",
-            "error": "Le message n’a pas pu être envoyé. Réessayez dans quelques instants."
+            "error": "Le message n’a pas pu être envoyé. Réessayez dans quelques instants.",
+            "simulated": "Test local réussi : le formulaire est valide. Aucun email n’a été envoyé."
         }
     },
     "footer": {
         "logo": "Julien ESTERBET",
-        "description": "Développeur full-stack orienté produit. Je construis des applications métiers et des expériences web utiles, puis j’ouvre le portfolio sur le Web3, les voyages et l’écriture.",
+        "description": "Analyste programmeur. Applications métiers, projets et expérimentations ; écrits et voyages autour de ce que je découvre et questionne.",
         "aria": "Navigation du pied de page",
         "pages": "Pages",
         "shortPages": {
             "home": "Portfolio",
             "web3": "Labs Web3",
             "travel": "Voyages",
-            "reflections": "Réflexions",
-            "journal": "Journal"
+            "reflections": "Réflexions"
         },
         "socials": "Réseaux",
         "cta": "Me contacter",
@@ -83,15 +82,19 @@
         "title": "Confidentialité et mesures d’audience",
         "intro": "Ce portfolio limite la collecte au nécessaire pour comprendre son usage, surveiller ses performances et répondre aux messages envoyés volontairement.",
         "analyticsTitle": "Audience et performances",
-        "analyticsBody": "Vercel Web Analytics mesure les pages consultées et Speed Insights collecte des indicateurs Web Vitals. Le site n’ajoute aucun événement personnalisé et ne transmet à ces outils ni nom, ni adresse e-mail, ni message, ni adresse de wallet.",
+        "analyticsBody": "Vercel Web Analytics mesure automatiquement les consultations dès l’ouverture des pages, y compris les changements de page internes. Ses statistiques comprennent la page consultée, la provenance de la visite, le navigateur, l’appareil et une localisation approximative. Selon Vercel, la mesure utilise un identifiant dérivé de la requête, renouvelé après 24 heures, sans cookie tiers de suivi.",
         "contactTitle": "Formulaire de contact",
-        "contactBody": "Le nom, l’adresse e-mail et le message saisis sont transmis à EmailJS uniquement pour livrer le message. Ils ne sont pas utilisés par le site pour établir un profil ou alimenter une base de données.",
+        "contactBody": "Le formulaire transmet votre nom, votre email et votre message au serveur du site, puis à EmailJS pour livraison dans ma messagerie. Le site ne crée pas de base de contacts ni de profil à partir de ces messages. Leur copie reçue reste dans la messagerie pour permettre nos échanges. La limitation des envois utilise une empreinte de l’adresse IP en mémoire et un compteur par fenêtre de quinze minutes.",
         "externalTitle": "Services externes",
-        "externalBody": "Mapbox, les fournisseurs RPC Alchemy et les sources de prix sont sollicités uniquement lorsque les fonctionnalités correspondantes sont utilisées. Les politiques de ces fournisseurs s’appliquent alors à leurs services.",
+        "externalBody": "Les images sont servies par Cloudflare R2. Dans les carnets de voyage, les fonds de carte Mapbox peuvent être demandés à l’affichage, sans clic préalable. Les outils Web3 interrogent Alchemy et CoinGecko ; une analyse de wallet transmet l’adresse publique analysée au fournisseur RPC/NFT. Les images de NFT et de tokens peuvent provenir de domaines tiers. Ces connexions communiquent notamment votre adresse IP aux fournisseurs concernés. Aucun secret ni clé privée de wallet n’est demandé par l’inspecteur.",
         "controlTitle": "Vos choix",
         "controlBody": "Vous pouvez utiliser les pages éditoriales et suivre les flux RSS ou Atom sans remplir le formulaire, communiquer d’adresse e-mail ni connecter de wallet. Le site ne propose actuellement aucune inscription à une newsletter. Les bloqueurs de contenu peuvent empêcher les mesures Vercel sans bloquer le contenu principal.",
         "contact": "Pour toute question concernant ces traitements, utilisez le formulaire de contact du portfolio.",
-        "updated": "Dernière mise à jour : août 2026."
+        "updated": "Dernière mise à jour : septembre 2026.",
+        "performanceTitle": "Performances et données exclues",
+        "performanceBody": "Vercel Speed Insights reçoit des mesures Web Vitals, accompagnées de la page, du type d’appareil, du navigateur, du système, du pays et d’informations de connexion. Le site retire les paramètres et fragments des URL mesurées et masque les chemins inconnus. Il n’ajoute aucun événement personnalisé et ne transmet pas volontairement les champs du formulaire ni les adresses de wallet à ces deux outils.",
+        "commentsTitle": "Commentaires publics",
+        "commentsBody": "Lorsque le service est disponible, tes commentaires, ton pseudonyme, la citation choisie et la date sont publics immédiatement. Aucun compte ni email n’est demandé. Une clé conservée dans ton navigateur permet de retirer tes commentaires ; Julien peut également les retirer. Une empreinte temporaire de l’adresse réseau sert à limiter le spam, sans publier cette adresse. Le pseudonyme ne certifie pas une identité. Évite de publier des données personnelles sensibles."
     },
     "notFound": {
         "pageTitle": "Page introuvable — Julien Esterbet",

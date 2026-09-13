@@ -26,6 +26,14 @@ export function validateContactPayload(input) {
         return {ok: false}
     }
 
+    if (
+        !['name', 'email', 'message'].every((field) => typeof input[field] === 'string') ||
+        (input.website !== undefined && typeof input.website !== 'string') ||
+        !['number', 'string'].includes(typeof input.startedAt)
+    ) {
+        return {ok: false}
+    }
+
     const data = {
         name: normalizeSingleLine(input.name),
         email: normalizeSingleLine(input.email).toLowerCase(),

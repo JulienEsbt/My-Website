@@ -1,5 +1,6 @@
 import {FiArrowDownLeft, FiArrowUpRight, FiExternalLink} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
+import WalletMetricsGuide from './WalletMetricsGuide.jsx'
 import WalletTokenRow from './WalletTokenRow.jsx'
 import {formatUsd, shortenAddress} from './walletFormatters.js'
 import {formatNumber, formatPercent} from '../../../../i18n/formatters.js'
@@ -28,6 +29,8 @@ const WalletInspectorResults = ({
 }) => {
     const {t, i18n} = useTranslation('web3')
     const language = i18n.resolvedLanguage ?? i18n.language
+    const unavailableValue = result.valuationPartial && result.portfolioValueUsd === 0
+    const portfolioValue = unavailableValue ? '—' : formatUsd(result.portfolioValueUsd, language)
 
     return (
         <>
@@ -48,9 +51,9 @@ const WalletInspectorResults = ({
                     </div>
                 </div>
 
-                <div className="wallet-inspector__metric">
+                <div className="wallet-inspector__metric wallet-inspector__metric--value">
                     <span>{t('walletInspector.portfolio')}</span>
-                    <strong>{formatUsd(result.portfolioValueUsd, language)}</strong>
+                    <strong>{portfolioValue}</strong>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -59,7 +62,13 @@ const WalletInspectorResults = ({
                         {formatNumber(result.nativeBalance, language, {maximumFractionDigits: 5})}{' '}
                         {result.network.symbol}
                     </strong>
-                    <small>{formatUsd(result.nativeValueUsd, language)}</small>
+                    <small>
+                        {result.valuationPartial &&
+                        result.nativeValueUsd === 0 &&
+                        result.nativeBalance > 0
+                            ? '—'
+                            : formatUsd(result.nativeValueUsd, language)}
+                    </small>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -73,7 +82,9 @@ const WalletInspectorResults = ({
 
                 <div className="wallet-inspector__metric">
                     <span>{t('walletInspector.nfts')}</span>
-                    <strong>{formatNumber(result.nftCount, language)}</strong>
+                    <strong>
+                        {result.nftCount === null ? '—' : formatNumber(result.nftCount, language)}
+                    </strong>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -96,6 +107,7 @@ const WalletInspectorResults = ({
                 </a>
             </div>
 
+            <WalletMetricsGuide />
             <div className="wallet-inspector__main-grid">
                 {(result.valuationPartial ||
                     result.tokenDataTruncated ||
@@ -109,7 +121,7 @@ const WalletInspectorResults = ({
                 <article className="wallet-inspector__panel wallet-inspector__allocation">
                     <div className="wallet-inspector__panel-head">
                         <h3>{t('walletInspector.allocation')}</h3>
-                        <span>{formatUsd(result.portfolioValueUsd, language)}</span>
+                        <span>{portfolioValue}</span>
                     </div>
 
                     {result.allocationItems.length === 0 ? (
@@ -121,7 +133,7 @@ const WalletInspectorResults = ({
                                 style={{background: getAllocationGradient(result.allocationItems)}}
                             >
                                 <div>
-                                    <strong>{formatUsd(result.portfolioValueUsd, language)}</strong>
+                                    <strong>{portfolioValue}</strong>
                                     <span>{t('walletInspector.total')}</span>
                                 </div>
                             </div>
@@ -174,22 +186,41 @@ const WalletInspectorResults = ({
                             className="wallet-inspector__view-all"
                             onClick={onShowAllNfts}
                         >
-                            {t('walletInspector.viewAll')} · {result.nftCount}
+                            {t('walletInspector.viewAll')} · {result.nfts.length}
                         </button>
                     </div>
 
+                    {result.nftStatus === 'partial' && (
+                        <p role="status">
+                            {t('walletInspector.nftsPartial', {count: result.nfts.length})}
+                        </p>
+                    )}
                     {result.nfts.length === 0 ? (
-                        <p>{t('walletInspector.noNfts')}</p>
+                        <p>
+                            {t(
+                                result.nftStatus === 'unavailable'
+                                    ? 'walletInspector.nftsUnavailable'
+                                    : result.nftStatus === 'partial'
+                                      ? 'walletInspector.nftsNotLoaded'
+                                      : 'walletInspector.noNfts'
+                            )}
+                        </p>
                     ) : (
                         <div className="wallet-nft-strip">
-                            {result.nfts.slice(0, 4).map((nft) => (
+                            {result.nfts.slice(0, 8).map((nft) => (
                                 <button
                                     key={nft.id}
                                     type="button"
                                     className="wallet-nft-card"
                                     onClick={() => onSelectNft(nft)}
                                 >
-                                    <img src={nft.image} alt={nft.name} />
+                                    {nft.image ? (
+                                        <img src={nft.image} alt={nft.name} />
+                                    ) : (
+                                        <span className="wallet-nft-placeholder">
+                                            {t('walletInspector.nftNoImage')}
+                                        </span>
+                                    )}
                                     <strong>{nft.name}</strong>
                                     <span>{nft.collection}</span>
                                 </button>
@@ -225,7 +256,12 @@ const WalletInspectorResults = ({
                                         <small>{shortenAddress(transfer.counterparty)}</small>
                                     </span>
                                     <em>
-                                        {transfer.value ?? '—'} {transfer.asset}
+                                        {transfer.value == null
+                                            ? '—'
+                                            : formatNumber(transfer.value, language, {
+                                                  maximumSignificantDigits: 6,
+                                              })}{' '}
+                                        {transfer.asset}
                                     </em>
                                 </a>
                             ))}

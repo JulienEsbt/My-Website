@@ -48,7 +48,7 @@ const About = () => {
                 y: 28,
                 duration: 0.8,
                 ease: 'power2.out',
-                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 95%'},
             })
 
             gsap.from(visualRef.current, {
@@ -56,11 +56,27 @@ const About = () => {
                 x: -28,
                 duration: 0.8,
                 ease: 'power3.out',
-                scrollTrigger: {trigger: sectionRef.current, start: 'top 74%'},
+                scrollTrigger: {trigger: sectionRef.current, start: 'top 95%'},
             })
         }, sectionRef)
 
-        return () => ctx.revert()
+        const media = gsap.matchMedia()
+        media.add('(min-width: 1100px) and (min-height: 800px)', () => {
+            gsap.to(visualRef.current.querySelector('img'), {
+                scale: 1.08,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 25%',
+                    end: 'bottom 75%',
+                    scrub: 0.6,
+                },
+            })
+        })
+        return () => {
+            media.revert()
+            ctx.revert()
+        }
     }, [reducedMotion])
 
     return (
@@ -74,6 +90,7 @@ const About = () => {
                         <div className="about__photo">
                             <ResponsiveImage
                                 media={HOME_ASSETS.about.photo}
+                                loading="eager"
                                 alt={t('about.photoAlt')}
                                 sizes="(max-width: 700px) 88vw, 520px"
                             />

@@ -66,7 +66,15 @@
     text-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
 }
 
+.lang-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
 .lang-slider .country-flag {
+    display: block;
     width: 2rem;
     height: 1.5rem;
     transform: scale(1.12);

@@ -5,7 +5,7 @@ This directory contains documentation that helps a reader understand, run, revie
 ## What is committed
 
 - `ARCHITECTURE.md`: stable application structure and data flow.
-- `EDITORIAL_GUIDE.md`: how to publish journal entries and reflections.
+- `EDITORIAL_GUIDE.md`: how to publish reflections and maintain RSS/Atom records.
 - `ACCESSIBILITY_AND_PRIVACY.md`: implemented accessibility and privacy principles.
 
 These documents describe the current code. They should be updated in the same commit as a structural or policy change.

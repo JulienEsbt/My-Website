@@ -1,4 +1,7 @@
+import {ROUTE_CATALOG} from './routeCatalog.js'
+import {languageFromPath, localizedPath, unlocalizedPath} from './localizedPaths.js'
 import reflections from '../data/reflections/reflections.js'
+import trips from '../data/travel/trips.js'
 
 export const SITE_URL = 'https://www.julienesterbet.com'
 export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
@@ -6,9 +9,9 @@ export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
 const content = {
     fr: {
         home: {
-            title: 'Julien Esterbet — Développeur full-stack orienté produit',
+            title: 'Portfolio — Julien Esterbet',
             description:
-                'Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web fiables, React, Angular, Java et expérimentations Web3.',
+                'Julien Esterbet, analyste programmeur : applications métiers, projets logiciels, réflexions personnelles et récits de voyage.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Étude de cas produit | Julien Esterbet',
@@ -45,11 +48,6 @@ const content = {
             description:
                 'Textes personnels de Julien Esterbet autour de la philosophie, de la société, du doute et de la construction de soi.',
         },
-        journal: {
-            title: 'Journal — Julien Esterbet',
-            description:
-                'Fil chronologique des projets, voyages, réflexions et nouvelles publications de Julien Esterbet, disponible en RSS et Atom.',
-        },
         notFound: {
             title: 'Page introuvable — Julien Esterbet',
             description: 'Cette page n’existe pas ou a été déplacée.',
@@ -57,9 +55,9 @@ const content = {
     },
     en: {
         home: {
-            title: 'Julien Esterbet — Product-minded full-stack developer',
+            title: 'Portfolio — Julien Esterbet',
             description:
-                'Julien Esterbet’s portfolio: product-minded full-stack development across reliable business applications, web products, React, Angular, Java and Web3 experiments.',
+                'Julien Esterbet, software developer and IT analyst: business applications, software projects, personal reflections and travel stories.',
         },
         brunoPizza: {
             title: 'Bruno Pizza — Product case study | Julien Esterbet',
@@ -96,11 +94,6 @@ const content = {
             description:
                 'Personal writing by Julien Esterbet about philosophy, society, doubt and self-construction.',
         },
-        journal: {
-            title: 'Journal — Julien Esterbet',
-            description:
-                'A chronological feed of Julien Esterbet’s projects, travels, reflections and new publications, available through RSS and Atom.',
-        },
         notFound: {
             title: 'Page not found — Julien Esterbet',
             description: 'This page does not exist or has been moved.',
@@ -108,17 +101,11 @@ const content = {
     },
 }
 
-const staticRoutes = {
-    '/': 'home',
-    '/projects/bruno-pizza': 'brunoPizza',
-    '/projects/my-website': 'myWebsite',
-    '/resume': 'resume',
-    '/privacy': 'privacy',
-    '/web3': 'web3',
-    '/travel': 'travel',
-    '/reflections': 'reflections',
-    '/journal': 'journal',
-}
+const staticRoutes = Object.fromEntries(
+    Object.values(ROUTE_CATALOG)
+        .filter(({path}) => !path.includes(':'))
+        .map(({path, seoKey}) => [path, seoKey])
+)
 
 const person = {
     '@type': 'Person',
@@ -145,8 +132,8 @@ const structuredDataFor = (key, path, language, metadata) => {
                 },
                 {
                     '@type': 'ProfilePage',
-                    '@id': `${SITE_URL}/#profile`,
-                    url: SITE_URL,
+                    '@id': `${SITE_URL}${path}#profile`,
+                    url: `${SITE_URL}${path}`,
                     name: metadata.title,
                     description: metadata.description,
                     inLanguage: language,
@@ -169,7 +156,7 @@ const structuredDataFor = (key, path, language, metadata) => {
         }
     }
 
-    if (key === 'reflection') {
+    if (key === 'reflection' || key === 'travelStory') {
         return {
             '@context': 'https://schema.org',
             '@type': 'Article',
@@ -178,21 +165,25 @@ const structuredDataFor = (key, path, language, metadata) => {
             url: `${SITE_URL}${path}`,
             inLanguage: language,
             author: person,
-            datePublished: metadata.date,
+            ...(metadata.date ? {datePublished: metadata.date} : {}),
+            ...(metadata.place ? {about: {'@type': 'Place', name: metadata.place}} : {}),
         }
     }
 
     return null
 }
 
-export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
+export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pathname)) => {
     const language = requestedLanguage?.startsWith('en') ? 'en' : 'fr'
+    pathname = unlocalizedPath(pathname)
     const reflectionMatch = pathname.match(/^\/reflections\/([^/]+)\/?$/)
     const reflection = reflectionMatch
         ? reflections.find(({slug}) => slug === reflectionMatch[1])
         : null
+    const travelMatch = pathname.match(/^\/travel\/([^/]+)\/?$/)
+    const trip = travelMatch ? trips.find(({id}) => id === travelMatch[1]) : null
     const normalizedPath = pathname !== '/' ? pathname.replace(/\/$/, '') : '/'
-    const key = reflection ? 'reflection' : staticRoutes[normalizedPath]
+    const key = reflection ? 'reflection' : trip ? 'travelStory' : staticRoutes[normalizedPath]
     const isNotFound = !key
 
     const metadata = reflection
@@ -201,32 +192,64 @@ export const getSeoMetadata = (pathname, requestedLanguage = 'fr') => {
               description: reflection.excerpt[language] ?? reflection.excerpt.fr,
               date: reflection.date,
           }
-        : content[language][key ?? 'notFound']
+        : trip
+          ? {
+                title: `${language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)}, ${
+                    language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
+                } — ${
+                    language === 'fr' ? trip.dateLabel : (trip.dateLabelEn ?? trip.dateLabel)
+                } | Julien Esterbet`,
+                description:
+                    language === 'fr' ? trip.description : (trip.descriptionEn ?? trip.description),
+                place: `${language === 'fr' ? trip.city : (trip.cityEn ?? trip.city)}, ${
+                    language === 'fr' ? trip.country : (trip.countryEn ?? trip.country)
+                }`,
+            }
+          : content[language][key ?? 'notFound']
 
-    const path = isNotFound
+    const basePath = isNotFound
         ? normalizedPath
         : reflection
           ? `/reflections/${reflection.slug}`
-          : normalizedPath
+          : trip
+            ? `/travel/${trip.id}`
+            : normalizedPath
 
+    const path = localizedPath(basePath, language)
+    const alternates = isNotFound
+        ? []
+        : ['fr', 'en', 'x-default'].map((locale) => ({
+              language: locale,
+              url: `${SITE_URL}${localizedPath(basePath, locale)}`,
+          }))
     return {
         ...metadata,
+        alternates,
         path,
         canonicalUrl: `${SITE_URL}${path}`,
-        imageUrl: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
-        imageAlt:
-            language === 'fr'
-                ? 'Julien Esterbet — développeur full-stack orienté produit'
-                : 'Julien Esterbet — product-minded full-stack developer',
+        imageUrl: `${SITE_URL}${trip ? `/og/travel/${language}/${trip.id}.png` : DEFAULT_SOCIAL_IMAGE}`,
+        imageAlt: trip
+            ? language === 'fr'
+                ? `Carnet de voyage à ${trip.city}, ${trip.country}`
+                : `Travel journal in ${trip.cityEn ?? trip.city}, ${trip.countryEn ?? trip.country}`
+            : language === 'fr'
+              ? 'Julien Esterbet — développeur full-stack orienté produit'
+              : 'Julien Esterbet — product-minded full-stack developer',
         language,
-        type: reflection ? 'article' : 'website',
+        type: reflection || trip ? 'article' : 'website',
         robots: isNotFound ? 'noindex, nofollow' : 'index, follow',
         isNotFound,
         structuredData: isNotFound ? null : structuredDataFor(key, path, language, metadata),
     }
 }
 
-export const INDEXABLE_PATHS = [
+export const BASE_INDEXABLE_PATHS = [
     ...Object.keys(staticRoutes),
     ...reflections.map(({slug}) => `/reflections/${slug}`),
+    ...trips.map(({id}) => `/travel/${id}`),
 ]
+
+export const INDEXABLE_PATHS = BASE_INDEXABLE_PATHS.flatMap((path) => [
+    path,
+    localizedPath(path, 'en'),
+])

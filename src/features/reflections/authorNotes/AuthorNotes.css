@@ -1,0 +1,25 @@
+.author-notes {
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-primary);
+    background: var(--color-bg-variant);
+    border-radius: 0.5rem;
+}
+.author-notes summary {
+    cursor: pointer;
+    line-height: 1.6;
+}
+.author-notes summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+.author-notes__body {
+    white-space: pre-line;
+}
+.author-notes__historical {
+    font-style: italic;
+}
+.author-passage,
+.author-notes details {
+    scroll-margin-top: 6rem;
+}

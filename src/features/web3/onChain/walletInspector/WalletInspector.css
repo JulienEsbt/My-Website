@@ -650,3 +650,325 @@
 .wallet-inspector__main-grid > * {
     margin: 0 !important;
 }
+
+.wallet-nft-placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 8rem;
+    padding: 1rem;
+    background: var(--color-bg-variant);
+    color: var(--color-light);
+}
+
+.wallet-metrics-guide {
+    margin: 1rem 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid #4db5ff30;
+    border-radius: 1rem;
+    background: #4db5ff08;
+}
+.wallet-metrics-guide summary {
+    cursor: pointer;
+    color: var(--color-primary);
+    min-height: 24px;
+}
+.wallet-metrics-guide > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.5rem;
+    padding-top: 1.3rem;
+}
+.wallet-metrics-guide section {
+    margin: 0;
+}
+.wallet-metrics-guide h4 {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+.wallet-metrics-guide p {
+    font-size: 0.85rem;
+    color: var(--color-light);
+    line-height: 1.7;
+}
+
+/* Calm dashboard hierarchy: a clear balance, compact data, full-width activity. */
+.wallet-inspector {
+    padding: clamp(1rem, 2.5vw, 2rem);
+    gap: 1.2rem;
+    background: radial-gradient(ellipse at 0 0, #31547724, transparent 55%), #0c1220ed;
+    border-color: #91b4d52b;
+}
+.wallet-inspector__searchbar {
+    background: transparent;
+    padding: 0;
+}
+.wallet-inspector__actions {
+    padding: 0;
+}
+.wallet-inspector__actions .btn {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.8rem;
+    box-shadow: none;
+}
+.wallet-inspector__overview {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+.wallet-inspector__identity-card,
+.wallet-inspector__metric,
+.wallet-inspector__explorer {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 1rem;
+}
+.wallet-inspector__identity-card {
+    grid-column: span 2;
+    padding-left: 0;
+}
+.wallet-inspector__identity-card > div {
+    min-width: 0;
+}
+.wallet-inspector__identity-card strong {
+    font-size: 1.15rem;
+}
+.wallet-inspector__metric--value {
+    grid-column: span 2;
+    text-align: right;
+    padding-right: 0;
+}
+.wallet-inspector__metric--value strong {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: white;
+    letter-spacing: -0.04em;
+}
+.wallet-inspector__metric:not(.wallet-inspector__metric--value) {
+    border-top: 1px solid #91b4d522;
+    padding-left: 0;
+}
+.wallet-inspector__metric strong {
+    font-variant-numeric: tabular-nums;
+}
+.wallet-inspector__explorer {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    padding: 0.4rem 0;
+    font-size: 0.8rem;
+}
+.wallet-inspector__main-grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 1rem;
+    align-items: start;
+}
+.wallet-inspector__panel {
+    background: #090f1ccc;
+    border-color: #91b4d51f;
+    padding: 1.25rem;
+    border-radius: 1rem;
+}
+.wallet-inspector__panel-head {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+.wallet-inspector__nfts-panel {
+    grid-column: 1 / -1;
+}
+.wallet-inspector__data-notice {
+    border: 0;
+    border-left: 2px solid #d8b77a;
+    border-radius: 0.3rem;
+    background: #d8b77a09;
+    font-size: 0.8rem;
+}
+.wallet-metrics-guide {
+    margin: 0;
+    padding: 0.7rem 0;
+    border: 0;
+    border-top: 1px solid #91b4d522;
+    border-bottom: 1px solid #91b4d522;
+    border-radius: 0;
+    background: transparent;
+}
+.wallet-metrics-guide summary {
+    font-size: 0.85rem;
+    min-height: 30px;
+    align-content: center;
+}
+.allocation-donut-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-block: 0.6rem;
+}
+.allocation-donut {
+    width: 156px;
+    height: 156px;
+    box-shadow: none;
+}
+.allocation-donut > div {
+    width: 128px;
+    height: 128px;
+    align-content: center;
+    gap: 0.3rem;
+    background: #0a101d;
+}
+.allocation-legend {
+    width: 100%;
+}
+.wallet-token-row {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) 42px;
+    border: 0;
+    border-bottom: 1px solid #91b4d51c;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.85rem 0.2rem;
+}
+.wallet-token-row > div {
+    min-width: 0;
+}
+.wallet-token-row :is(strong, span) {
+    overflow-wrap: anywhere;
+}
+.wallet-token-row:last-child {
+    border-bottom: 0;
+}
+.wallet-nft-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 760px;
+}
+.wallet-nft-card {
+    background: #182131;
+    border-color: #91b4d526;
+}
+.wallet-nft-card strong {
+    padding-top: 0.6rem;
+}
+.wallet-nft-card span {
+    padding-bottom: 0.7rem;
+}
+.wallet-activity-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+.wallet-activity-row {
+    grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1fr);
+    border: 0;
+    border-bottom: 1px solid #91b4d522;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.8rem 0.3rem;
+}
+.wallet-activity-row:last-child {
+    border-bottom: 0;
+}
+.wallet-activity-row:hover {
+    background: #4db5ff08;
+}
+.wallet-activity-row > svg {
+    padding: 0.4rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #4db5ff10;
+}
+.wallet-activity-row em {
+    text-align: right;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 720px) {
+    .wallet-inspector__overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .wallet-inspector__identity-card {
+        grid-column: 1 / -1;
+    }
+    .wallet-inspector__metric--value {
+        grid-column: 1 / -1;
+        text-align: left;
+        padding-left: 0;
+    }
+    .wallet-inspector__main-grid {
+        grid-template-columns: 1fr;
+    }
+    .wallet-nft-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .wallet-activity-row em {
+        grid-column: auto;
+    }
+    .wallet-token-row,
+    .wallet-token-list--modal .wallet-token-row {
+        grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .wallet-token-row > em {
+        grid-column: 3;
+        text-align: right;
+    }
+}
+
+/* Compact desktop overview and content, without compressing mobile touch targets. */
+.wallet-inspector {
+    max-width: 1120px;
+    gap: 0.75rem;
+    padding: 1.1rem;
+}
+.wallet-inspector__identity-card,
+.wallet-inspector__metric {
+    padding-block: 0.65rem;
+}
+.wallet-inspector__metric--value strong {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+.wallet-inspector__identity-card img,
+.wallet-inspector__avatar-fallback {
+    width: 3rem;
+    height: 3rem;
+}
+.wallet-inspector__panel {
+    padding: 1rem;
+}
+.wallet-metrics-guide {
+    padding-block: 0.3rem;
+}
+.wallet-inspector__explorer {
+    padding-block: 0;
+}
+.wallet-nft-strip {
+    max-width: none;
+}
+.allocation-donut {
+    width: 112px;
+    height: 112px;
+}
+.allocation-donut > div {
+    width: 90px;
+    height: 90px;
+}
+@media (min-width: 1000px) {
+    .wallet-inspector__main-grid {
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+    .wallet-inspector__allocation {
+        grid-column: 1;
+        align-self: stretch;
+    }
+    .wallet-inspector__tokens-panel {
+        grid-column: 2;
+        align-self: stretch;
+    }
+    .wallet-inspector__nfts-panel {
+        grid-column: 1 / -1;
+    }
+    .allocation-donut-layout {
+        padding-block: 0.25rem;
+    }
+    .wallet-token-row {
+        padding-block: 0.6rem;
+    }
+    .wallet-nft-strip {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}

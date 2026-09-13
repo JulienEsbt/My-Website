@@ -1,34 +1,50 @@
-import React, {useEffect, useMemo, useState} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
+import {useLocation, useParams} from 'react-router-dom'
 import {FiArrowLeft, FiArrowUp, FiArrowDown} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {motion} from 'framer-motion'
 import {getPreferredScrollBehavior} from '../components/common/accessibility/motionPreferences.js'
 import reflections from '../data/reflections/reflections.js'
+import FeatureLoading from '../components/common/feedback/featureLoading/FeatureLoading.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import {formatDate} from '../i18n/formatters.js'
+import {
+    AuthorNotesProvider,
+    ArticleNotes,
+    Passage,
+} from '../features/reflections/authorNotes/AuthorNotes.jsx'
 import './ReflectionArticlePage.css'
 
-const mdxModules = import.meta.glob('../content/reflections/*.mdx', {
-    eager: true,
-})
+import ReaderComments from '../features/reflections/comments/ReaderComments.jsx'
 
+const authorNoteComponents = {Passage}
+
+const mdxModules = import.meta.glob('../content/reflections/*.mdx')
+const articleComponents = new Map()
 const getMdxArticle = (slug, language) => {
     const key = `../content/reflections/${slug}.${language}.mdx`
-    return mdxModules[key]?.default
+    if (!mdxModules[key]) return undefined
+    if (!articleComponents.has(key)) articleComponents.set(key, lazy(mdxModules[key]))
+    return articleComponents.get(key)
 }
 
 const ReflectionArticlePage = () => {
     const {slug} = useParams()
+    const contentRef = useRef(null)
+    const {state} = useLocation()
+    const fromHome = state?.fromHome === 'reflections'
     const {t, i18n} = useTranslation('reflections')
 
+    const backTo = fromHome ? '/#home-reflections' : '/reflections'
+    const backLabel = fromHome
+        ? i18n.language?.startsWith('fr')
+            ? 'Retour à l’accueil'
+            : 'Back to home'
+        : t('article.back')
     const language = i18n.language?.startsWith('fr') ? 'fr' : 'en'
     const reflection = reflections.find((item) => item.slug === slug)
-    useDocumentTitle(
-        reflection ? `${reflection.title[language] ?? reflection.title.fr} — Julien Esterbet` : null
-    )
 
     const MdxContent = getMdxArticle(slug, language) || getMdxArticle(slug, 'fr')
     const isFallbackFrench = language !== 'fr' && !getMdxArticle(slug, language)
@@ -112,8 +128,8 @@ const ReflectionArticlePage = () => {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: 0.65, ease: 'easeOut'}}
             >
-                <Link to="/reflections" className="reflexion-article__back">
-                    ← {t('article.back')}
+                <Link to={backTo} className="reflexion-article__back">
+                    ← {backLabel}
                 </Link>
 
                 <div className="reflexion-article__shell">
@@ -131,15 +147,36 @@ const ReflectionArticlePage = () => {
                         <p className="reflexion-article__notice">{t('article.frenchOnly')}</p>
                     )}
 
-                    <div className="reflexion-article__content">
-                        {MdxContent ? (
-                            <MdxContent />
-                        ) : (
-                            (reflection.content?.[language] ?? []).map((paragraph, index) => (
-                                <p key={index}>{paragraph}</p>
-                            ))
-                        )}
-                    </div>
+                    <AuthorNotesProvider slug={slug} language={isFallbackFrench ? 'fr' : language}>
+                        <p className="passage-reading-hint">
+                            <strong>
+                                {language === 'fr'
+                                    ? 'Échangeons autour de ce texte'
+                                    : 'Let’s discuss this text'}
+                            </strong>
+                            {language === 'fr'
+                                ? 'Sélectionne quelques mots, puis clique sur « Commenter le passage ». Sur téléphone, maintiens le doigt sur le texte pour le sélectionner. Les bulles bleues indiquent les échanges existants : touche-les pour les lire. Tu peux aussi commenter le texte entier en bas de page.'
+                                : 'Select a few words, then choose “Comment on passage”. On your phone, press and hold the text to select it. Blue bubbles open existing conversations. You can also comment on the whole text at the bottom of the page.'}
+                        </p>
+                        <div className="reflexion-article__content" ref={contentRef}>
+                            {MdxContent ? (
+                                <Suspense fallback={<FeatureLoading />}>
+                                    <MdxContent components={authorNoteComponents} />
+                                </Suspense>
+                            ) : (
+                                (reflection.content?.[language] ?? []).map((paragraph, index) => (
+                                    <p key={index}>{paragraph}</p>
+                                ))
+                            )}
+                        </div>
+                        <ArticleNotes />
+                    </AuthorNotesProvider>
+                    <ReaderComments
+                        key={`${slug}-${language}`}
+                        slug={slug}
+                        language={isFallbackFrench ? 'fr' : language}
+                        contentRef={contentRef}
+                    />
                     <div className="reflexion-article__next">
                         <span>{t('article.finished')}</span>
 
@@ -179,9 +216,9 @@ const ReflectionArticlePage = () => {
                     </button>
                 )}
 
-                <Link to="/reflections" aria-label={t('article.back')}>
+                <Link to={backTo} aria-label={backLabel}>
                     <FiArrowLeft />
-                    <span>{t('article.back')}</span>
+                    <span>{backLabel}</span>
                 </Link>
 
                 {showTop && (

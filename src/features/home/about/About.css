@@ -17,6 +17,7 @@
 
 .about__visual {
     grid-area: visual;
+    align-self: start;
 }
 
 .about__cards {
@@ -281,5 +282,22 @@
     .about__bio {
         padding-left: 1rem;
         font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 1100px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+    .about__visual {
+        position: sticky;
+        top: 7rem;
+    }
+    .about__photo img {
+        transition: none;
+    }
+}
+
+@media (min-width: 1300px) and (min-height: 900px) {
+    .about__container {
+        grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+        gap: 1.5rem 3rem;
     }
 }

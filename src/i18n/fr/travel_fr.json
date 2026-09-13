@@ -107,7 +107,8 @@
             "visited": "Visité",
             "planned": "Prévu",
             "dream": "Destination rêvée"
-        }
+        },
+        "mapLoadIssue": "Certaines données de la carte n’ont pas pu être chargées. Vous pouvez continuer à explorer les destinations et lire les récits ci-dessous."
     },
     "nav": {
         "aria": "Navigation voyage",

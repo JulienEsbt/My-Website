@@ -59,9 +59,9 @@ describe('PageNav', () => {
 
         await user.click(screen.getByRole('button', {name: 'Ouvrir la navigation'}))
         await waitFor(() => expect(screen.getByRole('link', {name: 'Portfolio'})).toHaveFocus())
-        await user.click(screen.getByRole('button', {name: 'Switch to English'}))
-
-        expect(i18n.resolvedLanguage).toBe('en')
+        const languageLink = screen.getByRole('link', {name: 'Switch to English'})
+        expect(languageLink).toHaveAttribute('href', '/en')
+        await user.pointer({target: languageLink, keys: '[MouseLeft>]'})
         expect(screen.queryByRole('link', {name: 'Labs Web3'})).not.toBeInTheDocument()
     })
 })

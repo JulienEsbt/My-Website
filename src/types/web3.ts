@@ -38,6 +38,12 @@ export interface WalletNft {
     tokenId?: string
 }
 
+export interface WalletNftResult {
+    items: WalletNft[]
+    totalCount: number | null
+    status: 'complete' | 'partial' | 'unavailable'
+}
+
 export interface WalletPriceResult {
     nativePriceUsd: number
     tokenPricesByContract: Record<string, number>

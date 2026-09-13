@@ -19,6 +19,8 @@ jobs:
         name: Lint, tests, build and security
         runs-on: ubuntu-latest
         timeout-minutes: 20
+        env:
+            VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
 
         steps:
             - name: Checkout
@@ -39,3 +41,12 @@ jobs:
             - name: Audit generated media metadata
               if: ${{ hashFiles('public/media/**/*') != '' }}
               run: npm run media:check
+
+            - name: Install browser for integration tests
+              run: npx playwright install --with-deps chromium
+
+            - name: Verify browser flows
+              run: npm run test:e2e
+
+            - name: Verify public media samples
+              run: npm run media:remote

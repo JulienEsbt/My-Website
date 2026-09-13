@@ -1015,3 +1015,22 @@
         transform: translateY(18px);
     }
 }
+
+@media (min-width: 701px) {
+    .travel-timeline__back--home {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.6rem 0.9rem;
+        min-height: 44px;
+        color: var(--color-primary);
+        background: rgba(77, 181, 255, 0.08);
+        border: 1px solid var(--color-primary-variant);
+        border-radius: 999px;
+        cursor: pointer;
+    }
+    .travel-timeline__back--home:hover {
+        background: rgba(77, 181, 255, 0.16);
+    }
+}

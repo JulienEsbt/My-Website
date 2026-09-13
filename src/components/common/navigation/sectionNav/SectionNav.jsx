@@ -4,11 +4,34 @@ import {getPreferredScrollBehavior} from '../../accessibility/motionPreferences.
 import useReducedMotion from '../../accessibility/useReducedMotion.js'
 import './SectionNav.css'
 
-const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
+const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector}) => {
     const navRef = useRef(null)
+    const [avoidingContent, setAvoidingContent] = useState(Boolean(avoidSelector))
     const [active, setActive] = useState(`#${items[0]?.id ?? 'top'}`)
     const [dismissedTooltip, setDismissedTooltip] = useState(null)
     const reducedMotion = useReducedMotion()
+
+    useEffect(() => {
+        const protectedContent = avoidSelector ? document.querySelector(avoidSelector) : null
+        const nav = navRef.current
+        if (!protectedContent || !nav) return
+        const updateVisibility = () => {
+            const bottomGap = parseFloat(getComputedStyle(nav).bottom) || 16
+            const dockTop = window.innerHeight - nav.offsetHeight - bottomGap - 12
+            setAvoidingContent(protectedContent.getBoundingClientRect().bottom >= dockTop)
+        }
+        const observer = new ResizeObserver(updateVisibility)
+        observer.observe(protectedContent)
+        observer.observe(nav)
+        window.addEventListener('scroll', updateVisibility, {passive: true})
+        window.addEventListener('resize', updateVisibility)
+        updateVisibility()
+        return () => {
+            observer.disconnect()
+            window.removeEventListener('scroll', updateVisibility)
+            window.removeEventListener('resize', updateVisibility)
+        }
+    }, [avoidSelector])
 
     useEffect(() => {
         if (!navRef.current) return
@@ -73,7 +96,7 @@ const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
         const target = document.getElementById(id)
         if (!target) return
 
-        const offset = 30
+        const offset = Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 30
 
         window.scrollTo({
             top: target.getBoundingClientRect().top + window.scrollY - offset,
@@ -84,7 +107,13 @@ const SectionNav = ({items, ariaLabel = 'Section navigation'}) => {
     }
 
     return (
-        <nav ref={navRef} className="section-nav" aria-label={ariaLabel}>
+        <nav
+            ref={navRef}
+            className="section-nav"
+            aria-label={ariaLabel}
+            data-avoiding-content={avoidingContent || undefined}
+            inert={avoidingContent ? '' : undefined}
+        >
             {items.map((item) => {
                 const hash = `#${item.id}`
 

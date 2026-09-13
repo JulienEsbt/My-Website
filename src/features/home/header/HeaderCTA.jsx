@@ -1,6 +1,6 @@
 import React from 'react'
 import {motion} from 'framer-motion'
-import {Link} from 'react-router-dom'
+import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 
 const Btn = ({href, children, className = 'btn', ...props}) => (

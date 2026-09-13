@@ -70,6 +70,7 @@ export function createTravelMap({
     dreamLabel = 'Destination rêvée',
     navigationLabels,
     onSelectLocation,
+    onError,
 }: {
     container: HTMLElement
     expanded: boolean
@@ -79,6 +80,7 @@ export function createTravelMap({
     dreamLabel?: string
     navigationLabels: TravelMapNavigationLabels
     onSelectLocation?: (location: Coordinates) => void
+    onError?: () => void
 }) {
     mapboxgl.accessToken = MAPBOX_TOKEN
 
@@ -98,6 +100,8 @@ export function createTravelMap({
             'Popup.CloseButton': navigationLabels.closePopup,
         } as NonNullable<mapboxgl.MapOptions['locale']>,
     })
+
+    map.on('error', () => onError?.())
 
     const canvas = map.getCanvas()
     canvas.setAttribute('aria-hidden', 'true')

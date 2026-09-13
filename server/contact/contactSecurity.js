@@ -46,6 +46,7 @@ export function createMemoryRateLimiter({
     limit = DEFAULT_LIMIT,
     windowMs = DEFAULT_WINDOW_MS,
     now = Date.now,
+    maxClients = MAX_TRACKED_CLIENTS,
 } = {}) {
     const clients = new Map()
 
@@ -53,13 +54,22 @@ export function createMemoryRateLimiter({
         check(key) {
             const currentTime = now()
 
-            if (clients.size >= MAX_TRACKED_CLIENTS) {
+            if (clients.size >= maxClients) {
                 for (const [clientKey, entry] of clients) {
                     if (entry.resetAt <= currentTime) clients.delete(clientKey)
                 }
             }
 
             const current = clients.get(key)
+            if (!current && clients.size >= maxClients) {
+                const earliestReset = Math.min(
+                    ...Array.from(clients.values(), (entry) => entry.resetAt)
+                )
+                return {
+                    allowed: false,
+                    retryAfter: Math.max(1, Math.ceil((earliestReset - currentTime) / 1000)),
+                }
+            }
             if (!current || current.resetAt <= currentTime) {
                 clients.set(key, {count: 1, resetAt: currentTime + windowMs})
                 return {allowed: true, retryAfter: 0}

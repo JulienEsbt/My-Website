@@ -16,7 +16,6 @@
         "web3": "Web3 Labs",
         "travel": "Travel journals",
         "reflections": "Writing and reflections",
-        "journal": "Journal",
         "groups": {
             "primary": "Portfolio and labs",
             "editorial": "Explore further"
@@ -38,13 +37,13 @@
             },
             "twitter": {
                 "title": "Twitter",
-                "value": "Julien Esbt Crypto",
+                "value": "Julien_Esbt_Pro",
                 "cta": "DM me"
             }
         },
         "badge": "Available",
         "heading": "An idea, a project or a discussion?",
-        "description": "Whether it's for a project, a professional opportunity, a collaboration, or simply to discuss technology, Web3 or other topics we are passionate about, feel free to reach out.",
+        "description": "For a project, a professional opportunity or a discussion about ideas and shared interests, you can reach me here.",
         "form": {
             "nameLabel": "Name",
             "emailLabel": "Email",
@@ -57,20 +56,20 @@
             "loading": "Your message is being sent…",
             "success": "Message sent successfully. Thanks!",
             "invalid": "Please check the fields: the name must contain at least 2 characters and the message at least 10 characters.",
-            "error": "Your message could not be sent. Please try again in a moment."
+            "error": "Your message could not be sent. Please try again in a moment.",
+            "simulated": "Local test successful: the form is valid. No email was sent."
         }
     },
     "footer": {
         "logo": "Julien ESTERBET",
-        "description": "Product-minded full-stack developer building useful business applications and web experiences, with further explorations across Web3, travel and writing.",
+        "description": "Software developer and IT analyst. Business applications, projects and experiments; writing and travels around what I discover and question.",
         "aria": "Footer navigation",
         "pages": "Pages",
         "shortPages": {
             "home": "Portfolio",
             "web3": "Web3 Labs",
             "travel": "Travel",
-            "reflections": "Reflections",
-            "journal": "Journal"
+            "reflections": "Reflections"
         },
         "socials": "Socials",
         "cta": "Contact me",
@@ -83,15 +82,19 @@
         "title": "Privacy and audience measurement",
         "intro": "This portfolio limits collection to what is needed to understand its use, monitor performance and answer messages sent voluntarily.",
         "analyticsTitle": "Audience and performance",
-        "analyticsBody": "Vercel Web Analytics measures page views and Speed Insights collects Web Vitals. The site adds no custom event and sends these tools no name, email address, message or wallet address.",
+        "analyticsBody": "Vercel Web Analytics automatically measures visits when pages open, including internal navigation. Its statistics include the page, referral source, browser, device and approximate location. According to Vercel, measurement uses a request-derived identifier discarded after 24 hours, without third-party tracking cookies.",
         "contactTitle": "Contact form",
-        "contactBody": "The name, email address and message entered are sent to EmailJS only to deliver the message. The site does not use them to build a profile or populate a database.",
+        "contactBody": "The form sends your name, email and message to the site server, then to EmailJS for delivery to my mailbox. The site creates no contact database or profile from these messages. The received copy remains in the mailbox for our correspondence. Submission limits use an IP address fingerprint held in memory and a counter per fifteen-minute window.",
         "externalTitle": "External services",
-        "externalBody": "Mapbox, Alchemy RPC providers and price sources are contacted only when the corresponding features are used. Those providers’ policies then apply to their services.",
+        "externalBody": "Images are served by Cloudflare R2. Travel pages may request Mapbox maps when they become visible, without a prior click. Web3 tools query Alchemy and CoinGecko; wallet inspection sends the inspected public address to the RPC/NFT provider. NFT and token images may come from third-party domains. These connections disclose information such as your IP address to the relevant providers. The inspector never requests wallet secrets or private keys.",
         "controlTitle": "Your choices",
         "controlBody": "You can browse the editorial pages and follow the RSS or Atom feeds without completing the form, sharing an email address or connecting a wallet. The site currently offers no newsletter sign-up. Content blockers may prevent Vercel measurements without blocking the main content.",
         "contact": "For any question about this processing, use the portfolio contact form.",
-        "updated": "Last updated: August 2026."
+        "updated": "Last updated: September 2026.",
+        "performanceTitle": "Performance and excluded data",
+        "performanceBody": "Vercel Speed Insights receives Web Vitals measurements with the page, device type, browser, operating system, country and connection information. This site removes query parameters and fragments from measured URLs and masks unknown paths. It adds no custom events and does not intentionally send form fields or wallet addresses to these two tools.",
+        "commentsTitle": "Public comments",
+        "commentsBody": "When the service is available, comments, pseudonyms, selected quotations and dates are public immediately. No account or email is required. A key stored in your browser lets you remove your comments; Julien can also remove them. A temporary fingerprint of the network address is used to limit spam without publishing the address. Pseudonyms do not verify identity. Avoid posting sensitive personal information."
     },
     "notFound": {
         "pageTitle": "Page not found — Julien Esterbet",

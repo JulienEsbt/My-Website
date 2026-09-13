@@ -494,7 +494,7 @@
     }
 
     .donation-panel__content > div:first-child p {
-        display: none;
+        font-size: 0.8rem;
     }
 
     .donation-panel__receiver {
@@ -594,5 +594,78 @@
 
     .donation-panel__tokens {
         gap: 0.55rem;
+    }
+}
+
+/* A compact transfer sheet, with recipient and confirmation kept explicit. */
+.donation-panel {
+    max-width: 760px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    background: radial-gradient(ellipse at 100% 0, #8071bf1a, transparent 55%), #0c1220ed;
+    border-color: #91b4d52b;
+}
+.donation-panel__content {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.donation-panel p {
+    line-height: 1.65;
+    font-size: 0.9rem;
+}
+.donation-panel__receiver {
+    background: #080f1c;
+    border-color: #91b4d526;
+}
+.donation-panel__receiver code {
+    overflow-wrap: anywhere;
+}
+.donation-panel__search {
+    background: #080f1c;
+    border-color: #91b4d526;
+}
+.donation-panel__form input {
+    font-size: 1.3rem;
+    background: #080f1c;
+}
+.donation-panel__presets button {
+    box-shadow: none;
+    background: #4db5ff08;
+}
+.donation-panel__steps {
+    gap: 0.8rem;
+}
+.donation-panel__steps li {
+    background: transparent;
+    border: 0;
+    border-top: 2px solid #91b4d526;
+    border-radius: 0;
+    padding: 0.7rem 0;
+}
+.donation-panel__steps li.active {
+    border-color: #4db5ff;
+}
+.donation-panel__confirmation {
+    background: #d8b77a0b;
+}
+@media (max-width: 520px) {
+    .donation-panel__form input {
+        min-width: 0;
+        width: 100%;
+        flex-basis: 100%;
+    }
+    .donation-panel__review-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 560px) {
+    .donation-panel__presets {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .donation-panel__presets button {
+        padding: 0.6rem 0.3rem;
+        font-size: 0.75rem;
+        min-height: 44px;
     }
 }

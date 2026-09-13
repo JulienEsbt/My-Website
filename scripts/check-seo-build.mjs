@@ -1,3 +1,4 @@
+import {JSDOM} from 'jsdom'
 import {existsSync, readFileSync} from 'node:fs'
 import {join} from 'node:path'
 import {getSeoMetadata, INDEXABLE_PATHS, SITE_URL} from '../src/config/seo.js'
@@ -15,7 +16,29 @@ for (const path of INDEXABLE_PATHS) {
     }
 
     const html = readFileSync(file, 'utf8')
-    const metadata = getSeoMetadata(path, 'fr')
+    const dom = new JSDOM(html)
+    const document = dom.window.document
+    const content = document.querySelector('#prerendered-content main')
+    if (!content?.querySelector('h1') || content.textContent.trim().length < 200)
+        errors.push(`${output}: contenu HTML absent ou insuffisant`)
+    if (
+        /\/reflections\/[^/]+$/.test(path) &&
+        !content?.querySelector('.reflexion-article__content h2')
+    )
+        errors.push(`${output}: corps de l’article absent`)
+    for (const asset of document.querySelectorAll('link[rel="stylesheet"], a[href$=".pdf"]')) {
+        const href = asset.getAttribute('href')
+        if (href?.startsWith('/assets/') && !existsSync(join(dist, href)))
+            errors.push(`${output}: ressource absente ${href}`)
+    }
+    dom.window.close()
+    const metadata = getSeoMetadata(path)
+    if (!html.includes(`<html lang="${metadata.language}">`))
+        errors.push(`${output}: langue incorrecte`)
+    for (const alternate of metadata.alternates) {
+        if (!html.includes(`hreflang="${alternate.language}" href="${alternate.url}"`))
+            errors.push(`${output}: alternative ${alternate.language} absente`)
+    }
     const expectedCanonical = `${SITE_URL}${path}`
     const canonicalPattern = new RegExp(
         `<link(?=[^>]*rel="canonical")(?=[^>]*href="${escapeRegExp(expectedCanonical)}")[^>]*>`,
@@ -26,8 +49,13 @@ for (const path of INDEXABLE_PATHS) {
         errors.push(`${output}: description absente`)
     if (!/<meta(?=[^>]*name="robots")(?=[^>]*content="index, follow")[^>]*>/i.test(html))
         errors.push(`${output}: directive robots incorrecte`)
-    if (metadata.structuredData && !html.includes('<script type="application/ld+json">'))
+    if (metadata.structuredData && !html.includes('data-seo-json-ld="true"'))
         errors.push(`${output}: données structurées absentes`)
+    if (metadata.imageUrl.startsWith(`${SITE_URL}/og/travel/`)) {
+        const imagePath = metadata.imageUrl.slice(SITE_URL.length + 1)
+        if (!existsSync(join(dist, imagePath)))
+            errors.push(`${output}: aperçu social absent ${imagePath}`)
+    }
 }
 
 const notFoundFile = join(dist, '404.html')

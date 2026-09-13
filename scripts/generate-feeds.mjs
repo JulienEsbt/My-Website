@@ -22,7 +22,7 @@ const rssItems = journalEntries
         (entry) => `        <item>
             <title>${escapeXml(entry.title.fr)}</title>
             <link>${escapeXml(absoluteUrl(entry.href))}</link>
-            <guid isPermaLink="true">${escapeXml(absoluteUrl(entry.href))}</guid>
+            <guid isPermaLink="false">${escapeXml(absoluteUrl(entry.feedId ?? entry.href))}</guid>
             <pubDate>${publishedAt(entry)}</pubDate>
             <category>${escapeXml(entry.category)}</category>
             <description>${escapeXml(entry.excerpt.fr)}</description>
@@ -33,8 +33,8 @@ const rssItems = journalEntries
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
     <channel>
-        <title>Journal de Julien Esterbet</title>
-        <link>${SITE_URL}/journal</link>
+        <title>Publications de Julien Esterbet</title>
+        <link>${SITE_URL}</link>
         <description>Projets, voyages et réflexions de Julien Esterbet.</description>
         <language>fr</language>
         <lastBuildDate>${publishedAt(journalEntries[0])}</lastBuildDate>
@@ -47,7 +47,7 @@ const atomEntries = journalEntries
     .map(
         (entry) => `    <entry>
         <title>${escapeXml(entry.title.fr)}</title>
-        <id>${escapeXml(absoluteUrl(entry.href))}</id>
+        <id>${escapeXml(absoluteUrl(entry.feedId ?? entry.href))}</id>
         <link href="${escapeXml(absoluteUrl(entry.href))}" />
         <updated>${new Date(`${entry.date}T12:00:00Z`).toISOString()}</updated>
         <category term="${escapeXml(entry.category)}" />
@@ -58,9 +58,9 @@ const atomEntries = journalEntries
 
 const atom = `<?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
-    <title>Journal de Julien Esterbet</title>
+    <title>Publications de Julien Esterbet</title>
     <id>${SITE_URL}/journal</id>
-    <link href="${SITE_URL}/journal" />
+    <link href="${SITE_URL}" />
     <link href="${SITE_URL}/atom.xml" rel="self" />
     <updated>${updatedAt}</updated>
     <subtitle>Projets, voyages et réflexions de Julien Esterbet.</subtitle>

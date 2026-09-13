@@ -12,7 +12,7 @@
     transform: translateX(-50%);
     border-radius: 999px;
 
-    overflow: hidden;
+    overflow: visible;
 
     background: var(--liquid-bg);
     border: 1px solid var(--liquid-border);
@@ -34,11 +34,7 @@
         radial-gradient(circle at 72% 18%, rgba(77, 181, 255, 0.09), transparent 36%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 60%);
 
-    pointer-events: auto;
-}
-
-.section-nav a[data-tooltip-dismissed='true']::after {
-    display: none;
+    pointer-events: none;
 }
 
 .section-nav a {
@@ -130,7 +126,7 @@
         bottom: max(0.85rem, env(safe-area-inset-bottom));
         transform: translateX(-50%);
         max-width: calc(100vw - 1rem);
-        overflow: hidden;
+        overflow: visible;
     }
 
     .section-nav a {
@@ -152,4 +148,45 @@
     transform: translateX(-50%);
     z-index: 999;
     max-width: calc(100vw - 1.5rem);
+}
+
+.section-nav[data-avoiding-content='true'] {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 650px) {
+    .section-nav a:focus-visible::after {
+        display: block;
+    }
+    .section-nav a:first-child::after {
+        left: 0;
+        transform: translateY(0);
+    }
+    .section-nav a:last-child::after {
+        left: auto;
+        right: 0;
+        transform: translateY(0);
+    }
+}
+
+/* One compact dock across the site, with labels only on hover or keyboard focus. */
+.section-nav {
+    background: rgba(13, 21, 36, 0.94);
+}
+.section-nav a > span {
+    display: flex;
+}
+.section-nav a::after {
+    background: rgba(13, 21, 36, 0.96);
+}
+@media (prefers-reduced-motion: reduce) {
+    .section-nav a,
+    .section-nav a::after {
+        transition: none;
+    }
+}
+
+.section-nav a[data-tooltip-dismissed='true']::after {
+    display: none;
 }

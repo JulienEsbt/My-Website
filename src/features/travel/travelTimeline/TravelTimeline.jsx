@@ -1,4 +1,5 @@
 import React, {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import {FiChevronRight, FiExternalLink, FiMapPin, FiBookOpen, FiArrowLeft} from 'react-icons/fi'
@@ -11,18 +12,24 @@ import FeatureLoading from '../../../components/common/feedback/featureLoading/F
 import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import trips from '../../../data/travel/trips.js'
 import {getStaticTravelMapUrl} from '../../../services/mapbox/mapboxStaticService.js'
+import {languageFromPath, localizedPath} from '../../../config/localizedPaths.js'
 import './TravelTimeline.css'
 
 const TravelGallery = lazy(() => import('../travelGallery/TravelGallery.jsx'))
 
-const TravelTimeline = () => {
+const TravelTimeline = ({routeTripId}) => {
+    const {pathname, search, state} = useLocation()
+    const navigate = useNavigate()
+    const requestedTripId = new URLSearchParams(search).get('trip')
+    const urlTripId = routeTripId ?? requestedTripId
+    const validRequestedTrip = trips.find(({id}) => id === urlTripId)
     const {t, i18n} = useTranslation('travel')
     const isFr = i18n.resolvedLanguage?.startsWith('fr')
 
     const sortedTrips = useMemo(() => [...trips].sort((a, b) => a.sortOrder - b.sortOrder), [])
 
-    const [activeTripId, setActiveTripId] = useState(sortedTrips[0]?.id)
-    const [mobileDetailOpen, setMobileDetailOpen] = useState(false)
+    const [activeTripId, setActiveTripId] = useState(validRequestedTrip?.id ?? sortedTrips[0]?.id)
+    const [mobileDetailOpen, setMobileDetailOpen] = useState(Boolean(validRequestedTrip))
     const activeTrip = sortedTrips.find((trip) => trip.id === activeTripId) ?? sortedTrips[0]
     const [detailAnimationKey, setDetailAnimationKey] = useState(0)
     const [isClosingDetail, setIsClosingDetail] = useState(false)
@@ -38,6 +45,54 @@ const TravelTimeline = () => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false)
     const hasOpenedGalleryRef = useRef(false)
     const isDetailUnavailable = isGalleryOpen || (isMobileDetail && !mobileDetailOpen)
+
+    useEffect(() => {
+        if (!validRequestedTrip) {
+            if (!urlTripId) {
+                setMobileDetailOpen(false)
+                setIsClosingDetail(false)
+                setIsGalleryOpen(false)
+                clearTimeout(closeDetailTimerRef.current)
+            }
+            return
+        }
+        setActiveTripId(validRequestedTrip.id)
+        setMobileDetailOpen(true)
+        setIsClosingDetail(false)
+        setIsGalleryOpen(false)
+        clearTimeout(closeDetailTimerRef.current)
+    }, [urlTripId, validRequestedTrip])
+
+    const updateTripUrl = useCallback(
+        (tripId, replace = false) => {
+            const params = new URLSearchParams(search)
+            params.delete('trip')
+            const nextSearch = params.toString()
+            const basePath = tripId ? `/travel/${tripId}` : '/travel'
+
+            navigate(
+                {
+                    pathname: localizedPath(basePath, languageFromPath(pathname)),
+                    search: nextSearch ? `?${nextSearch}` : '',
+                    hash: '#stories',
+                },
+                {replace, preventScrollReset: true}
+            )
+        },
+        [navigate, pathname, search]
+    )
+
+    useEffect(() => {
+        if (!routeTripId && validRequestedTrip) updateTripUrl(validRequestedTrip.id, true)
+    }, [routeTripId, updateTripUrl, validRequestedTrip])
+
+    useEffect(() => {
+        if (!routeTripId || !validRequestedTrip) return
+        const frame = requestAnimationFrame(() => {
+            document.getElementById('stories')?.scrollIntoView?.({block: 'start'})
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [routeTripId, validRequestedTrip])
 
     const handleGalleryOpenChange = useCallback((isOpen) => {
         hasOpenedGalleryRef.current ||= isOpen
@@ -62,6 +117,7 @@ const TravelTimeline = () => {
     }
 
     const closeMobileDetail = () => {
+        updateTripUrl(null, true)
         setIsClosingDetail(true)
 
         clearTimeout(closeDetailTimerRef.current)
@@ -116,6 +172,7 @@ const TravelTimeline = () => {
                             onClick={() => {
                                 hasOpenedGalleryRef.current = false
                                 setIsGalleryOpen(false)
+                                updateTripUrl(trip.id)
                                 setActiveTripId(trip.id)
                                 setMobileDetailOpen(true)
                                 setDetailAnimationKey((key) => key + 1)
@@ -177,11 +234,24 @@ const TravelTimeline = () => {
                         <button
                             ref={detailBackRef}
                             type="button"
-                            className="travel-timeline__back"
-                            onClick={closeMobileDetail}
+                            className={`travel-timeline__back${state?.fromHome === 'travel' ? ' travel-timeline__back--home' : ''}`}
+                            onClick={
+                                state?.fromHome === 'travel'
+                                    ? () =>
+                                          navigate(
+                                              localizedPath('/', languageFromPath(pathname)) +
+                                                  '#home-travel',
+                                              {state: {homeTrip: activeTripId}}
+                                          )
+                                    : closeMobileDetail
+                            }
                         >
                             <FiArrowLeft />
-                            {t('timeline.details.back')}
+                            {state?.fromHome === 'travel'
+                                ? isFr
+                                    ? 'Retour à l’accueil'
+                                    : 'Back to home'
+                                : t('timeline.details.back')}
                         </button>
                         <div className="travel-timeline__detail-header">
                             <span className="travel-timeline__detail-flag" aria-hidden="true">

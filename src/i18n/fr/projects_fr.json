@@ -11,7 +11,7 @@
         },
         "overview": {
             "statusLabel": "Statut",
-            "status": "Produit actif — version 1.1.3",
+            "status": "Produit actif — Windows 1.1.4 / macOS 1.1.3",
             "roleLabel": "Responsabilité",
             "role": "Conception et développement full-stack",
             "scopeLabel": "Périmètre",
@@ -66,7 +66,7 @@
                 },
                 "quality": {
                     "title": "Livraison vérifiable",
-                    "body": "Les contrôles frontend, backend et desktop sont regroupés avant la construction des paquets de livraison."
+                    "body": "Les contrôles frontend, backend et desktop sont regroupés avant la construction des paquets de livraison. La version Windows 1.1.4 a été validée en atelier sur un écran de 43 pouces."
                 }
             }
         },

@@ -8,9 +8,9 @@
             "last": "Esterbet"
         },
         "portraitAlt": "Portrait de Julien Esterbet",
-        "eyebrow": "Développeur full-stack orienté produit",
+        "eyebrow": "Analyste programmeur — Technique & fonctionnel",
         "subtitle": "Applications métiers • Produits web • Expérimentations",
-        "description": "Je conçois des applications web et des outils métiers, de Java et SQL aux interfaces Angular et React. J’aime transformer des besoins concrets en produits utiles, lisibles et fiables, et mettre la technique au service de projets justes qui ont du sens.",
+        "description": "Je conçois et fais évoluer des applications métiers, de l’analyse des besoins au développement et aux tests. Mon travail s’appuie sur la rigueur, la compréhension des usages et une curiosité qui dépasse le logiciel.",
         "badges": {
             "badge1": "React & TypeScript",
             "badge2": "Java & SQL",
@@ -110,8 +110,8 @@
     },
     "portfolio": {
         "kicker": "Projets sélectionnés",
-        "title": "Ce que j’ai construit",
-        "intro": "Un produit métier actif, ce portfolio interactif et un prototype académique Web3, chacun présenté avec son usage, son architecture et son statut réel.",
+        "title": "Projets réalisés et en cours",
+        "intro": "Des produits, prototypes et projets en préparation présentés avec leur usage, leur architecture et leur statut réel.",
         "cta": "Voir le code",
         "caseStudy": "Voir l’étude de cas",
         "demo": "Voir le site",
@@ -145,12 +145,34 @@
                 "title": "Archivage de fichiers on-chain",
                 "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract."
             }
+        },
+        "agora": {
+            "type": "Nouveau projet · En construction",
+            "title": "Agora — Graphe des débats",
+            "description": "Une exploration de la manière de rendre les désaccords publics plus lisibles, en reliant arguments, objections, réponses, faits et sources sans imposer de conclusion.",
+            "principlesLabel": "Principes essentiels d’Agora",
+            "principles": [
+                "Arguments contradictoires",
+                "Sources visibles",
+                "Incertitudes explicites"
+            ],
+            "toggle": "Découvrir l’intention du projet",
+            "whyTitle": "Pourquoi ce projet ?",
+            "why": "Le débat public mélange souvent faits, interprétations, causalités, prévisions et valeurs. Agora cherche à rendre ces différences visibles pour mieux comprendre où se situe réellement un désaccord.",
+            "objectiveTitle": "Objectif",
+            "objective": "Organiser une question publique sous forme de graphe : arguments favorables et défavorables, objections, réponses, éléments de preuve et sources. L’objectif n’est pas de dire quoi penser, mais de rendre le raisonnement plus facile à examiner et à confronter.",
+            "designTitle": "Principes de conception",
+            "design": "Présenter les meilleurs arguments des différentes positions, conserver les sources originales, signaler les incertitudes et éviter les scores simplistes lorsqu’une controverse porte aussi sur des valeurs.",
+            "statusTitle": "État actuel",
+            "status": "Un prototype local non publié permet déjà d’explorer un débat démonstrateur sous forme de graphe et de vue textuelle, de rechercher et filtrer ses éléments, de consulter leurs sources et de préparer une contribution qui reste dans le navigateur. Il ne comporte encore ni comptes, ni collaboration distante, ni système de modération public.",
+            "questionsTitle": "Questions encore ouvertes",
+            "questions": "Le premier public, la gouvernance éditoriale, la vérification des contributions, la modération, l’hébergement et les liens futurs avec Reflection Studio et l’Observatoire démocratique restent à définir."
         }
     },
     "about": {
         "photoAlt": "Julien et deux étudiants pendant une présentation de projet",
-        "headingSmall": "Faisons connaissance",
-        "heading": "À propos",
+        "headingSmall": "À propos",
+        "heading": "Comprendre pour agir librement.",
         "caption": {
             "title": "Profil hybride",
             "text": "Entre développement logiciel, systèmes métiers et réflexion critique."
@@ -160,10 +182,10 @@
             "expertiseText": "Applications métiers, interfaces web, batchs et APIs",
             "collabTitle": "Comprendre",
             "collabText": "Systèmes techniques, organisations et enjeux humains",
-            "innovationTitle": "Relier",
-            "innovationText": "Code, idées, usages et impact concret"
+            "innovationTitle": "Confronter les idées",
+            "innovationText": "Écouter les arguments opposés et comprendre les désaccords réels"
         },
-        "bio": "Je suis développeur logiciel, avec une formation à la croisée de l’<b>informatique</b>, de la <b>finance</b> et des <b>technologies Web3</b>. Aujourd’hui, je travaille dans le secteur de l’assurance-vie, où je participe à des projets métiers, des interfaces web, des batchs et des systèmes documentaires.<br/><br/>Mais mon intérêt ne s’arrête pas au code. J’aime comprendre les systèmes : techniques, économiques, sociaux, politiques. Ce qui me motive, c’est de construire des outils utiles, mais aussi de réfléchir au rôle que la technologie peut jouer dans nos vies et dans la société.<br/><br/>Ce portfolio rassemble donc plusieurs facettes : mon parcours de développeur, mes projets, mon intérêt pour le Web3, mais aussi mes réflexions, mes voyages et les idées qui me construisent."
+        "bio": "Analyste programmeur chez PREPAR-VIE, je travaille sur des applications métiers dans le secteur de l’assurance-vie. Mon parcours associe <b>informatique et finance</b>, analyse des besoins, développement et compréhension des contraintes opérationnelles.<br/><br/>Ce qui m’anime dépasse largement ce cadre : les <b>questions humaines et collectives</b>, les comportements, la qualité du débat public et la participation démocratique. Mes réflexions se nourrissent de psychologie, de sociologie, de philosophie et de géopolitique, ainsi que des questions de liberté, de responsabilité et de souveraineté individuelle et numérique.<br/><br/>J’accorde une place centrale aux discussions approfondies, à l’écoute d’arguments opposés et au pluralisme. La technologie est aussi un objet de réflexion critique : ses possibilités m’intéressent autant que les dépendances, les rapports de pouvoir et les formes de surveillance qu’elle peut produire.<br/><br/>Je souhaite contribuer à des projets exigeants et porteurs de sens, numériques ou non. Mes écrits et mes voyages ont leur place ici : ils font partie de ce que j’apprends, de ce que je questionne et de la manière dont mon regard évolue."
     },
     "goals": {
         "kicker": "Un peu plus personnel",
@@ -205,7 +227,18 @@
             "experience": "Compétences",
             "portfolio": "Projets",
             "goals": "Objectifs",
-            "contact": "Contact"
+            "contact": "Contact",
+            "reflections": "Écrits",
+            "travel": "Voyages"
         }
+    },
+    "discover": {
+        "reflectionsTitle": "Écrits et réflexions",
+        "reflectionsIntro": "Des textes personnels pour examiner les idées, expliciter les doutes et approfondir les désaccords.",
+        "allReflections": "Toutes les réflexions",
+        "travelTitle": "Voyages et regards",
+        "travelIntro": "Des lieux, des rencontres et des souvenirs qui nourrissent mon regard.",
+        "readStory": "Lire ce récit",
+        "allTravel": "Explorer les voyages"
     }
 }

@@ -1,14 +1,12 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
-import {Link} from 'react-router-dom'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
-import useDocumentTitle from '../components/common/accessibility/useDocumentTitle.js'
 import './NotFoundPage.css'
 
 const NotFoundPage = ({context = 'page'}) => {
     const {t} = useTranslation('common')
     const descriptionKey = context === 'reflection' ? 'notFound.reflection' : 'notFound.description'
-    useDocumentTitle(t('notFound.pageTitle'))
 
     return (
         <PageFrame>

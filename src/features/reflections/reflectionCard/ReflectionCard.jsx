@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import {motion} from 'framer-motion'
 import {formatDate} from '../../../i18n/formatters.js'
 import './ReflectionCard.css'
@@ -22,27 +22,33 @@ const ReflectionCard = ({
             viewport={{once: true}}
             transition={{duration: 0.45, delay: index * 0.08}}
         >
-            <div className="reflexion-card__top">
-                <span className="reflexion-card__category">
-                    {categoryLabels?.[reflexion.category] ?? reflexion.category}
-                </span>
+            <Link
+                to={`/reflections/${reflexion.slug}`}
+                className="reflexion-card__link"
+                aria-label={`${readLabel} · ${reflexion.title[language]}`}
+            >
+                <div className="reflexion-card__top">
+                    <span className="reflexion-card__category">
+                        {categoryLabels?.[reflexion.category] ?? reflexion.category}
+                    </span>
 
-                {featured && <span className="reflexion-card__featured">{featuredLabel}</span>}
+                    {featured && <span className="reflexion-card__featured">{featuredLabel}</span>}
 
-                <span className="reflexion-card__date">{formatDate(reflexion.date, language)}</span>
-            </div>
+                    <span className="reflexion-card__date">
+                        {formatDate(reflexion.date, language)}
+                    </span>
+                </div>
 
-            <h3>{reflexion.title[language]}</h3>
+                <h3>{reflexion.title[language]}</h3>
 
-            <p>{reflexion.excerpt[language]}</p>
+                <p>{reflexion.excerpt[language]}</p>
 
-            <div className="reflexion-card__footer">
-                <span>{readingTimeLabel}</span>
+                <div className="reflexion-card__footer">
+                    <span>{readingTimeLabel}</span>
 
-                <Link to={`/reflections/${reflexion.slug}`} className="btn reflexion-card__button">
-                    {readLabel} →
-                </Link>
-            </div>
+                    <span className="btn reflexion-card__button">{readLabel} →</span>
+                </div>
+            </Link>
         </motion.article>
     )
 }

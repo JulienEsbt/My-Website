@@ -1,8 +1,10 @@
 import {useEffect} from 'react'
+import {unlocalizedPath} from '../../../config/localizedPaths.js'
 import {useLocation} from 'react-router-dom'
 
 const ScrollToTop = () => {
-    const {pathname, hash} = useLocation()
+    const {pathname: localizedPathname, hash} = useLocation()
+    const pathname = unlocalizedPath(localizedPathname)
 
     useEffect(() => {
         if (hash) {

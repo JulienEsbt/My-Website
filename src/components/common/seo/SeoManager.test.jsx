@@ -1,5 +1,5 @@
-import {render, waitFor} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom'
+import {render, screen, fireEvent, waitFor} from '@testing-library/react'
+import {Link, MemoryRouter} from 'react-router-dom'
 import {afterEach, describe, expect, it} from 'vitest'
 import SeoManager from './SeoManager.jsx'
 
@@ -19,7 +19,7 @@ describe('SeoManager', () => {
             expect(document.title).toContain('Bruno Pizza')
         })
         expect(document.head.querySelector('meta[name="description"]')?.content).toContain(
-            'desktop application'
+            'application desktop'
         )
         expect(document.head.querySelector('link[rel="canonical"]')?.href).toBe(
             'https://www.julienesterbet.com/projects/bruno-pizza'
@@ -43,4 +43,29 @@ describe('SeoManager', () => {
             )
         })
     })
+})
+
+it('replaces prerendered structured data when navigating and changing route type', async () => {
+    const initial = document.createElement('script')
+    initial.type = 'application/ld+json'
+    initial.dataset.seoJsonLd = 'true'
+    initial.textContent = JSON.stringify({'@type': 'Article', headline: 'Old article'})
+    document.head.appendChild(initial)
+    render(
+        <MemoryRouter initialEntries={['/']}>
+            <SeoManager />
+            <Link to="/reflections/charte-de-pensee">Article</Link>
+            <Link to="/reflections">List</Link>
+        </MemoryRouter>
+    )
+    await waitFor(() => expect(document.querySelectorAll('[data-seo-json-ld]')).toHaveLength(1))
+    expect(document.head.textContent).not.toContain('Old article')
+    fireEvent.click(screen.getByText('Article'))
+    await waitFor(() => expect(document.title).toContain('Charte'))
+    expect(document.querySelectorAll('[data-seo-json-ld]')).toHaveLength(1)
+    expect(JSON.parse(document.querySelector('[data-seo-json-ld]').textContent)['@type']).toBe(
+        'Article'
+    )
+    fireEvent.click(screen.getByText('List'))
+    await waitFor(() => expect(document.querySelector('[data-seo-json-ld]')).toBeNull())
 })

@@ -8,6 +8,39 @@
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
 
+        <script>
+            ;(() => {
+                try {
+                    const url = new URL(window.location.href)
+                    const queryLanguage = ['fr', 'en'].includes(url.searchParams.get('lang'))
+                        ? url.searchParams.get('lang')
+                        : null
+                    const pathLanguage = /^\/en(?:\/|$)/.test(url.pathname) ? 'en' : 'fr'
+                    let language = queryLanguage ?? pathLanguage
+
+                    if (!queryLanguage && url.pathname === '/') {
+                        let preference = null
+                        try {
+                            const stored = window.localStorage.getItem('julienesterbet.language')
+                            preference = ['fr', 'en'].includes(stored) ? stored : null
+                        } catch {
+                            // Browser language remains available when storage is blocked.
+                        }
+                        const primaryLanguage = navigator.languages?.[0] ?? navigator.language
+                        language =
+                            preference ??
+                            (primaryLanguage?.toLowerCase().startsWith('fr') ? 'fr' : 'en')
+                    }
+
+                    if (language !== pathLanguage) {
+                        document.documentElement.dataset.languageEntryPending = language
+                    }
+                } catch {
+                    // The readable French HTML remains the no-JavaScript/error fallback.
+                }
+            })()
+        </script>
+
         <meta
             content="Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web utiles, React, Angular, Java et expérimentations Web3."
             name="description"
@@ -34,10 +67,7 @@
         <meta content="website" property="og:type" />
         <meta content="Julien Esterbet — Portfolio" property="og:site_name" />
         <meta content="fr_FR" property="og:locale" />
-        <meta
-            content="Julien Esterbet — Développeur full-stack orienté produit"
-            property="og:title"
-        />
+        <meta content="Portfolio — Julien Esterbet" property="og:title" />
         <meta
             content="Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web utiles, React, Angular, Java et expérimentations Web3."
             property="og:description"
@@ -55,10 +85,7 @@
         />
 
         <meta content="summary_large_image" name="twitter:card" />
-        <meta
-            content="Julien Esterbet — Développeur full-stack orienté produit"
-            name="twitter:title"
-        />
+        <meta content="Portfolio — Julien Esterbet" name="twitter:title" />
         <meta
             content="Portfolio de Julien Esterbet, développeur full-stack orienté produit : applications métiers, produits web utiles, React, Angular, Java et expérimentations Web3."
             name="twitter:description"
@@ -72,7 +99,7 @@
             name="twitter:image:alt"
         />
 
-        <title>Julien Esterbet — Développeur full-stack orienté produit</title>
+        <title>Portfolio — Julien Esterbet</title>
     </head>
     <body>
         <div id="root"></div>
