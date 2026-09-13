@@ -26,10 +26,10 @@ export function createCommentStore(env) {
         async allow(key) {
             await db().query('DELETE FROM reflection_comment_limits WHERE expires_at < now()')
             const {rows} = await db().query(
-                `INSERT INTO reflection_comment_limits(key,count,expires_at) VALUES($1,1,now()+interval '15 minutes') ON CONFLICT(key) DO UPDATE SET count=reflection_comment_limits.count+1 RETURNING count`,
-                [key]
+                `INSERT INTO reflection_comment_limits(key,count,expires_at) VALUES($1,1,now()+interval '1 minute') ON CONFLICT(key) DO UPDATE SET count=reflection_comment_limits.count+1 RETURNING count`,
+                [`${key}:${Math.floor(Date.now() / 60000)}`]
             )
-            return rows[0].count <= 5
+            return rows[0].count <= 60
         },
         async add(data) {
             const {rows} = await db().query(

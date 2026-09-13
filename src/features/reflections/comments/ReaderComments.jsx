@@ -172,8 +172,8 @@ export default function ReaderComments({slug, language, contentRef}) {
             setMessage(
                 error.message === 'rate'
                     ? fr
-                        ? 'Trop de publications. Réessaie dans 15 minutes.'
-                        : 'Too many posts. Try again in 15 minutes.'
+                        ? 'Trop de publications. Réessaie dans une minute.'
+                        : 'Too many posts. Try again in one minute.'
                     : fr
                       ? 'Publication impossible pour le moment. Ton texte reste dans ce formulaire.'
                       : 'Unable to publish right now. Your text remains in this form.'

@@ -59,7 +59,13 @@ export default function PassageLayer({
                 .sort((a, b) => (a.rects[0]?.top ?? Infinity) - (b.rects[0]?.top ?? Infinity))
             for (const group of measured) {
                 if (!group.rects.length) continue
-                group.markerTop = Math.max(group.rects[0].top, previous + 54)
+                const passageTop = Math.min(...group.rects.map((rect) => rect.top))
+                const passageBottom = Math.max(...group.rects.map((rect) => rect.top + rect.height))
+                const markerHeight = innerWidth >= 1536 ? 44 : 40
+                group.markerTop = Math.max(
+                    (passageTop + passageBottom - markerHeight) / 2,
+                    previous + 54
+                )
                 group.markerLeft = Math.min(innerWidth - (innerWidth >= 1536 ? 50 : 44), edge + 8)
                 previous = group.markerTop
             }
@@ -177,7 +183,11 @@ export default function PassageLayer({
                                     className={`passage-marker ${active && passageKey(active) === group.key ? 'is-active' : ''}`}
                                     style={{left: group.markerLeft, top: group.markerTop}}
                                     aria-label={`${fr ? 'Commentaires sur le passage' : 'Comments on passage'} : ${group.anchor.quote.slice(0, 75)} (${group.comments.length})`}
-                                    title={fr ? "Ouvrir les commentaires de ce passage" : "Open comments on this passage"}
+                                    title={
+                                        fr
+                                            ? 'Ouvrir les commentaires de ce passage'
+                                            : 'Open comments on this passage'
+                                    }
                                     disabled={drafting}
                                     aria-controls="passage-thread"
                                     aria-expanded={!!selected && selected.key === group.key}

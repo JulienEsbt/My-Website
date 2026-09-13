@@ -1,4 +1,5 @@
 import {createHash, createHmac, randomBytes, randomUUID, timingSafeEqual} from 'node:crypto'
+import {notifyComment} from './notify.js'
 import reflections from '../../src/data/reflections/reflections.js'
 import {isAllowedOrigin} from '../contact/contactSecurity.js'
 import {createCommentStore} from './store.js'
@@ -6,7 +7,11 @@ const hash = (value) => createHash('sha256').update(value).digest('hex')
 const validId = (value) => typeof value === 'string' && /^[a-f0-9-]{36}$/.test(value)
 const clean = (value, max, min = 0) =>
     typeof value === 'string' && value.trim().length >= min && value.trim().length <= max
-export function createCommentsHandler({env = process.env, store = createCommentStore(env)} = {}) {
+export function createCommentsHandler({
+    env = process.env,
+    store = createCommentStore(env),
+    notify = notifyComment,
+} = {}) {
     return async (req, res) => {
         res.setHeader('Cache-Control', 'no-store')
         const send = (status, body) => res.status(status).json(body)
@@ -67,7 +72,7 @@ export function createCommentsHandler({env = process.env, store = createCommentS
                 .update(String(address || 'unknown').split(',')[0])
                 .digest('hex')
             if (!(await store.allow(key))) {
-                res.setHeader('Retry-After', '900')
+                res.setHeader('Retry-After', '60')
                 return send(429, {code: 'rate_limited'})
             }
             const deleteToken = randomBytes(32).toString('hex')
@@ -82,6 +87,12 @@ export function createCommentsHandler({env = process.env, store = createCommentS
                 suffix: data.suffix,
                 deleteHash: hash(deleteToken),
             })
+            try {
+                await notify({...comment, slug, language}, {env})
+            } catch {
+                // Publication remains successful if the mail provider is unavailable.
+                console.error('Comment notification failed', {commentId: comment.id})
+            }
             return send(201, {comment, deleteToken})
         } catch {
             return send(503, {code: 'unavailable'})

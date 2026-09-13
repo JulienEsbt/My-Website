@@ -83,10 +83,16 @@ Chaque publication reçoit aussi une clé de suppression individuelle aléatoire
 
 ## Données et limites
 
-Stockage partagé : article, langue, pseudonyme, texte, citation, contexte de la citation, date et empreinte de suppression. L’adresse réseau est transformée en empreinte HMAC avant stockage dans une table anti-spam séparée ; les entrées expirées sont nettoyées lors des publications suivantes. Limite de cinq publications par adresse réseau sur quinze minutes, partagée entre les instances. Aucun email ni compte lecteur.
+Stockage partagé : article, langue, pseudonyme, texte, citation, contexte de la citation, date et empreinte de suppression. L’adresse réseau est transformée en empreinte HMAC avant stockage dans une table anti-spam séparée ; les entrées expirées sont nettoyées lors des publications suivantes. Limite de soixante publications par adresse réseau et par minute, partagée entre les instances. Aucun email ni compte lecteur.
 
 Les citations sont fournies par les lecteurs, donc ne prouvent pas l’état historique du texte. Le lien recherche la citation et son contexte ; en cas de modification, il conserve la citation et signale qu’il ne retrouve plus le passage. Le contenu utilisateur est rendu en texte, sans HTML. Les requêtes SQL utilisent des paramètres.
 
 Sans configuration complète, l’API renvoie 503 et l’interface désactive Publier. Le formulaire reste accessible pour visualiser le fonctionnement ; ce n’est pas une publication locale simulée. La saisie non publiée n’est pas enregistrée après fermeture/rechargement de la page.
 
 La limite anti-spam ne remplace pas un système complet de lutte contre les abus distribués. Ajouter un challenge seulement si l’usage réel le justifie. Le raccordement PostgreSQL et la vérification avec deux navigateurs restent nécessaires avant mise en ligne.
+
+## Notifications de publication
+
+Pour activer les e-mails, définir `COMMENTS_NOTIFY_EMAIL=true` uniquement dans Vercel Production. Le serveur utilise le service et le modèle EmailJS du formulaire de contact : le destinataire configuré dans ce modèle reçoit chaque nouveau commentaire, son pseudonyme, sa citation éventuelle et le lien de l’article. Aucune adresse de lecteur n’est collectée ; le champ de réponse est vide. Vérifier que le modèle accepte ce champ vide et affiche le message comme du texte, puis effectuer une recette avec le fournisseur avant activation.
+
+Les essais locaux et Preview n’envoient aucun e-mail. Une panne du fournisseur ne bloque pas la publication : une erreur contenant uniquement l’identifiant du commentaire est journalisée côté serveur. Il n’y a pas de relance automatique des notifications échouées ; surveiller les erreurs et le quota EmailJS avant publication.
