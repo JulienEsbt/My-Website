@@ -169,3 +169,25 @@ test('dock labels are contextual and professional chapters remain readable', asy
         'static'
     )
 })
+
+test('competency evidence keeps the language and opens the relevant case section', async ({
+    page,
+}) => {
+    for (const prefix of ['', '/en']) {
+        await page.goto(prefix || '/')
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        const proofs = page.locator('.experience__proof')
+        await expect(proofs).toHaveCount(3)
+        await expect(proofs.nth(0)).toHaveAttribute(
+            'href',
+            `${prefix}/projects/my-website#solution`
+        )
+        await expect(proofs.nth(1)).toHaveAttribute(
+            'href',
+            `${prefix}/projects/bruno-pizza#architecture`
+        )
+        await proofs.nth(1).click()
+        await expect(page.locator('#architecture')).toBeVisible()
+        await expect(page).toHaveURL(new RegExp(`${prefix}/projects/bruno-pizza#architecture$`))
+    }
+})
