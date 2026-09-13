@@ -59,8 +59,8 @@ export default function PassageLayer({
                 .sort((a, b) => (a.rects[0]?.top ?? Infinity) - (b.rects[0]?.top ?? Infinity))
             for (const group of measured) {
                 if (!group.rects.length) continue
-                group.markerTop = Math.max(group.rects[0].top, previous + 44)
-                group.markerLeft = Math.min(innerWidth - 44, edge + 8)
+                group.markerTop = Math.max(group.rects[0].top, previous + 54)
+                group.markerLeft = Math.min(innerWidth - (innerWidth >= 1280 ? 50 : 44), edge + 8)
                 previous = group.markerTop
             }
             setLayout(measured)
@@ -69,7 +69,7 @@ export default function PassageLayer({
             const panelHeight = Math.min(threadRef.current?.scrollHeight || 440, innerHeight - 112)
             const top = Math.max(88, Math.min(rect?.top ?? 120, innerHeight - panelHeight - 24))
             setPanelStyle({
-                left: Math.min(innerWidth - 324, edge + 48),
+                left: Math.min(innerWidth - 324, edge + 64),
                 top,
                 '--thread-top': `${top}px`,
             })

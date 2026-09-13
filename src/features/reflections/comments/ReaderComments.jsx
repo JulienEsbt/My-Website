@@ -127,7 +127,7 @@ export default function ReaderComments({slug, language, contentRef}) {
             const rect = findPassage(root, value)?.getBoundingClientRect()
             panel.style.setProperty(
                 '--passage-left',
-                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 48)}px`
+                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 64)}px`
             )
             panel.style.setProperty(
                 '--passage-top',
@@ -234,7 +234,7 @@ export default function ReaderComments({slug, language, contentRef}) {
             if (!root || !panel) return
             panel.style.setProperty(
                 '--passage-left',
-                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 48)}px`
+                `${Math.min(innerWidth - 324, root.getBoundingClientRect().right + 64)}px`
             )
             panel.style.setProperty(
                 '--passage-top',

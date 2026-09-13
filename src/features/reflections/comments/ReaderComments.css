@@ -191,11 +191,11 @@
 @media (min-width: 1280px) {
     .reflexion-article.reflexion-article--annotated {
         width: calc(100% - 64px);
-        max-width: 1320px;
+        max-width: 1240px;
     }
-    .reflexion-article--annotated .reflexion-article__content {
-        margin-left: 0;
-        margin-right: 360px;
+    .reflexion-article--annotated .reflexion-article__shell {
+        width: calc(100% - 380px);
+        padding: 2rem;
     }
 }
 .passage-highlights {
@@ -221,13 +221,13 @@
     align-items: center;
     justify-content: center;
     gap: 3px;
-    width: 34px;
-    min-height: 34px;
+    width: 46px;
+    min-height: 44px;
     border: 1px solid #4db5ff55;
     border-radius: 11px;
     color: #9ad6ff;
     background: #11233b;
-    font-size: 11px;
+    font-size: 14px;
     cursor: pointer;
     box-shadow: 0 4px 14px #0003;
 }
@@ -353,7 +353,7 @@
     }
     .passage-marker {
         min-height: 40px;
-        width: 38px;
+        width: 40px;
     }
 }
 
@@ -369,8 +369,7 @@
 }
 @media (min-width: 1280px) {
     .reflexion-article--annotated .passage-reading-hint {
-        margin-left: 0;
-        margin-right: 360px;
+        margin-inline: auto;
     }
 }
 
