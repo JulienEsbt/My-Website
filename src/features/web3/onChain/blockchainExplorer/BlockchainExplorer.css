@@ -36,28 +36,22 @@
     position: relative;
 }
 
-.blockchain-embla::before,
-.blockchain-embla::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 1.2rem;
-    z-index: 2;
-    width: clamp(1.5rem, 2.5vw, 3rem);
-    pointer-events: none;
-}
-
-.blockchain-embla::before {
-    left: 0;
-    background: linear-gradient(90deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
-}
-
-.blockchain-embla::after {
-    right: 0;
-    background: linear-gradient(270deg, #020612 8%, rgba(2, 6, 18, 0.72) 38%, transparent);
-}
-
 .blockchain-embla__viewport {
+    /* Transparency reveals the actual page background, including its colored glows. */
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 2rem,
+        #000 calc(100% - 2rem),
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 2rem,
+        #000 calc(100% - 2rem),
+        transparent
+    );
     overflow: hidden;
     cursor: grab;
 }
