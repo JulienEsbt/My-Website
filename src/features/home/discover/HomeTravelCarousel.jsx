@@ -11,11 +11,12 @@ import guadeloupe from '../../../generated/media/travels/guadeloupe-2025.json'
 import estonia from '../../../generated/media/travels/estonia-2022.json'
 
 const destinations = [
-    ['portugal-2025', portugal, 'IMG_1944.jpeg'],
-    ['guadeloupe-2025', guadeloupe, 'dji_fly_20250326_061606_203_1742984195906_pano.jpg'],
-    ['estonia-2022', estonia, 'IMG_2014.jpeg'],
-].map(([id, manifest, filename]) => ({
+    ['portugal-2025', portugal, 'IMG_2144.jpeg', 'center'],
+    ['guadeloupe-2025', guadeloupe, 'IMG_3915.jpeg', 'center 85%'],
+    ['estonia-2022', estonia, 'IMG_1980.jpeg', 'center 45%'],
+].map(([id, manifest, filename, photoPosition]) => ({
     ...trips.find((trip) => trip.id === id),
+    photoPosition,
     photo: createMediaResolver(manifest, 'travels')(`${id}/${filename}`),
 }))
 
@@ -69,6 +70,7 @@ export default function HomeTravelCarousel({language, readLabel}) {
                 <div className="home-discover__photo">
                     <ResponsiveImage
                         media={trip.photo}
+                        style={{objectPosition: trip.photoPosition}}
                         alt={`${fr ? trip.country : trip.countryEn} · ${trip.year}`}
                         sizes="(max-width: 700px) 90vw, 55vw"
                     />
