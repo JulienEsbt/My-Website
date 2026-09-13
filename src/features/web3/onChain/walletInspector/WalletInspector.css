@@ -937,7 +937,7 @@
     padding-block: 0;
 }
 .wallet-nft-strip {
-    max-width: 560px;
+    max-width: none;
 }
 .allocation-donut {
     width: 112px;
@@ -953,11 +953,14 @@
     }
     .wallet-inspector__allocation {
         grid-column: 1;
-        grid-row: span 2;
+        align-self: stretch;
     }
-    .wallet-inspector__tokens-panel,
-    .wallet-inspector__nfts-panel {
+    .wallet-inspector__tokens-panel {
         grid-column: 2;
+        align-self: stretch;
+    }
+    .wallet-inspector__nfts-panel {
+        grid-column: 1 / -1;
     }
     .allocation-donut-layout {
         padding-block: 0.25rem;
@@ -966,6 +969,6 @@
         padding-block: 0.6rem;
     }
     .wallet-nft-strip {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 }

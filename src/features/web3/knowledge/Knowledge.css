@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.7fr);
     gap: 1.5rem;
-    align-items: start;
+    align-items: stretch;
 }
 
 .knowledge-v3__menu {
@@ -46,12 +46,14 @@
 
 .knowledge-v3__tab strong {
     display: block;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.35;
 }
 
 .knowledge-v3__tab small {
     color: var(--color-primary);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 .knowledge-v3__tab em {
@@ -63,6 +65,8 @@
 .knowledge-v3__panel {
     min-height: 0;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
     padding: 1.4rem;
     border-radius: 1.6rem;
     background:
@@ -131,6 +135,10 @@
 }
 
 .knowledge-v3__detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 1.2rem;

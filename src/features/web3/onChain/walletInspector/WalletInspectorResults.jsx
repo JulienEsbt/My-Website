@@ -207,7 +207,7 @@ const WalletInspectorResults = ({
                         </p>
                     ) : (
                         <div className="wallet-nft-strip">
-                            {result.nfts.slice(0, 4).map((nft) => (
+                            {result.nfts.slice(0, 8).map((nft) => (
                                 <button
                                     key={nft.id}
                                     type="button"

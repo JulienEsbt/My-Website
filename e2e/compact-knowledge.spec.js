@@ -14,6 +14,10 @@ test('knowledge follows its content and explorer fades transparently', async ({p
                 el.lastElementChild.getBoundingClientRect().bottom
         )
         expect(gap).toBeLessThan(35)
+        const boxes = await page
+            .locator('.knowledge-v3')
+            .evaluate((el) => [...el.children].map((child) => child.getBoundingClientRect().height))
+        expect(Math.abs(boxes[0] - boxes[1])).toBeLessThan(2)
     }
     await menu.filter({hasText: 'DeFi'}).click()
     await expect(menu.last()).toHaveCSS('opacity', '1')

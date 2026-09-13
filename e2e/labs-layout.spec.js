@@ -67,6 +67,12 @@ test('Labs dashboard keeps long amounts readable and donation controls usable', 
     await page.locator('.wallet-inspector').scrollIntoViewIfNeeded()
     await expect(page.locator('.wallet-inspector')).toHaveCSS('opacity', '1')
     await page.locator('.wallet-inspector').screenshot({path: '/tmp/labs-dashboard-desktop.png'})
+    const allocation = await page.locator('.wallet-inspector__allocation').boundingBox()
+    const tokens = await page.locator('.wallet-inspector__tokens-panel').boundingBox()
+    const nfts = await page.locator('.wallet-inspector__nfts-panel').boundingBox()
+    expect(Math.abs(allocation.height - tokens.height)).toBeLessThan(2)
+    expect(Math.abs(allocation.y - tokens.y)).toBeLessThan(2)
+    expect(nfts.width).toBeGreaterThan(tokens.width + allocation.width)
     for (const width of [1440, 768, 390]) {
         await page.setViewportSize({width, height: 1000})
         const row = page.locator('.wallet-activity-row')
