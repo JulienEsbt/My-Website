@@ -170,33 +170,15 @@
     }
 }
 
-/* One compact dock across the site, with a caption for the current section. */
+/* One compact dock across the site, with labels only on hover or keyboard focus. */
 .section-nav {
     background: rgba(13, 21, 36, 0.94);
 }
 .section-nav a > span {
     display: flex;
 }
-.section-nav a.active::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
 .section-nav a::after {
     background: rgba(13, 21, 36, 0.96);
-}
-.section-nav:has(a:hover, a:focus-visible) a.active:not(:hover):not(:focus-visible)::after {
-    opacity: 0;
-}
-@media (max-width: 650px) {
-    .section-nav a.active::after {
-        display: block;
-    }
-    .section-nav a:first-child.active::after {
-        transform: translateY(0);
-    }
-    .section-nav a:last-child.active::after {
-        transform: translateY(0);
-    }
 }
 @media (prefers-reduced-motion: reduce) {
     .section-nav a,
