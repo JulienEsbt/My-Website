@@ -1,5 +1,8 @@
 import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
+import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
+import {LINKS} from '../../../config/links.js'
+import {FiArrowUpRight} from 'react-icons/fi'
 import {FaReact, FaServer} from 'react-icons/fa'
 import {SiEthereum} from 'react-icons/si'
 import {gsap} from 'gsap'
@@ -29,7 +32,28 @@ const GROUPS = [
 ]
 
 const Experience = () => {
-    const {t} = useTranslation('home')
+    const {t, i18n} = useTranslation('home')
+    const fr = i18n.resolvedLanguage?.startsWith('fr')
+    const proofs = {
+        frontend: {
+            to: '/projects/my-website#solution',
+            label: fr
+                ? 'En pratique : interface et navigation du portfolio'
+                : 'In practice: portfolio interface and navigation',
+        },
+        backend: {
+            to: '/projects/bruno-pizza#architecture',
+            label: fr
+                ? 'En pratique : API et stockage de Bruno Pizza'
+                : 'In practice: Bruno Pizza API and storage',
+        },
+        web3: {
+            href: LINKS.projects.megalis,
+            label: fr
+                ? 'Voir le code du prototype académique Web3'
+                : 'View the academic Web3 prototype code',
+        },
+    }
     const sectionRef = useRef(null)
     const cardsRef = useRef([])
     const reducedMotion = useReducedMotion()
@@ -90,6 +114,22 @@ const Experience = () => {
                                 </span>
                             ))}
                         </div>
+                        {proofs[group.id].to ? (
+                            <Link className="experience__proof" to={proofs[group.id].to}>
+                                {proofs[group.id].label}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </Link>
+                        ) : (
+                            <a
+                                className="experience__proof"
+                                href={proofs[group.id].href}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {proofs[group.id].label}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </a>
+                        )}
                     </article>
                 ))}
             </div>

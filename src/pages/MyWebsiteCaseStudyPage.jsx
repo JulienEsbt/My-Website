@@ -91,7 +91,7 @@ export default function MyWebsiteCaseStudyPage() {
                     <p className="case-study__lead">{t('website.problem.body')}</p>
                 </section>
 
-                <section className="container case-study__section">
+                <section id="solution" className="container case-study__section">
                     <p className="section-kicker">{t('website.solution.kicker')}</p>
                     <h2>{t('website.solution.title')}</h2>
                     <p className="case-study__lead">{t('website.solution.intro')}</p>

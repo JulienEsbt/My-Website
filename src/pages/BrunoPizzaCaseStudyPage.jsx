@@ -75,7 +75,7 @@ export default function BrunoPizzaCaseStudyPage() {
                     <ProductionStory t={t} />
                 </section>
 
-                <section className="container case-study__section">
+                <section id="architecture" className="container case-study__section">
                     <p className="section-kicker">{t('bruno.architecture.kicker')}</p>
                     <h2>{t('bruno.architecture.title')}</h2>
                     <ol className="case-study__flow">
