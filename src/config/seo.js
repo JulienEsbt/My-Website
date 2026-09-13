@@ -9,7 +9,7 @@ export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
 const content = {
     fr: {
         home: {
-            title: 'Julien Esterbet — Analyste programmeur, projets et réflexions',
+            title: 'Portfolio — Julien Esterbet',
             description:
                 'Julien Esterbet, analyste programmeur : applications métiers, projets logiciels, réflexions personnelles et récits de voyage.',
         },
@@ -55,7 +55,7 @@ const content = {
     },
     en: {
         home: {
-            title: 'Julien Esterbet — Software developer, projects and reflections',
+            title: 'Portfolio — Julien Esterbet',
             description:
                 'Julien Esterbet, software developer and IT analyst: business applications, software projects, personal reflections and travel stories.',
         },

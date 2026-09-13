@@ -175,7 +175,7 @@ test('Agora is presented as a private project intent in both languages', async (
 
     await page.getByRole('link', {name: 'Switch to English'}).click()
     await expect(project.getByRole('heading', {name: 'Agora — Debate graph'})).toBeVisible()
-    await expect(project.getByText('Project in preparation')).toBeVisible()
+    await expect(project.getByText('New project · In development')).toBeVisible()
 })
 
 test('English articles have readable HTML without JavaScript', async ({browser}) => {
@@ -285,8 +285,8 @@ test('home introduces the person before projects and opens selected localized st
         await writing.click()
         await expect(page.getByRole('heading', {level: 1})).toBeVisible()
         await page.goBack()
-        await page.locator(`#home-travel a[href="${prefix}/travel/croatia-2021"]`).click()
-        await expect(page).toHaveURL(new RegExp(`${prefix}/travel/croatia-2021$`))
+        await page.locator(`#home-travel a[href="${prefix}/travel/portugal-2025"]`).click()
+        await expect(page).toHaveURL(new RegExp(`${prefix}/travel/portugal-2025$`))
     }
 })
 
@@ -340,4 +340,72 @@ test('project images open studies and the expanded Agora stays compact and align
     expect(order).toEqual(['goals', 'home-reflections', 'home-travel', 'contact'])
     await cards.nth(0).locator('a.portfolio__image').click()
     await expect(page).toHaveURL(/\/projects\/bruno-pizza$/)
+})
+
+test('home reading returns to its source section, including after a language switch', async ({
+    page,
+}) => {
+    await page.goto('/#home-reflections')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.locator('#home-reflections h3 a').first().click()
+    await expect(page.locator('.reflexion-article__back')).toHaveAttribute(
+        'href',
+        '/#home-reflections'
+    )
+    await page.getByRole('link', {name: 'Switch to English'}).click()
+    await page.locator('.reflexion-article__back').click()
+    await expect(page).toHaveURL(/\/en#home-reflections$/)
+    await expect(page.locator('#home-reflections')).toBeInViewport()
+    const carousel = page.locator('.home-travel-carousel')
+    await expect(carousel.locator('a[href*="croatia-2021"]')).toHaveCount(0)
+    await carousel.getByRole('button', {name: 'Guadeloupe'}).click()
+    await carousel.getByRole('link', {name: 'Read this story'}).click()
+    await expect(page).toHaveURL(/\/en\/travel\/guadeloupe-2025$/)
+    await page.locator('.travel-timeline__back').click()
+    await expect(page).toHaveURL(/\/en#home-travel$/)
+    await expect(carousel.getByRole('button', {name: 'Guadeloupe'})).toHaveAttribute(
+        'aria-pressed',
+        'true'
+    )
+})
+
+test('the About photo appears with the section on a large screen without scrolling', async ({
+    page,
+}) => {
+    await page.setViewportSize({width: 2560, height: 1440})
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await expect
+        .poll(() => page.locator('.about__visual').evaluate((el) => getComputedStyle(el).opacity))
+        .toBe('1')
+    const visual = await page.locator('.about__visual').boundingBox()
+    const cards = await page.locator('.about__cards').boundingBox()
+    expect(Math.abs(visual.y - cards.y)).toBeLessThan(2)
+    await expect(page.locator('.about__visual')).toBeInViewport()
+    expect(await page.evaluate(() => scrollY)).toBe(0)
+})
+
+test('home titles stay concise in both languages and travel rotation can be paused', async ({
+    page,
+}) => {
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/#home-travel')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await expect(page).toHaveTitle('Portfolio — Julien Esterbet')
+    const carousel = page.locator('.home-travel-carousel')
+    await carousel.scrollIntoViewIfNeeded()
+    await page.mouse.move(0, 0)
+    await expect(carousel.getByRole('button', {name: 'Guadeloupe'})).toHaveAttribute(
+        'aria-pressed',
+        'true',
+        {timeout: 10000}
+    )
+    await carousel.getByRole('button', {name: 'Mettre les voyages en pause'}).click()
+    await expect(
+        carousel.getByRole('button', {name: 'Reprendre le défilement des voyages'})
+    ).toBeVisible()
+    await page.getByRole('link', {name: 'Switch to English'}).click()
+    await expect(page).toHaveTitle('Portfolio — Julien Esterbet')
+    await expect(carousel.getByRole('button', {name: 'Resume travel slideshow'})).toBeVisible()
 })
