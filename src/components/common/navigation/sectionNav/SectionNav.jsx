@@ -4,12 +4,7 @@ import {getPreferredScrollBehavior} from '../../accessibility/motionPreferences.
 import useReducedMotion from '../../accessibility/useReducedMotion.js'
 import './SectionNav.css'
 
-const SectionNav = ({
-    items,
-    ariaLabel = 'Section navigation',
-    avoidSelector,
-    showLabels = false,
-}) => {
+const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector}) => {
     const navRef = useRef(null)
     const [avoidingContent, setAvoidingContent] = useState(Boolean(avoidSelector))
     const [active, setActive] = useState(`#${items[0]?.id ?? 'top'}`)
@@ -114,7 +109,7 @@ const SectionNav = ({
     return (
         <nav
             ref={navRef}
-            className={`section-nav${showLabels ? ' section-nav--labelled' : ''}`}
+            className="section-nav"
             aria-label={ariaLabel}
             data-avoiding-content={avoidingContent || undefined}
             inert={avoidingContent ? '' : undefined}
@@ -142,7 +137,6 @@ const SectionNav = ({
                         }}
                     >
                         <span aria-hidden="true">{item.icon}</span>
-                        {showLabels && <small aria-hidden="true">{item.label}</small>}
                     </a>
                 )
             })}

@@ -20,7 +20,6 @@ const HomeNav = () => {
 
     return (
         <SectionNav
-            showLabels
             avoidSelector=".home-hero .cta"
             items={items}
             ariaLabel={t('nav.aria', 'Section navigation')}

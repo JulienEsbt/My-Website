@@ -37,10 +37,6 @@
     pointer-events: none;
 }
 
-.section-nav a[data-tooltip-dismissed='true']::after {
-    display: none;
-}
-
 .section-nav a {
     position: relative;
     z-index: 1;
@@ -174,41 +170,41 @@
     }
 }
 
-.section-nav--labelled a {
-    width: 3.8rem;
-    height: 3.3rem;
-    border-radius: 1rem;
-    align-content: center;
-    gap: 0.15rem;
+/* One compact dock across the site, with a caption for the current section. */
+.section-nav {
+    background: rgba(13, 21, 36, 0.94);
 }
-.section-nav--labelled a small {
-    font-size: 0.65rem;
-    line-height: 1.2;
+.section-nav a > span {
+    display: flex;
 }
-.section-nav--labelled a::after {
-    display: none !important;
+.section-nav a.active::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.section-nav a::after {
+    background: rgba(13, 21, 36, 0.96);
+}
+.section-nav:has(a:hover, a:focus-visible) a.active:not(:hover):not(:focus-visible)::after {
+    opacity: 0;
 }
 @media (max-width: 650px) {
-    .section-nav--labelled {
-        gap: 0.25rem;
+    .section-nav a.active::after {
+        display: block;
     }
-    .section-nav--labelled a {
-        width: 2.75rem;
-        height: 3rem;
+    .section-nav a:first-child.active::after {
+        transform: translateY(0);
     }
-    .section-nav--labelled a small {
-        font-size: 0.65rem;
+    .section-nav a:last-child.active::after {
+        transform: translateY(0);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .section-nav a,
+    .section-nav a::after {
+        transition: none;
     }
 }
 
-.section-nav--labelled {
-    background: rgba(13, 21, 36, 0.94);
-    border-color: rgba(166, 201, 234, 0.24);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
-}
-.section-nav--labelled a {
-    color: #b5c1d2;
-}
-.section-nav--labelled a.active {
-    color: #07111f;
+.section-nav a[data-tooltip-dismissed='true']::after {
+    display: none;
 }
