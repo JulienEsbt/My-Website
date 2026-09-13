@@ -37,6 +37,16 @@ Pour la phase actuelle de validation :
 
 Sources : [stockage Vercel](https://vercel.com/docs/marketplace-storage), [intégration Neon](https://vercel.com/marketplace/neon/neon).
 
+## Après la connexion locale : variables Vercel
+
+Dans **my-website → Settings → Environment Variables**, vérifier les noms exacts pour l'environnement Preview :
+
+- `COMMENTS_DATABASE_URL` : URL de sa branche Neon. Si cette variable a déjà été créée par l'intégration, la conserver ; ne pas créer de doublon.
+- `COMMENTS_RATE_SECRET` et `COMMENTS_ADMIN_TOKEN` : copier leurs valeurs privées depuis le fichier local pour la recette Preview. Copier la valeur seule, sans nom de variable ni guillemets.
+- `COMMENTS_ALLOWED_ORIGINS` : `https://julienesterbet.com,https://www.julienesterbet.com`. Les URL Preview déclarées par Vercel sont aussi admises par le serveur.
+
+Enregistrer. Aucun préfixe `VITE_` : ces valeurs appartiennent au serveur. Un déploiement déjà existant ne reçoit pas ces changements ; la prochaine Preview doit contenir le code des commentaires et ces variables. Sa base doit également recevoir `server/comments/schema.sql` si elle est distincte de la base locale. Le push et le déploiement sont une étape séparée après revue. Pour Production, configurer une branche permanente et des clés dédiées avant la mise en ligne.
+
 ## Connexion avant publication
 
 1. Créer ou choisir une base PostgreSQL, par exemple Neon via Vercel Marketplace. Aucun service n’a été créé par ce chantier.
