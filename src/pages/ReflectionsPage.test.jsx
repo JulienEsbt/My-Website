@@ -49,14 +49,14 @@ describe('ReflectionsPage', () => {
         expect(screen.getByRole('status')).toHaveTextContent('1 réflexion trouvée')
     })
 
-    it('offers only populated categories and sorts latest articles by date', () => {
+    it('keeps all categories visible and prioritizes the featured article', () => {
         renderPage()
-        expect(screen.queryByRole('button', {name: 'Politique (0)'})).not.toBeInTheDocument()
+        for (const name of ['Tous (3)', 'Politique (0)', 'Société (0)', 'Technologie (0)']) {
+            expect(screen.getByRole('button', {name})).toBeInTheDocument()
+        }
         expect(screen.getByRole('button', {name: 'Philosophie (3)'})).toBeInTheDocument()
         const list = screen.getByRole('heading', {name: 'Dernières réflexions'}).closest('section')
-        expect(within(list).getAllByRole('article')[0]).toHaveTextContent(
-            'Se méfier des oppositions simples'
-        )
+        expect(within(list).getAllByRole('article')[0]).toHaveTextContent('Charte de pensée')
     })
 
     it('updates the visible content after a complete language change', async () => {

@@ -48,7 +48,7 @@ const ReflectionsPage = () => {
             value: 'technology',
             label: `${t('filters.technology')} (${categoryCounters.technology})`,
         },
-    ].filter(({value}) => value === 'all' || categoryCounters[value] > 0)
+    ]
 
     const latestReflexion = [...reflections].sort((a, b) => new Date(b.date) - new Date(a.date))[0]
 
@@ -69,7 +69,10 @@ const ReflectionsPage = () => {
 
         const sortReflections = (items) => {
             return [...items].sort((a, b) => {
-                return new Date(b.date) - new Date(a.date)
+                return (
+                    Number(Boolean(b.featured)) - Number(Boolean(a.featured)) ||
+                    new Date(b.date) - new Date(a.date)
+                )
             })
         }
 
