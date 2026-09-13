@@ -294,3 +294,10 @@
         transition: none;
     }
 }
+
+@media (min-width: 1300px) and (min-height: 900px) {
+    .about__container {
+        grid-template-columns: minmax(360px, 460px) minmax(0, 1fr);
+        gap: 1.5rem 3rem;
+    }
+}

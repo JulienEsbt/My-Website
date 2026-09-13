@@ -125,3 +125,47 @@ test('additional scroll stories preserve content and simplify on mobile', async 
     await page.emulateMedia({reducedMotion: 'reduce'})
     await expect(story.locator('.production-story__step').first()).toHaveCSS('transform', 'none')
 })
+
+test('dock labels are contextual and professional chapters remain readable', async ({page}) => {
+    await page.setViewportSize({width: 1440, height: 1000})
+    await page.emulateMedia({reducedMotion: 'reduce'})
+    await page.goto('/')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.locator('#portfolio').scrollIntoViewIfNeeded()
+    await page.mouse.move(0, 0)
+    const active = page.locator('.section-nav a[data-label="Projets"]')
+    await expect
+        .poll(() => active.evaluate((el) => getComputedStyle(el, '::after').opacity))
+        .toBe('0')
+    await active.hover()
+    await expect
+        .poll(() => active.evaluate((el) => getComputedStyle(el, '::after').opacity))
+        .toBe('1')
+    await page.mouse.move(0, 0)
+    await expect
+        .poll(() => active.evaluate((el) => getComputedStyle(el, '::after').opacity))
+        .toBe('0')
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    for (const section of ['experience', 'services']) {
+        await page.locator(`#${section}`).scrollIntoViewIfNeeded()
+        await expect(page.locator(`#${section} .professional-chapter__heading`)).toHaveCSS(
+            'position',
+            'sticky'
+        )
+        await page.screenshot({path: `/tmp/chapters-${section}.png`})
+    }
+    await page.locator('#about').scrollIntoViewIfNeeded()
+    expect((await page.locator('.about__visual').boundingBox()).width).toBeGreaterThan(400)
+    await page.screenshot({path: '/tmp/chapters-about.png'})
+    await page.setViewportSize({width: 390, height: 844})
+    await page.locator('#services').scrollIntoViewIfNeeded()
+    await expect
+        .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+        .toBe(true)
+    await page.screenshot({path: '/tmp/chapters-mobile.png'})
+    await page.emulateMedia({reducedMotion: 'reduce'})
+    await expect(page.locator('#services .professional-chapter__heading')).toHaveCSS(
+        'position',
+        'static'
+    )
+})

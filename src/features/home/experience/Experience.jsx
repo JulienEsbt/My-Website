@@ -6,6 +6,7 @@ import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import './Experience.css'
+import '../professionalChapters.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,21 +38,12 @@ const Experience = () => {
         if (reducedMotion) return undefined
 
         const ctx = gsap.context(() => {
-            gsap.from(sectionRef.current, {
-                opacity: 0,
-                y: 28,
-                duration: 0.7,
-                ease: 'power2.out',
-                scrollTrigger: {trigger: sectionRef.current, start: 'top 80%'},
-            })
-
-            gsap.from(cardsRef.current.filter(Boolean), {
-                opacity: 0,
-                y: 24,
-                duration: 0.55,
-                ease: 'power2.out',
-                stagger: 0.1,
-                scrollTrigger: {trigger: sectionRef.current, start: 'top 72%'},
+            cardsRef.current.filter(Boolean).forEach((card) => {
+                gsap.from(card, {
+                    y: 35,
+                    ease: 'none',
+                    scrollTrigger: {trigger: card, start: 'top 95%', end: 'top 65%', scrub: 0.5},
+                })
             })
         }, sectionRef)
 
@@ -59,10 +51,19 @@ const Experience = () => {
     }, [reducedMotion])
 
     return (
-        <section id="experience" ref={sectionRef}>
-            <p className="section-kicker">{t('experience.kicker')}</p>
-            <h2>{t('experience.title')}</h2>
-            <p className="experience__intro">{t('experience.intro')}</p>
+        <section
+            id="experience"
+            className="professional-chapter professional-chapter--experience"
+            ref={sectionRef}
+        >
+            <div className="professional-chapter__heading">
+                <span className="professional-chapter__number" aria-hidden="true">
+                    02
+                </span>
+                <p className="section-kicker">{t('experience.kicker')}</p>
+                <h2>{t('experience.title')}</h2>
+                <p className="experience__intro">{t('experience.intro')}</p>
+            </div>
 
             <div className="container experience__container">
                 {GROUPS.map((group, index) => (

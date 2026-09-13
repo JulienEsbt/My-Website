@@ -10,6 +10,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import AgoraProjectCard from './AgoraProjectCard.jsx'
 import './Portfolio.css'
+import '../professionalChapters.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -58,10 +59,19 @@ export default function Portfolio() {
     }, [reducedMotion])
 
     return (
-        <section id="portfolio" ref={sectionRef}>
-            <p className="section-kicker">{t('portfolio.kicker')}</p>
-            <h2>{t('portfolio.title')}</h2>
-            <p className="portfolio__intro">{t('portfolio.intro')}</p>
+        <section
+            id="portfolio"
+            className="professional-chapter professional-chapter--portfolio"
+            ref={sectionRef}
+        >
+            <div className="professional-chapter__heading">
+                <span className="professional-chapter__number" aria-hidden="true">
+                    01
+                </span>
+                <p className="section-kicker">{t('portfolio.kicker')}</p>
+                <h2>{t('portfolio.title')}</h2>
+                <p className="portfolio__intro">{t('portfolio.intro')}</p>
+            </div>
 
             <div className="container portfolio__container">
                 {PORTFOLIO_PROJECTS.map(({id, image, repository, demo, caseStudy, tags}, index) => (
