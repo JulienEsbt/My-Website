@@ -58,3 +58,16 @@ describe('ENS resolution', () => {
         ).resolves.toEqual({address: '0x123', ens: 'julienesbt.eth', avatar: null})
     })
 })
+
+it('resolves the same public address from ENS and hexadecimal input', async () => {
+    const address = '0x1234567890123456789012345678901234567890'
+    const provider = {
+        resolveName: vi.fn().mockResolvedValue(address),
+        lookupAddress: vi.fn().mockResolvedValue('example.eth'),
+        getAvatar: vi.fn().mockResolvedValue(null),
+    }
+    const network = {id: 'ethereum'}
+    const named = await resolveWalletInput({provider, input: 'example.eth', network})
+    const direct = await resolveWalletInput({provider, input: address, network})
+    expect(named.address).toBe(direct.address)
+})

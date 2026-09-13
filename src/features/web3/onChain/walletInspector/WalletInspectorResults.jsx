@@ -29,6 +29,8 @@ const WalletInspectorResults = ({
 }) => {
     const {t, i18n} = useTranslation('web3')
     const language = i18n.resolvedLanguage ?? i18n.language
+    const unavailableValue = result.valuationPartial && result.portfolioValueUsd === 0
+    const portfolioValue = unavailableValue ? '—' : formatUsd(result.portfolioValueUsd, language)
 
     return (
         <>
@@ -51,7 +53,7 @@ const WalletInspectorResults = ({
 
                 <div className="wallet-inspector__metric wallet-inspector__metric--value">
                     <span>{t('walletInspector.portfolio')}</span>
-                    <strong>{formatUsd(result.portfolioValueUsd, language)}</strong>
+                    <strong>{portfolioValue}</strong>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -60,7 +62,13 @@ const WalletInspectorResults = ({
                         {formatNumber(result.nativeBalance, language, {maximumFractionDigits: 5})}{' '}
                         {result.network.symbol}
                     </strong>
-                    <small>{formatUsd(result.nativeValueUsd, language)}</small>
+                    <small>
+                        {result.valuationPartial &&
+                        result.nativeValueUsd === 0 &&
+                        result.nativeBalance > 0
+                            ? '—'
+                            : formatUsd(result.nativeValueUsd, language)}
+                    </small>
                 </div>
 
                 <div className="wallet-inspector__metric">
@@ -113,7 +121,7 @@ const WalletInspectorResults = ({
                 <article className="wallet-inspector__panel wallet-inspector__allocation">
                     <div className="wallet-inspector__panel-head">
                         <h3>{t('walletInspector.allocation')}</h3>
-                        <span>{formatUsd(result.portfolioValueUsd, language)}</span>
+                        <span>{portfolioValue}</span>
                     </div>
 
                     {result.allocationItems.length === 0 ? (
@@ -125,7 +133,7 @@ const WalletInspectorResults = ({
                                 style={{background: getAllocationGradient(result.allocationItems)}}
                             >
                                 <div>
-                                    <strong>{formatUsd(result.portfolioValueUsd, language)}</strong>
+                                    <strong>{portfolioValue}</strong>
                                     <span>{t('walletInspector.total')}</span>
                                 </div>
                             </div>

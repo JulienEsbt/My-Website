@@ -22,7 +22,7 @@ export default function WalletMetricsGuide() {
               ],
               [
                   'Sources et vérification',
-                  'Les soldes et transferts sont interrogés via Alchemy ; les prix sont récupérés par le service de cotation du site. Les données peuvent évoluer entre deux analyses. Le lien vers l’explorateur permet de vérifier l’adresse sur le réseau choisi.',
+                  'Les soldes et transferts sont interrogés via Alchemy ; les prix sont récupérés par le service de cotation du site. La cotation est limitée à 20 contrats par analyse. Les prix reçus sont réutilisés pendant une minute au maximum. Les données peuvent évoluer entre deux analyses. Le lien vers l’explorateur permet de vérifier l’adresse sur le réseau choisi.',
               ],
           ]
         : [
@@ -44,7 +44,7 @@ export default function WalletMetricsGuide() {
               ],
               [
                   'Sources and verification',
-                  'Balances and transfers are queried through Alchemy; prices come through the site’s pricing service. Data can change between analyses. The explorer link lets you verify the address on the selected network.',
+                  'Balances and transfers are queried through Alchemy; prices come through the site’s pricing service. Pricing is limited to 20 contracts per analysis. Received prices are reused for up to one minute. Data can change between analyses. The explorer link lets you verify the address on the selected network.',
               ],
           ]
     return (
