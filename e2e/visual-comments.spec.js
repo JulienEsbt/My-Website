@@ -207,6 +207,8 @@ test('professional chapters keep the centered title pinned while cards progress'
         for (const id of ['experience', 'services']) {
             const section = page.locator(`#${id}`)
             const heading = section.locator('.professional-chapter__heading')
+            await section.scrollIntoViewIfNeeded()
+            await page.evaluate(() => document.fonts.ready)
             const geometry = await section.evaluate((el) => {
                 const h = el.querySelector('.professional-chapter__heading')
                 return {

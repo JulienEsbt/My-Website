@@ -19,6 +19,8 @@ jobs:
         name: Lint, tests, build and security
         runs-on: ubuntu-latest
         timeout-minutes: 20
+        env:
+            VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
 
         steps:
             - name: Checkout
@@ -47,6 +49,4 @@ jobs:
               run: npm run test:e2e
 
             - name: Verify public media samples
-              env:
-                  VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
               run: npm run media:remote

@@ -30,7 +30,7 @@ Les variables VITE_ sont intégrées au navigateur : les classer Secret dans Ver
 
 Les variables COMMENTS_DATABASE_DATABASE_URL, COMMENTS_DATABASE_POSTGRES_URL et autres variantes créées par Neon ne remplacent pas COMMENTS_DATABASE_URL. Récupérer la bonne URL dans Neon et enregistrer cette dernière sous le nom exact attendu. L’intégration peut gérer et recréer ses propres variables ; ne pas les supprimer en masse.
 
-Les listes d’origines peuvent être identiques : https://julienesterbet.com,https://www.julienesterbet.com,https://re7.julien-esterbet.com,https://recette.julien-esterbet.com, en conservant uniquement les domaines effectivement utilisés. Les URL de déploiement déclarées par Vercel sont également reconnues par le serveur.
+Les listes d’origines peuvent être identiques : https://julienesterbet.com,https://www.julienesterbet.com,https://re7.julienesterbet.com,https://recette.julienesterbet.com, en conservant uniquement les domaines effectivement utilisés. Les URL de déploiement déclarées par Vercel sont également reconnues par le serveur.
 
 ## 3. Secrets Neon et alerte Needs Attention
 
