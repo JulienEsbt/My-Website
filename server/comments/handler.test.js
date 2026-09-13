@@ -17,7 +17,7 @@ const payload = {
 function setup(overrides = {}) {
     const store = {
         list: vi.fn().mockResolvedValue({comments: [], hasMore: false}),
-        allow: vi.fn().mockResolvedValue(true),
+        allow: vi.fn().mockResolvedValue({allowed: true, retryAfter: 0}),
         add: vi.fn(async (data) => ({id: data.id, body: data.body})),
         remove: vi.fn().mockResolvedValue(true),
     }
@@ -65,7 +65,7 @@ describe('public comments API', () => {
     })
     it('enforces database-backed rate limits', async () => {
         const {handler, req, res, store} = setup()
-        store.allow.mockResolvedValue(false)
+        store.allow.mockResolvedValue({allowed: false, retryAfter: 900})
         await handler(req, res)
         expect(res.code).toBe(429)
         expect(store.add).not.toHaveBeenCalled()

@@ -83,7 +83,7 @@ Chaque publication reçoit aussi une clé de suppression individuelle aléatoire
 
 ## Données et limites
 
-Stockage partagé : article, langue, pseudonyme, texte, citation, contexte de la citation, date et empreinte de suppression. L’adresse réseau est transformée en empreinte HMAC avant stockage dans une table anti-spam séparée ; les entrées expirées sont nettoyées lors des publications suivantes. Limite de soixante publications par adresse réseau et par minute, partagée entre les instances. Aucun email ni compte lecteur.
+Stockage partagé : article, langue, pseudonyme, texte, citation, contexte de la citation, date et empreinte de suppression. L’adresse réseau est transformée en empreinte HMAC avant stockage dans une table anti-spam séparée ; les entrées expirées sont nettoyées lors des publications suivantes. Deux limites glissantes par adresse réseau : dix publications sur quinze minutes et trente sur deux heures, partagée entre les instances. Aucun email ni compte lecteur.
 
 Les citations sont fournies par les lecteurs, donc ne prouvent pas l’état historique du texte. Le lien recherche la citation et son contexte ; en cas de modification, il conserve la citation et signale qu’il ne retrouve plus le passage. Le contenu utilisateur est rendu en texte, sans HTML. Les requêtes SQL utilisent des paramètres.
 

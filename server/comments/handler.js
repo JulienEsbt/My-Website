@@ -71,9 +71,10 @@ export function createCommentsHandler({
             const key = createHmac('sha256', env.COMMENTS_RATE_SECRET)
                 .update(String(address || 'unknown').split(',')[0])
                 .digest('hex')
-            if (!(await store.allow(key))) {
-                res.setHeader('Retry-After', '60')
-                return send(429, {code: 'rate_limited'})
+            const limit = await store.allow(key)
+            if (!limit.allowed) {
+                res.setHeader('Retry-After', String(limit.retryAfter))
+                return send(429, {code: 'rate_limited', retryAfter: limit.retryAfter})
             }
             const deleteToken = randomBytes(32).toString('hex')
             const comment = await store.add({
