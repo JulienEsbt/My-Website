@@ -2,6 +2,18 @@
 
 Interface FR/EN : sélectionner un passage (jusqu’à 1 000 caractères), ouvrir le formulaire, choisir un pseudonyme et publier. Les réactions générales sont également possibles. Publication immédiate, sans compte ; les pseudonymes ne certifient aucune identité.
 
+## Réglages de l’écran « Install Integration »
+
+- **Region** : choisir Frankfurt, Germany si proposée pour garder la base en UE. Vérifier ensuite la région des fonctions Vercel : rapprocher fonctions et base réduit la latence. La région de Londres affichée sur la capture n’est pas une erreur technique, mais ce n’est pas le choix recommandé ici.
+- **Auth** : désactiver. Les commentaires utilisent un pseudonyme sans compte et n’emploient pas Neon Auth.
+- **Installation Plans** : garder Free pour commencer ; vérifier le récapitulatif avant validation.
+- **Nom** si demandé : `portfolio-comments`. Connecter au projet Vercel `my-website`.
+- Pour les essais locaux, créer une branche Neon `development` et récupérer son URL depuis Connect. Garder la branche de production distincte.
+- Si l’intégration crée une variable `DATABASE_URL`, notre code attend explicitement `COMMENTS_DATABASE_URL` : ajouter cette dernière avec l’URL de la bonne branche. Ne pas supposer que l’installation suffit à brancher l’API.
+- Les noms de branches Neon et les environnements Vercel sont deux réglages distincts : contrôler l’URL affectée à Development/Preview/Production avant publication.
+
+Références : [Neon dans Vercel Marketplace](https://vercel.com/marketplace/neon/neon), [latence selon les régions](https://neon.com/demos/regional-latency).
+
 ## Connexion guidée pour Julien
 
 1. Dans le projet **my-website** sur Vercel, ouvrir **Storage**, choisir Neon via le Marketplace et connecter la ressource au projet. Vérifier l’offre et la région affichées avant de valider ; aucune formule payante n’est souscrite par le code.
