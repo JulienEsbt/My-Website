@@ -426,7 +426,7 @@
     background: linear-gradient(135deg, rgba(44, 44, 108, 0.6), rgba(12, 17, 43, 0.78));
 }
 .crypto-about__card:nth-child(2) {
-    background: linear-gradient(135deg, rgba(20, 65, 79, 0.35), rgba(10, 22, 37, 0.8));
+    background: linear-gradient(135deg, rgba(47, 58, 120, 0.6), rgba(14, 18, 46, 0.8));
 }
 .crypto-about__card-icons {
     margin-bottom: 0.8rem;
