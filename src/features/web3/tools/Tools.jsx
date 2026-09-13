@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Tools.css'
+import ResourceLogo from './ResourceLogo.jsx'
 import {FiCompass, FiSearch} from 'react-icons/fi'
 import {FiChevronDown, FiExternalLink} from 'react-icons/fi'
 import {motion} from 'framer-motion'
@@ -87,7 +88,7 @@ const Tools = () => {
                                             aria-label={t('tools.aria.open', {site: tool.label})}
                                         >
                                             <span className="tools-v2__icon">
-                                                <span aria-hidden="true">{tool.label[0]}</span>
+                                                <ResourceLogo name={tool.label} />
                                             </span>
 
                                             <span className="tools-v2__label">

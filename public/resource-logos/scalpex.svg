@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#3367B4"/>
+  <circle cx="16" cy="16" r="10.5" fill="#1c1611" stroke="#dcc698" stroke-width="1.75"/>
+  <text x="16" y="21" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="14" fill="#f3ead8">H</text>
+</svg>

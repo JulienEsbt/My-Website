@@ -237,3 +237,16 @@
         grid-template-columns: 1fr;
     }
 }
+
+.tools-v2__icon img,
+.tools-v2__icon > svg {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 180ms ease;
+}
+.tools-v2__list a:hover .tools-v2__icon > * { transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+    .tools-v2__icon > * { transition: none; }
+}
