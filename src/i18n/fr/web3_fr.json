@@ -454,6 +454,7 @@
             "error": "Données indisponibles"
         },
         "errors": {
+            "ensUnavailable": "La résolution du nom ENS est momentanément indisponible. Réessayez ou saisissez directement une adresse Ethereum.",
             "invalidAddress": "Adresse ou ENS invalide.",
             "missingRpc": "RPC manquant pour ce réseau.",
             "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",

@@ -454,6 +454,7 @@
             "error": "Data unavailable"
         },
         "errors": {
+            "ensUnavailable": "ENS name resolution is temporarily unavailable. Try again or enter an Ethereum address directly.",
             "invalidAddress": "Invalid address or ENS.",
             "missingRpc": "Missing RPC for this network.",
             "noProvider": "No wallet detected. Install MetaMask or use a Web3 browser.",

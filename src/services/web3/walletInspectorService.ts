@@ -54,7 +54,7 @@ async function mapWithConcurrency<T, R>(
     return results
 }
 
-async function resolveWalletInput({
+export async function resolveWalletInput({
     provider,
     input,
     network,
@@ -74,7 +74,9 @@ async function resolveWalletInput({
         return {address: cleanInput, ens, avatar}
     }
     if (network.id !== 'ethereum' || !cleanInput.endsWith('.eth')) return null
-    const address = await provider.resolveName(cleanInput).catch(() => null)
+    const address = await provider.resolveName(cleanInput).catch(() => {
+        throw new Error('ENS_UNAVAILABLE')
+    })
     if (!address) return null
     return {
         address,

@@ -44,6 +44,7 @@ const WalletInspector = () => {
 
     const getTranslatedError = (errorCode) => {
         if (errorCode === 'MISSING_RPC') return t('walletInspector.errors.missingRpc')
+        if (errorCode === 'ENS_UNAVAILABLE') return t('walletInspector.errors.ensUnavailable')
         if (errorCode === 'INVALID_ADDRESS') return t('walletInspector.errors.invalidAddress')
         return t('walletInspector.errors.failed')
     }
@@ -85,7 +86,9 @@ const WalletInspector = () => {
             if (abortController.signal.aborted || requestId !== requestIdRef.current) return
             if (
                 import.meta.env.DEV &&
-                !['MISSING_RPC', 'INVALID_ADDRESS'].includes(inspectionError.message)
+                !['MISSING_RPC', 'INVALID_ADDRESS', 'ENS_UNAVAILABLE'].includes(
+                    inspectionError.message
+                )
             ) {
                 console.error(inspectionError)
             }
