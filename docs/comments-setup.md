@@ -37,6 +37,13 @@ Pour la phase actuelle de validation :
 
 Sources : [stockage Vercel](https://vercel.com/docs/marketplace-storage), [intégration Neon](https://vercel.com/marketplace/neon/neon).
 
+## À quoi servent les deux clés privées ?
+
+- `COMMENTS_RATE_SECRET` : une valeur aléatoire utilisée par le serveur pour calculer l’empreinte anti-spam des adresses réseau. Ce n’est pas un mot de passe de lecteur ; personne n’a à la saisir sur le site.
+- `COMMENTS_ADMIN_TOKEN` : la clé de modération de Julien. Dans les commentaires, ouvrir « Modération du site » et saisir cette valeur pour pouvoir retirer une contribution. Ne pas la partager : elle donne ce pouvoir à son détenteur.
+
+Le script de préparation génère ces valeurs dans `.env.local` lorsqu’elles manquent. Pour Vercel, copier la valeur après `=` dans la variable du même nom, sans les guillemets. Ne jamais placer ces clés dans une variable `VITE_`, un commit ou un commentaire public.
+
 ## Après la connexion locale : variables Vercel
 
 Dans **my-website → Settings → Environment Variables**, vérifier les noms exacts pour l'environnement Preview :
