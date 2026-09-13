@@ -1,5 +1,6 @@
 import {FiArrowDownLeft, FiArrowUpRight, FiExternalLink} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
+import WalletMetricsGuide from './WalletMetricsGuide.jsx'
 import WalletTokenRow from './WalletTokenRow.jsx'
 import {formatUsd, shortenAddress} from './walletFormatters.js'
 import {formatNumber, formatPercent} from '../../../../i18n/formatters.js'
@@ -98,6 +99,7 @@ const WalletInspectorResults = ({
                 </a>
             </div>
 
+            <WalletMetricsGuide />
             <div className="wallet-inspector__main-grid">
                 {(result.valuationPartial ||
                     result.tokenDataTruncated ||

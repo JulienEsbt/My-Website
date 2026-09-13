@@ -659,3 +659,34 @@
     background: var(--color-bg-variant);
     color: var(--color-light);
 }
+
+.wallet-metrics-guide {
+    margin: 1rem 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid #4db5ff30;
+    border-radius: 1rem;
+    background: #4db5ff08;
+}
+.wallet-metrics-guide summary {
+    cursor: pointer;
+    color: var(--color-primary);
+    min-height: 24px;
+}
+.wallet-metrics-guide > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.5rem;
+    padding-top: 1.3rem;
+}
+.wallet-metrics-guide section {
+    margin: 0;
+}
+.wallet-metrics-guide h4 {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+.wallet-metrics-guide p {
+    font-size: 0.85rem;
+    color: var(--color-light);
+    line-height: 1.7;
+}
