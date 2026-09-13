@@ -418,7 +418,7 @@
     margin-top: auto;
 }
 .portfolio__intent {
-    margin-top: 1rem;
+    margin-top: 1.75rem;
 }
 .portfolio__intent-overview {
     grid-template-columns: 190px minmax(0, 1fr);
@@ -442,7 +442,6 @@
         border-color 0.25s ease,
         box-shadow 0.25s ease;
 }
-.portfolio__intent-principles li:hover,
 .portfolio__intent-grid section:hover {
     border-color: rgba(77, 181, 255, 0.5);
     transform: translateY(-2px);

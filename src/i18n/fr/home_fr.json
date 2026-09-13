@@ -110,7 +110,7 @@
     },
     "portfolio": {
         "kicker": "Projets sélectionnés",
-        "title": "Ce que j’ai construit",
+        "title": "Projets réalisés et en cours",
         "intro": "Des produits, prototypes et projets en préparation présentés avec leur usage, leur architecture et leur statut réel.",
         "cta": "Voir le code",
         "caseStudy": "Voir l’étude de cas",
@@ -147,7 +147,7 @@
             }
         },
         "agora": {
-            "type": "Projet en préparation",
+            "type": "Nouveau projet · En construction",
             "title": "Agora — Graphe des débats",
             "description": "Une exploration de la manière de rendre les désaccords publics plus lisibles, en reliant arguments, objections, réponses, faits et sources sans imposer de conclusion.",
             "principlesLabel": "Principes essentiels d’Agora",

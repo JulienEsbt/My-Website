@@ -91,7 +91,7 @@ describe('Portfolio', () => {
         )
 
         expect(screen.getByRole('heading', {name: 'Agora — Debate graph'})).toBeVisible()
-        expect(screen.getByText('Project in preparation')).toBeVisible()
+        expect(screen.getByText('New project · In development')).toBeVisible()
         expect(screen.getByText('Explore the project’s intent')).toBeVisible()
     })
 })

@@ -339,3 +339,48 @@ img {
 #prerendered-content .swiper-slide {
     flex: 1 1 16rem;
 }
+
+/* Consistent feedback for informational chips and their interactive counterparts. */
+:root
+    :is(
+        .home-hero__badges span,
+        .home-hero__floating-pill,
+        .portfolio__tags span,
+        .experience__skills span,
+        .portfolio__intent-principles li,
+        .knowledge-v3__tags span,
+        .knowledge-v3__item,
+        .reflexion-article__meta span,
+        .reflexion-filter,
+        .travel-timeline__detail-badges span,
+        .home-discover__location,
+        .home-travel-carousel__destinations button
+    ) {
+    transition:
+        translate 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    :root
+        :is(
+            .home-hero__badges span,
+            .home-hero__floating-pill,
+            .portfolio__tags span,
+            .experience__skills span,
+            .portfolio__intent-principles li,
+            .knowledge-v3__tags span,
+            .knowledge-v3__item,
+            .reflexion-article__meta span,
+            .reflexion-filter,
+            .travel-timeline__detail-badges span,
+            .home-discover__location,
+            .home-travel-carousel__destinations button
+        ):hover {
+        translate: 0 -2px;
+        border-color: rgba(77, 181, 255, 0.55);
+        box-shadow: 0 5px 18px rgba(77, 181, 255, 0.13);
+        background-color: rgba(77, 181, 255, 0.14);
+    }
+}
