@@ -17,6 +17,7 @@
 
 .about__visual {
     grid-area: visual;
+    align-self: start;
 }
 
 .about__cards {
