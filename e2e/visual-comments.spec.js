@@ -1,0 +1,98 @@
+import {test, expect} from '@playwright/test'
+test.beforeEach(async ({page}) => {
+    await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
+})
+test('six trips keep whole photographs and Tallinn last', async ({page}) => {
+    await page.goto('/')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    const carousel = page.locator('.home-travel-carousel')
+    await carousel.scrollIntoViewIfNeeded()
+    const buttons = carousel.locator('.home-travel-carousel__destinations button')
+    await expect(buttons).toHaveCount(6)
+    await expect(buttons.last()).toContainText('Estonie')
+    for (let i = 0; i < 6; i++) {
+        await buttons.nth(i).click()
+        await expect(carousel.locator('img')).toHaveCSS('object-fit', 'contain')
+        await expect
+            .poll(() =>
+                carousel.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)
+            )
+            .toBe(true)
+    }
+    await page.screenshot({path: '/tmp/portfolio-travel-desktop.png'})
+    await page.setViewportSize({width: 390, height: 844})
+    await carousel.scrollIntoViewIfNeeded()
+    await expect
+        .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+        .toBe(true)
+    await page.screenshot({path: '/tmp/portfolio-travel-mobile.png'})
+})
+test('reflection card title opens the article and text selection publishes through the API', async ({
+    page,
+}) => {
+    let comments = []
+    await page.route('**/api/comments?**', async (route) => {
+        if (route.request().method() === 'POST') {
+            const input = route.request().postDataJSON()
+            const comment = {...input, id: 'test-id', createdAt: new Date().toISOString()}
+            comments = [comment]
+            return route.fulfill({json: {comment, deleteToken: 'test-delete'}})
+        }
+        if (route.request().method() === 'DELETE') {
+            comments = []
+            return route.fulfill({json: {ok: true}})
+        }
+        return route.fulfill({json: {comments, hasMore: false}})
+    })
+    await page.goto('/reflections')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.locator('.reflexion-card').first().locator('h3').click()
+    const content = page.locator('.reflexion-article__content')
+    await expect(content).toBeVisible()
+    await content
+        .locator('p')
+        .first()
+        .evaluate((p) => {
+            const range = document.createRange()
+            range.selectNodeContents(p)
+            const s = window.getSelection()
+            s.removeAllRanges()
+            s.addRange(range)
+        })
+    await page.getByRole('button', {name: 'Commenter ce passage', exact: true}).click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+    await dialog.getByLabel('Pseudonyme').fill('Camille')
+    await dialog.getByLabel('Ton commentaire').fill('Une autre manière de lire ce passage.')
+    await dialog.getByRole('button', {name: 'Publier', exact: true}).click()
+    await expect(dialog).not.toBeVisible()
+    await expect(page.locator('.reader-comments__item')).toContainText('Camille')
+    await page.getByRole('button', {name: 'Retirer ce commentaire', exact: true}).click()
+    await expect(page.locator('.reader-comments__item')).toHaveCount(0)
+})
+test('unconfigured comments cannot pretend to publish', async ({page}) => {
+    await page.route('**/api/comments?**', (route) =>
+        route.fulfill({status: 503, json: {code: 'not_configured'}})
+    )
+    await page.goto('/reflections/charte-de-pensee')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.getByRole('button', {name: 'Commenter la réflexion', exact: true}).click()
+    await expect(
+        page.getByRole('dialog').getByRole('button', {name: 'Publier', exact: true})
+    ).toBeDisabled()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('dialog')).not.toBeVisible()
+})
+test('production story respects motion preferences and scrolls natively', async ({page}) => {
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/projects/bruno-pizza')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    const story = page.locator('.production-story')
+    await story.scrollIntoViewIfNeeded()
+    await expect(story.locator('.production-story__step')).toHaveCount(3)
+    await expect(story.locator('.production-story__visual')).toHaveCSS('position', 'sticky')
+    await story.locator('.production-story__step').last().scrollIntoViewIfNeeded()
+    await page.screenshot({path: '/tmp/portfolio-production-story.png'})
+    await page.emulateMedia({reducedMotion: 'reduce'})
+    await expect(story.locator('.production-story__visual')).toHaveCSS('position', 'static')
+})
