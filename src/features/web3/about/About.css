@@ -423,10 +423,25 @@
     padding: 1.1rem;
     border-radius: 1.1rem;
     border: 1px solid rgba(77, 181, 255, 0.2);
-    background: linear-gradient(135deg, rgba(44, 44, 108, 0.6), rgba(12, 17, 43, 0.78));
+    --card-tint: 55, 105, 195;
+    background: linear-gradient(135deg, rgba(var(--card-tint), 0.26), rgba(12, 17, 43, 0.88));
+    transition:
+        translate 220ms ease,
+        box-shadow 220ms ease,
+        border-color 220ms ease,
+        filter 220ms ease;
 }
 .crypto-about__card:nth-child(2) {
-    background: linear-gradient(135deg, rgba(47, 58, 120, 0.6), rgba(14, 18, 46, 0.8));
+    --card-tint: 95, 90, 210;
+}
+.crypto-about__card:nth-child(3) {
+    --card-tint: 139, 83, 205;
+}
+.crypto-about__card:hover {
+    background: linear-gradient(135deg, rgba(var(--card-tint), 0.26), rgba(12, 17, 43, 0.88));
+    translate: 0 -3px;
+    filter: brightness(1.12);
+    box-shadow: 0 10px 28px rgba(var(--card-tint), 0.16);
 }
 .crypto-about__card-icons {
     margin-bottom: 0.8rem;
@@ -441,8 +456,10 @@
 }
 .crypto-about__card:hover,
 .crypto-about__floating-card:hover {
-    transform: translateY(-3px);
     border-color: rgba(77, 181, 255, 0.55);
+}
+.crypto-about__floating-card:hover {
+    transform: translateY(-3px);
 }
 .crypto-about__orb:focus-within {
     outline: 2px solid var(--color-primary);
@@ -488,5 +505,6 @@
     .crypto-about__card:hover,
     .crypto-about__floating-card:hover {
         transform: none;
+        translate: none;
     }
 }
