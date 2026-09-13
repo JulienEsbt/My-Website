@@ -1,7 +1,7 @@
 import {test, expect} from '@playwright/test'
 
 for (const {width, prefix, label} of [
-    {width: 1440, prefix: '', label: 'Commenter ce passage'},
+    {width: 1600, prefix: '', label: 'Commenter ce passage'},
     {width: 390, prefix: '/en', label: 'Comment on this passage'},
 ]) {
     test(`passage action stays beside the selection at ${width}px`, async ({page}) => {

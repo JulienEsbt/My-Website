@@ -188,13 +188,15 @@
 }
 
 /* A reading margin, not an overlay over the article. */
-@media (min-width: 1280px) {
+@media (min-width: 1536px) {
     .reflexion-article.reflexion-article--annotated {
         width: calc(100% - 64px);
         max-width: 1240px;
     }
     .reflexion-article--annotated .reflexion-article__shell {
-        width: calc(100% - 380px);
+        width: 860px;
+        max-width: 100%;
+        margin-inline: auto;
         padding: 2rem;
     }
 }
@@ -338,7 +340,7 @@
     font-size: 0.85rem;
     padding: 0.6rem 0.8rem;
 }
-@media (max-width: 1279px) {
+@media (max-width: 1535px) {
     .passage-thread,
     .reader-comments__dialog--passage {
         left: 12px !important;
@@ -367,7 +369,7 @@
     border-left: 2px solid #4db5ff50;
     background: #4db5ff06;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1536px) {
     .reflexion-article--annotated .passage-reading-hint {
         margin-inline: auto;
     }
@@ -381,3 +383,23 @@
 .passage-marker:disabled {
     cursor: default;
 }
+
+/* Keep the reading column centred even when the margin becomes a bottom sheet. */
+.reflexion-article.reflexion-article--annotated {
+    width: calc(100% - 48px);
+    max-width: 1240px;
+}
+.reflexion-article--annotated .reflexion-article__shell {
+    max-width: 860px;
+    margin-inline: auto;
+}
+.passage-marker {
+    background: linear-gradient(135deg, #72c9ff, #448bea);
+    color: #051527;
+    border: 2px solid #b9e6ff;
+    font-weight: 750;
+    box-shadow: 0 0 0 4px #4db5ff20, 0 5px 18px #0006;
+}
+.passage-marker svg { width: 19px; height: 19px; }
+.passage-marker:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.passage-reading-hint strong { display: block; color: #d5edff; margin-bottom: .35rem; }

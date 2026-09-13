@@ -149,9 +149,10 @@ const ReflectionArticlePage = () => {
 
                     <AuthorNotesProvider slug={slug} language={isFallbackFrench ? 'fr' : language}>
                         <p className="passage-reading-hint">
+                            <strong>{language === 'fr' ? 'Échangeons autour de ce texte' : 'Let’s discuss this text'}</strong>
                             {language === 'fr'
-                                ? 'Une idée à discuter ? Sélectionne un passage pour le commenter. Les bulles dans la marge ouvrent les échanges.'
-                                : 'An idea to discuss? Select a passage to comment. Margin bubbles open the conversation.'}
+                                ? 'Sélectionne quelques mots, puis clique sur « Commenter le passage ». Sur téléphone, maintiens le doigt sur le texte pour le sélectionner. Les bulles bleues indiquent les échanges existants : touche-les pour les lire. Tu peux aussi commenter le texte entier en bas de page.'
+                                : 'Select a few words, then choose “Comment on passage”. On your phone, press and hold the text to select it. Blue bubbles open existing conversations. You can also comment on the whole text at the bottom of the page.'}
                         </p>
                         <div className="reflexion-article__content" ref={contentRef}>
                             {MdxContent ? (

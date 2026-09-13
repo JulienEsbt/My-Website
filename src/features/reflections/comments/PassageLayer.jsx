@@ -60,7 +60,7 @@ export default function PassageLayer({
             for (const group of measured) {
                 if (!group.rects.length) continue
                 group.markerTop = Math.max(group.rects[0].top, previous + 54)
-                group.markerLeft = Math.min(innerWidth - (innerWidth >= 1280 ? 50 : 44), edge + 8)
+                group.markerLeft = Math.min(innerWidth - (innerWidth >= 1536 ? 50 : 44), edge + 8)
                 previous = group.markerTop
             }
             setLayout(measured)
@@ -177,6 +177,7 @@ export default function PassageLayer({
                                     className={`passage-marker ${active && passageKey(active) === group.key ? 'is-active' : ''}`}
                                     style={{left: group.markerLeft, top: group.markerTop}}
                                     aria-label={`${fr ? 'Commentaires sur le passage' : 'Comments on passage'} : ${group.anchor.quote.slice(0, 75)} (${group.comments.length})`}
+                                    title={fr ? "Ouvrir les commentaires de ce passage" : "Open comments on this passage"}
                                     disabled={drafting}
                                     aria-controls="passage-thread"
                                     aria-expanded={!!selected && selected.key === group.key}

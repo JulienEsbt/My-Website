@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 
-for (const width of [1440, 390]) {
+for (const width of [1600, 390]) {
     test(`passage threads live beside the text and general comments stay below at ${width}px`, async ({
         page,
     }) => {
