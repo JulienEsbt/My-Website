@@ -49,7 +49,7 @@ const WalletInspectorResults = ({
                     </div>
                 </div>
 
-                <div className="wallet-inspector__metric">
+                <div className="wallet-inspector__metric wallet-inspector__metric--value">
                     <span>{t('walletInspector.portfolio')}</span>
                     <strong>{formatUsd(result.portfolioValueUsd, language)}</strong>
                 </div>
@@ -248,7 +248,12 @@ const WalletInspectorResults = ({
                                         <small>{shortenAddress(transfer.counterparty)}</small>
                                     </span>
                                     <em>
-                                        {transfer.value ?? '—'} {transfer.asset}
+                                        {transfer.value == null
+                                            ? '—'
+                                            : formatNumber(transfer.value, language, {
+                                                  maximumSignificantDigits: 6,
+                                              })}{' '}
+                                        {transfer.asset}
                                     </em>
                                 </a>
                             ))}

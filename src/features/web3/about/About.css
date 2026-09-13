@@ -218,3 +218,66 @@
     height: 100%;
     object-fit: cover;
 }
+
+/* Keep the ecosystem introduction at the scale of the other Labs sections. */
+.crypto-about {
+    max-width: 1120px;
+    grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+    gap: 3rem;
+}
+.crypto-about__visual {
+    min-height: 24rem;
+}
+.crypto-about__orb {
+    width: min(17rem, 90%);
+    transform: rotate(-2deg);
+}
+.crypto-about__floating-card {
+    padding: 0.65rem 0.8rem;
+}
+.crypto-about__floating-card--top {
+    right: -1rem;
+    top: 1rem;
+}
+.crypto-about__floating-card--bottom {
+    left: -0.5rem;
+    bottom: 1rem;
+}
+.crypto-about__intro {
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+.crypto-about__intro h3 {
+    font-size: 1.3rem;
+}
+.crypto-about__intro p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+.crypto-about__cards {
+    gap: 0.7rem;
+}
+.crypto-about__card {
+    padding: 0.9rem;
+    background: #0c1421bb;
+    border-color: #91b4d526;
+}
+.crypto-about__card p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+@media (max-width: 900px) {
+    .crypto-about {
+        grid-template-columns: 1fr;
+    }
+    .crypto-about__visual {
+        width: min(300px, 100%);
+        margin-inline: auto;
+    }
+}
+@media (max-width: 700px) {
+    .crypto-about__visual {
+        min-height: auto;
+    }
+}
