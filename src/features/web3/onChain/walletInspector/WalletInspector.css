@@ -908,3 +908,64 @@
         text-align: right;
     }
 }
+
+/* Compact desktop overview and content, without compressing mobile touch targets. */
+.wallet-inspector {
+    max-width: 1120px;
+    gap: 0.75rem;
+    padding: 1.1rem;
+}
+.wallet-inspector__identity-card,
+.wallet-inspector__metric {
+    padding-block: 0.65rem;
+}
+.wallet-inspector__metric--value strong {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+.wallet-inspector__identity-card img,
+.wallet-inspector__avatar-fallback {
+    width: 3rem;
+    height: 3rem;
+}
+.wallet-inspector__panel {
+    padding: 1rem;
+}
+.wallet-metrics-guide {
+    padding-block: 0.3rem;
+}
+.wallet-inspector__explorer {
+    padding-block: 0;
+}
+.wallet-nft-strip {
+    max-width: 560px;
+}
+.allocation-donut {
+    width: 112px;
+    height: 112px;
+}
+.allocation-donut > div {
+    width: 90px;
+    height: 90px;
+}
+@media (min-width: 1000px) {
+    .wallet-inspector__main-grid {
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+    .wallet-inspector__allocation {
+        grid-column: 1;
+        grid-row: span 2;
+    }
+    .wallet-inspector__tokens-panel,
+    .wallet-inspector__nfts-panel {
+        grid-column: 2;
+    }
+    .allocation-donut-layout {
+        padding-block: 0.25rem;
+    }
+    .wallet-token-row {
+        padding-block: 0.6rem;
+    }
+    .wallet-nft-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

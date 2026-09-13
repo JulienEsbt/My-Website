@@ -281,3 +281,73 @@
         min-height: auto;
     }
 }
+
+.crypto-about {
+    max-width: 1000px;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 2rem;
+}
+.crypto-about__visual {
+    min-height: 18rem;
+}
+.crypto-about__orb {
+    width: 180px;
+    border-radius: 1.3rem;
+    padding: 0.3rem;
+}
+.crypto-about__orb img {
+    border-radius: 1rem;
+}
+.crypto-about__floating-card {
+    position: static;
+    padding: 0.4rem 0.6rem;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    text-align: center;
+}
+.crypto-about__floating-card span {
+    font-size: 0.65rem;
+}
+.crypto-about__floating-card strong {
+    font-size: 0.75rem;
+}
+.crypto-about__content {
+    gap: 1rem;
+}
+.crypto-about__cards {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+.crypto-about__card {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    column-gap: 0.6rem;
+    padding: 0.8rem 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #91b4d526;
+    border-radius: 0;
+}
+.crypto-about__card-icons {
+    grid-row: span 2;
+    align-self: center;
+    margin: 0;
+    font-size: 1rem;
+}
+.crypto-about__card h4 {
+    font-size: 0.9rem;
+}
+.crypto-about__card:hover {
+    transform: translateX(3px);
+    background: transparent;
+}
+@media (max-width: 700px) {
+    .crypto-about {
+        grid-template-columns: 1fr;
+    }
+    .crypto-about__visual {
+        min-height: auto;
+    }
+}
