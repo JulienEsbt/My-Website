@@ -40,9 +40,10 @@ const Services = () => {
         const ctx = gsap.context(() => {
             cardsRef.current.filter(Boolean).forEach((card) => {
                 gsap.from(card, {
-                    y: 35,
+                    y: 55,
+                    scale: 0.96,
                     ease: 'none',
-                    scrollTrigger: {trigger: card, start: 'top 95%', end: 'top 65%', scrub: 0.5},
+                    scrollTrigger: {trigger: card, start: 'top 90%', end: 'top 40%', scrub: 0.5},
                 })
             })
         }, sectionRef)
@@ -67,31 +68,29 @@ const Services = () => {
 
             <div className="container services__container">
                 {SERVICES.map((service, index) => (
-                    <article
-                        key={service.id}
-                        className="service"
-                        ref={(el) => (cardsRef.current[index] = el)}
-                    >
-                        <div className="service__head">
-                            <div className="service__icon" aria-hidden="true">
-                                {service.icon}
+                    <div className="professional-chapter__step" key={service.id}>
+                        <article className="service" ref={(el) => (cardsRef.current[index] = el)}>
+                            <div className="service__head">
+                                <div className="service__icon" aria-hidden="true">
+                                    {service.icon}
+                                </div>
+
+                                <div>
+                                    <h3>{t(`services.groups.${service.id}.title`)}</h3>
+                                    <p>{t(`services.groups.${service.id}.description`)}</p>
+                                </div>
                             </div>
 
-                            <div>
-                                <h3>{t(`services.groups.${service.id}.title`)}</h3>
-                                <p>{t(`services.groups.${service.id}.description`)}</p>
-                            </div>
-                        </div>
-
-                        <ul className="service__list">
-                            {service.items.map((item) => (
-                                <li key={item}>
-                                    <BiCheck className="service__list-icon" />
-                                    <p>{t(`services.groups.${service.id}.items.${item}`)}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </article>
+                            <ul className="service__list">
+                                {service.items.map((item) => (
+                                    <li key={item}>
+                                        <BiCheck className="service__list-icon" />
+                                        <p>{t(`services.groups.${service.id}.items.${item}`)}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </article>
+                    </div>
                 ))}
             </div>
         </section>

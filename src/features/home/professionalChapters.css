@@ -146,3 +146,25 @@
     text-decoration: underline;
     text-underline-offset: 0.3rem;
 }
+
+/* Give each compact card a reading stage so the title can genuinely stay pinned. */
+@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+    .professional-chapter :is(.experience__container, .services__container) {
+        padding-block: 15svh;
+        gap: 0;
+    }
+    .professional-chapter__step {
+        min-height: 70svh;
+        display: grid;
+        align-content: center;
+        min-width: 0;
+    }
+    .professional-chapter__step > article {
+        width: 100%;
+    }
+}
+@media (max-width: 1099px), (prefers-reduced-motion: reduce) {
+    .professional-chapter__step {
+        min-width: 0;
+    }
+}

@@ -64,9 +64,10 @@ const Experience = () => {
         const ctx = gsap.context(() => {
             cardsRef.current.filter(Boolean).forEach((card) => {
                 gsap.from(card, {
-                    y: 35,
+                    y: 55,
+                    scale: 0.96,
                     ease: 'none',
-                    scrollTrigger: {trigger: card, start: 'top 95%', end: 'top 65%', scrub: 0.5},
+                    scrollTrigger: {trigger: card, start: 'top 90%', end: 'top 40%', scrub: 0.5},
                 })
             })
         }, sectionRef)
@@ -91,46 +92,47 @@ const Experience = () => {
 
             <div className="container experience__container">
                 {GROUPS.map((group, index) => (
-                    <article
-                        key={group.id}
-                        className="experience__card"
-                        ref={(el) => (cardsRef.current[index] = el)}
-                    >
-                        <div className="experience__card-head">
-                            <div className="experience__icon" aria-hidden="true">
-                                {group.icon}
+                    <div className="professional-chapter__step" key={group.id}>
+                        <article
+                            className="experience__card"
+                            ref={(el) => (cardsRef.current[index] = el)}
+                        >
+                            <div className="experience__card-head">
+                                <div className="experience__icon" aria-hidden="true">
+                                    {group.icon}
+                                </div>
+
+                                <div>
+                                    <h3>{t(`experience.groups.${group.id}.title`)}</h3>
+                                    <p>{t(`experience.groups.${group.id}.description`)}</p>
+                                </div>
                             </div>
 
-                            <div>
-                                <h3>{t(`experience.groups.${group.id}.title`)}</h3>
-                                <p>{t(`experience.groups.${group.id}.description`)}</p>
+                            <div className="experience__skills">
+                                {group.skills.map((skill) => (
+                                    <span key={skill}>
+                                        {t(`experience.groups.${group.id}.skills.${skill}`)}
+                                    </span>
+                                ))}
                             </div>
-                        </div>
-
-                        <div className="experience__skills">
-                            {group.skills.map((skill) => (
-                                <span key={skill}>
-                                    {t(`experience.groups.${group.id}.skills.${skill}`)}
-                                </span>
-                            ))}
-                        </div>
-                        {proofs[group.id].to ? (
-                            <Link className="experience__proof" to={proofs[group.id].to}>
-                                {proofs[group.id].label}
-                                <FiArrowUpRight aria-hidden="true" />
-                            </Link>
-                        ) : (
-                            <a
-                                className="experience__proof"
-                                href={proofs[group.id].href}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                {proofs[group.id].label}
-                                <FiArrowUpRight aria-hidden="true" />
-                            </a>
-                        )}
-                    </article>
+                            {proofs[group.id].to ? (
+                                <Link className="experience__proof" to={proofs[group.id].to}>
+                                    {proofs[group.id].label}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </Link>
+                            ) : (
+                                <a
+                                    className="experience__proof"
+                                    href={proofs[group.id].href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    {proofs[group.id].label}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </a>
+                            )}
+                        </article>
+                    </div>
                 ))}
             </div>
         </section>

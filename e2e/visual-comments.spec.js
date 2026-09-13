@@ -191,3 +191,30 @@ test('competency evidence keeps the language and opens the relevant case section
         await expect(page).toHaveURL(new RegExp(`${prefix}/projects/bruno-pizza#architecture$`))
     }
 })
+
+test('professional chapters keep the centered title pinned while cards progress', async ({
+    page,
+}) => {
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    for (const size of [
+        {width: 1440, height: 900},
+        {width: 1920, height: 1080},
+    ]) {
+        await page.setViewportSize(size)
+        for (const id of ['experience', 'services']) {
+            const section = page.locator(`#${id}`)
+            const top = await section.evaluate((el) => el.getBoundingClientRect().top + scrollY)
+            await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), top + 150)
+            const heading = section.locator('.professional-chapter__heading')
+            await expect.poll(async () => Math.abs((await heading.boundingBox()).y)).toBeLessThan(3)
+            const first = await section.locator('.professional-chapter__step').first().boundingBox()
+            await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), top + 450)
+            await expect.poll(async () => Math.abs((await heading.boundingBox()).y)).toBeLessThan(3)
+            const next = await section.locator('.professional-chapter__step').first().boundingBox()
+            expect(first.y - next.y).toBeGreaterThan(250)
+            await page.screenshot({path: `/tmp/restored-${id}-${size.width}.png`})
+        }
+    }
+})
