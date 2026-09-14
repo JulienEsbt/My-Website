@@ -228,6 +228,12 @@ test('professional chapters keep the centered title pinned while cards progress'
                 await expect
                     .poll(async () => Math.abs((await heading.boundingBox()).y - geometry.inset))
                     .toBeLessThan(3)
+                // Overlapping panels must stay opaque: fading the whole card mixes their text.
+                for (const card of await section
+                    .locator('.professional-chapter__step > article')
+                    .all()) {
+                    await expect(card).toHaveCSS('opacity', '1')
+                }
                 const box = await heading.boundingBox()
                 expect(Math.abs(box.y + box.height / 2 - size.height / 2)).toBeLessThan(3)
             }
