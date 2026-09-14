@@ -39,6 +39,12 @@ test('chapter handoff stays centered, reverses and restores full readability', a
     await expect(outgoing).toHaveCSS('clip-path', 'none')
     await expect(proof).toHaveCSS('opacity', '1')
     await expect(proof).toHaveCSS('visibility', 'visible')
+    // The card can extend beyond its sticky slot while the scrub settles.
+    // A mask on that slot clips its bottom in WebKit.
+    await expect(page.locator('#experience .professional-chapter__step').last()).toHaveCSS(
+        'mask-image',
+        'none'
+    )
     const followingCards = page.locator('#services .professional-chapter__step')
     await expect(followingCards.nth(1)).toHaveCSS('transform', 'none')
     await expect(followingCards.nth(2)).toHaveCSS('transform', 'none')

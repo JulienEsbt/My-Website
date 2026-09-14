@@ -34,11 +34,26 @@ export default function useChapterTransition() {
                     const eased = smooth(motion.progress)
                     const feather = Math.min(320, innerWidth * 0.24)
                     const edge = -feather + (innerWidth + feather * 2) * eased
+                    // Read geometry before writing styles to avoid repeated layout during scroll.
+                    const geometry = new Map(
+                        [...outgoing, ...incoming].map((element) => {
+                            const surface = element.firstElementChild || element
+                            return [
+                                element,
+                                {
+                                    surface,
+                                    left:
+                                        surface.getBoundingClientRect().left -
+                                        Number(gsap.getProperty(element, 'x')),
+                                },
+                            ]
+                        })
+                    )
                     const move = (elements, entering) => {
                         elements.forEach((element) => {
                             const x = (entering ? eased - 1 : eased) * 48
-                            const rect = element.getBoundingClientRect()
-                            const left = rect.left - Number(gsap.getProperty(element, 'x')) + x
+                            const {surface, left: baseLeft} = geometry.get(element)
+                            const left = baseLeft + x
                             const near = edge - left - feather / 2
                             const far = edge - left + feather / 2
                             const revealMask = entering
@@ -69,6 +84,10 @@ export default function useChapterTransition() {
                                 opacity: hidden ? 0 : 1,
                                 visibility: hidden ? 'hidden' : 'visible',
                                 clipPath: 'none',
+                            })
+                            // Mask the painted surface, never the fixed-height sticky wrapper.
+                            // Its child can extend beyond that wrapper while its y tween settles.
+                            gsap.set(surface, {
                                 maskImage: mask,
                                 webkitMaskImage: mask,
                             })
@@ -116,6 +135,12 @@ export default function useChapterTransition() {
                 render(trigger)
                 return () => {
                     if (lastStep) lastStep.style.marginTop = originalMargin
+                    gsap.set(
+                        [...outgoing, ...incoming].map(
+                            (element) => element.firstElementChild || element
+                        ),
+                        {clearProps: 'maskImage,webkitMaskImage'}
+                    )
                     follow.tween.kill()
                     trigger.kill()
                     gsap.set([...outgoing, ...incoming], {
