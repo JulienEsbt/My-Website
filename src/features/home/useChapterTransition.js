@@ -1,0 +1,105 @@
+import {useLayoutEffect} from 'react'
+import {gsap} from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+
+// A feathered reveal keeps the short lateral motion without a hard clipping edge.
+export default function useChapterTransition() {
+    useLayoutEffect(() => {
+        const previous = document.getElementById('experience')
+        const next = document.getElementById('services')
+        if (!previous || !next) return undefined
+        const media = gsap.matchMedia()
+        media.add(
+            '(min-width: 1100px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)',
+            () => {
+                const outgoing = previous.querySelectorAll(
+                    '.professional-chapter__heading, .professional-chapter__step'
+                )
+                const incoming = [
+                    next.querySelector('.professional-chapter__heading'),
+                    next.querySelector('.professional-chapter__step'),
+                ]
+                const stageHeight = (section) =>
+                    parseFloat(getComputedStyle(section).getPropertyValue('--stage-height')) || 350
+                const stageTop = (section) => Math.max(80, (innerHeight - stageHeight(section)) / 2)
+                const pageTop = (section) => section.getBoundingClientRect().top + scrollY
+                const smooth = (value) => value * value * value * (value * (value * 6 - 15) + 10)
+                const motion = {progress: 0}
+                const render = (trigger) => {
+                    const progress = trigger.progress
+                    const distance = trigger.end - trigger.start
+                    const eased = smooth(motion.progress)
+                    const feather = Math.min(320, innerWidth * 0.24)
+                    const edge = -feather + (innerWidth + feather * 2) * eased
+                    const move = (elements, entering) => {
+                        elements.forEach((element) => {
+                            const x = (entering ? eased - 1 : eased) * 48
+                            const rect = element.getBoundingClientRect()
+                            const left = rect.left - Number(gsap.getProperty(element, 'x')) + x
+                            const near = edge - left - feather / 2
+                            const far = edge - left + feather / 2
+                            const mask = entering
+                                ? `linear-gradient(90deg, #000 ${near}px, transparent ${far}px)`
+                                : `linear-gradient(90deg, transparent ${near}px, #000 ${far}px)`
+                            gsap.set(element, {
+                                y: (entering ? progress - 1 : progress) * distance,
+                                x,
+                                rotationY: 0,
+                                opacity: 1,
+                                visibility:
+                                    (entering && eased === 0) ||
+                                    (!entering && eased === 1) ||
+                                    (!entering &&
+                                        progress > 0 &&
+                                        element.matches('.professional-chapter__step') &&
+                                        element !== outgoing[outgoing.length - 1])
+                                        ? 'hidden'
+                                        : 'visible',
+                                clipPath: 'none',
+                                maskImage: mask,
+                                webkitMaskImage: mask,
+                            })
+                        })
+                    }
+                    move(outgoing, false)
+                    move(incoming, true)
+                }
+                // Filter wheel/trackpad steps without delaying the vertical anchoring.
+                let trigger
+                const follow = gsap.quickTo(motion, 'progress', {
+                    duration: 0.38,
+                    ease: 'power2.out',
+                    onUpdate: () => trigger && render(trigger),
+                })
+                trigger = ScrollTrigger.create({
+                    trigger: previous,
+                    start: () =>
+                        pageTop(previous) +
+                        previous.offsetHeight -
+                        stageHeight(previous) -
+                        stageTop(previous),
+                    end: () => pageTop(next) - stageTop(next),
+                    onUpdate: (self) => {
+                        follow(self.progress)
+                        render(self)
+                    },
+                    onRefresh: (self) => {
+                        follow.tween.pause()
+                        motion.progress = self.progress
+                        render(self)
+                    },
+                })
+                render(trigger)
+                return () => {
+                    follow.tween.kill()
+                    trigger.kill()
+                    gsap.set([...outgoing, ...incoming], {
+                        clearProps:
+                            'transform,transformOrigin,backfaceVisibility,opacity,visibility,clipPath,maskImage,webkitMaskImage',
+                    })
+                }
+            }
+        )
+        return () => media.revert()
+    }, [])
+}
