@@ -173,7 +173,10 @@ export default function ReaderComments({slug, language, contentRef}) {
             } catch {
                 /* The comment is published even when storage is unavailable. */
             }
-            setComments((items) => [result.comment, ...items])
+            // Commit the new thread before the native close event checks whether it exists.
+            flushSync(() => {
+                setComments((items) => [result.comment, ...items])
+            })
             dialog.current.close()
             setDrafting(false)
             event.target.reset()
