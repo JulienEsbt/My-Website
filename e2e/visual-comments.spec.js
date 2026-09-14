@@ -231,19 +231,32 @@ test('professional chapters keep the centered title pinned while cards progress'
                 const box = await heading.boundingBox()
                 expect(Math.abs(box.y + box.height / 2 - size.height / 2)).toBeLessThan(3)
             }
-            const gaps = await section
+            // At 70% the first panels overlap intentionally, while sharing the heading's inset.
+            const panels = await section
                 .locator('.professional-chapter__step')
                 .evaluateAll((steps) =>
-                    steps
-                        .slice(1)
-                        .map(
-                            (step, i) => step.offsetTop - steps[i].offsetTop - steps[i].offsetHeight
-                        )
+                    steps.map((step) => {
+                        const rect = step.getBoundingClientRect()
+                        return {top: rect.top, bottom: rect.bottom}
+                    })
                 )
-            for (const gap of gaps) {
-                expect(gap).toBeGreaterThanOrEqual(0)
-                expect(gap).toBeLessThanOrEqual(24)
-            }
+            expect(Math.abs(panels[0].top - geometry.inset)).toBeLessThan(3)
+            expect(panels[1].top).toBeLessThan(panels[0].bottom)
+            // Both columns must leave together once the sticky sequence ends.
+            await page.evaluate(
+                (y) => scrollTo({top: y, behavior: 'instant'}),
+                geometry.top - geometry.inset + range + 40
+            )
+            await expect
+                .poll(async () => {
+                    const title = await heading.boundingBox()
+                    const last = await section
+                        .locator('.professional-chapter__step')
+                        .last()
+                        .boundingBox()
+                    return Math.abs(title.y - last.y)
+                })
+                .toBeLessThan(3)
             await page.screenshot({path: `/tmp/restored-${id}-${size.width}.png`})
         }
     }
