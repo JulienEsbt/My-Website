@@ -27,6 +27,10 @@ for (const {width, prefix, label} of [
         expect(box.x + box.width).toBeLessThanOrEqual(width)
         expect(box.y).toBeGreaterThan(0)
         expect(box.y + box.height).toBeLessThan(900)
+        if (width >= 1600) {
+            const article = await page.locator('.reflexion-article__content').boundingBox()
+            expect(box.x).toBeGreaterThanOrEqual(article.x + article.width)
+        }
         const scroll = await page.evaluate(() => scrollY)
         await page.screenshot({path: `/tmp/passage-selection-${width}.png`})
         await action.click()

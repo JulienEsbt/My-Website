@@ -7,6 +7,13 @@ describe('ScrollToTop', () => {
     let animationFrameSpy
 
     beforeEach(() => {
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                observe() {}
+                disconnect() {}
+            }
+        )
         window.scrollTo.mockClear()
         HTMLElement.prototype.scrollIntoView.mockClear()
         animationFrameSpy = vi
@@ -19,6 +26,7 @@ describe('ScrollToTop', () => {
 
     afterEach(() => {
         animationFrameSpy.mockRestore()
+        vi.unstubAllGlobals()
     })
 
     it('scrolls to the requested anchor', () => {

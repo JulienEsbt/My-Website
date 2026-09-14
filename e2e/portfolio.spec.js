@@ -409,3 +409,15 @@ test('home titles stay concise in both languages and travel rotation can be paus
     await expect(page).toHaveTitle('Portfolio — Julien Esterbet')
     await expect(carousel.getByRole('button', {name: 'Resume travel slideshow'})).toBeVisible()
 })
+
+test('case study return restores the projects anchor after home layout settles', async ({page}) => {
+    await page.goto('/projects/bruno-pizza')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.locator('a[href="/#portfolio"]').first().click()
+    await expect(page).toHaveURL(/#portfolio$/)
+    await expect
+        .poll(async () => Math.abs((await page.locator('#portfolio').boundingBox()).y))
+        .toBeLessThan(100)
+    await page.waitForTimeout(2200)
+    expect(Math.abs((await page.locator('#portfolio').boundingBox()).y)).toBeLessThan(100)
+})

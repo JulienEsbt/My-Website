@@ -972,3 +972,43 @@
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 }
+
+/* Keep populated results distinct and readable against the page. */
+.wallet-inspector {
+    --color-light: #c2cee3;
+    background: linear-gradient(140deg, #1d2b45, #1c223a);
+    border-color: #93b7ed40;
+}
+.wallet-inspector__panel {
+    background: #24324d;
+    border-color: #9ebff03b;
+}
+.wallet-inspector__panel :is(h3, h4, strong) {
+    color: #f4f7ff;
+}
+.wallet-inspector__panel-head {
+    border-bottom-color: #a6c4f02e;
+}
+.wallet-token-row,
+.wallet-activity-row {
+    border-bottom-color: #a6c4f02e;
+}
+.wallet-token-row :is(span, em),
+.allocation-legend-row :is(span, em),
+.wallet-nft-card span {
+    color: #c5d2e8;
+}
+.allocation-donut > div {
+    background: #24324d;
+}
+.wallet-nft-card {
+    background: #2b3b57;
+    border-color: #a5c4f040;
+}
+.wallet-inspector__data-notice {
+    background: #9abaff0d;
+    color: #d3ddef;
+}
+.wallet-inspector__metric strong {
+    color: #86ceff;
+}

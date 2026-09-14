@@ -10,10 +10,17 @@ const ScrollToTop = () => {
         if (hash) {
             const targetId = decodeURIComponent(hash.slice(1))
             let observer
+            let stopped = false
+            const stop = () => {
+                stopped = true
+            }
+            const resize = new ResizeObserver(() => {
+                if (!stopped) scrollToTarget()
+            })
 
             const scrollToTarget = () => {
                 const target = document.getElementById(targetId)
-                if (!target) return false
+                if (!target || stopped || target.closest('#prerendered-content')) return false
 
                 target.scrollIntoView({block: 'start'})
                 observer?.disconnect()
@@ -27,12 +34,24 @@ const ScrollToTop = () => {
                 observer.observe(document.body, {childList: true, subtree: true})
             })
 
-            const timeout = window.setTimeout(() => observer?.disconnect(), 2000)
+            resize.observe(document.body)
+            window.addEventListener('wheel', stop, {passive: true})
+            window.addEventListener('touchstart', stop, {passive: true})
+            window.addEventListener('keydown', stop)
+            const timeout = window.setTimeout(() => {
+                stop()
+                observer?.disconnect()
+                resize.disconnect()
+            }, 2000)
 
             return () => {
                 window.cancelAnimationFrame(frame)
                 window.clearTimeout(timeout)
                 observer?.disconnect()
+                resize.disconnect()
+                window.removeEventListener('wheel', stop)
+                window.removeEventListener('touchstart', stop)
+                window.removeEventListener('keydown', stop)
             }
         }
 

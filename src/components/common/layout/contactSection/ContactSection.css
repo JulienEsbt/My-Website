@@ -270,3 +270,34 @@
         padding: 0.85rem 1rem;
     }
 }
+
+.crypto-contact__intro {
+    background: linear-gradient(130deg, #293568, #282345 75%);
+    border-color: #a9a3f04a;
+    box-shadow: inset 0 1px 0 #ffffff05;
+}
+.crypto-contact__form {
+    background: linear-gradient(145deg, #192e49, #1b213d 65%, #25203b);
+    border-color: #83b5e842;
+    box-shadow:
+        inset 0 1px 0 #ffffff06,
+        0 16px 40px #00000018;
+}
+.crypto-contact__option {
+    background: linear-gradient(110deg, #1a2b46, #1d2540);
+    border-color: #8ca9e530;
+}
+.crypto-contact__option:hover {
+    background: #263b5b;
+    border-color: #70b9ee55;
+}
+.crypto-contact__field input,
+.crypto-contact__field textarea {
+    background: #0d192c;
+    border-color: #839edb38;
+}
+.crypto-contact__field input:focus,
+.crypto-contact__field textarea:focus {
+    background: #0e1828;
+    box-shadow: 0 0 0 3px #4db5ff10;
+}

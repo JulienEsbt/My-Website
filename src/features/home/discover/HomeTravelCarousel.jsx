@@ -52,7 +52,7 @@ export default function HomeTravelCarousel({language, readLabel}) {
         if (paused || hovered || !visible || reducedMotion) return undefined
         const timer = setInterval(() => {
             if (!document.hidden) setIndex((value) => (value + 1) % destinations.length)
-        }, 7000)
+        }, 6000)
         return () => clearInterval(timer)
     }, [paused, hovered, visible, reducedMotion])
     const select = (value) => {
@@ -65,8 +65,6 @@ export default function HomeTravelCarousel({language, readLabel}) {
             className="home-travel-carousel"
             role="region"
             aria-label={fr ? 'Récits de voyage sélectionnés' : 'Selected travel stories'}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
         >
             <article
                 className="home-discover__travel"
@@ -91,6 +89,8 @@ export default function HomeTravelCarousel({language, readLabel}) {
                     <p>{fr ? trip.description : trip.descriptionEn}</p>
                     <Link
                         className="btn home-discover__story-link"
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
                         to={`/travel/${trip.id}`}
                         state={{fromHome: 'travel'}}
                     >
