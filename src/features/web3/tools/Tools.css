@@ -254,3 +254,113 @@
         transition: none;
     }
 }
+
+.tools-v2__card,
+.tools-v2__card:nth-child(2) {
+    background: linear-gradient(140deg, #263c5e, #252b49);
+    border-color: #8fafe036;
+    box-shadow: inset 0 1px 0 #ffffff0a;
+}
+.tools-v2__head,
+.tools-v2__card:nth-child(2) .tools-v2__head {
+    background: transparent;
+    border-bottom-color: #8fafe024;
+    padding: 1.3rem;
+}
+.tools-v2__head span {
+    background: #4db5ff18;
+    color: #85cdff;
+    border-color: #8acaff30;
+}
+.tools-v2__card:nth-child(2) .tools-v2__head span {
+    background: #aa8aff18;
+    color: #c5afff;
+    border-color: #b99aff30;
+}
+.tools-v2__list {
+    gap: 0.35rem 0.85rem;
+    padding: 0.7rem 1rem 1rem;
+}
+.tools-v2__list li a,
+.tools-v2__card:nth-child(2) .tools-v2__list li a {
+    background: transparent;
+    border-color: transparent;
+    border-radius: 0.8rem;
+    padding: 0.85rem 0.55rem;
+}
+.tools-v2__list li a:hover,
+.tools-v2__card:nth-child(2) .tools-v2__list li a:hover {
+    background: #709eff14;
+    border-color: #a5cdff38;
+}
+.tools-v2__label small {
+    color: #b7c4dc;
+}
+
+/* Small accents keep the directory calm while making each destination clear. */
+.tools-v2__card {
+    border-top-color: #79bfff66;
+}
+.tools-v2__card:nth-child(2) {
+    border-top-color: #b29aef66;
+}
+.tools-v2__head h3 {
+    letter-spacing: -0.015em;
+    font-weight: 600;
+}
+.tools-v2__list li a {
+    gap: 0.8rem;
+}
+.tools-v2__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 2.5rem;
+    border-radius: 0.75rem;
+    background: #adc9ff09;
+    border: 1px solid #a7c4ef15;
+}
+.tools-v2__icon img,
+.tools-v2__icon > svg {
+    width: 26px;
+    height: 26px;
+}
+.tools-v2__label strong {
+    font-weight: 600;
+}
+.tools-v2__label small {
+    color: #aabbd5;
+    font-size: 0.72rem;
+}
+.tools-v2__external {
+    opacity: 0.6;
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+}
+.tools-v2__list li a:hover .tools-v2__external,
+.tools-v2__list li a:focus-visible .tools-v2__external {
+    opacity: 1;
+    color: #9ad5ff;
+}
+.tools-v2__list li a:focus-visible {
+    outline: 2px solid #92ccff;
+    outline-offset: 2px;
+    background: #709eff14;
+}
+@media (prefers-reduced-motion: reduce) {
+    .tools-v2__external {
+        transition: none;
+    }
+}
+
+.tools-v2__card:nth-child(2) {
+    background: linear-gradient(140deg, #343356, #272d49);
+}
+.tools-v2__icon {
+    background: #75baff14;
+    border-color: #a7c4ef29;
+}
+.tools-v2__card:nth-child(2) .tools-v2__icon {
+    background: #b39aff14;
+    border-color: #c2aff029;
+}

@@ -67,13 +67,23 @@ export default function ReaderComments({slug, language, contentRef}) {
                 (rect) => rect.bottom > 70 && rect.top < innerHeight - 70
             )
             const rect = rects.at(-1)
+            const edge = root.getBoundingClientRect().right
+            const beside = innerWidth - edge >= 264
+            const selectedBounds = range.getBoundingClientRect()
             if (rect)
                 setSelectionPosition({
-                    left: Math.max(12, Math.min(innerWidth - 252, rect.left)),
-                    top:
-                        rect.bottom + 56 < innerHeight - 65
-                            ? rect.bottom + 8
-                            : Math.max(70, rect.top - 52),
+                    left: beside ? edge + 16 : Math.max(12, Math.min(innerWidth - 252, rect.left)),
+                    top: beside
+                        ? Math.max(
+                              76,
+                              Math.min(
+                                  innerHeight - 100,
+                                  (selectedBounds.top + selectedBounds.bottom) / 2 - 24
+                              )
+                          )
+                        : rect.bottom + 56 < innerHeight - 65
+                          ? rect.bottom + 8
+                          : Math.max(70, rect.top - 52),
                 })
             const before = range.cloneRange()
             before.selectNodeContents(root)

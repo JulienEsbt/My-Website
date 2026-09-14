@@ -301,3 +301,19 @@ test('chapter progress updates after a fresh production load without resizing', 
         }
     }
 })
+
+test('travel slideshow advances over the photo and can be paused', async ({page}) => {
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/#home-travel')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    const carousel = page.locator('.home-travel-carousel')
+    await carousel.scrollIntoViewIfNeeded()
+    await carousel.locator('.home-discover__photo').hover()
+    const selected = carousel.locator('[aria-pressed="true"]')
+    const initial = await selected.innerText()
+    await expect(selected).not.toHaveText(initial, {timeout: 10000})
+    await carousel.getByRole('button', {name: 'Mettre les voyages en pause'}).click()
+    const paused = await selected.innerText()
+    await page.waitForTimeout(6500)
+    await expect(selected).toHaveText(paused)
+})
