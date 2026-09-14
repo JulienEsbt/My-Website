@@ -131,7 +131,6 @@ const Experience = () => {
                     if (cards[index + 1]) {
                         gsap.to(card, {
                             scale: 0.94,
-                            opacity: 0.35,
                             ease: 'none',
                             scrollTrigger: {
                                 trigger: cards[index + 1].parentElement,
