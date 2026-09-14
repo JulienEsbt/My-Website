@@ -41,7 +41,7 @@
         padding-block: 0;
     }
     .professional-chapter:not(.professional-chapter--portfolio)
-        .professional-chapter__heading::after {
+        .professional-chapter__heading-content::after {
         content: '';
         display: block;
         width: 5rem;
@@ -152,4 +152,76 @@
 }
 .professional-chapter__step > article {
     width: 100%;
+}
+
+/* A compact sequence of layered panels, driven by the reader's scroll. */
+@media (min-width: 1100px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+    .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__step {
+        position: sticky;
+        top: max(5rem, calc((100svh - var(--panel-height, 20rem)) / 2));
+        perspective: 1200px;
+        padding-bottom: 2rem;
+    }
+    .professional-chapter :is(.experience__container, .services__container) {
+        padding-bottom: 5rem;
+        gap: 2rem;
+    }
+    .professional-chapter :is(.experience__card, .service) {
+        transform-origin: center top;
+        transition:
+            border-color 0.3s,
+            box-shadow 0.3s;
+        background: linear-gradient(135deg, #17283e, #14152d 65%, #101626);
+        border: 1px solid #77b9ff35;
+        border-radius: 1.5rem;
+        padding: clamp(1.5rem, 2.5vw, 2.5rem);
+        box-shadow: 0 20px 60px #00000030;
+    }
+    #services .services__container {
+        border-left: 0;
+        padding-left: 0;
+        gap: 2rem;
+    }
+    #services .service {
+        background: linear-gradient(135deg, #22203e, #15172c 65%, #101626);
+        padding: 2rem;
+        border-radius: 1.5rem;
+    }
+    .professional-chapter :is(.experience__card, .service):hover {
+        border-color: #87caff80;
+    }
+}
+
+@media (min-width: 1100px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+    .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__heading,
+    .professional-chapter:not(.professional-chapter--portfolio) .professional-chapter__step {
+        top: max(5rem, calc((100svh - var(--stage-height)) / 2));
+        height: var(--stage-height);
+        min-height: var(--stage-height);
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .professional-chapter :is(.experience__container, .services__container) {
+        padding-bottom: 0;
+    }
+    .professional-chapter__heading-content {
+        width: 100%;
+        transform-origin: center;
+    }
+    .professional-chapter:not(.professional-chapter--portfolio)
+        .professional-chapter__heading-content::after {
+        width: 100%;
+        transform: scaleX(var(--chapter-progress, 0.05));
+        transform-origin: left;
+    }
+}
+
+/* Let the preceding chapter clear the viewport just before the sticky sequence. */
+@media (min-width: 1100px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+    #experience.professional-chapter,
+    #services.professional-chapter {
+        margin-top: calc(max(5rem, (100svh - var(--stage-height, 22rem)) / 2) + 12px);
+    }
 }
