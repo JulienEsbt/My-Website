@@ -19,6 +19,8 @@ export default function useChapterTransition() {
                     next.querySelector('.professional-chapter__heading'),
                     next.querySelector('.professional-chapter__step'),
                 ]
+                const lastStep = next.querySelector('.professional-chapter__step:last-child')
+                const originalMargin = lastStep?.style.marginTop || ''
                 const stageHeight = (section) =>
                     parseFloat(getComputedStyle(section).getPropertyValue('--stage-height')) || 350
                 const stageTop = (section) => Math.max(80, (innerHeight - stageHeight(section)) / 2)
@@ -27,6 +29,7 @@ export default function useChapterTransition() {
                 const motion = {progress: 0}
                 const render = (trigger) => {
                     const progress = trigger.progress
+                    const transitioning = progress > 0 || motion.progress > 0.0001
                     const distance = trigger.end - trigger.start
                     const eased = smooth(motion.progress)
                     const feather = Math.min(320, innerWidth * 0.24)
@@ -38,23 +41,33 @@ export default function useChapterTransition() {
                             const left = rect.left - Number(gsap.getProperty(element, 'x')) + x
                             const near = edge - left - feather / 2
                             const far = edge - left + feather / 2
-                            const mask = entering
+                            const revealMask = entering
                                 ? `linear-gradient(90deg, #000 ${near}px, transparent ${far}px)`
                                 : `linear-gradient(90deg, transparent ${near}px, #000 ${far}px)`
+                            // A CSS mask clips vertical overflow too, even when fully opaque.
+                            // Keep the ordinary stacked cards unmasked outside the handoff.
+                            const participates =
+                                entering ||
+                                element.matches('.professional-chapter__heading') ||
+                                element === outgoing[outgoing.length - 1]
+                            const hidden =
+                                (entering && eased === 0) ||
+                                (!entering && eased === 1) ||
+                                (!entering &&
+                                    transitioning &&
+                                    element.matches('.professional-chapter__step') &&
+                                    element !== outgoing[outgoing.length - 1])
+                            const mask = hidden
+                                ? 'linear-gradient(transparent, transparent)'
+                                : eased > 0 && eased < 1 && participates
+                                  ? revealMask
+                                  : 'none'
                             gsap.set(element, {
                                 y: (entering ? progress - 1 : progress) * distance,
                                 x,
                                 rotationY: 0,
-                                opacity: 1,
-                                visibility:
-                                    (entering && eased === 0) ||
-                                    (!entering && eased === 1) ||
-                                    (!entering &&
-                                        progress > 0 &&
-                                        element.matches('.professional-chapter__step') &&
-                                        element !== outgoing[outgoing.length - 1])
-                                        ? 'hidden'
-                                        : 'visible',
+                                opacity: hidden ? 0 : 1,
+                                visibility: hidden ? 'hidden' : 'visible',
                                 clipPath: 'none',
                                 maskImage: mask,
                                 webkitMaskImage: mask,
@@ -64,6 +77,16 @@ export default function useChapterTransition() {
                     move(outgoing, false)
                     move(incoming, true)
                 }
+                const setSpacing = () => {
+                    const start =
+                        pageTop(previous) +
+                        previous.offsetHeight -
+                        stageHeight(previous) -
+                        stageTop(previous)
+                    const end = pageTop(next) - stageTop(next)
+                    if (lastStep) lastStep.style.marginTop = `${Math.max(0, end - start) * 0.5}px`
+                }
+                setSpacing()
                 // Filter wheel/trackpad steps without delaying the vertical anchoring.
                 let trigger
                 const follow = gsap.quickTo(motion, 'progress', {
@@ -84,6 +107,7 @@ export default function useChapterTransition() {
                         render(self)
                     },
                     onRefresh: (self) => {
+                        setSpacing()
                         follow.tween.pause()
                         motion.progress = self.progress
                         render(self)
@@ -91,6 +115,7 @@ export default function useChapterTransition() {
                 })
                 render(trigger)
                 return () => {
+                    if (lastStep) lastStep.style.marginTop = originalMargin
                     follow.tween.kill()
                     trigger.kill()
                     gsap.set([...outgoing, ...incoming], {
