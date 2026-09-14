@@ -7,6 +7,11 @@ This directory contains documentation that helps a reader understand, run, revie
 - `ARCHITECTURE.md`: stable application structure and data flow.
 - `EDITORIAL_GUIDE.md`: how to publish reflections and maintain RSS/Atom records.
 - `ACCESSIBILITY_AND_PRIVACY.md`: implemented accessibility and privacy principles.
+- `author-notes.md`: adding approved author notes to articles.
+- `comments-setup.md`: PostgreSQL, reader comments and moderation.
+- `vercel-configuration.md`: deployment environments and configuration checks.
+- `contact-protection.md`: contact form protection and operational checks.
+- `quality-and-prerendering.md`: automated checks and static rendering.
 
 These documents describe the current code. They should be updated in the same commit as a structural or policy change.
 
