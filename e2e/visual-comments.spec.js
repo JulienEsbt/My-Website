@@ -267,3 +267,37 @@ test('professional chapters keep the centered title pinned while cards progress'
         }
     }
 })
+
+test('chapter progress updates after a fresh production load without resizing', async ({page}) => {
+    await page.setViewportSize({width: 1440, height: 900})
+    await page.emulateMedia({reducedMotion: 'no-preference'})
+    await page.goto('/#experience')
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.evaluate(() => document.fonts.ready)
+    for (const id of ['experience', 'services']) {
+        const section = page.locator(`#${id}`)
+        const content = section.locator('.professional-chapter__heading-content')
+        const geometry = await section.evaluate((el) => ({
+            top: el.getBoundingClientRect().top + scrollY,
+            height: el.offsetHeight,
+            inset: parseFloat(
+                getComputedStyle(el.querySelector('.professional-chapter__heading')).top
+            ),
+        }))
+        const start = geometry.top - geometry.inset
+        const end = geometry.top + geometry.height - 450
+        for (const progress of [0.15, 0.75, 0.3]) {
+            await page.evaluate(
+                (y) => scrollTo({top: y, behavior: 'instant'}),
+                start + (end - start) * progress
+            )
+            await expect
+                .poll(() =>
+                    content.evaluate((el) =>
+                        Number(getComputedStyle(el).getPropertyValue('--chapter-progress'))
+                    )
+                )
+                .toBeCloseTo(0.05 + 0.95 * progress, 1)
+        }
+    }
+})
