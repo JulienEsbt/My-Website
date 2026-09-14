@@ -1,4 +1,5 @@
 import React from 'react'
+import useChapterTransition from '../features/home/useChapterTransition.js'
 import Header from '../features/home/header/Header'
 import HomeNav from '../features/home/homeNav/HomeNav.jsx'
 import About from '../features/home/about/About'
@@ -11,6 +12,7 @@ import ContactSection from '../components/common/layout/contactSection/ContactSe
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 
 const HomePage = () => {
+    useChapterTransition()
     return (
         <PageFrame>
             <Header />
