@@ -28,4 +28,4 @@ Les liens réels sont `/reflections/SLUG#passage-ID` et `/reflections/SLUG#autho
 - Vérifier les identifiants, les liens directs, les citations, les traductions, la lecture mobile et le rendu après génération.
 - Lancer les tests et la construction avant toute publication.
 
-Les commentaires visiteurs restent à concevoir (privés ou publics modérés, stockage et modération). La bibliothèque commentée reste reportée.
+Les commentaires visiteurs disposent de leur propre système, documenté dans [comments-setup.md](comments-setup.md). La bibliothèque commentée reste reportée.
