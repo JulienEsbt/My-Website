@@ -1,3 +1,5 @@
+@import '../../Surfaces.css';
+
 .donation-panel {
     max-width: 900px;
     padding: 2rem;
@@ -671,15 +673,13 @@
 }
 
 .donation-panel {
-    background: linear-gradient(135deg, #1d304d, #212b47 48%, #25243d);
-    border-color: #89b7ff40;
-    box-shadow:
-        inset 0 1px 0 #d0e4ff12,
-        0 18px 40px #07132b40;
+    background: var(--web3-surface);
+    border-color: var(--web3-border);
+    box-shadow: var(--web3-shadow);
 }
 .donation-panel__receiver {
-    background: linear-gradient(110deg, #294468, #303c61);
-    border-color: #a1cbff38;
+    background: var(--web3-inset);
+    border-color: var(--web3-border);
 }
 .donation-panel__receiver code {
     color: #edf5ff;
@@ -689,17 +689,17 @@
     border-left-color: #8ecbff;
 }
 .donation-panel__token {
-    background: #15284d99;
-    border-color: #9abaff40;
+    background: var(--web3-inset);
+    border-color: var(--web3-border);
     box-shadow: none;
 }
 .donation-panel__token.active {
-    background: linear-gradient(125deg, #2b587b, #354d7c);
+    background: rgba(77, 181, 255, 0.13);
     border-color: #8bc7ed;
     box-shadow: 0 0 0 1px #75c5ff26;
 }
 .donation-panel__search,
 .donation-panel__form input {
-    background: #101f3c;
-    border-color: #8db4ed55;
+    background: #0b1427;
+    border-color: var(--web3-border);
 }

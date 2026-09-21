@@ -299,7 +299,7 @@
 .civic-card__date {
     font-size: 0.7rem;
 }
-.civic-grid--compact .civic-card {
+.civic-card--compact {
     background: rgba(14, 22, 38, 0.5);
 }
 .civic-projects {
@@ -553,22 +553,20 @@
     margin: 1rem auto 4rem;
     padding: 5px;
     border: 1px solid rgba(161, 190, 225, 0.25);
-    border-radius: 999px;
-    background: rgba(10, 18, 34, 0.94);
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-radius: 0.75rem;
+    background: rgba(8, 15, 28, 0.92);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 }
 .civic-section-nav__indicator {
     position: absolute;
-    top: 5px;
-    bottom: 5px;
+    height: 2px;
+    bottom: 0;
     left: 5px;
     width: calc((100% - 10px) / 4);
     border-radius: 999px;
-    background: linear-gradient(125deg, rgba(95, 174, 234, 0.25), rgba(158, 131, 224, 0.2));
+    background: linear-gradient(90deg, #83caff, #b29ee6);
     transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
 }
@@ -758,20 +756,14 @@
     color: #f1f5fb;
     border-color: var(--civic-accent);
 }
-.civic-grid--compact {
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-bottom: 5rem;
-}
-.civic-grid--compact .civic-card {
+.civic-card--compact {
     display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.5fr);
-    gap: clamp(2rem, 6vw, 6rem);
-    padding: 2.8rem 0;
-    border: 0;
-    border-top: 1px solid var(--civic-line);
-    border-radius: 0;
-    background: none;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    padding: clamp(1.5rem, 3vw, 3rem);
+    border-radius: 1.6rem;
+    background: linear-gradient(135deg, rgba(55, 105, 195, 0.18), rgba(12, 17, 43, 0.92));
 }
 .civic-card__question {
     position: relative;
@@ -794,17 +786,17 @@
     color: var(--civic-accent);
     font-size: 1.5rem;
 }
-.civic-grid--compact .civic-card__body {
+.civic-card--compact .civic-card__body {
     padding: 0.5rem 0;
 }
-.civic-grid--compact .civic-card__meta {
+.civic-card--compact .civic-card__meta {
     display: none;
 }
-.civic-grid--compact .civic-card__limit {
+.civic-card--compact .civic-card__limit {
     border: 0;
     padding: 0;
 }
-.civic-grid--compact .civic-card__visit {
+.civic-card--compact .civic-card__visit {
     justify-content: flex-start;
     gap: 1.5rem;
 }
@@ -820,10 +812,10 @@
     font-size: 0.85rem;
 }
 @media (max-width: 700px) {
-    .civic-grid--compact .civic-card {
+    .civic-card--compact {
         grid-template-columns: 1fr;
         gap: 0.5rem;
-        padding: 2rem 0;
+        padding: 1.3rem;
     }
     .civic-card__question p {
         margin-bottom: 0.5rem;
@@ -833,5 +825,43 @@
     }
     .civic-projects {
         padding: 1.3rem;
+    }
+}
+
+.civic-scene--more {
+    margin-bottom: 5rem;
+}
+.civic-scene--more .civic-scene__panel:nth-child(even) .civic-card {
+    background: linear-gradient(135deg, rgba(95, 90, 210, 0.18), rgba(12, 17, 43, 0.92));
+}
+.civic-preview__link {
+    display: block;
+    position: relative;
+}
+.civic-preview__link:focus-visible {
+    outline: 3px solid var(--civic-accent);
+    outline-offset: -3px;
+}
+.civic-preview__action {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: #0c172bed;
+    border: 1px solid #83caff80;
+    color: #b0dfff;
+    box-shadow: 0 4px 16px #0004;
+    transition: transform 200ms ease;
+}
+.civic-preview__link:hover .civic-preview__action {
+    transform: translate(2px, -2px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .civic-preview__link:hover .civic-preview__action {
+        transform: none;
     }
 }

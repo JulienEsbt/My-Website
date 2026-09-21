@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 import {FiArrowUpRight, FiChevronDown, FiExternalLink} from 'react-icons/fi'
 import {formatDate} from '../../i18n/formatters.js'
 
-export default function ResourceCard({resource, number}) {
+export default function ResourceCard({resource, number, compact = false}) {
     const {t, i18n} = useTranslation('resources')
     const language = i18n.resolvedLanguage?.startsWith('fr') ? 'fr' : 'en'
     const copy = t(`resources.${resource.id}`, {returnObjects: true})
@@ -12,8 +12,7 @@ export default function ResourceCard({resource, number}) {
     return (
         <article
             id={`resource-${resource.id}`}
-            data-civic-reveal={resource.featured ? undefined : true}
-            className={`civic-card civic-card--${resource.id} ${resource.featured ? 'civic-card--featured' : ''}`}
+            className={`civic-card civic-card--${resource.id} ${resource.featured ? 'civic-card--featured' : 'civic-card--compact'}`}
             aria-labelledby={`title-${resource.id}`}
         >
             {resource.featured &&
@@ -23,15 +22,24 @@ export default function ResourceCard({resource, number}) {
                             <span aria-hidden="true">● ● ●</span>
                             <span>{resource.domain}</span>
                         </div>
-                        <img
-                            src={resource.preview.src}
-                            width="960"
-                            height="600"
-                            loading="lazy"
-                            decoding="async"
-                            alt={t('card.preview', {name})}
-                            onError={() => setPreviewFailed(true)}
-                        />
+                        <a
+                            className="civic-preview__link"
+                            href={resource.url}
+                            aria-label={t('card.visitPreview', {name})}
+                        >
+                            <img
+                                src={resource.preview.src}
+                                width="960"
+                                height="600"
+                                loading="lazy"
+                                decoding="async"
+                                alt={t('card.preview', {name})}
+                                onError={() => setPreviewFailed(true)}
+                            />
+                            <span className="civic-preview__action" aria-hidden="true">
+                                <FiArrowUpRight />
+                            </span>
+                        </a>
                         <figcaption>{t('uses.' + resource.use)}</figcaption>
                     </figure>
                 ) : (
@@ -45,7 +53,9 @@ export default function ResourceCard({resource, number}) {
                 ))}
             {!resource.featured && (
                 <div className="civic-card__question">
-                    <span>{copy.kind}</span>
+                    <span>
+                        {String(number).padStart(2, '0')} / {copy.kind}
+                    </span>
                     <p>{copy.question}</p>
                     <FiArrowUpRight aria-hidden="true" />
                 </div>
@@ -63,7 +73,9 @@ export default function ResourceCard({resource, number}) {
                     <span>{t('card.language')}</span>
                 </div>
                 <h3 id={`title-${resource.id}`}>{name}</h3>
-                <p className="civic-card__description">{copy.description}</p>
+                <p className="civic-card__description">
+                    {compact ? copy.teaser : copy.description}
+                </p>
                 <p className="civic-card__owner">
                     {t('card.owner')} {copy.owner}
                 </p>
@@ -85,6 +97,7 @@ export default function ResourceCard({resource, number}) {
                         <FiChevronDown aria-hidden="true" />
                     </summary>
                     <div>
+                        {compact && <p>{copy.description}</p>}
                         <p>{copy.method}</p>
                         <ul>
                             {resource.sources.map((source, index) => (

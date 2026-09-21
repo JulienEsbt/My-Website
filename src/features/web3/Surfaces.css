@@ -1,0 +1,13 @@
+/* The same restrained blue/violet surfaces as the Labs approach cards. */
+.knowledge-v3,
+.wallet-inspector,
+.donation-panel,
+.blockchain-section {
+    --web3-surface: linear-gradient(135deg, rgba(55, 105, 195, 0.2), rgba(12, 17, 43, 0.88));
+    --web3-inset: rgba(31, 31, 56, 0.48);
+    --web3-border: rgba(77, 181, 255, 0.2);
+    --web3-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+.donation-panel {
+    --web3-surface: linear-gradient(135deg, rgba(95, 90, 210, 0.18), rgba(12, 17, 43, 0.88));
+}

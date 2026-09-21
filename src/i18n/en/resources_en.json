@@ -31,16 +31,17 @@
         "title": "Four starting points.",
         "intro": "Different approaches, a shared purpose: understanding more and taking part in democratic life. These resources focus on France.",
         "scene": {
-            "label": "Browse the selection",
             "hint": "Scroll to discover the next resource",
             "continuous": "Continuous reading",
             "animated": "Animated reading"
-        }
+        },
+        "sceneLabel": "Browse the selection"
     },
     "more": {
         "eyebrow": "04 / Go further",
         "title": "A question. A path to explore.",
-        "intro": "A document to find, an argument to examine, a vote to check: a few paths to explore further."
+        "intro": "A document to find, an argument to examine, a vote to check: a few paths to explore further.",
+        "sceneLabel": "Browse further resources"
     },
     "card": {
         "limit": "Keep in mind",
@@ -50,7 +51,8 @@
         "language": "Resource in French",
         "preview": "Preview of {{name}}",
         "previewCredit": "Preview: {{name}} · {{date}}",
-        "sourceLabels": ["About / methodology", "Further context"]
+        "sourceLabels": ["About / methodology", "Further context"],
+        "visitPreview": "Visit the {{name}} website"
     },
     "projects": {
         "eyebrow": "03 / Continuing the conversation",
@@ -138,7 +140,8 @@
             "limit": "Exchanges are generally public. Some documents cannot be disclosed: read the conditions before sharing personal information.",
             "method": "MaDada supports access to administrative documents in France. Reading an existing request is a useful first step; requesting a document does not itself trigger an investigation.",
             "cta": "Explore MaDada",
-            "question": "How can I access a public document?"
+            "question": "How can I access a public document?",
+            "teaser": "Find an existing request or prepare your own request to a public body."
         },
         "wikidebats": {
             "kind": "Arguments and objections",
@@ -147,7 +150,8 @@
             "limit": "The presence or number of arguments does not establish their strength. Examine their sources and possible responses.",
             "method": "This collaborative encyclopaedia publishes its content under CC BY-SA 4.0. This page links to the original and does not reproduce its debate collections.",
             "cta": "Explore the debates",
-            "question": "What about the opposing arguments?"
+            "question": "What about the opposing arguments?",
+            "teaser": "Explore arguments, objections and their sources around the same question."
         },
         "datan": {
             "kind": "Parliamentary data",
@@ -156,7 +160,8 @@
             "limit": "Check the period and indicator definitions. Voting records do not capture all parliamentary work.",
             "method": "Datan explains its statistics and introduces its team and scientific council. Its methods help clarify what each comparison measures.",
             "cta": "Explore Datan",
-            "question": "How did my representative vote?"
+            "question": "How did my representative vote?",
+            "teaser": "Look at voting records and indicators to examine what your representatives do."
         },
         "medias": {
             "name": "French media: who owns what?",
@@ -166,7 +171,9 @@
             "limit": "The map is selective and dated. Ownership alone does not establish the content of an article.",
             "method": "The Acrimed page is dated 21 January 2026. The data repository states December 2024 and an ODC-By licence; those dates do not establish that the map and data are synchronised.",
             "cta": "View the original map",
-            "question": "Who owns the media I read?"
+            "question": "Who owns the media I read?",
+            "teaser": "Find a media outlet within the main ownership links in the French press.",
+            "shortName": "Media ownership"
         }
     }
 }

@@ -1,13 +1,11 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
-import {citizenResources} from '../../data/citizenResources/resources.js'
 import ResourceCard from './ResourceCard.jsx'
 
-const resources = citizenResources.filter((resource) => resource.featured)
 const clamp = (value) => Math.max(0, Math.min(1, value))
 
-export default function FeaturedResources() {
+export default function ResourceScene({resources, variant = 'featured'}) {
     const {t} = useTranslation('resources')
     const rootRef = useRef(null)
     const pendingTarget = useRef(null)
@@ -121,7 +119,7 @@ export default function FeaturedResources() {
                 panel.removeAttribute('style')
             })
         }
-    }, [animated])
+    }, [animated, resources.length])
 
     useEffect(() => {
         const followHash = () => {
@@ -146,7 +144,10 @@ export default function FeaturedResources() {
     }
 
     return (
-        <div ref={rootRef} className={`civic-scene ${animated ? 'civic-scene--animated' : ''}`}>
+        <div
+            ref={rootRef}
+            className={`civic-scene civic-scene--${variant} ${animated ? 'civic-scene--animated' : ''}`}
+        >
             <div className="civic-scene__stage">
                 {eligible && (
                     <div className="civic-scene__toolbar">
@@ -174,7 +175,7 @@ export default function FeaturedResources() {
                     </div>
                 )}
                 {animated && (
-                    <nav className="civic-scene__steps" aria-label={t('featured.scene.label')}>
+                    <nav className="civic-scene__steps" aria-label={t(`${variant}.sceneLabel`)}>
                         {resources.map((resource, index) => (
                             <button
                                 type="button"
@@ -183,7 +184,9 @@ export default function FeaturedResources() {
                                 onClick={() => select(index)}
                             >
                                 <span aria-hidden="true">0{index + 1}</span>
-                                {resource.name}
+                                {t(`resources.${resource.id}.shortName`, {
+                                    defaultValue: resource.name,
+                                })}
                             </button>
                         ))}
                     </nav>
@@ -198,7 +201,11 @@ export default function FeaturedResources() {
                 >
                     {resources.map((resource, index) => (
                         <div className="civic-scene__panel" key={resource.id}>
-                            <ResourceCard resource={resource} number={index + 1} />
+                            <ResourceCard
+                                resource={resource}
+                                number={index + 1}
+                                compact={variant === 'more'}
+                            />
                         </div>
                     ))}
                 </div>

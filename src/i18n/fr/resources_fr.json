@@ -31,16 +31,17 @@
         "title": "Quatre portes d’entrée.",
         "intro": "Des approches différentes, une même envie : mieux comprendre et prendre part à la vie démocratique.",
         "scene": {
-            "label": "Parcourir la sélection",
             "hint": "Faites défiler pour découvrir la suite",
             "continuous": "Lecture continue",
             "animated": "Lecture animée"
-        }
+        },
+        "sceneLabel": "Parcourir la sélection"
     },
     "more": {
         "eyebrow": "04 / Pour approfondir",
         "title": "Une question. Une piste à explorer.",
-        "intro": "Un document à retrouver, un argument à examiner, un vote à vérifier : quelques pistes pour aller plus loin."
+        "intro": "Un document à retrouver, un argument à examiner, un vote à vérifier : quelques pistes pour aller plus loin.",
+        "sceneLabel": "Parcourir les pistes pour approfondir"
     },
     "card": {
         "limit": "À garder en tête",
@@ -50,7 +51,8 @@
         "language": "Ressource en français",
         "preview": "Aperçu du site {{name}}",
         "previewCredit": "Aperçu : {{name}} · {{date}}",
-        "sourceLabels": ["Présentation / méthode", "Pour approfondir"]
+        "sourceLabels": ["Présentation / méthode", "Pour approfondir"],
+        "visitPreview": "Visiter le site de {{name}}"
     },
     "projects": {
         "eyebrow": "03 / Dans le prolongement",
@@ -138,7 +140,8 @@
             "limit": "Les échanges sont généralement publics. Certains documents ne sont pas communicables : lire les conditions avant de transmettre des informations personnelles.",
             "method": "MaDada accompagne l’accès aux documents administratifs. Consulter une demande existante est un bon premier pas ; une demande de document ne déclenche pas à elle seule une enquête.",
             "cta": "Découvrir MaDada",
-            "question": "Comment accéder à un document public ?"
+            "question": "Comment accéder à un document public ?",
+            "teaser": "Retrouver une demande existante ou préparer la vôtre auprès d’une administration."
         },
         "wikidebats": {
             "kind": "Arguments et objections",
@@ -147,7 +150,8 @@
             "limit": "La présence ou le nombre d’arguments ne démontre pas leur solidité. Examiner leurs sources et les réponses possibles.",
             "method": "Cette encyclopédie collaborative publie son contenu sous licence CC BY-SA 4.0. Cette page renvoie vers l’original et ne reproduit pas les corpus de débats.",
             "cta": "Explorer les débats",
-            "question": "Et si je regardais les arguments opposés ?"
+            "question": "Et si je regardais les arguments opposés ?",
+            "teaser": "Explorer les arguments, les objections et leurs sources autour d’une même question."
         },
         "datan": {
             "kind": "Données parlementaires",
@@ -156,7 +160,8 @@
             "limit": "Vérifier la période et la définition des indicateurs. Les votes ne résument pas tout le travail parlementaire.",
             "method": "Datan explique ses statistiques et présente son équipe et son conseil scientifique. Les méthodes permettent de comprendre ce que mesure chaque comparaison.",
             "cta": "Consulter Datan",
-            "question": "Comment mon député a-t-il voté ?"
+            "question": "Comment mon député a-t-il voté ?",
+            "teaser": "Revenir aux scrutins et aux indicateurs pour regarder les actes de vos représentants."
         },
         "medias": {
             "name": "Médias français : qui possède quoi ?",
@@ -166,7 +171,9 @@
             "limit": "La carte est sélective et datée. Un lien de propriété ne suffit pas à déduire le contenu d’un article.",
             "method": "La page Acrimed est datée du 21 janvier 2026. Le dépôt de données indique décembre 2024 et une licence ODC-By ; ces dates ne garantissent pas la synchronisation de la carte et des données.",
             "cta": "Consulter la carte originale",
-            "question": "Qui possède les médias que je consulte ?"
+            "question": "Qui possède les médias que je consulte ?",
+            "teaser": "Situer un média dans les principaux liens de propriété de la presse française.",
+            "shortName": "Propriété des médias"
         }
     }
 }

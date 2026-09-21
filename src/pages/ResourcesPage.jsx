@@ -13,9 +13,11 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {citizenResources} from '../data/citizenResources/resources.js'
 import CivicSectionNav from '../features/citizenResources/CivicSectionNav.jsx'
 import useCivicMotion from '../features/citizenResources/useCivicMotion.js'
-import FeaturedResources from '../features/citizenResources/FeaturedResources.jsx'
-import ResourceCard from '../features/citizenResources/ResourceCard.jsx'
+import ResourceScene from '../features/citizenResources/ResourceScene.jsx'
 import '../features/citizenResources/CitizenResources.css'
+
+const featuredResources = citizenResources.filter((resource) => resource.featured)
+const furtherResources = citizenResources.filter((resource) => !resource.featured)
 
 export default function ResourcesPage() {
     const {t} = useTranslation('resources')
@@ -116,7 +118,7 @@ export default function ResourcesPage() {
                         <h2 id="selection-title">{t('featured.title')}</h2>
                         <p>{t('featured.intro')}</p>
                     </div>
-                    <FeaturedResources />
+                    <ResourceScene resources={featuredResources} />
                 </section>
 
                 <section
@@ -181,13 +183,7 @@ export default function ResourcesPage() {
                         <h2 id="further-title">{t('more.title')}</h2>
                         <p>{t('more.intro')}</p>
                     </div>
-                    <div className="civic-grid civic-grid--compact">
-                        {citizenResources
-                            .filter((r) => !r.featured)
-                            .map((resource) => (
-                                <ResourceCard key={resource.id} resource={resource} />
-                            ))}
-                    </div>
+                    <ResourceScene resources={furtherResources} variant="more" />
                 </section>
             </div>
         </PageFrame>
