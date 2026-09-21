@@ -118,12 +118,10 @@ for (const engine of ['chromium', 'webkit']) {
                 })
                 await page.goto('/resources')
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
-                const card = page.locator('#resource-monvote2027')
+                const card = page.locator('#resource-datan')
                 await card.scrollIntoViewIfNeeded()
                 await expect
-                    .poll(() =>
-                        page.evaluate(() => window.civicReveals.includes('resource-monvote2027'))
-                    )
+                    .poll(() => page.evaluate(() => window.civicReveals.includes('resource-datan')))
                     .toBe(true)
                 await expect.poll(() => card.evaluate((el) => el.getAnimations().length)).toBe(0)
                 await expect(card).toHaveCSS('opacity', '1')
@@ -132,20 +130,25 @@ for (const engine of ['chromium', 'webkit']) {
                 await nav.locator('a[href="#projects"]').click()
                 await expect(nav.locator('[aria-current]')).toHaveAttribute('href', '#projects')
                 await expect(page.locator('#projects-title')).toBeInViewport()
-                const gap = await page.evaluate(
-                    () =>
-                        document.querySelector('#projects-title').getBoundingClientRect().top -
-                        document.querySelector('.civic-section-nav').getBoundingClientRect().bottom
-                )
-                expect(gap).toBeGreaterThan(0)
+                // Upward native smooth scrolling can mark the section active before settling.
+                await expect
+                    .poll(() =>
+                        page.evaluate(
+                            () =>
+                                document.querySelector('#projects-title').getBoundingClientRect()
+                                    .top -
+                                document.querySelector('.civic-section-nav').getBoundingClientRect()
+                                    .bottom
+                        )
+                    )
+                    .toBeGreaterThan(0)
                 await nav.locator('a[href="#selection"]').click()
                 await card.scrollIntoViewIfNeeded()
                 await expect(card).toHaveCSS('opacity', '1')
                 await expect(card).toHaveCSS('transform', 'none')
                 expect(
                     await page.evaluate(
-                        () =>
-                            window.civicReveals.filter((id) => id === 'resource-monvote2027').length
+                        () => window.civicReveals.filter((id) => id === 'resource-datan').length
                     )
                 ).toBe(1)
                 await page.emulateMedia({reducedMotion: 'reduce'})
@@ -169,5 +172,92 @@ for (const engine of ['chromium', 'webkit']) {
                 await browser.close()
             }
         })
+    })
+}
+
+for (const engine of ['chromium', 'webkit']) {
+    test(`the scroll scene works forwards, backwards and with keyboard sources in ${engine}`, async ({
+        playwright,
+    }) => {
+        const browser = await playwright[engine].launch()
+        const page = await browser.newPage({
+            baseURL: 'http://localhost:4173',
+            locale: 'fr-FR',
+            viewport: {width: 1440, height: 1000},
+            reducedMotion: 'no-preference',
+        })
+        const errors = []
+        page.on('pageerror', (error) => errors.push(error.message))
+        try {
+            await page.goto('/resources')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+            const scene = page.locator('.civic-scene')
+            await expect(scene).toHaveClass(/civic-scene--animated/)
+            const scrollToStep = async (step) => {
+                await scene.evaluate(
+                    (el, value) =>
+                        scrollTo({
+                            top:
+                                scrollY +
+                                el.getBoundingClientRect().top -
+                                100 +
+                                value * innerHeight * 0.72,
+                            behavior: 'instant',
+                        }),
+                    step
+                )
+            }
+            const panels = scene.locator('.civic-scene__panel')
+            for (const index of [0, 1, 2, 3, 2, 1, 0]) {
+                await scrollToStep(index)
+                await expect(panels.nth(index)).toHaveAttribute('aria-hidden', 'false')
+                await expect(panels.nth(index)).toHaveCSS('opacity', '1')
+                await expect(scene.locator('.civic-scene__panel:not([inert])')).toHaveCount(1)
+                const box = await panels.nth(index).boundingBox()
+                expect(box.y).toBeGreaterThan(100)
+                expect(box.y + box.height).toBeLessThan(1000)
+            }
+            // No overlapping bodies or orphaned links during a partial transition.
+            for (const fraction of [0.4, 0.6, 0.75]) {
+                await scrollToStep(fraction)
+                await expect
+                    .poll(() =>
+                        panels.evaluateAll(
+                            (items) => items.filter((el) => Number(el.style.opacity) > 0.01).length
+                        )
+                    )
+                    .toBeLessThanOrEqual(1)
+            }
+            await scene.getByRole('button', {name: /MonVote2027/}).click()
+            await expect(panels.nth(1)).toHaveAttribute('aria-hidden', 'false')
+            const summary = page.locator('#resource-monvote2027 summary')
+            await summary.focus()
+            await page.keyboard.press('Enter')
+            await expect(scene).not.toHaveClass(/civic-scene--animated/)
+            await expect(page.locator('#resource-monvote2027 details')).toHaveAttribute('open', '')
+            await expect(summary).toBeFocused()
+            await expect(scene.locator('[inert]')).toHaveCount(0)
+            await expect(summary).toBeInViewport()
+            await page.goto('/en/resources#resource-praxis')
+            await expect(scene).not.toHaveClass(/civic-scene--animated/)
+            await expect(page.locator('#resource-praxis')).toBeInViewport()
+            await page.goto('/resources')
+            await expect(scene).toHaveClass(/civic-scene--animated/)
+            await scrollToStep(2)
+            await expect(panels.nth(2)).toHaveAttribute('aria-hidden', 'false')
+            await page.emulateMedia({reducedMotion: 'reduce'})
+            await expect(scene).not.toHaveClass(/civic-scene--animated/)
+            await expect(
+                scene.locator('.civic-scene__panel[inert], .civic-scene__panel[aria-hidden="true"]')
+            ).toHaveCount(0)
+            await expect(page.locator('#resource-praxis')).toBeInViewport()
+            await page.setViewportSize({width: 390, height: 844})
+            expect(
+                await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
+            ).toBe(true)
+            expect(errors).toEqual([])
+        } finally {
+            await browser.close()
+        }
     })
 }

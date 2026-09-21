@@ -13,6 +13,7 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {citizenResources} from '../data/citizenResources/resources.js'
 import CivicSectionNav from '../features/citizenResources/CivicSectionNav.jsx'
 import useCivicMotion from '../features/citizenResources/useCivicMotion.js'
+import FeaturedResources from '../features/citizenResources/FeaturedResources.jsx'
 import ResourceCard from '../features/citizenResources/ResourceCard.jsx'
 import '../features/citizenResources/CitizenResources.css'
 
@@ -51,10 +52,10 @@ export default function ResourcesPage() {
                             ↗
                         </span>
                         <nav>
-                            {['featured', 'more', 'projects', 'approach'].map((item, index) => (
+                            {['approach', 'featured', 'projects', 'more'].map((item, index) => (
                                 <a
                                     key={item}
-                                    href={`#${['selection', 'further', 'projects', 'approach'][index]}`}
+                                    href={`#${['approach', 'selection', 'projects', 'further'][index]}`}
                                 >
                                     <span aria-hidden="true">0{index + 1}</span>
                                     {t(`nav.${item}`)}
@@ -67,94 +68,6 @@ export default function ResourcesPage() {
                 </header>
 
                 <CivicSectionNav />
-
-                <section
-                    className="civic-section container"
-                    id="selection"
-                    aria-labelledby="selection-title"
-                >
-                    <div className="civic-section__heading" data-civic-reveal>
-                        <p className="civic-eyebrow">{t('featured.eyebrow')}</p>
-                        <h2 id="selection-title">{t('featured.title')}</h2>
-                        <p>{t('featured.intro')}</p>
-                    </div>
-                    <div className="civic-grid civic-grid--featured">
-                        {citizenResources
-                            .filter((r) => r.featured)
-                            .map((resource, index) => (
-                                <ResourceCard
-                                    key={resource.id}
-                                    resource={resource}
-                                    number={index + 1}
-                                />
-                            ))}
-                    </div>
-                </section>
-
-                <section
-                    className="civic-section container"
-                    id="further"
-                    aria-labelledby="further-title"
-                >
-                    <div className="civic-section__heading" data-civic-reveal>
-                        <p className="civic-eyebrow">{t('more.eyebrow')}</p>
-                        <h2 id="further-title">{t('more.title')}</h2>
-                        <p>{t('more.intro')}</p>
-                    </div>
-                    <div className="civic-grid civic-grid--compact">
-                        {citizenResources
-                            .filter((r) => !r.featured)
-                            .map((resource) => (
-                                <ResourceCard key={resource.id} resource={resource} />
-                            ))}
-                    </div>
-                </section>
-
-                <section
-                    className="civic-section container"
-                    id="projects"
-                    aria-labelledby="projects-title"
-                >
-                    <div className="civic-section__heading" data-civic-reveal>
-                        <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
-                        <h2 id="projects-title">{t('projects.title')}</h2>
-                        <p>{t('projects.intro')}</p>
-                    </div>
-                    <div className="civic-projects">
-                        <article className="civic-project" data-civic-reveal>
-                            <FiGitBranch className="civic-project__icon" aria-hidden="true" />
-                            <p className="civic-project__status">{t('projects.agora.status')}</p>
-                            <h3>{t('projects.agora.name')}</h3>
-                            <span className="civic-project__label">
-                                {t('projects.agora.label')}
-                            </span>
-                            <p>{t('projects.agora.description')}</p>
-                            <Link to="/#agora-project-title">
-                                {t('projects.agora.cta')}
-                                <FiArrowUpRight aria-hidden="true" />
-                            </Link>
-                        </article>
-                        <article className="civic-project" data-civic-reveal>
-                            <FiSearch className="civic-project__icon" aria-hidden="true" />
-                            <p className="civic-project__status">
-                                {t('projects.observatory.status')}
-                            </p>
-                            <h3>{t('projects.observatory.name')}</h3>
-                            <span className="civic-project__label">
-                                {t('projects.observatory.label')}
-                            </span>
-                            <p>{t('projects.observatory.description')}</p>
-                            <details>
-                                <summary>{t('projects.observatory.details')}</summary>
-                                <p>{t('projects.observatory.future')}</p>
-                                <a href="#resource-medias">
-                                    {t('projects.observatory.source')}
-                                    <FiArrowUpRight aria-hidden="true" />
-                                </a>
-                            </details>
-                        </article>
-                    </div>
-                </section>
 
                 <section
                     className="civic-section civic-approach container"
@@ -190,6 +103,90 @@ export default function ResourcesPage() {
                             </Link>
                         </p>
                         <small>{t('approach.privacy')}</small>
+                    </div>
+                </section>
+
+                <section
+                    className="civic-section container"
+                    id="selection"
+                    aria-labelledby="selection-title"
+                >
+                    <div className="civic-section__heading" data-civic-reveal>
+                        <p className="civic-eyebrow">{t('featured.eyebrow')}</p>
+                        <h2 id="selection-title">{t('featured.title')}</h2>
+                        <p>{t('featured.intro')}</p>
+                    </div>
+                    <FeaturedResources />
+                </section>
+
+                <section
+                    className="civic-section container"
+                    id="projects"
+                    aria-labelledby="projects-title"
+                >
+                    <div className="civic-section__heading" data-civic-reveal>
+                        <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
+                        <h2 id="projects-title">{t('projects.title')}</h2>
+                        <p>{t('projects.intro')}</p>
+                    </div>
+                    <div className="civic-projects">
+                        <article className="civic-project" data-civic-reveal>
+                            <FiGitBranch className="civic-project__icon" aria-hidden="true" />
+                            <p className="civic-project__status">{t('projects.agora.status')}</p>
+                            <h3>{t('projects.agora.name')}</h3>
+                            <span className="civic-project__label">
+                                {t('projects.agora.label')}
+                            </span>
+                            <p>{t('projects.agora.description')}</p>
+                            <p className="civic-project__intention">
+                                {t('projects.agora.intention')}
+                            </p>
+                            <Link to="/#agora-project-title">
+                                {t('projects.agora.cta')}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </Link>
+                        </article>
+                        <article className="civic-project" data-civic-reveal>
+                            <FiSearch className="civic-project__icon" aria-hidden="true" />
+                            <p className="civic-project__status">
+                                {t('projects.observatory.status')}
+                            </p>
+                            <h3>{t('projects.observatory.name')}</h3>
+                            <span className="civic-project__label">
+                                {t('projects.observatory.label')}
+                            </span>
+                            <p>{t('projects.observatory.description')}</p>
+                            <p className="civic-project__intention">
+                                {t('projects.observatory.intention')}
+                            </p>
+                            <details>
+                                <summary>{t('projects.observatory.details')}</summary>
+                                <p>{t('projects.observatory.future')}</p>
+                                <a href="#resource-medias">
+                                    {t('projects.observatory.source')}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </a>
+                            </details>
+                        </article>
+                    </div>
+                </section>
+
+                <section
+                    className="civic-section container"
+                    id="further"
+                    aria-labelledby="further-title"
+                >
+                    <div className="civic-section__heading" data-civic-reveal>
+                        <p className="civic-eyebrow">{t('more.eyebrow')}</p>
+                        <h2 id="further-title">{t('more.title')}</h2>
+                        <p>{t('more.intro')}</p>
+                    </div>
+                    <div className="civic-grid civic-grid--compact">
+                        {citizenResources
+                            .filter((r) => !r.featured)
+                            .map((resource) => (
+                                <ResourceCard key={resource.id} resource={resource} />
+                            ))}
                     </div>
                 </section>
             </div>

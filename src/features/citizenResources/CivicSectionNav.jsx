@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 
-const sections = ['selection', 'further', 'projects', 'approach']
+const sections = ['approach', 'selection', 'projects', 'further']
 
 export default function CivicSectionNav() {
     const {t} = useTranslation('resources')

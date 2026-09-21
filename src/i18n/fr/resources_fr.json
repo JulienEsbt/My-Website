@@ -27,13 +27,19 @@
         "accountability": "Demander des comptes"
     },
     "featured": {
-        "eyebrow": "01 / Pour commencer",
+        "eyebrow": "02 / Pour commencer",
         "title": "Quatre portes d’entrée.",
-        "intro": "Des approches différentes, une même envie : mieux comprendre et prendre part à la vie démocratique."
+        "intro": "Des approches différentes, une même envie : mieux comprendre et prendre part à la vie démocratique.",
+        "scene": {
+            "label": "Parcourir la sélection",
+            "hint": "Faites défiler pour découvrir la suite",
+            "continuous": "Lecture continue",
+            "animated": "Lecture animée"
+        }
     },
     "more": {
-        "eyebrow": "02 / Pour approfondir",
-        "title": "À chaque question, une ressource.",
+        "eyebrow": "04 / Pour approfondir",
+        "title": "Une question. Une piste à explorer.",
         "intro": "Un document à retrouver, un argument à examiner, un vote à vérifier : quelques pistes pour aller plus loin."
     },
     "card": {
@@ -55,7 +61,8 @@
             "label": "Graphe des débats",
             "status": "Prototype local · non publié",
             "description": "Relier arguments, objections, faits et sources pour comprendre où se situe un désaccord, sans imposer de conclusion.",
-            "cta": "Découvrir l’intention du projet"
+            "cta": "Découvrir l’intention du projet",
+            "intention": "L’intention : pouvoir remonter d’une conclusion aux arguments qui la soutiennent, puis aux sources — et laisser les objections visibles."
         },
         "observatory": {
             "name": "L’Observatoire",
@@ -64,11 +71,12 @@
             "description": "Rendre le fonctionnement du pouvoir lisible et vérifiable : représentants, votes, intérêts et actions citoyennes.",
             "details": "Une évolution : explorer la propriété des médias",
             "future": "Une carte interactive pour rechercher un média, suivre ses liens de propriété et consulter les sources. Ce module reste une évolution envisagée avec l’Observatoire ; il n’est pas encore disponible ici.",
-            "source": "Consulter la ressource documentaire"
+            "source": "Consulter la ressource documentaire",
+            "intention": "L’intention : partir d’une question concrète, retrouver les documents et comprendre ce qu’ils permettent réellement d’établir."
         }
     },
     "approach": {
-        "eyebrow": "04 / La démarche",
+        "eyebrow": "01 / La démarche",
         "title": "Un point de vue.\nDe la place pour le vôtre.",
         "body": "Cette sélection est personnelle et engagée. L’égalité entre les femmes et les hommes, le partage des richesses, la démocratie directe — notamment le référendum d’initiative citoyenne — et l’indépendance des médias font partie des questions qui m’importent.",
         "humility": "Mes convictions comme mes analyses peuvent évoluer. Partager une ressource ne signifie pas en approuver chaque position. Vous n’avez pas besoin de partager les miennes pour trouver ici des informations utiles ou des arguments à discuter.",
@@ -79,7 +87,7 @@
             },
             {
                 "title": "Des limites explicites",
-                "body": "Une description, une analyse et une conviction ne jouent pas le même rôle. Les repères aident à les distinguer."
+                "body": "Les faits se vérifient à partir de sources ; les analyses proposent une lecture ; les convictions expriment des choix. Les fiches donnent des repères sans confondre ces trois registres."
             },
             {
                 "title": "Une sélection qui se relit",
@@ -129,7 +137,8 @@
             "description": "Consulter des demandes déjà adressées aux administrations et préparer une demande de document public : notes de frais, subvention ou contrat, par exemple.",
             "limit": "Les échanges sont généralement publics. Certains documents ne sont pas communicables : lire les conditions avant de transmettre des informations personnelles.",
             "method": "MaDada accompagne l’accès aux documents administratifs. Consulter une demande existante est un bon premier pas ; une demande de document ne déclenche pas à elle seule une enquête.",
-            "cta": "Découvrir MaDada"
+            "cta": "Découvrir MaDada",
+            "question": "Comment accéder à un document public ?"
         },
         "wikidebats": {
             "kind": "Arguments et objections",
@@ -137,7 +146,8 @@
             "description": "Examiner les arguments pour et contre une proposition, suivre les objections et revenir aux sources pour se forger une opinion.",
             "limit": "La présence ou le nombre d’arguments ne démontre pas leur solidité. Examiner leurs sources et les réponses possibles.",
             "method": "Cette encyclopédie collaborative publie son contenu sous licence CC BY-SA 4.0. Cette page renvoie vers l’original et ne reproduit pas les corpus de débats.",
-            "cta": "Explorer les débats"
+            "cta": "Explorer les débats",
+            "question": "Et si je regardais les arguments opposés ?"
         },
         "datan": {
             "kind": "Données parlementaires",
@@ -145,7 +155,8 @@
             "description": "Approfondir les votes des députés et les indicateurs parlementaires, après une première découverte d’un sujet ou d’un scrutin.",
             "limit": "Vérifier la période et la définition des indicateurs. Les votes ne résument pas tout le travail parlementaire.",
             "method": "Datan explique ses statistiques et présente son équipe et son conseil scientifique. Les méthodes permettent de comprendre ce que mesure chaque comparaison.",
-            "cta": "Consulter Datan"
+            "cta": "Consulter Datan",
+            "question": "Comment mon député a-t-il voté ?"
         },
         "medias": {
             "name": "Médias français : qui possède quoi ?",
@@ -154,7 +165,8 @@
             "description": "Repérer les principaux liens de propriété des médias français. Une ressource documentaire pour mieux situer les acteurs de l’information.",
             "limit": "La carte est sélective et datée. Un lien de propriété ne suffit pas à déduire le contenu d’un article.",
             "method": "La page Acrimed est datée du 21 janvier 2026. Le dépôt de données indique décembre 2024 et une licence ODC-By ; ces dates ne garantissent pas la synchronisation de la carte et des données.",
-            "cta": "Consulter la carte originale"
+            "cta": "Consulter la carte originale",
+            "question": "Qui possède les médias que je consulte ?"
         }
     }
 }

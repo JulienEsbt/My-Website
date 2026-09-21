@@ -12,7 +12,7 @@ export default function ResourceCard({resource, number}) {
     return (
         <article
             id={`resource-${resource.id}`}
-            data-civic-reveal
+            data-civic-reveal={resource.featured ? undefined : true}
             className={`civic-card civic-card--${resource.id} ${resource.featured ? 'civic-card--featured' : ''}`}
             aria-labelledby={`title-${resource.id}`}
         >
@@ -43,6 +43,13 @@ export default function ResourceCard({resource, number}) {
                         <span className="civic-card__identity-line" />
                     </div>
                 ))}
+            {!resource.featured && (
+                <div className="civic-card__question">
+                    <span>{copy.kind}</span>
+                    <p>{copy.question}</p>
+                    <FiArrowUpRight aria-hidden="true" />
+                </div>
+            )}
             <div className="civic-card__body">
                 <div className="civic-card__meta">
                     <span>

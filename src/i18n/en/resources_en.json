@@ -27,13 +27,19 @@
         "accountability": "Hold power accountable"
     },
     "featured": {
-        "eyebrow": "01 / Start here",
+        "eyebrow": "02 / Start here",
         "title": "Four starting points.",
-        "intro": "Different approaches, a shared purpose: understanding more and taking part in democratic life. These resources focus on France."
+        "intro": "Different approaches, a shared purpose: understanding more and taking part in democratic life. These resources focus on France.",
+        "scene": {
+            "label": "Browse the selection",
+            "hint": "Scroll to discover the next resource",
+            "continuous": "Continuous reading",
+            "animated": "Animated reading"
+        }
     },
     "more": {
-        "eyebrow": "02 / Go further",
-        "title": "A resource for your question.",
+        "eyebrow": "04 / Go further",
+        "title": "A question. A path to explore.",
         "intro": "A document to find, an argument to examine, a vote to check: a few paths to explore further."
     },
     "card": {
@@ -55,7 +61,8 @@
             "label": "A graph of debates",
             "status": "Local prototype · unpublished",
             "description": "Connect arguments, objections, facts and sources to understand where a disagreement lies, without imposing a conclusion.",
-            "cta": "Explore the project’s purpose"
+            "cta": "Explore the project’s purpose",
+            "intention": "The intention: trace a conclusion back to its supporting arguments and sources, while keeping objections visible."
         },
         "observatory": {
             "name": "The Observatory",
@@ -64,11 +71,12 @@
             "description": "Make the exercise of power understandable and verifiable: representatives, votes, interests and civic action.",
             "details": "A future direction: exploring media ownership",
             "future": "An interactive map to search for a media outlet, follow its ownership links and examine sources. This module remains a planned extension with the Observatory; it is not yet available here.",
-            "source": "Explore the documentary resource"
+            "source": "Explore the documentary resource",
+            "intention": "The intention: start with a concrete question, find the documents and understand what they actually establish."
         }
     },
     "approach": {
-        "eyebrow": "04 / The approach",
+        "eyebrow": "01 / The approach",
         "title": "A point of view.\nRoom for yours.",
         "body": "This selection is personal and reflects my commitments. Equality between women and men, the distribution of wealth, direct democracy — including citizen-initiated referendums — and media independence are among the questions that matter to me.",
         "humility": "My convictions and analyses can change. Sharing a resource does not mean endorsing every position it takes. You do not need to share mine to find useful information or arguments to discuss here.",
@@ -79,7 +87,7 @@
             },
             {
                 "title": "Explicit limitations",
-                "body": "A description, an analysis and a conviction serve different purposes. Context helps distinguish them."
+                "body": "Facts can be checked against sources; analyses offer an interpretation; convictions express choices. Each card offers context without treating these three as interchangeable."
             },
             {
                 "title": "A selection to revisit",
@@ -129,7 +137,8 @@
             "description": "Browse requests already sent to public authorities and prepare a request for a public document, such as expenses, a grant or a contract.",
             "limit": "Exchanges are generally public. Some documents cannot be disclosed: read the conditions before sharing personal information.",
             "method": "MaDada supports access to administrative documents in France. Reading an existing request is a useful first step; requesting a document does not itself trigger an investigation.",
-            "cta": "Explore MaDada"
+            "cta": "Explore MaDada",
+            "question": "How can I access a public document?"
         },
         "wikidebats": {
             "kind": "Arguments and objections",
@@ -137,7 +146,8 @@
             "description": "Examine arguments for and against a proposition, follow objections and return to sources to form your own opinion.",
             "limit": "The presence or number of arguments does not establish their strength. Examine their sources and possible responses.",
             "method": "This collaborative encyclopaedia publishes its content under CC BY-SA 4.0. This page links to the original and does not reproduce its debate collections.",
-            "cta": "Explore the debates"
+            "cta": "Explore the debates",
+            "question": "What about the opposing arguments?"
         },
         "datan": {
             "kind": "Parliamentary data",
@@ -145,7 +155,8 @@
             "description": "Go deeper into MPs’ votes and parliamentary indicators after an initial introduction to a topic or ballot.",
             "limit": "Check the period and indicator definitions. Voting records do not capture all parliamentary work.",
             "method": "Datan explains its statistics and introduces its team and scientific council. Its methods help clarify what each comparison measures.",
-            "cta": "Explore Datan"
+            "cta": "Explore Datan",
+            "question": "How did my representative vote?"
         },
         "medias": {
             "name": "French media: who owns what?",
@@ -154,7 +165,8 @@
             "description": "Identify major ownership links in French media. A documentary resource for understanding the organisations behind the news.",
             "limit": "The map is selective and dated. Ownership alone does not establish the content of an article.",
             "method": "The Acrimed page is dated 21 January 2026. The data repository states December 2024 and an ODC-By licence; those dates do not establish that the map and data are synchronised.",
-            "cta": "View the original map"
+            "cta": "View the original map",
+            "question": "Who owns the media I read?"
         }
     }
 }
