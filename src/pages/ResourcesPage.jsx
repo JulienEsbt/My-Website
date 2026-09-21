@@ -1,3 +1,4 @@
+import {useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {
     FiArrowDown,
@@ -10,21 +11,34 @@ import {
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {citizenResources} from '../data/citizenResources/resources.js'
+import CivicSectionNav from '../features/citizenResources/CivicSectionNav.jsx'
+import useCivicMotion from '../features/citizenResources/useCivicMotion.js'
 import ResourceCard from '../features/citizenResources/ResourceCard.jsx'
 import '../features/citizenResources/CitizenResources.css'
 
 export default function ResourcesPage() {
     const {t} = useTranslation('resources')
+    const pageRef = useRef(null)
+    useCivicMotion(pageRef)
     return (
         <PageFrame>
-            <div className="civic-page">
+            <div className="civic-page" ref={pageRef}>
                 <header className="civic-hero container" id="top">
                     <div className="civic-hero__copy">
                         <p className="civic-eyebrow">
                             <FiCompass aria-hidden="true" />
                             {t('hero.kicker')}
                         </p>
-                        <h1>{t('hero.title')}</h1>
+                        <h1>
+                            {t('hero.title')
+                                .split('\n')
+                                .map((line, index) => (
+                                    <span key={index}>
+                                        {line}
+                                        {index === 0 && ' '}
+                                    </span>
+                                ))}
+                        </h1>
                         <p className="civic-hero__intro">{t('hero.intro')}</p>
                         <p className="civic-hero__invitation">{t('hero.invitation')}</p>
                         <a className="civic-button" href="#selection">
@@ -52,17 +66,19 @@ export default function ResourcesPage() {
                     </aside>
                 </header>
 
+                <CivicSectionNav />
+
                 <section
                     className="civic-section container"
                     id="selection"
                     aria-labelledby="selection-title"
                 >
-                    <div className="civic-section__heading">
+                    <div className="civic-section__heading" data-civic-reveal>
                         <p className="civic-eyebrow">{t('featured.eyebrow')}</p>
                         <h2 id="selection-title">{t('featured.title')}</h2>
                         <p>{t('featured.intro')}</p>
                     </div>
-                    <div className="civic-grid">
+                    <div className="civic-grid civic-grid--featured">
                         {citizenResources
                             .filter((r) => r.featured)
                             .map((resource, index) => (
@@ -80,7 +96,7 @@ export default function ResourcesPage() {
                     id="further"
                     aria-labelledby="further-title"
                 >
-                    <div className="civic-section__heading">
+                    <div className="civic-section__heading" data-civic-reveal>
                         <p className="civic-eyebrow">{t('more.eyebrow')}</p>
                         <h2 id="further-title">{t('more.title')}</h2>
                         <p>{t('more.intro')}</p>
@@ -99,13 +115,13 @@ export default function ResourcesPage() {
                     id="projects"
                     aria-labelledby="projects-title"
                 >
-                    <div className="civic-section__heading">
+                    <div className="civic-section__heading" data-civic-reveal>
                         <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
                         <h2 id="projects-title">{t('projects.title')}</h2>
                         <p>{t('projects.intro')}</p>
                     </div>
                     <div className="civic-projects">
-                        <article className="civic-project">
+                        <article className="civic-project" data-civic-reveal>
                             <FiGitBranch className="civic-project__icon" aria-hidden="true" />
                             <p className="civic-project__status">{t('projects.agora.status')}</p>
                             <h3>{t('projects.agora.name')}</h3>
@@ -118,7 +134,7 @@ export default function ResourcesPage() {
                                 <FiArrowUpRight aria-hidden="true" />
                             </Link>
                         </article>
-                        <article className="civic-project">
+                        <article className="civic-project" data-civic-reveal>
                             <FiSearch className="civic-project__icon" aria-hidden="true" />
                             <p className="civic-project__status">
                                 {t('projects.observatory.status')}
@@ -145,7 +161,7 @@ export default function ResourcesPage() {
                     id="approach"
                     aria-labelledby="approach-title"
                 >
-                    <div className="civic-approach__copy">
+                    <div className="civic-approach__copy" data-civic-reveal>
                         <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
                         <h2 id="approach-title">{t('approach.title')}</h2>
                         <p>{t('approach.body')}</p>
@@ -156,7 +172,7 @@ export default function ResourcesPage() {
                             <FiArrowUpRight aria-hidden="true" />
                         </Link>
                     </div>
-                    <div className="civic-approach__principles">
+                    <div className="civic-approach__principles" data-civic-reveal>
                         {t('approach.principles', {returnObjects: true}).map((principle, index) => (
                             <div key={principle.title}>
                                 <span aria-hidden="true">0{index + 1}</span>

@@ -92,3 +92,82 @@ test('both library pages expose content, sources and canonical URLs without Java
     }
     await context.close()
 })
+
+for (const engine of ['chromium', 'webkit']) {
+    test.describe(`civic reading transitions in ${engine}`, () => {
+        test('section navigation stays usable and animation never hides a returning card', async ({
+            playwright,
+        }) => {
+            const browser = await playwright[engine].launch()
+            const context = await browser.newContext({
+                baseURL: 'http://localhost:4173',
+                locale: 'fr-FR',
+                viewport: {width: 1280, height: 720},
+                reducedMotion: 'no-preference',
+            })
+            const page = await context.newPage()
+            try {
+                await page.addInitScript(() => {
+                    window.civicReveals = []
+                    const animate = Element.prototype.animate
+                    Element.prototype.animate = function (...args) {
+                        if (this.hasAttribute('data-civic-reveal'))
+                            window.civicReveals.push(this.id)
+                        return animate.apply(this, args)
+                    }
+                })
+                await page.goto('/resources')
+                await page.locator('#prerendered-content').waitFor({state: 'detached'})
+                const card = page.locator('#resource-monvote2027')
+                await card.scrollIntoViewIfNeeded()
+                await expect
+                    .poll(() =>
+                        page.evaluate(() => window.civicReveals.includes('resource-monvote2027'))
+                    )
+                    .toBe(true)
+                await expect.poll(() => card.evaluate((el) => el.getAnimations().length)).toBe(0)
+                await expect(card).toHaveCSS('opacity', '1')
+                await expect(card).toHaveCSS('transform', 'none')
+                const nav = page.locator('.civic-section-nav')
+                await nav.locator('a[href="#projects"]').click()
+                await expect(nav.locator('[aria-current]')).toHaveAttribute('href', '#projects')
+                await expect(page.locator('#projects-title')).toBeInViewport()
+                const gap = await page.evaluate(
+                    () =>
+                        document.querySelector('#projects-title').getBoundingClientRect().top -
+                        document.querySelector('.civic-section-nav').getBoundingClientRect().bottom
+                )
+                expect(gap).toBeGreaterThan(0)
+                await nav.locator('a[href="#selection"]').click()
+                await card.scrollIntoViewIfNeeded()
+                await expect(card).toHaveCSS('opacity', '1')
+                await expect(card).toHaveCSS('transform', 'none')
+                expect(
+                    await page.evaluate(
+                        () =>
+                            window.civicReveals.filter((id) => id === 'resource-monvote2027').length
+                    )
+                ).toBe(1)
+                await page.emulateMedia({reducedMotion: 'reduce'})
+                await page.locator('#resource-datan').scrollIntoViewIfNeeded()
+                // WebKit delivers the preference change event asynchronously.
+                await expect
+                    .poll(() =>
+                        page
+                            .locator('.civic-page')
+                            .evaluate((el) => el.getAnimations({subtree: true}).length)
+                    )
+                    .toBe(0)
+                await page.setViewportSize({width: 390, height: 844})
+                await nav.locator('a[href="#approach"]').click()
+                await expect(nav.locator('[aria-current]')).toHaveAttribute('href', '#approach')
+                await expect(page.locator('#approach-title')).toBeInViewport()
+                expect(
+                    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
+                ).toBe(true)
+            } finally {
+                await browser.close()
+            }
+        })
+    })
+}

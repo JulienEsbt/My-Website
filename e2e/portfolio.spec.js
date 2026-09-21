@@ -68,6 +68,8 @@ test('explicit URLs win and a manual home choice is remembered', async ({browser
     await expect(page).toHaveURL(/\/reflections$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
     await page.goto('/en')
+    // The prerendered link navigates but only the hydrated switch remembers the choice.
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
     await page.getByRole('link', {name: 'Passer en français'}).click()
     await expect(page).toHaveURL(/\/$/)

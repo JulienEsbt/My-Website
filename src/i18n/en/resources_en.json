@@ -12,7 +12,13 @@
         "featured": "Start here",
         "more": "Go further",
         "projects": "My projects",
-        "approach": "The approach"
+        "approach": "The approach",
+        "short": {
+            "selection": "Selection",
+            "further": "Explore",
+            "projects": "Projects",
+            "approach": "Approach"
+        }
     },
     "uses": {
         "observe": "Understand power",

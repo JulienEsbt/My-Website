@@ -12,6 +12,7 @@ export default function ResourceCard({resource, number}) {
     return (
         <article
             id={`resource-${resource.id}`}
+            data-civic-reveal
             className={`civic-card civic-card--${resource.id} ${resource.featured ? 'civic-card--featured' : ''}`}
             aria-labelledby={`title-${resource.id}`}
         >
@@ -44,7 +45,14 @@ export default function ResourceCard({resource, number}) {
                 ))}
             <div className="civic-card__body">
                 <div className="civic-card__meta">
-                    <span>{copy.kind}</span>
+                    <span>
+                        {resource.featured && (
+                            <b className="civic-card__number" aria-hidden="true">
+                                {String(number).padStart(2, '0')}
+                            </b>
+                        )}
+                        {copy.kind}
+                    </span>
                     <span>{t('card.language')}</span>
                 </div>
                 <h3 id={`title-${resource.id}`}>{name}</h3>

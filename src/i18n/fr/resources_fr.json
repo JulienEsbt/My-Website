@@ -12,7 +12,13 @@
         "featured": "Pour commencer",
         "more": "Pour approfondir",
         "projects": "Mes projets",
-        "approach": "La démarche"
+        "approach": "La démarche",
+        "short": {
+            "selection": "Sélection",
+            "further": "Approfondir",
+            "projects": "Projets",
+            "approach": "Démarche"
+        }
     },
     "uses": {
         "observe": "Comprendre les pouvoirs",
