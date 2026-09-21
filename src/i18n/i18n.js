@@ -5,6 +5,10 @@ import common_en from './en/common_en.json'
 import common_fr from './fr/common_fr.json'
 
 const namespaceLoaders = {
+    resources: {
+        en: () => import('./en/resources_en.json'),
+        fr: () => import('./fr/resources_fr.json'),
+    },
     home: {
         en: () => import('./en/home_en.json'),
         fr: () => import('./fr/home_fr.json'),

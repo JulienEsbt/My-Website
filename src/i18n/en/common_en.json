@@ -19,7 +19,8 @@
         "groups": {
             "primary": "Portfolio and labs",
             "editorial": "Explore further"
-        }
+        },
+        "resources": "Civic resources"
     },
     "contact": {
         "kicker": "Get in touch",
@@ -69,7 +70,8 @@
             "home": "Portfolio",
             "web3": "Web3 Labs",
             "travel": "Travel",
-            "reflections": "Reflections"
+            "reflections": "Reflections",
+            "resources": "Civic resources"
         },
         "socials": "Socials",
         "cta": "Contact me",

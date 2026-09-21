@@ -1,0 +1,182 @@
+import {useTranslation} from 'react-i18next'
+import {
+    FiArrowDown,
+    FiArrowUpRight,
+    FiBookOpen,
+    FiGitBranch,
+    FiSearch,
+    FiCompass,
+} from 'react-icons/fi'
+import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
+import {citizenResources} from '../data/citizenResources/resources.js'
+import ResourceCard from '../features/citizenResources/ResourceCard.jsx'
+import '../features/citizenResources/CitizenResources.css'
+
+export default function ResourcesPage() {
+    const {t} = useTranslation('resources')
+    return (
+        <PageFrame>
+            <div className="civic-page">
+                <header className="civic-hero container" id="top">
+                    <div className="civic-hero__copy">
+                        <p className="civic-eyebrow">
+                            <FiCompass aria-hidden="true" />
+                            {t('hero.kicker')}
+                        </p>
+                        <h1>{t('hero.title')}</h1>
+                        <p className="civic-hero__intro">{t('hero.intro')}</p>
+                        <p className="civic-hero__invitation">{t('hero.invitation')}</p>
+                        <a className="civic-button" href="#selection">
+                            {t('hero.cta')}
+                            <FiArrowDown aria-hidden="true" />
+                        </a>
+                    </div>
+                    <aside className="civic-hero__index" aria-label={t('nav.label')}>
+                        <span className="civic-hero__index-mark" aria-hidden="true">
+                            ↗
+                        </span>
+                        <nav>
+                            {['featured', 'more', 'projects', 'approach'].map((item, index) => (
+                                <a
+                                    key={item}
+                                    href={`#${['selection', 'further', 'projects', 'approach'][index]}`}
+                                >
+                                    <span aria-hidden="true">0{index + 1}</span>
+                                    {t(`nav.${item}`)}
+                                    <FiArrowDown aria-hidden="true" />
+                                </a>
+                            ))}
+                        </nav>
+                        <p>{t('hero.signature')}</p>
+                    </aside>
+                </header>
+
+                <section
+                    className="civic-section container"
+                    id="selection"
+                    aria-labelledby="selection-title"
+                >
+                    <div className="civic-section__heading">
+                        <p className="civic-eyebrow">{t('featured.eyebrow')}</p>
+                        <h2 id="selection-title">{t('featured.title')}</h2>
+                        <p>{t('featured.intro')}</p>
+                    </div>
+                    <div className="civic-grid">
+                        {citizenResources
+                            .filter((r) => r.featured)
+                            .map((resource, index) => (
+                                <ResourceCard
+                                    key={resource.id}
+                                    resource={resource}
+                                    number={index + 1}
+                                />
+                            ))}
+                    </div>
+                </section>
+
+                <section
+                    className="civic-section container"
+                    id="further"
+                    aria-labelledby="further-title"
+                >
+                    <div className="civic-section__heading">
+                        <p className="civic-eyebrow">{t('more.eyebrow')}</p>
+                        <h2 id="further-title">{t('more.title')}</h2>
+                        <p>{t('more.intro')}</p>
+                    </div>
+                    <div className="civic-grid civic-grid--compact">
+                        {citizenResources
+                            .filter((r) => !r.featured)
+                            .map((resource) => (
+                                <ResourceCard key={resource.id} resource={resource} />
+                            ))}
+                    </div>
+                </section>
+
+                <section
+                    className="civic-section container"
+                    id="projects"
+                    aria-labelledby="projects-title"
+                >
+                    <div className="civic-section__heading">
+                        <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
+                        <h2 id="projects-title">{t('projects.title')}</h2>
+                        <p>{t('projects.intro')}</p>
+                    </div>
+                    <div className="civic-projects">
+                        <article className="civic-project">
+                            <FiGitBranch className="civic-project__icon" aria-hidden="true" />
+                            <p className="civic-project__status">{t('projects.agora.status')}</p>
+                            <h3>{t('projects.agora.name')}</h3>
+                            <span className="civic-project__label">
+                                {t('projects.agora.label')}
+                            </span>
+                            <p>{t('projects.agora.description')}</p>
+                            <Link to="/#agora-project-title">
+                                {t('projects.agora.cta')}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </Link>
+                        </article>
+                        <article className="civic-project">
+                            <FiSearch className="civic-project__icon" aria-hidden="true" />
+                            <p className="civic-project__status">
+                                {t('projects.observatory.status')}
+                            </p>
+                            <h3>{t('projects.observatory.name')}</h3>
+                            <span className="civic-project__label">
+                                {t('projects.observatory.label')}
+                            </span>
+                            <p>{t('projects.observatory.description')}</p>
+                            <details>
+                                <summary>{t('projects.observatory.details')}</summary>
+                                <p>{t('projects.observatory.future')}</p>
+                                <a href="#resource-medias">
+                                    {t('projects.observatory.source')}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </a>
+                            </details>
+                        </article>
+                    </div>
+                </section>
+
+                <section
+                    className="civic-section civic-approach container"
+                    id="approach"
+                    aria-labelledby="approach-title"
+                >
+                    <div className="civic-approach__copy">
+                        <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
+                        <h2 id="approach-title">{t('approach.title')}</h2>
+                        <p>{t('approach.body')}</p>
+                        <p>{t('approach.humility')}</p>
+                        <Link className="civic-text-link" to="/reflections">
+                            <FiBookOpen aria-hidden="true" />
+                            {t('pageNav.reflections', {ns: 'common'})}
+                            <FiArrowUpRight aria-hidden="true" />
+                        </Link>
+                    </div>
+                    <div className="civic-approach__principles">
+                        {t('approach.principles', {returnObjects: true}).map((principle, index) => (
+                            <div key={principle.title}>
+                                <span aria-hidden="true">0{index + 1}</span>
+                                <h3>{principle.title}</h3>
+                                <p>{principle.body}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="civic-approach__contact">
+                        <p>
+                            {t('approach.contact')}{' '}
+                            <Link to="/#contact">
+                                {t('approach.cta')}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </Link>
+                        </p>
+                        <small>{t('approach.privacy')}</small>
+                    </div>
+                </section>
+            </div>
+        </PageFrame>
+    )
+}

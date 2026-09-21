@@ -22,6 +22,12 @@ export const ROUTE_CATALOG = /** @type {const} */ ({
         page: 'TravelPage',
         namespace: 'travel',
     },
+    resources: {
+        path: '/resources',
+        seoKey: 'resources',
+        page: 'ResourcesPage',
+        namespace: 'resources',
+    },
     reflections: {
         path: '/reflections',
         seoKey: 'reflections',

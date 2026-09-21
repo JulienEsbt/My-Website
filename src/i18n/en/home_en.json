@@ -236,5 +236,10 @@
         "travelIntro": "Places, encounters and memories that shape my perspective.",
         "readStory": "Read this story",
         "allTravel": "Explore my travels"
+    },
+    "citizenResources": {
+        "title": "Resources to take these questions further.",
+        "body": "Tools, media and civic initiatives to understand, examine arguments and hold power accountable.",
+        "cta": "Explore civic resources"
     }
 }

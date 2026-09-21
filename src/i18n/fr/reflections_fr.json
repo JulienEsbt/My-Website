@@ -74,5 +74,10 @@
             "latest": "Articles",
             "author": "Note"
         }
+    },
+    "citizenResources": {
+        "title": "Des ressources pour prolonger ces questions.",
+        "body": "Outils, médias et initiatives citoyennes pour comprendre, confronter les arguments et demander des comptes.",
+        "cta": "Explorer les ressources citoyennes"
     }
 }

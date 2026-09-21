@@ -9,6 +9,7 @@ import ReflectionAuthor from '../features/reflections/reflectionAuthor/Reflectio
 import Fuse from 'fuse.js'
 import reflections from '../data/reflections/reflections.js'
 import ReflectionsNav from '../features/reflections/reflectionsNav/ReflectionsNav.jsx'
+import CitizenResourcesLink from '../features/citizenResources/CitizenResourcesLink.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 
 const ReflectionsPage = () => {
@@ -149,6 +150,9 @@ const ReflectionsPage = () => {
                 title={t('latest.title')}
             />
 
+            <div className="container">
+                <CitizenResourcesLink copy={t('citizenResources', {returnObjects: true})} />
+            </div>
             <ReflectionAuthor />
         </PageFrame>
     )

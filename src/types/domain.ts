@@ -6,7 +6,7 @@ export type RoutePath =
     (typeof import('../config/routeCatalog.js').ROUTE_CATALOG)[keyof typeof import('../config/routeCatalog.js').ROUTE_CATALOG]['path']
 
 export interface NavigationPage {
-    id: 'home' | 'web3' | 'travel' | 'reflections'
+    id: 'home' | 'web3' | 'travel' | 'reflections' | 'resources'
     path: RoutePath
     i18nKey: string
 }

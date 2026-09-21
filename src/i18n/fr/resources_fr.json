@@ -1,0 +1,154 @@
+{
+    "hero": {
+        "kicker": "Ressources citoyennes",
+        "title": "Comprendre.\nConfronter. Agir.",
+        "intro": "Je souhaite une démocratie dans laquelle chacun puisse comprendre, proposer, décider et demander des comptes. Je partage ici des ressources qui font écho à mes préoccupations : la souveraineté populaire, l’égalité, la justice et la transparence des pouvoirs.",
+        "invitation": "Une invitation à explorer et à vous faire votre propre idée.",
+        "cta": "Découvrir la sélection",
+        "signature": "Une sélection personnelle, ouverte au désaccord."
+    },
+    "nav": {
+        "label": "Dans cette page",
+        "featured": "Pour commencer",
+        "more": "Pour approfondir",
+        "projects": "Mes projets",
+        "approach": "La démarche"
+    },
+    "uses": {
+        "observe": "Comprendre les pouvoirs",
+        "compare": "Confronter les arguments",
+        "participate": "Participer au débat",
+        "accountability": "Demander des comptes"
+    },
+    "featured": {
+        "eyebrow": "01 / Pour commencer",
+        "title": "Quatre portes d’entrée.",
+        "intro": "Des approches différentes, une même envie : mieux comprendre et prendre part à la vie démocratique."
+    },
+    "more": {
+        "eyebrow": "02 / Pour approfondir",
+        "title": "À chaque question, une ressource.",
+        "intro": "Un document à retrouver, un argument à examiner, un vote à vérifier : quelques pistes pour aller plus loin."
+    },
+    "card": {
+        "limit": "À garder en tête",
+        "details": "Sources et repères",
+        "owner": "Porté par",
+        "checked": "Lien et présentation vérifiés le",
+        "language": "Ressource en français",
+        "preview": "Aperçu du site {{name}}",
+        "previewCredit": "Aperçu : {{name}} · {{date}}",
+        "sourceLabels": ["Présentation / méthode", "Pour approfondir"]
+    },
+    "projects": {
+        "eyebrow": "03 / Dans le prolongement",
+        "title": "Ce que je construis aussi.",
+        "intro": "Ces initiatives nourrissent mes propres projets. Deux façons complémentaires de rendre le débat et le pouvoir plus lisibles.",
+        "agora": {
+            "name": "Agora",
+            "label": "Graphe des débats",
+            "status": "Prototype local · non publié",
+            "description": "Relier arguments, objections, faits et sources pour comprendre où se situe un désaccord, sans imposer de conclusion.",
+            "cta": "Découvrir l’intention du projet"
+        },
+        "observatory": {
+            "name": "L’Observatoire",
+            "label": "Pouvoirs et transparence",
+            "status": "Projet en développement",
+            "description": "Rendre le fonctionnement du pouvoir lisible et vérifiable : représentants, votes, intérêts et actions citoyennes.",
+            "details": "Une évolution : explorer la propriété des médias",
+            "future": "Une carte interactive pour rechercher un média, suivre ses liens de propriété et consulter les sources. Ce module reste une évolution envisagée avec l’Observatoire ; il n’est pas encore disponible ici.",
+            "source": "Consulter la ressource documentaire"
+        }
+    },
+    "approach": {
+        "eyebrow": "04 / La démarche",
+        "title": "Un point de vue.\nDe la place pour le vôtre.",
+        "body": "Cette sélection est personnelle et engagée. L’égalité entre les femmes et les hommes, le partage des richesses, la démocratie directe — notamment le référendum d’initiative citoyenne — et l’indépendance des médias font partie des questions qui m’importent.",
+        "humility": "Mes convictions comme mes analyses peuvent évoluer. Partager une ressource ne signifie pas en approuver chaque position. Vous n’avez pas besoin de partager les miennes pour trouver ici des informations utiles ou des arguments à discuter.",
+        "principles": [
+            {
+                "title": "Des crédits visibles",
+                "body": "Chaque initiative reste attribuée à son équipe. Les liens vous conduisent directement aux ressources originales."
+            },
+            {
+                "title": "Des limites explicites",
+                "body": "Une description, une analyse et une conviction ne jouent pas le même rôle. Les repères aident à les distinguer."
+            },
+            {
+                "title": "Une sélection qui se relit",
+                "body": "Les liens et les présentations sont vérifiés ponctuellement. La date ne constitue pas un audit complet du service."
+            }
+        ],
+        "contact": "Un lien incorrect ou une précision à apporter ?",
+        "cta": "M’en parler",
+        "privacy": "Les sites référencés ne sont pas chargés dans cette page. Vous les consultez en suivant leurs liens."
+    },
+    "resources": {
+        "leurs-votes": {
+            "kind": "Votes parlementaires",
+            "owner": "Bon Pote",
+            "description": "Explorer les votes à l’Assemblée nationale, par sujet, et comparer les positions des groupes politiques. Un point de départ pour regarder les actes au-delà des discours.",
+            "limit": "Les votes enregistrés, le choix des sujets et leur interprétation éditoriale sont à distinguer.",
+            "method": "Le projet est porté par Bon Pote. Revenir au scrutin et au texte concernés permet de replacer une présentation thématique dans son contexte.",
+            "cta": "Explorer les votes"
+        },
+        "monvote2027": {
+            "kind": "Comparaison politique",
+            "owner": "L’équipe bénévole de MonVote2027",
+            "description": "Comparer ses réponses aux positions attribuées aux personnalités politiques, puis consulter les sources et les désaccords sujet par sujet.",
+            "limit": "Un score dépend des questions et de leur pondération. Il ne suffit pas pour choisir un vote.",
+            "method": "L’équipe se présente comme bénévole et anonyme. Sa méthode publie le calcul et les limites : positions simplifiées, évolution des programmes, absence d’évaluation du bilan ou de la crédibilité.",
+            "cta": "Découvrir le questionnaire"
+        },
+        "praxis": {
+            "kind": "Média et consultations",
+            "owner": "L’équipe Praxis, initiée par François Boulo",
+            "description": "Lire des analyses puis découvrir des consultations autour de propositions concrètes. Une passerelle entre l’information et la participation.",
+            "limit": "Les participants volontaires ne représentent pas nécessairement toute la population. Ces consultations ne sont pas des référendums officiels contraignants.",
+            "method": "Praxis présente un projet de média et de participation citoyenne. L’accès dépend des contenus et des fonctionnalités. Le module « RIC Praxis » figure parmi les évolutions annoncées : une annonce ne vaut pas disponibilité.",
+            "cta": "Voir les consultations"
+        },
+        "transparence": {
+            "kind": "Association citoyenne",
+            "owner": "L’association Transparence Citoyenne",
+            "description": "Découvrir des demandes de documents publics, des publications et des actions pour rendre l’usage du pouvoir et de l’argent public plus transparent.",
+            "limit": "Un signalement ou une procédure en cours ne constitue pas un jugement établissant les faits allégués.",
+            "method": "L’association publie ses démarches et des documents obtenus. Pour chaque dossier, distinguer la pièce d’origine, le commentaire de l’association et l’état de la procédure.",
+            "cta": "Découvrir leurs actions"
+        },
+        "madada": {
+            "kind": "Documents publics",
+            "owner": "Open Knowledge France",
+            "description": "Consulter des demandes déjà adressées aux administrations et préparer une demande de document public : notes de frais, subvention ou contrat, par exemple.",
+            "limit": "Les échanges sont généralement publics. Certains documents ne sont pas communicables : lire les conditions avant de transmettre des informations personnelles.",
+            "method": "MaDada accompagne l’accès aux documents administratifs. Consulter une demande existante est un bon premier pas ; une demande de document ne déclenche pas à elle seule une enquête.",
+            "cta": "Découvrir MaDada"
+        },
+        "wikidebats": {
+            "kind": "Arguments et objections",
+            "owner": "Le Laboratoire du débat méthodique et les contributeurs",
+            "description": "Examiner les arguments pour et contre une proposition, suivre les objections et revenir aux sources pour se forger une opinion.",
+            "limit": "La présence ou le nombre d’arguments ne démontre pas leur solidité. Examiner leurs sources et les réponses possibles.",
+            "method": "Cette encyclopédie collaborative publie son contenu sous licence CC BY-SA 4.0. Cette page renvoie vers l’original et ne reproduit pas les corpus de débats.",
+            "cta": "Explorer les débats"
+        },
+        "datan": {
+            "kind": "Données parlementaires",
+            "owner": "L’équipe et l’association Datan",
+            "description": "Approfondir les votes des députés et les indicateurs parlementaires, après une première découverte d’un sujet ou d’un scrutin.",
+            "limit": "Vérifier la période et la définition des indicateurs. Les votes ne résument pas tout le travail parlementaire.",
+            "method": "Datan explique ses statistiques et présente son équipe et son conseil scientifique. Les méthodes permettent de comprendre ce que mesure chaque comparaison.",
+            "cta": "Consulter Datan"
+        },
+        "medias": {
+            "name": "Médias français : qui possède quoi ?",
+            "kind": "Propriété des médias",
+            "owner": "Acrimed et Le Monde diplomatique · Jérémie Fabre et Marie Beyer",
+            "description": "Repérer les principaux liens de propriété des médias français. Une ressource documentaire pour mieux situer les acteurs de l’information.",
+            "limit": "La carte est sélective et datée. Un lien de propriété ne suffit pas à déduire le contenu d’un article.",
+            "method": "La page Acrimed est datée du 21 janvier 2026. Le dépôt de données indique décembre 2024 et une licence ODC-By ; ces dates ne garantissent pas la synchronisation de la carte et des données.",
+            "cta": "Consulter la carte originale"
+        }
+    }
+}
