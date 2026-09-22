@@ -102,13 +102,20 @@ for (const engine of ['chromium', 'webkit']) {
             const context = await browser.newContext({
                 baseURL: 'http://localhost:4173',
                 locale: 'fr-FR',
-                viewport: {width: 1280, height: 720},
+                viewport: {width: 1440, height: 1000},
                 reducedMotion: 'no-preference',
             })
             const page = await context.newPage()
             try {
                 await page.goto('/resources')
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
+                // Font metrics can make this scene fit on Linux but not macOS.
+                // Enter continuous reading through its control before addressing an off-stage card.
+                await page.evaluate(() => document.fonts.ready)
+                const continuous = page
+                    .locator('#further')
+                    .getByRole('button', {name: 'Lecture continue', exact: true})
+                await continuous.click()
                 const card = page.locator('#resource-datan')
                 await card.scrollIntoViewIfNeeded()
                 await expect(card).toBeVisible()
