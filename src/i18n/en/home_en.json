@@ -241,5 +241,10 @@
         "title": "Resources to take these questions further.",
         "body": "Tools, media and civic initiatives to understand, examine arguments and hold power accountable.",
         "cta": "Explore civic resources"
+    },
+    "chapterMotion": {
+        "hint": "Scroll to discover more",
+        "continuous": "Continuous reading",
+        "animated": "Animated reading"
     }
 }

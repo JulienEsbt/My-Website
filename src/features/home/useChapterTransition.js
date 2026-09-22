@@ -27,16 +27,11 @@ export default function useChapterTransition() {
                 const pageTop = (section) => section.getBoundingClientRect().top + scrollY
                 const smooth = (value) => value * value * value * (value * (value * 6 - 15) + 10)
                 const motion = {progress: 0}
-                const render = (trigger) => {
-                    const progress = trigger.progress
-                    const transitioning = progress > 0 || motion.progress > 0.0001
-                    const distance = trigger.end - trigger.start
-                    const eased = smooth(motion.progress)
-                    const feather = Math.min(320, innerWidth * 0.24)
-                    const edge = -feather + (innerWidth + feather * 2) * eased
-                    // Read geometry before writing styles to avoid repeated layout during scroll.
-                    const geometry = new Map(
-                        [...outgoing, ...incoming].map((element) => {
+                const elements = [...outgoing, ...incoming]
+                let geometry = new Map()
+                const measureGeometry = () => {
+                    geometry = new Map(
+                        elements.map((element) => {
                             const surface = element.firstElementChild || element
                             return [
                                 element,
@@ -49,6 +44,19 @@ export default function useChapterTransition() {
                             ]
                         })
                     )
+                }
+                let lastProgress = -1
+                let lastMotion = -1
+                const render = (trigger) => {
+                    const progress = trigger.progress
+                    if (progress === lastProgress && motion.progress === lastMotion) return
+                    lastProgress = progress
+                    lastMotion = motion.progress
+                    const transitioning = progress > 0 || motion.progress > 0.0001
+                    const distance = trigger.end - trigger.start
+                    const eased = smooth(motion.progress)
+                    const feather = Math.min(320, innerWidth * 0.24)
+                    const edge = -feather + (innerWidth + feather * 2) * eased
                     const move = (elements, entering) => {
                         elements.forEach((element) => {
                             const x = (entering ? eased - 1 : eased) * 48
@@ -106,6 +114,7 @@ export default function useChapterTransition() {
                     if (lastStep) lastStep.style.marginTop = `${Math.max(0, end - start) * 0.5}px`
                 }
                 setSpacing()
+                measureGeometry()
                 // Filter wheel/trackpad steps without delaying the vertical anchoring.
                 let trigger
                 const follow = gsap.quickTo(motion, 'progress', {
@@ -127,6 +136,8 @@ export default function useChapterTransition() {
                     },
                     onRefresh: (self) => {
                         setSpacing()
+                        measureGeometry()
+                        lastProgress = -1
                         follow.tween.pause()
                         motion.progress = self.progress
                         render(self)
