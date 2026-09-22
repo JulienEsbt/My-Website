@@ -13,7 +13,7 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {citizenResources} from '../data/citizenResources/resources.js'
 import CivicSectionNav from '../features/citizenResources/CivicSectionNav.jsx'
 import useCivicMotion from '../features/citizenResources/useCivicMotion.js'
-import useCivicFocus from '../features/citizenResources/useCivicFocus.js'
+import CivicZoomScene from '../features/citizenResources/CivicZoomScene.jsx'
 import ResourceScene from '../features/citizenResources/ResourceScene.jsx'
 import '../features/citizenResources/CitizenResources.css'
 
@@ -24,7 +24,6 @@ export default function ResourcesPage() {
     const {t} = useTranslation('resources')
     const pageRef = useRef(null)
     useCivicMotion(pageRef)
-    useCivicFocus(pageRef)
     return (
         <PageFrame>
             <div className="civic-page" ref={pageRef}>
@@ -75,41 +74,47 @@ export default function ResourcesPage() {
                 <CivicSectionNav />
 
                 <section
-                    className="civic-section civic-approach container"
+                    className="civic-section container"
                     id="approach"
                     aria-labelledby="approach-title"
                 >
-                    <div className="civic-approach__copy" data-civic-focus>
-                        <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
-                        <h2 id="approach-title">{t('approach.title')}</h2>
-                        <p>{t('approach.body')}</p>
-                        <p>{t('approach.intent')}</p>
-                        <p>{t('approach.humility')}</p>
-                        <Link className="civic-text-link" to="/reflections">
-                            <FiBookOpen aria-hidden="true" />
-                            {t('pageNav.reflections', {ns: 'common'})}
-                            <FiArrowUpRight aria-hidden="true" />
-                        </Link>
-                    </div>
-                    <div className="civic-approach__principles" data-civic-focus>
-                        {t('approach.principles', {returnObjects: true}).map((principle, index) => (
-                            <div key={principle.title}>
-                                <span aria-hidden="true">0{index + 1}</span>
-                                <h3>{principle.title}</h3>
-                                <p>{principle.body}</p>
+                    <CivicZoomScene>
+                        <div className="civic-approach">
+                            <div className="civic-approach__copy">
+                                <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
+                                <h2 id="approach-title">{t('approach.title')}</h2>
+                                <p>{t('approach.body')}</p>
+                                <p>{t('approach.intent')}</p>
+                                <p>{t('approach.humility')}</p>
+                                <Link className="civic-text-link" to="/reflections">
+                                    <FiBookOpen aria-hidden="true" />
+                                    {t('pageNav.reflections', {ns: 'common'})}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </Link>
                             </div>
-                        ))}
-                    </div>
-                    <div className="civic-approach__contact">
-                        <p>
-                            {t('approach.contact')}{' '}
-                            <Link to="/#contact">
-                                {t('approach.cta')}
-                                <FiArrowUpRight aria-hidden="true" />
-                            </Link>
-                        </p>
-                        <small>{t('approach.privacy')}</small>
-                    </div>
+                            <div className="civic-approach__principles">
+                                {t('approach.principles', {returnObjects: true}).map(
+                                    (principle, index) => (
+                                        <div key={principle.title}>
+                                            <span aria-hidden="true">0{index + 1}</span>
+                                            <h3>{principle.title}</h3>
+                                            <p>{principle.body}</p>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                            <div className="civic-approach__contact">
+                                <p>
+                                    {t('approach.contact')}{' '}
+                                    <Link to="/#contact">
+                                        {t('approach.cta')}
+                                        <FiArrowUpRight aria-hidden="true" />
+                                    </Link>
+                                </p>
+                                <small>{t('approach.privacy')}</small>
+                            </div>
+                        </div>
+                    </CivicZoomScene>
                 </section>
 
                 <section
@@ -130,51 +135,55 @@ export default function ResourcesPage() {
                     id="projects"
                     aria-labelledby="projects-title"
                 >
-                    <div className="civic-section__heading" data-civic-reveal>
-                        <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
-                        <h2 id="projects-title">{t('projects.title')}</h2>
-                        <p>{t('projects.intro')}</p>
-                    </div>
-                    <div className="civic-projects">
-                        <article className="civic-project" data-civic-focus>
-                            <FiGitBranch className="civic-project__icon" aria-hidden="true" />
-                            <p className="civic-project__status">{t('projects.agora.status')}</p>
-                            <h3>{t('projects.agora.name')}</h3>
-                            <span className="civic-project__label">
-                                {t('projects.agora.label')}
-                            </span>
-                            <p>{t('projects.agora.description')}</p>
-                            <p className="civic-project__intention">
-                                {t('projects.agora.intention')}
-                            </p>
-                            <Link to="/#agora-project-title">
-                                {t('projects.agora.cta')}
-                                <FiArrowUpRight aria-hidden="true" />
-                            </Link>
-                        </article>
-                        <article className="civic-project" data-civic-focus>
-                            <FiSearch className="civic-project__icon" aria-hidden="true" />
-                            <p className="civic-project__status">
-                                {t('projects.observatory.status')}
-                            </p>
-                            <h3>{t('projects.observatory.name')}</h3>
-                            <span className="civic-project__label">
-                                {t('projects.observatory.label')}
-                            </span>
-                            <p>{t('projects.observatory.description')}</p>
-                            <p className="civic-project__intention">
-                                {t('projects.observatory.intention')}
-                            </p>
-                            <details>
-                                <summary>{t('projects.observatory.details')}</summary>
-                                <p>{t('projects.observatory.future')}</p>
-                                <a href="#resource-medias">
-                                    {t('projects.observatory.source')}
+                    <CivicZoomScene>
+                        <div className="civic-section__heading">
+                            <p className="civic-eyebrow">{t('projects.eyebrow')}</p>
+                            <h2 id="projects-title">{t('projects.title')}</h2>
+                            <p>{t('projects.intro')}</p>
+                        </div>
+                        <div className="civic-projects">
+                            <article className="civic-project">
+                                <FiGitBranch className="civic-project__icon" aria-hidden="true" />
+                                <p className="civic-project__status">
+                                    {t('projects.agora.status')}
+                                </p>
+                                <h3>{t('projects.agora.name')}</h3>
+                                <span className="civic-project__label">
+                                    {t('projects.agora.label')}
+                                </span>
+                                <p>{t('projects.agora.description')}</p>
+                                <p className="civic-project__intention">
+                                    {t('projects.agora.intention')}
+                                </p>
+                                <Link to="/#agora-project-title">
+                                    {t('projects.agora.cta')}
                                     <FiArrowUpRight aria-hidden="true" />
-                                </a>
-                            </details>
-                        </article>
-                    </div>
+                                </Link>
+                            </article>
+                            <article className="civic-project">
+                                <FiSearch className="civic-project__icon" aria-hidden="true" />
+                                <p className="civic-project__status">
+                                    {t('projects.observatory.status')}
+                                </p>
+                                <h3>{t('projects.observatory.name')}</h3>
+                                <span className="civic-project__label">
+                                    {t('projects.observatory.label')}
+                                </span>
+                                <p>{t('projects.observatory.description')}</p>
+                                <p className="civic-project__intention">
+                                    {t('projects.observatory.intention')}
+                                </p>
+                                <details>
+                                    <summary>{t('projects.observatory.details')}</summary>
+                                    <p>{t('projects.observatory.future')}</p>
+                                    <a href="#resource-medias">
+                                        {t('projects.observatory.source')}
+                                        <FiArrowUpRight aria-hidden="true" />
+                                    </a>
+                                </details>
+                            </article>
+                        </div>
+                    </CivicZoomScene>
                 </section>
 
                 <section

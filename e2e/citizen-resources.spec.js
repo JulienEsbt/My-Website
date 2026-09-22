@@ -276,3 +276,62 @@ test('each featured preview opens its own original site', async ({page}) => {
         await expect(page).toHaveURL(url)
     }
 })
+
+for (const engine of ['chromium', 'webkit']) {
+    test(`editorial sections stay pinned during zoom then release in ${engine}`, async ({
+        playwright,
+    }) => {
+        const browser = await playwright[engine].launch()
+        const page = await browser.newPage({
+            viewport: {width: 1440, height: 1000},
+            reducedMotion: 'no-preference',
+            locale: 'fr-FR',
+        })
+        try {
+            await page.goto('http://localhost:4173/resources')
+            for (const id of ['approach', 'projects']) {
+                const scene = page.locator(`#${id} .civic-zoom`)
+                await expect(scene).toHaveClass(/civic-zoom--animated/)
+                const start = await scene.evaluate(
+                    (el) => scrollY + el.getBoundingClientRect().top - 100
+                )
+                const stage = scene.locator('.civic-zoom__stage')
+                const content = scene.locator('.civic-zoom__content')
+                const scale = () =>
+                    content.evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).a)
+                const top = () => stage.evaluate((el) => el.getBoundingClientRect().top)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 85)
+                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(scale).toBeLessThan(0.93)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 680)
+                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(scale).toBeGreaterThan(0.98)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 1050)
+                await expect.poll(top).toBeLessThan(0)
+                await expect.poll(scale).toBeCloseTo(1, 2)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 425)
+                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(scale).toBeCloseTo(0.96, 2)
+                await scene.getByRole('button', {name: 'Lecture continue', exact: true}).click()
+                await expect(scene).not.toHaveClass(/civic-zoom--animated/)
+                await expect(content).toHaveCSS('transform', 'none')
+                await scene.getByRole('button', {name: 'Lecture animée', exact: true}).click()
+                await expect(scene).toHaveClass(/civic-zoom--animated/)
+            }
+            await page.locator('#projects summary').click()
+            await expect(page.locator('#projects .civic-zoom')).not.toHaveClass(
+                /civic-zoom--animated/
+            )
+            await page.emulateMedia({reducedMotion: 'reduce'})
+            await expect(page.locator('.civic-zoom--animated')).toHaveCount(0)
+            await page.setViewportSize({width: 390, height: 844})
+            await page.emulateMedia({reducedMotion: 'no-preference'})
+            await expect(page.locator('.civic-zoom--animated')).toHaveCount(0)
+            expect(
+                await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
+            ).toBe(true)
+        } finally {
+            await browser.close()
+        }
+    })
+}
