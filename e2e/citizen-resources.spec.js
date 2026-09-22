@@ -142,12 +142,28 @@ for (const engine of ['chromium', 'webkit']) {
                 await expect(card).toHaveCSS('transform', 'none')
                 await page.emulateMedia({reducedMotion: 'reduce'})
                 await page.locator('#resource-datan').scrollIntoViewIfNeeded()
-                // WebKit delivers the preference change event asynchronously.
+                // Reduced motion must stop movement, not erase finished Web Animations objects.
+                // WebKit may retain completed animations in getAnimations().
+                await expect(
+                    page.locator(
+                        '.civic-scene--animated, .civic-zoom--animated, .civic-mobile-scene--animated'
+                    )
+                ).toHaveCount(0)
+                await expect(page.locator('.civic-scene__panel[inert]')).toHaveCount(0)
                 await expect
                     .poll(() =>
                         page
                             .locator('.civic-page')
-                            .evaluate((el) => el.getAnimations({subtree: true}).length)
+                            .evaluate(
+                                (el) =>
+                                    el
+                                        .getAnimations({subtree: true})
+                                        .filter(
+                                            (animation) =>
+                                                animation.pending ||
+                                                animation.playState === 'running'
+                                        ).length
+                            )
                     )
                     .toBe(0)
                 await page.setViewportSize({width: 390, height: 844})
