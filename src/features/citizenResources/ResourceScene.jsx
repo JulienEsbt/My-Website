@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
 import ResourceCard from './ResourceCard.jsx'
+import useMobileScrollScenes from './useMobileScrollScenes.js'
 
 const clamp = (value) => Math.max(0, Math.min(1, value))
 
@@ -13,6 +14,8 @@ export default function ResourceScene({resources, variant = 'featured'}) {
     const [continuous, setContinuous] = useState(false)
     const [active, setActive] = useState(0)
     const animated = eligible && !continuous
+    const mobileEligible = useMobileScrollScenes(rootRef, continuous)
+    const motionEnabled = (eligible || mobileEligible) && !continuous
 
     useEffect(() => {
         const root = rootRef.current
@@ -116,10 +119,13 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             panels.forEach((panel) => {
                 panel.inert = false
                 panel.removeAttribute('aria-hidden')
-                panel.removeAttribute('style')
+                // Preserve the mobile scene's measurements when switching layouts.
+                ;['opacity', 'visibility', 'transform', 'z-index'].forEach((property) =>
+                    panel.style.removeProperty(property)
+                )
             })
         }
-    }, [animated, resources.length])
+    }, [animated, continuous, resources.length])
 
     useEffect(() => {
         const followHash = () => {
@@ -149,9 +155,9 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             className={`civic-scene civic-scene--${variant} ${animated ? 'civic-scene--animated' : ''}`}
         >
             <div className="civic-scene__stage">
-                {eligible && (
+                {(eligible || mobileEligible) && (
                     <div className="civic-scene__toolbar">
-                        {animated && (
+                        {motionEnabled && (
                             <span>
                                 <FiArrowDown aria-hidden="true" />
                                 {t('featured.scene.hint')}
@@ -160,7 +166,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                         <button
                             type="button"
                             onClick={() => {
-                                if (animated) readContinuously()
+                                if (motionEnabled) readContinuously()
                                 else {
                                     setContinuous(false)
                                     rootRef.current.scrollIntoView({
@@ -170,7 +176,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                                 }
                             }}
                         >
-                            {t(`featured.scene.${animated ? 'continuous' : 'animated'}`)}
+                            {t(`featured.scene.${motionEnabled ? 'continuous' : 'animated'}`)}
                         </button>
                     </div>
                 )}
@@ -195,12 +201,12 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                     className="civic-scene__panels"
                     onClickCapture={(event) => {
                         // Sources expand in normal document flow, with the focused control preserved.
-                        if (animated && event.target.closest('summary'))
+                        if (motionEnabled && event.target.closest('summary'))
                             readContinuously(event.target.closest('article'))
                     }}
                 >
                     {resources.map((resource, index) => (
-                        <div className="civic-scene__panel" key={resource.id}>
+                        <div className="civic-scene__panel" key={resource.id} data-mobile-scene>
                             <ResourceCard
                                 resource={resource}
                                 number={index + 1}

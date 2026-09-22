@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
+import useMobileScrollScenes from './useMobileScrollScenes.js'
 
 export default function CivicZoomScene({children}) {
     const {t} = useTranslation('resources')
@@ -10,6 +11,8 @@ export default function CivicZoomScene({children}) {
     const [eligible, setEligible] = useState(false)
     const [continuous, setContinuous] = useState(false)
     const animated = eligible && !continuous
+    const mobileEligible = useMobileScrollScenes(rootRef, continuous)
+    const motionEnabled = (eligible || mobileEligible) && !continuous
 
     useEffect(() => {
         const root = rootRef.current
@@ -71,14 +74,14 @@ export default function CivicZoomScene({children}) {
             window.removeEventListener('resize', schedule)
             root.style.removeProperty('--zoom-progress')
         }
-    }, [animated])
+    }, [animated, continuous])
 
     return (
         <div ref={rootRef} className={`civic-zoom ${animated ? 'civic-zoom--animated' : ''}`}>
             <div className="civic-zoom__stage">
-                {eligible && (
+                {(eligible || mobileEligible) && (
                     <div className="civic-scene__toolbar civic-zoom__toolbar">
-                        {animated && (
+                        {motionEnabled && (
                             <span>
                                 <FiArrowDown aria-hidden="true" />
                                 {t('featured.scene.hint')}
@@ -87,7 +90,7 @@ export default function CivicZoomScene({children}) {
                         <button
                             type="button"
                             onClick={() => {
-                                if (animated) pendingTarget.current = contentRef.current
+                                if (motionEnabled) pendingTarget.current = contentRef.current
                                 else
                                     rootRef.current.scrollIntoView({
                                         block: 'start',
@@ -96,7 +99,7 @@ export default function CivicZoomScene({children}) {
                                 setContinuous(!continuous)
                             }}
                         >
-                            {t(`featured.scene.${animated ? 'continuous' : 'animated'}`)}
+                            {t(`featured.scene.${motionEnabled ? 'continuous' : 'animated'}`)}
                         </button>
                     </div>
                 )}
@@ -104,7 +107,7 @@ export default function CivicZoomScene({children}) {
                     ref={contentRef}
                     className="civic-zoom__content"
                     onClickCapture={(event) => {
-                        if (animated && event.target.closest('summary')) {
+                        if (motionEnabled && event.target.closest('summary')) {
                             pendingTarget.current = event.target.closest('summary')
                             setContinuous(true)
                         }
@@ -113,6 +116,14 @@ export default function CivicZoomScene({children}) {
                     {children}
                 </div>
             </div>
+        </div>
+    )
+}
+
+export function CivicMobilePanel({children}) {
+    return (
+        <div className="civic-mobile-panel" data-mobile-scene>
+            <div className="civic-mobile-panel__content">{children}</div>
         </div>
     )
 }

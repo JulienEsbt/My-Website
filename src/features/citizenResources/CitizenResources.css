@@ -314,7 +314,7 @@
     position: relative;
     padding: 1rem 1.7rem 1rem 0;
 }
-.civic-project + .civic-project {
+.civic-projects > .civic-mobile-panel + .civic-mobile-panel .civic-project {
     border-left: 1px solid var(--civic-line);
     padding-left: 2rem;
 }
@@ -372,7 +372,7 @@
     white-space: pre-line;
     margin-bottom: 1.5rem;
 }
-.civic-approach__copy > p:not(.civic-eyebrow) {
+.civic-approach__copy p:not(.civic-eyebrow) {
     font-size: 0.93rem;
     line-height: 1.85;
     margin-bottom: 1.1rem;
@@ -483,7 +483,7 @@
     .civic-project {
         padding: 1rem 0;
     }
-    .civic-project + .civic-project {
+    .civic-projects > .civic-mobile-panel + .civic-mobile-panel .civic-project {
         border-left: 0;
         border-top: 1px solid var(--civic-line);
         padding: 2rem 0 1rem;
@@ -906,4 +906,90 @@
 .civic-zoom--animated .civic-zoom__content {
     transform-origin: center top;
     transform: scale(calc(0.92 + var(--zoom-progress, 0) * 0.08));
+}
+
+.civic-mobile-panel,
+.civic-mobile-panel__content {
+    display: contents;
+}
+@media (max-width: 1099px) {
+    .civic-mobile-panel,
+    .civic-mobile-panel__content {
+        display: flow-root;
+    }
+    .civic-mobile-scene--animated {
+        height: calc(var(--mobile-scene-height) + var(--mobile-scene-distance));
+        position: relative;
+    }
+    .civic-mobile-scene--animated > :first-child {
+        position: sticky;
+        top: 160px;
+        transform-origin: center top;
+        transform: scale(calc(0.95 + var(--mobile-scene-progress, 0) * 0.05));
+    }
+    .civic-mobile-panel + .civic-mobile-panel {
+        margin-top: 1.5rem;
+    }
+    .civic-zoom .civic-scene__toolbar {
+        gap: 0.5rem;
+    }
+    .civic-scene .civic-card--featured {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0.85rem;
+    }
+    .civic-scene .civic-card--featured .civic-preview {
+        margin: 0 0 0.65rem;
+    }
+    .civic-scene .civic-preview img {
+        height: 100px;
+        object-position: top;
+        object-fit: cover;
+    }
+    .civic-scene .civic-preview__bar,
+    .civic-scene .civic-preview figcaption {
+        display: none;
+    }
+    .civic-scene .civic-card--featured .civic-card__body {
+        padding: 0;
+    }
+    .civic-scene .civic-card h3 {
+        font-size: 1.25rem;
+    }
+    .civic-scene .civic-card__description,
+    .civic-scene .civic-card__owner,
+    .civic-scene .civic-card__limit {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+    .civic-scene .civic-card__meta {
+        font-size: 0.65rem;
+        margin-bottom: 0.45rem;
+    }
+    .civic-scene .civic-card__limit {
+        margin-top: 0.7rem;
+        padding-top: 0.6rem;
+    }
+    .civic-scene .civic-card__visit {
+        margin-top: 0.7rem;
+        min-height: 44px;
+    }
+    .civic-scene .civic-card__details {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 1099px) {
+    .civic-projects {
+        padding: 0;
+        border: 0;
+        background: none;
+    }
+    .civic-projects > .civic-mobile-panel .civic-project,
+    .civic-projects > .civic-mobile-panel + .civic-mobile-panel .civic-project {
+        padding: 1.3rem;
+        border: 1px solid var(--civic-line);
+        border-radius: 1.5rem;
+        background: linear-gradient(135deg, rgba(55, 105, 195, 0.16), rgba(12, 17, 43, 0.9));
+    }
 }

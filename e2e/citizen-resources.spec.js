@@ -335,3 +335,58 @@ for (const engine of ['chromium', 'webkit']) {
         }
     })
 }
+
+for (const engine of ['chromium', 'webkit']) {
+    test(`mobile civic blocks hold, zoom and release with touch enabled in ${engine}`, async ({
+        playwright,
+    }) => {
+        const browser = await playwright[engine].launch()
+        const page = await browser.newPage({
+            viewport: {width: 390, height: 844},
+            isMobile: true,
+            hasTouch: true,
+            locale: 'fr-FR',
+            reducedMotion: 'no-preference',
+        })
+        try {
+            await page.goto('http://localhost:4173/resources')
+            for (const id of ['approach', 'selection', 'projects', 'further']) {
+                const panel = page.locator(`#${id} .civic-mobile-scene--animated`).first()
+                await expect(panel).toBeVisible()
+                const content = panel.locator(':scope > *').first()
+                const start = await panel.evaluate(
+                    (el) => scrollY + el.getBoundingClientRect().top - 160
+                )
+                const top = () => content.evaluate((el) => el.getBoundingClientRect().top)
+                const scale = () =>
+                    content.evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).a)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 34)
+                await expect.poll(top).toBeCloseTo(160, 0)
+                await expect.poll(scale).toBeLessThan(0.96)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 270)
+                await expect.poll(top).toBeCloseTo(160, 0)
+                await expect.poll(scale).toBeGreaterThan(0.99)
+                expect(
+                    await content.evaluate((el) => el.getBoundingClientRect().bottom < innerHeight)
+                ).toBe(true)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 540)
+                await expect.poll(top).toBeLessThan(0)
+                await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 170)
+                await expect.poll(top).toBeCloseTo(160, 0)
+            }
+            await page.locator('#resource-madada summary').click()
+            await expect(page.locator('#further .civic-mobile-scene--animated')).toHaveCount(0)
+            await expect(page.locator('#resource-madada details')).toHaveAttribute('open', '')
+            await page.emulateMedia({reducedMotion: 'reduce'})
+            await expect(page.locator('.civic-mobile-scene--animated')).toHaveCount(0)
+            await page.emulateMedia({reducedMotion: 'no-preference'})
+            await page.setViewportSize({width: 844, height: 390})
+            await expect(page.locator('.civic-mobile-scene--animated')).toHaveCount(0)
+            expect(
+                await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
+            ).toBe(true)
+        } finally {
+            await browser.close()
+        }
+    })
+}
