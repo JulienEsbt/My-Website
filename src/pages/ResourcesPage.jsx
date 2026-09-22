@@ -13,6 +13,7 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {citizenResources} from '../data/citizenResources/resources.js'
 import CivicSectionNav from '../features/citizenResources/CivicSectionNav.jsx'
 import useCivicMotion from '../features/citizenResources/useCivicMotion.js'
+import useCivicFocus from '../features/citizenResources/useCivicFocus.js'
 import ResourceScene from '../features/citizenResources/ResourceScene.jsx'
 import '../features/citizenResources/CitizenResources.css'
 
@@ -23,6 +24,7 @@ export default function ResourcesPage() {
     const {t} = useTranslation('resources')
     const pageRef = useRef(null)
     useCivicMotion(pageRef)
+    useCivicFocus(pageRef)
     return (
         <PageFrame>
             <div className="civic-page" ref={pageRef}>
@@ -77,21 +79,21 @@ export default function ResourcesPage() {
                     id="approach"
                     aria-labelledby="approach-title"
                 >
-                    <div className="civic-approach__copy" data-civic-reveal>
+                    <div className="civic-approach__copy">
                         <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
                         <h2 id="approach-title">{t('approach.title')}</h2>
-                        <p>{t('approach.body')}</p>
-                        <p>{t('approach.intent')}</p>
-                        <p>{t('approach.humility')}</p>
+                        <p data-civic-focus>{t('approach.body')}</p>
+                        <p data-civic-focus>{t('approach.intent')}</p>
+                        <p data-civic-focus>{t('approach.humility')}</p>
                         <Link className="civic-text-link" to="/reflections">
                             <FiBookOpen aria-hidden="true" />
                             {t('pageNav.reflections', {ns: 'common'})}
                             <FiArrowUpRight aria-hidden="true" />
                         </Link>
                     </div>
-                    <div className="civic-approach__principles" data-civic-reveal>
+                    <div className="civic-approach__principles">
                         {t('approach.principles', {returnObjects: true}).map((principle, index) => (
-                            <div key={principle.title}>
+                            <div key={principle.title} data-civic-focus>
                                 <span aria-hidden="true">0{index + 1}</span>
                                 <h3>{principle.title}</h3>
                                 <p>{principle.body}</p>
@@ -134,7 +136,7 @@ export default function ResourcesPage() {
                         <p>{t('projects.intro')}</p>
                     </div>
                     <div className="civic-projects">
-                        <article className="civic-project" data-civic-reveal>
+                        <article className="civic-project" data-civic-focus>
                             <FiGitBranch className="civic-project__icon" aria-hidden="true" />
                             <p className="civic-project__status">{t('projects.agora.status')}</p>
                             <h3>{t('projects.agora.name')}</h3>
@@ -150,7 +152,7 @@ export default function ResourcesPage() {
                                 <FiArrowUpRight aria-hidden="true" />
                             </Link>
                         </article>
-                        <article className="civic-project" data-civic-reveal>
+                        <article className="civic-project" data-civic-focus>
                             <FiSearch className="civic-project__icon" aria-hidden="true" />
                             <p className="civic-project__status">
                                 {t('projects.observatory.status')}
