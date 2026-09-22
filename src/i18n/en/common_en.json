@@ -20,7 +20,8 @@
             "primary": "Portfolio and labs",
             "editorial": "Explore further"
         },
-        "resources": "Civic resources"
+        "resources": "Civic resources",
+        "resourcesShort": "Resources"
     },
     "contact": {
         "kicker": "Get in touch",
