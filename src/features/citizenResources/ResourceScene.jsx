@@ -20,7 +20,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         const media = matchMedia('(prefers-reduced-motion: no-preference)')
         let width = innerWidth
         let viewportHeight = innerHeight
-        // A full card must fit without an inner scrollbar, including larger text/zoom.
+        // On mobile, the page scroll reveals tall cards inside the pinned stage before transitioning.
         const measure = () => {
             const height = Math.max(
                 ...Array.from(root.querySelectorAll('.civic-card'), (card) => card.offsetHeight)
@@ -31,15 +31,38 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 width = innerWidth
                 viewportHeight = innerHeight
             }
+            const controlsHeight = mobile ? 104 : 128
+            const dock = document.querySelector('.civic-section-nav')
+            const bottomSpace =
+                mobile && dock
+                    ? dock.offsetHeight + (parseFloat(getComputedStyle(dock).bottom) || 16) + 12
+                    : 88
             const top = mobile ? 80 : 100
-            const controlsHeight = mobile ? 56 : 128
-            const distance = viewportHeight * (mobile ? 0.65 : 0.72)
-            metrics.current = {top, distance, mobile}
+            const cardHeight = mobile
+                ? Math.min(
+                      height,
+                      Math.max(180, viewportHeight - top - bottomSpace - controlsHeight)
+                  )
+                : height
+            const distance = mobile
+                ? Math.max(viewportHeight * 0.65, height - cardHeight + viewportHeight * 0.45)
+                : viewportHeight * 0.72
+            metrics.current = {top, distance, mobile, cardHeight}
             root.style.setProperty('--scene-top', `${top}px`)
-            root.style.setProperty('--scene-height', `${height + controlsHeight}px`)
-            root.style.setProperty('--scene-travel', `${distance * (resources.length - 1)}px`)
+            root.style.setProperty('--scene-card-height', `${cardHeight}px`)
+            root.style.setProperty(
+                '--scene-height',
+                `${Math.min(height, cardHeight) + controlsHeight}px`
+            )
+            root.style.setProperty(
+                '--scene-travel',
+                `${distance * (resources.length - (mobile ? 0 : 1))}px`
+            )
             const next =
-                media.matches && height + controlsHeight < viewportHeight - top - (mobile ? 88 : 24)
+                media.matches &&
+                (mobile
+                    ? viewportHeight > innerWidth
+                    : height + controlsHeight < viewportHeight - top - 24)
             const bounds = root.getBoundingClientRect()
             if (
                 !next &&
@@ -79,14 +102,20 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         let previous = -1
         const update = () => {
             frame = 0
-            const {top, distance, mobile} = metrics.current
+            const {top, distance, mobile, cardHeight} = metrics.current
             const position = Math.max(
                 0,
-                Math.min(resources.length - 1, (top - root.getBoundingClientRect().top) / distance)
+                Math.min(
+                    resources.length - (mobile ? 0.001 : 1),
+                    (top - root.getBoundingClientRect().top) / distance
+                )
             )
             const base = Math.floor(position)
             // Hold the reading position, then ease the complete panel into the next one.
-            const progress = clamp((position - base - 0.28) / 0.58)
+            const progress =
+                base === resources.length - 1
+                    ? 0
+                    : clamp((position - base - (mobile ? 0.65 : 0.28)) / (mobile ? 0.33 : 0.58))
             const eased = progress * progress * (3 - 2 * progress)
             const current = Math.min(resources.length - 1, base + (eased >= 0.5 ? 1 : 0))
             panels.forEach((panel, index) => {
@@ -99,6 +128,11 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                         : incoming
                           ? fadeIn * fadeIn * (3 - 2 * fadeIn)
                           : 0
+                const readingOffset =
+                    mobile && index === base
+                        ? Math.max(0, panel.offsetHeight - cardHeight) *
+                          clamp((position - base - 0.08) / 0.5)
+                        : 0
                 const offset =
                     index === base ? -(mobile ? 12 : 24) * eased : (mobile ? 18 : 40) * (1 - eased)
                 if (index !== current && panel.contains(document.activeElement)) {
@@ -110,7 +144,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 panel.setAttribute('aria-hidden', String(index !== current))
                 panel.style.opacity = String(opacity)
                 panel.style.visibility = opacity > 0 ? 'visible' : 'hidden'
-                panel.style.transform = `translateY(${offset}px) scale(${0.985 + 0.015 * opacity})`
+                panel.style.transform = `translateY(${offset - readingOffset}px) scale(${0.985 + 0.015 * opacity})`
                 panel.style.zIndex = index === current ? '2' : '1'
             })
             if (previous !== current) {
@@ -215,6 +249,14 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 )}
                 <div
                     className="civic-scene__panels"
+                    onFocusCapture={(event) => {
+                        if (!animated || !metrics.current.mobile) return
+                        const target = event.target
+                        const bounds = event.currentTarget.getBoundingClientRect()
+                        const focused = target.getBoundingClientRect()
+                        if (focused.bottom > bounds.bottom || focused.top < bounds.top)
+                            readContinuously(target.closest('article'))
+                    }}
                     onClickCapture={(event) => {
                         // Sources expand in normal document flow, with the focused control preserved.
                         if (animated && event.target.closest('summary'))
