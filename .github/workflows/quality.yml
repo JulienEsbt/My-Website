@@ -42,8 +42,8 @@ jobs:
               if: ${{ hashFiles('public/media/**/*') != '' }}
               run: npm run media:check
 
-            - name: Install browser for integration tests
-              run: npx playwright install --with-deps chromium
+            - name: Install browsers for integration tests
+              run: npx playwright install --with-deps chromium webkit
 
             - name: Verify browser flows
               run: npm run test:e2e
