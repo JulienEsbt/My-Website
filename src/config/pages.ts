@@ -16,6 +16,7 @@ export const SITE_PAGE_GROUPS = [
         pages: [
             {id: 'travel', path: ROUTE_PATHS.travel, i18nKey: 'pageNav.travel'},
             {id: 'reflections', path: ROUTE_PATHS.reflections, i18nKey: 'pageNav.reflections'},
+            {id: 'resources', path: ROUTE_PATHS.resources, i18nKey: 'pageNav.resources'},
         ],
     },
 ] as const satisfies readonly NavigationGroup[]

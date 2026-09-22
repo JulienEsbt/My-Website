@@ -1,3 +1,5 @@
+@import '../../Surfaces.css';
+
 .wallet-inspector {
     max-width: 1240px;
     padding: 1rem 1.25rem 1.1rem;
@@ -976,12 +978,12 @@
 /* Keep populated results distinct and readable against the page. */
 .wallet-inspector {
     --color-light: #c2cee3;
-    background: linear-gradient(140deg, #1d2b45, #1c223a);
-    border-color: #93b7ed40;
+    background: var(--web3-surface);
+    border-color: var(--web3-border);
 }
 .wallet-inspector__panel {
-    background: #24324d;
-    border-color: #9ebff03b;
+    background: var(--web3-inset);
+    border-color: var(--web3-border);
 }
 .wallet-inspector__panel :is(h3, h4, strong) {
     color: #f4f7ff;
@@ -999,11 +1001,11 @@
     color: #c5d2e8;
 }
 .allocation-donut > div {
-    background: #24324d;
+    background: #10182a;
 }
 .wallet-nft-card {
-    background: #2b3b57;
-    border-color: #a5c4f040;
+    background: var(--web3-inset);
+    border-color: var(--web3-border);
 }
 .wallet-inspector__data-notice {
     background: #9abaff0d;

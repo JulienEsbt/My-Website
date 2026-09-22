@@ -19,6 +19,8 @@ Heavy travel and Web3 features are lazy-loaded. Provider calls stay outside pres
 
 Reflections are stored as localized metadata plus MDX articles. Travel entries and photo-album manifests are versioned data; private source photographs are not committed. Publication records combine verified project, travel and reflection entries for RSS and Atom. The former Journal page is retired; its URLs redirect to the homepage.
 
+Citizen resources use versioned metadata in `src/data/citizenResources/resources.js` and the lazy-loaded `resources` translation namespace. `/resources` and `/en/resources` share the existing route registry, prerender, sitemap and navigation. The section adds no API, account, remote embed or analytics integration. A native observer progressively reveals content once, with a fully visible fallback and live reduced-motion handling. Its sticky section navigation uses a throttled scroll listener; it does not pin cards or change scroll distances. Static, credited previews live in `public/previews/citizen-resources`; the media ownership map remains a future project, not a dependency.
+
 The production build generates:
 
 - static SEO documents for indexable routes;

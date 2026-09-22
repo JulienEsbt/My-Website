@@ -240,5 +240,15 @@
         "travelIntro": "Des lieux, des rencontres et des souvenirs qui nourrissent mon regard.",
         "readStory": "Lire ce récit",
         "allTravel": "Explorer les voyages"
+    },
+    "citizenResources": {
+        "title": "Des ressources pour prolonger ces questions.",
+        "body": "Outils, médias et initiatives citoyennes pour comprendre, confronter les arguments et demander des comptes.",
+        "cta": "Explorer les ressources citoyennes"
+    },
+    "chapterMotion": {
+        "hint": "Faites défiler pour découvrir la suite",
+        "continuous": "Lecture continue",
+        "animated": "Lecture animée"
     }
 }

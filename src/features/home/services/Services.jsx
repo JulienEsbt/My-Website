@@ -8,6 +8,7 @@ import useReducedMotion from '../../../components/common/accessibility/useReduce
 import './Services.css'
 import '../professionalChapters.css'
 import useChapterHeading from '../useChapterHeading.js'
+import useMobileChapter from '../useMobileChapter.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,6 +35,7 @@ const Services = () => {
     const sectionRef = useRef(null)
     const cardsRef = useRef([])
     useChapterHeading(sectionRef)
+    const mobileChapter = useMobileChapter(sectionRef)
     const reducedMotion = useReducedMotion()
 
     useLayoutEffect(() => {
@@ -139,6 +141,23 @@ const Services = () => {
                     <p className="services__intro">{t('services.intro')}</p>
                 </div>
             </div>
+
+            {mobileChapter.available && (
+                <div className="container professional-chapter__mobile-controls">
+                    <span>{t('chapterMotion.hint')}</span>
+                    <button
+                        type="button"
+                        onClick={mobileChapter.toggle}
+                        aria-pressed={mobileChapter.continuous}
+                    >
+                        {t(
+                            mobileChapter.continuous
+                                ? 'chapterMotion.animated'
+                                : 'chapterMotion.continuous'
+                        )}
+                    </button>
+                </div>
+            )}
 
             <div className="container services__container">
                 {SERVICES.map((service, index) => (

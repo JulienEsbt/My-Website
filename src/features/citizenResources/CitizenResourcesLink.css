@@ -1,0 +1,74 @@
+.citizen-resources-link {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(152, 179, 211, 0.2);
+    border-bottom: 1px solid rgba(152, 179, 211, 0.2);
+}
+.citizen-resources-link__icon {
+    color: #83caff;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+.citizen-resources-link > div {
+    flex: 1;
+}
+.citizen-resources-link h3 {
+    color: #edf3fb;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0 0 0.4rem;
+}
+.citizen-resources-link p {
+    color: #afbcd0;
+    font-size: 0.86rem;
+    margin: 0;
+}
+.citizen-resources-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    color: #83caff;
+    font-size: 0.83rem;
+}
+.citizen-resources-link a:hover {
+    color: #fff;
+}
+.citizen-resources-link a svg {
+    flex-shrink: 0;
+}
+@media (max-width: 800px) {
+    .citizen-resources-link {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    .citizen-resources-link > div {
+        flex-basis: calc(100% - 3rem);
+    }
+    .citizen-resources-link > a {
+        margin-left: 2.3rem;
+    }
+}
+
+.citizen-resources-link {
+    padding: 1.6rem;
+    border: 1px solid rgba(152, 179, 211, 0.2);
+    border-radius: 1.2rem;
+    background:
+        radial-gradient(ellipse at 0 0, rgba(73, 156, 222, 0.14), transparent 65%),
+        rgba(17, 27, 45, 0.6);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .citizen-resources-link {
+        transition:
+            border-color 300ms,
+            background-color 300ms;
+    }
+    .citizen-resources-link:hover {
+        border-color: rgba(131, 202, 255, 0.45);
+        background-color: rgba(25, 39, 63, 0.65);
+    }
+}

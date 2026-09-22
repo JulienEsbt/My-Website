@@ -43,6 +43,11 @@ const content = {
             description:
                 'Un espace personnel consacré aux lieux de vie, voyages, photographies et souvenirs de Julien Esterbet.',
         },
+        resources: {
+            title: 'Ressources citoyennes — Julien Esterbet',
+            description:
+                'Une sélection personnelle d’outils, de médias et d’initiatives pour comprendre, confronter les arguments, participer et demander des comptes.',
+        },
         reflections: {
             title: 'Écrits et réflexions — Julien Esterbet',
             description:
@@ -88,6 +93,11 @@ const content = {
             title: 'Travel journals — Julien Esterbet',
             description:
                 'A personal space for Julien Esterbet’s places, travels, photographs and memories.',
+        },
+        resources: {
+            title: 'Civic resources — Julien Esterbet',
+            description:
+                'A personal selection of tools, media and civic initiatives to understand, examine arguments, participate and hold power accountable.',
         },
         reflections: {
             title: 'Writing and reflections — Julien Esterbet',

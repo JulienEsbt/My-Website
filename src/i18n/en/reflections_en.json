@@ -74,5 +74,10 @@
             "latest": "Articles",
             "author": "Note"
         }
+    },
+    "citizenResources": {
+        "title": "Resources to take these questions further.",
+        "body": "Tools, media and civic initiatives to understand, examine arguments and hold power accountable.",
+        "cta": "Explore civic resources"
     }
 }

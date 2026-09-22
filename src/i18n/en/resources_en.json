@@ -1,0 +1,183 @@
+{
+    "hero": {
+        "kicker": "Civic resources",
+        "title": "Understand.\nQuestion. Act.",
+        "intro": "I want a democracy in which everyone can understand, propose, decide and hold power accountable. Here I share resources that reflect my concerns: popular sovereignty, equality, justice and transparency.",
+        "invitation": "An invitation to explore and make up your own mind.",
+        "cta": "Explore the selection",
+        "signature": "A personal selection, open to disagreement.",
+        "context": "Find the text behind a vote, compare arguments, understand who owns a media outlet or discover ways to participate: these tools offer practical starting points. From there, everyone can cross-check sources and take their thinking further."
+    },
+    "nav": {
+        "label": "On this page",
+        "featured": "Start here",
+        "more": "Go further",
+        "projects": "My projects",
+        "approach": "The approach",
+        "short": {
+            "selection": "Selection",
+            "further": "Explore",
+            "projects": "Projects",
+            "approach": "Approach"
+        }
+    },
+    "uses": {
+        "observe": "Understand power",
+        "compare": "Examine arguments",
+        "participate": "Join the debate",
+        "accountability": "Hold power accountable"
+    },
+    "featured": {
+        "eyebrow": "02 / Start here",
+        "title": "Four starting points.",
+        "intro": "Different approaches, a shared purpose: understanding more and taking part in democratic life. These resources focus on France.",
+        "scene": {
+            "hint": "Scroll to discover the next resource",
+            "continuous": "Continuous reading",
+            "animated": "Animated reading"
+        },
+        "sceneLabel": "Browse the selection"
+    },
+    "more": {
+        "eyebrow": "04 / Go further",
+        "title": "A question. A path to explore.",
+        "intro": "A document to find, an argument to examine, a vote to check: a few paths to explore further.",
+        "sceneLabel": "Browse further resources"
+    },
+    "card": {
+        "limit": "Keep in mind",
+        "detailsMobile": "Sources, credits and limitations",
+        "details": "Sources and context",
+        "owner": "Created by",
+        "checked": "Link and description checked on",
+        "language": "Resource in French",
+        "preview": "Preview of {{name}}",
+        "previewCredit": "Preview: {{name}} · {{date}}",
+        "sourceLabels": ["About / methodology", "Further context"],
+        "visitPreview": "Visit the {{name}} website"
+    },
+    "projects": {
+        "eyebrow": "03 / Continuing the conversation",
+        "title": "What I’m building, too.",
+        "intro": "These initiatives inform my own projects. Two complementary ways to make debate and power easier to examine.",
+        "agora": {
+            "name": "Agora",
+            "label": "A graph of debates",
+            "status": "Local prototype · unpublished",
+            "description": "Connect arguments, objections, facts and sources to understand where a disagreement lies, without imposing a conclusion.",
+            "cta": "Explore the project’s purpose",
+            "intention": "The intention: trace a conclusion back to its supporting arguments and sources, while keeping objections visible."
+        },
+        "observatory": {
+            "name": "The Observatory",
+            "label": "Power and transparency",
+            "status": "Project in development",
+            "description": "Make the exercise of power understandable and verifiable: representatives, votes, interests and civic action.",
+            "details": "A future direction: exploring media ownership",
+            "future": "An interactive map to search for a media outlet, follow its ownership links and examine sources. This module remains a planned extension with the Observatory; it is not yet available here.",
+            "source": "Explore the documentary resource",
+            "intention": "The intention: start with a concrete question, find the documents and understand what they actually establish."
+        }
+    },
+    "approach": {
+        "notesTitle": "About this selection",
+        "eyebrow": "01 / The approach",
+        "title": "A point of view.\nRoom for yours.",
+        "body": "This selection is personal and reflects my commitments. Equality between women and men, the distribution of wealth, direct democracy — including citizen-initiated referendums — and media independence are among the questions that matter to me.",
+        "humility": "My convictions and analyses can change. Sharing a resource does not mean endorsing every position it takes. You do not need to share mine to find useful information or arguments to discuss here.",
+        "principles": [
+            {
+                "title": "Visible credits",
+                "body": "Each initiative is attributed to its team. Links take you directly to the original resources."
+            },
+            {
+                "title": "Explicit limitations",
+                "body": "Facts can be checked against sources; analyses offer an interpretation; convictions express choices. Each card offers context without treating these three as interchangeable."
+            },
+            {
+                "title": "A selection to revisit",
+                "body": "Links and descriptions are checked periodically. The date is not a certification or a full audit of the service."
+            }
+        ],
+        "contact": "Found a broken link or something to clarify?",
+        "cta": "Let me know",
+        "privacy": "The referenced websites are not embedded in this page. You visit them by following their links.",
+        "intent": "I want to open doors rather than prescribe a single path. Taking time to read a source, understand its context and consider objections is part of this approach too. These tools can inform our conversations and initiatives; they cannot replace debate or our collective choices."
+    },
+    "resources": {
+        "leurs-votes": {
+            "kind": "Parliamentary votes",
+            "owner": "Bon Pote",
+            "description": "Explore votes in the French National Assembly by topic and compare political groups’ positions. A starting point for looking at actions beyond statements.",
+            "limit": "Distinguish recorded votes from the editorial selection and interpretation of topics.",
+            "method": "The project is run by Bon Pote. Returning to the ballot and the underlying text helps put a thematic presentation in context.",
+            "cta": "Explore the votes"
+        },
+        "monvote2027": {
+            "kind": "Political comparison",
+            "owner": "The MonVote2027 volunteer team",
+            "description": "Compare your answers with positions attributed to political figures, then examine sources and disagreements topic by topic.",
+            "limit": "Scores depend on the questions and their weighting. They are not enough to decide how to vote.",
+            "method": "The team describes itself as anonymous volunteers. Its methodology explains the calculation and its limits: simplified positions, changing programmes and no assessment of past performance or credibility.",
+            "cta": "Explore the questionnaire"
+        },
+        "praxis": {
+            "kind": "Media and consultations",
+            "owner": "The Praxis team, initiated by François Boulo",
+            "description": "Read analyses and explore consultations on concrete proposals. A connection between information and participation.",
+            "limit": "Self-selected participants do not necessarily represent the population. These consultations are not official binding referendums.",
+            "method": "Praxis presents a media and civic participation project. Access depends on the content and features. Its citizen-initiated referendum module is listed as a future development; an announcement does not establish availability.",
+            "cta": "View the consultations"
+        },
+        "transparence": {
+            "kind": "Civic association",
+            "owner": "The Transparence Citoyenne association",
+            "description": "Explore public document requests, publications and actions to make the exercise of power and the use of public money more transparent.",
+            "limit": "A report or ongoing proceeding is not a court ruling establishing the alleged facts.",
+            "method": "The association publishes its actions and documents obtained. For each case, distinguish the original document, the association’s interpretation and the status of any proceedings.",
+            "cta": "Discover their actions"
+        },
+        "madada": {
+            "kind": "Public documents",
+            "owner": "Open Knowledge France",
+            "description": "Browse requests already sent to public authorities and prepare a request for a public document, such as expenses, a grant or a contract.",
+            "limit": "Exchanges are generally public. Some documents cannot be disclosed: read the conditions before sharing personal information.",
+            "method": "MaDada supports access to administrative documents in France. Reading an existing request is a useful first step; requesting a document does not itself trigger an investigation.",
+            "cta": "Explore MaDada",
+            "question": "How can I access a public document?",
+            "teaser": "Find an existing request or prepare your own request to a public body."
+        },
+        "wikidebats": {
+            "kind": "Arguments and objections",
+            "owner": "Le Laboratoire du débat méthodique and contributors",
+            "description": "Examine arguments for and against a proposition, follow objections and return to sources to form your own opinion.",
+            "limit": "The presence or number of arguments does not establish their strength. Examine their sources and possible responses.",
+            "method": "This collaborative encyclopaedia publishes its content under CC BY-SA 4.0. This page links to the original and does not reproduce its debate collections.",
+            "cta": "Explore the debates",
+            "question": "What about the opposing arguments?",
+            "teaser": "Explore arguments, objections and their sources around the same question."
+        },
+        "datan": {
+            "kind": "Parliamentary data",
+            "owner": "The Datan team and association",
+            "description": "Go deeper into MPs’ votes and parliamentary indicators after an initial introduction to a topic or ballot.",
+            "limit": "Check the period and indicator definitions. Voting records do not capture all parliamentary work.",
+            "method": "Datan explains its statistics and introduces its team and scientific council. Its methods help clarify what each comparison measures.",
+            "cta": "Explore Datan",
+            "question": "How did my representative vote?",
+            "teaser": "Look at voting records and indicators to examine what your representatives do."
+        },
+        "medias": {
+            "name": "French media: who owns what?",
+            "kind": "Media ownership",
+            "owner": "Acrimed and Le Monde diplomatique · Jérémie Fabre and Marie Beyer",
+            "description": "Identify major ownership links in French media. A documentary resource for understanding the organisations behind the news.",
+            "limit": "The map is selective and dated. Ownership alone does not establish the content of an article.",
+            "method": "The Acrimed page is dated 21 January 2026. The data repository states December 2024 and an ODC-By licence; those dates do not establish that the map and data are synchronised.",
+            "cta": "View the original map",
+            "question": "Who owns the media I read?",
+            "teaser": "Find a media outlet within the main ownership links in the French press.",
+            "shortName": "Media ownership"
+        }
+    }
+}

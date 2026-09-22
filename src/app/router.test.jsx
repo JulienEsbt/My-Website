@@ -86,7 +86,7 @@ describe('Router', () => {
         expect(await screen.findByText('Privacy')).toBeVisible()
     })
 
-    it('keeps an unknown URL and displays a real not-found page', () => {
+    it('keeps an unknown URL and displays a real not-found page', async () => {
         render(
             <MemoryRouter initialEntries={['/page-inconnue']}>
                 <Router />
@@ -95,7 +95,7 @@ describe('Router', () => {
         )
 
         expect(
-            screen.getByRole('heading', {name: 'Cette page n’existe pas ou plus.'})
+            await screen.findByRole('heading', {name: 'Cette page n’existe pas ou plus.'})
         ).toBeVisible()
         expect(screen.getByTestId('location')).toHaveTextContent('/page-inconnue')
         expect(screen.getByRole('link', {name: 'Retour au portfolio'})).toHaveAttribute('href', '/')

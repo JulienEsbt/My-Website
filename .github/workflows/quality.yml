@@ -42,11 +42,20 @@ jobs:
               if: ${{ hashFiles('public/media/**/*') != '' }}
               run: npm run media:check
 
-            - name: Install browser for integration tests
-              run: npx playwright install --with-deps chromium
+            - name: Install browsers for integration tests
+              run: npx playwright install --with-deps chromium webkit
 
             - name: Verify browser flows
               run: npm run test:e2e
+
+            - name: Preserve failed browser traces
+              if: failure()
+              uses: actions/upload-artifact@v7.0.1
+              with:
+                  name: browser-failure-traces
+                  path: test-results/
+                  retention-days: 7
+                  if-no-files-found: ignore
 
             - name: Verify public media samples
               run: npm run media:remote

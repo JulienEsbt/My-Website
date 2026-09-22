@@ -68,6 +68,8 @@ test('explicit URLs win and a manual home choice is remembered', async ({browser
     await expect(page).toHaveURL(/\/reflections$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
     await page.goto('/en')
+    // The prerendered link navigates but only the hydrated switch remembers the choice.
+    await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
     await page.getByRole('link', {name: 'Passer en français'}).click()
     await expect(page).toHaveURL(/\/$/)
@@ -331,9 +333,13 @@ test('project images open studies and the expanded Agora stays compact and align
     )
     await expect(cards.nth(2).locator('a.portfolio__image')).toHaveCount(0)
     await page.locator('.portfolio__intent summary').click()
-    const summary = await page.locator('.portfolio__intent summary').boundingBox()
-    const first = await page.locator('.portfolio__intent-grid section').first().boundingBox()
-    expect(first.y - summary.y - summary.height).toBeLessThan(24)
+    // Read both rectangles in one frame: anchor settling can scroll between browser calls.
+    const detailsGap = await page.locator('.portfolio__intent').evaluate((card) => {
+        const summary = card.querySelector('summary').getBoundingClientRect()
+        const first = card.querySelector('.portfolio__intent-grid section').getBoundingClientRect()
+        return first.top - summary.bottom
+    })
+    expect(detailsGap).toBeLessThan(24)
     const order = await page
         .locator('#goals, #home-reflections, #home-travel, #contact')
         .evaluateAll((nodes) => nodes.map((n) => n.id))

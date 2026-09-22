@@ -5,6 +5,7 @@ import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import reflections from '../../../data/reflections/reflections.js'
 import {formatDate} from '../../../i18n/formatters.js'
 import HomeTravelCarousel from './HomeTravelCarousel.jsx'
+import CitizenResourcesLink from '../../citizenResources/CitizenResourcesLink.jsx'
 import './HomeDiscover.css'
 
 const selected = [...reflections].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2)
@@ -59,6 +60,7 @@ export default function HomeDiscover() {
                         </article>
                     ))}
                 </div>
+                <CitizenResourcesLink copy={t('citizenResources', {returnObjects: true})} />
             </section>
             <section id="home-travel" className="container home-discover">
                 <div className="home-discover__heading">
