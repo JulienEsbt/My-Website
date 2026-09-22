@@ -1043,3 +1043,57 @@
         display: inline;
     }
 }
+
+/* Use the available phone height, keeping each complete card stationary while reading. */
+@media (max-width: 1099px) {
+    .civic-scene--animated .civic-card {
+        min-height: var(--mobile-card-height, 0px);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .civic-scene--animated .civic-card__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .civic-scene--animated .civic-card__visit {
+        margin-top: auto;
+    }
+    .civic-scene .civic-card[data-density='comfortable'] .civic-preview img,
+    .civic-scene .civic-card[data-density='full'] .civic-preview img {
+        height: 112px;
+    }
+    .civic-scene .civic-card[data-density='comfortable'] h3,
+    .civic-scene .civic-card[data-density='full'] h3 {
+        font-size: 1.5rem;
+    }
+    .civic-scene .civic-card[data-density='comfortable'] .civic-card__description,
+    .civic-scene .civic-card[data-density='full'] .civic-card__description {
+        font-size: 0.95rem;
+    }
+    .civic-scene .civic-card[data-density='full'] .civic-card__context {
+        display: block;
+    }
+    .civic-scene .civic-card[data-density='full'] .civic-card__mobile-context {
+        display: none;
+    }
+    .civic-scene .civic-card[data-density='full'] .civic-card__owner,
+    .civic-scene .civic-card[data-density='full'] .civic-card__limit {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 1099px) {
+    .civic-scene .civic-card[data-density='full'] .civic-preview img {
+        height: 80px;
+    }
+    .civic-scene .civic-card[data-density='full'] .civic-card__description {
+        font-size: 0.875rem;
+    }
+    .civic-scene .civic-card[data-density='full'] .civic-card__owner,
+    .civic-scene .civic-card[data-density='full'] .civic-card__limit {
+        font-size: 0.8rem;
+    }
+}

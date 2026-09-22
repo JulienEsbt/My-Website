@@ -489,6 +489,29 @@ for (const engine of ['chromium', 'webkit']) {
                             (await panel.boundingBox()).y + (await panel.boundingBox()).height
                         ).toBeLessThan((await dock.boundingBox()).y)
                     }
+                    // Safari toolbar changes should resize the whole card, never leave a large void.
+                    const beforeHeight = await scene
+                        .locator('.civic-card')
+                        .first()
+                        .evaluate((el) => el.offsetHeight)
+                    await page.setViewportSize({...viewport, height: viewport.height + 80})
+                    await expect
+                        .poll(() =>
+                            scene
+                                .locator('.civic-card')
+                                .first()
+                                .evaluate((el) => el.offsetHeight)
+                        )
+                        .toBe(beforeHeight + 80)
+                    await page.setViewportSize(viewport)
+                    await expect
+                        .poll(() =>
+                            scene
+                                .locator('.civic-card')
+                                .first()
+                                .evaluate((el) => el.offsetHeight)
+                        )
+                        .toBe(beforeHeight)
                     await scene.locator('.civic-scene__panel').first().locator('summary').click()
                     await expect(scene).not.toHaveClass(/civic-scene--animated/)
                     await expect(scene.locator('details').first()).toHaveAttribute('open', '')

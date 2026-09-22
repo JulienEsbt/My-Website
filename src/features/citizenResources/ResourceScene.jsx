@@ -22,9 +22,8 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         let viewportHeight = innerHeight
         // Cards transition as a whole: never pan or crop their content inside the pinned stage.
         const measure = () => {
-            const height = Math.max(
-                ...Array.from(root.querySelectorAll('.civic-card'), (card) => card.offsetHeight)
-            )
+            const cards = Array.from(root.querySelectorAll('.civic-card'))
+            const naturalHeight = () => Math.max(...cards.map((card) => card.offsetHeight))
             const mobile = innerWidth < 1100
             // Keep travel stable while the mobile browser hides its address bar.
             if (!mobile || width !== innerWidth) {
@@ -38,6 +37,23 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                     ? dock.offsetHeight + (parseFloat(getComputedStyle(dock).bottom) || 16) + 12
                     : 88
             const top = mobile ? 80 : 100
+            const available = innerHeight - top - bottomSpace - controlsHeight
+            root.style.setProperty('--mobile-card-height', '0px')
+            cards.forEach((card) => {
+                delete card.dataset.density
+                if (!mobile) return
+                // Each resource gets the richest layout that fits, independent of longer neighbours.
+                for (const density of ['full', 'comfortable', 'compact']) {
+                    card.dataset.density = density
+                    if (card.offsetHeight <= available || density === 'compact') break
+                }
+            })
+            let height = naturalHeight()
+            const fits = height <= available
+            if (mobile && fits) {
+                root.style.setProperty('--mobile-card-height', `${available}px`)
+                height = available
+            }
             const distance = viewportHeight * (mobile ? 0.65 : 0.72)
             metrics.current = {top, distance, mobile}
             root.style.setProperty('--scene-top', `${top}px`)
@@ -46,8 +62,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             const next =
                 media.matches &&
                 (mobile
-                    ? viewportHeight > innerWidth &&
-                      height + controlsHeight < viewportHeight - top - bottomSpace
+                    ? viewportHeight > innerWidth && fits
                     : height + controlsHeight < viewportHeight - top - 24)
             const bounds = root.getBoundingClientRect()
             if (
