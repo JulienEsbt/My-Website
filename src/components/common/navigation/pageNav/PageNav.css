@@ -55,7 +55,10 @@
     top: 3.5rem;
     left: 0;
 
-    min-width: 13rem;
+    width: max-content;
+    min-width: 16rem;
+    max-width: calc(100vw - 2.4rem);
+    box-sizing: border-box;
     padding: 1rem 1.5rem;
 
     display: grid;
@@ -63,7 +66,7 @@
 
     border-radius: 1rem;
 
-    background: var(--liquid-bg);
+    background: rgba(8, 13, 29, 0.96);
     border: 1px solid var(--liquid-border);
 
     backdrop-filter: blur(var(--liquid-blur)) saturate(210%) brightness(0.92);

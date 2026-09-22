@@ -80,11 +80,7 @@ const PageNav = () => {
                                             className="pagetext"
                                             onClick={closeMenu}
                                         >
-                                            {t(
-                                                page.id === 'resources'
-                                                    ? 'pageNav.resourcesShort'
-                                                    : page.i18nKey
-                                            )}
+                                            {t(page.i18nKey)}
                                         </NavLink>
                                     ))}
                                 </div>

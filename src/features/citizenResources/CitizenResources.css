@@ -364,7 +364,7 @@
 }
 .civic-approach {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 3rem 5rem;
     padding-top: 3rem;
 }
@@ -1095,5 +1095,32 @@
     .civic-scene .civic-card[data-density='full'] .civic-card__owner,
     .civic-scene .civic-card[data-density='full'] .civic-card__limit {
         font-size: 0.8rem;
+    }
+}
+
+.civic-approach__copy {
+    max-width: 52rem;
+}
+.civic-notes {
+    margin-top: 4rem;
+    padding-bottom: 6rem;
+}
+.civic-notes > details {
+    border-top: 1px solid var(--civic-line);
+    padding: 1rem 0;
+}
+.civic-notes > details > summary {
+    cursor: pointer;
+    min-height: 44px;
+    align-content: center;
+    color: var(--civic-muted);
+}
+.civic-notes .civic-approach__principles {
+    padding: 1rem 0 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 700px) {
+    .civic-notes .civic-approach__principles {
+        grid-template-columns: 1fr;
     }
 }

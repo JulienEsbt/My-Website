@@ -92,27 +92,6 @@ export default function ResourcesPage() {
                                     <FiArrowUpRight aria-hidden="true" />
                                 </Link>
                             </div>
-                            <div className="civic-approach__principles">
-                                {t('approach.principles', {returnObjects: true}).map(
-                                    (principle, index) => (
-                                        <div key={principle.title}>
-                                            <span aria-hidden="true">0{index + 1}</span>
-                                            <h3>{principle.title}</h3>
-                                            <p>{principle.body}</p>
-                                        </div>
-                                    )
-                                )}
-                            </div>
-                            <div className="civic-approach__contact">
-                                <p>
-                                    {t('approach.contact')}{' '}
-                                    <Link to="/#contact">
-                                        {t('approach.cta')}
-                                        <FiArrowUpRight aria-hidden="true" />
-                                    </Link>
-                                </p>
-                                <small>{t('approach.privacy')}</small>
-                            </div>
                         </div>
                     </CivicZoomScene>
                 </section>
@@ -205,6 +184,32 @@ export default function ResourcesPage() {
                     </div>
                     <ResourceScene resources={furtherResources} variant="more" />
                 </section>
+                <aside className="civic-notes container" aria-label={t('approach.notesTitle')}>
+                    <details>
+                        <summary>{t('approach.notesTitle')}</summary>
+                        <div className="civic-approach__principles">
+                            {t('approach.principles', {returnObjects: true}).map(
+                                (principle, index) => (
+                                    <div key={principle.title}>
+                                        <span aria-hidden="true">0{index + 1}</span>
+                                        <h3>{principle.title}</h3>
+                                        <p>{principle.body}</p>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </details>
+                    <div className="civic-approach__contact">
+                        <p>
+                            {t('approach.contact')}{' '}
+                            <Link to="/#contact">
+                                {t('approach.cta')}
+                                <FiArrowUpRight aria-hidden="true" />
+                            </Link>
+                        </p>
+                        <small>{t('approach.privacy')}</small>
+                    </div>
+                </aside>
             </div>
         </PageFrame>
     )
