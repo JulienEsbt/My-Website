@@ -122,9 +122,9 @@ for (const engine of ['chromium', 'webkit']) {
                     .poll(() =>
                         page.evaluate(
                             () =>
-                                document.querySelector('#projects-title').getBoundingClientRect()
-                                    .top -
                                 document.querySelector('.civic-section-nav').getBoundingClientRect()
+                                    .top -
+                                document.querySelector('#projects-title').getBoundingClientRect()
                                     .bottom
                         )
                     )
@@ -350,7 +350,7 @@ for (const engine of ['chromium', 'webkit']) {
         })
         try {
             await page.goto('http://localhost:4173/resources')
-            for (const id of ['approach', 'selection', 'projects', 'further']) {
+            for (const id of ['projects']) {
                 const panel = page.locator(`#${id} .civic-mobile-scene--animated`).first()
                 await expect(panel).toBeVisible()
                 const content = panel.locator(':scope > *').first()
@@ -374,14 +374,73 @@ for (const engine of ['chromium', 'webkit']) {
                 await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 170)
                 await expect.poll(top).toBeCloseTo(160, 0)
             }
-            await page.locator('#resource-madada summary').click()
-            await expect(page.locator('#further .civic-mobile-scene--animated')).toHaveCount(0)
-            await expect(page.locator('#resource-madada details')).toHaveAttribute('open', '')
+            await expect(page.locator('#approach [data-mobile-scene]')).toHaveCount(0)
             await page.emulateMedia({reducedMotion: 'reduce'})
             await expect(page.locator('.civic-mobile-scene--animated')).toHaveCount(0)
             await page.emulateMedia({reducedMotion: 'no-preference'})
             await page.setViewportSize({width: 844, height: 390})
             await expect(page.locator('.civic-mobile-scene--animated')).toHaveCount(0)
+            expect(
+                await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
+            ).toBe(true)
+        } finally {
+            await browser.close()
+        }
+    })
+}
+
+for (const engine of ['chromium', 'webkit']) {
+    test(`mobile resource cards share a pinned stage and clear the bottom dock in ${engine}`, async ({
+        playwright,
+    }) => {
+        const browser = await playwright[engine].launch()
+        const page = await browser.newPage({
+            viewport: {width: 390, height: 740},
+            isMobile: true,
+            hasTouch: true,
+            locale: 'fr-FR',
+            reducedMotion: 'no-preference',
+        })
+        try {
+            await page.goto('http://localhost:4173/resources')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+            const dock = page.locator('.civic-section-nav')
+            await expect(dock).toHaveCSS('position', 'fixed')
+            for (const id of ['selection', 'further']) {
+                const scene = page.locator(`#${id} .civic-scene`)
+                await expect(scene).toHaveClass(/civic-scene--animated/)
+                const start = await scene.evaluate(
+                    (el) => scrollY + el.getBoundingClientRect().top - 80
+                )
+                const travel = await scene.evaluate(
+                    (el) => parseFloat(el.style.getPropertyValue('--scene-travel')) / 3
+                )
+                for (const i of [0, 1, 2, 3, 2, 1, 0]) {
+                    await page.evaluate(
+                        (y) => scrollTo({top: y, behavior: 'instant'}),
+                        start + i * travel
+                    )
+                    const panel = scene.locator('.civic-scene__panel').nth(i)
+                    await expect(panel).toHaveAttribute('aria-hidden', 'false')
+                    await expect(panel).toHaveCSS('opacity', '1')
+                    await expect
+                        .poll(() =>
+                            scene
+                                .locator('.civic-scene__stage')
+                                .evaluate((el) => Math.abs(el.getBoundingClientRect().top - 80))
+                        )
+                        .toBeLessThan(1)
+                    expect(
+                        (await panel.boundingBox()).y + (await panel.boundingBox()).height
+                    ).toBeLessThan((await dock.boundingBox()).y)
+                }
+                await scene.locator('.civic-scene__panel').first().locator('summary').click()
+                await expect(scene).not.toHaveClass(/civic-scene--animated/)
+                await expect(scene.locator('details').first()).toHaveAttribute('open', '')
+                await expect(scene.locator('[inert]')).toHaveCount(0)
+            }
+            await page.emulateMedia({reducedMotion: 'reduce'})
+            await expect(page.locator('.civic-scene--animated')).toHaveCount(0)
             expect(
                 await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)
             ).toBe(true)

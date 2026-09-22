@@ -2,7 +2,6 @@ import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
 import ResourceCard from './ResourceCard.jsx'
-import useMobileScrollScenes from './useMobileScrollScenes.js'
 
 const clamp = (value) => Math.max(0, Math.min(1, value))
 
@@ -10,31 +9,43 @@ export default function ResourceScene({resources, variant = 'featured'}) {
     const {t} = useTranslation('resources')
     const rootRef = useRef(null)
     const pendingTarget = useRef(null)
+    const metrics = useRef({top: 100, distance: 1, mobile: false})
     const [eligible, setEligible] = useState(false)
     const [continuous, setContinuous] = useState(false)
     const [active, setActive] = useState(0)
     const animated = eligible && !continuous
-    const mobileEligible = useMobileScrollScenes(rootRef, continuous)
-    const motionEnabled = (eligible || mobileEligible) && !continuous
 
     useEffect(() => {
         const root = rootRef.current
-        const media = matchMedia(
-            '(min-width: 1100px) and (min-height: 850px) and (prefers-reduced-motion: no-preference)'
-        )
+        const media = matchMedia('(prefers-reduced-motion: no-preference)')
+        let width = innerWidth
+        let viewportHeight = innerHeight
         // A full card must fit without an inner scrollbar, including larger text/zoom.
         const measure = () => {
             const height = Math.max(
                 ...Array.from(root.querySelectorAll('.civic-card'), (card) => card.offsetHeight)
             )
-            root.style.setProperty('--scene-height', `${height + 128}px`)
-            const next = media.matches && height + 128 < innerHeight - 120
+            const mobile = innerWidth < 1100
+            // Keep travel stable while the mobile browser hides its address bar.
+            if (!mobile || width !== innerWidth) {
+                width = innerWidth
+                viewportHeight = innerHeight
+            }
+            const top = mobile ? 80 : 100
+            const controlsHeight = mobile ? 56 : 128
+            const distance = viewportHeight * (mobile ? 0.65 : 0.72)
+            metrics.current = {top, distance, mobile}
+            root.style.setProperty('--scene-top', `${top}px`)
+            root.style.setProperty('--scene-height', `${height + controlsHeight}px`)
+            root.style.setProperty('--scene-travel', `${distance * (resources.length - 1)}px`)
+            const next =
+                media.matches && height + controlsHeight < viewportHeight - top - (mobile ? 88 : 24)
             const bounds = root.getBoundingClientRect()
             if (
                 !next &&
                 root.classList.contains('civic-scene--animated') &&
                 bounds.top < innerHeight &&
-                bounds.bottom > 100
+                bounds.bottom > metrics.current.top
             ) {
                 pendingTarget.current = root.querySelector(
                     '.civic-scene__panel[aria-hidden="false"] article'
@@ -52,7 +63,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             media.removeEventListener('change', measure)
             window.removeEventListener('resize', measure)
         }
-    }, [])
+    }, [resources.length])
 
     useEffect(() => {
         const root = rootRef.current
@@ -68,10 +79,10 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         let previous = -1
         const update = () => {
             frame = 0
-            const distance = innerHeight * 0.72
+            const {top, distance, mobile} = metrics.current
             const position = Math.max(
                 0,
-                Math.min(resources.length - 1, (100 - root.getBoundingClientRect().top) / distance)
+                Math.min(resources.length - 1, (top - root.getBoundingClientRect().top) / distance)
             )
             const base = Math.floor(position)
             // Hold the reading position, then ease the complete panel into the next one.
@@ -88,7 +99,8 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                         : incoming
                           ? fadeIn * fadeIn * (3 - 2 * fadeIn)
                           : 0
-                const offset = index === base ? -24 * eased : 40 * (1 - eased)
+                const offset =
+                    index === base ? -(mobile ? 12 : 24) * eased : (mobile ? 18 : 40) * (1 - eased)
                 if (index !== current && panel.contains(document.activeElement)) {
                     root.querySelectorAll('.civic-scene__steps button')[current]?.focus({
                         preventScroll: true,
@@ -119,7 +131,6 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             panels.forEach((panel) => {
                 panel.inert = false
                 panel.removeAttribute('aria-hidden')
-                // Preserve the mobile scene's measurements when switching layouts.
                 ;['opacity', 'visibility', 'transform', 'z-index'].forEach((property) =>
                     panel.style.removeProperty(property)
                 )
@@ -141,7 +152,10 @@ export default function ResourceScene({resources, variant = 'featured'}) {
 
     const select = (index) => {
         const top =
-            scrollY + rootRef.current.getBoundingClientRect().top - 100 + index * innerHeight * 0.72
+            scrollY +
+            rootRef.current.getBoundingClientRect().top -
+            metrics.current.top +
+            index * metrics.current.distance
         window.scrollTo({top, behavior: 'instant'})
     }
     const readContinuously = (target) => {
@@ -155,9 +169,9 @@ export default function ResourceScene({resources, variant = 'featured'}) {
             className={`civic-scene civic-scene--${variant} ${animated ? 'civic-scene--animated' : ''}`}
         >
             <div className="civic-scene__stage">
-                {(eligible || mobileEligible) && (
+                {eligible && (
                     <div className="civic-scene__toolbar">
-                        {motionEnabled && (
+                        {animated && (
                             <span>
                                 <FiArrowDown aria-hidden="true" />
                                 {t('featured.scene.hint')}
@@ -166,7 +180,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                         <button
                             type="button"
                             onClick={() => {
-                                if (motionEnabled) readContinuously()
+                                if (animated) readContinuously()
                                 else {
                                     setContinuous(false)
                                     rootRef.current.scrollIntoView({
@@ -176,7 +190,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                                 }
                             }}
                         >
-                            {t(`featured.scene.${motionEnabled ? 'continuous' : 'animated'}`)}
+                            {t(`featured.scene.${animated ? 'continuous' : 'animated'}`)}
                         </button>
                     </div>
                 )}
@@ -190,9 +204,11 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                                 onClick={() => select(index)}
                             >
                                 <span aria-hidden="true">0{index + 1}</span>
-                                {t(`resources.${resource.id}.shortName`, {
-                                    defaultValue: resource.name,
-                                })}
+                                <span className="civic-scene__step-label">
+                                    {t(`resources.${resource.id}.shortName`, {
+                                        defaultValue: resource.name,
+                                    })}
+                                </span>
                             </button>
                         ))}
                     </nav>
@@ -201,12 +217,12 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                     className="civic-scene__panels"
                     onClickCapture={(event) => {
                         // Sources expand in normal document flow, with the focused control preserved.
-                        if (motionEnabled && event.target.closest('summary'))
+                        if (animated && event.target.closest('summary'))
                             readContinuously(event.target.closest('article'))
                     }}
                 >
                     {resources.map((resource, index) => (
-                        <div className="civic-scene__panel" key={resource.id} data-mobile-scene>
+                        <div className="civic-scene__panel" key={resource.id}>
                             <ResourceCard
                                 resource={resource}
                                 number={index + 1}
