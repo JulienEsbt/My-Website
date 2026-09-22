@@ -1,13 +1,11 @@
 import {useEffect} from 'react'
 
-// A light scroll reveal in normal document flow; no pinning or hidden content.
+// Zoom whole editorial panels over more than a viewport of native scrolling.
 export default function useCivicFocus(ref) {
     useEffect(() => {
         const root = ref.current
         if (!root || !window.IntersectionObserver) return
-        const media = window.matchMedia(
-            '(min-width: 851px) and (prefers-reduced-motion: no-preference)'
-        )
+        const media = window.matchMedia('(prefers-reduced-motion: no-preference)')
         const targets = [...root.querySelectorAll('[data-civic-focus]')]
         const visible = new Set()
         let observer
@@ -19,7 +17,7 @@ export default function useCivicFocus(ref) {
                 const top = target.getBoundingClientRect().top
                 const progress = target.contains(document.activeElement)
                     ? 1
-                    : Math.max(0, Math.min(1, (height * 0.92 - top) / (height * 0.48)))
+                    : Math.max(0, Math.min(1, (height * 0.95 - top) / (height * 1.15)))
                 return [target, progress]
             })
             values.forEach(([target, progress]) => {

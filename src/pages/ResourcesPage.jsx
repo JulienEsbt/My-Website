@@ -79,21 +79,21 @@ export default function ResourcesPage() {
                     id="approach"
                     aria-labelledby="approach-title"
                 >
-                    <div className="civic-approach__copy">
+                    <div className="civic-approach__copy" data-civic-focus>
                         <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
                         <h2 id="approach-title">{t('approach.title')}</h2>
-                        <p data-civic-focus>{t('approach.body')}</p>
-                        <p data-civic-focus>{t('approach.intent')}</p>
-                        <p data-civic-focus>{t('approach.humility')}</p>
+                        <p>{t('approach.body')}</p>
+                        <p>{t('approach.intent')}</p>
+                        <p>{t('approach.humility')}</p>
                         <Link className="civic-text-link" to="/reflections">
                             <FiBookOpen aria-hidden="true" />
                             {t('pageNav.reflections', {ns: 'common'})}
                             <FiArrowUpRight aria-hidden="true" />
                         </Link>
                     </div>
-                    <div className="civic-approach__principles">
+                    <div className="civic-approach__principles" data-civic-focus>
                         {t('approach.principles', {returnObjects: true}).map((principle, index) => (
-                            <div key={principle.title} data-civic-focus>
+                            <div key={principle.title}>
                                 <span aria-hidden="true">0{index + 1}</span>
                                 <h3>{principle.title}</h3>
                                 <p>{principle.body}</p>
