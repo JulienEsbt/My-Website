@@ -20,7 +20,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         const media = matchMedia('(prefers-reduced-motion: no-preference)')
         let width = innerWidth
         let viewportHeight = innerHeight
-        // On mobile, the page scroll reveals tall cards inside the pinned stage before transitioning.
+        // Cards transition as a whole: never pan or crop their content inside the pinned stage.
         const measure = () => {
             const height = Math.max(
                 ...Array.from(root.querySelectorAll('.civic-card'), (card) => card.offsetHeight)
@@ -38,30 +38,16 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                     ? dock.offsetHeight + (parseFloat(getComputedStyle(dock).bottom) || 16) + 12
                     : 88
             const top = mobile ? 80 : 100
-            const cardHeight = mobile
-                ? Math.min(
-                      height,
-                      Math.max(180, viewportHeight - top - bottomSpace - controlsHeight)
-                  )
-                : height
-            const distance = mobile
-                ? Math.max(viewportHeight * 0.65, height - cardHeight + viewportHeight * 0.45)
-                : viewportHeight * 0.72
-            metrics.current = {top, distance, mobile, cardHeight}
+            const distance = viewportHeight * (mobile ? 0.65 : 0.72)
+            metrics.current = {top, distance, mobile}
             root.style.setProperty('--scene-top', `${top}px`)
-            root.style.setProperty('--scene-card-height', `${cardHeight}px`)
-            root.style.setProperty(
-                '--scene-height',
-                `${Math.min(height, cardHeight) + controlsHeight}px`
-            )
-            root.style.setProperty(
-                '--scene-travel',
-                `${distance * (resources.length - (mobile ? 0 : 1))}px`
-            )
+            root.style.setProperty('--scene-height', `${height + controlsHeight}px`)
+            root.style.setProperty('--scene-travel', `${distance * (resources.length - 1)}px`)
             const next =
                 media.matches &&
                 (mobile
-                    ? viewportHeight > innerWidth
+                    ? viewportHeight > innerWidth &&
+                      height + controlsHeight < viewportHeight - top - bottomSpace
                     : height + controlsHeight < viewportHeight - top - 24)
             const bounds = root.getBoundingClientRect()
             if (
@@ -102,13 +88,10 @@ export default function ResourceScene({resources, variant = 'featured'}) {
         let previous = -1
         const update = () => {
             frame = 0
-            const {top, distance, mobile, cardHeight} = metrics.current
+            const {top, distance, mobile} = metrics.current
             const position = Math.max(
                 0,
-                Math.min(
-                    resources.length - (mobile ? 0.001 : 1),
-                    (top - root.getBoundingClientRect().top) / distance
-                )
+                Math.min(resources.length - 1, (top - root.getBoundingClientRect().top) / distance)
             )
             const base = Math.floor(position)
             // Hold the reading position, then ease the complete panel into the next one.
@@ -128,11 +111,6 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                         : incoming
                           ? fadeIn * fadeIn * (3 - 2 * fadeIn)
                           : 0
-                const readingOffset =
-                    mobile && index === base
-                        ? Math.max(0, panel.offsetHeight - cardHeight) *
-                          clamp((position - base - 0.08) / 0.5)
-                        : 0
                 const offset =
                     index === base ? -(mobile ? 12 : 24) * eased : (mobile ? 18 : 40) * (1 - eased)
                 if (index !== current && panel.contains(document.activeElement)) {
@@ -144,7 +122,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 panel.setAttribute('aria-hidden', String(index !== current))
                 panel.style.opacity = String(opacity)
                 panel.style.visibility = opacity > 0 ? 'visible' : 'hidden'
-                panel.style.transform = `translateY(${offset - readingOffset}px) scale(${0.985 + 0.015 * opacity})`
+                panel.style.transform = `translateY(${offset}px) scale(${0.985 + 0.015 * opacity})`
                 panel.style.zIndex = index === current ? '2' : '1'
             })
             if (previous !== current) {

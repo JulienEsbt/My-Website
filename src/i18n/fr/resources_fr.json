@@ -46,6 +46,7 @@
     },
     "card": {
         "limit": "À garder en tête",
+        "detailsMobile": "Sources, crédits et limites",
         "details": "Sources et repères",
         "owner": "Porté par",
         "checked": "Lien et présentation vérifiés le",

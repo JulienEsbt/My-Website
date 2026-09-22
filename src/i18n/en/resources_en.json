@@ -46,6 +46,7 @@
     },
     "card": {
         "limit": "Keep in mind",
+        "detailsMobile": "Sources, credits and limitations",
         "details": "Sources and context",
         "owner": "Created by",
         "checked": "Link and description checked on",

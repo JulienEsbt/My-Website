@@ -992,8 +992,6 @@
     .civic-scene--animated .civic-scene__panels {
         grid-column: 1 / -1;
         grid-row: 3;
-        height: var(--scene-card-height);
-        overflow: clip;
     }
     .civic-scene .civic-preview img {
         height: 64px;
@@ -1013,5 +1011,35 @@
     .civic-scene .civic-card--compact {
         padding: 1rem;
         gap: 0.2rem;
+    }
+}
+
+.civic-card__mobile-context {
+    display: none;
+}
+@media (max-width: 1099px) {
+    .civic-scene .civic-card__context {
+        display: none;
+    }
+    .civic-scene .civic-card__mobile-context {
+        display: block;
+    }
+    .civic-scene .civic-card__visit {
+        margin-top: 0.5rem;
+    }
+    .civic-scene .civic-card__details {
+        margin-top: 0.4rem;
+    }
+}
+
+.civic-card__mobile-label {
+    display: none;
+}
+@media (max-width: 1099px) {
+    .civic-scene .civic-card__details-label {
+        display: none;
+    }
+    .civic-scene .civic-card__mobile-label {
+        display: inline;
     }
 }

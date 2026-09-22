@@ -432,6 +432,18 @@ for (const engine of ['chromium', 'webkit']) {
             try {
                 await page.goto('http://localhost:4173/resources')
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
+                if (viewport.height < 650) {
+                    await expect(page.locator('.civic-scene--animated')).toHaveCount(0)
+                    await expect(page.locator('.civic-scene__panel[inert]')).toHaveCount(0)
+                    for (const id of ['leurs-votes', 'madada']) {
+                        const card = page.locator(`#resource-${id}`)
+                        await card.scrollIntoViewIfNeeded()
+                        await expect(card).toBeVisible()
+                        await card.locator('summary').click()
+                        await expect(card.locator('.civic-card__mobile-context')).toBeVisible()
+                    }
+                    return
+                }
                 const dock = page.locator('.civic-section-nav')
                 await expect(dock).toHaveCSS('position', 'fixed')
                 for (const id of ['selection', 'further']) {
@@ -445,16 +457,27 @@ for (const engine of ['chromium', 'webkit']) {
                         (el) => scrollY + el.getBoundingClientRect().top - 80
                     )
                     const travel = await scene.evaluate(
-                        (el) => parseFloat(el.style.getPropertyValue('--scene-travel')) / 4
+                        (el) => parseFloat(el.style.getPropertyValue('--scene-travel')) / 3
                     )
                     for (const i of [0, 1, 2, 3, 2, 1, 0]) {
                         await page.evaluate(
                             (y) => scrollTo({top: y, behavior: 'instant'}),
-                            start + (i + 0.6) * travel
+                            start + i * travel
                         )
                         const panel = scene.locator('.civic-scene__panel').nth(i)
                         await expect(panel).toHaveAttribute('aria-hidden', 'false')
                         await expect(panel).toHaveCSS('opacity', '1')
+                        const restingTransform = await panel.evaluate(
+                            (el) => getComputedStyle(el).transform
+                        )
+                        if (i < 3) {
+                            await page.evaluate(
+                                (y) => scrollTo({top: y, behavior: 'instant'}),
+                                start + (i + 0.5) * travel
+                            )
+                            await expect(panel).toHaveCSS('transform', restingTransform)
+                        }
+
                         await expect
                             .poll(() =>
                                 scene

@@ -76,13 +76,15 @@ export default function ResourceCard({resource, number, compact = false}) {
                 <p className="civic-card__description">
                     {compact ? copy.teaser : copy.description}
                 </p>
-                <p className="civic-card__owner">
-                    {t('card.owner')} {copy.owner}
-                </p>
-                <p className="civic-card__limit">
-                    <strong>{t('card.limit')}</strong>
-                    {copy.limit}
-                </p>
+                <div className="civic-card__context">
+                    <p className="civic-card__owner">
+                        {t('card.owner')} {copy.owner}
+                    </p>
+                    <p className="civic-card__limit">
+                        <strong>{t('card.limit')}</strong>
+                        {copy.limit}
+                    </p>
+                </div>
                 <a className="civic-card__visit" href={resource.url}>
                     <span>
                         {copy.cta}
@@ -92,11 +94,21 @@ export default function ResourceCard({resource, number, compact = false}) {
                 </a>
                 <details className="civic-card__details">
                     <summary>
-                        {t('card.details')}
+                        <span className="civic-card__details-label">{t('card.details')}</span>
+                        <span className="civic-card__mobile-label">{t('card.detailsMobile')}</span>
                         <span className="sr-only"> — {name}</span>
                         <FiChevronDown aria-hidden="true" />
                     </summary>
                     <div>
+                        <div className="civic-card__mobile-context">
+                            <p className="civic-card__owner">
+                                {t('card.owner')} {copy.owner}
+                            </p>
+                            <p className="civic-card__limit">
+                                <strong>{t('card.limit')}</strong>
+                                {copy.limit}
+                            </p>
+                        </div>
                         {compact && <p>{copy.description}</p>}
                         <p>{copy.method}</p>
                         <ul>
