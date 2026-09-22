@@ -43,6 +43,7 @@ export default function ResourcesPage() {
                                 ))}
                         </h1>
                         <p className="civic-hero__intro">{t('hero.intro')}</p>
+                        <p className="civic-hero__context">{t('hero.context')}</p>
                         <p className="civic-hero__invitation">{t('hero.invitation')}</p>
                         <a className="civic-button" href="#selection">
                             {t('hero.cta')}
@@ -80,6 +81,7 @@ export default function ResourcesPage() {
                         <p className="civic-eyebrow">{t('approach.eyebrow')}</p>
                         <h2 id="approach-title">{t('approach.title')}</h2>
                         <p>{t('approach.body')}</p>
+                        <p>{t('approach.intent')}</p>
                         <p>{t('approach.humility')}</p>
                         <Link className="civic-text-link" to="/reflections">
                             <FiBookOpen aria-hidden="true" />

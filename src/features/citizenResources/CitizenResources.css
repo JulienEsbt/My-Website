@@ -865,3 +865,16 @@
         transform: none;
     }
 }
+
+/* Breathing room around the sections read in the normal document flow. */
+.civic-page #approach,
+.civic-page #selection,
+.civic-page #further {
+    margin-top: clamp(4.5rem, 6vw, 6rem);
+}
+.civic-page .civic-hero__context {
+    max-width: 40rem;
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}

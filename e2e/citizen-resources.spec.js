@@ -162,7 +162,7 @@ for (const engine of ['chromium', 'webkit']) {
         const ids =
             variant === 'selection'
                 ? ['leurs-votes', 'monvote2027', 'praxis', 'transparence']
-                : ['madada', 'wikidebats', 'datan', 'medias']
+                : ['medias', 'datan', 'wikidebats', 'madada']
         test(`the ${variant} scroll scene works forwards, backwards and with keyboard sources in ${engine}`, async ({
             playwright,
         }) => {

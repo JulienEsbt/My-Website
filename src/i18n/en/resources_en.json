@@ -5,7 +5,8 @@
         "intro": "I want a democracy in which everyone can understand, propose, decide and hold power accountable. Here I share resources that reflect my concerns: popular sovereignty, equality, justice and transparency.",
         "invitation": "An invitation to explore and make up your own mind.",
         "cta": "Explore the selection",
-        "signature": "A personal selection, open to disagreement."
+        "signature": "A personal selection, open to disagreement.",
+        "context": "Find the text behind a vote, compare arguments, understand who owns a media outlet or discover ways to participate: these tools offer practical starting points. From there, everyone can cross-check sources and take their thinking further."
     },
     "nav": {
         "label": "On this page",
@@ -98,7 +99,8 @@
         ],
         "contact": "Found a broken link or something to clarify?",
         "cta": "Let me know",
-        "privacy": "The referenced websites are not embedded in this page. You visit them by following their links."
+        "privacy": "The referenced websites are not embedded in this page. You visit them by following their links.",
+        "intent": "I want to open doors rather than prescribe a single path. Taking time to read a source, understand its context and consider objections is part of this approach too. These tools can inform our conversations and initiatives; they cannot replace debate or our collective choices."
     },
     "resources": {
         "leurs-votes": {

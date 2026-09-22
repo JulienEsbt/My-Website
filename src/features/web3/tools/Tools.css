@@ -1,3 +1,5 @@
+@import '../Surfaces.css';
+
 .tools-v2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -257,9 +259,9 @@
 
 .tools-v2__card,
 .tools-v2__card:nth-child(2) {
-    background: linear-gradient(140deg, #263c5e, #252b49);
-    border-color: #8fafe036;
-    box-shadow: inset 0 1px 0 #ffffff0a;
+    background: var(--web3-surface);
+    border-color: var(--web3-border);
+    box-shadow: var(--web3-shadow);
 }
 .tools-v2__head,
 .tools-v2__card:nth-child(2) .tools-v2__head {
@@ -354,7 +356,7 @@
 }
 
 .tools-v2__card:nth-child(2) {
-    background: linear-gradient(140deg, #343356, #272d49);
+    background: linear-gradient(135deg, rgba(95, 90, 210, 0.18), rgba(12, 17, 43, 0.88));
 }
 .tools-v2__icon {
     background: #75baff14;

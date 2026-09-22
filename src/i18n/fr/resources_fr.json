@@ -5,7 +5,8 @@
         "intro": "Je souhaite une démocratie dans laquelle chacun puisse comprendre, proposer, décider et demander des comptes. Je partage ici des ressources qui font écho à mes préoccupations : la souveraineté populaire, l’égalité, la justice et la transparence des pouvoirs.",
         "invitation": "Une invitation à explorer et à vous faire votre propre idée.",
         "cta": "Découvrir la sélection",
-        "signature": "Une sélection personnelle, ouverte au désaccord."
+        "signature": "Une sélection personnelle, ouverte au désaccord.",
+        "context": "Retrouver le texte d’un vote, confronter des arguments, comprendre qui possède un média ou découvrir comment participer : ces outils offrent des points de départ concrets. À chacun ensuite de croiser les sources et de prolonger la réflexion."
     },
     "nav": {
         "label": "Dans cette page",
@@ -98,7 +99,8 @@
         ],
         "contact": "Un lien incorrect ou une précision à apporter ?",
         "cta": "M’en parler",
-        "privacy": "Les sites référencés ne sont pas chargés dans cette page. Vous les consultez en suivant leurs liens."
+        "privacy": "Les sites référencés ne sont pas chargés dans cette page. Vous les consultez en suivant leurs liens.",
+        "intent": "Je souhaite ouvrir des portes plutôt que proposer un parcours imposé. Prendre le temps de lire une source, d’en comprendre le contexte et d’écouter les objections fait aussi partie de la démarche. Ces outils peuvent nourrir nos échanges et nos initiatives ; ils ne remplacent ni le débat ni nos choix collectifs."
     },
     "resources": {
         "leurs-votes": {
