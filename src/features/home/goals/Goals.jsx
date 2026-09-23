@@ -29,6 +29,7 @@ export default function Goals() {
     const swiperRef = useRef(null)
     const reducedMotion = useReducedMotion()
     const [autoplayPaused, setAutoplayPaused] = useState(false)
+    const [carouselReady, setCarouselReady] = useState(false)
 
     useLayoutEffect(() => {
         if (reducedMotion) return undefined
@@ -55,18 +56,42 @@ export default function Goals() {
     }, [reducedMotion])
 
     useEffect(() => {
+        // PageFrame reveals the root in its layout effect. Mount Swiper only
+        // afterwards: production initially hides the root behind prerendered HTML.
+        setCarouselReady(true)
+    }, [])
+
+    useEffect(() => {
         const autoplay = swiperRef.current?.autoplay
         if (!autoplay) return
 
         if (reducedMotion || autoplayPaused) autoplay.stop()
         else autoplay.start()
-    }, [autoplayPaused, reducedMotion])
+    }, [autoplayPaused, reducedMotion, carouselReady])
 
     const toggleAutoplay = () => {
         setAutoplayPaused((isPaused) => !isPaused)
     }
 
     const paginationBulletMessage = t('goals.paginationBullet').replace('{index}', '{{index}}')
+
+    const cards = ITEMS.map((item, index) => (
+        <React.Fragment key={item.key}>
+            <article className="goal-card">
+                <span className="goal-card__number">{String(index + 1).padStart(2, '0')}</span>
+
+                <div className="goal-card__icon" aria-hidden="true">
+                    {item.icon}
+                </div>
+
+                <span className="goal-card__label">{t('goals.label')}</span>
+
+                <h3>{t(`goals.items.${item.key}.name`)}</h3>
+
+                <p>{t(`goals.items.${item.key}.review`)}</p>
+            </article>
+        </React.Fragment>
+    ))
 
     return (
         <section id="goals" ref={sectionRef}>
@@ -80,63 +105,53 @@ export default function Goals() {
                 role="region"
                 aria-label={t('goals.carouselAria')}
             >
-                <Swiper
-                    modules={[A11y, Autoplay, EffectCoverflow, Keyboard, Pagination]}
-                    effect={reducedMotion ? 'slide' : 'coverflow'}
-                    grabCursor
-                    centeredSlides
-                    loop
-                    slidesPerView="auto"
-                    speed={reducedMotion ? 0 : 300}
-                    coverflowEffect={{
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 120,
-                        modifier: 1.7,
-                        slideShadows: false,
-                    }}
-                    autoplay={
-                        reducedMotion
-                            ? false
-                            : {
-                                  delay: 5200,
-                                  disableOnInteraction: false,
-                                  pauseOnMouseEnter: true,
-                              }
-                    }
-                    keyboard={{enabled: true, onlyInViewport: true}}
-                    a11y={{
-                        containerMessage: t('goals.carouselAria'),
-                        paginationBulletMessage,
-                    }}
-                    pagination={{clickable: true}}
-                    className="goals-carousel__swiper"
-                    onSwiper={(swiper) => {
-                        swiperRef.current = swiper
-                    }}
-                >
-                    {ITEMS.map((item, index) => (
-                        <SwiperSlide key={item.key} className="goals-carousel__slide">
-                            <article className="goal-card">
-                                <span className="goal-card__number">
-                                    {String(index + 1).padStart(2, '0')}
-                                </span>
+                {carouselReady ? (
+                    <Swiper
+                        modules={[A11y, Autoplay, EffectCoverflow, Keyboard, Pagination]}
+                        effect={reducedMotion ? 'slide' : 'coverflow'}
+                        grabCursor
+                        centeredSlides
+                        loop
+                        slidesPerView="auto"
+                        speed={reducedMotion ? 0 : 300}
+                        coverflowEffect={{
+                            rotate: 0,
+                            stretch: 0,
+                            depth: 120,
+                            modifier: 1.7,
+                            slideShadows: false,
+                        }}
+                        autoplay={
+                            reducedMotion
+                                ? false
+                                : {
+                                      delay: 5200,
+                                      disableOnInteraction: false,
+                                      pauseOnMouseEnter: true,
+                                  }
+                        }
+                        keyboard={{enabled: true, onlyInViewport: true}}
+                        a11y={{
+                            containerMessage: t('goals.carouselAria'),
+                            paginationBulletMessage,
+                        }}
+                        pagination={{clickable: true}}
+                        className="goals-carousel__swiper"
+                        onSwiper={(swiper) => {
+                            swiperRef.current = swiper
+                        }}
+                    >
+                        {cards.map((card, index) => (
+                            <SwiperSlide key={ITEMS[index].key} className="goals-carousel__slide">
+                                {card}
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                ) : (
+                    <div className="goals-carousel__fallback">{cards}</div>
+                )}
 
-                                <div className="goal-card__icon" aria-hidden="true">
-                                    {item.icon}
-                                </div>
-
-                                <span className="goal-card__label">{t('goals.label')}</span>
-
-                                <h3>{t(`goals.items.${item.key}.name`)}</h3>
-
-                                <p>{t(`goals.items.${item.key}.review`)}</p>
-                            </article>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-
-                {!reducedMotion && (
+                {carouselReady && !reducedMotion && (
                     <button
                         type="button"
                         className="goals-carousel__autoplay"
