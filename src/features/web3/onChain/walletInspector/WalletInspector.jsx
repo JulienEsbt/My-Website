@@ -7,12 +7,18 @@ import FeatureLoading from '../../../../components/common/feedback/featureLoadin
 import {BLOCKCHAIN_NETWORKS} from '../../../../config/blockchains.js'
 import WalletInspectorResults from './WalletInspectorResults.jsx'
 import './WalletInspector.css'
+import ConnectedWallet from './ConnectedWallet.jsx'
+
+const WalletPicker = lazy(() => import('./WalletPicker.jsx'))
 
 const WalletInspectorDialogs = lazy(() => import('./WalletInspectorDialogs.jsx'))
 
 const WalletInspector = () => {
     const {t} = useTranslation('web3')
+    const [showWalletPicker, setShowWalletPicker] = useState(false)
     const [address, setAddress] = useState('')
+    const [connectedWallet, setConnectedWallet] = useState(null)
+    const walletSessionId = useRef(0)
     const [selectedNetworkId, setSelectedNetworkId] = useState('ethereum')
     const [result, setResult] = useState(null)
     const [selectedNft, setSelectedNft] = useState(null)
@@ -101,6 +107,20 @@ const WalletInspector = () => {
         }
     }
 
+    const clearInspection = () => {
+        resetComparison()
+        requestIdRef.current++
+        abortControllerRef.current?.abort()
+        setResult(null)
+        setError('')
+        setLoading(false)
+    }
+    const selectWalletAddress = (value) => {
+        setAddress(value)
+        if (value) void inspectAddress(value)
+        else clearInspection()
+    }
+
     const changeNetwork = (event) => {
         resetComparison()
         requestIdRef.current += 1
@@ -115,39 +135,6 @@ const WalletInspector = () => {
     const inspectWallet = async (event) => {
         event.preventDefault()
         await inspectAddress(address)
-    }
-
-    const connectCurrentWallet = async () => {
-        resetComparison()
-        setResult(null)
-        const requestId = ++requestIdRef.current
-        abortControllerRef.current?.abort()
-        abortControllerRef.current = null
-
-        if (!window.ethereum) {
-            setError(t('walletInspector.errors.noProvider'))
-            setLoading(false)
-            return
-        }
-
-        setLoading(true)
-        setError('')
-
-        try {
-            const {connectInjectedWallet} =
-                await import('../../../../services/web3/walletInspectorService.js')
-            const connectedAddress = await connectInjectedWallet()
-            if (requestId !== requestIdRef.current) return
-
-            setAddress(connectedAddress)
-            await inspectAddress(connectedAddress)
-        } catch (connectionError) {
-            if (requestId !== requestIdRef.current) return
-            if (import.meta.env.DEV) console.error(connectionError)
-            setError(t('walletInspector.errors.failed'))
-        } finally {
-            if (requestId === requestIdRef.current) setLoading(false)
-        }
     }
 
     const hasOpenDialog = showAllTokens || showAllNfts || Boolean(selectedNft)
@@ -233,7 +220,11 @@ const WalletInspector = () => {
                             autoComplete="off"
                             required
                             value={address}
-                            onChange={(event) => setAddress(event.target.value)}
+                            onChange={(event) => {
+                                setConnectedWallet(null)
+                                clearInspection()
+                                setAddress(event.target.value)
+                            }}
                             placeholder={t('walletInspector.placeholder')}
                             aria-invalid={error ? 'true' : undefined}
                             aria-describedby={error ? 'wallet-inspector-error' : undefined}
@@ -250,7 +241,7 @@ const WalletInspector = () => {
                     <button
                         type="button"
                         className="btn wallet-inspector__connect"
-                        onClick={connectCurrentWallet}
+                        onClick={() => setShowWalletPicker(true)}
                         disabled={loading}
                     >
                         <TbWallet />
@@ -258,6 +249,19 @@ const WalletInspector = () => {
                     </button>
                 </form>
 
+                {connectedWallet && (
+                    <ConnectedWallet
+                        key={connectedWallet.sessionKey}
+                        wallet={connectedWallet}
+                        onAddress={selectWalletAddress}
+                        onChangeWallet={() => setShowWalletPicker(true)}
+                        onDisconnect={() => {
+                            setConnectedWallet(null)
+                            setAddress('')
+                            clearInspection()
+                        }}
+                    />
+                )}
                 {error && (
                     <p id="wallet-inspector-error" className="wallet-inspector__error" role="alert">
                         {error}
@@ -306,6 +310,21 @@ const WalletInspector = () => {
                         onSelectNft={setSelectedNft}
                         onShowAllNfts={setShowAllNfts}
                         onShowAllTokens={setShowAllTokens}
+                    />
+                </Suspense>
+            )}
+            {showWalletPicker && (
+                <Suspense fallback={<FeatureLoading />}>
+                    <WalletPicker
+                        onClose={() => setShowWalletPicker(false)}
+                        onConnected={(connectedAddress, wallet) => {
+                            setConnectedWallet(
+                                wallet ? {...wallet, sessionKey: ++walletSessionId.current} : null
+                            )
+                            setShowWalletPicker(false)
+                            setAddress(connectedAddress)
+                            void inspectAddress(connectedAddress)
+                        }}
                     />
                 </Suspense>
             )}

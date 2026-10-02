@@ -458,12 +458,47 @@
             "invalidAddress": "Adresse ou ENS invalide.",
             "missingRpc": "RPC manquant pour ce réseau.",
             "noProvider": "Aucun wallet détecté. Installe MetaMask ou utilise un navigateur Web3.",
-            "failed": "Impossible d’analyser ce wallet."
+            "failed": "Impossible d’analyser ce wallet.",
+            "noAccounts": "Aucun compte accessible dans ce wallet. Déverrouillez-le et sélectionnez ou créez un compte, puis réessayez.",
+            "rejected": "La connexion a été refusée. Vous pouvez choisir un autre wallet ou utiliser une adresse publique.",
+            "pending": "Une demande est déjà en attente dans cette extension. Ouvrez-la pour la terminer avant de réessayer.",
+            "unauthorized": "Ce wallet n’autorise pas l’accès au compte. Vérifiez les permissions du site dans l’extension.",
+            "connectionFailed": "La connexion au wallet a échoué. Vérifiez que l’extension est déverrouillée, ou choisissez un autre wallet.",
+            "connectionTimeout": "La demande de connexion a expiré. Réessayez pour générer un nouveau QR code.",
+            "copyFailed": "Impossible de copier le lien. Vous pouvez scanner le QR code depuis votre wallet."
         },
         "nftsUnavailable": "Les NFT sont momentanément indisponibles. Cela ne signifie pas que ce wallet n’en possède aucun.",
         "nftsPartial": "Collection partiellement chargée : {{count}} NFT disponibles dans cette analyse.",
         "nftsNotLoaded": "Les éléments de la collection n’ont pas pu être chargés.",
-        "nftNoImage": "Visuel indisponible"
+        "nftNoImage": "Visuel indisponible",
+        "picker": {
+            "title": "Choisir mon wallet",
+            "description": "Choisissez une extension détectée sur ce navigateur. Vous autorisez ensuite les adresses à partager, sans signature ni transaction.",
+            "legacy": "Wallet du navigateur {{number}}",
+            "legacyHint": "Ancienne détection : vérifiez l’extension qui s’ouvre",
+            "waiting": "Confirmez la connexion dans votre extension…",
+            "detected": "Extension détectée",
+            "empty": "Aucune extension EVM détectée. Ouvrez la page dans le navigateur de votre wallet ou saisissez une adresse publique.",
+            "manual": "Utiliser une adresse publique",
+            "qrButton": "Wallet mobile",
+            "relay": "WalletConnect utilise le relais externe Reown uniquement à votre demande. L’adresse partagée sert à l’analyse ; la session est ensuite fermée.",
+            "qrAlt": "QR code de connexion WalletConnect",
+            "scan": "Scannez ce code depuis votre wallet compatible Ethereum. Sur le même téléphone, copiez le lien de connexion si votre wallet permet de le coller.",
+            "copy": "Copier le lien de connexion",
+            "copied": "Lien copié",
+            "cancel": "Annuler WalletConnect",
+            "waitingMobile": "En attente de votre wallet mobile…",
+            "eyebrow": "VOTRE WALLET · VOTRE CHOIX"
+        },
+        "session": {
+            "connected": "Adresses autorisées · lecture seule",
+            "locked": "Aucune adresse accessible · ouvrez votre wallet",
+            "account": "Adresse à analyser",
+            "refresh": "Actualiser les adresses",
+            "change": "Changer de wallet",
+            "disconnect": "Détacher du site",
+            "help": "Seules les adresses autorisées sont proposées. Pour en ajouter, ouvrez les permissions du site dans votre wallet, puis actualisez. Le réseau analysé reste celui choisi ci-dessus. Détacher arrête le suivi sur cette page ; les permissions se retirent dans le wallet."
+        }
     },
     "nav": {
         "aria": "Navigation des Labs Web3",
