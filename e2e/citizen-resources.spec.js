@@ -210,7 +210,9 @@ for (const engine of ['chromium', 'webkit']) {
                                 top:
                                     scrollY +
                                     el.getBoundingClientRect().top -
-                                    100 +
+                                    parseFloat(
+                                        getComputedStyle(el).getPropertyValue('--scene-top')
+                                    ) +
                                     value * innerHeight * 0.72,
                                 behavior: 'instant',
                             }),
@@ -316,24 +318,28 @@ for (const engine of ['chromium', 'webkit']) {
                 const scene = page.locator(`#${id} .civic-zoom`)
                 await expect(scene).toHaveClass(/civic-zoom--animated/)
                 const start = await scene.evaluate(
-                    (el) => scrollY + el.getBoundingClientRect().top - 100
+                    (el) =>
+                        scrollY +
+                        el.getBoundingClientRect().top -
+                        parseFloat(getComputedStyle(el).getPropertyValue('--zoom-top'))
                 )
                 const stage = scene.locator('.civic-zoom__stage')
+                const pinnedTop = await stage.evaluate((el) => parseFloat(getComputedStyle(el).top))
                 const content = scene.locator('.civic-zoom__content')
                 const scale = () =>
                     content.evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).a)
                 const top = () => stage.evaluate((el) => el.getBoundingClientRect().top)
                 await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 85)
-                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(top).toBeCloseTo(pinnedTop, 0)
                 await expect.poll(scale).toBeLessThan(0.93)
                 await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 680)
-                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(top).toBeCloseTo(pinnedTop, 0)
                 await expect.poll(scale).toBeGreaterThan(0.98)
                 await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 1050)
-                await expect.poll(top).toBeLessThan(0)
+                await expect.poll(top).toBeLessThan(pinnedTop - 100)
                 await expect.poll(scale).toBeCloseTo(1, 2)
                 await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), start + 425)
-                await expect.poll(top).toBeCloseTo(100, 0)
+                await expect.poll(top).toBeCloseTo(pinnedTop, 0)
                 await expect.poll(scale).toBeCloseTo(0.96, 2)
                 await scene.getByRole('button', {name: 'Lecture continue', exact: true}).click()
                 await expect(scene).not.toHaveClass(/civic-zoom--animated/)

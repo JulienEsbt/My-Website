@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
+import {desktopScenePlacement} from './sceneViewport.js'
 import useMobileScrollScenes from './useMobileScrollScenes.js'
 
 export default function CivicZoomScene({children}) {
@@ -8,6 +9,7 @@ export default function CivicZoomScene({children}) {
     const rootRef = useRef(null)
     const contentRef = useRef(null)
     const pendingTarget = useRef(null)
+    const stageTop = useRef(100)
     const [eligible, setEligible] = useState(false)
     const [continuous, setContinuous] = useState(false)
     const animated = eligible && !continuous
@@ -23,7 +25,10 @@ export default function CivicZoomScene({children}) {
             const height = content.offsetHeight + 60
             root.style.setProperty('--zoom-stage-height', `${height}px`)
             root.style.setProperty('--zoom-distance', `${innerHeight * 0.85}px`)
-            const next = media.matches && height < innerHeight - 124
+            const placement = desktopScenePlacement(height)
+            stageTop.current = placement.top
+            root.style.setProperty('--zoom-top', `${placement.top}px`)
+            const next = media.matches && placement.fits
             if (!next && root.classList.contains('civic-zoom--animated')) {
                 const bounds = root.getBoundingClientRect()
                 if (bounds.top < 100 && bounds.bottom > 100) pendingTarget.current = content
@@ -57,7 +62,10 @@ export default function CivicZoomScene({children}) {
             frame = 0
             const progress = Math.max(
                 0,
-                Math.min(1, (100 - root.getBoundingClientRect().top) / (innerHeight * 0.85))
+                Math.min(
+                    1,
+                    (stageTop.current - root.getBoundingClientRect().top) / (innerHeight * 0.85)
+                )
             )
             const eased = progress * progress * (3 - 2 * progress)
             root.style.setProperty('--zoom-progress', String(eased))

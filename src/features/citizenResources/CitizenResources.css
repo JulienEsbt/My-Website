@@ -676,7 +676,7 @@
 }
 .civic-scene--animated .civic-scene__panel {
     grid-area: 1 / 1;
-    align-self: start;
+    align-self: center;
     transform-origin: center;
 }
 .civic-scene--animated .civic-scene__panel:not(:first-child) {
@@ -846,7 +846,7 @@
 }
 .civic-zoom--animated .civic-zoom__stage {
     position: sticky;
-    top: 100px;
+    top: var(--zoom-top, 100px);
 }
 .civic-zoom__toolbar {
     height: 60px;
@@ -855,7 +855,7 @@
     padding-bottom: 12px;
 }
 .civic-zoom--animated .civic-zoom__content {
-    transform-origin: center top;
+    transform-origin: center;
     transform: scale(calc(0.92 + var(--zoom-progress, 0) * 0.08));
 }
 
@@ -1153,5 +1153,38 @@
 @media (max-width: 700px) {
     .civic-notes .civic-approach__principles {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Grow gently on spacious desktops; content measurements still decide whether pinning is safe. */
+@media (min-width: 1600px) and (min-height: 900px) {
+    .civic-page .container {
+        width: min(88%, clamp(76rem, 76vw, 100rem));
+    }
+    #approach .civic-zoom {
+        max-width: clamp(62rem, 64vw, 80rem);
+    }
+    #approach h2 {
+        font-size: clamp(3.6rem, 3.5vw, 4.5rem);
+    }
+    #approach .civic-approach__copy p:not(.civic-eyebrow) {
+        font-size: clamp(1.1rem, 1vw, 1.4rem);
+    }
+    .civic-scene .civic-card__description,
+    .civic-scene .civic-card__owner,
+    .civic-scene .civic-card__limit,
+    .civic-project p {
+        font-size: clamp(1rem, 0.9vw, 1.3rem);
+    }
+    .civic-scene .civic-card h3,
+    .civic-project h3 {
+        font-size: clamp(1.8rem, 1.7vw, 2.5rem);
+    }
+    .civic-page .civic-card__question p {
+        font-size: clamp(2.1rem, 2vw, 3rem);
+    }
+    .civic-card--featured .civic-card__body,
+    .civic-projects {
+        padding: clamp(2rem, 2vw, 3rem);
     }
 }
