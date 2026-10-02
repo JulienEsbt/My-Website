@@ -18,16 +18,24 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 const step = section.locator('.professional-chapter__step').first()
                 await expect(step).toHaveClass(/step--mobile/)
                 const card = step.locator('article')
+                // Measure sticky geometry at settled positions, without interrupting Safari's
+                // CSS smooth-scroll animation when reversing direction between assertions.
                 const geometry = await step.evaluate((el) => ({
                     top: el.getBoundingClientRect().top + scrollY,
                     hold: parseFloat(el.style.getPropertyValue('--mobile-hold')),
                 }))
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + 20)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + 20
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeCloseTo(88, 0)
                 const initial = await card.evaluate((el) => el.getBoundingClientRect().width)
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + geometry.hold * 0.9)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + geometry.hold * 0.9
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().width))
                     .toBeGreaterThan(initial)
@@ -41,11 +49,17 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 expect(await card.evaluate((el) => el.getBoundingClientRect().bottom)).toBeLessThan(
                     790 - 80
                 )
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + geometry.hold + 100)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + geometry.hold + 100
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeLessThan(0)
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + 20)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + 20
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeCloseTo(88, 0)
