@@ -71,7 +71,18 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                     )
                 ).toBe(geometry.hold)
                 await page.setViewportSize({width: 393, height: 790})
-                await section.getByRole('button', {name: 'Lecture continue', exact: true}).click()
+                const readingToggle = section.getByRole('button', {
+                    name: 'Lecture continue',
+                    exact: true,
+                })
+                // Bring the control clear of the fixed header/dock after the resize,
+                // before asking WebKit to hit-test a real pointer click.
+                await readingToggle.evaluate((el) =>
+                    el.scrollIntoView({block: 'center', behavior: 'instant'})
+                )
+                await expect(readingToggle).toBeInViewport({ratio: 1})
+                await readingToggle.click()
+                await expect(readingToggle).toHaveCount(0)
                 await expect(section.locator('.professional-chapter__step--mobile')).toHaveCount(0)
                 await section.getByRole('button', {name: 'Lecture animée', exact: true}).click()
                 await expect(step).toHaveClass(/step--mobile/)
