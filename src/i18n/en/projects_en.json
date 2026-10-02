@@ -1,6 +1,8 @@
 {
     "bruno": {
-        "meta": {"title": "Bruno Pizza — Product case study | Julien Esterbet"},
+        "meta": {
+            "title": "Bruno Pizza — Product case study | Julien Esterbet"
+        },
         "hero": {
             "kicker": "Product case study",
             "title": "Bruno Pizza — Production",
@@ -11,7 +13,7 @@
         },
         "overview": {
             "statusLabel": "Status",
-            "status": "Active product — Windows 1.1.4 / macOS 1.1.3",
+            "status": "Active product · v1.2.0 in acceptance testing",
             "roleLabel": "Responsibility",
             "role": "Full-stack design and development",
             "scopeLabel": "Scope",
@@ -25,19 +27,19 @@
         "solution": {
             "kicker": "Solution",
             "title": "A guided local business workflow",
-            "intro": "The application matches the Excel plan with a business catalogue and organizes work across three complementary areas.",
+            "intro": "Version 1.2 brings the Excel plan closer to workshop practice: adjust quantities, recover imported values and follow assembly steps in pictures.",
             "items": {
                 "dashboard": {
                     "title": "Production dashboard",
-                    "body": "Excel import and validation, header, duplicate, quantity and total checks, followed by distribution by variety and distributor."
+                    "body": "Excel import excludes Kit Pizza rows and groups quantities by pizza and location. Quantities can be adjusted with recalculated totals. Changes are highlighted in yellow, saved locally and can be reset to the imported values after confirmation."
                 },
                 "workshop": {
                     "title": "Workshop flow",
-                    "body": "Ordered recipe, picture, progress and navigation to guide preparation pizza by pizza."
+                    "body": "Ordered recipes and an assembly gallery: photos play at an adjustable pace, with pause, navigation and access to the final image. Zero-quantity pizzas are skipped; the next pizza stays visible to help prepare ahead."
                 },
                 "settings": {
                     "title": "Business settings",
-                    "body": "Local management of pizzas, ingredients, recipes, pictures and distributors."
+                    "body": "Local management of the catalogue, recipes and locations. Up to 20 photos per pizza can be added, reordered or removed with confirmation; the last one represents the finished result."
                 }
             }
         },
@@ -62,11 +64,11 @@
                 },
                 "persistence": {
                     "title": "Separated persistence",
-                    "body": "User data is stored outside installed files so an update can reuse the existing catalogue."
+                    "body": "The catalogue and photos remain outside the installation files. Gallery migration preserves existing images and backs up the existing database; plan adjustments are saved separately in local storage."
                 },
                 "quality": {
                     "title": "Verifiable delivery",
-                    "body": "Frontend, backend and desktop checks are grouped before release packages are built. Windows version 1.1.4 was validated in the workshop on a 43-inch screen."
+                    "body": "As of 2 October 2026, the v1.2.0 release log reports 67 automated tests, a packaged macOS build and an in-app check. Windows acceptance testing remains pending. Version 1.1.4 had been validated in the workshop on a 43-inch screen."
                 }
             }
         },
@@ -74,20 +76,52 @@
             "kicker": "Current limitations",
             "title": "A deliberate scope",
             "items": {
-                "excel": "Excel remains the only production source; Adial integration is not included yet.",
+                "excel": "Excel remains the initial source of the plan, with traceable local adjustments; Adial integration is not included.",
                 "trust": "The application targets trusted local use and does not include the authentication required for network exposure.",
-                "signing": "The Windows and macOS test releases are not signed yet."
+                "signing": "The Windows and macOS test releases are not signed yet.",
+                "validation": "Version 1.2.0 is an acceptance-test build: Windows packaging and workshop feedback are still pending."
             }
         },
-        "stack": {"kicker": "Stack", "title": "Core technologies"},
+        "stack": {
+            "kicker": "Stack",
+            "title": "Core technologies"
+        },
         "next": {
             "title": "An application designed for the workshop",
             "body": "The public repository documents the complete flow, from Excel plan import to local persistence and desktop packaging.",
             "cta": "Back to the selection"
+        },
+        "release": {
+            "kicker": "Update · 1.2.0",
+            "title": "Adjust, illustrate, prepare",
+            "body": "This iteration addresses three practical needs: adjust a plan without losing the Excel reference, make assembly steps visible and improve readability during production. The dark theme is now permanent and images stay uncropped."
+        },
+        "gallery": {
+            "title": "Bruno Pizza screenshots",
+            "previous": "Previous screenshot",
+            "next": "Next screenshot",
+            "pause": "Pause slideshow",
+            "play": "Play slideshow",
+            "enlarge": "View full resolution (new tab)",
+            "choose": "Choose a screenshot",
+            "captions": {
+                "01-dashboard": "Production dashboard",
+                "02-edit-quantities": "Editing quantities",
+                "03-adjusted-totals": "Updated production totals",
+                "04-pizza-catalogue": "Pizza catalogue and recipes",
+                "05-ingredients": "Ingredient management",
+                "06-distributors": "Distributor settings",
+                "07-workshop-start": "Workshop · starting assembly",
+                "08-workshop-assembly": "Workshop · preparation steps",
+                "09-workshop-final": "Workshop · final image",
+                "10-completion": "Production walkthrough completed"
+            }
         }
     },
     "website": {
-        "meta": {"title": "My-Website — Portfolio case study | Julien Esterbet"},
+        "meta": {
+            "title": "My-Website — Portfolio case study | Julien Esterbet"
+        },
         "hero": {
             "kicker": "Portfolio case study",
             "title": "My-Website",
@@ -203,7 +237,10 @@
                 "fieldData": "Responsive media, build budgets and lazy loading control the cost of the richest pages."
             }
         },
-        "stack": {"kicker": "Stack", "title": "Core technologies and controls"},
+        "stack": {
+            "kicker": "Stack",
+            "title": "Core technologies and controls"
+        },
         "next": {
             "title": "A portfolio built as a product",
             "body": "The public repository exposes the architecture, data, tests and delivery choices behind the visible experience.",

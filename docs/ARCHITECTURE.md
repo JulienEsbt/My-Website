@@ -30,7 +30,7 @@ The production build generates:
 ## External services
 
 - Vercel hosts the application, functions, analytics, and Speed Insights.
-- Cloudflare R2 serves sanitized responsive media derivatives.
+- Cloudflare R2 serves sanitized responsive media derivatives. The Bruno Pizza v1.2 gallery is currently an explicit exception: its WebP variants are bundled by Vite and served from the site, not R2 (see `docs/assets/bruno-pizza-v12/README.md`).
 - Mapbox renders the travel map.
 - Alchemy-compatible RPC endpoints power the experimental Web3 views.
 - EmailJS is called server-side for contact delivery.

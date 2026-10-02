@@ -1,6 +1,8 @@
 {
     "bruno": {
-        "meta": {"title": "Bruno Pizza — Étude de cas produit | Julien Esterbet"},
+        "meta": {
+            "title": "Bruno Pizza — Étude de cas produit | Julien Esterbet"
+        },
         "hero": {
             "kicker": "Étude de cas produit",
             "title": "Bruno Pizza — Production",
@@ -11,7 +13,7 @@
         },
         "overview": {
             "statusLabel": "Statut",
-            "status": "Produit actif — Windows 1.1.4 / macOS 1.1.3",
+            "status": "Produit actif · v1.2.0 en recette",
             "roleLabel": "Responsabilité",
             "role": "Conception et développement full-stack",
             "scopeLabel": "Périmètre",
@@ -25,19 +27,19 @@
         "solution": {
             "kicker": "Solution",
             "title": "Un parcours métier local et guidé",
-            "intro": "L’application rapproche le plan Excel d’un catalogue métier et organise le travail dans trois espaces complémentaires.",
+            "intro": "La version 1.2 rapproche le plan Excel du travail réel : ajuster les quantités, retrouver les valeurs importées et suivre les étapes de montage en images.",
             "items": {
                 "dashboard": {
                     "title": "Tableau de production",
-                    "body": "Import et validation des fichiers Excel, contrôle des en-têtes, doublons, quantités et totaux, puis répartition par variété et distributeur."
+                    "body": "Import Excel avec exclusion des lignes Kit Pizza, répartition par pizza et distributeur, puis correction des quantités avec totaux recalculés. Les modifications sont repérées en jaune, conservées localement et réinitialisables aux valeurs Excel après confirmation."
                 },
                 "workshop": {
                     "title": "Parcours atelier",
-                    "body": "Recette ordonnée, photo, progression et navigation pour guider la fabrication pizza par pizza."
+                    "body": "Recette ordonnée et galerie de montage : les photos défilent à une cadence réglable, avec pause, navigation et accès à l’image finale. Les pizzas à quantité nulle sont ignorées ; la suivante reste visible pour anticiper la préparation."
                 },
                 "settings": {
                     "title": "Paramètres métier",
-                    "body": "Gestion locale du catalogue de pizzas, des ingrédients, des recettes, des visuels et des distributeurs."
+                    "body": "Gestion locale du catalogue, des recettes et des distributeurs. Jusqu’à 20 photos par pizza peuvent être ajoutées, réordonnées ou supprimées avec confirmation ; la dernière représente le résultat final."
                 }
             }
         },
@@ -62,11 +64,11 @@
                 },
                 "persistence": {
                     "title": "Persistance séparée",
-                    "body": "Les données utilisateur sont stockées hors des fichiers installés afin qu’une mise à jour puisse réutiliser le catalogue existant."
+                    "body": "Le catalogue et les photos restent hors des fichiers installés. La migration des galeries préserve les anciennes images et sauvegarde la base existante ; les corrections du plan sont conservées séparément dans le stockage local."
                 },
                 "quality": {
                     "title": "Livraison vérifiable",
-                    "body": "Les contrôles frontend, backend et desktop sont regroupés avant la construction des paquets de livraison. La version Windows 1.1.4 a été validée en atelier sur un écran de 43 pouces."
+                    "body": "Au 2 octobre 2026, le journal de livraison de la v1.2.0 rapporte 67 tests automatiques, un paquet macOS construit et un contrôle dans l’application. La recette Windows reste à réaliser. La v1.1.4 avait été validée en atelier sur un écran de 43 pouces."
                 }
             }
         },
@@ -74,20 +76,52 @@
             "kicker": "Limites actuelles",
             "title": "Un périmètre assumé",
             "items": {
-                "excel": "Excel reste l’unique source de production ; l’intégration Adial n’est pas encore incluse.",
+                "excel": "Excel reste la source initiale du plan, avec des corrections locales traçables ; l’intégration Adial n’est pas incluse.",
                 "trust": "L’application vise un usage local de confiance et ne possède pas l’authentification requise pour une exposition réseau.",
-                "signing": "Les versions Windows et macOS de test ne sont pas encore signées."
+                "signing": "Les versions Windows et macOS de test ne sont pas encore signées.",
+                "validation": "La v1.2.0 est une version de recette : la construction Windows et les retours en atelier sont encore attendus."
             }
         },
-        "stack": {"kicker": "Stack", "title": "Technologies principales"},
+        "stack": {
+            "kicker": "Stack",
+            "title": "Technologies principales"
+        },
         "next": {
             "title": "Une application pensée pour l’atelier",
             "body": "Le dépôt public documente le parcours complet, de l’import du plan Excel à la persistance locale et au paquet desktop.",
             "cta": "Revenir à la sélection"
+        },
+        "release": {
+            "kicker": "Évolution · 1.2.0",
+            "title": "Ajuster, illustrer, préparer",
+            "body": "Cette itération suit trois besoins concrets : corriger un plan sans perdre la référence Excel, rendre les étapes de montage visibles et faciliter la lecture pendant la production. Le thème sombre devient permanent et les images restent entières, sans recadrage."
+        },
+        "gallery": {
+            "title": "Bruno Pizza en images",
+            "previous": "Capture précédente",
+            "next": "Capture suivante",
+            "pause": "Mettre le diaporama en pause",
+            "play": "Lancer le diaporama",
+            "enlarge": "Voir en pleine résolution (nouvel onglet)",
+            "choose": "Choisir une capture",
+            "captions": {
+                "01-dashboard": "Tableau de production",
+                "02-edit-quantities": "Correction des quantités",
+                "03-adjusted-totals": "Totaux après modification",
+                "04-pizza-catalogue": "Catalogue et recettes des pizzas",
+                "05-ingredients": "Gestion des ingrédients",
+                "06-distributors": "Configuration des distributeurs",
+                "07-workshop-start": "Atelier · début du montage",
+                "08-workshop-assembly": "Atelier · étapes de préparation",
+                "09-workshop-final": "Atelier · visuel final",
+                "10-completion": "Fin du parcours de production"
+            }
         }
     },
     "website": {
-        "meta": {"title": "My-Website — Étude de cas portfolio | Julien Esterbet"},
+        "meta": {
+            "title": "My-Website — Étude de cas portfolio | Julien Esterbet"
+        },
         "hero": {
             "kicker": "Étude de cas portfolio",
             "title": "My-Website",
@@ -203,7 +237,10 @@
                 "fieldData": "Les médias responsives, les budgets de build et le chargement différé limitent le coût des pages les plus riches."
             }
         },
-        "stack": {"kicker": "Stack", "title": "Technologies et contrôles principaux"},
+        "stack": {
+            "kicker": "Stack",
+            "title": "Technologies et contrôles principaux"
+        },
         "next": {
             "title": "Un portfolio construit comme un produit",
             "body": "Le dépôt public permet d’examiner l’architecture, les données, les tests et les choix de livraison derrière l’expérience visible.",

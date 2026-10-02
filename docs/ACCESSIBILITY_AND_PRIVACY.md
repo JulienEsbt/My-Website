@@ -6,6 +6,6 @@ Implemented practices include semantic landmarks, a skip link, keyboard-operable
 
 The site does not provide user accounts or an email newsletter. RSS and Atom require no personal-data submission. The contact form sends volunteered details for message delivery without creating a subscriber database.
 
-Private source photographs are excluded from Git. Public derivatives are resized, compressed, and generated without source metadata before being served from Cloudflare R2. Wallet inspection remains an experimental, user-initiated read-only feature; donation transactions require explicit wallet confirmation.
+Private source photographs are excluded from Git. Public derivatives are resized, compressed, and generated without source metadata before being served from Cloudflare R2. The user-provided Bruno Pizza v1.2 application screenshots are archived in `docs/assets/bruno-pizza-v12`; their responsive WebP derivatives are currently shipped with the site rather than R2. Wallet inspection remains an experimental, user-initiated read-only feature; donation transactions require explicit wallet confirmation.
 
 This document records implemented principles, not a formal accessibility certification or legal opinion.
