@@ -35,8 +35,9 @@ const Header = () => {
                 .from(cta.current, {y: 18, opacity: 0}, '-=0.4')
                 .from(visual.current, {scale: 0.92, opacity: 0}, '-=0.5')
                 .from(floating.current?.children, {y: 16, opacity: 0, stagger: 0.08}, '-=0.35')
-                // Animate the contents: GSAP must not capture the responsive rail's centering.
-                .from(socials.current?.children, {x: -14, opacity: 0}, '-=0.45')
+                // Keep navigation visible while the entrance timeline starts or is throttled.
+                // Animate only its contents, not the responsive rail's centering.
+                .from(socials.current?.children, {x: -14}, '-=0.45')
 
             gsap.to('.home-hero__floating-pill', {
                 y: -8,

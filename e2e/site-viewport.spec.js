@@ -189,15 +189,24 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
             for (const width of [1280, 1440, 1181, 1710]) {
                 await page.setViewportSize({width, height: 800})
                 await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'}))
-                const rail = await socials.boundingBox()
-                expect(rail.x).toBeGreaterThanOrEqual(0)
-                expect(rail.x + rail.width).toBeLessThanOrEqual(width)
-                const actions = await page.locator('.home-hero .cta').boundingBox()
-                if (width < 1440) {
-                    expect(rail.y).toBeGreaterThanOrEqual(actions.y + actions.height + 16)
-                } else {
-                    expect(rail.x + rail.width).toBeLessThanOrEqual(actions.x)
-                }
+                // Visibility is immediate; geometry settles independently as the copy animates.
+                await expect
+                    .poll(
+                        async () => {
+                            const rail = await socials.boundingBox()
+                            const actions = await page.locator('.home-hero .cta').boundingBox()
+                            return {
+                                leftInside: rail.x >= 0,
+                                rightInside: rail.x + rail.width <= width,
+                                clearOfActions:
+                                    width < 1440
+                                        ? rail.y >= actions.y + actions.height + 16
+                                        : rail.x + rail.width <= actions.x,
+                            }
+                        },
+                        {timeout: 15000, message: `social navigation at ${width}px in ${engine}`}
+                    )
+                    .toEqual({leftInside: true, rightInside: true, clearOfActions: true})
             }
         } finally {
             await browser.close()

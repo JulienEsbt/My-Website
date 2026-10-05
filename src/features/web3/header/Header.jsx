@@ -30,7 +30,8 @@ const Header = () => {
                 .from(role.current, {y: 20, opacity: 0}, '-=0.45')
                 .from(cta.current, {y: 20}, '-=0.45')
                 .from(photo.current, {scale: 0.9, opacity: 0}, '-=0.45')
-                .from(socials.current, {x: -12, opacity: 0}, '-=0.5')
+                // Navigation stays visible even if the entrance timeline is throttled.
+                .from(socials.current, {x: -12}, '-=0.5')
                 .from(scroll.current, {x: 12, opacity: 0}, '-=0.6')
         })
         return () => mm.revert()
