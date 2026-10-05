@@ -299,6 +299,9 @@ test('a Mapbox denial is explained while the selected story stays readable', asy
     )
     await page.goto('/travel/croatia-2021')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page
+        .locator('#travel-explorer')
+        .evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     await expect(page.locator('.travel-mapbox__status')).toContainText(
         'Certaines données de la carte'
     )

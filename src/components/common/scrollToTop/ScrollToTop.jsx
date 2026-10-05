@@ -1,12 +1,28 @@
-import {useEffect} from 'react'
+import {useEffect, useRef} from 'react'
 import {unlocalizedPath} from '../../../config/localizedPaths.js'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigationType} from 'react-router-dom'
 
 const ScrollToTop = () => {
-    const {pathname: localizedPathname, hash} = useLocation()
+    const {pathname: localizedPathname, hash, key, state} = useLocation()
+    const navigationType = useNavigationType()
+    const previousLocation = useRef(null)
     const pathname = unlocalizedPath(localizedPathname)
 
     useEffect(() => {
+        const previous = previousLocation.current
+        previousLocation.current = {pathname, hash, key, origin: state?.travelTimelineOrigin}
+        // Language switches keep the same document position.
+        if (previous?.pathname === pathname && previous?.hash === hash) return
+        const isTravel = (path) => path === '/travel' || path?.startsWith('/travel/')
+        if (
+            previous &&
+            isTravel(previous.pathname) &&
+            isTravel(pathname) &&
+            (state?.travelTimelineOrigin || (navigationType === 'POP' && previous.origin === key))
+        ) {
+            // The mobile dialog's body lock restores the list, including browser Back.
+            return
+        }
         if (hash) {
             const targetId = decodeURIComponent(hash.slice(1))
             let observer
@@ -60,7 +76,7 @@ const ScrollToTop = () => {
             left: 0,
             behavior: 'instant',
         })
-    }, [pathname, hash])
+    }, [pathname, hash, key, state?.travelTimelineOrigin, navigationType])
 
     return null
 }

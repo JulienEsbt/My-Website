@@ -1,3 +1,4 @@
+import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import {useCallback, useEffect, useRef, useState} from 'react'
 import {createPortal} from 'react-dom'
 import {useTranslation} from 'react-i18next'
@@ -10,7 +11,10 @@ import ResponsiveImage from '../../../components/common/media/ResponsiveImage.js
 import {loadTripPhotos} from '../../../data/travel/photoAlbums.js'
 
 const TravelGallery = ({albumId, city, onOpenChange}) => {
-    const {t} = useTranslation('travel')
+    const {t, i18n} = useTranslation('travel')
+    const fr = i18n.resolvedLanguage?.startsWith('fr')
+    const reducedMotion = useReducedMotion()
+    const [paused, setPaused] = useState(false)
     const [photos, setPhotos] = useState([])
     const [status, setStatus] = useState('loading')
     const [activePhotoIndex, setActivePhotoIndex] = useState(null)
@@ -42,7 +46,16 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
         }
     }, [albumId])
 
+    useEffect(() => {
+        if (activePhotoIndex === null || paused || reducedMotion || photos.length < 2) return
+        const timer = setInterval(() => {
+            if (!document.hidden) setActivePhotoIndex((index) => (index + 1) % photos.length)
+        }, 6500)
+        return () => clearInterval(timer)
+    }, [activePhotoIndex, paused, reducedMotion, photos.length])
+
     const openPhoto = (index) => {
+        setPaused(false)
         if (!isOverlayOpen) triggerRef.current = document.activeElement
         setGalleryOpen(false)
         setActivePhotoIndex(index)
@@ -70,10 +83,12 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }
 
     const previousPhoto = useCallback(() => {
+        setPaused(true)
         setActivePhotoIndex((index) => (index === 0 ? photos.length - 1 : index - 1))
     }, [photos.length])
 
     const nextPhoto = useCallback(() => {
+        setPaused(true)
         setActivePhotoIndex((index) => (index === photos.length - 1 ? 0 : index + 1))
     }, [photos.length])
 
@@ -313,13 +328,28 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
 
                                 <span
                                     className="travel-timeline__lightbox-counter"
-                                    aria-live="polite"
+                                    aria-live={paused || reducedMotion ? 'polite' : 'off'}
                                     aria-atomic="true"
                                 >
                                     {activePhotoIndex + 1} / {photos.length}
                                 </span>
                             </div>
 
+                            <button
+                                className="gallery-playback"
+                                type="button"
+                                disabled={reducedMotion}
+                                onClick={() => setPaused(!paused)}
+                                aria-pressed={paused}
+                            >
+                                {paused || reducedMotion
+                                    ? fr
+                                        ? 'Reprendre le défilement'
+                                        : 'Resume slideshow'
+                                    : fr
+                                      ? 'Mettre le défilement en pause'
+                                      : 'Pause slideshow'}
+                            </button>
                             <div className="travel-timeline__lightbox-dock">
                                 <div
                                     ref={lightboxStripRef}
