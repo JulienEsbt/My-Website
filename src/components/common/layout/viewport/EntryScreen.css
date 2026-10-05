@@ -1,0 +1,473 @@
+/* One optical scale for landing introductions. Grow only when both dimensions
+   permit it; never scale the document or counteract the reader's browser zoom. */
+.entry-screen {
+    --entry-unit: clamp(
+        1rem,
+        min(calc(1rem + (100vw - 100rem) * 0.014), calc(1rem + (100svh - 56.25rem) * 0.025)),
+        1.625rem
+    );
+    --entry-width: min(calc(75 * var(--entry-unit)), calc(100vw - 4rem));
+    font-size: var(--entry-unit);
+}
+.entry-screen:is(.home-hero, .hero, .editorial-entry, .civic-entry) {
+    min-height: 100svh;
+    margin-top: 0;
+    padding-block: var(--scene-header, 96px) var(--scene-bottom, 100px);
+    display: grid;
+    align-content: center;
+}
+.entry-screen :is(.home-hero__container, .header__container, .civic-hero, .page-hero__container) {
+    width: var(--entry-width);
+    margin-inline: auto;
+}
+.entry-screen .civic-hero {
+    padding-block: 0;
+}
+.entry-screen .page-hero__container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 2.5em 4em;
+    align-items: center;
+}
+.entry-screen .page-hero__copy {
+    min-width: 0;
+}
+.entry-screen .page-hero__kicker {
+    font-size: 0.8em;
+}
+.entry-screen.page-hero h1 {
+    max-width: 13ch;
+    font-size: clamp(2.6rem, 4.6vw, calc(4.5 * var(--entry-unit)));
+    letter-spacing: -0.045em;
+    margin-bottom: 0.4em;
+    text-wrap: balance;
+}
+.entry-screen .page-hero__subtitle {
+    max-width: 42ch;
+    font-size: 1em;
+    line-height: 1.8;
+}
+.entry-screen .page-hero__actions {
+    gap: 0.8em;
+    margin-top: 1.6em;
+}
+.entry-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+    padding: 0.8em 1.2em;
+    min-height: 44px;
+    font-size: 0.85em;
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 999px;
+    background: rgba(77, 181, 255, 0.1);
+}
+.entry-action--quiet {
+    background: transparent;
+}
+.entry-action:hover {
+    background: rgba(77, 181, 255, 0.18);
+}
+.page-hero__visual {
+    min-width: 0;
+}
+.page-hero__footer {
+    grid-column: 1 / -1;
+}
+.entry-screen :is(.travel-stats-section, .reflexion-stats-section) {
+    margin: 0;
+}
+.entry-screen :is(.travel-stats, .reflexion-stats) {
+    width: 100%;
+    max-width: none;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    border-inline: 0;
+    border-bottom: 0;
+}
+.entry-screen .reflexion-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.entry-screen :is(.travel-stat, .reflexion-stat) {
+    padding: 0.8em 1.2em;
+    min-height: 0;
+}
+.entry-screen :is(.travel-stat, .reflexion-stat):first-child {
+    padding-left: 0;
+}
+.entry-screen :is(.travel-stat, .reflexion-stat) span {
+    min-height: 0;
+    font-size: 0.75em;
+}
+.entry-screen :is(.travel-stat, .reflexion-stat) strong {
+    font-size: 1.5em;
+}
+.travel-entry-photo {
+    width: 100%;
+    position: relative;
+    display: block;
+    aspect-ratio: 1.12;
+    overflow: hidden;
+    border-radius: 1.5em;
+    border: 1px solid var(--liquid-border);
+    background: #10182b;
+    isolation: isolate;
+}
+.travel-entry-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 35%, rgba(0, 0, 0, 0.8));
+    pointer-events: none;
+}
+.travel-entry-photo .responsive-picture,
+.travel-entry-photo img {
+    width: 100%;
+    height: 100%;
+}
+.travel-entry-photo img {
+    object-fit: cover;
+    object-position: 50% 55%;
+    transition: transform 500ms ease;
+}
+.travel-entry-photo:hover img {
+    transform: scale(1.025);
+}
+.travel-entry-photo__top,
+.travel-entry-photo__caption {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    left: 1.4em;
+    right: 1.4em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+.travel-entry-photo__top {
+    top: 1.4em;
+    font-size: 0.8em;
+}
+.travel-entry-photo__caption {
+    bottom: 1.4em;
+    justify-content: space-between;
+}
+.travel-entry-photo__caption small {
+    display: block;
+    font-size: 0.75em;
+    opacity: 0.85;
+}
+.travel-entry-photo__caption strong {
+    display: block;
+    font-size: 1.7em;
+    line-height: 1.2;
+    margin-top: 0.3em;
+}
+.travel-entry-photo__caption > svg {
+    width: 1.5em;
+    height: 1.5em;
+    flex-shrink: 0;
+}
+.reflection-entry-note {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    padding: 2em;
+    border: 1px solid var(--liquid-border);
+    border-radius: 1.4em;
+    background:
+        radial-gradient(ellipse at top right, rgba(77, 181, 255, 0.13), transparent 70%),
+        linear-gradient(135deg, rgba(24, 39, 65, 0.7), rgba(18, 17, 44, 0.7));
+}
+.reflection-entry-note:hover {
+    border-color: var(--color-primary);
+}
+.reflection-entry-note__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.8em;
+}
+.reflection-entry-note h2 {
+    font-size: 2em;
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    color: var(--color-white);
+    text-wrap: balance;
+}
+.reflection-entry-note p {
+    color: var(--color-light);
+    font-size: 0.95em;
+    line-height: 1.8;
+}
+.reflection-entry-note__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    border-top: 1px solid var(--liquid-border-soft);
+    padding-top: 1.2em;
+    font-size: 0.8em;
+}
+.reflection-entry-note__footer > span:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+@media (min-width: 1025px) {
+    .entry-screen .travel-entry-photo {
+        max-height: max(16rem, calc(var(--scene-available) - 12.5em));
+    }
+    .entry-screen .home-hero__title {
+        font-size: clamp(3rem, 5.4vw, calc(5 * var(--entry-unit)));
+    }
+    .entry-screen .home-hero__subtitle {
+        font-size: 1.45em;
+    }
+    .entry-screen .home-hero__description {
+        max-width: 43em;
+        font-size: 1em;
+    }
+    .entry-screen .home-hero__eyebrow {
+        font-size: 0.9em;
+    }
+    .entry-screen .home-hero__portrait-card {
+        width: clamp(19rem, calc(var(--scene-available) * 0.72), calc(24 * var(--entry-unit)));
+        padding: 1em;
+        border-radius: 2.2em;
+    }
+    .entry-screen .home-hero__identity-card {
+        width: calc(100% - 2.4em);
+        padding: 0.9em 1em;
+        bottom: 1.15em;
+    }
+    .entry-screen .home-hero__identity-card strong {
+        font-size: 0.95em;
+    }
+    .entry-screen .home-hero__identity-card span {
+        font-size: 0.78em;
+    }
+    .entry-screen .home-hero__floating-pill,
+    .entry-screen .home-hero__badges span {
+        font-size: calc(0.78 * var(--entry-unit));
+    }
+    .entry-screen :is(.home-hero__container, .header__container) {
+        gap: 5em;
+    }
+    .entry-screen .hero__title {
+        font-size: clamp(3.4rem, 6vw, calc(5.8 * var(--entry-unit)));
+    }
+    .entry-screen .hero__subtitle {
+        font-size: 1.2em;
+        max-width: 42em;
+    }
+    .entry-screen .me {
+        width: clamp(19rem, calc(var(--scene-available) * 0.72), calc(25 * var(--entry-unit)));
+    }
+    .entry-screen .me__meta {
+        width: min(16em, 72%);
+    }
+    .entry-screen .me__meta span {
+        font-size: 0.7em;
+    }
+    .entry-screen .me__meta strong {
+        font-size: 0.84em;
+    }
+    .entry-screen .cta {
+        gap: 0.85em;
+    }
+    .entry-screen .cta .btn {
+        font-size: 0.9em;
+        padding: 0.8em 1.3em;
+    }
+    .entry-screen .civic-hero {
+        gap: 5em;
+    }
+    .entry-screen .civic-hero h1 {
+        font-size: clamp(3rem, 5.3vw, calc(5 * var(--entry-unit)));
+    }
+    .entry-screen .civic-hero__intro {
+        font-size: 1em;
+        max-width: 42em;
+    }
+    .civic-page .entry-screen .civic-hero__context {
+        font-size: 0.95em;
+        max-width: 42em;
+    }
+    .entry-screen .civic-hero__invitation {
+        font-size: 1em;
+    }
+    .entry-screen .civic-hero__index a {
+        font-size: 0.94em;
+    }
+    .entry-screen .civic-hero__index p {
+        font-size: 0.8em;
+    }
+    .entry-screen .civic-hero__index-mark {
+        font-size: 4em;
+    }
+    .entry-screen .civic-eyebrow {
+        font-size: 0.75em;
+    }
+    .entry-screen .civic-button {
+        font-size: 1em;
+    }
+}
+@media (min-width: 1440px) {
+    .entry-screen .home-hero__container {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 3em;
+    }
+    .entry-screen .home-hero__visual {
+        /* Include the right-hand floating label in the composition's bounds. */
+        padding-right: 2rem;
+        margin-left: 1.5em;
+    }
+}
+@media (min-width: 1025px) and (max-width: 1439px) {
+    .entry-screen .home-hero__container {
+        grid-template-areas: 'copy visual' 'socials visual';
+        row-gap: 1.25rem;
+    }
+    .entry-screen .home-hero__copy {
+        grid-area: copy;
+    }
+    .entry-screen .home-hero__visual {
+        grid-area: visual;
+    }
+}
+@media (max-width: 1024px) {
+    .entry-screen .page-hero__container {
+        gap: 2em;
+        grid-template-columns: 1fr;
+    }
+    .entry-screen .page-hero__copy {
+        max-width: 42rem;
+    }
+    .entry-screen.page-hero h1 {
+        max-width: 17ch;
+        font-size: clamp(2.6rem, 7vw, 4rem);
+    }
+    .entry-screen .page-hero__visual {
+        width: 100%;
+        max-width: 42rem;
+    }
+    .travel-entry-photo {
+        aspect-ratio: 1.8;
+    }
+}
+@media (max-width: 600px) {
+    .entry-screen {
+        --entry-width: calc(100vw - 2rem);
+    }
+    .entry-screen .civic-hero {
+        width: var(--entry-width);
+    }
+    .entry-screen :is(.travel-stat, .reflexion-stat) {
+        padding: 0.8em;
+    }
+    .entry-screen .travel-stat:nth-child(3) {
+        padding-left: 0;
+    }
+    .reflection-entry-note {
+        padding: 1.4em;
+        gap: 1em;
+    }
+    .reflection-entry-note h2 {
+        font-size: 1.65em;
+    }
+}
+
+/* On shallow laptop windows, keep the editorial footer above the dock. */
+@media (min-width: 1025px) and (max-height: 800px) {
+    .entry-screen.page-hero h1 {
+        font-size: clamp(2.6rem, 4.6vw, 3.4rem);
+    }
+    .entry-screen .page-hero__container {
+        row-gap: 1.8em;
+    }
+}
+
+.travel-entry-carousel__controls,
+.travel-entry-carousel__dots,
+.travel-entry-carousel__arrows {
+    display: flex;
+    align-items: center;
+}
+.travel-entry-carousel__controls {
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5em;
+}
+.travel-entry-carousel__controls button {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-light);
+    cursor: pointer;
+}
+.travel-entry-carousel__arrows button {
+    font-size: 1em;
+}
+.travel-entry-carousel__arrows svg {
+    width: 1.1em;
+    height: 1.1em;
+}
+.travel-entry-carousel__dots button {
+    min-width: 28px;
+}
+.travel-entry-carousel__dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background: currentColor;
+}
+.travel-entry-carousel__dots [aria-pressed='true'] span {
+    width: 18px;
+    color: var(--color-primary);
+}
+.travel-entry-carousel__controls button:hover {
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.1);
+}
+.travel-entry-carousel__controls button:focus-visible,
+.travel-entry-photo:focus-visible,
+.reflection-entry-note:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+.reflection-entry-note__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em 1em;
+    color: var(--color-light);
+    font-size: 0.75em;
+    margin-bottom: -0.5em;
+}
+.reflection-entry-note__eyebrow svg {
+    box-sizing: content-box;
+    padding: 0.65em;
+    border: 1px solid var(--liquid-border);
+    border-radius: 0.8em;
+    background: rgba(77, 181, 255, 0.08);
+}
+@media (prefers-reduced-motion: no-preference) {
+    .travel-entry-carousel .responsive-picture {
+        animation: entry-photo-appear 450ms ease-out;
+    }
+    @keyframes entry-photo-appear {
+        from {
+            opacity: 0.5;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}

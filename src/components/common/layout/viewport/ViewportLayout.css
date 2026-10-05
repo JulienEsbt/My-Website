@@ -1,0 +1,7 @@
+/* Geometry shared by sticky scenes. Each page owns its content dimensions;
+   centering must not enlarge every section or change its reading rhythm. */
+#main {
+    --scene-header: 96px;
+    --scene-bottom: 100px;
+    --scene-available: calc(100svh - var(--scene-header) - var(--scene-bottom));
+}

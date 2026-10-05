@@ -35,7 +35,8 @@ const Header = () => {
                 .from(cta.current, {y: 18, opacity: 0}, '-=0.4')
                 .from(visual.current, {scale: 0.92, opacity: 0}, '-=0.5')
                 .from(floating.current?.children, {y: 16, opacity: 0, stagger: 0.08}, '-=0.35')
-                .from(socials.current, {x: -14, opacity: 0}, '-=0.45')
+                // Animate the contents: GSAP must not capture the responsive rail's centering.
+                .from(socials.current?.children, {x: -14, opacity: 0}, '-=0.45')
 
             gsap.to('.home-hero__floating-pill', {
                 y: -8,
@@ -51,8 +52,11 @@ const Header = () => {
     }, [])
 
     return (
-        <header id="top" className="home-hero">
+        <header id="top" className="home-hero entry-screen">
             <div className="container home-hero__container">
+                <div ref={socials} className="home-hero__socials-wrapper">
+                    <HeaderSocials />
+                </div>
                 <div className="home-hero__copy">
                     <span ref={title} className="home-hero__eyebrow">
                         {t('header.eyebrow')}
@@ -93,7 +97,7 @@ const Header = () => {
                             <ResponsiveImage
                                 media={HOME_ASSETS.header.me}
                                 alt={t('header.portraitAlt')}
-                                sizes="(max-width: 700px) 78vw, 420px"
+                                sizes="(max-width: 700px) 78vw, (min-width: 1800px) 26vw, 420px"
                                 loading="eager"
                                 fetchPriority="high"
                             />
@@ -116,10 +120,6 @@ const Header = () => {
                             </span>
                         </div>
                     </motion.div>
-                </div>
-
-                <div ref={socials} className="home-hero__socials-wrapper">
-                    <HeaderSocials />
                 </div>
             </div>
         </header>
