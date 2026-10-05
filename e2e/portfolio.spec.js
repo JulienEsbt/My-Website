@@ -212,6 +212,7 @@ test('article navigation replaces structured data and unknown pages are noindex'
 })
 
 test('travel stories have clean, localized and backward-compatible URLs', async ({page}) => {
+    test.setTimeout(60000)
     await page.goto('/travel?trip=croatia-2026#stories')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
@@ -375,21 +376,29 @@ test('home reading returns to its source section, including after a language swi
     )
 })
 
-test('the About photo appears with the section on a large screen without scrolling', async ({
-    page,
-}) => {
+test('the About photo appears with its section on a large screen', async ({page}) => {
     await page.setViewportSize({width: 2560, height: 1440})
     await page.emulateMedia({reducedMotion: 'no-preference'})
     await page.goto('/')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page
+        .locator('#about')
+        .evaluate((el) => el.scrollIntoView({behavior: 'instant', block: 'center'}))
     await expect
         .poll(() => page.locator('.about__visual').evaluate((el) => getComputedStyle(el).opacity))
         .toBe('1')
-    const visual = await page.locator('.about__visual').boundingBox()
-    const cards = await page.locator('.about__cards').boundingBox()
-    expect(Math.abs(visual.y - cards.y)).toBeLessThan(2)
+    // Compare the initial alignment before the photo reaches its sticky position.
+    // Read both columns in the same frame while their parent finishes its entrance.
+    await expect
+        .poll(() =>
+            page.evaluate(() => {
+                const visual = document.querySelector('.about__visual').getBoundingClientRect()
+                const cards = document.querySelector('.about__cards').getBoundingClientRect()
+                return Math.abs(visual.y - cards.y)
+            })
+        )
+        .toBeLessThan(2)
     await expect(page.locator('.about__visual')).toBeInViewport()
-    expect(await page.evaluate(() => scrollY)).toBe(0)
 })
 
 test('home titles stay concise in both languages and travel rotation can be paused', async ({

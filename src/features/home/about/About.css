@@ -22,6 +22,7 @@
 
 .about__cards {
     grid-area: cards;
+    align-self: start;
 }
 
 .about__bio {

@@ -1,0 +1,123 @@
+.bruno-gallery {
+    width: min(92vw, 1440px);
+    margin: 0 auto;
+    border: 1px solid var(--liquid-border-soft);
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: #0b1322;
+    box-shadow: var(--liquid-shadow);
+}
+.bruno-gallery__screen {
+    aspect-ratio: 3420 / 2148;
+    background: #0b1322;
+    touch-action: pan-y pinch-zoom;
+}
+.bruno-gallery__screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.bruno-gallery__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+}
+.bruno-gallery__caption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+.bruno-gallery__caption span {
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+.bruno-gallery__caption strong {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+.bruno-gallery__controls {
+    display: flex;
+    gap: 0.4rem;
+}
+.bruno-gallery__controls button,
+.bruno-gallery__controls a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: var(--color-primary);
+    background: #ffffff08;
+    border: 1px solid #78caff30;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.bruno-gallery__controls button:hover,
+.bruno-gallery__controls a:hover {
+    background: #78caff20;
+}
+.bruno-gallery__thumbnails {
+    display: flex;
+    gap: 0.65rem;
+    overflow-x: auto;
+    padding: 0 1.2rem 1.2rem;
+    scrollbar-width: thin;
+}
+.bruno-gallery__thumbnails button {
+    position: relative;
+    flex: 1 0 96px;
+    max-width: 140px;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #101a2b;
+    cursor: pointer;
+    opacity: 0.65;
+}
+.bruno-gallery__thumbnails button[aria-pressed='true'] {
+    border-color: var(--color-primary);
+    opacity: 1;
+}
+.bruno-gallery__thumbnails button:hover {
+    opacity: 1;
+}
+.bruno-gallery__thumbnails img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.bruno-gallery__thumbnails span {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    background: #061020dd;
+    color: white;
+    font-size: 0.65rem;
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+@media (max-width: 600px) {
+    .bruno-gallery {
+        border-radius: 0.8rem;
+    }
+    .bruno-gallery__toolbar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.8rem;
+    }
+    .bruno-gallery__caption {
+        width: 100%;
+    }
+    .bruno-gallery__controls {
+        margin-left: auto;
+    }
+    .bruno-gallery__thumbnails {
+        padding: 0 0.8rem 0.8rem;
+    }
+}

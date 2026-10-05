@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useLocation} from 'react-router-dom'
-import {FiArrowLeft, FiArrowRight, FiMapPin, FiPause, FiPlay} from 'react-icons/fi'
+import {FiArrowLeft, FiArrowRight, FiArrowUpRight, FiMapPin, FiPause, FiPlay} from 'react-icons/fi'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
@@ -26,7 +26,7 @@ const destinations = [
     photo: createMediaResolver(manifest, 'travels')(`${id}/${filename}`),
 }))
 
-export default function HomeTravelCarousel({language, readLabel}) {
+export default function HomeTravelCarousel({language, readLabel, variant = 'home'}) {
     const fr = language === 'fr'
     const {state} = useLocation()
     const [index, setIndex] = useState(() =>
@@ -58,6 +58,94 @@ export default function HomeTravelCarousel({language, readLabel}) {
     const select = (value) => {
         setPaused(true)
         setIndex((value + destinations.length) % destinations.length)
+    }
+    if (variant === 'entry') {
+        return (
+            <div
+                ref={root}
+                className="travel-entry-carousel"
+                role="region"
+                aria-label={fr ? 'Récits de voyage sélectionnés' : 'Selected travel stories'}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+            >
+                <Link
+                    className="travel-entry-photo"
+                    to={`/travel/${trip.id}#stories`}
+                    onFocus={() => setPaused(true)}
+                >
+                    <ResponsiveImage
+                        key={trip.id}
+                        media={trip.photo}
+                        style={{objectPosition: trip.photoPosition}}
+                        alt={`${fr ? trip.city : trip.cityEn} · ${fr ? trip.country : trip.countryEn}`}
+                        sizes="(min-width: 1800px) 38vw, (min-width: 1025px) 40vw, 90vw"
+                        loading="eager"
+                        fetchPriority={index === 0 ? 'high' : 'auto'}
+                    />
+                    <span className="travel-entry-photo__top">
+                        <FiMapPin aria-hidden="true" />
+                        {fr ? trip.country : trip.countryEn} · {trip.year}
+                    </span>
+                    <span className="travel-entry-photo__caption">
+                        <span>
+                            <small>{readLabel}</small>
+                            <strong>{fr ? trip.city : trip.cityEn}</strong>
+                        </span>
+                        <FiArrowUpRight aria-hidden="true" />
+                    </span>
+                </Link>
+                <div className="travel-entry-carousel__controls">
+                    <div className="travel-entry-carousel__dots">
+                        {destinations.map((entry, i) => (
+                            <button
+                                key={entry.id}
+                                type="button"
+                                aria-label={fr ? entry.country : entry.countryEn}
+                                title={fr ? entry.country : entry.countryEn}
+                                aria-pressed={i === index}
+                                onClick={() => select(i)}
+                            >
+                                <span />
+                            </button>
+                        ))}
+                    </div>
+                    <div className="travel-entry-carousel__arrows">
+                        <button
+                            type="button"
+                            onClick={() => select(index - 1)}
+                            aria-label={fr ? 'Voyage précédent' : 'Previous trip'}
+                        >
+                            <FiArrowLeft />
+                        </button>
+                        {!reducedMotion && (
+                            <button
+                                type="button"
+                                onClick={() => setPaused((value) => !value)}
+                                aria-label={
+                                    paused
+                                        ? fr
+                                            ? 'Reprendre le défilement des voyages'
+                                            : 'Resume travel slideshow'
+                                        : fr
+                                          ? 'Mettre les voyages en pause'
+                                          : 'Pause travel slideshow'
+                                }
+                            >
+                                {paused ? <FiPlay /> : <FiPause />}
+                            </button>
+                        )}
+                        <button
+                            type="button"
+                            onClick={() => select(index + 1)}
+                            aria-label={fr ? 'Voyage suivant' : 'Next trip'}
+                        >
+                            <FiArrowRight />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
     }
     return (
         <div

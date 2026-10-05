@@ -18,16 +18,24 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 const step = section.locator('.professional-chapter__step').first()
                 await expect(step).toHaveClass(/step--mobile/)
                 const card = step.locator('article')
+                // Measure sticky geometry at settled positions, without interrupting Safari's
+                // CSS smooth-scroll animation when reversing direction between assertions.
                 const geometry = await step.evaluate((el) => ({
                     top: el.getBoundingClientRect().top + scrollY,
                     hold: parseFloat(el.style.getPropertyValue('--mobile-hold')),
                 }))
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + 20)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + 20
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeCloseTo(88, 0)
                 const initial = await card.evaluate((el) => el.getBoundingClientRect().width)
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + geometry.hold * 0.9)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + geometry.hold * 0.9
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().width))
                     .toBeGreaterThan(initial)
@@ -41,11 +49,17 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 expect(await card.evaluate((el) => el.getBoundingClientRect().bottom)).toBeLessThan(
                     790 - 80
                 )
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + geometry.hold + 100)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + geometry.hold + 100
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeLessThan(0)
-                await page.evaluate((y) => scrollTo(0, y), geometry.top - 88 + 20)
+                await page.evaluate(
+                    (y) => scrollTo({top: y, behavior: 'instant'}),
+                    geometry.top - 88 + 20
+                )
                 await expect
                     .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
                     .toBeCloseTo(88, 0)
@@ -57,7 +71,18 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                     )
                 ).toBe(geometry.hold)
                 await page.setViewportSize({width: 393, height: 790})
-                await section.getByRole('button', {name: 'Lecture continue', exact: true}).click()
+                const readingToggle = section.getByRole('button', {
+                    name: 'Lecture continue',
+                    exact: true,
+                })
+                // Bring the control clear of the fixed header/dock after the resize,
+                // before asking WebKit to hit-test a real pointer click.
+                await readingToggle.evaluate((el) =>
+                    el.scrollIntoView({block: 'center', behavior: 'instant'})
+                )
+                await expect(readingToggle).toBeInViewport({ratio: 1})
+                await readingToggle.click()
+                await expect(readingToggle).toHaveCount(0)
                 await expect(section.locator('.professional-chapter__step--mobile')).toHaveCount(0)
                 await section.getByRole('button', {name: 'Lecture animée', exact: true}).click()
                 await expect(step).toHaveClass(/step--mobile/)

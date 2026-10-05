@@ -5,15 +5,14 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
-import {HOME_ASSETS} from '../config/homeAssets.js'
+import BrunoGallery from '../features/projects/brunoGallery/BrunoGallery.jsx'
 import {LINKS} from '../config/links.js'
 import './CaseStudyPage.css'
 
 import ProductionStory from '../features/projects/productionStory/ProductionStory.jsx'
 const ARCHITECTURE_STEPS = ['excel', 'react', 'express', 'sqlite', 'electron']
 const DECISION_ITEMS = ['local', 'persistence', 'quality']
-const LIMIT_ITEMS = ['excel', 'trust', 'signing']
+const LIMIT_ITEMS = ['excel', 'trust', 'signing', 'validation']
 const STACK = ['React', 'TypeScript', 'Electron', 'Express', 'SQLite', 'Vite']
 
 export default function BrunoPizzaCaseStudyPage() {
@@ -43,15 +42,7 @@ export default function BrunoPizzaCaseStudyPage() {
             </PageHero>
 
             <article className="case-study">
-                <div className="container case-study__visual">
-                    <ResponsiveImage
-                        media={HOME_ASSETS.portfolio.brunoPizza}
-                        alt={t('bruno.hero.imageAlt')}
-                        sizes="(max-width: 900px) 92vw, 1100px"
-                        loading="eager"
-                        fetchPriority="high"
-                    />
-                </div>
+                <BrunoGallery />
 
                 <dl className="container case-study__overview">
                     {['status', 'role', 'scope'].map((item) => (
@@ -73,6 +64,12 @@ export default function BrunoPizzaCaseStudyPage() {
                     <h2>{t('bruno.solution.title')}</h2>
                     <p className="case-study__lead">{t('bruno.solution.intro')}</p>
                     <ProductionStory t={t} />
+                </section>
+
+                <section className="container case-study__section">
+                    <p className="section-kicker">{t('bruno.release.kicker')}</p>
+                    <h2>{t('bruno.release.title')}</h2>
+                    <p className="case-study__lead">{t('bruno.release.body')}</p>
                 </section>
 
                 <section id="architecture" className="container case-study__section">

@@ -32,9 +32,9 @@
 }
 
 .home-hero__container {
-    width: min(1120px, 92vw);
+    width: min(75rem, calc(100% - 4rem));
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: clamp(2.5rem, 6vw, 5rem);
     align-items: center;
     position: relative;
@@ -55,7 +55,7 @@
 }
 
 .home-hero__title {
-    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-size: clamp(3rem, 5.4vw, 5rem);
     line-height: 0.95;
     color: var(--color-white);
     margin-bottom: 1rem;
@@ -78,7 +78,6 @@
     color: var(--color-light);
     line-height: 1.85;
     margin-bottom: 1.25rem;
-    min-height: 8em;
 }
 
 .home-hero__badges {
@@ -231,10 +230,8 @@
 }
 
 .home-hero__socials-wrapper {
-    position: absolute;
-    left: -9rem;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    width: max-content;
     z-index: 10;
 }
 
@@ -249,10 +246,6 @@
 
     .pill-human {
         left: -2rem;
-    }
-
-    .home-hero__socials-wrapper {
-        display: none;
     }
 }
 
@@ -406,5 +399,44 @@
     #about {
         clear: both;
         margin-top: 4rem;
+    }
+}
+
+/* The social rail belongs to the centered composition, including when it
+   moves below the copy on narrower laptop windows. */
+@media (min-width: 1025px) and (max-width: 1439px) {
+    .home-hero__socials-wrapper {
+        position: static;
+        translate: none;
+        width: max-content;
+        grid-area: socials;
+    }
+    .home-hero__socials-wrapper .header-socials {
+        width: auto;
+        height: 3.5rem;
+        padding-inline: 0.5rem;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    .home-hero__socials-wrapper .header-socials::after {
+        display: none;
+    }
+}
+@media (max-width: 1024px) {
+    .home-hero__socials-wrapper {
+        display: none;
+    }
+}
+@media (min-width: 1025px) {
+    .home-hero {
+        min-height: 100svh;
+        padding-block: var(--scene-header, 96px) var(--scene-bottom, 100px);
+    }
+    .home-hero__portrait-card {
+        width: clamp(19rem, calc(var(--scene-available, 32rem) * 0.72), 24rem);
+        max-width: 100%;
+    }
+    .home-hero__floating-pill.pill-systems {
+        right: -2rem;
     }
 }

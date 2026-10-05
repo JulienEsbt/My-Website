@@ -1,3 +1,4 @@
+import {desktopScenePlacement} from '../../../components/common/layout/viewport/sceneViewport.js'
 import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiBookOpen, FiBriefcase, FiCheckSquare} from 'react-icons/fi'
@@ -48,16 +49,11 @@ const Services = () => {
                     '.professional-chapter__heading-content'
                 )
                 const stageTop = () =>
-                    Math.max(
-                        80,
-                        (window.innerHeight -
-                            parseFloat(
-                                getComputedStyle(sectionRef.current).getPropertyValue(
-                                    '--stage-height'
-                                )
-                            )) /
-                            2
-                    )
+                    desktopScenePlacement(
+                        parseFloat(
+                            getComputedStyle(sectionRef.current).getPropertyValue('--stage-height')
+                        ) || 350
+                    ).top
                 gsap.fromTo(
                     title,
                     {y: 3},

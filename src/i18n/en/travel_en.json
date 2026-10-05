@@ -5,7 +5,9 @@
     "hero": {
         "kicker": "Personal journals",
         "title": "Travels and places lived",
-        "subtitle": "A secondary portfolio space for collecting places, memories, photos and stories from my travels."
+        "subtitle": "Places I have lived, routes I have travelled and memories to share. Explore the map or open a journal for photos and stories.",
+        "story": "Open the journal",
+        "photoAlt": "A photograph from my 2025 trip to Portugal"
     },
     "intro": {
         "title": "Explore, understand, feel",

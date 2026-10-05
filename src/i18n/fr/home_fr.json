@@ -133,7 +133,7 @@
             "1": {
                 "type": "Produit actif",
                 "title": "Bruno Pizza — Production",
-                "description": "Application desktop locale qui importe et valide un plan Excel, organise la production par distributeur et guide la fabrication pizza par pizza."
+                "description": "Application desktop locale de production : import Excel, correction des quantités et guidage du montage en photos. Version 1.2 en recette."
             },
             "2": {
                 "type": "Portfolio actif",

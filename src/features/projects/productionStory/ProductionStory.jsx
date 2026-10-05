@@ -1,3 +1,4 @@
+import useCenteredSticky from '../../../components/common/layout/viewport/useCenteredSticky.js'
 import React, {useRef} from 'react'
 import {motion, useScroll, useTransform} from 'framer-motion'
 import {FiGrid, FiList, FiSettings} from 'react-icons/fi'
@@ -33,13 +34,15 @@ export default function ProductionStory({
     items = stages,
 }) {
     const root = useRef(null)
+    const visual = useRef(null)
+    useCenteredSticky(visual)
     const reduced = useReducedMotion()
     const {scrollYProgress} = useScroll({target: root, offset: ['start center', 'end center']})
     const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1])
     const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [8, 0, -3])
     return (
         <div className="production-story" ref={root}>
-            <div className="production-story__visual">
+            <div className="production-story__visual" ref={visual}>
                 <motion.figure style={reduced ? undefined : {scale, rotateX}}>
                     <ResponsiveImage
                         media={media}

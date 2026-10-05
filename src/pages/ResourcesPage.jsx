@@ -27,48 +27,50 @@ export default function ResourcesPage() {
     return (
         <PageFrame>
             <div className="civic-page" ref={pageRef}>
-                <header className="civic-hero container" id="top">
-                    <div className="civic-hero__copy">
-                        <p className="civic-eyebrow">
-                            <FiCompass aria-hidden="true" />
-                            {t('hero.kicker')}
-                        </p>
-                        <h1>
-                            {t('hero.title')
-                                .split('\n')
-                                .map((line, index) => (
-                                    <span key={index}>
-                                        {line}
-                                        {index === 0 && ' '}
-                                    </span>
+                <header className="entry-screen civic-entry" id="top">
+                    <div className="civic-hero container">
+                        <div className="civic-hero__copy">
+                            <p className="civic-eyebrow">
+                                <FiCompass aria-hidden="true" />
+                                {t('hero.kicker')}
+                            </p>
+                            <h1>
+                                {t('hero.title')
+                                    .split('\n')
+                                    .map((line, index) => (
+                                        <span key={index}>
+                                            {line}
+                                            {index === 0 && ' '}
+                                        </span>
+                                    ))}
+                            </h1>
+                            <p className="civic-hero__intro">{t('hero.intro')}</p>
+                            <p className="civic-hero__context">{t('hero.context')}</p>
+                            <p className="civic-hero__invitation">{t('hero.invitation')}</p>
+                            <a className="civic-button" href="#selection">
+                                {t('hero.cta')}
+                                <FiArrowDown aria-hidden="true" />
+                            </a>
+                        </div>
+                        <aside className="civic-hero__index" aria-label={t('nav.label')}>
+                            <span className="civic-hero__index-mark" aria-hidden="true">
+                                ↗
+                            </span>
+                            <nav>
+                                {['approach', 'featured', 'projects', 'more'].map((item, index) => (
+                                    <a
+                                        key={item}
+                                        href={`#${['approach', 'selection', 'projects', 'further'][index]}`}
+                                    >
+                                        <span aria-hidden="true">0{index + 1}</span>
+                                        {t(`nav.${item}`)}
+                                        <FiArrowDown aria-hidden="true" />
+                                    </a>
                                 ))}
-                        </h1>
-                        <p className="civic-hero__intro">{t('hero.intro')}</p>
-                        <p className="civic-hero__context">{t('hero.context')}</p>
-                        <p className="civic-hero__invitation">{t('hero.invitation')}</p>
-                        <a className="civic-button" href="#selection">
-                            {t('hero.cta')}
-                            <FiArrowDown aria-hidden="true" />
-                        </a>
+                            </nav>
+                            <p>{t('hero.signature')}</p>
+                        </aside>
                     </div>
-                    <aside className="civic-hero__index" aria-label={t('nav.label')}>
-                        <span className="civic-hero__index-mark" aria-hidden="true">
-                            ↗
-                        </span>
-                        <nav>
-                            {['approach', 'featured', 'projects', 'more'].map((item, index) => (
-                                <a
-                                    key={item}
-                                    href={`#${['approach', 'selection', 'projects', 'further'][index]}`}
-                                >
-                                    <span aria-hidden="true">0{index + 1}</span>
-                                    {t(`nav.${item}`)}
-                                    <FiArrowDown aria-hidden="true" />
-                                </a>
-                            ))}
-                        </nav>
-                        <p>{t('hero.signature')}</p>
-                    </aside>
                 </header>
 
                 <CivicSectionNav />

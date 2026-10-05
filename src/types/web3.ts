@@ -123,6 +123,7 @@ export interface DonationToken {
 }
 
 export interface EthereumProvider {
+    providers?: EthereumProvider[]
     request(args: {method: string; params?: readonly unknown[]}): Promise<unknown>
 }
 

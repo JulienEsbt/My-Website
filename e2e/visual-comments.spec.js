@@ -234,8 +234,15 @@ test('professional chapters keep the centered title pinned while cards progress'
                     .all()) {
                     await expect(card).toHaveCSS('opacity', '1')
                 }
-                const box = await heading.boundingBox()
-                expect(Math.abs(box.y + box.height / 2 - size.height / 2)).toBeLessThan(3)
+                // The dock has its own entrance animation; compare settled geometry.
+                await expect
+                    .poll(async () => {
+                        const box = await heading.boundingBox()
+                        const dock = await page.locator('.section-nav').boundingBox()
+                        const usefulCenter = (96 + dock.y - 20) / 2
+                        return Math.abs(box.y + box.height / 2 - usefulCenter)
+                    })
+                    .toBeLessThan(3)
             }
             // At 70% the first panels overlap intentionally, while sharing the heading's inset.
             const panels = await section

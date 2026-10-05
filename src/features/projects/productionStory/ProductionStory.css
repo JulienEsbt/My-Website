@@ -8,7 +8,7 @@
 .production-story__visual {
     align-self: start;
     position: sticky;
-    top: 20vh;
+    top: var(--sticky-center-top, 96px);
     perspective: 1000px;
 }
 .production-story__visual figure {
@@ -90,4 +90,8 @@
     .production-story__track {
         display: none;
     }
+}
+
+.production-story__visual[data-fits-viewport='false'] {
+    position: static;
 }

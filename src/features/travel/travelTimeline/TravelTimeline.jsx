@@ -1,3 +1,4 @@
+import useCenteredSticky from '../../../components/common/layout/viewport/useCenteredSticky.js'
 import React, {lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
@@ -41,6 +42,7 @@ const TravelTimeline = ({routeTripId}) => {
         '(max-width: 700px), (max-height: 500px) and (max-width: 950px)'
     )
     const detailDialogRef = useRef(null)
+    useCenteredSticky(detailDialogRef, `${activeTripId}-${detailAnimationKey}`)
     const detailBackRef = useRef(null)
     const [isGalleryOpen, setIsGalleryOpen] = useState(false)
     const hasOpenedGalleryRef = useRef(false)

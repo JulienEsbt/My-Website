@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
+import {desktopScenePlacement} from './sceneViewport.js'
 import ResourceCard from './ResourceCard.jsx'
 
 const clamp = (value) => Math.max(0, Math.min(1, value))
@@ -36,7 +37,7 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 mobile && dock
                     ? dock.offsetHeight + (parseFloat(getComputedStyle(dock).bottom) || 16) + 12
                     : 88
-            const top = mobile ? 80 : 100
+            let top = mobile ? 80 : 100
             const available = innerHeight - top - bottomSpace - controlsHeight
             root.style.setProperty('--mobile-card-height', '0px')
             cards.forEach((card) => {
@@ -54,16 +55,15 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                 root.style.setProperty('--mobile-card-height', `${available}px`)
                 height = available
             }
+            const placement = desktopScenePlacement(height + controlsHeight)
+            if (!mobile) top = placement.top
             const distance = viewportHeight * (mobile ? 0.65 : 0.72)
             metrics.current = {top, distance, mobile}
             root.style.setProperty('--scene-top', `${top}px`)
             root.style.setProperty('--scene-height', `${height + controlsHeight}px`)
             root.style.setProperty('--scene-travel', `${distance * (resources.length - 1)}px`)
             const next =
-                media.matches &&
-                (mobile
-                    ? viewportHeight > innerWidth && fits
-                    : height + controlsHeight < viewportHeight - top - 24)
+                media.matches && (mobile ? viewportHeight > innerWidth && fits : placement.fits)
             const bounds = root.getBoundingClientRect()
             if (
                 !next &&
