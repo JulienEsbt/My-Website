@@ -1034,3 +1034,10 @@
         background: rgba(77, 181, 255, 0.16);
     }
 }
+
+@media (min-width: 1100px) {
+    .travel-timeline__detail {
+        top: var(--sticky-center-top, 96px);
+        max-height: var(--scene-available, calc(100svh - 196px));
+    }
+}

@@ -1,3 +1,4 @@
+import {desktopScenePlacement} from '../../components/common/layout/viewport/sceneViewport.js'
 import {useLayoutEffect} from 'react'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
@@ -23,7 +24,7 @@ export default function useChapterTransition() {
                 const originalMargin = lastStep?.style.marginTop || ''
                 const stageHeight = (section) =>
                     parseFloat(getComputedStyle(section).getPropertyValue('--stage-height')) || 350
-                const stageTop = (section) => Math.max(80, (innerHeight - stageHeight(section)) / 2)
+                const stageTop = (section) => desktopScenePlacement(stageHeight(section)).top
                 const pageTop = (section) => section.getBoundingClientRect().top + scrollY
                 const smooth = (value) => value * value * value * (value * (value * 6 - 15) + 10)
                 const motion = {progress: 0}
