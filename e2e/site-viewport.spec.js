@@ -41,22 +41,25 @@ for (const viewport of [
                 expect(Math.abs(bounds.x + bounds.width / 2 - viewport.width / 2)).toBeLessThan(2)
                 await expect
                     .poll(
-                        async () => {
-                            const rect = await hero.boundingBox()
-                            const bottom = await page
-                                .locator('#main')
-                                .evaluate((el) =>
-                                    parseFloat(
-                                        getComputedStyle(el).getPropertyValue('--scene-bottom')
+                        () =>
+                            hero.evaluate((el) => {
+                                const rect = el.getBoundingClientRect()
+                                const bottom = parseFloat(
+                                    getComputedStyle(el.closest('#main')).getPropertyValue(
+                                        '--scene-bottom'
                                     )
                                 )
-                            return rect.height <= viewport.height - 96 - bottom
-                                ? Math.abs(
-                                      rect.y + rect.height / 2 - (96 + viewport.height - bottom) / 2
-                                  )
-                                : 0
-                        },
-                        {message: `${route} centered after fonts and entrance settle`}
+                                return rect.height <= innerHeight - 96 - bottom
+                                    ? Math.abs(
+                                          rect.y + rect.height / 2 - (96 + innerHeight - bottom) / 2
+                                      )
+                                    : 0
+                            }),
+                        {
+                            message: `${route} centered after fonts and entrance settle`,
+                            // Initial globe rendering can occupy the browser thread on CI.
+                            timeout: 15000,
+                        }
                     )
                     .toBeLessThan(4)
                 await page.screenshot({
@@ -146,7 +149,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                             )
                     // WebKit applies viewport changes asynchronously. Assert the settled
                     // layout, as Playwright does for pointer actionability below.
-                    await expect.poll(readClipping, {message: label}).toEqual([])
+                    await expect.poll(readClipping, {message: label, timeout: 15000}).toEqual([])
                     for (const link of await hero.locator('.cta a, .header-socials a').all()) {
                         if (!(await link.isVisible())) continue
                         // Pointer actionability waits for WebKit's asynchronous resize/scroll
