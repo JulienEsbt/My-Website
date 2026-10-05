@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useLayoutEffect, useRef, useState} from 'react'
 
 // A native sticky scene: observing the page never cancels wheel or touch events.
 export default function useScrollDeck({scene, stage, track, enabled, count}) {
@@ -6,6 +6,7 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
     const [manual, setManual] = useState(false)
     const metrics = useRef({top: 80, distance: 1})
     const restoreTop = useRef(null)
+    const currentCard = useRef(0)
     const animated = enabled && fits && !manual
 
     useEffect(() => {
@@ -39,8 +40,13 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
         }
     }, [enabled, count, scene, stage])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!animated) {
+            const element = track.current
+            if (element && currentCard.current) {
+                const card = element.children[currentCard.current]
+                if (card) element.scrollLeft = card.offsetLeft - element.children[0].offsetLeft
+            }
             if (restoreTop.current !== null && stage.current) {
                 window.scrollBy({
                     top: stage.current.getBoundingClientRect().top - restoreTop.current,
@@ -51,6 +57,8 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
             return
         }
         let frame = 0
+        const panels = Array.from(track.current.children)
+        track.current.scrollLeft = 0
         const update = () => {
             frame = 0
             const element = track.current
@@ -66,10 +74,24 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
             const base = Math.floor(position)
             const progress = Math.max(0, Math.min(1, (position - base - 0.45) / 0.5))
             const eased = progress * progress * (3 - 2 * progress)
-            const first = element.children[0]
-            const next = element.children[1]
-            const stride = next ? next.offsetLeft - first.offsetLeft : 0
-            element.scrollLeft = (base + eased) * stride
+            currentCard.current = Math.min(count - 1, base + (eased >= 0.5 ? 1 : 0))
+            panels.forEach((panel, index) => {
+                const outgoing = index === base
+                const incoming = index === base + 1
+                const opacity = outgoing ? 1 - 0.7 * eased : incoming && eased > 0 ? 1 : 0
+                const offset = outgoing ? -18 * eased : 28 * (1 - eased)
+                const scale = outgoing ? 1 - 0.075 * eased : 0.94 + 0.06 * eased
+                const tilt = outgoing ? 3 * eased : -3 * (1 - eased)
+                panel.style.opacity = String(opacity)
+                panel.style.visibility = opacity > 0 ? 'visible' : 'hidden'
+                panel.style.transform = `perspective(900px) translateY(${offset}px) rotateX(${tilt}deg) scale(${scale})`
+                panel.style.zIndex = incoming ? '2' : '1'
+                panel.style.clipPath = incoming
+                    ? `inset(${(1 - eased) * 100}% 0 0 0 round 1.4rem)`
+                    : 'none'
+                panel.inert = index !== currentCard.current
+                panel.setAttribute('aria-hidden', String(index !== currentCard.current))
+            })
         }
         const schedule = () => {
             if (!frame) frame = requestAnimationFrame(update)
@@ -81,6 +103,18 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
             cancelAnimationFrame(frame)
             window.removeEventListener('scroll', schedule)
             window.removeEventListener('resize', schedule)
+            panels.forEach((panel) => {
+                panel.inert = false
+                panel.removeAttribute('aria-hidden')
+                for (const property of [
+                    'opacity',
+                    'visibility',
+                    'transform',
+                    'z-index',
+                    'clip-path',
+                ])
+                    panel.style.removeProperty(property)
+            })
         }
     }, [animated, count, scene, stage, track])
 
@@ -102,15 +136,5 @@ export default function useScrollDeck({scene, stage, track, enabled, count}) {
         restoreTop.current = stage.current.getBoundingClientRect().top
         setManual(true)
     }
-    const select = (index) => {
-        window.scrollTo({
-            top:
-                scrollY +
-                scene.current.getBoundingClientRect().top -
-                metrics.current.top +
-                index * metrics.current.distance,
-            behavior: 'instant',
-        })
-    }
-    return {animated, release, select}
+    return {animated, release}
 }

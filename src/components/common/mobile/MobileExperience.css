@@ -1305,7 +1305,16 @@
         top: 80px;
     }
     #main .mobile-scroll-deck--animated .mobile-deck__track {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        overflow: visible;
         scroll-snap-type: none;
+    }
+    #main .mobile-scroll-deck--animated .mobile-deck__item {
+        grid-area: 1 / 1;
+        min-width: 0;
+        transform-origin: center 55%;
+        backface-visibility: hidden;
     }
     #main .mobile-deck__scroll-hint {
         min-width: 1rem;
@@ -1315,5 +1324,11 @@
     #main .mobile-scroll-deck .civic-preview img {
         height: clamp(100px, 16svh, 150px);
         aspect-ratio: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    #main .mobile-scroll-deck--animated .civic-card {
+        background: linear-gradient(145deg, #172438, #101426);
     }
 }

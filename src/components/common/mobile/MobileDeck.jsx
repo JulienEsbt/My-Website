@@ -2,7 +2,7 @@ import useScrollDeck from './useScrollDeck.js'
 import useReducedMotion from '../accessibility/useReducedMotion.js'
 import {Children, useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
-import {FiArrowDown, FiArrowLeft, FiArrowRight, FiPause, FiPlay} from 'react-icons/fi'
+import {FiArrowLeft, FiArrowRight, FiPause, FiPlay} from 'react-icons/fi'
 import useMediaQuery from '../accessibility/useMediaQuery.js'
 import {getPreferredScrollBehavior} from '../accessibility/motionPreferences.js'
 
@@ -116,10 +116,6 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
     if (!mobile) return <>{children}</>
     const select = (index) => {
         setPaused(true)
-        if (scrollScene.animated) {
-            scrollScene.select(index)
-            return
-        }
         const element = track.current
         const card = element?.children[index]
         if (!card) return
@@ -203,7 +199,7 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
                     </div>
                 ))}
             </div>
-            {!expanded && (
+            {!expanded && !scrollDriven && (
                 <div className="mobile-deck__controls">
                     <button
                         type="button"
@@ -217,31 +213,27 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
                         {String(active + 1).padStart(2, '0')} <span aria-hidden="true">/</span>{' '}
                         {String(cards.length).padStart(2, '0')}
                     </span>
-                    {scrollDriven ? (
-                        <FiArrowDown className="mobile-deck__scroll-hint" aria-hidden="true" />
-                    ) : (
-                        <button
-                            type="button"
-                            onClick={() => setPaused(!paused)}
-                            aria-label={
-                                paused
-                                    ? fr
-                                        ? 'Reprendre le défilement'
-                                        : 'Resume slideshow'
-                                    : fr
-                                      ? 'Mettre le défilement en pause'
-                                      : 'Pause slideshow'
-                            }
-                            aria-pressed={paused}
-                            disabled={reducedMotion}
-                        >
-                            {paused || reducedMotion ? (
-                                <FiPlay aria-hidden="true" />
-                            ) : (
-                                <FiPause aria-hidden="true" />
-                            )}
-                        </button>
-                    )}
+                    <button
+                        type="button"
+                        onClick={() => setPaused(!paused)}
+                        aria-label={
+                            paused
+                                ? fr
+                                    ? 'Reprendre le défilement'
+                                    : 'Resume slideshow'
+                                : fr
+                                  ? 'Mettre le défilement en pause'
+                                  : 'Pause slideshow'
+                        }
+                        aria-pressed={paused}
+                        disabled={reducedMotion}
+                    >
+                        {paused || reducedMotion ? (
+                            <FiPlay aria-hidden="true" />
+                        ) : (
+                            <FiPause aria-hidden="true" />
+                        )}
+                    </button>
                     <button
                         type="button"
                         disabled={active === cards.length - 1}
