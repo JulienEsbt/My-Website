@@ -1,3 +1,4 @@
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import React, {useState} from 'react'
 import './Tools.css'
 import ResourceLogo from './ResourceLogo.jsx'
@@ -15,7 +16,11 @@ const buildTools = (items = []) =>
 
 const Tools = () => {
     const {t} = useTranslation('web3')
-    const [openGroups, setOpenGroups] = useState(['others', 'explorers'])
+    const mobile = useMediaQuery('(max-width: 700px)')
+    const [mobileGroups, setMobileGroups] = useState([])
+    const [desktopGroups, setDesktopGroups] = useState(['others', 'explorers'])
+    const openGroups = mobile ? mobileGroups : desktopGroups
+    const setOpenGroups = mobile ? setMobileGroups : setDesktopGroups
 
     const toggleGroup = (groupId) => {
         setOpenGroups((current) =>
