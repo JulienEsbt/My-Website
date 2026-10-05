@@ -386,6 +386,8 @@
 @media (min-width: 1025px) and (max-height: 800px) {
     .entry-screen.page-hero h1 {
         font-size: clamp(2.6rem, 4.6vw, 3.4rem);
+        /* Font metrics differ across systems; use the whole column on short screens. */
+        max-width: none;
     }
     .entry-screen .page-hero__container {
         row-gap: 1.8em;

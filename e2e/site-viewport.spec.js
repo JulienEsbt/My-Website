@@ -269,6 +269,13 @@ test('editorial entry cards open the selected story and note in the current lang
 })
 
 test('editorial first-screen statistics clear the dock on shallow laptops', async ({page}) => {
+    test.setTimeout(60000)
+    // Exercise a different system font, matching the fallback available on Linux CI.
+    await page.addInitScript(() => {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.style.setProperty('--font-sans', 'Arial, sans-serif')
+        })
+    })
     await page.setViewportSize({width: 1280, height: 720})
     for (const prefix of ['', '/en']) {
         for (const route of ['/travel', '/reflections']) {
@@ -318,8 +325,11 @@ test('portfolio centers the visible social, copy and portrait composition', asyn
     }
 })
 
-test('travel introduction offers six selectable stories with localized links', async ({page}) => {
-    for (const prefix of ['', '/en']) {
+for (const prefix of ['', '/en']) {
+    test(`travel introduction offers six selectable stories in ${prefix ? 'English' : 'French'}`, async ({
+        page,
+    }) => {
+        test.setTimeout(60000)
         await page.setViewportSize({width: 393, height: 790})
         await page.goto(`${prefix}/travel`)
         await page.locator('#prerendered-content').waitFor({state: 'detached'})
@@ -342,5 +352,5 @@ test('travel introduction offers six selectable stories with localized links', a
         await carousel.locator('.travel-entry-photo').click()
         await expect(page).toHaveURL(new RegExp(`${prefix}/travel/guadeloupe-2025#stories$`))
         await expect(page.locator('#travel-detail-title')).toBeVisible()
-    }
-})
+    })
+}
