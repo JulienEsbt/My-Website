@@ -11,6 +11,8 @@ import reflections from '../data/reflections/reflections.js'
 import ReflectionsNav from '../features/reflections/reflectionsNav/ReflectionsNav.jsx'
 import CitizenResourcesLink from '../features/citizenResources/CitizenResourcesLink.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
+import {Link} from '../components/common/navigation/LocalizedLink.jsx'
+import {FiArrowDown, FiArrowUpRight, FiBookOpen} from 'react-icons/fi'
 
 const ReflectionsPage = () => {
     const {t, i18n} = useTranslation('reflections')
@@ -56,10 +58,6 @@ const ReflectionsPage = () => {
     const stats = [
         {label: t('stats.articles'), value: reflections.length},
         {label: t('stats.themes'), value: categoryCount},
-        {
-            label: t('stats.latest'),
-            value: latestReflexion?.title[language] ?? '-',
-        },
     ]
 
     const filteredReflexions = useMemo(() => {
@@ -96,11 +94,55 @@ const ReflectionsPage = () => {
                 kicker={t('hero.kicker')}
                 title={t('hero.title')}
                 subtitle={t('hero.subtitle')}
-            />
+                fullScreen
+                footer={<ReflectionStats items={stats} />}
+                visual={
+                    latestReflexion && (
+                        <Link
+                            className="reflection-entry-note"
+                            to={`/reflections/${latestReflexion.slug}`}
+                        >
+                            <span className="reflection-entry-note__eyebrow">
+                                <FiBookOpen aria-hidden="true" />
+                                {t('stats.latest')}
+                            </span>
+                            <span className="reflection-entry-note__metadata">
+                                <span>{t(`categories.${latestReflexion.category}`)}</span>
+                                <time dateTime={latestReflexion.date}>
+                                    {new Intl.DateTimeFormat(language, {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        timeZone: 'UTC',
+                                    }).format(new Date(latestReflexion.date))}
+                                </time>
+                            </span>
+                            <h2>{latestReflexion.title[language]}</h2>
+                            <p>{latestReflexion.excerpt[language]}</p>
+                            <span className="reflection-entry-note__footer">
+                                <span>
+                                    {t('article.readingTime', {count: latestReflexion.readingTime})}
+                                </span>
+                                <span>
+                                    {t('card.read')}
+                                    <FiArrowUpRight aria-hidden="true" />
+                                </span>
+                            </span>
+                        </Link>
+                    )
+                }
+            >
+                <a className="entry-action" href="#latest">
+                    {t('actions.latest')}
+                    <FiArrowDown aria-hidden="true" />
+                </a>
+                <a className="entry-action entry-action--quiet" href="#themes">
+                    {t('actions.themes')}
+                    <FiArrowUpRight aria-hidden="true" />
+                </a>
+            </PageHero>
 
             <ReflectionsNav />
-
-            <ReflectionStats items={stats} />
 
             <motion.section
                 id="themes"

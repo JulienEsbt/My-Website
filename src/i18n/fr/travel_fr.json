@@ -5,7 +5,9 @@
     "hero": {
         "kicker": "Carnets personnels",
         "title": "Voyages et lieux de vie",
-        "subtitle": "Un espace secondaire du portfolio pour conserver mes lieux, souvenirs, photos et récits de voyage."
+        "subtitle": "Des lieux où j’ai vécu, des routes parcourues et des souvenirs à partager. Explorez la carte ou ouvrez un carnet pour retrouver les photos et les récits.",
+        "story": "Ouvrir le carnet",
+        "photoAlt": "Souvenir photographique du voyage au Portugal en 2025"
     },
     "intro": {
         "title": "Explorer, comprendre, ressentir",

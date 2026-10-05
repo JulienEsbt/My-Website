@@ -1,10 +1,11 @@
 import React from 'react'
-import {motion} from 'framer-motion'
+import {motion, useReducedMotion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
 import trips from '../../../data/travel/trips.js'
 import './TravelStats.css'
 
 const TravelStats = () => {
+    const reducedMotion = useReducedMotion()
     const {t} = useTranslation('travel')
 
     const completedTrips = trips.filter((trip) => !trip.isPlanned)
@@ -51,7 +52,7 @@ const TravelStats = () => {
                     <motion.div
                         key={stat.id}
                         className="travel-stat"
-                        initial={{opacity: 0, y: 28}}
+                        initial={reducedMotion ? false : {opacity: 0, y: 28}}
                         whileInView={{opacity: 1, y: 0}}
                         viewport={{once: true}}
                         transition={{

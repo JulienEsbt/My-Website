@@ -10,9 +10,12 @@ import TravelNav from '../features/travel/travelNav/TravelNav.jsx'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
 import trips from '../data/travel/trips.js'
+import {FiArrowDown, FiArrowUpRight} from 'react-icons/fi'
+import HomeTravelCarousel from '../features/home/discover/HomeTravelCarousel.jsx'
 
 const TravelPage = () => {
-    const {t} = useTranslation('travel')
+    const {t, i18n} = useTranslation('travel')
+    const fr = i18n.language.startsWith('fr')
     const {tripId} = useParams()
 
     if (tripId && !trips.some(({id}) => id === tripId)) return <NotFoundPage />
@@ -24,9 +27,26 @@ const TravelPage = () => {
                 kicker={t('hero.kicker')}
                 title={t('hero.title')}
                 subtitle={t('hero.subtitle')}
-            />
+                fullScreen
+                footer={<TravelStats />}
+                visual={
+                    <HomeTravelCarousel
+                        variant="entry"
+                        language={fr ? 'fr' : 'en'}
+                        readLabel={t('hero.story')}
+                    />
+                }
+            >
+                <a className="entry-action" href="#stories">
+                    {t('actions.stories')}
+                    <FiArrowDown aria-hidden="true" />
+                </a>
+                <a className="entry-action entry-action--quiet" href="#travel-explorer">
+                    {t('actions.map')}
+                    <FiArrowUpRight aria-hidden="true" />
+                </a>
+            </PageHero>
             <TravelNav />
-            <TravelStats />
             <TravelExplorer />
             <TravelTimeline routeTripId={tripId} />
             <DreamDestinations />
