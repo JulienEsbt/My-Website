@@ -7,7 +7,9 @@ export default function useMobileChapter(sectionRef) {
     useLayoutEffect(() => {
         const section = sectionRef.current
         if (!section) return undefined
-        const media = matchMedia('(max-width: 1099px) and (prefers-reduced-motion: no-preference)')
+        const media = matchMedia(
+            '(min-width: 701px) and (max-width: 1099px) and (prefers-reduced-motion: no-preference)'
+        )
         const steps = [...section.querySelectorAll('.professional-chapter__step')]
         let width = innerWidth
         let height = innerHeight

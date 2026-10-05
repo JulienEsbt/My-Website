@@ -6,6 +6,7 @@ import Footer from '../footerSection/Footer.jsx'
 import {observeSceneViewport} from '../viewport/sceneViewport.js'
 import '../viewport/ViewportLayout.css'
 import '../viewport/EntryScreen.css'
+import '../../mobile/MobileExperience.css'
 
 interface PageFrameProps {
     children: ReactNode

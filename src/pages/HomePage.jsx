@@ -1,4 +1,5 @@
 import React from 'react'
+import useMediaQuery from '../components/common/accessibility/useMediaQuery.js'
 import useChapterTransition from '../features/home/useChapterTransition.js'
 import Header from '../features/home/header/Header'
 import HomeNav from '../features/home/homeNav/HomeNav.jsx'
@@ -13,12 +14,14 @@ import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 
 const HomePage = () => {
     useChapterTransition()
+    const mobile = useMediaQuery('(max-width: 700px)')
     return (
         <PageFrame>
             <Header />
             <HomeNav />
-            <About />
+            {!mobile && <About />}
             <Portfolio />
+            {mobile && <About />}
             <Experience />
             <Services />
             <Goals />

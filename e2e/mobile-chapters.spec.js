@@ -1,98 +1,44 @@
 import {test, expect, chromium, webkit} from '@playwright/test'
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
-    test(`mobile portfolio cards pause, zoom and release without inner scrolling in ${engine}`, async () => {
+    test(`mobile professional chapters use native cards and preserve desktop structure in ${engine}`, async () => {
         const browser = await browserType.launch()
         try {
             const page = await browser.newPage({
                 viewport: {width: 393, height: 790},
                 locale: 'fr-FR',
-                reducedMotion: 'no-preference',
+                reducedMotion: 'reduce',
             })
-            const errors = []
-            page.on('pageerror', (error) => errors.push(error.message))
-            await page.goto('http://localhost:4173/')
+            await page.goto('http://localhost:4173/?lang=fr')
             await page.locator('#prerendered-content').waitFor({state: 'detached'})
-            for (const id of ['experience', 'services']) {
-                const section = page.locator(`#${id}`)
-                const step = section.locator('.professional-chapter__step').first()
-                await expect(step).toHaveClass(/step--mobile/)
-                const card = step.locator('article')
-                // Measure sticky geometry at settled positions, without interrupting Safari's
-                // CSS smooth-scroll animation when reversing direction between assertions.
-                const geometry = await step.evaluate((el) => ({
-                    top: el.getBoundingClientRect().top + scrollY,
-                    hold: parseFloat(el.style.getPropertyValue('--mobile-hold')),
-                }))
-                await page.evaluate(
-                    (y) => scrollTo({top: y, behavior: 'instant'}),
-                    geometry.top - 88 + 20
-                )
-                await expect
-                    .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
-                    .toBeCloseTo(88, 0)
-                const initial = await card.evaluate((el) => el.getBoundingClientRect().width)
-                await page.evaluate(
-                    (y) => scrollTo({top: y, behavior: 'instant'}),
-                    geometry.top - 88 + geometry.hold * 0.9
-                )
-                await expect
-                    .poll(() => card.evaluate((el) => el.getBoundingClientRect().width))
-                    .toBeGreaterThan(initial)
-                expect(
-                    await card.evaluate((el) => ({
-                        top: el.getBoundingClientRect().top,
-                        bottom: el.getBoundingClientRect().bottom,
-                        innerScroll: el.scrollHeight > el.clientHeight + 1,
-                    }))
-                ).toEqual({top: 88, bottom: expect.any(Number), innerScroll: false})
-                expect(await card.evaluate((el) => el.getBoundingClientRect().bottom)).toBeLessThan(
-                    790 - 80
-                )
-                await page.evaluate(
-                    (y) => scrollTo({top: y, behavior: 'instant'}),
-                    geometry.top - 88 + geometry.hold + 100
-                )
-                await expect
-                    .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
-                    .toBeLessThan(0)
-                await page.evaluate(
-                    (y) => scrollTo({top: y, behavior: 'instant'}),
-                    geometry.top - 88 + 20
-                )
-                await expect
-                    .poll(() => card.evaluate((el) => el.getBoundingClientRect().top))
-                    .toBeCloseTo(88, 0)
-                // Address-bar height changes keep the same native scroll distance.
-                await page.setViewportSize({width: 393, height: 850})
-                expect(
-                    await step.evaluate((el) =>
-                        parseFloat(el.style.getPropertyValue('--mobile-hold'))
-                    )
-                ).toBe(geometry.hold)
-                await page.setViewportSize({width: 393, height: 790})
-                const readingToggle = section.getByRole('button', {
-                    name: 'Lecture continue',
-                    exact: true,
-                })
-                // Bring the control clear of the fixed header/dock after the resize,
-                // before asking WebKit to hit-test a real pointer click.
-                await readingToggle.evaluate((el) =>
+            for (const id of ['experience']) {
+                const deck = page.locator(`#${id} .mobile-deck`)
+                const track = deck.locator('.mobile-deck__track')
+                await deck
+                    .getByRole('button', {name: 'Carte suivante'})
+                    .evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
+                await deck.getByRole('button', {name: 'Carte suivante'}).click()
+                await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(100)
+                await expect(deck.locator('.mobile-deck__controls > span')).toContainText('02')
+                await deck.getByRole('button', {name: 'Carte précédente'}).click()
+                await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeLessThan(2)
+                const show = deck.getByRole('button', {name: 'Tout afficher'})
+                await show.evaluate((el) =>
                     el.scrollIntoView({block: 'center', behavior: 'instant'})
                 )
-                await expect(readingToggle).toBeInViewport({ratio: 1})
-                await readingToggle.click()
-                await expect(readingToggle).toHaveCount(0)
-                await expect(section.locator('.professional-chapter__step--mobile')).toHaveCount(0)
-                await section.getByRole('button', {name: 'Lecture animée', exact: true}).click()
-                await expect(step).toHaveClass(/step--mobile/)
+                await show.click()
+                await expect(track).toHaveCSS('overflow-x', 'visible')
+                await expect(deck.getByRole('button', {name: 'Vue cartes'})).toHaveAttribute(
+                    'aria-pressed',
+                    'true'
+                )
             }
-            await page.emulateMedia({reducedMotion: 'reduce'})
-            await expect(page.locator('.professional-chapter__step--mobile')).toHaveCount(0)
             await page.emulateMedia({reducedMotion: 'no-preference'})
-            await page.setViewportSize({width: 790, height: 393})
             await expect(page.locator('.professional-chapter__step--mobile')).toHaveCount(0)
-            expect(errors).toEqual([])
+            await page.setViewportSize({width: 1440, height: 900})
+            await expect(page.locator('.mobile-deck')).toHaveCount(0)
+            await expect(page.locator('.home-hero')).toBeVisible()
+            await expect(page.locator('.portfolio__container > .portfolio__item')).toHaveCount(3)
         } finally {
             await browser.close()
         }

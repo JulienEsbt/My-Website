@@ -7,8 +7,10 @@ import HeaderSocials from '../../../components/common/social/headerSocials/Heade
 import {HOME_ASSETS} from '../../../config/homeAssets.js'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './Header.css'
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
+import MobileHomeHeader from './MobileHomeHeader.jsx'
 
-const Header = () => {
+const DesktopHeader = () => {
     const {t} = useTranslation('home')
 
     const title = useRef(null)
@@ -127,4 +129,7 @@ const Header = () => {
     )
 }
 
-export default Header
+export default function Header() {
+    const mobile = useMediaQuery('(max-width: 700px)')
+    return mobile ? <MobileHomeHeader /> : <DesktopHeader />
+}

@@ -14,7 +14,10 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
     useEffect(() => {
         const protectedContent = avoidSelector ? document.querySelector(avoidSelector) : null
         const nav = navRef.current
-        if (!protectedContent || !nav) return
+        if (!protectedContent || !nav) {
+            setAvoidingContent(false)
+            return
+        }
         const updateVisibility = () => {
             const bottomGap = parseFloat(getComputedStyle(nav).bottom) || 16
             const dockTop = window.innerHeight - nav.offsetHeight - bottomGap - 12
@@ -137,6 +140,9 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
                         }}
                     >
                         <span aria-hidden="true">{item.icon}</span>
+                        <span className="section-nav__mobile-label" aria-hidden="true">
+                            {item.mobileLabel || item.label}
+                        </span>
                     </a>
                 )
             })}

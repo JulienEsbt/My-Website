@@ -1,3 +1,4 @@
+import MobileAccordion from '../../../components/common/mobile/MobileAccordion.jsx'
 import React, {useLayoutEffect, useRef} from 'react'
 import {BsGithub} from 'react-icons/bs'
 import {FiArrowUpRight} from 'react-icons/fi'
@@ -74,75 +75,88 @@ export default function Portfolio() {
             </div>
 
             <div className="container portfolio__container">
-                {PORTFOLIO_PROJECTS.map(({id, image, repository, demo, caseStudy, tags}, index) => (
-                    <article
-                        key={id}
-                        className="portfolio__item"
-                        ref={(el) => (cardsRef.current[index] = el)}
-                    >
-                        <ProjectImage
-                            caseStudy={caseStudy}
-                            title={t(`portfolio.items.${id}.title`)}
-                            label={t('portfolio.caseStudy')}
-                        >
-                            <ResponsiveImage
-                                media={image}
-                                alt={t(`portfolio.items.${id}.title`)}
-                                sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 360px"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </ProjectImage>
-
-                        <div className="portfolio__body">
-                            <span className="portfolio__type">
-                                {t(`portfolio.items.${id}.type`)}
+                <MobileAccordion
+                    labels={PORTFOLIO_PROJECTS.map(({id, image}) => (
+                        <span className="mobile-project-preview" key={id}>
+                            <ResponsiveImage media={image} alt="" sizes="80px" loading="lazy" />
+                            <span>
+                                <strong>{t(`portfolio.items.${id}.title`)}</strong>
+                                <small>{t(`portfolio.items.${id}.type`)}</small>
                             </span>
-
-                            <h3>{t(`portfolio.items.${id}.title`)}</h3>
-
-                            <p>{t(`portfolio.items.${id}.description`)}</p>
-
-                            <div className="portfolio__tags">
-                                {tags.map((tag) => (
-                                    <span key={tag}>{t(`portfolio.tags.${tag}`)}</span>
-                                ))}
-                            </div>
-
-                            <div className="portfolio__actions">
-                                {caseStudy && (
-                                    <Link className="portfolio__case-study" to={caseStudy}>
-                                        <FiArrowUpRight aria-hidden="true" />
-                                        {t('portfolio.caseStudy')}
-                                    </Link>
-                                )}
-
-                                {demo && (
-                                    <a
-                                        className="portfolio__demo"
-                                        href={demo}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        <FiArrowUpRight aria-hidden="true" />
-                                        {t('portfolio.demo')}
-                                    </a>
-                                )}
-
-                                <a
-                                    className="portfolio__link"
-                                    href={repository}
-                                    target="_blank"
-                                    rel="noreferrer"
+                        </span>
+                    ))}
+                >
+                    {PORTFOLIO_PROJECTS.map(
+                        ({id, image, repository, demo, caseStudy, tags}, index) => (
+                            <article
+                                key={id}
+                                className="portfolio__item"
+                                ref={(el) => (cardsRef.current[index] = el)}
+                            >
+                                <ProjectImage
+                                    caseStudy={caseStudy}
+                                    title={t(`portfolio.items.${id}.title`)}
+                                    label={t('portfolio.caseStudy')}
                                 >
-                                    <BsGithub aria-hidden="true" />
-                                    {t('portfolio.cta')}
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                ))}
+                                    <ResponsiveImage
+                                        media={image}
+                                        alt={t(`portfolio.items.${id}.title`)}
+                                        sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 360px"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </ProjectImage>
 
+                                <div className="portfolio__body">
+                                    <span className="portfolio__type">
+                                        {t(`portfolio.items.${id}.type`)}
+                                    </span>
+
+                                    <h3>{t(`portfolio.items.${id}.title`)}</h3>
+
+                                    <p>{t(`portfolio.items.${id}.description`)}</p>
+
+                                    <div className="portfolio__tags">
+                                        {tags.map((tag) => (
+                                            <span key={tag}>{t(`portfolio.tags.${tag}`)}</span>
+                                        ))}
+                                    </div>
+
+                                    <div className="portfolio__actions">
+                                        {caseStudy && (
+                                            <Link className="portfolio__case-study" to={caseStudy}>
+                                                <FiArrowUpRight aria-hidden="true" />
+                                                {t('portfolio.caseStudy')}
+                                            </Link>
+                                        )}
+
+                                        {demo && (
+                                            <a
+                                                className="portfolio__demo"
+                                                href={demo}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <FiArrowUpRight aria-hidden="true" />
+                                                {t('portfolio.demo')}
+                                            </a>
+                                        )}
+
+                                        <a
+                                            className="portfolio__link"
+                                            href={repository}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <BsGithub aria-hidden="true" />
+                                            {t('portfolio.cta')}
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    )}
+                </MobileAccordion>
                 <AgoraProjectCard
                     cardRef={(element) => (cardsRef.current[PORTFOLIO_PROJECTS.length] = element)}
                 />
