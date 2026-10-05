@@ -91,18 +91,18 @@ const zoomViewports = [1.25, 1.5, 2].map((zoom) => ({
 }))
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
-    test(`hero content stays inside the screen across laptop sizes and zoom layouts in ${engine}`, async () => {
-        test.setTimeout(120000)
-        const browser = await browserType.launch()
-        const context = await browser.newContext({
-            locale: 'fr-FR',
-            reducedMotion: 'reduce',
-            deviceScaleFactor: 2,
-        })
-        await context.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
-        const page = await context.newPage()
-        try {
-            for (const route of ['/', '/web3']) {
+    for (const route of ['/', '/web3']) {
+        test(`hero ${route} stays inside the screen across laptop sizes and zoom layouts in ${engine}`, async () => {
+            test.setTimeout(120000)
+            const browser = await browserType.launch()
+            const context = await browser.newContext({
+                locale: 'fr-FR',
+                reducedMotion: 'reduce',
+                deviceScaleFactor: 2,
+            })
+            await context.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
+            const page = await context.newPage()
+            try {
                 await page.goto(`http://localhost:4173${route}`)
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
                 await page.evaluate(() => document.fonts.ready)
@@ -162,11 +162,11 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                         })
                     }
                 }
+            } finally {
+                await browser.close()
             }
-        } finally {
-            await browser.close()
-        }
-    })
+        })
+    }
 }
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
@@ -203,12 +203,12 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
 }
 
 // Guard against an optically tiny layout that still passes overflow checks.
-test('all five introductions grow on large displays and keep a complete first screen in both languages', async ({
-    page,
-}) => {
-    test.setTimeout(120000)
-    for (const locale of ['', '/en']) {
-        for (const route of ['/', '/web3', '/travel', '/reflections', '/resources']) {
+for (const locale of ['', '/en']) {
+    for (const route of ['/', '/web3', '/travel', '/reflections', '/resources']) {
+        test(`introduction ${locale}${route} grows on large displays and keeps a complete first screen`, async ({
+            page,
+        }) => {
+            test.setTimeout(60000)
             const sizes = []
             for (const viewport of [
                 {width: 1440, height: 900},
@@ -241,9 +241,9 @@ test('all five introductions grow on large displays and keep a complete first sc
             }
             expect(sizes[1].width / sizes[0].width, `${locale}${route} width`).toBeGreaterThan(1.5)
             expect(sizes[1].title / sizes[0].title, `${locale}${route} title`).toBeGreaterThan(1.4)
-        }
+        })
     }
-})
+}
 
 test('editorial entry cards open the selected story and note in the current language', async ({
     page,

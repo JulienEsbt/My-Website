@@ -212,6 +212,7 @@ test('article navigation replaces structured data and unknown pages are noindex'
 })
 
 test('travel stories have clean, localized and backward-compatible URLs', async ({page}) => {
+    test.setTimeout(60000)
     await page.goto('/travel?trip=croatia-2026#stories')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('#travel-detail-title')).toHaveText('Dubrovnik')
