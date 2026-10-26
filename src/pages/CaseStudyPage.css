@@ -340,6 +340,9 @@
     max-width: none;
 }
 .bruno-hero-visual {
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
     overflow: hidden;
     border: 1px solid rgba(77, 181, 255, 0.3);
     border-radius: 1.25rem;

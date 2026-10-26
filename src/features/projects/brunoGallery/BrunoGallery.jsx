@@ -79,7 +79,7 @@ export default function BrunoGallery() {
                     key={image.id}
                     media={image}
                     alt={caption}
-                    sizes="(min-width: 1600px) 1440px, 92vw"
+                    sizes="(min-width: 1280px) 1060px, 86vw"
                     loading="eager"
                     fetchPriority={index === 0 ? 'high' : undefined}
                 />
