@@ -7,7 +7,8 @@ test('case studies have a visual hero and circular previous/next navigation in b
     for (const prefix of ['', '/en']) {
         await page.goto(`${prefix}/projects/bruno-pizza`)
         await page.locator('#prerendered-content').waitFor({state: 'detached'})
-        await expect(page.locator('.page-hero__visual img')).toBeVisible()
+        await expect(page.locator('.bruno-hero-visual__sheet')).toBeVisible()
+        await expect(page.locator('.bruno-hero-visual img')).toHaveCount(2)
         const pager = page.locator('.page-hero .case-study__pager')
         await expect(pager.locator('a[rel="next"]')).toHaveAttribute(
             'href',
