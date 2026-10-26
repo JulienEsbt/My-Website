@@ -78,7 +78,9 @@ test('Bruno Pizza presents the v1.2 changes and separates Windows validation in 
     for (const path of ['/projects/bruno-pizza', '/en/projects/bruno-pizza']) {
         await page.goto(path)
         await page.locator('#prerendered-content').waitFor({state: 'detached'})
-        await expect(page.locator('.case-study__overview')).toContainText('v1.2.0')
+        await expect(page.locator('.page-hero__footer .case-study-hero__facts')).toContainText(
+            'v1.2.0'
+        )
         await expect(page.locator('.case-study__limits')).toContainText('Windows')
         await expect(page.locator('.production-story')).toContainText('20 photos')
     }
@@ -94,4 +96,31 @@ test('Bruno uses the locally shipped version 1.2 screenshot', async ({page}) => 
         .toBe(true)
     await image.scrollIntoViewIfNeeded()
     await page.screenshot({path: '/tmp/bruno-v12-preview.png'})
+})
+
+test('Bruno screenshots fit a compact frame without cropping on large and small screens', async ({
+    page,
+}) => {
+    for (const size of [
+        {width: 1920, height: 1080},
+        {width: 1440, height: 900},
+        {width: 390, height: 844},
+    ]) {
+        await page.setViewportSize(size)
+        await page.goto('/projects/bruno-pizza')
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        const hero = await page.locator('.bruno-hero-visual').boundingBox()
+        expect(hero.width).toBeLessThanOrEqual(521)
+        const gallery = page.locator('.bruno-gallery')
+        expect((await gallery.boundingBox()).width).toBeLessThanOrEqual(1101)
+        const screen = page.locator('.bruno-gallery__screen')
+        expect((await screen.boundingBox()).height).toBeLessThanOrEqual(size.height * 0.62 + 1)
+        await expect(screen.locator('img')).toHaveCSS('object-fit', 'contain')
+        await expect
+            .poll(() => screen.locator('img').evaluate((e) => e.complete && e.naturalWidth > 0))
+            .toBe(true)
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+            true
+        )
+    }
 })

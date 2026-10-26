@@ -9,7 +9,11 @@
             "subtitle": "A local desktop application that turns an Excel plan into an actionable workshop production flow.",
             "imageAlt": "Bruno Pizza production dashboard showing quantities by variety and distributor",
             "back": "Back to projects",
-            "code": "View GitHub repository"
+            "code": "View GitHub repository",
+            "flowLabel": "From an Excel plan to a production workflow",
+            "quantities": "Quantities",
+            "workshop": "Workshop",
+            "visualCaption": "Guided production, from an Excel plan to photo-led assembly."
         },
         "overview": {
             "statusLabel": "Status",
@@ -126,10 +130,18 @@
             "kicker": "Portfolio case study",
             "title": "My-Website",
             "subtitle": "A bilingual, interactive portfolio bringing together my projects, experiments and more personal work.",
-            "imageAlt": "My-Website homepage presenting Julien Esterbet and his full-stack positioning",
+            "imageAlt": "Julien Esterbet’s portfolio homepage: introduction, portrait and personal interests.",
             "back": "Back to projects",
             "live": "View current public site",
-            "code": "View GitHub repository"
+            "code": "View GitHub repository",
+            "diagramLabel": "Portfolio services",
+            "appLabel": "One bilingual interface, three complementary services",
+            "services": {
+                "code": "Versioned code",
+                "hosting": "Deployed website",
+                "media": "Optimized media"
+            },
+            "visualCaption": "From code to content: the services behind the portfolio."
         },
         "overview": {
             "statusLabel": "Status",
@@ -245,6 +257,132 @@
             "title": "A portfolio built as a product",
             "body": "The public repository exposes the architecture, data, tests and delivery choices behind the visible experience.",
             "cta": "Back to the selection"
+        }
+    },
+    "opendente": {
+        "hero": {
+            "kicker": "macOS · Open source",
+            "title": "OpenDente. Charging at your pace.",
+            "subtitle": "My edition of a native utility that adapts Mac charging to your day. Simple profiles, clear battery information and your settings, right in the menu bar.",
+            "explore": "Explore the application",
+            "code": "View code",
+            "back": "Back to projects",
+            "lightAlt": "OpenDente in English: charging panel in light appearance",
+            "darkAlt": "OpenDente in English: dark panel with Desk, Daily and Travel profiles",
+            "caption": "Real screenshots · Light and dark appearance",
+            "factsLabel": "OpenDente Personal features",
+            "native": "Native SwiftUI interface",
+            "languages": "French and English",
+            "local": "Local, without accounts or telemetry"
+        },
+        "overview": {
+            "statusLabel": "Project status",
+            "status": "Personal Edition 0.8.0 · Public source, built and signed locally.",
+            "roleLabel": "My contribution",
+            "role": "Extending an open source project: new workflows, bilingual interface and experimental native control.",
+            "scopeLabel": "Environment",
+            "scope": "macOS 14+ · Hardware checks on a MacBook Air M3 running macOS 27.2."
+        },
+        "intent": {
+            "kicker": "The starting point",
+            "title": "A quiet tool for an everyday need.",
+            "body": "A Mac is used differently at a desk, on the move or before a long period in storage. I extended OpenDente to make these situations easier to manage: keep everyday charging preferences, read the actual battery state and enable a temporary mode without losing those settings."
+        },
+        "contributions": {
+            "daily": {
+                "title": "Settings that follow your day",
+                "body": "Desk, Daily and Travel profiles, a one-off full charge and storage preparation at 50%: temporary modes preserve the everyday configuration."
+            },
+            "interface": {
+                "title": "An interface that belongs on Mac",
+                "body": "French and English, light and dark appearance, percentage inside the battery icon and customizable measurements keep the essentials easy to read."
+            },
+            "background": {
+                "title": "There when it is needed",
+                "body": "Quiet login startup, configurable MagSafe signals, an offline guide and optional local diagnostics. No account or telemetry server added."
+            }
+        },
+        "gallery": {
+            "kicker": "Inside the application",
+            "title": "A small panel. Thoughtful controls.",
+            "choose": "Choose an OpenDente view",
+            "previous": "Previous view",
+            "next": "Next view",
+            "enlarge": "Enlarge screenshot",
+            "note": "Real screenshots from version 0.8.0. Customizable thresholds shown as examples.",
+            "items": {
+                "charge": {
+                    "label": "Charging settings",
+                    "title": "A ceiling and a resume threshold.",
+                    "body": "Choose a daily limit, decide when charging resumes and find the options in one place. An additional thermal pause can be configured; macOS protections retain priority.",
+                    "alt": "OpenDente charging settings in English: 80% limit, return to the ceiling and resume below 70%"
+                },
+                "profiles": {
+                    "label": "Everyday profiles",
+                    "title": "From your desk to your next trip.",
+                    "body": "The panel brings together profiles, storage preparation and a one-off charge to 100%. The percentage, active mode and energy flows help explain what is happening.",
+                    "alt": "OpenDente panel in English, dark appearance: everyday profiles, storage at 50% and one-off full charge"
+                },
+                "menu": {
+                    "label": "Menu bar",
+                    "title": "The essentials, without a window.",
+                    "body": "The percentage sits inside the battery. Temperature, power and charging mode can complete the display, with a choice of compact or classic layout.",
+                    "alt": "OpenDente menu bar settings in English: compact display and optional indicators"
+                },
+                "magsafe": {
+                    "label": "MagSafe signals",
+                    "title": "Status at the end of the cable.",
+                    "body": "Assign a fixed color, slow blink or alternating pattern to each charging state. A ten-second preview makes each signal easy to check.",
+                    "alt": "OpenDente MagSafe settings in English: colors, blinking patterns and signal previews"
+                },
+                "guide": {
+                    "label": "Built-in guide",
+                    "title": "Understand a setting as you use it.",
+                    "body": "An offline guide explains profiles, thresholds, temporary modes and their limits. Search helps find an answer without leaving the application.",
+                    "alt": "OpenDente built-in guide in English with search and explanations of profiles and temporary modes"
+                }
+            }
+        },
+        "engineering": {
+            "kicker": "Behind the interface",
+            "title": "A native experience, from panel to system.",
+            "body": "The SwiftUI interface stays separate from privileged operations. This edition adds an experimental native mechanism, settings restoration and recovery checks while preserving the original project’s architecture and history.",
+            "stackLabel": "OpenDente technologies",
+            "steps": {
+                "app": "The SwiftUI application reads measurements and applies the user’s profiles and preferences.",
+                "helper": "A certificate-authenticated XPC connection delegates privileged operations to the local helper.",
+                "system": "The helper uses the available SMC or native mechanism. A recovery journal and watchdog support settings restoration."
+            }
+        },
+        "context": {
+            "kicker": "Current scope",
+            "title": "Real checks, with compatibility still to expand.",
+            "body": "Native control uses private Apple interfaces and remains experimental. Documented hardware checks cover a MacBook Air M3; they do not validate every Mac. A request can take several minutes and is not an immediate hardware cutoff. The application is built and signed locally; no notarized public installer is provided.",
+            "validation": "Read the validation record"
+        },
+        "credits": {
+            "title": "Built on an open project",
+            "before": "This edition is a fork of",
+            "after": ". The original charging features and architecture come from that project; my additions extend this foundation and preserve its credits and history.",
+            "license": "GPL-3.0 source code. Other contributions and their licenses are detailed in the repository."
+        },
+        "next": {
+            "title": "Explore the project at its source.",
+            "body": "The public repository contains the code, user guide, technical choices and validation records.",
+            "cta": "Explore OpenDente"
+        }
+    },
+    "actions": {
+        "label": "Project actions",
+        "back": "Back to projects",
+        "code": "View GitHub repository",
+        "browse": "Browse case studies",
+        "previous": "Previous project",
+        "next": "Next project",
+        "projects": {
+            "1": "Bruno Pizza",
+            "4": "OpenDente",
+            "2": "My-Website"
         }
     }
 }

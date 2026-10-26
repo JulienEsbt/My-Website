@@ -127,7 +127,10 @@
             "vite": "Vite",
             "i18n": "FR / EN",
             "accessibility": "Accessibilité",
-            "vercel": "Vercel"
+            "vercel": "Vercel",
+            "swift": "Swift",
+            "swiftui": "SwiftUI",
+            "macos": "macOS"
         },
         "items": {
             "1": {
@@ -143,7 +146,13 @@
             "3": {
                 "type": "Prototype académique",
                 "title": "Archivage de fichiers on-chain",
-                "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract."
+                "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract.",
+                "imageAlt": "Illustration : référence d’un document public, smart contract et horodatage dans la blockchain."
+            },
+            "4": {
+                "type": "Application macOS · Open source",
+                "title": "OpenDente — Personal Edition",
+                "description": "Mon édition d’un utilitaire natif pour la batterie du Mac : profils de charge, barre de menus et interface bilingue. Un fork open source enrichi pour le quotidien."
             }
         },
         "agora": {
@@ -166,8 +175,19 @@
             "statusTitle": "État actuel",
             "status": "Un prototype local non publié permet déjà d’explorer un débat démonstrateur sous forme de graphe et de vue textuelle, de rechercher et filtrer ses éléments, de consulter leurs sources et de préparer une contribution qui reste dans le navigateur. Il ne comporte encore ni comptes, ni collaboration distante, ni système de modération public.",
             "questionsTitle": "Questions encore ouvertes",
-            "questions": "Le premier public, la gouvernance éditoriale, la vérification des contributions, la modération, l’hébergement et les liens futurs avec Reflection Studio et l’Observatoire démocratique restent à définir."
-        }
+            "questions": "Le premier public, la gouvernance éditoriale, la vérification des contributions, la modération, l’hébergement et les liens futurs avec Reflection Studio et l’Observatoire démocratique restent à définir.",
+            "close": "Fermer",
+            "graph": {
+                "question": "Une question publique",
+                "arguments": "Arguments",
+                "objections": "Objections",
+                "facts": "Faits",
+                "sources": "Sources"
+            }
+        },
+        "browseLabel": "Parcourir les projets",
+        "browseHint": "Choisissez un projet pour découvrir son usage et sa réalisation.",
+        "scrollHint": "Faites défiler pour parcourir les projets, ou choisissez-en un dans la liste."
     },
     "about": {
         "photoAlt": "Julien et deux étudiants pendant une présentation de projet",

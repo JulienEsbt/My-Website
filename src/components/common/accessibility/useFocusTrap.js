@@ -154,7 +154,7 @@ const useFocusTrap = ({
                 const target = getReturnFocusTarget(returnFocusRef, returnFocusTarget)
 
                 if (target instanceof HTMLElement && target.isConnected) {
-                    target.focus()
+                    target.focus({preventScroll: true})
                     returnFocusFrameRef.current = null
                     return
                 }

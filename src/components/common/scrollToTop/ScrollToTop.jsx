@@ -1,16 +1,33 @@
-import {useEffect} from 'react'
+import {useEffect, useRef} from 'react'
 import {unlocalizedPath} from '../../../config/localizedPaths.js'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigationType} from 'react-router-dom'
 
 const ScrollToTop = () => {
-    const {pathname: localizedPathname, hash} = useLocation()
+    const {pathname: localizedPathname, hash, key, state} = useLocation()
+    const navigationType = useNavigationType()
+    const previousLocation = useRef(null)
     const pathname = unlocalizedPath(localizedPathname)
 
     useEffect(() => {
+        const previous = previousLocation.current
+        previousLocation.current = {pathname, hash, key, origin: state?.travelTimelineOrigin}
+        // Language switches keep the same document position.
+        if (previous?.pathname === pathname && previous?.hash === hash) return
+        const isTravel = (path) => path === '/travel' || path?.startsWith('/travel/')
+        if (
+            previous &&
+            isTravel(previous.pathname) &&
+            isTravel(pathname) &&
+            (state?.travelTimelineOrigin || (navigationType === 'POP' && previous.origin === key))
+        ) {
+            // The mobile dialog's body lock restores the list, including browser Back.
+            return
+        }
         if (hash) {
             const targetId = decodeURIComponent(hash.slice(1))
             let observer
             let stopped = false
+            let anchoredScrollY = null
             const stop = () => {
                 stopped = true
             }
@@ -22,7 +39,14 @@ const ScrollToTop = () => {
                 const target = document.getElementById(targetId)
                 if (!target || stopped || target.closest('#prerendered-content')) return false
 
+                // A section may restore a more precise position after the shared anchor.
+                // Stop settling once another scroll owner has moved the viewport.
+                if (anchoredScrollY !== null && Math.abs(window.scrollY - anchoredScrollY) > 2) {
+                    stop()
+                    return false
+                }
                 target.scrollIntoView({block: 'start'})
+                anchoredScrollY = window.scrollY
                 observer?.disconnect()
                 return true
             }
@@ -35,6 +59,7 @@ const ScrollToTop = () => {
             })
 
             resize.observe(document.body)
+            window.addEventListener('pointerdown', stop, {passive: true})
             window.addEventListener('wheel', stop, {passive: true})
             window.addEventListener('touchstart', stop, {passive: true})
             window.addEventListener('keydown', stop)
@@ -49,6 +74,7 @@ const ScrollToTop = () => {
                 window.clearTimeout(timeout)
                 observer?.disconnect()
                 resize.disconnect()
+                window.removeEventListener('pointerdown', stop)
                 window.removeEventListener('wheel', stop)
                 window.removeEventListener('touchstart', stop)
                 window.removeEventListener('keydown', stop)
@@ -60,7 +86,7 @@ const ScrollToTop = () => {
             left: 0,
             behavior: 'instant',
         })
-    }, [pathname, hash])
+    }, [pathname, hash, key, state?.travelTimelineOrigin, navigationType])
 
     return null
 }

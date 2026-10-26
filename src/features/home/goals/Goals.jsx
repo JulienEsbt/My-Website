@@ -1,3 +1,4 @@
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {A11y, Autoplay, EffectCoverflow, Keyboard, Pagination} from 'swiper/modules'
@@ -23,7 +24,10 @@ const ITEMS = [
 ]
 
 export default function Goals() {
-    const {t} = useTranslation('home')
+    const {t, i18n} = useTranslation('home')
+    const fr = i18n.resolvedLanguage?.startsWith('fr')
+    const [showAll, setShowAll] = useState(false)
+    const mobile = useMediaQuery('(max-width: 700px)')
     const sectionRef = useRef(null)
     const sliderRef = useRef(null)
     const swiperRef = useRef(null)
@@ -67,7 +71,7 @@ export default function Goals() {
 
         if (reducedMotion || autoplayPaused) autoplay.stop()
         else autoplay.start()
-    }, [autoplayPaused, reducedMotion, carouselReady])
+    }, [autoplayPaused, reducedMotion, carouselReady, showAll, mobile])
 
     const toggleAutoplay = () => {
         setAutoplayPaused((isPaused) => !isPaused)
@@ -105,7 +109,35 @@ export default function Goals() {
                 role="region"
                 aria-label={t('goals.carouselAria')}
             >
-                {carouselReady ? (
+                {mobile && (
+                    <div className="mobile-deck__toolbar">
+                        <span>{fr ? 'Ce qui me guide' : 'What drives me'}</span>
+                        <button
+                            type="button"
+                            aria-pressed={showAll}
+                            onClick={() => {
+                                setShowAll(!showAll)
+                                requestAnimationFrame(() =>
+                                    sliderRef.current?.scrollIntoView({
+                                        block: 'start',
+                                        behavior: 'instant',
+                                    })
+                                )
+                            }}
+                        >
+                            {showAll
+                                ? fr
+                                    ? 'Vue carrousel'
+                                    : 'Carousel view'
+                                : fr
+                                  ? 'Tout afficher'
+                                  : 'Show all'}
+                        </button>
+                    </div>
+                )}
+                {mobile && showAll ? (
+                    <div className="goals-carousel__fallback">{cards}</div>
+                ) : carouselReady ? (
                     <Swiper
                         modules={[A11y, Autoplay, EffectCoverflow, Keyboard, Pagination]}
                         effect={reducedMotion ? 'slide' : 'coverflow'}
@@ -151,7 +183,7 @@ export default function Goals() {
                     <div className="goals-carousel__fallback">{cards}</div>
                 )}
 
-                {carouselReady && !reducedMotion && (
+                {!(mobile && showAll) && carouselReady && !reducedMotion && (
                     <button
                         type="button"
                         className="goals-carousel__autoplay"

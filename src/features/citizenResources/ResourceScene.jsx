@@ -1,12 +1,15 @@
+import MobileAccordion from '../../components/common/mobile/MobileAccordion.jsx'
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown} from 'react-icons/fi'
 import {desktopScenePlacement} from './sceneViewport.js'
 import ResourceCard from './ResourceCard.jsx'
+import useMediaQuery from '../../components/common/accessibility/useMediaQuery.js'
+import MobileDeck from '../../components/common/mobile/MobileDeck.jsx'
 
 const clamp = (value) => Math.max(0, Math.min(1, value))
 
-export default function ResourceScene({resources, variant = 'featured'}) {
+function DesktopResourceScene({resources, variant = 'featured'}) {
     const {t} = useTranslation('resources')
     const rootRef = useRef(null)
     const pendingTarget = useRef(null)
@@ -267,6 +270,31 @@ export default function ResourceScene({resources, variant = 'featured'}) {
                     ))}
                 </div>
             </div>
+        </div>
+    )
+}
+
+export default function ResourceScene({resources, variant = 'featured'}) {
+    const mobile = useMediaQuery('(max-width: 700px)')
+    const {t} = useTranslation('resources')
+    if (!mobile) return <DesktopResourceScene resources={resources} variant={variant} />
+    const Collection = variant === 'more' ? MobileAccordion : MobileDeck
+    return (
+        <div className="civic-mobile-resources">
+            <Collection
+                label={t(`${variant}.title`)}
+                scrollDriven={variant === 'featured'}
+                labels={resources.map(({id}) => t(`resources.${id}.question`))}
+            >
+                {resources.map((resource, index) => (
+                    <ResourceCard
+                        key={resource.id}
+                        resource={resource}
+                        number={index + 1}
+                        compact={variant === 'more'}
+                    />
+                ))}
+            </Collection>
         </div>
     )
 }

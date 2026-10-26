@@ -6,7 +6,9 @@ export default function useMobileScrollScenes(ref, continuous) {
     useEffect(() => {
         const root = ref.current
         if (!root || !window.ResizeObserver) return
-        const media = matchMedia('(max-width: 1099px) and (prefers-reduced-motion: no-preference)')
+        const media = matchMedia(
+            '(min-width: 701px) and (max-width: 1099px) and (prefers-reduced-motion: no-preference)'
+        )
         const panels = [...root.querySelectorAll('[data-mobile-scene]')]
         let width = innerWidth
         let viewportHeight = innerHeight

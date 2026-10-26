@@ -14,6 +14,9 @@ export function desktopScenePlacement(height) {
 
 export function observeSceneViewport(element) {
     const update = () => {
+        // An immersive dialog temporarily hides the dock. Keep the underlying
+        // page geometry stable so closing it restores the original scroll position.
+        if (document.body.classList.contains('immersive-navigation-open')) return
         const {header, bottom} = sceneViewport()
         element.style.setProperty('--scene-header', `${header}px`)
         element.style.setProperty('--scene-bottom', `${bottom}px`)

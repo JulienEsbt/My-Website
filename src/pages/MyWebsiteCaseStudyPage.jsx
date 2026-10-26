@@ -1,18 +1,12 @@
+import {WebsiteHeroVisual} from '../features/projects/caseStudy/ProjectHeroVisual.jsx'
+import CaseStudyPager from '../features/projects/caseStudy/CaseStudyPager.jsx'
+import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
 import React from 'react'
-import {BsGithub} from 'react-icons/bs'
-import {
-    FiArrowLeft,
-    FiArrowUpRight,
-    FiExternalLink,
-    FiLayers,
-    FiImage,
-    FiCheckCircle,
-} from 'react-icons/fi'
+import {FiArrowUpRight, FiExternalLink, FiLayers, FiImage, FiCheckCircle} from 'react-icons/fi'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
 import {HOME_ASSETS} from '../config/homeAssets.js'
 import {LINKS} from '../config/links.js'
 import './CaseStudyPage.css'
@@ -35,154 +29,140 @@ export default function MyWebsiteCaseStudyPage() {
 
     return (
         <PageFrame>
-            <PageHero
-                id="top"
-                kicker={t('website.hero.kicker')}
-                title={t('website.hero.title')}
-                subtitle={t('website.hero.subtitle')}
-            >
-                <Link className="btn case-study__button" to="/#portfolio">
-                    <FiArrowLeft aria-hidden="true" />
-                    {t('website.hero.back')}
-                </Link>
-                <a
-                    className="btn case-study__button"
-                    href={LINKS.demos.myWebsite}
-                    target="_blank"
-                    rel="noreferrer"
+            <div className="case-study-page">
+                <PageHero
+                    id="top"
+                    kicker={t('website.hero.kicker')}
+                    title={t('website.hero.title')}
+                    subtitle={t('website.hero.subtitle')}
+                    visual={<WebsiteHeroVisual />}
+                    footer={
+                        <dl className="case-study-hero__facts">
+                            {['status', 'role', 'scope'].map((item) => (
+                                <div key={item}>
+                                    <dt>{t(`website.overview.${item}Label`)}</dt>
+                                    <dd>{t(`website.overview.${item}`)}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    }
                 >
-                    <FiExternalLink aria-hidden="true" />
-                    {t('website.hero.live')}
-                </a>
-                <a
-                    className="btn btn-primary case-study__button"
-                    href={LINKS.projects.myWebsite}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <BsGithub aria-hidden="true" />
-                    {t('website.hero.code')}
-                </a>
-            </PageHero>
+                    <CaseStudyActions projectId="2" repository={LINKS.projects.myWebsite}>
+                        <a
+                            className="btn case-study__button"
+                            href={LINKS.demos.myWebsite}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FiExternalLink aria-hidden="true" />
+                            {t('website.hero.live')}
+                        </a>
+                    </CaseStudyActions>
+                </PageHero>
 
-            <article className="case-study">
-                <div className="container case-study__visual">
-                    <ResponsiveImage
-                        media={HOME_ASSETS.portfolio.myWebsite}
-                        alt={t('website.hero.imageAlt')}
-                        sizes="(max-width: 900px) 92vw, 1100px"
-                        loading="eager"
-                        fetchPriority="high"
-                    />
-                </div>
+                <article className="case-study">
+                    <section className="container case-study__section">
+                        <p className="section-kicker">{t('website.problem.kicker')}</p>
+                        <h2>{t('website.problem.title')}</h2>
+                        <p className="case-study__lead">{t('website.problem.body')}</p>
+                    </section>
 
-                <dl className="container case-study__overview">
-                    {['status', 'role', 'scope'].map((item) => (
-                        <div key={item}>
-                            <dt>{t(`website.overview.${item}Label`)}</dt>
-                            <dd>{t(`website.overview.${item}`)}</dd>
+                    <section id="solution" className="container case-study__section">
+                        <p className="section-kicker">{t('website.solution.kicker')}</p>
+                        <h2>{t('website.solution.title')}</h2>
+                        <p className="case-study__lead">{t('website.solution.intro')}</p>
+                        <ProductionStory
+                            t={t}
+                            namespace="website"
+                            media={HOME_ASSETS.portfolio.myWebsite}
+                            items={SOLUTION_ITEMS}
+                        />
+                    </section>
+
+                    <section className="container case-study__section">
+                        <p className="section-kicker">{t('website.architecture.kicker')}</p>
+                        <h2>{t('website.architecture.title')}</h2>
+                        <ol className="case-study__flow">
+                            {ARCHITECTURE_STEPS.map((step, index) => (
+                                <li key={step}>
+                                    <span aria-hidden="true">{index + 1}</span>
+                                    <p>{t(`website.architecture.steps.${step}`)}</p>
+                                </li>
+                            ))}
+                        </ol>
+                    </section>
+
+                    <section className="container case-study__section">
+                        <p className="section-kicker">{t('website.decisions.kicker')}</p>
+                        <h2>{t('website.decisions.title')}</h2>
+                        <div className="case-study__grid case-study__grid--two-columns">
+                            {DECISION_ITEMS.map((item) => (
+                                <div key={item} className="case-study__card">
+                                    <h3>{t(`website.decisions.items.${item}.title`)}</h3>
+                                    <p>{t(`website.decisions.items.${item}.body`)}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </dl>
+                    </section>
 
-                <section className="container case-study__section">
-                    <p className="section-kicker">{t('website.problem.kicker')}</p>
-                    <h2>{t('website.problem.title')}</h2>
-                    <p className="case-study__lead">{t('website.problem.body')}</p>
-                </section>
+                    <section className="container case-study__section">
+                        <p className="section-kicker">{t('website.challenges.kicker')}</p>
+                        <h2>{t('website.challenges.title')}</h2>
+                        <div className="case-study__grid">
+                            {CHALLENGE_ITEMS.map((item) => (
+                                <div key={item} className="case-study__card">
+                                    <h3>{t(`website.challenges.items.${item}.title`)}</h3>
+                                    <p>{t(`website.challenges.items.${item}.body`)}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
 
-                <section id="solution" className="container case-study__section">
-                    <p className="section-kicker">{t('website.solution.kicker')}</p>
-                    <h2>{t('website.solution.title')}</h2>
-                    <p className="case-study__lead">{t('website.solution.intro')}</p>
-                    <ProductionStory
-                        t={t}
-                        namespace="website"
-                        media={HOME_ASSETS.portfolio.myWebsite}
-                        items={SOLUTION_ITEMS}
-                    />
-                </section>
+                    <section className="container case-study__section case-study__limits">
+                        <p className="section-kicker">{t('website.results.kicker')}</p>
+                        <h2>{t('website.results.title')}</h2>
+                        <ul>
+                            {RESULT_ITEMS.map((item) => (
+                                <li key={item}>{t(`website.results.items.${item}`)}</li>
+                            ))}
+                        </ul>
+                    </section>
 
-                <section className="container case-study__section">
-                    <p className="section-kicker">{t('website.architecture.kicker')}</p>
-                    <h2>{t('website.architecture.title')}</h2>
-                    <ol className="case-study__flow">
-                        {ARCHITECTURE_STEPS.map((step, index) => (
-                            <li key={step}>
-                                <span aria-hidden="true">{index + 1}</span>
-                                <p>{t(`website.architecture.steps.${step}`)}</p>
-                            </li>
-                        ))}
-                    </ol>
-                </section>
+                    <section className="container case-study__section case-study__limits">
+                        <p className="section-kicker">{t('website.limits.kicker')}</p>
+                        <h2>{t('website.limits.title')}</h2>
+                        <ul>
+                            {LIMIT_ITEMS.map((item) => (
+                                <li key={item}>{t(`website.limits.items.${item}`)}</li>
+                            ))}
+                        </ul>
+                    </section>
 
-                <section className="container case-study__section">
-                    <p className="section-kicker">{t('website.decisions.kicker')}</p>
-                    <h2>{t('website.decisions.title')}</h2>
-                    <div className="case-study__grid case-study__grid--two-columns">
-                        {DECISION_ITEMS.map((item) => (
-                            <div key={item} className="case-study__card">
-                                <h3>{t(`website.decisions.items.${item}.title`)}</h3>
-                                <p>{t(`website.decisions.items.${item}.body`)}</p>
-                            </div>
-                        ))}
+                    <section className="container case-study__section">
+                        <p className="section-kicker">{t('website.stack.kicker')}</p>
+                        <h2>{t('website.stack.title')}</h2>
+                        <ul className="case-study__stack" aria-label={t('website.stack.title')}>
+                            {STACK.map((technology) => (
+                                <li key={technology}>{technology}</li>
+                            ))}
+                        </ul>
+                    </section>
+
+                    <aside className="container case-study__next">
+                        <div>
+                            <h2>{t('website.next.title')}</h2>
+                            <p>{t('website.next.body')}</p>
+                        </div>
+                        <Link className="btn btn-primary case-study__button" to="/#portfolio">
+                            {t('website.next.cta')}
+                            <FiArrowUpRight aria-hidden="true" />
+                        </Link>
+                    </aside>
+                    <div className="container case-study__pager-footer">
+                        <CaseStudyPager current="2" />
                     </div>
-                </section>
-
-                <section className="container case-study__section">
-                    <p className="section-kicker">{t('website.challenges.kicker')}</p>
-                    <h2>{t('website.challenges.title')}</h2>
-                    <div className="case-study__grid">
-                        {CHALLENGE_ITEMS.map((item) => (
-                            <div key={item} className="case-study__card">
-                                <h3>{t(`website.challenges.items.${item}.title`)}</h3>
-                                <p>{t(`website.challenges.items.${item}.body`)}</p>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="container case-study__section case-study__limits">
-                    <p className="section-kicker">{t('website.results.kicker')}</p>
-                    <h2>{t('website.results.title')}</h2>
-                    <ul>
-                        {RESULT_ITEMS.map((item) => (
-                            <li key={item}>{t(`website.results.items.${item}`)}</li>
-                        ))}
-                    </ul>
-                </section>
-
-                <section className="container case-study__section case-study__limits">
-                    <p className="section-kicker">{t('website.limits.kicker')}</p>
-                    <h2>{t('website.limits.title')}</h2>
-                    <ul>
-                        {LIMIT_ITEMS.map((item) => (
-                            <li key={item}>{t(`website.limits.items.${item}`)}</li>
-                        ))}
-                    </ul>
-                </section>
-
-                <section className="container case-study__section">
-                    <p className="section-kicker">{t('website.stack.kicker')}</p>
-                    <h2>{t('website.stack.title')}</h2>
-                    <ul className="case-study__stack" aria-label={t('website.stack.title')}>
-                        {STACK.map((technology) => (
-                            <li key={technology}>{technology}</li>
-                        ))}
-                    </ul>
-                </section>
-
-                <aside className="container case-study__next">
-                    <div>
-                        <h2>{t('website.next.title')}</h2>
-                        <p>{t('website.next.body')}</p>
-                    </div>
-                    <Link className="btn btn-primary case-study__button" to="/#portfolio">
-                        {t('website.next.cta')}
-                        <FiArrowUpRight aria-hidden="true" />
-                    </Link>
-                </aside>
-            </article>
+                </article>
+            </div>
         </PageFrame>
     )
 }

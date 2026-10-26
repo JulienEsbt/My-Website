@@ -1,4 +1,5 @@
 import React from 'react'
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {useTranslation} from 'react-i18next'
 import {AiOutlineHome, AiOutlineUser} from 'react-icons/ai'
 import {BiBookOpen, BiMessageSquareDetail} from 'react-icons/bi'
@@ -8,6 +9,7 @@ import SectionNav from '../../../components/common/navigation/sectionNav/Section
 
 const HomeNav = () => {
     const {t} = useTranslation('home')
+    const mobile = useMediaQuery('(max-width: 700px)')
 
     const items = [
         {id: 'top', label: t('nav.items.home'), icon: <AiOutlineHome />},
@@ -20,8 +22,8 @@ const HomeNav = () => {
 
     return (
         <SectionNav
-            avoidSelector=".home-hero .cta"
-            items={items}
+            avoidSelector={mobile ? undefined : '.home-hero .cta'}
+            items={mobile ? [items[0], items[2], items[1], ...items.slice(3)] : items}
             ariaLabel={t('nav.aria', 'Section navigation')}
         />
     )

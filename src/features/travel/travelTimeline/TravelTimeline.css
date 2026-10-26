@@ -1041,3 +1041,15 @@
         max-height: var(--scene-available, calc(100svh - 196px));
     }
 }
+
+.gallery-playback {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid #91cfff50;
+    border-radius: 2rem;
+    background: #122237;
+    color: #dcefff;
+    cursor: pointer;
+    margin: 0.5rem auto;
+    display: block;
+}

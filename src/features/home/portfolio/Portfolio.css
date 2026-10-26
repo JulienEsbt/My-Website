@@ -7,10 +7,11 @@
 }
 
 .portfolio__container {
+    max-width: 80rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    align-items: stretch;
+    grid-template-columns: minmax(250px, 0.42fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
 }
 
 .portfolio__item {
@@ -32,142 +33,21 @@
     box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.3);
 }
 
-.portfolio__intent {
-    grid-column: 1 / -1;
-    overflow: hidden;
-    border-radius: 1.45rem;
-    background:
-        radial-gradient(circle at 8% 20%, rgba(77, 181, 255, 0.16), transparent 30%),
-        linear-gradient(135deg, rgba(31, 31, 56, 0.76), rgba(10, 16, 39, 0.9));
-    border: 1px solid rgba(77, 181, 255, 0.2);
-}
-
-.portfolio__intent-overview {
-    display: grid;
-    grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1.58fr);
-    align-items: stretch;
-}
-
-.portfolio__intent-mark {
-    position: relative;
-    min-height: 220px;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    background:
-        linear-gradient(rgba(77, 181, 255, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(77, 181, 255, 0.15) 1px, transparent 1px), rgba(7, 12, 34, 0.5);
-    background-size: 36px 36px;
-    border-right: 1px solid rgba(77, 181, 255, 0.14);
-}
-
-.portfolio__intent-mark::before,
-.portfolio__intent-mark::after {
-    content: '';
-    position: absolute;
-    width: 9rem;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(77, 181, 255, 0.64), transparent);
-    transform-origin: center;
-}
-
-.portfolio__intent-mark::before {
-    transform: rotate(28deg);
-}
-
-.portfolio__intent-mark::after {
-    transform: rotate(-28deg);
-}
-
-.portfolio__intent-icon {
-    position: relative;
-    z-index: 2;
-    width: 5rem;
-    height: 5rem;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    color: var(--color-primary);
-    background: rgba(7, 12, 34, 0.92);
-    border: 1px solid rgba(77, 181, 255, 0.44);
-    box-shadow: 0 0 3rem rgba(77, 181, 255, 0.2);
-    font-size: 2rem;
-}
-
-.portfolio__intent-node {
-    position: absolute;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background: var(--color-primary);
-    box-shadow: 0 0 1rem rgba(77, 181, 255, 0.75);
-}
-
-.portfolio__intent-node--one {
-    left: 24%;
-    top: 28%;
-}
-
-.portfolio__intent-node--two {
-    right: 22%;
-    top: 32%;
-}
-
-.portfolio__intent-node--three {
-    right: 29%;
-    bottom: 23%;
-}
-
-.portfolio__intent-copy {
-    padding: 1.5rem 1.65rem;
-}
-
-.portfolio__intent-copy h3 {
-    margin: 0 0 0.7rem;
-    color: var(--color-white);
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
-    line-height: 1.25;
-}
-
-.portfolio__intent-copy > p {
-    max-width: 780px;
-    margin: 0;
-    color: var(--color-light);
-    line-height: 1.7;
-}
-
-.portfolio__intent-principles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.15rem;
-}
-
-.portfolio__intent-principles li {
-    padding: 0.42rem 0.65rem;
-    border-radius: 999px;
-    color: var(--color-primary);
-    background: rgba(77, 181, 255, 0.08);
-    border: 1px solid rgba(77, 181, 255, 0.16);
-    font-size: 0.76rem;
-}
-
 .portfolio__intent-details {
-    border-top: 1px solid rgba(77, 181, 255, 0.14);
+    width: 100%;
 }
 
 .portfolio__intent-details summary {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.65rem;
-    color: var(--color-white);
-    font-size: 0.88rem;
+    gap: 0.5rem;
+    width: fit-content;
+    min-height: 44px;
+    color: var(--color-primary);
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     list-style: none;
-    transition: background 0.2s ease;
 }
 
 .portfolio__intent-details summary::-webkit-details-marker {
@@ -194,7 +74,7 @@
 }
 
 .portfolio__intent-content {
-    padding: 0.3rem 1.65rem 1.65rem;
+    padding: 0.5rem 0 0;
 }
 
 .portfolio__intent-grid {
@@ -238,31 +118,20 @@
 .portfolio__image {
     position: relative;
     display: block;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
+    padding: clamp(0.8rem, 1vw, 1.2rem);
     overflow: hidden;
-    background: rgba(77, 181, 255, 0.08);
+    border-bottom: 1px solid rgba(77, 181, 255, 0.12);
+    background:
+        radial-gradient(ellipse at 50% 65%, rgba(77, 181, 255, 0.1), transparent 70%), #080e20;
 }
 
 .portfolio__image img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transform: scale(1.02);
-    transition:
-        transform 0.45s ease,
-        filter 0.45s ease;
-}
-
-.portfolio__item:hover .portfolio__image img {
-    transform: scale(1.08);
-    filter: saturate(1.08) contrast(1.04);
-}
-
-.portfolio__image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 45%, rgba(7, 12, 34, 0.78));
+    object-fit: contain;
+    border-radius: 0.65rem;
 }
 
 .portfolio__open {
@@ -354,10 +223,6 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .portfolio__container {
-        grid-template-columns: 1fr;
-    }
-
     .portfolio__item {
         width: min(720px, 100%);
         margin: 0 auto;
@@ -381,23 +246,6 @@
     .portfolio__body {
         padding: 1rem;
     }
-
-    .portfolio__intent-overview {
-        grid-template-columns: 1fr;
-    }
-
-    .portfolio__intent-mark {
-        min-height: 150px;
-        border-right: 0;
-        border-bottom: 1px solid rgba(77, 181, 255, 0.14);
-    }
-
-    .portfolio__intent-copy,
-    .portfolio__intent-details summary,
-    .portfolio__intent-content {
-        padding-right: 1rem;
-        padding-left: 1rem;
-    }
 }
 
 /* Keep every project on a shared baseline, including its actions. */
@@ -418,13 +266,7 @@
     margin-top: auto;
 }
 .portfolio__intent {
-    margin-top: 1.75rem;
-}
-.portfolio__intent-overview {
-    grid-template-columns: 190px minmax(0, 1fr);
-}
-.portfolio__intent-mark {
-    min-height: 190px;
+    margin-top: 0;
 }
 .portfolio__intent-content section {
     margin: 0;
@@ -433,9 +275,6 @@
     display: grid;
     gap: 0.8rem;
 }
-.portfolio__intent-principles li,
-.portfolio__intent-icon,
-.portfolio__intent-node,
 .portfolio__intent-grid section {
     transition:
         transform 0.25s ease,
@@ -445,13 +284,6 @@
 .portfolio__intent-grid section:hover {
     border-color: rgba(77, 181, 255, 0.5);
     transform: translateY(-2px);
-}
-.portfolio__intent-mark:hover .portfolio__intent-icon {
-    transform: scale(1.08);
-    box-shadow: 0 0 35px rgba(77, 181, 255, 0.24);
-}
-.portfolio__intent-mark:hover .portfolio__intent-node {
-    transform: scale(1.35);
 }
 .portfolio__intent-details[open] .portfolio__intent-content {
     animation: intent-reveal 0.25s ease-out;
@@ -466,23 +298,384 @@
         transform: translateY(0);
     }
 }
-@media (max-width: 600px) {
-    .portfolio__intent-overview {
-        grid-template-columns: 1fr;
-    }
-    .portfolio__intent-mark {
-        min-height: 130px;
-    }
-}
 @media (prefers-reduced-motion: reduce) {
     .portfolio__intent-details[open] .portfolio__intent-content {
         animation: none;
     }
-    .portfolio__intent-principles li,
-    .portfolio__intent-icon,
-    .portfolio__intent-node,
     .portfolio__intent-grid section {
         transition: none;
         transform: none !important;
     }
+}
+
+.portfolio__preview-mark {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid var(--liquid-border-soft);
+    border-radius: 0.8rem;
+    color: var(--color-primary);
+    background: rgba(77, 181, 255, 0.08);
+    font-size: 1.6rem;
+}
+
+@media (min-width: 701px) {
+    .portfolio__index {
+        position: sticky;
+        top: 5.5rem;
+        min-width: 0;
+    }
+
+    .portfolio__index-label {
+        margin: 0 0 1rem;
+        color: var(--color-light);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .portfolio__selector {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        min-height: 6rem;
+        padding: 0.85rem 0.6rem;
+        border: 1px solid transparent;
+        border-bottom-color: var(--liquid-border-soft);
+        border-radius: 0.8rem;
+        color: var(--color-white);
+        background: transparent;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .portfolio__selector:hover,
+    .portfolio__selector[aria-selected='true'] {
+        border-color: rgba(77, 181, 255, 0.3);
+        background: rgba(77, 181, 255, 0.08);
+    }
+
+    .portfolio__index-number {
+        color: var(--color-light);
+        font-size: 0.7rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .portfolio__selector > svg {
+        flex-shrink: 0;
+        color: var(--color-primary);
+        opacity: 0;
+    }
+
+    .portfolio__selector[aria-selected='true'] > svg {
+        opacity: 1;
+    }
+
+    .portfolio__preview {
+        display: grid;
+        grid-template-columns: 3.25rem minmax(0, 1fr);
+        align-items: center;
+        gap: 0.75rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .portfolio__preview img,
+    .portfolio__preview-mark {
+        width: 3.25rem;
+        height: 3.25rem;
+        object-fit: cover;
+        border-radius: 0.6rem;
+    }
+
+    .portfolio__preview strong,
+    .portfolio__preview small {
+        display: block;
+    }
+
+    .portfolio__preview strong {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .portfolio__preview small {
+        margin-top: 0.3rem;
+        color: var(--color-light);
+        font-size: 0.7rem;
+        font-weight: 400;
+        line-height: 1.45;
+    }
+
+    .portfolio__index-hint {
+        max-width: 26ch;
+        margin-top: 1.5rem;
+        color: var(--color-light);
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .portfolio__panels {
+        min-width: 0;
+        min-height: 40rem;
+    }
+
+    .portfolio__panel:not([hidden]) ~ .portfolio__panel:not([hidden]) {
+        margin-top: 1.5rem;
+    }
+
+    .portfolio__panel .portfolio__item {
+        width: 100%;
+        min-height: 39rem;
+    }
+
+    .portfolio__panel .portfolio__image {
+        height: clamp(16rem, 25vw, 25rem);
+        aspect-ratio: auto;
+    }
+
+    .portfolio__panel .portfolio__image img {
+        object-fit: contain;
+        transform: none;
+        filter: none;
+    }
+
+    .portfolio__panel .portfolio__body {
+        padding: 1.5rem;
+    }
+
+    .portfolio__panel .portfolio__body h3 {
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+    }
+
+    .portfolio__panel .portfolio__body p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+    .portfolio__panel .portfolio__actions a {
+        min-height: 44px;
+        font-size: 0.9rem;
+    }
+
+    .portfolio__panel .portfolio__intent {
+        width: 100%;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 1050px) {
+    .portfolio__container {
+        grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1fr);
+        gap: 1.25rem;
+    }
+
+    .portfolio__index-number,
+    .portfolio__selector > svg {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .portfolio__container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #portfolio .mobile-accordion__body .portfolio__intent {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+    }
+}
+
+.portfolio__journey {
+    position: relative;
+}
+
+.portfolio__journey[data-scroll-enabled='true'] {
+    height: calc(var(--project-stage-height) + var(--project-travel));
+}
+
+.portfolio__journey[data-scroll-enabled='true'] .portfolio__stage {
+    position: sticky;
+    top: var(--project-top);
+}
+
+.portfolio__journey[data-scroll-enabled='true'] .portfolio__index {
+    position: static;
+}
+
+.portfolio__panel:not([hidden]) {
+    animation: portfolio-panel-enter 0.32s ease-out;
+}
+
+@keyframes portfolio-panel-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio__agora-visual {
+    padding: 0;
+    background-image:
+        radial-gradient(ellipse at center, rgba(77, 181, 255, 0.13), transparent 65%),
+        linear-gradient(rgba(77, 181, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 181, 255, 0.045) 1px, transparent 1px);
+    background-size:
+        auto,
+        36px 36px,
+        36px 36px;
+}
+.portfolio__agora-visual svg {
+    width: 100%;
+    height: 100%;
+}
+.portfolio__agora-lines {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    opacity: 0.55;
+}
+.portfolio__agora-core {
+    fill: #101d32;
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+}
+.portfolio__agora-branch {
+    fill: #0b1527;
+    stroke: rgba(77, 181, 255, 0.3);
+}
+.portfolio__agora-bubble {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 2;
+}
+.portfolio__agora-node {
+    fill: var(--color-primary);
+}
+.portfolio__agora-visual text {
+    fill: var(--color-primary);
+    font-size: 17px;
+}
+.portfolio__agora-visual .portfolio__agora-question {
+    fill: var(--color-white);
+    font-weight: 600;
+}
+.portfolio__intent .portfolio__tags span {
+    display: inline-block;
+}
+
+.portfolio__intent-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    background: transparent;
+    color: var(--color-primary);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.portfolio__intent-trigger:hover {
+    text-decoration: underline;
+}
+.portfolio__intent-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(58rem, calc(100% - 2rem));
+    max-width: none;
+    max-height: min(90dvh, 54rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid rgba(77, 181, 255, 0.3);
+    border-radius: 1.5rem;
+    background: #0b1122;
+    color: var(--color-white);
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.5);
+}
+.portfolio__intent-dialog::backdrop {
+    background: rgba(3, 7, 18, 0.8);
+    backdrop-filter: blur(8px);
+}
+.portfolio__intent-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-bottom: 0.75rem;
+    background: #0b1122;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+}
+.portfolio__intent-header h2 {
+    margin: 0;
+    text-align: left;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+}
+.portfolio__intent-close {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid rgba(77, 181, 255, 0.25);
+    border-radius: 0.7rem;
+    background: transparent;
+    color: var(--color-white);
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+.portfolio__intent-close:hover {
+    background: rgba(77, 181, 255, 0.1);
+}
+.portfolio__intent-lead {
+    margin: 1.25rem 0;
+    color: var(--color-light);
+    line-height: 1.7;
+}
+.portfolio__intent-dialog .portfolio__intent-content p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+}
+.portfolio__intent-dialog .portfolio__intent-content h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1rem;
+}
+.portfolio__intent-trigger:focus-visible,
+.portfolio__intent-close:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+@media (max-width: 600px) {
+    .portfolio__intent-header {
+        flex-direction: column-reverse;
+    }
+    .portfolio__intent-close {
+        align-self: flex-end;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portfolio__panel:not([hidden]) {
+        animation: none;
+    }
+}
+
+.portfolio__item[data-project='2'] .portfolio__image {
+    padding: 0.8rem;
+    background: #050c19;
 }
