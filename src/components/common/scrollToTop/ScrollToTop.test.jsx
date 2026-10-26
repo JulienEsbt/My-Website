@@ -94,4 +94,29 @@ describe('ScrollToTop', () => {
         resize()
         expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
     })
+    it('keeps another component in control after it restores its own scroll position', () => {
+        let resize
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                constructor(callback) {
+                    resize = callback
+                }
+                observe() {}
+                disconnect() {}
+            }
+        )
+        render(
+            <MemoryRouter initialEntries={['/#portfolio']}>
+                <div id="portfolio" />
+                <ScrollToTop />
+            </MemoryRouter>
+        )
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(2)
+        vi.stubGlobal('scrollY', 300)
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(2)
+    })
 })

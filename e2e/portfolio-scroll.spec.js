@@ -167,6 +167,10 @@ test('returning from a case study resumes the selected scroll step after layout 
         'aria-selected',
         'true'
     )
+    // A late layout update must not overwrite the position restored by the project scene.
+    await page.evaluate(() => {
+        document.body.style.paddingBottom = '120px'
+    })
     // The shared anchor restoration watches late layout changes for two seconds.
     await page.waitForTimeout(2200)
     await expect(page.getByRole('tab', {name: /OpenDente/})).toHaveAttribute(

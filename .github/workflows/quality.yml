@@ -19,6 +19,10 @@ jobs:
         name: Lint, tests, build and security
         runs-on: ubuntu-24.04
         timeout-minutes: 20
+        container:
+            # Keep the preinstalled browsers aligned with @playwright/test.
+            image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+            options: --ipc=host
         env:
             VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
 
@@ -41,13 +45,6 @@ jobs:
             - name: Audit generated media metadata
               if: ${{ hashFiles('public/media/**/*') != '' }}
               run: npm run media:check
-
-            - name: Install browsers for integration tests
-              # The Azure apt mirror stalled for 19 minutes in run 40379362732.
-              # Use Ubuntu's archive while keeping package signature verification.
-              run: |
-                  sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
-                  npx playwright install --with-deps chromium webkit
 
             - name: Verify browser flows
               run: npm run test:e2e

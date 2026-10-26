@@ -27,6 +27,7 @@ const ScrollToTop = () => {
             const targetId = decodeURIComponent(hash.slice(1))
             let observer
             let stopped = false
+            let anchoredScrollY = null
             const stop = () => {
                 stopped = true
             }
@@ -38,7 +39,14 @@ const ScrollToTop = () => {
                 const target = document.getElementById(targetId)
                 if (!target || stopped || target.closest('#prerendered-content')) return false
 
+                // A section may restore a more precise position after the shared anchor.
+                // Stop settling once another scroll owner has moved the viewport.
+                if (anchoredScrollY !== null && Math.abs(window.scrollY - anchoredScrollY) > 2) {
+                    stop()
+                    return false
+                }
                 target.scrollIntoView({block: 'start'})
+                anchoredScrollY = window.scrollY
                 observer?.disconnect()
                 return true
             }
