@@ -78,7 +78,7 @@ const TravelTimeline = ({routeTripId}) => {
                 {
                     pathname: localizedPath(basePath, languageFromPath(pathname)),
                     search: nextSearch ? `?${nextSearch}` : '',
-                    hash: '#stories',
+                    hash: preservePosition ? '' : '#stories',
                 },
                 {
                     replace,
@@ -195,7 +195,7 @@ const TravelTimeline = ({routeTripId}) => {
                             onClick={() => {
                                 hasOpenedGalleryRef.current = false
                                 setIsGalleryOpen(false)
-                                updateTripUrl(trip.id, false, isMobileDetail)
+                                updateTripUrl(trip.id, false, true)
                                 // The route effect opens the reader after navigation commits,
                                 // so an immediate browser Back cannot race an optimistic dialog.
                                 setDetailAnimationKey((key) => key + 1)
