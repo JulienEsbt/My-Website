@@ -5,8 +5,8 @@
     <linearGradient id="contract" x1="600" y1="220" x2="980" y2="450" gradientUnits="userSpaceOnUse"><stop stop-color="#142b42"/><stop offset="1" stop-color="#0c182b"/></linearGradient>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#5dbdff" stroke-opacity=".035"/></pattern>
   </defs>
-  <rect width="1600" height="760" rx="28" fill="#080f20"/>
-  <rect width="1600" height="760" rx="28" fill="url(#grid)"/>
+  <rect width="1600" height="760" fill="#040a16"/>
+  <rect width="1600" height="760" fill="url(#grid)"/>
   <ellipse cx="800" cy="340" rx="730" ry="360" fill="url(#glow)"/>
   <g stroke="#63bdff" stroke-width="2">
     <path d="M452 350H596M986 350H1114" stroke-opacity=".5"/>

@@ -71,7 +71,7 @@ test('manual choice synchronizes the scroll position and Agora reading preserves
                     )
                 )
         )
-        .toBeLessThan(0.02)
+        .toBeLessThan(0.0015)
     await expect(
         page.getByRole('tabpanel').getByRole('heading', {name: 'Agora — Graphe des débats'})
     ).toBeVisible()
@@ -90,6 +90,8 @@ test('manual choice synchronizes the scroll position and Agora reading preserves
         )
         .toBeLessThan(3)
     const trigger = page.getByRole('button', {name: 'Découvrir l’intention du projet'})
+    // Complete actionability scrolling before measuring the position the dialog must restore.
+    await trigger.click({trial: true})
     const readingTop = await page.evaluate(() => scrollY)
     await trigger.click()
     await expect(page.getByRole('dialog')).toBeVisible()

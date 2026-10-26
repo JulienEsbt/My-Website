@@ -119,7 +119,7 @@
     position: relative;
     display: block;
     aspect-ratio: 16 / 9;
-    padding: clamp(0.8rem, 1vw, 1.2rem);
+    padding: 0;
     overflow: hidden;
     border-bottom: 1px solid rgba(77, 181, 255, 0.12);
     background:
@@ -128,10 +128,11 @@
 
 .portfolio__image img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    border-radius: 0.65rem;
 }
 
 .portfolio__open {
@@ -436,12 +437,6 @@
         aspect-ratio: auto;
     }
 
-    .portfolio__panel .portfolio__image img {
-        object-fit: contain;
-        transform: none;
-        filter: none;
-    }
-
     .portfolio__panel .portfolio__body {
         padding: 1.5rem;
     }
@@ -675,7 +670,72 @@
     }
 }
 
-.portfolio__item[data-project='2'] .portfolio__image {
-    padding: 0.8rem;
-    background: #050c19;
+/* Whole product views sit on a continuous background rather than being cropped. */
+.portfolio__cover {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    isolation: isolate;
+    background: #040a16;
+}
+img.portfolio__ambient {
+    position: absolute;
+    z-index: -1;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    filter: blur(48px);
+    opacity: 0.18;
+    pointer-events: none;
+}
+.portfolio__item[data-project='2'] .portfolio__cover-image {
+    mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent);
+}
+.portfolio__opendente {
+    position: relative;
+    width: min(100%, 48rem);
+    height: 100%;
+}
+img.portfolio__opendente-screen {
+    position: absolute;
+    max-width: 40%;
+    height: 86%;
+    max-height: none;
+    filter: drop-shadow(0 0.75rem 1rem rgba(0, 0, 0, 0.3));
+}
+.portfolio__opendente-screen--dark {
+    top: 5%;
+    left: 24%;
+    transform: rotate(-3deg);
+}
+img.portfolio__opendente-screen--light {
+    height: 76%;
+    top: 13%;
+    right: 20%;
+    transform: rotate(4deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+    .portfolio__panel:not([hidden]) .portfolio__opendente-screen {
+        animation: portfolio-product-float 7s ease-in-out var(--float-delay, 0s) infinite;
+    }
+    .portfolio__opendente-screen--light {
+        --float-delay: -2s;
+    }
+}
+@keyframes portfolio-product-float {
+    50% {
+        translate: 0 -4px;
+    }
+}
+@media (min-width: 701px) and (max-width: 1099px) {
+    .portfolio__panel .portfolio__image {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
 }
