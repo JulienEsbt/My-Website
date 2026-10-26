@@ -13,6 +13,14 @@ export const PORTFOLIO_PROJECTS = [
         tags: ['react', 'typescript', 'electron', 'express', 'sqlite'],
     },
     {
+        id: '4',
+        status: 'active',
+        image: HOME_ASSETS.portfolio.openDente,
+        repository: LINKS.projects.openDente,
+        caseStudy: ROUTE_PATHS.openDenteCaseStudy,
+        tags: ['swift', 'swiftui', 'macos', 'i18n'],
+    },
+    {
         id: '2',
         status: 'portfolio',
         image: HOME_ASSETS.portfolio.myWebsite,

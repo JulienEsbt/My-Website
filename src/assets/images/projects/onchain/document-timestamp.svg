@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" fill="none">
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#123957" stop-opacity=".6"/><stop offset="1" stop-color="#080f20" stop-opacity="0"/></radialGradient>
+    <linearGradient id="surface" x1="160" y1="160" x2="430" y2="490" gradientUnits="userSpaceOnUse"><stop stop-color="#172b42"/><stop offset="1" stop-color="#0b1629"/></linearGradient>
+    <linearGradient id="contract" x1="600" y1="220" x2="980" y2="450" gradientUnits="userSpaceOnUse"><stop stop-color="#142b42"/><stop offset="1" stop-color="#0c182b"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#5dbdff" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1600" height="760" rx="28" fill="#080f20"/>
+  <rect width="1600" height="760" rx="28" fill="url(#grid)"/>
+  <ellipse cx="800" cy="340" rx="730" ry="360" fill="url(#glow)"/>
+  <g stroke="#63bdff" stroke-width="2">
+    <path d="M452 350H596M986 350H1114" stroke-opacity=".5"/>
+    <path d="M584 342l12 8-12 8M1102 342l12 8-12 8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="502" cy="350" r="4" fill="#63bdff" stroke="none"/>
+    <circle cx="1036" cy="350" r="4" fill="#63bdff" stroke="none"/>
+  </g>
+  <g>
+    <rect x="160" y="180" width="242" height="322" rx="20" fill="#0b1629" stroke="#315471" stroke-opacity=".5" transform="rotate(-8 281 341)"/>
+    <path d="M204 158H346L406 218V454Q406 476 384 476H204Q182 476 182 454V180Q182 158 204 158Z" fill="url(#surface)" stroke="#65bdff" stroke-opacity=".65" stroke-width="2"/>
+    <path d="M346 158V202Q346 218 362 218H406" fill="#1b3a54" stroke="#65bdff" stroke-opacity=".65" stroke-width="2"/>
+    <path d="M224 257H312M224 283H362M224 309H362M224 335H322" stroke="#a3c5dc" stroke-opacity=".65" stroke-width="7" stroke-linecap="round"/>
+    <rect x="219" y="384" width="150" height="46" rx="12" fill="#53b8ff" fill-opacity=".1" stroke="#53b8ff" stroke-opacity=".3"/>
+    <path d="m244 402-5 5 5 5m13-10 5 5-5 5" stroke="#69c2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="310" y="414" fill="#81ceff" font-family="system-ui, sans-serif" font-size="25" text-anchor="middle">URL</text>
+  </g>
+  <g>
+    <rect x="616" y="224" width="354" height="248" rx="28" fill="url(#contract)" stroke="#62bcff" stroke-width="2"/>
+    <rect x="638" y="246" width="310" height="58" rx="14" fill="#66bdff" fill-opacity=".07"/>
+    <path d="m675 263-13 12 13 12m31-24 13 12-13 12m-13-26-9 29" stroke="#6dc4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="823" y="282" fill="#dcecf6" font-family="system-ui, sans-serif" font-size="26" text-anchor="middle">Solidity / EVM</text>
+    <path d="M648 340H718M648 370H718M648 400H718" stroke="#5faedc" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/>
+    <text x="750" y="347" fill="#91b9d0" font-family="ui-monospace, monospace" font-size="26">URL</text>
+    <text x="750" y="377" fill="#91b9d0" font-family="ui-monospace, monospace" font-size="26">SIREN</text>
+    <g stroke="#73c6ff" stroke-width="2" stroke-linecap="round"><circle cx="759" cy="400" r="9"/><path d="M759 395V400L763 403"/></g>
+    <path d="M786 400H898" stroke="#5faedc" stroke-opacity=".3" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g stroke="#4ea0d0" stroke-width="2">
+    <path d="M1192 350H1222M1322 350H1352" stroke-opacity=".65"/>
+    <rect x="1118" y="292" width="74" height="116" rx="16" fill="#10253a"/>
+    <rect x="1222" y="270" width="100" height="160" rx="20" fill="#15324a" stroke="#75caff"/>
+    <rect x="1352" y="292" width="74" height="116" rx="16" fill="#10253a"/>
+    <path d="M1138 318H1172M1138 333H1162M1372 318H1406M1372 333H1396" stroke-opacity=".6" stroke-linecap="round" stroke-width="4"/>
+    <circle cx="1272" cy="336" r="24" stroke="#88d2ff"/>
+    <path d="M1272 323V337L1282 343" stroke="#88d2ff" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1247 392H1297" stroke="#88d2ff" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g fill="#b6d7ed" font-family="system-ui, sans-serif" font-size="32" font-weight="500" letter-spacing="3" text-anchor="middle">
+    <text x="294" y="566">DOCUMENT</text>
+    <text x="793" y="566">SMART CONTRACT</text>
+    <text x="1272" y="566">BLOCKCHAIN</text>
+  </g>
+  <g fill="#64bfff" fill-opacity=".7" font-family="ui-monospace, monospace" font-size="24" text-anchor="middle">
+    <text x="294" y="604">URL · SIREN</text>
+    <text x="793" y="604">{ publication }</text>
+    <text x="1272" y="604">UTC</text>
+  </g>
+</svg>

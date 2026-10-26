@@ -1,4 +1,5 @@
 import {desktopScenePlacement} from '../../../components/common/layout/viewport/sceneViewport.js'
+import MobileDeck from '../../../components/common/mobile/MobileDeck.jsx'
 import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
@@ -180,49 +181,51 @@ const Experience = () => {
             )}
 
             <div className="container experience__container">
-                {GROUPS.map((group, index) => (
-                    <div className="professional-chapter__step" key={group.id}>
-                        <article
-                            className="experience__card"
-                            ref={(el) => (cardsRef.current[index] = el)}
-                        >
-                            <div className="experience__card-head">
-                                <div className="experience__icon" aria-hidden="true">
-                                    {group.icon}
+                <MobileDeck label={t('experience.title')}>
+                    {GROUPS.map((group, index) => (
+                        <div className="professional-chapter__step" key={group.id}>
+                            <article
+                                className="experience__card"
+                                ref={(el) => (cardsRef.current[index] = el)}
+                            >
+                                <div className="experience__card-head">
+                                    <div className="experience__icon" aria-hidden="true">
+                                        {group.icon}
+                                    </div>
+
+                                    <div>
+                                        <h3>{t(`experience.groups.${group.id}.title`)}</h3>
+                                        <p>{t(`experience.groups.${group.id}.description`)}</p>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <h3>{t(`experience.groups.${group.id}.title`)}</h3>
-                                    <p>{t(`experience.groups.${group.id}.description`)}</p>
+                                <div className="experience__skills">
+                                    {group.skills.map((skill) => (
+                                        <span key={skill}>
+                                            {t(`experience.groups.${group.id}.skills.${skill}`)}
+                                        </span>
+                                    ))}
                                 </div>
-                            </div>
-
-                            <div className="experience__skills">
-                                {group.skills.map((skill) => (
-                                    <span key={skill}>
-                                        {t(`experience.groups.${group.id}.skills.${skill}`)}
-                                    </span>
-                                ))}
-                            </div>
-                            {proofs[group.id].to ? (
-                                <Link className="experience__proof" to={proofs[group.id].to}>
-                                    {proofs[group.id].label}
-                                    <FiArrowUpRight aria-hidden="true" />
-                                </Link>
-                            ) : (
-                                <a
-                                    className="experience__proof"
-                                    href={proofs[group.id].href}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    {proofs[group.id].label}
-                                    <FiArrowUpRight aria-hidden="true" />
-                                </a>
-                            )}
-                        </article>
-                    </div>
-                ))}
+                                {proofs[group.id].to ? (
+                                    <Link className="experience__proof" to={proofs[group.id].to}>
+                                        {proofs[group.id].label}
+                                        <FiArrowUpRight aria-hidden="true" />
+                                    </Link>
+                                ) : (
+                                    <a
+                                        className="experience__proof"
+                                        href={proofs[group.id].href}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        {proofs[group.id].label}
+                                        <FiArrowUpRight aria-hidden="true" />
+                                    </a>
+                                )}
+                            </article>
+                        </div>
+                    ))}
+                </MobileDeck>
             </div>
         </section>
     )

@@ -1,4 +1,5 @@
 import React from 'react'
+import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import {motion} from 'framer-motion'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
@@ -20,6 +21,20 @@ const ExternalAction = ({href, children}) => (
 
 const Web3CTA = () => {
     const {t} = useTranslation('web3')
+    const mobile = useMediaQuery('(max-width: 700px)')
+    if (mobile)
+        return (
+            <div className="cta web3-cta">
+                <a className="btn btn-primary" href="#wallet-inspector">
+                    {t('nav.items.wallet')}
+                    <FiArrowRight aria-hidden="true" />
+                </a>
+                <a className="btn" href="#blockchain-explorer">
+                    {t('nav.items.networks')}
+                    <FiArrowRight aria-hidden="true" />
+                </a>
+            </div>
+        )
 
     return (
         <div className="cta web3-cta" role="group" aria-label={t('cta.groupLabel')}>

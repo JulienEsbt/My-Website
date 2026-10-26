@@ -15,11 +15,12 @@ import trips from '../../../data/travel/trips.js'
 import {getStaticTravelMapUrl} from '../../../services/mapbox/mapboxStaticService.js'
 import {languageFromPath, localizedPath} from '../../../config/localizedPaths.js'
 import './TravelTimeline.css'
+import TravelCover from './TravelCover.jsx'
 
 const TravelGallery = lazy(() => import('../travelGallery/TravelGallery.jsx'))
 
 const TravelTimeline = ({routeTripId}) => {
-    const {pathname, search, state} = useLocation()
+    const {pathname, search, state, key: locationKey} = useLocation()
     const navigate = useNavigate()
     const requestedTripId = new URLSearchParams(search).get('trip')
     const urlTripId = routeTripId ?? requestedTripId
@@ -35,6 +36,7 @@ const TravelTimeline = ({routeTripId}) => {
     const [detailAnimationKey, setDetailAnimationKey] = useState(0)
     const [isClosingDetail, setIsClosingDetail] = useState(false)
     const closeDetailTimerRef = useRef(null)
+    const returnToStartRef = useRef(false)
     const detailScrollRef = useRef(null)
     const [canScrollDetail, setCanScrollDetail] = useState(false)
     const [isDetailBottom, setIsDetailBottom] = useState(false)
@@ -66,7 +68,7 @@ const TravelTimeline = ({routeTripId}) => {
     }, [urlTripId, validRequestedTrip])
 
     const updateTripUrl = useCallback(
-        (tripId, replace = false) => {
+        (tripId, replace = false, preservePosition = false) => {
             const params = new URLSearchParams(search)
             params.delete('trip')
             const nextSearch = params.toString()
@@ -78,10 +80,16 @@ const TravelTimeline = ({routeTripId}) => {
                     search: nextSearch ? `?${nextSearch}` : '',
                     hash: '#stories',
                 },
-                {replace, preventScrollReset: true}
+                {
+                    replace,
+                    preventScrollReset: true,
+                    state: preservePosition
+                        ? {travelTimelineOrigin: state?.travelTimelineOrigin ?? locationKey}
+                        : null,
+                }
             )
         },
-        [navigate, pathname, search]
+        [navigate, pathname, search, state?.travelTimelineOrigin, locationKey]
     )
 
     useEffect(() => {
@@ -89,12 +97,12 @@ const TravelTimeline = ({routeTripId}) => {
     }, [routeTripId, updateTripUrl, validRequestedTrip])
 
     useEffect(() => {
-        if (!routeTripId || !validRequestedTrip) return
+        if (!routeTripId || !validRequestedTrip || state?.travelTimelineOrigin) return
         const frame = requestAnimationFrame(() => {
             document.getElementById('stories')?.scrollIntoView?.({block: 'start'})
         })
         return () => cancelAnimationFrame(frame)
-    }, [routeTripId, validRequestedTrip])
+    }, [routeTripId, validRequestedTrip, state?.travelTimelineOrigin])
 
     const handleGalleryOpenChange = useCallback((isOpen) => {
         hasOpenedGalleryRef.current ||= isOpen
@@ -118,8 +126,21 @@ const TravelTimeline = ({routeTripId}) => {
         return trip[field]
     }
 
+    useEffect(() => {
+        if (mobileDetailOpen || !returnToStartRef.current) return
+        returnToStartRef.current = false
+        // The body must be unlocked before positioning a direct-link return.
+        const frame = requestAnimationFrame(() => {
+            document
+                .getElementById('stories')
+                ?.scrollIntoView({block: 'start', behavior: 'instant'})
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [mobileDetailOpen])
+
     const closeMobileDetail = () => {
-        updateTripUrl(null, true)
+        returnToStartRef.current = !state?.travelTimelineOrigin
+        updateTripUrl(null, true, Boolean(state?.travelTimelineOrigin))
         setIsClosingDetail(true)
 
         clearTimeout(closeDetailTimerRef.current)
@@ -174,9 +195,9 @@ const TravelTimeline = ({routeTripId}) => {
                             onClick={() => {
                                 hasOpenedGalleryRef.current = false
                                 setIsGalleryOpen(false)
-                                updateTripUrl(trip.id)
-                                setActiveTripId(trip.id)
-                                setMobileDetailOpen(true)
+                                updateTripUrl(trip.id, false, isMobileDetail)
+                                // The route effect opens the reader after navigation commits,
+                                // so an immediate browser Back cannot race an optimistic dialog.
                                 setDetailAnimationKey((key) => key + 1)
                             }}
                             initial={{opacity: 0, y: 24}}
@@ -185,6 +206,7 @@ const TravelTimeline = ({routeTripId}) => {
                             transition={{duration: 0.35, delay: index * 0.035}}
                             aria-pressed={activeTripId === trip.id}
                         >
+                            {isMobileDetail && <TravelCover trip={trip} isFr={isFr} />}
                             <span className="travel-timeline__dot" />
 
                             <span className="travel-timeline__main">

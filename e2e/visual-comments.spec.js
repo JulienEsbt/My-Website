@@ -3,11 +3,13 @@ test.beforeEach(async ({page}) => {
     await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
 })
 test('six trips fill their photo frame and keep Tallinn last', async ({page}) => {
-    await page.goto('/')
+    // Use the public section anchor to avoid racing first-load scroll restoration.
+    await page.goto('/#home-travel')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     const carousel = page.locator('.home-travel-carousel')
-    await carousel.scrollIntoViewIfNeeded()
+    await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     const buttons = carousel.locator('.home-travel-carousel__destinations button')
+    await expect(carousel).toBeInViewport()
     await expect(buttons).toHaveCount(6)
     await expect(buttons.last()).toContainText('Estonie')
     for (let i = 0; i < 6; i++) {
@@ -25,7 +27,7 @@ test('six trips fill their photo frame and keep Tallinn last', async ({page}) =>
     }
     await page.screenshot({path: '/tmp/portfolio-travel-desktop.png'})
     await page.setViewportSize({width: 390, height: 844})
-    await carousel.scrollIntoViewIfNeeded()
+    await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     await expect
         .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
         .toBe(true)
@@ -314,7 +316,7 @@ test('travel slideshow advances over the photo and can be paused', async ({page}
     await page.goto('/#home-travel')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     const carousel = page.locator('.home-travel-carousel')
-    await carousel.scrollIntoViewIfNeeded()
+    await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     await carousel.locator('.home-discover__photo').hover()
     const selected = carousel.locator('[aria-pressed="true"]')
     const initial = await selected.innerText()

@@ -1,3 +1,4 @@
+import useMediaQuery from '../components/common/accessibility/useMediaQuery.js'
 import React, {useMemo, useState} from 'react'
 import {motion} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
@@ -17,6 +18,7 @@ import {FiArrowDown, FiArrowUpRight, FiBookOpen} from 'react-icons/fi'
 const ReflectionsPage = () => {
     const {t, i18n} = useTranslation('reflections')
     const [activeFilter, setActiveFilter] = useState('all')
+    const mobile = useMediaQuery('(max-width: 700px)')
     const [search, setSearch] = useState('')
 
     const language = i18n.language?.startsWith('fr') ? 'fr' : 'en'
@@ -97,6 +99,7 @@ const ReflectionsPage = () => {
                 fullScreen
                 footer={<ReflectionStats items={stats} />}
                 visual={
+                    !mobile &&
                     latestReflexion && (
                         <Link
                             className="reflection-entry-note"
