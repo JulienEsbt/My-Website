@@ -152,6 +152,11 @@ test('returning from a case study resumes the selected scroll step after layout 
 }) => {
     await page.setViewportSize({width: 1600, height: 1000})
     await page.emulateMedia({reducedMotion: 'no-preference'})
+    // Keep the outgoing page mounted while the lazy destination loads.
+    await page.route('**/assets/OpenDenteCaseStudyPage-*.js', async (route) => {
+        await new Promise((resolve) => setTimeout(resolve, 1200))
+        await route.continue()
+    })
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.locator('.portfolio__journey')).toHaveAttribute('data-scroll-enabled', 'true')
@@ -161,6 +166,8 @@ test('returning from a case study resumes the selected scroll step after layout 
         .getByRole('link', {name: 'Voir l’étude de cas', exact: true})
         .click()
     await expect(page).toHaveURL(/\/projects\/opendente$/)
+    await expect(page.getByRole('heading', {level: 1})).toContainText('OpenDente')
+    expect(await page.evaluate(() => sessionStorage.getItem('portfolio.selectedProject'))).toBe('4')
     await page.getByRole('link', {name: 'Retour aux projets', exact: true}).click()
     await expect(page.locator('.portfolio__journey')).toHaveAttribute('data-scroll-enabled', 'true')
     await expect(page.getByRole('tab', {name: /OpenDente/})).toHaveAttribute(
