@@ -78,7 +78,9 @@ test('Bruno Pizza presents the v1.2 changes and separates Windows validation in 
     for (const path of ['/projects/bruno-pizza', '/en/projects/bruno-pizza']) {
         await page.goto(path)
         await page.locator('#prerendered-content').waitFor({state: 'detached'})
-        await expect(page.locator('.case-study__overview')).toContainText('v1.2.0')
+        await expect(page.locator('.page-hero__footer .case-study-hero__facts')).toContainText(
+            'v1.2.0'
+        )
         await expect(page.locator('.case-study__limits')).toContainText('Windows')
         await expect(page.locator('.production-story')).toContainText('20 photos')
     }
