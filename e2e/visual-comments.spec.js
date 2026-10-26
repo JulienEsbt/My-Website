@@ -50,7 +50,7 @@ test('reflection card title opens the article and text selection publishes throu
         }
         return route.fulfill({json: {comments, hasMore: false}})
     })
-    await page.goto('/reflections')
+    await page.goto('/reflections#latest')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await page.locator('.reflexion-card').first().locator('h3').click()
     const content = page.locator('.reflexion-article__content')
