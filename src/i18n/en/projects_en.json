@@ -13,7 +13,11 @@
             "flowLabel": "From an Excel plan to a production workflow",
             "quantities": "Quantities",
             "workshop": "Workshop",
-            "visualCaption": "Guided production, from an Excel plan to photo-led assembly."
+            "visualCaption": "Guided production, from an Excel plan to photo-led assembly.",
+            "planLabel": "Production plan",
+            "checkedLabel": "Quantities checked",
+            "assemblyAlt": "Demo pizza illustrating guided assembly",
+            "assemblyLabel": "Guided assembly"
         },
         "overview": {
             "statusLabel": "Status",
