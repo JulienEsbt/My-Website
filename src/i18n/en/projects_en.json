@@ -359,5 +359,10 @@
             "body": "The public repository contains the code, user guide, technical choices and validation records.",
             "cta": "Explore OpenDente"
         }
+    },
+    "actions": {
+        "label": "Project actions",
+        "back": "Back to projects",
+        "code": "View GitHub repository"
     }
 }

@@ -173,7 +173,8 @@
             "questions": "The initial audience, editorial governance, contribution verification, moderation, hosting and future connections with Reflection Studio and the Democratic Observatory remain to be defined."
         },
         "browseLabel": "Browse projects",
-        "browseHint": "Each project explores a purpose and a way of building."
+        "browseHint": "Choose a project to explore its purpose and how it was built.",
+        "scrollHint": "Scroll to explore the projects, or choose one from the list."
     },
     "about": {
         "photoAlt": "Julien and two students during a project presentation",

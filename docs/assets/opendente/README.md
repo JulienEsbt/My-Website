@@ -28,3 +28,10 @@ The page selects French or English panels and settings to match the site languag
 - Browser checks: npx playwright test e2e/opendente.spec.js
 
 Changes unrelated to OpenDente and the portfolio layout are excluded, including the preexisting edits within e2e/portfolio.spec.js. This integration is prepared and committed locally; publishing and deployment require a separate step.
+
+
+## Portfolio navigation
+
+On wide screens, the project index follows native page scrolling while the selected card stays in view. Manual choice and keyboard navigation remain available. The scroll scene is enabled only when the complete presentation fits above the navigation dock; reduced motion, shorter screens and phones keep manual navigation. Expanding Agora releases the scene into ordinary document flow at the current reading position.
+
+The three case studies share their header actions: back to projects, an optional context action, and the primary GitHub repository link. Labels, order and mobile button layout are shared in both languages.

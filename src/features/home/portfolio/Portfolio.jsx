@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react'
 import {useLocation} from 'react-router-dom'
 import {FiArrowUpRight, FiMessageCircle} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
@@ -11,6 +11,7 @@ import useReducedMotion from '../../../components/common/accessibility/useReduce
 import {PORTFOLIO_PROJECTS} from '../../../config/portfolioProjects.js'
 import AgoraProjectCard from './AgoraProjectCard.jsx'
 import PortfolioProject from './PortfolioProject.jsx'
+import useProjectScroll from './useProjectScroll.js'
 import './Portfolio.css'
 import '../professionalChapters.css'
 
@@ -42,8 +43,11 @@ export default function Portfolio() {
     const {hash} = useLocation()
     const sectionRef = useRef(null)
     const selectors = useRef([])
+    const scene = useRef(null)
+    const stage = useRef(null)
     const reducedMotion = useReducedMotion()
     const mobile = useMediaQuery('(max-width: 700px)')
+    const wide = useMediaQuery('(min-width: 1100px)')
     const [selected, setSelected] = useState(PROJECTS[0].id)
     const [enhanced, setEnhanced] = useState(false)
 
@@ -78,14 +82,25 @@ export default function Portfolio() {
         return () => ctx.revert()
     }, [reducedMotion])
 
-    const select = (id) => {
+    const select = useCallback((id) => {
         setSelected(id)
         try {
             sessionStorage.setItem(STORAGE_KEY, id)
         } catch {
             /* Storage is optional. */
         }
-    }
+    }, [])
+
+    const onScrollSelect = useCallback((index) => select(PROJECTS[index].id), [select])
+    const {scrolling, selectProject, readContinuously} = useProjectScroll({
+        scene,
+        stage,
+        enabled: enhanced && wide && !reducedMotion,
+        count: PROJECTS.length,
+        selected: PROJECTS.findIndex(({id}) => id === selected),
+        onSelect: onScrollSelect,
+        hash,
+    })
 
     const navigate = (event, index) => {
         const next = {
@@ -96,13 +111,13 @@ export default function Portfolio() {
         }[event.key]
         if (next === undefined) return
         event.preventDefault()
-        select(PROJECTS[next].id)
+        selectProject(next)
         selectors.current[next]?.focus()
     }
 
     const cards = PROJECTS.map((project) =>
         project.id === 'agora' ? (
-            <AgoraProjectCard key="agora" />
+            <AgoraProjectCard key="agora" onExpand={readContinuously} />
         ) : (
             <PortfolioProject
                 key={project.id}
@@ -126,76 +141,82 @@ export default function Portfolio() {
                 <h2>{t('portfolio.title')}</h2>
                 <p className="portfolio__intro">{t('portfolio.intro')}</p>
             </div>
-            <div className="container portfolio__container">
-                {mobile ? (
-                    <MobileAccordion
-                        labels={PROJECTS.map((project) => (
-                            <ProjectPreview key={project.id} project={project} t={t} />
-                        ))}
-                    >
-                        {cards}
-                    </MobileAccordion>
-                ) : (
-                    <>
-                        <div className="portfolio__index">
-                            <p className="portfolio__index-label" id="portfolio-index-label">
-                                {t('portfolio.browseLabel')}
-                            </p>
-                            <div
-                                role={enhanced ? 'tablist' : undefined}
-                                aria-labelledby="portfolio-index-label"
-                                aria-orientation={enhanced ? 'vertical' : undefined}
-                            >
-                                {PROJECTS.map((project, index) => (
-                                    <button
-                                        type="button"
-                                        className="portfolio__selector"
-                                        key={project.id}
-                                        id={`portfolio-tab-${project.id}`}
-                                        ref={(el) => (selectors.current[index] = el)}
-                                        role={enhanced ? 'tab' : undefined}
-                                        aria-selected={
-                                            enhanced ? selected === project.id : undefined
-                                        }
-                                        aria-controls={
-                                            enhanced ? `portfolio-panel-${project.id}` : undefined
-                                        }
-                                        tabIndex={!enhanced || selected === project.id ? 0 : -1}
-                                        onClick={() => select(project.id)}
-                                        onKeyDown={(event) => navigate(event, index)}
-                                    >
-                                        <span
-                                            className="portfolio__index-number"
-                                            aria-hidden="true"
+            <div ref={scene} className="portfolio__journey" data-scroll-enabled={scrolling}>
+                <div ref={stage} className="container portfolio__container portfolio__stage">
+                    {mobile ? (
+                        <MobileAccordion
+                            labels={PROJECTS.map((project) => (
+                                <ProjectPreview key={project.id} project={project} t={t} />
+                            ))}
+                        >
+                            {cards}
+                        </MobileAccordion>
+                    ) : (
+                        <>
+                            <div className="portfolio__index">
+                                <p className="portfolio__index-label" id="portfolio-index-label">
+                                    {t('portfolio.browseLabel')}
+                                </p>
+                                <div
+                                    role={enhanced ? 'tablist' : undefined}
+                                    aria-labelledby="portfolio-index-label"
+                                    aria-orientation={enhanced ? 'vertical' : undefined}
+                                >
+                                    {PROJECTS.map((project, index) => (
+                                        <button
+                                            type="button"
+                                            className="portfolio__selector"
+                                            key={project.id}
+                                            id={`portfolio-tab-${project.id}`}
+                                            ref={(el) => (selectors.current[index] = el)}
+                                            role={enhanced ? 'tab' : undefined}
+                                            aria-selected={
+                                                enhanced ? selected === project.id : undefined
+                                            }
+                                            aria-controls={
+                                                enhanced
+                                                    ? `portfolio-panel-${project.id}`
+                                                    : undefined
+                                            }
+                                            tabIndex={!enhanced || selected === project.id ? 0 : -1}
+                                            onClick={() => selectProject(index)}
+                                            onKeyDown={(event) => navigate(event, index)}
                                         >
-                                            0{index + 1}
-                                        </span>
-                                        <ProjectPreview project={project} t={t} />
-                                        <FiArrowUpRight aria-hidden="true" />
-                                    </button>
+                                            <span
+                                                className="portfolio__index-number"
+                                                aria-hidden="true"
+                                            >
+                                                0{index + 1}
+                                            </span>
+                                            <ProjectPreview project={project} t={t} />
+                                            <FiArrowUpRight aria-hidden="true" />
+                                        </button>
+                                    ))}
+                                </div>
+                                <p className="portfolio__index-hint">
+                                    {t(scrolling ? 'portfolio.scrollHint' : 'portfolio.browseHint')}
+                                </p>
+                            </div>
+                            <div className="portfolio__panels">
+                                {PROJECTS.map((project, index) => (
+                                    <div
+                                        key={project.id}
+                                        id={`portfolio-panel-${project.id}`}
+                                        className="portfolio__panel"
+                                        role={enhanced ? 'tabpanel' : undefined}
+                                        aria-labelledby={
+                                            enhanced ? `portfolio-tab-${project.id}` : undefined
+                                        }
+                                        tabIndex={enhanced ? 0 : undefined}
+                                        hidden={enhanced && selected !== project.id}
+                                    >
+                                        {cards[index]}
+                                    </div>
                                 ))}
                             </div>
-                            <p className="portfolio__index-hint">{t('portfolio.browseHint')}</p>
-                        </div>
-                        <div className="portfolio__panels">
-                            {PROJECTS.map((project, index) => (
-                                <div
-                                    key={project.id}
-                                    id={`portfolio-panel-${project.id}`}
-                                    className="portfolio__panel"
-                                    role={enhanced ? 'tabpanel' : undefined}
-                                    aria-labelledby={
-                                        enhanced ? `portfolio-tab-${project.id}` : undefined
-                                    }
-                                    tabIndex={enhanced ? 0 : undefined}
-                                    hidden={enhanced && selected !== project.id}
-                                >
-                                    {cards[index]}
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </div>
         </section>
     )

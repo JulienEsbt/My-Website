@@ -359,5 +359,10 @@
             "body": "Code, guide d’utilisation, choix techniques et validations sont accessibles dans le dépôt public.",
             "cta": "Explorer OpenDente"
         }
+    },
+    "actions": {
+        "label": "Actions du projet",
+        "back": "Retour aux projets",
+        "code": "Voir le dépôt GitHub"
     }
 }

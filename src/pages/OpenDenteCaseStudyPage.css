@@ -25,15 +25,6 @@
     align-items: center;
 }
 
-.opendente-hero__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-basis: 100%;
-    min-height: 44px;
-    font-size: 0.85rem;
-}
-
 .opendente-page .page-hero__footer {
     grid-column: 1 / -1;
 }
@@ -272,15 +263,6 @@
 }
 
 @media (max-width: 767px) {
-    .opendente-page .page-hero__actions {
-        gap: 0.75rem;
-    }
-
-    .opendente-page .page-hero__actions .btn {
-        padding: 0.75rem 0.85rem;
-        font-size: 0.8rem;
-    }
-
     .opendente-gallery__copy {
         min-width: 0;
     }

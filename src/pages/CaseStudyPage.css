@@ -222,3 +222,29 @@
 .case-study__section[id] {
     scroll-margin-top: 6rem;
 }
+
+.case-study__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+}
+
+.case-study__actions .btn {
+    min-height: 48px;
+    justify-content: center;
+}
+
+@media (max-width: 650px) {
+    .case-study__actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+    }
+
+    .case-study__actions .btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+}

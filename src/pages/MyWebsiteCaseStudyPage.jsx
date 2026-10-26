@@ -1,13 +1,6 @@
+import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
 import React from 'react'
-import {BsGithub} from 'react-icons/bs'
-import {
-    FiArrowLeft,
-    FiArrowUpRight,
-    FiExternalLink,
-    FiLayers,
-    FiImage,
-    FiCheckCircle,
-} from 'react-icons/fi'
+import {FiArrowUpRight, FiExternalLink, FiLayers, FiImage, FiCheckCircle} from 'react-icons/fi'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
@@ -41,28 +34,17 @@ export default function MyWebsiteCaseStudyPage() {
                 title={t('website.hero.title')}
                 subtitle={t('website.hero.subtitle')}
             >
-                <Link className="btn case-study__button" to="/#portfolio">
-                    <FiArrowLeft aria-hidden="true" />
-                    {t('website.hero.back')}
-                </Link>
-                <a
-                    className="btn case-study__button"
-                    href={LINKS.demos.myWebsite}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <FiExternalLink aria-hidden="true" />
-                    {t('website.hero.live')}
-                </a>
-                <a
-                    className="btn btn-primary case-study__button"
-                    href={LINKS.projects.myWebsite}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <BsGithub aria-hidden="true" />
-                    {t('website.hero.code')}
-                </a>
+                <CaseStudyActions repository={LINKS.projects.myWebsite}>
+                    <a
+                        className="btn case-study__button"
+                        href={LINKS.demos.myWebsite}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <FiExternalLink aria-hidden="true" />
+                        {t('website.hero.live')}
+                    </a>
+                </CaseStudyActions>
             </PageHero>
 
             <article className="case-study">

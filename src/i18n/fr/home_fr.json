@@ -177,7 +177,8 @@
             "questions": "Le premier public, la gouvernance éditoriale, la vérification des contributions, la modération, l’hébergement et les liens futurs avec Reflection Studio et l’Observatoire démocratique restent à définir."
         },
         "browseLabel": "Parcourir les projets",
-        "browseHint": "Chaque projet raconte un usage et une façon de concevoir."
+        "browseHint": "Choisissez un projet pour découvrir son usage et sa réalisation.",
+        "scrollHint": "Faites défiler pour parcourir les projets, ou choisissez-en un dans la liste."
     },
     "about": {
         "photoAlt": "Julien et deux étudiants pendant une présentation de projet",

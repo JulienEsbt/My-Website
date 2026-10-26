@@ -1,6 +1,6 @@
+import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
 import React from 'react'
-import {BsGithub} from 'react-icons/bs'
-import {FiArrowLeft, FiArrowUpRight} from 'react-icons/fi'
+import {FiArrowUpRight} from 'react-icons/fi'
 import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
@@ -26,19 +26,7 @@ export default function BrunoPizzaCaseStudyPage() {
                 title={t('bruno.hero.title')}
                 subtitle={t('bruno.hero.subtitle')}
             >
-                <Link className="btn case-study__button" to="/#portfolio">
-                    <FiArrowLeft aria-hidden="true" />
-                    {t('bruno.hero.back')}
-                </Link>
-                <a
-                    className="btn btn-primary case-study__button"
-                    href={LINKS.projects.brunoPizza}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <BsGithub aria-hidden="true" />
-                    {t('bruno.hero.code')}
-                </a>
+                <CaseStudyActions repository={LINKS.projects.brunoPizza} />
             </PageHero>
 
             <article className="case-study">

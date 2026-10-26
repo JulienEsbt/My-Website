@@ -1,17 +1,9 @@
+import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
 import {useTranslation} from 'react-i18next'
-import {BsGithub} from 'react-icons/bs'
-import {
-    FiArrowDown,
-    FiArrowLeft,
-    FiArrowUpRight,
-    FiBatteryCharging,
-    FiGlobe,
-    FiMonitor,
-} from 'react-icons/fi'
+import {FiArrowDown, FiArrowUpRight, FiBatteryCharging, FiGlobe, FiMonitor} from 'react-icons/fi'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
-import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {LINKS} from '../config/links.js'
 import {OPENDENTE_PANELS} from '../config/opendenteMedia.js'
 import OpenDenteGallery from '../features/projects/openDente/OpenDenteGallery.jsx'
@@ -70,23 +62,12 @@ export default function OpenDenteCaseStudyPage() {
                         </ul>
                     }
                 >
-                    <a className="btn btn-primary case-study__button" href="#explore">
-                        <FiArrowDown aria-hidden="true" />
-                        {t('opendente.hero.explore')}
-                    </a>
-                    <a
-                        className="btn case-study__button"
-                        href={LINKS.projects.openDente}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <BsGithub aria-hidden="true" />
-                        {t('opendente.hero.code')}
-                    </a>
-                    <Link className="opendente-hero__back" to="/#portfolio">
-                        <FiArrowLeft aria-hidden="true" />
-                        {t('opendente.hero.back')}
-                    </Link>
+                    <CaseStudyActions repository={LINKS.projects.openDente}>
+                        <a className="btn case-study__button" href="#explore">
+                            <FiArrowDown aria-hidden="true" />
+                            {t('opendente.hero.explore')}
+                        </a>
+                    </CaseStudyActions>
                 </PageHero>
 
                 <article className="case-study">

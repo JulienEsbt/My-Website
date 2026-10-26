@@ -51,6 +51,7 @@ const ScrollToTop = () => {
             })
 
             resize.observe(document.body)
+            window.addEventListener('pointerdown', stop, {passive: true})
             window.addEventListener('wheel', stop, {passive: true})
             window.addEventListener('touchstart', stop, {passive: true})
             window.addEventListener('keydown', stop)
@@ -65,6 +66,7 @@ const ScrollToTop = () => {
                 window.clearTimeout(timeout)
                 observer?.disconnect()
                 resize.disconnect()
+                window.removeEventListener('pointerdown', stop)
                 window.removeEventListener('wheel', stop)
                 window.removeEventListener('touchstart', stop)
                 window.removeEventListener('keydown', stop)

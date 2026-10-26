@@ -71,4 +71,27 @@ describe('ScrollToTop', () => {
         )
         target.remove()
     })
+    it('stops settling an anchor after a pointer interaction', () => {
+        let resize
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                constructor(callback) {
+                    resize = callback
+                }
+                observe() {}
+                disconnect() {}
+            }
+        )
+        render(
+            <MemoryRouter initialEntries={['/#portfolio']}>
+                <div id="portfolio" />
+                <ScrollToTop />
+            </MemoryRouter>
+        )
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+        window.dispatchEvent(new Event('pointerdown'))
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+    })
 })
