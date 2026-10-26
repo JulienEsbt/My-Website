@@ -1,5 +1,6 @@
 import {test, expect, chromium} from '@playwright/test'
 test.beforeEach(async ({page}) => {
+    await page.bringToFront()
     await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
 })
 test('six trips fill their photo frame and keep Tallinn last', async () => {
