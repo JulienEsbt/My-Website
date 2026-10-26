@@ -39,13 +39,17 @@ const ScrollToTop = () => {
                 const target = document.getElementById(targetId)
                 if (!target || stopped || target.closest('#prerendered-content')) return false
 
-                // A section may restore a more precise position after the shared anchor.
-                // Stop settling once another scroll owner has moved the viewport.
-                if (anchoredScrollY !== null && Math.abs(window.scrollY - anchoredScrollY) > 2) {
+                // The project scene restores the selected step after the shared anchor.
+                // Other anchors must keep settling as their disclosures open.
+                if (
+                    targetId === 'portfolio' &&
+                    anchoredScrollY !== null &&
+                    Math.abs(window.scrollY - anchoredScrollY) > 2
+                ) {
                     stop()
                     return false
                 }
-                target.scrollIntoView({block: 'start'})
+                target.scrollIntoView({block: 'start', behavior: 'instant'})
                 anchoredScrollY = window.scrollY
                 observer?.disconnect()
                 return true
