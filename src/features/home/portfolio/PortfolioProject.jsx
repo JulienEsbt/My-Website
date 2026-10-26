@@ -10,7 +10,9 @@ export default function PortfolioProject({project, onOpen}) {
     const visual = (
         <ResponsiveImage
             media={image}
-            alt={t(`portfolio.items.${id}.title`)}
+            alt={t(`portfolio.items.${id}.imageAlt`, {
+                defaultValue: t(`portfolio.items.${id}.title`),
+            })}
             sizes="(max-width: 700px) 92vw, (min-width: 1600px) 850px, 60vw"
             loading="lazy"
             decoding="async"

@@ -146,7 +146,8 @@
             "3": {
                 "type": "Academic prototype",
                 "title": "On-chain file archiving",
-                "description": "An academic EVM prototype exploring the timestamping of public document references through a smart contract."
+                "description": "An academic EVM prototype exploring the timestamping of public document references through a smart contract.",
+                "imageAlt": "Illustration: a public document reference, a smart contract and a blockchain timestamp."
             },
             "4": {
                 "type": "macOS application · Open source",

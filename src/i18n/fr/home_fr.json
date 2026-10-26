@@ -146,7 +146,8 @@
             "3": {
                 "type": "Prototype académique",
                 "title": "Archivage de fichiers on-chain",
-                "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract."
+                "description": "Un prototype académique EVM explorant l’horodatage de références de documents publics via smart contract.",
+                "imageAlt": "Illustration : référence d’un document public, smart contract et horodatage dans la blockchain."
             },
             "4": {
                 "type": "Application macOS · Open source",

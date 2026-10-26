@@ -1,3 +1,4 @@
+import onChainCover from '../assets/images/projects/onchain/document-timestamp.svg'
 import {WEBSITE_COVER} from './websiteMedia.js'
 import {OPENDENTE_COVER} from './opendenteMedia.js'
 import {BRUNO_GALLERY} from './brunoGallery.js'
@@ -16,7 +17,7 @@ export const HOME_ASSETS = {
         openDente: OPENDENTE_COVER,
         brunoPizza: BRUNO_GALLERY[0],
         myWebsite: WEBSITE_COVER,
-        megalis: getHomeMedia('portfolio/Megalis.png'),
+        megalis: onChainCover,
     },
     resume: {
         fr: cvFr,
