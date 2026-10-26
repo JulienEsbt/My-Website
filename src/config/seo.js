@@ -18,6 +18,11 @@ const content = {
             description:
                 'Étude de cas de Bruno Pizza Production, une application desktop locale qui transforme un plan Excel en parcours de production guidé.',
         },
+        openDente: {
+            title: 'OpenDente — Application macOS | Julien Esterbet',
+            description:
+                'OpenDente Personal : mon édition d’un utilitaire macOS open source, avec profils de charge, barre de menus et interface native SwiftUI en français et en anglais.',
+        },
         myWebsite: {
             title: 'My-Website — Étude de cas portfolio | Julien Esterbet',
             description:
@@ -68,6 +73,11 @@ const content = {
             title: 'Bruno Pizza — Product case study | Julien Esterbet',
             description:
                 'Case study of Bruno Pizza Production, a local desktop application turning an Excel plan into a guided production workflow.',
+        },
+        openDente: {
+            title: 'OpenDente — macOS application | Julien Esterbet',
+            description:
+                'OpenDente Personal: my edition of an open source macOS battery utility, with charging profiles, menu bar controls and a native French and English SwiftUI interface.',
         },
         myWebsite: {
             title: 'My-Website — Portfolio case study | Julien Esterbet',
@@ -150,6 +160,22 @@ const structuredDataFor = (key, path, language, metadata) => {
                     mainEntity: person,
                 },
             ],
+        }
+    }
+
+    if (key === 'openDente') {
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'OpenDente — Personal Edition',
+            url: `${SITE_URL}${path}`,
+            description: metadata.description,
+            inLanguage: language,
+            operatingSystem: 'macOS 14+',
+            applicationCategory: 'UtilitiesApplication',
+            contributor: person,
+            isBasedOn: 'https://github.com/killerk3emstar/OpenDente',
+            license: 'https://www.gnu.org/licenses/gpl-3.0.html',
         }
     }
 
@@ -237,14 +263,17 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
         alternates,
         path,
         canonicalUrl: `${SITE_URL}${path}`,
-        imageUrl: `${SITE_URL}${trip ? `/og/travel/${language}/${trip.id}.png` : DEFAULT_SOCIAL_IMAGE}`,
-        imageAlt: trip
-            ? language === 'fr'
-                ? `Carnet de voyage à ${trip.city}, ${trip.country}`
-                : `Travel journal in ${trip.cityEn ?? trip.city}, ${trip.countryEn ?? trip.country}`
-            : language === 'fr'
-              ? 'Julien Esterbet — développeur full-stack orienté produit'
-              : 'Julien Esterbet — product-minded full-stack developer',
+        imageUrl: `${SITE_URL}${key === 'openDente' ? '/og/opendente.png' : trip ? `/og/travel/${language}/${trip.id}.png` : DEFAULT_SOCIAL_IMAGE}`,
+        imageAlt:
+            key === 'openDente'
+                ? 'OpenDente — Personal Edition · macOS'
+                : trip
+                  ? language === 'fr'
+                      ? `Carnet de voyage à ${trip.city}, ${trip.country}`
+                      : `Travel journal in ${trip.cityEn ?? trip.city}, ${trip.countryEn ?? trip.country}`
+                  : language === 'fr'
+                    ? 'Julien Esterbet — développeur full-stack orienté produit'
+                    : 'Julien Esterbet — product-minded full-stack developer',
         language,
         type: reflection || trip ? 'article' : 'website',
         robots: isNotFound ? 'noindex, nofollow' : 'index, follow',

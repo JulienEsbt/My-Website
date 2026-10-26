@@ -3,13 +3,21 @@ import {test, expect} from '@playwright/test'
 test.beforeEach(async ({page}) => {
     // Vercel's hosted measurement endpoints do not exist in a local static preview.
     await page.route('**/_vercel/**', (route) =>
-        route.fulfill({status: 200, contentType: 'application/javascript', body: ''})
+        route.fulfill({
+            status: 200,
+            contentType: 'application/javascript',
+            body: '',
+        })
     )
 })
 
 const silenceLocalMeasurements = (context) =>
     context.route('**/_vercel/**', (route) =>
-        route.fulfill({status: 200, contentType: 'application/javascript', body: ''})
+        route.fulfill({
+            status: 200,
+            contentType: 'application/javascript',
+            body: '',
+        })
     )
 
 test('the neutral home follows the primary browser language', async ({browser}) => {
@@ -110,7 +118,10 @@ test('historical query links persist a choice without requiring storage', async 
 })
 
 test('the French prerender remains readable without JavaScript', async ({browser}) => {
-    const context = await browser.newContext({javaScriptEnabled: false, locale: 'de-DE'})
+    const context = await browser.newContext({
+        javaScriptEnabled: false,
+        locale: 'de-DE',
+    })
     const page = await context.newPage()
     await page.goto('/')
     await expect(page).toHaveURL(/\/$/)
@@ -166,6 +177,7 @@ test('Agora is presented as a private project intent in both languages', async (
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
 
+    await page.getByRole('tab', {name: /Agora/}).click()
     const project = page.locator('.portfolio__intent')
     await expect(project.getByRole('heading', {name: 'Agora — Graphe des débats'})).toBeVisible()
     await expect(project.getByRole('link')).toHaveCount(0)
@@ -309,35 +321,24 @@ test('a Mapbox denial is explained while the selected story stays readable', asy
     await expect(page.getByRole('link', {name: 'Switch to English'})).toBeVisible()
 })
 
-test('project images open studies and the expanded Agora stays compact and aligned', async ({
-    page,
-}) => {
+test('project selector opens studies and the expanded Agora stays compact', async ({page}) => {
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
-    const cards = page.locator('.portfolio__item')
-    const boxes = await cards.evaluateAll((nodes) =>
-        nodes.map((n) => {
-            const b = n.getBoundingClientRect()
-            return {top: b.top, bottom: b.bottom}
-        })
-    )
-    expect(
-        Math.max(...boxes.map((b) => b.top)) - Math.min(...boxes.map((b) => b.top))
-    ).toBeLessThan(1)
-    expect(
-        Math.max(...boxes.map((b) => b.bottom)) - Math.min(...boxes.map((b) => b.bottom))
-    ).toBeLessThan(1)
-    await expect(cards.nth(0).locator('a.portfolio__image')).toHaveAttribute(
+    await expect(page.getByRole('tab')).toHaveCount(5)
+    await expect(page.getByRole('tabpanel')).toHaveCount(1)
+    await expect(page.getByRole('tabpanel').locator('a.portfolio__image')).toHaveAttribute(
         'href',
         '/projects/bruno-pizza'
     )
-    await expect(cards.nth(1).locator('a.portfolio__image')).toHaveAttribute(
+    await page.getByRole('tab', {name: /My-Website/}).click()
+    await expect(page.getByRole('tabpanel').locator('a.portfolio__image')).toHaveAttribute(
         'href',
         '/projects/my-website'
     )
-    await expect(cards.nth(2).locator('a.portfolio__image')).toHaveCount(0)
+    await page.getByRole('tab', {name: /Archivage/}).click()
+    await expect(page.getByRole('tabpanel').locator('a.portfolio__image')).toHaveCount(0)
+    await page.getByRole('tab', {name: /Agora/}).click()
     await page.locator('.portfolio__intent summary').click()
-    // Read both rectangles in one frame: anchor settling can scroll between browser calls.
     const detailsGap = await page.locator('.portfolio__intent').evaluate((card) => {
         const summary = card.querySelector('summary').getBoundingClientRect()
         const first = card.querySelector('.portfolio__intent-grid section').getBoundingClientRect()
@@ -348,7 +349,8 @@ test('project images open studies and the expanded Agora stays compact and align
         .locator('#goals, #home-reflections, #home-travel, #contact')
         .evaluateAll((nodes) => nodes.map((n) => n.id))
     expect(order).toEqual(['goals', 'home-reflections', 'home-travel', 'contact'])
-    await cards.nth(0).locator('a.portfolio__image').click()
+    await page.getByRole('tab', {name: /Bruno Pizza/}).click()
+    await page.getByRole('tabpanel').locator('a.portfolio__image').click()
     await expect(page).toHaveURL(/\/projects\/bruno-pizza$/)
 })
 
@@ -421,7 +423,9 @@ test('home titles stay concise in both languages and travel rotation can be paus
     )
     await carousel.getByRole('button', {name: 'Mettre les voyages en pause'}).click()
     await expect(
-        carousel.getByRole('button', {name: 'Reprendre le défilement des voyages'})
+        carousel.getByRole('button', {
+            name: 'Reprendre le défilement des voyages',
+        })
     ).toBeVisible()
     await page.getByRole('link', {name: 'Switch to English'}).click()
     await expect(page).toHaveTitle('Portfolio — Julien Esterbet')

@@ -1,3 +1,4 @@
+import {OPENDENTE_COVER} from './opendenteMedia.js'
 import {BRUNO_GALLERY} from './brunoGallery.js'
 import cvFr from '../assets/documents/Julien-Esterbet-CV-FR-2026.pdf'
 import resumeEn from '../assets/documents/Julien-Esterbet-Resume-EN-2026.pdf'
@@ -11,6 +12,7 @@ export const HOME_ASSETS = {
         photo: getHomeMedia('about/D14F4D37-8AEF-4E9D-8CAE-DEDE412C2D64_1_105_c.jpeg'),
     },
     portfolio: {
+        openDente: OPENDENTE_COVER,
         brunoPizza: BRUNO_GALLERY[0],
         myWebsite: getHomeMedia('portfolio/MyWebsite.png'),
         megalis: getHomeMedia('portfolio/Megalis.png'),

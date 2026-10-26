@@ -127,7 +127,10 @@
             "vite": "Vite",
             "i18n": "FR / EN",
             "accessibility": "Accessibility",
-            "vercel": "Vercel"
+            "vercel": "Vercel",
+            "swift": "Swift",
+            "swiftui": "SwiftUI",
+            "macos": "macOS"
         },
         "items": {
             "1": {
@@ -144,6 +147,11 @@
                 "type": "Academic prototype",
                 "title": "On-chain file archiving",
                 "description": "An academic EVM prototype exploring the timestamping of public document references through a smart contract."
+            },
+            "4": {
+                "type": "macOS application · Open source",
+                "title": "OpenDente — Personal Edition",
+                "description": "My edition of a native Mac battery utility: charging profiles, menu bar controls and a bilingual interface. An open source fork extended for everyday use."
             }
         },
         "agora": {
@@ -163,7 +171,9 @@
             "status": "An unpublished local prototype already makes it possible to explore a demonstration debate through a graph and an accessible text view, search and filter its elements, consult their sources and prepare a contribution that remains in the browser. It does not yet include accounts, remote collaboration or a public moderation system.",
             "questionsTitle": "Open questions",
             "questions": "The initial audience, editorial governance, contribution verification, moderation, hosting and future connections with Reflection Studio and the Democratic Observatory remain to be defined."
-        }
+        },
+        "browseLabel": "Browse projects",
+        "browseHint": "Each project explores a purpose and a way of building."
     },
     "about": {
         "photoAlt": "Julien and two students during a project presentation",

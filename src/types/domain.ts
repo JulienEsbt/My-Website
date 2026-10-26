@@ -52,7 +52,7 @@ export interface ProjectSummary {
 }
 
 export interface PortfolioProject {
-    id: '1' | '2' | '3'
+    id: '1' | '2' | '3' | '4'
     status: 'active' | 'portfolio' | 'academic'
     image: unknown
     repository: `https://github.com/${string}`

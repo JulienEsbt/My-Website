@@ -246,5 +246,118 @@
             "body": "Le dépôt public permet d’examiner l’architecture, les données, les tests et les choix de livraison derrière l’expérience visible.",
             "cta": "Revenir à la sélection"
         }
+    },
+    "opendente": {
+        "hero": {
+            "kicker": "macOS · Open source",
+            "title": "OpenDente. La charge, à votre rythme.",
+            "subtitle": "Mon édition d’un utilitaire natif pour adapter la charge du Mac à vos habitudes. Des profils simples, une batterie lisible et vos réglages dans la barre de menus.",
+            "explore": "Découvrir l’application",
+            "code": "Voir le code",
+            "back": "Retour aux projets",
+            "lightAlt": "OpenDente en français : panneau de charge en apparence claire",
+            "darkAlt": "OpenDente en français : panneau sombre avec profils Bureau, Quotidien et Mobilité",
+            "caption": "Captures réelles · Apparences claire et sombre",
+            "factsLabel": "Caractéristiques d’OpenDente Personal",
+            "native": "Interface native SwiftUI",
+            "languages": "Français et anglais",
+            "local": "Local, sans compte ni télémétrie"
+        },
+        "overview": {
+            "statusLabel": "État du projet",
+            "status": "Personal Edition 0.8.0 · Sources publiques, compilation et signature locales.",
+            "roleLabel": "Mon intervention",
+            "role": "Extension du projet open source : nouveaux usages, interface bilingue et contrôle natif expérimental.",
+            "scopeLabel": "Environnement",
+            "scope": "macOS 14+ · Essais matériels sur MacBook Air M3, sous macOS 27.2."
+        },
+        "intent": {
+            "kicker": "Le point de départ",
+            "title": "Un outil discret pour un besoin quotidien.",
+            "body": "Un Mac ne s’utilise pas de la même façon au bureau, en déplacement ou avant une longue période sans utilisation. J’ai fait évoluer OpenDente pour rendre ces situations plus simples à gérer : garder ses habitudes de charge, lire l’état réel de la batterie et activer un mode temporaire sans perdre ses réglages."
+        },
+        "contributions": {
+            "daily": {
+                "title": "Des réglages qui suivent l’usage",
+                "body": "Profils Bureau, Quotidien et Mobilité, charge complète ponctuelle et préparation au stockage à 50 % : les modes temporaires conservent la configuration du quotidien."
+            },
+            "interface": {
+                "title": "Une interface à sa place sur Mac",
+                "body": "Français et anglais, apparences claire et sombre, pourcentage dans l’icône de batterie et mesures personnalisables : l’information essentielle reste facile à lire."
+            },
+            "background": {
+                "title": "Présent quand il le faut",
+                "body": "Démarrage discret à la connexion, signaux MagSafe configurables, guide intégré hors ligne et diagnostics locaux facultatifs. Aucun compte ni serveur de télémétrie ajouté."
+            }
+        },
+        "gallery": {
+            "kicker": "Dans l’application",
+            "title": "Un petit panneau. Des réglages qui comptent.",
+            "choose": "Choisir une vue d’OpenDente",
+            "previous": "Vue précédente",
+            "next": "Vue suivante",
+            "enlarge": "Agrandir la capture",
+            "note": "Captures réelles de la version 0.8.0. Seuils personnalisables donnés à titre d’exemple. Vue MagSafe en anglais.",
+            "items": {
+                "charge": {
+                    "label": "Réglages de charge",
+                    "title": "Un plafond, un seuil de reprise.",
+                    "body": "Choisir sa limite habituelle, définir quand la charge reprend et retrouver les options au même endroit. Une pause thermique supplémentaire peut être configurée ; les protections de macOS restent prioritaires.",
+                    "alt": "Réglages de charge OpenDente en français : limite à 80 %, retour au plafond et reprise sous 70 %"
+                },
+                "profiles": {
+                    "label": "Profils du quotidien",
+                    "title": "Passer du bureau à la mobilité.",
+                    "body": "Le panneau regroupe les profils, la préparation au stockage et la charge à 100 % pour une seule fois. Le pourcentage, le mode actif et les flux d’énergie permettent de comprendre ce qui se passe.",
+                    "alt": "Panneau OpenDente en français, apparence sombre : profils du quotidien, stockage à 50 % et charge complète ponctuelle"
+                },
+                "menu": {
+                    "label": "Barre des menus",
+                    "title": "L’essentiel, sans ouvrir une fenêtre.",
+                    "body": "Le pourcentage s’inscrit dans la batterie. Température, puissance et mode de charge complètent l’affichage selon les préférences, avec une présentation compacte ou classique.",
+                    "alt": "Réglages de la barre des menus OpenDente en français : affichage compact et indicateurs facultatifs"
+                },
+                "magsafe": {
+                    "label": "Signaux MagSafe",
+                    "title": "Des états visibles au bout du câble.",
+                    "body": "Associer aux états de charge une couleur fixe, un clignotement lent ou une alternance. Un aperçu de dix secondes permet de vérifier chaque signal.",
+                    "alt": "Réglages MagSafe OpenDente en anglais : couleurs, clignotements et aperçus des signaux"
+                },
+                "guide": {
+                    "label": "Guide intégré",
+                    "title": "Comprendre un réglage sur le moment.",
+                    "body": "Un guide consultable hors ligne explique les profils, les seuils, les modes temporaires et leurs limites. La recherche aide à retrouver une réponse sans quitter l’application.",
+                    "alt": "Guide intégré OpenDente en français avec recherche et explications des profils et modes temporaires"
+                }
+            }
+        },
+        "engineering": {
+            "kicker": "Sous l’interface",
+            "title": "Une expérience native, du panneau au système.",
+            "body": "L’interface SwiftUI reste séparée des opérations privilégiées. Cette édition ajoute notamment un mécanisme natif expérimental, une restauration des réglages et des contrôles de récupération, en conservant l’architecture et l’historique du projet d’origine.",
+            "stackLabel": "Technologies d’OpenDente",
+            "steps": {
+                "app": "L’application SwiftUI lit les mesures et applique les profils et les préférences de l’utilisateur.",
+                "helper": "Une liaison XPC authentifiée par certificat délègue les opérations privilégiées au service local.",
+                "system": "Le service utilise le mécanisme SMC ou natif disponible. Un journal de récupération et un watchdog accompagnent la restauration des réglages."
+            }
+        },
+        "context": {
+            "kicker": "Périmètre actuel",
+            "title": "Des essais concrets, une compatibilité à élargir.",
+            "body": "Le contrôle natif utilise des interfaces privées Apple et reste expérimental. Les essais matériels documentés concernent un MacBook Air M3 : ils ne valent pas validation pour tous les Mac. Une consigne peut prendre plusieurs minutes et ne correspond pas à une coupure matérielle immédiate. L’application se compile et se signe localement ; aucun installateur public notarié n’est proposé.",
+            "validation": "Consulter le détail des validations"
+        },
+        "credits": {
+            "title": "Construit sur un projet ouvert",
+            "before": "Cette édition est un fork de",
+            "after": ". Les fonctions de charge et l’architecture initiales viennent de ce projet ; mes apports prolongent ce socle et en préservent les crédits et l’historique.",
+            "license": "Code sous GPL-3.0. Les autres contributions et leurs licences sont détaillées dans le dépôt."
+        },
+        "next": {
+            "title": "Explorer le projet à la source.",
+            "body": "Code, guide d’utilisation, choix techniques et validations sont accessibles dans le dépôt public.",
+            "cta": "Explorer OpenDente"
+        }
     }
 }

@@ -14,7 +14,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 locator.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
             await page.goto('http://localhost:4173/?lang=fr')
             const projects = page.locator('#portfolio .mobile-accordion__item')
-            await expect(projects).toHaveCount(3)
+            await expect(projects).toHaveCount(5)
             const sizes = await projects.evaluateAll((nodes) =>
                 nodes.map((el) => el.getBoundingClientRect().height)
             )
@@ -22,6 +22,9 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
             await settle(projects.first().locator('summary'))
             await projects.first().locator('summary').click()
             await expect(projects.first().locator('.portfolio__body')).toBeVisible()
+            const agora = projects.filter({hasText: 'Agora — Graphe des débats'})
+            await settle(agora.locator(':scope > summary'))
+            await agora.locator(':scope > summary').click()
             await settle(page.locator('.portfolio__intent summary'))
             await page.locator('.portfolio__intent summary').click()
             await expect(page.locator('.portfolio__intent-content')).toBeVisible()
