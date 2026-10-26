@@ -28,14 +28,19 @@ for (const [name, engine] of Object.entries({chromium, webkit})) {
                         )
                     )
                 )
-                .toBeLessThan(0.02)
-            const before = await page.evaluate(() => scrollY)
+                .toBeLessThan(0.0015)
             const trigger = page.getByRole('button', {name: 'Découvrir l’intention du projet'})
             await trigger.click()
             const dialog = page.getByRole('dialog', {name: 'Agora — Graphe des débats'})
             await expect(dialog).toBeVisible()
             await expect(dialog.getByText(/Un prototype local non publié/)).toBeVisible()
             await expect(page.locator('body')).toHaveCSS('position', 'fixed')
+            // The click can finish smooth scrolling before the dialog locks the body.
+            // Compare against the actual locked position, not an earlier animation frame.
+            const before = await page
+                .locator('body')
+                .evaluate((body) => -parseFloat(body.style.top))
+            expect(Number.isFinite(before)).toBe(true)
             await page.addScriptTag({content: axe.source})
             expect(
                 await page.evaluate(() =>

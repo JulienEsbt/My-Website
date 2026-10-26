@@ -2,7 +2,7 @@ import {test, expect, chromium, webkit} from '@playwright/test'
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
     for (const route of ['/', '/web3']) {
-        test(`social navigation remains visible with delayed animation frames in ${engine} on ${route}`, async () => {
+        test(`navigation remains visible with delayed animation frames in ${engine} on ${route}`, async () => {
             const browser = await browserType.launch()
             try {
                 const context = await browser.newContext({
@@ -13,12 +13,18 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 // Reproduce a browser that delays animation frames during startup.
                 // Hydration must leave navigation visible without relying on a GSAP tick.
                 await context.addInitScript(() => {
-                    window.requestAnimationFrame = () => 0
-                    window.cancelAnimationFrame = () => {}
+                    const requestFrame = window.requestAnimationFrame.bind(window)
+                    const started = performance.now()
+                    window.requestAnimationFrame = (callback) =>
+                        requestFrame((time) => {
+                            if (performance.now() - started < 1500) callback(time)
+                        })
                 })
                 const page = await context.newPage()
                 await page.goto(`http://localhost:4173${route}`)
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
+                // Let mount effects run, then inspect controls with animation frames stalled.
+                await page.waitForTimeout(1800)
                 const nav = page.locator('header .header-socials')
                 await expect(nav).toBeVisible()
                 const hiddenAncestors = await nav.evaluate((el) => {
@@ -31,6 +37,12 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                     return hidden
                 })
                 expect(hiddenAncestors).toEqual([])
+                if (route === '/') {
+                    const dock = page.locator('.section-nav')
+                    await expect(dock).toBeVisible()
+                    await expect(dock).toHaveCSS('opacity', '1')
+                    await expect(dock).toHaveCSS('filter', 'none')
+                }
                 await expect(nav.getByRole('link', {name: 'LinkedIn'})).toHaveAttribute(
                     'href',
                     /linkedin\.com/
