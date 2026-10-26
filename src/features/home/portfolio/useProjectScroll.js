@@ -1,8 +1,10 @@
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react'
+import {useLocation} from 'react-router-dom'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {desktopScenePlacement} from '../../../components/common/layout/viewport/sceneViewport.js'
 
 export default function useProjectScroll({scene, stage, enabled, count, selected, onSelect, hash}) {
+    const {pathname} = useLocation()
     const [fits, setFits] = useState(false)
     const metrics = useRef({top: 96, distance: 1})
     const selection = useRef(selected)
@@ -95,7 +97,12 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
             restoring = true
         const update = () => {
             frame = 0
-            if (restoring || document.body.style.position === 'fixed') return
+            if (
+                restoring ||
+                window.location.pathname !== pathname ||
+                document.body.style.position === 'fixed'
+            )
+                return
             const root = scene.current
             if (!root) return
             lastStageTop.current = stage.current.getBoundingClientRect().top
@@ -123,6 +130,7 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
         }
         first = requestAnimationFrame(() => {
             second = requestAnimationFrame(() => {
+                if (window.location.pathname !== pathname) return
                 const bounds = scene.current.getBoundingClientRect()
                 if (hash && selection.current > 0 && bounds.top < innerHeight && bounds.bottom > 0)
                     moveTo(selection.current, 'instant')
@@ -145,7 +153,7 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
             window.removeEventListener('touchstart', cancelPending)
             window.removeEventListener('keydown', cancelPending)
         }
-    }, [scrolling, count, scene, stage, hash, moveTo])
+    }, [scrolling, count, scene, stage, hash, moveTo, pathname])
 
     return {scrolling, selectProject}
 }
