@@ -49,8 +49,14 @@ jobs:
               if: ${{ hashFiles('public/media/**/*') != '' }}
               run: npm run media:check
 
-            - name: Verify browser flows
-              run: npm run test:e2e
+            - name: Verify visual browser flows
+              run: npx playwright test e2e/visual-comments.spec.js
+
+            - name: Verify remaining browser flows
+              shell: bash
+              run: |
+                  mapfile -d '' -t specs < <(find e2e -type f ! -path 'e2e/visual-comments.spec.js' -print0)
+                  npx playwright test "${specs[@]}"
 
             - name: Preserve failed browser traces
               if: failure()
