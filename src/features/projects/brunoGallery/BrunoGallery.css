@@ -1,5 +1,5 @@
 .bruno-gallery {
-    width: min(92vw, 1440px);
+    width: min(90vw, 1100px);
     margin: 0 auto;
     border: 1px solid var(--liquid-border-soft);
     border-radius: 1.4rem;
@@ -8,15 +8,20 @@
     box-shadow: var(--liquid-shadow);
 }
 .bruno-gallery__screen {
-    aspect-ratio: 3420 / 2148;
+    height: clamp(220px, 55vw, min(62vh, 680px));
+    padding: clamp(0.5rem, 1.4vw, 1.25rem);
+    display: grid;
+    place-items: center;
     background: #0b1322;
     touch-action: pan-y pinch-zoom;
 }
 .bruno-gallery__screen img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    min-height: 0;
     object-fit: contain;
+    border-radius: 0.65rem;
 }
 .bruno-gallery__toolbar {
     display: flex;

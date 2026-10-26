@@ -1,35 +1,51 @@
-import {test, expect} from '@playwright/test'
+import {test, expect, chromium} from '@playwright/test'
 test.beforeEach(async ({page}) => {
+    await page.bringToFront()
     await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
 })
-test('six trips fill their photo frame and keep Tallinn last', async ({page}) => {
-    await page.goto('/')
-    await page.locator('#prerendered-content').waitFor({state: 'detached'})
-    const carousel = page.locator('.home-travel-carousel')
-    await carousel.scrollIntoViewIfNeeded()
-    const buttons = carousel.locator('.home-travel-carousel__destinations button')
-    await expect(buttons).toHaveCount(6)
-    await expect(buttons.last()).toContainText('Estonie')
-    for (let i = 0; i < 6; i++) {
-        await buttons.nth(i).click()
-        await expect(carousel.locator('img')).toHaveCSS('object-fit', 'cover')
+test('six trips fill their photo frame and keep Tallinn last', async () => {
+    // Give this screenshot scenario a fresh renderer after the cross-device tests.
+    const browser = await chromium.launch()
+    try {
+        const page = await browser.newPage({
+            viewport: {width: 1280, height: 720},
+            locale: 'fr-FR',
+            reducedMotion: 'reduce',
+        })
+        await page.route('**/_vercel/**', (route) => route.fulfill({status: 200, body: ''}))
+        // Use the public section anchor to avoid racing first-load scroll restoration.
+        await page.goto('http://localhost:4173/#home-travel')
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        await page.bringToFront()
+        const carousel = page.locator('.home-travel-carousel')
+        await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
+        const buttons = carousel.locator('.home-travel-carousel__destinations button')
+        await expect(carousel).toBeInViewport()
+        await expect(buttons).toHaveCount(6)
+        await expect(buttons.last()).toContainText('Estonie')
+        for (let i = 0; i < 6; i++) {
+            await buttons.nth(i).click()
+            await expect(carousel.locator('img')).toHaveCSS('object-fit', 'cover')
+            await expect
+                .poll(() =>
+                    carousel.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)
+                )
+                .toBe(true)
+            await expect(carousel.locator('img')).toHaveCSS('padding-top', '0px')
+            await carousel
+                .locator('.home-discover__photo')
+                .screenshot({path: `/tmp/travel-crop-${i}.png`})
+        }
+        await page.screenshot({path: '/tmp/portfolio-travel-desktop.png'})
+        await page.setViewportSize({width: 390, height: 844})
+        await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
         await expect
-            .poll(() =>
-                carousel.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)
-            )
+            .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
             .toBe(true)
-        await expect(carousel.locator('img')).toHaveCSS('padding-top', '0px')
-        await carousel
-            .locator('.home-discover__photo')
-            .screenshot({path: `/tmp/travel-crop-${i}.png`})
+        await page.screenshot({path: '/tmp/portfolio-travel-mobile.png'})
+    } finally {
+        await browser.close()
     }
-    await page.screenshot({path: '/tmp/portfolio-travel-desktop.png'})
-    await page.setViewportSize({width: 390, height: 844})
-    await carousel.scrollIntoViewIfNeeded()
-    await expect
-        .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
-        .toBe(true)
-    await page.screenshot({path: '/tmp/portfolio-travel-mobile.png'})
 })
 test('reflection card title opens the article and text selection publishes through the API', async ({
     page,
@@ -48,7 +64,7 @@ test('reflection card title opens the article and text selection publishes throu
         }
         return route.fulfill({json: {comments, hasMore: false}})
     })
-    await page.goto('/reflections')
+    await page.goto('/reflections#latest')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await page.locator('.reflexion-card').first().locator('h3').click()
     const content = page.locator('.reflexion-article__content')
@@ -314,7 +330,7 @@ test('travel slideshow advances over the photo and can be paused', async ({page}
     await page.goto('/#home-travel')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     const carousel = page.locator('.home-travel-carousel')
-    await carousel.scrollIntoViewIfNeeded()
+    await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     await carousel.locator('.home-discover__photo').hover()
     const selected = carousel.locator('[aria-pressed="true"]')
     const initial = await selected.innerText()

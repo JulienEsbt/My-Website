@@ -1,3 +1,4 @@
+import MobileDeck from '../../../components/common/mobile/MobileDeck.jsx'
 import React from 'react'
 import {FiArrowUpRight, FiClock, FiBookOpen} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
@@ -29,36 +30,38 @@ export default function HomeDiscover() {
                     </Link>
                 </div>
                 <div className="home-discover__grid">
-                    {selected.map((entry) => (
-                        <article className="home-discover__essay" key={entry.slug}>
-                            <div className="home-discover__meta">
-                                <span className="home-discover__index" aria-hidden="true">
-                                    <FiBookOpen />
-                                </span>
-                                <span className="home-discover__duration">
-                                    <FiClock aria-hidden="true" />
-                                    {entry.readingTime} min
-                                </span>
-                            </div>
-                            <h3>
-                                <Link
-                                    to={`/reflections/${entry.slug}`}
-                                    state={{fromHome: 'reflections'}}
-                                >
-                                    {entry.title[language]}
-                                </Link>
-                            </h3>
-                            <p className="home-discover__excerpt">{entry.excerpt[language]}</p>
-                            <div className="home-discover__essay-footer">
-                                <time dateTime={entry.date}>
-                                    {formatDate(entry.date, language)}
-                                </time>
-                                <span className="home-discover__arrow" aria-hidden="true">
-                                    <FiArrowUpRight />
-                                </span>
-                            </div>
-                        </article>
-                    ))}
+                    <MobileDeck label={t('discover.reflectionsTitle')}>
+                        {selected.map((entry) => (
+                            <article className="home-discover__essay" key={entry.slug}>
+                                <div className="home-discover__meta">
+                                    <span className="home-discover__index" aria-hidden="true">
+                                        <FiBookOpen />
+                                    </span>
+                                    <span className="home-discover__duration">
+                                        <FiClock aria-hidden="true" />
+                                        {entry.readingTime} min
+                                    </span>
+                                </div>
+                                <h3>
+                                    <Link
+                                        to={`/reflections/${entry.slug}`}
+                                        state={{fromHome: 'reflections'}}
+                                    >
+                                        {entry.title[language]}
+                                    </Link>
+                                </h3>
+                                <p className="home-discover__excerpt">{entry.excerpt[language]}</p>
+                                <div className="home-discover__essay-footer">
+                                    <time dateTime={entry.date}>
+                                        {formatDate(entry.date, language)}
+                                    </time>
+                                    <span className="home-discover__arrow" aria-hidden="true">
+                                        <FiArrowUpRight />
+                                    </span>
+                                </div>
+                            </article>
+                        ))}
+                    </MobileDeck>
                 </div>
                 <CitizenResourcesLink copy={t('citizenResources', {returnObjects: true})} />
             </section>

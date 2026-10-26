@@ -95,3 +95,8 @@
 .production-story__visual[data-fits-viewport='false'] {
     position: static;
 }
+
+.production-story--bruno .production-story__visual figure {
+    max-width: 720px;
+    margin-inline: auto;
+}

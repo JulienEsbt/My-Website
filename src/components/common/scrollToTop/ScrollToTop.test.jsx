@@ -37,7 +37,10 @@ describe('ScrollToTop', () => {
             </MemoryRouter>
         )
 
-        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledWith({block: 'start'})
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledWith({
+            block: 'start',
+            behavior: 'instant',
+        })
         expect(window.scrollTo).not.toHaveBeenCalled()
     })
 
@@ -67,8 +70,81 @@ describe('ScrollToTop', () => {
         document.body.append(target)
 
         await waitFor(() =>
-            expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledWith({block: 'start'})
+            expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledWith({
+                block: 'start',
+                behavior: 'instant',
+            })
         )
         target.remove()
+    })
+    it('stops settling an anchor after a pointer interaction', () => {
+        let resize
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                constructor(callback) {
+                    resize = callback
+                }
+                observe() {}
+                disconnect() {}
+            }
+        )
+        render(
+            <MemoryRouter initialEntries={['/#portfolio']}>
+                <div id="portfolio" />
+                <ScrollToTop />
+            </MemoryRouter>
+        )
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+        window.dispatchEvent(new Event('pointerdown'))
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+    })
+    it('keeps settling a disclosure anchor as opening it changes the scroll position', () => {
+        let resize
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                constructor(callback) {
+                    resize = callback
+                }
+                observe() {}
+                disconnect() {}
+            }
+        )
+        render(
+            <MemoryRouter initialEntries={['/resources#resource-madada']}>
+                <div id="resource-madada" />
+                <ScrollToTop />
+            </MemoryRouter>
+        )
+        vi.stubGlobal('scrollY', 300)
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(2)
+    })
+    it('keeps the project scene in control after it restores its own scroll position', () => {
+        let resize
+        vi.stubGlobal(
+            'ResizeObserver',
+            class {
+                constructor(callback) {
+                    resize = callback
+                }
+                observe() {}
+                disconnect() {}
+            }
+        )
+        render(
+            <MemoryRouter initialEntries={['/#portfolio']}>
+                <div id="portfolio" />
+                <ScrollToTop />
+            </MemoryRouter>
+        )
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(1)
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(2)
+        vi.stubGlobal('scrollY', 300)
+        resize()
+        expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalledTimes(2)
     })
 })

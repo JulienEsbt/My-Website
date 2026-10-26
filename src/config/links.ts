@@ -35,6 +35,7 @@ export const LINKS = {
     tools: toolLinks,
     mail: {professional: 'pro@julienesterbet.com'},
     projects: {
+        openDente: 'https://github.com/JulienEsbt/OpenDente',
         brunoPizza: 'https://github.com/JulienEsbt/bruno-pizza-production',
         myWebsite: 'https://github.com/JulienEsbt/My-Website',
         megalis: 'https://github.com/JulienEsbt/Megalis-Smart-Contract',

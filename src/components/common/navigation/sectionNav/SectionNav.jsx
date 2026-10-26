@@ -14,7 +14,10 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
     useEffect(() => {
         const protectedContent = avoidSelector ? document.querySelector(avoidSelector) : null
         const nav = navRef.current
-        if (!protectedContent || !nav) return
+        if (!protectedContent || !nav) {
+            setAvoidingContent(false)
+            return
+        }
         const updateVisibility = () => {
             const bottomGap = parseFloat(getComputedStyle(nav).bottom) || 16
             const dockTop = window.innerHeight - nav.offsetHeight - bottomGap - 12
@@ -44,18 +47,14 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
         const tween = gsap.fromTo(
             navRef.current,
             {
-                y: 24,
-                opacity: 0,
-                scale: 0.92,
-                filter: 'blur(10px)',
+                // Navigation must remain readable even when animation frames are delayed.
+                y: 6,
+                scale: 0.98,
             },
             {
                 y: 0,
-                opacity: 1,
                 scale: 1,
-                filter: 'blur(0px)',
-                duration: 0.75,
-                delay: 1.25,
+                duration: 0.6,
                 ease: 'power3.out',
             }
         )
@@ -137,6 +136,9 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
                         }}
                     >
                         <span aria-hidden="true">{item.icon}</span>
+                        <span className="section-nav__mobile-label" aria-hidden="true">
+                            {item.mobileLabel || item.label}
+                        </span>
                     </a>
                 )
             })}

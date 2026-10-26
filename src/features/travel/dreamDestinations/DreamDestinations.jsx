@@ -1,7 +1,8 @@
-import React, {useMemo, useRef, useState} from 'react'
+import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useTranslation} from 'react-i18next'
-import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
+import {FiArrowLeft, FiArrowRight, FiPause, FiPlay} from 'react-icons/fi'
 import {getPreferredScrollBehavior} from '../../../components/common/accessibility/motionPreferences.js'
 import CountryFlag from '../../../components/common/media/CountryFlag.jsx'
 import dreamDestinations from '../../../data/travel/dreamDestinations.js'
@@ -13,6 +14,25 @@ const DreamDestinations = () => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     const railRef = useRef(null)
+    const sectionRef = useRef(null)
+    const [paused, setPaused] = useState(false)
+    const [visible, setVisible] = useState(false)
+    const reducedMotion = useReducedMotion()
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+            threshold: 0.25,
+        })
+        observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
+    useEffect(() => {
+        if (paused || !visible || reducedMotion) return
+        const timer = setInterval(() => {
+            if (document.hidden || railRef.current?.contains(document.activeElement)) return
+            setActiveIndex((index) => (index + 1) % dreamDestinations.length)
+        }, 7000)
+        return () => clearInterval(timer)
+    }, [paused, visible, reducedMotion])
 
     const syncRail = (index) => {
         requestAnimationFrame(() => {
@@ -33,6 +53,7 @@ const DreamDestinations = () => {
     }
 
     const next = () => {
+        setPaused(true)
         setActiveIndex((index) => {
             const newIndex = (index + 1) % dreamDestinations.length
             syncRail(newIndex)
@@ -41,6 +62,7 @@ const DreamDestinations = () => {
     }
 
     const previous = () => {
+        setPaused(true)
         setActiveIndex((index) => {
             const newIndex = index === 0 ? dreamDestinations.length - 1 : index - 1
             syncRail(newIndex)
@@ -54,7 +76,7 @@ const DreamDestinations = () => {
     )
 
     return (
-        <section id="dreams" className="dream-section">
+        <section ref={sectionRef} id="dreams" className="dream-section">
             <p className="section-kicker">{t('dreams.kicker')}</p>
             <h2>{t('dreams.title')}</h2>
             <p className="dream-section__intro">{t('dreams.intro')}</p>
@@ -72,6 +94,7 @@ const DreamDestinations = () => {
                             type="button"
                             className={`dream-showcase__thumb ${activeIndex === index ? 'active' : ''}`}
                             onClick={() => {
+                                setPaused(true)
                                 setActiveIndex(index)
                                 syncRail(index)
                             }}
@@ -128,6 +151,23 @@ const DreamDestinations = () => {
                                 <FiArrowLeft />
                             </button>
 
+                            <button
+                                type="button"
+                                disabled={reducedMotion}
+                                aria-pressed={paused}
+                                onClick={() => setPaused(!paused)}
+                                aria-label={
+                                    paused
+                                        ? isFr
+                                            ? 'Reprendre le défilement'
+                                            : 'Resume slideshow'
+                                        : isFr
+                                          ? 'Mettre le défilement en pause'
+                                          : 'Pause slideshow'
+                                }
+                            >
+                                {paused || reducedMotion ? <FiPlay /> : <FiPause />}
+                            </button>
                             <div className="dream-showcase__dots">
                                 {dreamDestinations.map((destination, index) => (
                                     <button
@@ -135,6 +175,7 @@ const DreamDestinations = () => {
                                         type="button"
                                         className={activeIndex === index ? 'active' : ''}
                                         onClick={() => {
+                                            setPaused(true)
                                             setActiveIndex(index)
                                             syncRail(index)
                                         }}

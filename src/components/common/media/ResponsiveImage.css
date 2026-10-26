@@ -1,3 +1,8 @@
 .responsive-picture {
     display: contents;
 }
+
+/* Sources select pixels; they must not occupy cells when picture uses display: contents. */
+.responsive-picture > source {
+    display: none;
+}

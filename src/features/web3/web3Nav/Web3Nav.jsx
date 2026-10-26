@@ -7,12 +7,17 @@ import {useTranslation} from 'react-i18next'
 import SectionNav from '../../../components/common/navigation/sectionNav/SectionNav.jsx'
 
 const Web3Nav = () => {
-    const {t} = useTranslation('web3')
+    const {t, i18n} = useTranslation('web3')
 
     const items = [
         {id: 'top', icon: <AiOutlineHome />, label: t('nav.items.home')},
         {id: 'about', icon: <AiOutlineUser />, label: t('nav.items.about')},
-        {id: 'knowledge', icon: <BiBook />, label: t('nav.items.knowledge')},
+        {
+            id: 'knowledge',
+            icon: <BiBook />,
+            label: t('nav.items.knowledge'),
+            mobileLabel: i18n.resolvedLanguage?.startsWith('fr') ? 'Sujets' : 'Topics',
+        },
         {id: 'blockchain-explorer', icon: <BiLineChart />, label: t('nav.items.networks')},
         {id: 'wallet-inspector', icon: <TbWallet />, label: t('nav.items.wallet')},
         {id: 'contact', icon: <MdOutlineEmail />, label: t('nav.items.contact')},
