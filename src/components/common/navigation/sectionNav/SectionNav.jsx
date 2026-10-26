@@ -47,18 +47,14 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
         const tween = gsap.fromTo(
             navRef.current,
             {
-                y: 24,
-                opacity: 0,
-                scale: 0.92,
-                filter: 'blur(10px)',
+                // Navigation must remain readable even when animation frames are delayed.
+                y: 6,
+                scale: 0.98,
             },
             {
                 y: 0,
-                opacity: 1,
                 scale: 1,
-                filter: 'blur(0px)',
-                duration: 0.75,
-                delay: 1.25,
+                duration: 0.6,
                 ease: 'power3.out',
             }
         )
