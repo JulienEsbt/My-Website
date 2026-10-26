@@ -41,7 +41,7 @@ export default function ProductionStory({
     const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1])
     const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [8, 0, -3])
     return (
-        <div className="production-story" ref={root}>
+        <div className={`production-story production-story--${namespace}`} ref={root}>
             <div className="production-story__visual" ref={visual}>
                 <motion.figure style={reduced ? undefined : {scale, rotateX}}>
                     <ResponsiveImage

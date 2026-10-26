@@ -97,3 +97,30 @@ test('Bruno uses the locally shipped version 1.2 screenshot', async ({page}) => 
     await image.scrollIntoViewIfNeeded()
     await page.screenshot({path: '/tmp/bruno-v12-preview.png'})
 })
+
+test('Bruno screenshots fit a compact frame without cropping on large and small screens', async ({
+    page,
+}) => {
+    for (const size of [
+        {width: 1920, height: 1080},
+        {width: 1440, height: 900},
+        {width: 390, height: 844},
+    ]) {
+        await page.setViewportSize(size)
+        await page.goto('/projects/bruno-pizza')
+        await page.locator('#prerendered-content').waitFor({state: 'detached'})
+        const hero = await page.locator('.bruno-hero-visual').boundingBox()
+        expect(hero.width).toBeLessThanOrEqual(521)
+        const gallery = page.locator('.bruno-gallery')
+        expect((await gallery.boundingBox()).width).toBeLessThanOrEqual(1101)
+        const screen = page.locator('.bruno-gallery__screen')
+        expect((await screen.boundingBox()).height).toBeLessThanOrEqual(size.height * 0.62 + 1)
+        await expect(screen.locator('img')).toHaveCSS('object-fit', 'contain')
+        await expect
+            .poll(() => screen.locator('img').evaluate((e) => e.complete && e.naturalWidth > 0))
+            .toBe(true)
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+            true
+        )
+    }
+})
