@@ -32,6 +32,11 @@ Changes unrelated to OpenDente and the portfolio layout are excluded, including 
 
 ## Portfolio navigation
 
-On wide screens, the project index follows native page scrolling while the selected card stays in view. Manual choice and keyboard navigation remain available. The scroll scene is enabled only when the complete presentation fits above the navigation dock; reduced motion, shorter screens and phones keep manual navigation. Expanding Agora releases the scene into ordinary document flow at the current reading position.
+On wide screens, the project index follows native page scrolling while the selected card stays in view. Manual choice and keyboard navigation remain available. The scroll scene is enabled only when the complete presentation fits above the navigation dock; reduced motion, shorter screens and phones keep manual navigation. Opening Agora uses a native reading dialog; closing it restores focus and the original scroll position while keeping the project journey active.
 
 The three case studies share their header actions: back to projects, an optional context action, and the primary GitHub repository link. Labels, order and mobile button layout are shared in both languages.
+
+
+## Screenshot clarity
+
+`node scripts/generate-opendente-media.mjs <source folder>` regenerates the screenshots as lossless WebP at 360px, 720px and their original width. Hero panels use the original 864px width; they are no longer rotated in CSS, avoiding resampling of UI text. The overview cover has a 2400px master composed from the original French panels without enlarging them. No interface content is retouched or reconstructed.

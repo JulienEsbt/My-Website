@@ -9,7 +9,11 @@
             "subtitle": "A local desktop application that turns an Excel plan into an actionable workshop production flow.",
             "imageAlt": "Bruno Pizza production dashboard showing quantities by variety and distributor",
             "back": "Back to projects",
-            "code": "View GitHub repository"
+            "code": "View GitHub repository",
+            "flowLabel": "From an Excel plan to a production workflow",
+            "quantities": "Quantities",
+            "workshop": "Workshop",
+            "visualCaption": "Guided production, from an Excel plan to photo-led assembly."
         },
         "overview": {
             "statusLabel": "Status",
@@ -129,7 +133,15 @@
             "imageAlt": "Julien Esterbet’s portfolio homepage: introduction, portrait and personal interests.",
             "back": "Back to projects",
             "live": "View current public site",
-            "code": "View GitHub repository"
+            "code": "View GitHub repository",
+            "diagramLabel": "Portfolio services",
+            "appLabel": "One bilingual interface, three complementary services",
+            "services": {
+                "code": "Versioned code",
+                "hosting": "Deployed website",
+                "media": "Optimized media"
+            },
+            "visualCaption": "From code to content: the services behind the portfolio."
         },
         "overview": {
             "statusLabel": "Status",
@@ -363,6 +375,14 @@
     "actions": {
         "label": "Project actions",
         "back": "Back to projects",
-        "code": "View GitHub repository"
+        "code": "View GitHub repository",
+        "browse": "Browse case studies",
+        "previous": "Previous project",
+        "next": "Next project",
+        "projects": {
+            "1": "Bruno Pizza",
+            "4": "OpenDente",
+            "2": "My-Website"
+        }
     }
 }

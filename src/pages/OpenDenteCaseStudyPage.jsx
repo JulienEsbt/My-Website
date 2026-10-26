@@ -1,3 +1,4 @@
+import CaseStudyPager from '../features/projects/caseStudy/CaseStudyPager.jsx'
 import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
 import {useTranslation} from 'react-i18next'
 import {FiArrowDown, FiArrowUpRight, FiBatteryCharging, FiGlobe, FiMonitor} from 'react-icons/fi'
@@ -32,14 +33,18 @@ export default function OpenDenteCaseStudyPage() {
                     visual={
                         <div className="opendente-hero__panels">
                             <ResponsiveImage
-                                media={OPENDENTE_PANELS[language].light}
+                                media={{
+                                    variants: [OPENDENTE_PANELS[language].light.variants.at(-1)],
+                                }}
                                 alt={t('opendente.hero.lightAlt')}
                                 className="opendente-hero__light"
                                 sizes="(min-width: 1100px) 240px, 35vw"
                                 loading="eager"
                             />
                             <ResponsiveImage
-                                media={OPENDENTE_PANELS[language].dark}
+                                media={{
+                                    variants: [OPENDENTE_PANELS[language].dark.variants.at(-1)],
+                                }}
                                 alt={t('opendente.hero.darkAlt')}
                                 className="opendente-hero__dark"
                                 sizes="(min-width: 1100px) 320px, 48vw"
@@ -62,7 +67,7 @@ export default function OpenDenteCaseStudyPage() {
                         </ul>
                     }
                 >
-                    <CaseStudyActions repository={LINKS.projects.openDente}>
+                    <CaseStudyActions projectId="4" repository={LINKS.projects.openDente}>
                         <a className="btn case-study__button" href="#explore">
                             <FiArrowDown aria-hidden="true" />
                             {t('opendente.hero.explore')}
@@ -171,6 +176,9 @@ export default function OpenDenteCaseStudyPage() {
                             <FiArrowUpRight aria-hidden="true" />
                         </a>
                     </aside>
+                    <div className="container case-study__pager-footer">
+                        <CaseStudyPager current="4" />
+                    </div>
                 </article>
             </div>
         </PageFrame>

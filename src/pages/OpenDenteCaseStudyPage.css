@@ -47,7 +47,7 @@
 
 .opendente-hero__panels {
     position: relative;
-    height: clamp(440px, 42vw, 600px);
+    height: clamp(460px, 42vw, 680px);
     isolation: isolate;
 }
 
@@ -69,14 +69,14 @@
     top: 1rem;
     right: 0;
     height: 80%;
-    transform: rotate(5deg);
+    transform: none;
 }
 
 .opendente-hero__dark {
     top: 2rem;
     left: 0;
     height: 88%;
-    transform: rotate(-4deg);
+    transform: none;
 }
 
 .opendente-hero__caption {

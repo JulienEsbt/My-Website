@@ -9,7 +9,11 @@
             "subtitle": "Une application desktop locale pour transformer un plan Excel en parcours de production exploitable en atelier.",
             "imageAlt": "Tableau de production de l’application Bruno Pizza présentant les quantités par variété et distributeur",
             "back": "Retour aux projets",
-            "code": "Voir le dépôt GitHub"
+            "code": "Voir le dépôt GitHub",
+            "flowLabel": "Du plan Excel au parcours de production",
+            "quantities": "Quantités",
+            "workshop": "Atelier",
+            "visualCaption": "Une production guidée, du plan Excel au montage en photos."
         },
         "overview": {
             "statusLabel": "Statut",
@@ -129,7 +133,15 @@
             "imageAlt": "Accueil du portfolio de Julien Esterbet : présentation, portrait et domaines d’intérêt.",
             "back": "Retour aux projets",
             "live": "Voir le site public actuel",
-            "code": "Voir le dépôt GitHub"
+            "code": "Voir le dépôt GitHub",
+            "diagramLabel": "Les services du portfolio",
+            "appLabel": "Une interface bilingue, trois services complémentaires",
+            "services": {
+                "code": "Code versionné",
+                "hosting": "Site déployé",
+                "media": "Médias optimisés"
+            },
+            "visualCaption": "Du code aux contenus : les services derrière le portfolio."
         },
         "overview": {
             "statusLabel": "Statut",
@@ -363,6 +375,14 @@
     "actions": {
         "label": "Actions du projet",
         "back": "Retour aux projets",
-        "code": "Voir le dépôt GitHub"
+        "code": "Voir le dépôt GitHub",
+        "browse": "Naviguer entre les études de cas",
+        "previous": "Projet précédent",
+        "next": "Projet suivant",
+        "projects": {
+            "1": "Bruno Pizza",
+            "4": "OpenDente",
+            "2": "My-Website"
+        }
     }
 }

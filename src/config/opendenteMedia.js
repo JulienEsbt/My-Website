@@ -31,6 +31,7 @@ import guide_fr_1464 from '../assets/images/projects/opendente/guide-fr-1464.web
 import guide_en_360 from '../assets/images/projects/opendente/guide-en-360.webp'
 import guide_en_720 from '../assets/images/projects/opendente/guide-en-720.webp'
 import guide_en_1464 from '../assets/images/projects/opendente/guide-en-1464.webp'
+import cover2400 from '../assets/images/projects/opendente/cover-2400.webp'
 import cover640 from '../assets/images/projects/opendente/cover-640.webp'
 import cover1280 from '../assets/images/projects/opendente/cover-1280.webp'
 import cover1600 from '../assets/images/projects/opendente/cover-1600.webp'
@@ -118,6 +119,7 @@ export const OPENDENTE_COVER = {
         {format: 'fallback', width: 640, height: 400, url: cover640},
         {format: 'fallback', width: 1280, height: 800, url: cover1280},
         {format: 'fallback', width: 1600, height: 1000, url: cover1600},
+        {format: 'fallback', width: 2400, height: 1500, url: cover2400},
     ],
 }
 export const OPENDENTE_PANELS = {
