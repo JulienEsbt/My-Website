@@ -17,7 +17,7 @@ permissions:
 jobs:
     quality:
         name: Lint, tests, build and security
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         timeout-minutes: 20
         env:
             VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
@@ -43,7 +43,11 @@ jobs:
               run: npm run media:check
 
             - name: Install browsers for integration tests
-              run: npx playwright install --with-deps chromium webkit
+              # The Azure apt mirror stalled for 19 minutes in run 40379362732.
+              # Use Ubuntu's archive while keeping package signature verification.
+              run: |
+                  sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+                  npx playwright install --with-deps chromium webkit
 
             - name: Verify browser flows
               run: npm run test:e2e
