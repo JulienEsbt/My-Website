@@ -13,7 +13,11 @@
             "flowLabel": "Du plan Excel au parcours de production",
             "quantities": "Quantités",
             "workshop": "Atelier",
-            "visualCaption": "Une production guidée, du plan Excel au montage en photos."
+            "visualCaption": "Une production guidée, du plan Excel au montage en photos.",
+            "planLabel": "Plan de fabrication",
+            "checkedLabel": "Quantités vérifiées",
+            "assemblyAlt": "Pizza de démonstration utilisée pour illustrer le montage guidé",
+            "assemblyLabel": "Montage guidé"
         },
         "overview": {
             "statusLabel": "Statut",

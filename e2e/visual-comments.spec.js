@@ -9,7 +9,21 @@ test('six trips fill their photo frame and keep Tallinn last', async ({page}) =>
     const carousel = page.locator('.home-travel-carousel')
     await carousel.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
     const buttons = carousel.locator('.home-travel-carousel__destinations button')
-    await expect(carousel).toBeInViewport()
+    await expect(carousel).toBeVisible()
+    // Check the painted frame directly; IntersectionObserver can remain pending in headless CI.
+    await expect
+        .poll(() =>
+            carousel.evaluate((element) => {
+                const bounds = element.getBoundingClientRect()
+                return (
+                    bounds.top < innerHeight &&
+                    bounds.bottom > 0 &&
+                    bounds.left < innerWidth &&
+                    bounds.right > 0
+                )
+            })
+        )
+        .toBe(true)
     await expect(buttons).toHaveCount(6)
     await expect(buttons.last()).toContainText('Estonie')
     for (let i = 0; i < 6; i++) {
