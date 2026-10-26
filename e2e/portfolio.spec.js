@@ -170,11 +170,11 @@ test('Agora is presented as a private project intent in both languages', async (
     const project = page.locator('.portfolio__intent')
     await expect(project.getByRole('heading', {name: 'Agora — Graphe des débats'})).toBeVisible()
     await expect(project.getByRole('link')).toHaveCount(0)
-    await expect(project.locator('details')).not.toHaveAttribute('open', '')
+    await expect(page.getByRole('dialog')).toHaveCount(0)
 
     await project.getByText('Découvrir l’intention du projet').click()
-    await expect(project.locator('details')).toHaveAttribute('open', '')
-    await expect(project.getByText(/Un prototype local non publié/)).toBeVisible()
+    await expect(page.getByRole('dialog').getByText(/Un prototype local non publié/)).toBeVisible()
+    await page.getByRole('dialog').getByRole('button', {name: 'Fermer'}).click()
 
     await page.getByRole('link', {name: 'Switch to English'}).click()
     await expect(project.getByRole('heading', {name: 'Agora — Debate graph'})).toBeVisible()
@@ -310,7 +310,9 @@ test('a Mapbox denial is explained while the selected story stays readable', asy
     await expect(page.getByRole('link', {name: 'Switch to English'})).toBeVisible()
 })
 
-test('project selector opens studies and the expanded Agora stays compact', async ({page}) => {
+test('project selector opens studies and Agora intent without changing card height', async ({
+    page,
+}) => {
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
     await expect(page.getByRole('tab')).toHaveCount(5)
@@ -327,13 +329,15 @@ test('project selector opens studies and the expanded Agora stays compact', asyn
     await page.getByRole('tab', {name: /Archivage/}).click()
     await expect(page.getByRole('tabpanel').locator('a.portfolio__image')).toHaveCount(0)
     await page.getByRole('tab', {name: /Agora/}).click()
-    await page.locator('.portfolio__intent summary').click()
-    const detailsGap = await page.locator('.portfolio__intent').evaluate((card) => {
-        const summary = card.querySelector('summary').getBoundingClientRect()
-        const first = card.querySelector('.portfolio__intent-grid section').getBoundingClientRect()
-        return first.top - summary.bottom
-    })
-    expect(detailsGap).toBeLessThan(24)
+    const cardHeight = await page
+        .locator('.portfolio__intent')
+        .evaluate((card) => card.offsetHeight)
+    await page.getByRole('button', {name: 'Découvrir l’intention du projet'}).click()
+    await expect(page.getByRole('dialog')).toBeVisible()
+    await page.getByRole('dialog').getByRole('button', {name: 'Fermer'}).click()
+    expect(await page.locator('.portfolio__intent').evaluate((card) => card.offsetHeight)).toBe(
+        cardHeight
+    )
     const order = await page
         .locator('#goals, #home-reflections, #home-travel, #contact')
         .evaluateAll((nodes) => nodes.map((n) => n.id))

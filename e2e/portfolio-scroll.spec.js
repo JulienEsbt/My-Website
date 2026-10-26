@@ -44,7 +44,7 @@ test('native page scrolling reveals each project and works in reverse', async ({
         .toBeLessThan(200)
 })
 
-test('manual choice synchronizes the scroll position and Agora expands into reading flow', async ({
+test('manual choice synchronizes the scroll position and Agora reading preserves it', async ({
     page,
 }) => {
     await page.setViewportSize({width: 1600, height: 1000})
@@ -89,26 +89,15 @@ test('manual choice synchronizes the scroll position and Agora expands into read
                 )
         )
         .toBeLessThan(3)
-    const summary = page.locator('.portfolio__intent summary')
-    await page
-        .getByRole('tabpanel')
-        .evaluate((el) =>
-            Promise.all(
-                el
-                    .getAnimations({subtree: true})
-                    .map((animation) => animation.finished.catch(() => {}))
-            )
-        )
-    const readingTop = (await summary.boundingBox()).y
-    await summary.click()
-    await expect(page.locator('.portfolio__journey')).toHaveAttribute(
-        'data-scroll-enabled',
-        'false'
-    )
-    await expect(page.locator('.portfolio__intent-content')).toBeVisible()
-    await expect
-        .poll(async () => Math.abs((await summary.boundingBox()).y - readingTop))
-        .toBeLessThan(3)
+    const trigger = page.getByRole('button', {name: 'Découvrir l’intention du projet'})
+    const readingTop = await page.evaluate(() => scrollY)
+    await trigger.click()
+    await expect(page.getByRole('dialog')).toBeVisible()
+    await page.getByRole('dialog').getByRole('button', {name: 'Fermer'}).click()
+    await expect(page.locator('.portfolio__journey')).toHaveAttribute('data-scroll-enabled', 'true')
+    await expect(page.locator('body')).not.toHaveCSS('position', 'fixed')
+    await expect.poll(() => page.evaluate((y) => Math.abs(scrollY - y), readingTop)).toBeLessThan(3)
+    await expect(trigger).toBeFocused()
     await expect(page.getByRole('tab', {name: /Agora/})).toBeInViewport()
     await expect(page.getByRole('tabpanel').getByRole('link')).toHaveCount(0)
 })

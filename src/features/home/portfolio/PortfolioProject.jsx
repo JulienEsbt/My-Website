@@ -18,7 +18,7 @@ export default function PortfolioProject({project, onOpen}) {
     )
 
     return (
-        <article className="portfolio__item">
+        <article className="portfolio__item" data-project={id}>
             {caseStudy ? (
                 <Link
                     to={caseStudy}

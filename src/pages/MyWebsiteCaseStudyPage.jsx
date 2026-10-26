@@ -5,7 +5,6 @@ import {Link} from '../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
-import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
 import {HOME_ASSETS} from '../config/homeAssets.js'
 import {LINKS} from '../config/links.js'
 import './CaseStudyPage.css'
@@ -48,16 +47,6 @@ export default function MyWebsiteCaseStudyPage() {
             </PageHero>
 
             <article className="case-study">
-                <div className="container case-study__visual">
-                    <ResponsiveImage
-                        media={HOME_ASSETS.portfolio.myWebsite}
-                        alt={t('website.hero.imageAlt')}
-                        sizes="(max-width: 900px) 92vw, 1100px"
-                        loading="eager"
-                        fetchPriority="high"
-                    />
-                </div>
-
                 <dl className="container case-study__overview">
                     {['status', 'role', 'scope'].map((item) => (
                         <div key={item}>

@@ -92,7 +92,7 @@ export default function Portfolio() {
     }, [])
 
     const onScrollSelect = useCallback((index) => select(PROJECTS[index].id), [select])
-    const {scrolling, selectProject, readContinuously} = useProjectScroll({
+    const {scrolling, selectProject} = useProjectScroll({
         scene,
         stage,
         enabled: enhanced && wide && !reducedMotion,
@@ -117,7 +117,7 @@ export default function Portfolio() {
 
     const cards = PROJECTS.map((project) =>
         project.id === 'agora' ? (
-            <AgoraProjectCard key="agora" onExpand={readContinuously} />
+            <AgoraProjectCard key="agora" enhanced={enhanced} />
         ) : (
             <PortfolioProject
                 key={project.id}

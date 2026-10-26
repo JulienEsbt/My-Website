@@ -4,7 +4,6 @@ import {desktopScenePlacement} from '../../../components/common/layout/viewport/
 
 export default function useProjectScroll({scene, stage, enabled, count, selected, onSelect, hash}) {
     const [fits, setFits] = useState(false)
-    const [reading, setReading] = useState(false)
     const metrics = useRef({top: 96, distance: 1})
     const selection = useRef(selected)
     const change = useRef(onSelect)
@@ -14,7 +13,7 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
     const timer = useRef(0)
     selection.current = selected
     change.current = onSelect
-    const scrolling = enabled && fits && !reading
+    const scrolling = enabled && fits
 
     useEffect(() => {
         if (!enabled || !scene.current || !stage.current) return undefined
@@ -88,13 +87,6 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
         [scrolling, moveTo]
     )
 
-    const readContinuously = useCallback(() => {
-        if (!scrolling) return
-        restoreTop.current = stage.current.getBoundingClientRect().top
-        window.scrollTo({top: window.scrollY, left: window.scrollX, behavior: 'instant'})
-        setReading(true)
-    }, [scrolling, stage])
-
     useEffect(() => {
         if (!scrolling) return undefined
         let frame = 0,
@@ -155,5 +147,5 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
         }
     }, [scrolling, count, scene, stage, hash, moveTo])
 
-    return {scrolling, selectProject, readContinuously}
+    return {scrolling, selectProject}
 }

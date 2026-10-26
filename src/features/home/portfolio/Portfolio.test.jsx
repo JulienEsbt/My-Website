@@ -4,6 +4,7 @@ import {MemoryRouter} from 'react-router-dom'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import i18n from 'i18next'
 import Portfolio from './Portfolio.jsx'
+import AgoraProjectCard from './AgoraProjectCard.jsx'
 
 vi.mock('gsap', () => ({
     default: {context: () => ({revert: vi.fn()}), from: vi.fn(), registerPlugin: vi.fn()},
@@ -105,12 +106,20 @@ describe('Portfolio', () => {
         )
         await user.click(screen.getByRole('tab', {name: /Agora/}))
         const project = screen.getByRole('tabpanel')
-        const details = project.querySelector('details')
         expect(within(project).queryByRole('link')).not.toBeInTheDocument()
+        expect(
+            within(project).getByRole('button', {name: 'Découvrir l’intention du projet'})
+        ).toHaveAttribute('aria-haspopup', 'dialog')
+    })
+
+    it('keeps the complete intent readable without JavaScript enhancement', async () => {
+        const user = userEvent.setup()
+        const {container} = render(<AgoraProjectCard />)
+        const details = container.querySelector('details')
         expect(details).not.toHaveAttribute('open')
-        await user.click(within(project).getByText('Découvrir l’intention du projet'))
+        await user.click(screen.getByText('Découvrir l’intention du projet'))
         expect(details).toHaveAttribute('open')
-        expect(within(project).getByText(/Un prototype local non publié/)).toBeVisible()
+        expect(screen.getByText(/Un prototype local non publié/)).toBeVisible()
     })
 
     it('honors the existing direct Agora anchor before any saved selection', async () => {

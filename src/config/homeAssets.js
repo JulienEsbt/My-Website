@@ -1,3 +1,4 @@
+import {WEBSITE_COVER} from './websiteMedia.js'
 import {OPENDENTE_COVER} from './opendenteMedia.js'
 import {BRUNO_GALLERY} from './brunoGallery.js'
 import cvFr from '../assets/documents/Julien-Esterbet-CV-FR-2026.pdf'
@@ -14,7 +15,7 @@ export const HOME_ASSETS = {
     portfolio: {
         openDente: OPENDENTE_COVER,
         brunoPizza: BRUNO_GALLERY[0],
-        myWebsite: getHomeMedia('portfolio/MyWebsite.png'),
+        myWebsite: WEBSITE_COVER,
         megalis: getHomeMedia('portfolio/Megalis.png'),
     },
     resume: {
