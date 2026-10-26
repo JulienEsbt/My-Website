@@ -3,21 +3,13 @@ import {test, expect} from '@playwright/test'
 test.beforeEach(async ({page}) => {
     // Vercel's hosted measurement endpoints do not exist in a local static preview.
     await page.route('**/_vercel/**', (route) =>
-        route.fulfill({
-            status: 200,
-            contentType: 'application/javascript',
-            body: '',
-        })
+        route.fulfill({status: 200, contentType: 'application/javascript', body: ''})
     )
 })
 
 const silenceLocalMeasurements = (context) =>
     context.route('**/_vercel/**', (route) =>
-        route.fulfill({
-            status: 200,
-            contentType: 'application/javascript',
-            body: '',
-        })
+        route.fulfill({status: 200, contentType: 'application/javascript', body: ''})
     )
 
 test('the neutral home follows the primary browser language', async ({browser}) => {
@@ -118,10 +110,7 @@ test('historical query links persist a choice without requiring storage', async 
 })
 
 test('the French prerender remains readable without JavaScript', async ({browser}) => {
-    const context = await browser.newContext({
-        javaScriptEnabled: false,
-        locale: 'de-DE',
-    })
+    const context = await browser.newContext({javaScriptEnabled: false, locale: 'de-DE'})
     const page = await context.newPage()
     await page.goto('/')
     await expect(page).toHaveURL(/\/$/)
@@ -423,9 +412,7 @@ test('home titles stay concise in both languages and travel rotation can be paus
     )
     await carousel.getByRole('button', {name: 'Mettre les voyages en pause'}).click()
     await expect(
-        carousel.getByRole('button', {
-            name: 'Reprendre le défilement des voyages',
-        })
+        carousel.getByRole('button', {name: 'Reprendre le défilement des voyages'})
     ).toBeVisible()
     await page.getByRole('link', {name: 'Switch to English'}).click()
     await expect(page).toHaveTitle('Portfolio — Julien Esterbet')
