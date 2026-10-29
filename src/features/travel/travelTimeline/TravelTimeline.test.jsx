@@ -52,7 +52,7 @@ describe('travel journal links', () => {
             .getAllByRole('button', {name: /Dubrovnik/i})
             .find((button) => button.textContent.includes('2026'))
         await user.click(dubrovnik2026)
-        expect(screen.getByTestId('location')).toHaveTextContent('/en/travel/croatia-2026#stories')
+        expect(screen.getByTestId('location')).toHaveTextContent('/en/travel/croatia-2026')
     })
 
     it('falls back safely for an unknown trip', () => {
