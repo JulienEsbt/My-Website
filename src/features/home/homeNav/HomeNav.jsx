@@ -15,8 +15,18 @@ const HomeNav = () => {
         {id: 'top', label: t('nav.items.home'), icon: <AiOutlineHome />},
         {id: 'about', label: t('nav.items.about'), icon: <AiOutlineUser />},
         {id: 'portfolio', label: t('nav.items.portfolio'), icon: <VscFolderLibrary />},
-        {id: 'home-reflections', label: t('nav.items.reflections'), icon: <BiBookOpen />},
-        {id: 'home-travel', label: t('nav.items.travel'), icon: <PiCompassBold />},
+        {
+            id: 'home-reflections',
+            label: t('nav.items.reflections'),
+            ariaLabel: t('nav.sectionLabels.reflections'),
+            icon: <BiBookOpen />,
+        },
+        {
+            id: 'home-travel',
+            label: t('nav.items.travel'),
+            ariaLabel: t('nav.sectionLabels.travel'),
+            icon: <PiCompassBold />,
+        },
         {id: 'contact', label: t('nav.items.contact'), icon: <BiMessageSquareDetail />},
     ]
 

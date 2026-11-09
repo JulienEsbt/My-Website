@@ -100,7 +100,7 @@ const DesktopHeader = () => {
                             <ResponsiveImage
                                 media={HOME_ASSETS.header.me}
                                 alt={t('header.portraitAlt')}
-                                sizes="(max-width: 700px) 78vw, (min-width: 1800px) 26vw, 420px"
+                                sizes="(max-width: 700px) 128px, (min-width: 1800px) 26vw, 420px"
                                 loading="eager"
                                 fetchPriority="high"
                             />

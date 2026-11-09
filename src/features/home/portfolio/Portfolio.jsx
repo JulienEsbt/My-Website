@@ -9,6 +9,7 @@ import ResponsiveImage from '../../../components/common/media/ResponsiveImage.js
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
 import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import {PORTFOLIO_PROJECTS} from '../../../config/portfolioProjects.js'
+import {HOME_THUMBNAILS} from '../../../config/homeThumbnails.js'
 import AgoraProjectCard from './AgoraProjectCard.jsx'
 import PortfolioProject from './PortfolioProject.jsx'
 import useProjectScroll from './useProjectScroll.js'
@@ -21,10 +22,21 @@ const STORAGE_KEY = 'portfolio.selectedProject'
 
 function ProjectPreview({project, t}) {
     const key = project.id === 'agora' ? 'portfolio.agora' : `portfolio.items.${project.id}`
+    const thumbnail = {
+        1: HOME_THUMBNAILS.bruno,
+        2: HOME_THUMBNAILS.website,
+        4: HOME_THUMBNAILS.opendente,
+    }[project.id]
     return (
         <span className="portfolio__preview mobile-project-preview">
             {project.image ? (
-                <ResponsiveImage media={project.image} alt="" sizes="72px" loading="lazy" />
+                <ResponsiveImage
+                    media={thumbnail ?? project.image}
+                    alt=""
+                    sizes="72px"
+                    loading="lazy"
+                    {...(project.id === '3' ? {width: 1600, height: 760} : {})}
+                />
             ) : (
                 <span className="portfolio__preview-mark" aria-hidden="true">
                     <FiMessageCircle />
