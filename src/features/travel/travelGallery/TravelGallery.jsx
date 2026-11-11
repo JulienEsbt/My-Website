@@ -55,7 +55,6 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }, [activePhotoIndex, paused, reducedMotion, photos.length])
 
     const openPhoto = (index) => {
-        setPaused(false)
         if (!isOverlayOpen) triggerRef.current = document.activeElement
         setGalleryOpen(false)
         setActivePhotoIndex(index)
@@ -83,12 +82,10 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
     }
 
     const previousPhoto = useCallback(() => {
-        setPaused(true)
         setActivePhotoIndex((index) => (index === 0 ? photos.length - 1 : index - 1))
     }, [photos.length])
 
     const nextPhoto = useCallback(() => {
-        setPaused(true)
         setActivePhotoIndex((index) => (index === photos.length - 1 ? 0 : index + 1))
     }, [photos.length])
 
@@ -339,7 +336,7 @@ const TravelGallery = ({albumId, city, onOpenChange}) => {
                                 className="gallery-playback"
                                 type="button"
                                 disabled={reducedMotion}
-                                onClick={() => setPaused(!paused)}
+                                onClick={() => setPaused((value) => !value)}
                                 aria-pressed={paused}
                             >
                                 {paused || reducedMotion

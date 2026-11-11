@@ -16,7 +16,6 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
         )
     )
     const [paused, setPaused] = useState(false)
-    const [hovered, setHovered] = useState(false)
     const [visible, setVisible] = useState(false)
     const root = useRef(null)
     const reducedMotion = useReducedMotion()
@@ -29,14 +28,13 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
         return () => observer.disconnect()
     }, [])
     useEffect(() => {
-        if (paused || hovered || !visible || reducedMotion) return undefined
+        if (paused || !visible || reducedMotion) return undefined
         const timer = setInterval(() => {
             if (!document.hidden) setIndex((value) => (value + 1) % destinations.length)
         }, 6000)
         return () => clearInterval(timer)
-    }, [paused, hovered, visible, reducedMotion])
+    }, [paused, visible, reducedMotion])
     const select = (value) => {
-        setPaused(true)
         setIndex((value + destinations.length) % destinations.length)
     }
     if (variant === 'entry') {
@@ -46,14 +44,8 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
                 className="travel-entry-carousel"
                 role="region"
                 aria-label={fr ? 'Récits de voyage sélectionnés' : 'Selected travel stories'}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
             >
-                <Link
-                    className="travel-entry-photo"
-                    to={`/travel/${trip.id}#stories`}
-                    onFocus={() => setPaused(true)}
-                >
+                <Link className="travel-entry-photo" to={`/travel/${trip.id}#stories`}>
                     <ResponsiveImage
                         key={trip.id}
                         media={trip.photo}
@@ -134,11 +126,7 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
             role="region"
             aria-label={fr ? 'Récits de voyage sélectionnés' : 'Selected travel stories'}
         >
-            <article
-                className="home-discover__travel"
-                key={trip.id}
-                onFocusCapture={() => setPaused(true)}
-            >
+            <article className="home-discover__travel" key={trip.id}>
                 <div className="home-discover__photo">
                     <ResponsiveImage
                         media={trip.photo}
@@ -157,8 +145,6 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
                     <p>{fr ? trip.description : trip.descriptionEn}</p>
                     <Link
                         className="btn home-discover__story-link"
-                        onMouseEnter={() => setHovered(true)}
-                        onMouseLeave={() => setHovered(false)}
                         to={`/travel/${trip.id}`}
                         state={{fromHome: 'travel'}}
                     >
