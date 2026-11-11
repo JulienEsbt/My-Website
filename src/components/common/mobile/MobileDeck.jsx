@@ -50,7 +50,7 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
             return
         const timer = setInterval(() => {
             const element = track.current
-            if (!element || document.hidden || root.current?.querySelector('details[open]')) return
+            if (!element || document.hidden) return
             const index = (active + 1) % cards.length
             const card = element.children[index]
             element.scrollTo({

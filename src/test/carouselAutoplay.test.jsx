@@ -241,7 +241,13 @@ describe('MobileDeck autoplay', () => {
         )
         render(
             <MobileDeck label="Cartes de test">
-                <button>Première carte</button>
+                <div>
+                    <button>Première carte</button>
+                    <details>
+                        <summary>Lire les détails</summary>
+                        <p>Le contenu reste ouvert sans modifier la lecture automatique.</p>
+                    </details>
+                </div>
                 <button>Deuxième carte</button>
                 <button>Troisième carte</button>
             </MobileDeck>
@@ -256,6 +262,8 @@ describe('MobileDeck autoplay', () => {
             track.scrollLeft = left
             fireEvent.scroll(track)
         }
+        fireEvent.click(screen.getByText('Lire les détails'))
+        expect(screen.getByText('Lire les détails').closest('details')).toHaveAttribute('open')
         fireEvent.click(screen.getByRole('button', {name: 'Carte suivante'}))
         expect(track.scrollLeft).toBe(300)
         fireEvent.pointerDown(screen.getByRole('button', {name: 'Deuxième carte'}))
