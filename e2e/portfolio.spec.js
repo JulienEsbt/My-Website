@@ -226,7 +226,7 @@ test('travel stories have clean, localized and backward-compatible URLs', async 
         .locator('.travel-timeline__item', {hasText: 'Dubrovnik'})
         .filter({hasText: 'Juin 2026'})
         .click()
-    await expect(page).toHaveURL(/\/travel\/croatia-2026#stories$/)
+    await expect(page).toHaveURL(/\/travel\/croatia-2026$/)
     await page.goBack()
     await expect(page).toHaveURL(/\/travel$/)
 

@@ -237,6 +237,10 @@
     },
     "nav": {
         "aria": "Section navigation",
+        "sectionLabels": {
+            "travel": "Travel overview",
+            "reflections": "Writing overview"
+        },
         "items": {
             "home": "Home",
             "about": "About",
