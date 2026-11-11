@@ -121,7 +121,7 @@ const SectionNav = ({items, ariaLabel = 'Section navigation', avoidSelector, cla
                         key={item.id}
                         href={hash}
                         className={active === hash ? 'active' : ''}
-                        aria-label={item.label}
+                        aria-label={item.ariaLabel || item.label}
                         aria-current={active === hash ? 'location' : undefined}
                         data-label={item.label}
                         data-tooltip-dismissed={dismissedTooltip === item.id ? 'true' : undefined}

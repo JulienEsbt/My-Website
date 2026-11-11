@@ -1043,6 +1043,11 @@
 }
 
 .gallery-playback {
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + 0.75rem);
+    left: 50%;
+    z-index: 2;
+    transform: translateX(-50%);
     min-height: 44px;
     padding: 0.65rem 1rem;
     border: 1px solid #91cfff50;
@@ -1050,6 +1055,6 @@
     background: #122237;
     color: #dcefff;
     cursor: pointer;
-    margin: 0.5rem auto;
+    margin: 0;
     display: block;
 }

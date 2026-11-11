@@ -29,8 +29,7 @@
     cursor: pointer;
 }
 
-.goals-carousel__autoplay:hover,
-.goals-carousel__autoplay:focus-visible {
+.goals-carousel__autoplay:is(:hover, :focus-visible) {
     border-color: var(--color-primary);
     color: var(--color-primary);
 }
@@ -99,7 +98,6 @@
 .goal-card__label {
     position: relative;
     z-index: 1;
-    display: inline-flex;
     margin-bottom: 0.55rem;
     color: var(--color-primary);
     font-size: 0.75rem;
@@ -130,8 +128,8 @@
     opacity: 0.42;
     transform: scale(0.9);
     transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
+        opacity 0.35s,
+        transform 0.35s;
 }
 
 .goals-carousel .swiper-slide-active {
@@ -144,22 +142,25 @@
 }
 
 .goals-carousel .swiper-pagination-bullet {
+    box-sizing: content-box;
     width: 0.55rem;
     height: 0.55rem;
+    padding: 8px;
+    margin: 0 !important;
     opacity: 1;
     background: rgba(255, 255, 255, 0.18);
+    background-clip: content-box;
     transition: var(--transition);
 }
 
 .goals-carousel .swiper-pagination-bullet-active {
     width: 1.7rem;
     border-radius: 999px;
-    background: var(--color-primary);
+    background-color: var(--color-primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .goals-carousel .swiper-slide,
-    .goals-carousel .swiper-slide-active {
+    .goals-carousel .swiper-slide {
         transition: none;
     }
 }
