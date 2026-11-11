@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next'
 import {OPENDENTE_PANELS} from '../../../config/opendenteMedia.js'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
+import {HOME_THUMBNAILS} from '../../../config/homeThumbnails.js'
 
 export default function PortfolioProject({project, onOpen}) {
     const {t, i18n} = useTranslation('home')
@@ -12,11 +13,16 @@ export default function PortfolioProject({project, onOpen}) {
         defaultValue: t(`portfolio.items.${id}.title`),
     })
     const panels = OPENDENTE_PANELS[i18n.resolvedLanguage?.startsWith('en') ? 'en' : 'fr']
+    const thumbnail = {
+        1: HOME_THUMBNAILS.bruno,
+        2: HOME_THUMBNAILS.website,
+        4: HOME_THUMBNAILS.opendente,
+    }[id]
     const visual = (
         <div className="portfolio__cover">
             {id !== '3' && (
                 <ResponsiveImage
-                    media={image}
+                    media={thumbnail ?? image}
                     className="portfolio__ambient"
                     alt=""
                     aria-hidden="true"
@@ -47,6 +53,7 @@ export default function PortfolioProject({project, onOpen}) {
                     sizes="(max-width: 700px) 92vw, (min-width: 1600px) 850px, 60vw"
                     loading="lazy"
                     decoding="async"
+                    {...(id === '3' ? {width: 1600, height: 760} : {})}
                 />
             )}
         </div>

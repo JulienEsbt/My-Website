@@ -42,26 +42,27 @@ export default function ResponsiveImage({
     const fallbacks = [...(byFormat.fallback ?? [])].sort((a, b) => a.width - b.width)
     const fallback = fallbacks.at(-1) ?? media.variants.at(-1)
 
+    // Set sizes before srcSet so WebKit selects the right candidate on first insertion.
     return (
         <picture className="responsive-picture">
             {byFormat.avif?.length > 0 && (
                 <source
                     type="image/avif"
-                    srcSet={buildSourceSet([...byFormat.avif])}
                     sizes={sizes}
+                    srcSet={buildSourceSet([...byFormat.avif])}
                 />
             )}
             {byFormat.webp?.length > 0 && (
                 <source
                     type="image/webp"
-                    srcSet={buildSourceSet([...byFormat.webp])}
                     sizes={sizes}
+                    srcSet={buildSourceSet([...byFormat.webp])}
                 />
             )}
             <img
-                src={fallback.url}
-                srcSet={buildSourceSet(fallbacks)}
                 sizes={sizes}
+                srcSet={buildSourceSet(fallbacks)}
+                src={fallback.url}
                 width={fallback.width}
                 height={fallback.height}
                 alt={alt}

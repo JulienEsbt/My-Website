@@ -241,6 +241,10 @@
     },
     "nav": {
         "aria": "Navigation des sections",
+        "sectionLabels": {
+            "travel": "Aperçu des voyages",
+            "reflections": "Aperçu des écrits"
+        },
         "items": {
             "home": "Accueil",
             "about": "À propos",
