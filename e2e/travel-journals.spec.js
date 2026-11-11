@@ -22,6 +22,11 @@ test('completed Skopje and Amsterdam journals work on mobile and desktop in both
                 await page.goto(path)
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
                 await expect(page.locator('#travel-detail-title')).toHaveText(city)
+                const flag = page.locator('.travel-timeline__detail-header .country-flag')
+                await flag.scrollIntoViewIfNeeded()
+                await expect
+                    .poll(() => flag.evaluate((image) => image.complete && image.naturalWidth > 0))
+                    .toBe(true)
                 await expect(page.locator('.travel-timeline__detail-badges')).toContainText(date)
                 await expect(page.locator('.travel-timeline__detail-badges')).not.toContainText(
                     /Prévu|Planned/
