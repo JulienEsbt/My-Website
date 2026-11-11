@@ -28,7 +28,7 @@ const DreamDestinations = () => {
     useEffect(() => {
         if (paused || !visible || reducedMotion) return
         const timer = setInterval(() => {
-            if (document.hidden || railRef.current?.contains(document.activeElement)) return
+            if (document.hidden) return
             setActiveIndex((index) => (index + 1) % dreamDestinations.length)
         }, 7000)
         return () => clearInterval(timer)
@@ -53,7 +53,6 @@ const DreamDestinations = () => {
     }
 
     const next = () => {
-        setPaused(true)
         setActiveIndex((index) => {
             const newIndex = (index + 1) % dreamDestinations.length
             syncRail(newIndex)
@@ -62,7 +61,6 @@ const DreamDestinations = () => {
     }
 
     const previous = () => {
-        setPaused(true)
         setActiveIndex((index) => {
             const newIndex = index === 0 ? dreamDestinations.length - 1 : index - 1
             syncRail(newIndex)
@@ -94,7 +92,6 @@ const DreamDestinations = () => {
                             type="button"
                             className={`dream-showcase__thumb ${activeIndex === index ? 'active' : ''}`}
                             onClick={() => {
-                                setPaused(true)
                                 setActiveIndex(index)
                                 syncRail(index)
                             }}
@@ -155,7 +152,7 @@ const DreamDestinations = () => {
                                 type="button"
                                 disabled={reducedMotion}
                                 aria-pressed={paused}
-                                onClick={() => setPaused(!paused)}
+                                onClick={() => setPaused((value) => !value)}
                                 aria-label={
                                     paused
                                         ? isFr
@@ -175,7 +172,6 @@ const DreamDestinations = () => {
                                         type="button"
                                         className={activeIndex === index ? 'active' : ''}
                                         onClick={() => {
-                                            setPaused(true)
                                             setActiveIndex(index)
                                             syncRail(index)
                                         }}

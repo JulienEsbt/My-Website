@@ -37,8 +37,9 @@ const BlockchainExplorer = () => {
                 ? null
                 : AutoScroll({
                       speed: 0.7,
-                      stopOnInteraction: false,
-                      stopOnMouseEnter: true,
+                      stopOnInteraction: true,
+                      stopOnMouseEnter: false,
+                      stopOnFocusIn: false,
                   }),
         [reducedMotion]
     )
@@ -112,6 +113,13 @@ const BlockchainExplorer = () => {
 
         if (autoScrollPaused) autoScroll.stop()
         else autoScroll.play()
+
+        // A drag may interrupt the motion, but only the pause button keeps it stopped.
+        const resumeAfterDrag = () => {
+            if (!autoScrollPaused) autoScroll.play()
+        }
+        emblaApi.on('pointerUp', resumeAfterDrag)
+        return () => emblaApi.off('pointerUp', resumeAfterDrag)
     }, [autoScrollPaused, emblaApi])
 
     return (

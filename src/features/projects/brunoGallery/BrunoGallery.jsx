@@ -11,17 +11,14 @@ export default function BrunoGallery() {
     const reduced = useReducedMotion()
     const [index, setIndex] = useState(0)
     const [playing, setPlaying] = useState(true)
-    const [hovered, setHovered] = useState(false)
-    const [focused, setFocused] = useState(false)
     const [visible, setVisible] = useState(false)
     const [pageVisible, setPageVisible] = useState(true)
     const root = useRef(null)
     const touchStart = useRef(null)
-    const active = playing && !reduced && !hovered && !focused && visible && pageVisible
+    const active = playing && !reduced && visible && pageVisible
     const image = BRUNO_GALLERY[index]
     const caption = t(`bruno.gallery.captions.${image.id}`)
     const select = (next) => {
-        setPlaying(false)
         setIndex((next + BRUNO_GALLERY.length) % BRUNO_GALLERY.length)
     }
     useEffect(() => {
@@ -46,17 +43,7 @@ export default function BrunoGallery() {
         return () => clearInterval(timer)
     }, [active])
     return (
-        <section
-            ref={root}
-            className="bruno-gallery"
-            aria-label={t('bruno.gallery.title')}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            onFocusCapture={() => setFocused(true)}
-            onBlurCapture={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false)
-            }}
-        >
+        <section ref={root} className="bruno-gallery" aria-label={t('bruno.gallery.title')}>
             <div
                 className="bruno-gallery__screen"
                 onTouchStart={(event) => {
@@ -100,7 +87,7 @@ export default function BrunoGallery() {
                     {!reduced && (
                         <button
                             type="button"
-                            onClick={() => setPlaying(!playing)}
+                            onClick={() => setPlaying((value) => !value)}
                             aria-label={t(`bruno.gallery.${playing ? 'pause' : 'play'}`)}
                         >
                             {playing ? <FiPause /> : <FiPlay />}
