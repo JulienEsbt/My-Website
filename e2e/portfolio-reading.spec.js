@@ -14,6 +14,16 @@ for (const [name, engine] of Object.entries({chromium, webkit})) {
             await page.locator('#prerendered-content').waitFor({state: 'detached'})
             const journey = page.locator('.portfolio__journey')
             await expect(journey).toHaveAttribute('data-scroll-enabled', 'true')
+            // The section entrance moves the journey's visual top. Wait for that
+            // animation before checking the scroll destination to pixel precision.
+            await expect
+                .poll(() =>
+                    page.locator('#portfolio').evaluate((el) => {
+                        const transform = getComputedStyle(el).transform
+                        return transform === 'none' ? 0 : new DOMMatrixReadOnly(transform).m42
+                    })
+                )
+                .toBe(0)
             await page.getByRole('tab', {name: /Agora/}).click()
             await expect
                 .poll(() =>

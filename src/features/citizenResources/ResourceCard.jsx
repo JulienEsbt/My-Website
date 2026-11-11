@@ -25,6 +25,8 @@ export default function ResourceCard({resource, number, compact = false}) {
                         <a
                             className="civic-preview__link"
                             href={resource.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label={t('card.visitPreview', {name})}
                         >
                             <img
@@ -85,7 +87,12 @@ export default function ResourceCard({resource, number, compact = false}) {
                         {copy.limit}
                     </p>
                 </div>
-                <a className="civic-card__visit" href={resource.url}>
+                <a
+                    className="civic-card__visit"
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <span>
                         {copy.cta}
                         <small>{resource.domain}</small>
@@ -114,7 +121,7 @@ export default function ResourceCard({resource, number, compact = false}) {
                         <ul>
                             {resource.sources.map((source, index) => (
                                 <li key={source.url}>
-                                    <a href={source.url}>
+                                    <a href={source.url} target="_blank" rel="noopener noreferrer">
                                         {t(`card.sourceLabels.${index}`)} · {source.label}{' '}
                                         <FiExternalLink aria-hidden="true" />
                                     </a>
@@ -123,7 +130,11 @@ export default function ResourceCard({resource, number, compact = false}) {
                         </ul>
                         {resource.preview && (
                             <p className="civic-card__date">
-                                <a href={resource.preview.url}>
+                                <a
+                                    href={resource.preview.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     {t('card.previewCredit', {
                                         name: resource.name,
                                         date: formatDate(resource.preview.date, language),

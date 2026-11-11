@@ -28,12 +28,20 @@ export default function PrivacyPage() {
                             <h3>{t(`privacy.${section}Title`)}</h3>
                             <p>{t(`privacy.${section}Body`)}</p>
                             {section === 'analytics' && (
-                                <a href="https://vercel.com/docs/analytics/privacy-policy">
+                                <a
+                                    href="https://vercel.com/docs/analytics/privacy-policy"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     Vercel Web Analytics
                                 </a>
                             )}
                             {section === 'performance' && (
-                                <a href="https://vercel.com/docs/speed-insights/privacy-policy">
+                                <a
+                                    href="https://vercel.com/docs/speed-insights/privacy-policy"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     Vercel Speed Insights
                                 </a>
                             )}
