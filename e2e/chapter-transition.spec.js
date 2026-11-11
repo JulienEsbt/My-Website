@@ -7,6 +7,7 @@ test('chapter handoff stays centered, reverses and restores full readability', a
     await page.emulateMedia({reducedMotion: 'no-preference'})
     await page.goto('/')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
+    await page.evaluate(() => document.fonts.ready)
     const bounds = await page.evaluate(() => {
         const a = document.getElementById('experience')
         const b = document.getElementById('services')
@@ -26,13 +27,17 @@ test('chapter handoff stays centered, reverses and restores full readability', a
         .last()
         .locator('.experience__proof')
     const incoming = page.locator('#services .professional-chapter__heading')
-    await page.evaluate((y) => scrollTo(0, y), bounds.end + 10)
+    // Check exact positions without racing the page-wide smooth scrolling.
+    await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), bounds.end + 10)
     await expect(incoming).toHaveCSS('opacity', '1')
     await expect(page.locator('#experience .professional-chapter__step').last()).toHaveCSS(
         'opacity',
         '0'
     )
-    await page.evaluate((y) => scrollTo(0, y), bounds.start + (bounds.end - bounds.start) * 0.5)
+    await page.evaluate(
+        (y) => scrollTo({top: y, behavior: 'instant'}),
+        bounds.start + (bounds.end - bounds.start) * 0.5
+    )
     await expect(incoming).toHaveCSS('opacity', '1')
     await expect(outgoing).toHaveCSS('opacity', '1')
     await expect(incoming).toHaveCSS('clip-path', 'none')
@@ -48,7 +53,7 @@ test('chapter handoff stays centered, reverses and restores full readability', a
     const followingCards = page.locator('#services .professional-chapter__step')
     await expect(followingCards.nth(1)).toHaveCSS('transform', 'none')
     await expect(followingCards.nth(2)).toHaveCSS('transform', 'none')
-    await page.evaluate((y) => scrollTo(0, y), bounds.start - 10)
+    await page.evaluate((y) => scrollTo({top: y, behavior: 'instant'}), bounds.start - 10)
     await expect(outgoing).toHaveCSS('opacity', '1')
     await expect(incoming).toHaveCSS('visibility', 'hidden')
     await expect(proof).toHaveCSS('opacity', '1')
