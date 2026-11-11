@@ -953,31 +953,67 @@ But above all, this trip was incredible on a human level. I got to know amazing 
         countryCode: 'MK',
         flag: '🇲🇰',
         year: 2026,
-        dateLabel: 'Septembre 2026',
-        dateLabelEn: 'September 2026',
-        type: 'Prévu',
-        typeEn: 'Planned',
-        category: 'planned',
+        dateLabel: '22–29 septembre 2026',
+        dateLabelEn: '22–29 September 2026',
+        type: 'Mariage',
+        typeEn: 'Wedding',
+        category: 'visited',
         continent: 'Europe',
         continentEn: 'Europe',
         lat: 41.9981,
         lng: 21.4254,
-        description: 'Retour prévu en Macédoine du Nord pour le mariage d’Aleksandra.',
-        descriptionEn: 'Planned return to North Macedonia for Aleksandra’s wedding.',
-        story: `Le prochain voyage prévu est un retour en Macédoine du Nord pour le mariage d'Aleksandra.
+        description: 'Retour à Skopje du 22 au 29 septembre 2026 pour le mariage d’Aleksandra.',
+        descriptionEn: 'Back in Skopje from 22 to 29 September 2026 for Aleksandra’s wedding.',
+        story: `Du 22 au 29 septembre 2026, je suis retourné à Skopje, en Macédoine du Nord, pour le mariage d’Aleksandra.
 
-Après l'avoir rencontrée pendant mon master et être allé la voir à Skopje en 2025, ce futur voyage aura forcément une valeur particulière. J'ai hâte de retrouver sa famille, de revoir le pays et de vivre ce moment important avec elle.`,
-        storyEn: `The next planned trip is a return to North Macedonia for Aleksandra's wedding.
+Après notre rencontre pendant mon master et ma visite à Skopje en 2025, ce nouveau séjour était lié à un moment important de sa vie.`,
+        storyEn: `From 22 to 29 September 2026, I returned to Skopje, North Macedonia, for Aleksandra’s wedding.
 
-After meeting her during my master's degree and visiting her in Skopje in 2025, this future trip will obviously feel special. I am looking forward to seeing her family again, rediscovering the country and sharing such an important moment with her.`,
-        polarstepsUrl:
-            'https://www.polarsteps.com/JulienEsbt/17028595-visit-to-aleksandra?mode=track',
+After meeting during my master’s degree and my visit to Skopje in 2025, this new stay was connected to an important moment in her life.`,
+        polarstepsUrl: '',
         isSovereignCountry: true,
         isTerritory: false,
         hasLivedThere: false,
         isStudyTrip: false,
         isWorkTrip: false,
-        isPlanned: true,
+        isPlanned: false,
+    },
+    {
+        id: 'netherlands-2026',
+        sortOrder: 202610,
+        city: 'Amsterdam',
+        cityEn: 'Amsterdam',
+        country: 'Pays-Bas',
+        countryEn: 'Netherlands',
+        countryCode: 'NL',
+        flag: '🇳🇱',
+        year: 2026,
+        dateLabel: '22–25 octobre 2026',
+        dateLabelEn: '22–25 October 2026',
+        type: 'Festival',
+        typeEn: 'Festival',
+        category: 'visited',
+        continent: 'Europe',
+        continentEn: 'Europe',
+        lat: 52.3676,
+        lng: 4.9041,
+        description:
+            'Amsterdam avec deux amis pour l’ADE, avec notamment KUKO (kukocologne), mon DJ préféré.',
+        descriptionEn:
+            'Amsterdam with two friends for ADE, including KUKO (kukocologne), my favourite DJ.',
+        story: `Du 22 au 25 octobre 2026, je suis parti à Amsterdam avec deux amis pour l’Amsterdam Dance Event (ADE).
+
+Un séjour autour de la musique électronique et de l’ADE, avec notamment KUKO (kukocologne), mon DJ préféré.`,
+        storyEn: `From 22 to 25 October 2026, I went to Amsterdam with two friends for Amsterdam Dance Event (ADE).
+
+A stay centred on electronic music and ADE, including KUKO (kukocologne), my favourite DJ.`,
+        polarstepsUrl: '',
+        isSovereignCountry: true,
+        isTerritory: false,
+        hasLivedThere: false,
+        isStudyTrip: false,
+        isWorkTrip: false,
+        isPlanned: false,
     },
 ]
 

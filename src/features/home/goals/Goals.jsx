@@ -159,7 +159,7 @@ export default function Goals() {
                                 : {
                                       delay: 5200,
                                       disableOnInteraction: false,
-                                      pauseOnMouseEnter: true,
+                                      pauseOnMouseEnter: false,
                                   }
                         }
                         keyboard={{enabled: true, onlyInViewport: true}}

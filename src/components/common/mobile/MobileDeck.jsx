@@ -50,13 +50,7 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
             return
         const timer = setInterval(() => {
             const element = track.current
-            if (
-                !element ||
-                document.hidden ||
-                track.current?.contains(document.activeElement) ||
-                root.current?.querySelector('details[open]')
-            )
-                return
+            if (!element || document.hidden) return
             const index = (active + 1) % cards.length
             const card = element.children[index]
             element.scrollTo({
@@ -115,7 +109,6 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
     }, [mobile, expanded])
     if (!mobile) return <>{children}</>
     const select = (index) => {
-        setPaused(true)
         const element = track.current
         const card = element?.children[index]
         if (!card) return
@@ -174,7 +167,6 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
                 }}
                 onFocusCapture={() => scrollScene.release()}
                 onPointerDown={(event) => {
-                    setPaused(true)
                     gesture.current = {x: event.clientX, y: event.clientY}
                 }}
                 onPointerMove={(event) => {
@@ -215,7 +207,7 @@ export default function MobileDeck({children, label, scrollDriven = false}) {
                     </span>
                     <button
                         type="button"
-                        onClick={() => setPaused(!paused)}
+                        onClick={() => setPaused((value) => !value)}
                         aria-label={
                             paused
                                 ? fr

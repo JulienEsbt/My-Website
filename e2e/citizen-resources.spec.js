@@ -286,7 +286,7 @@ for (const engine of ['chromium', 'webkit']) {
     }
 }
 
-test('each featured preview opens its own original site', async ({page}) => {
+test('each featured preview opens its original site in a new tab', async ({page, context}) => {
     const destinations = [
         ['leurs-votes', 'https://www.leurs-votes.fr/'],
         ['monvote2027', 'https://monvote2027.fr/'],
@@ -294,16 +294,22 @@ test('each featured preview opens its own original site', async ({page}) => {
         ['transparence', 'https://transparencecitoyenne.fr/'],
     ]
     for (const [id, url] of destinations) {
-        await page.route(url, (route) =>
+        await context.route(url, (route) =>
             route.fulfill({contentType: 'text/html', body: '<h1>Destination</h1>'})
         )
         await page.goto('/resources')
         await page.locator('#prerendered-content').waitFor({state: 'detached'})
         const link = page.locator(`#resource-${id} .civic-preview__link`)
         await expect(link).toHaveAttribute('href', url)
+        await expect(link).toHaveAttribute('target', '_blank')
+        await expect(link).toHaveAttribute('rel', /noopener/)
         await link.focus()
+        const popupOpened = page.waitForEvent('popup')
         await page.keyboard.press('Enter')
-        await expect(page).toHaveURL(url)
+        const popup = await popupOpened
+        await expect(popup).toHaveURL(url)
+        await expect(page).toHaveURL(/\/resources$/)
+        await popup.close()
     }
 })
 
