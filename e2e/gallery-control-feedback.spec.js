@@ -79,8 +79,12 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                         await expect.poll(() => appearance(next)).not.toEqual(normal)
                         await page.mouse.move(0, 0)
                         await expect.poll(() => appearance(next)).toEqual(normal)
-                        await next.press('Shift+Tab')
-                        await page.keyboard.press('Tab')
+                        // Exercise keyboard activation without relying on the browser's
+                        // platform-specific Tab filtering of buttons and links.
+                        const beforeKeyboard = await page.locator(gallery.counter).textContent()
+                        await next.focus()
+                        await next.press('Enter')
+                        await expect(page.locator(gallery.counter)).not.toHaveText(beforeKeyboard)
                         await expect(next).toBeFocused()
                         await expect(next).toHaveCSS('outline-style', 'solid')
                     }
