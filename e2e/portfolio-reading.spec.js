@@ -14,6 +14,13 @@ for (const [name, engine] of Object.entries({chromium, webkit})) {
             await page.locator('#prerendered-content').waitFor({state: 'detached'})
             const journey = page.locator('.portfolio__journey')
             await expect(journey).toHaveAttribute('data-scroll-enabled', 'true')
+            // Hydration and font loading can move the initial hash target. Put the
+            // section in view before waiting for its scroll-triggered entrance.
+            await page.evaluate(() => document.fonts.ready)
+            await page.locator('#portfolio').evaluate((section) => {
+                section.scrollIntoView({block: 'start', behavior: 'instant'})
+            })
+            await expect(page.locator('#portfolio')).toBeInViewport()
             // The section entrance moves the journey's visual top. Wait for that
             // animation before checking the scroll destination to pixel precision.
             await expect
