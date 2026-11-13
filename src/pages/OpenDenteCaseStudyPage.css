@@ -220,10 +220,29 @@
     cursor: pointer;
 }
 
-.opendente-gallery button:hover,
-.opendente-gallery__toolbar a:hover {
-    border-color: var(--color-primary);
-    color: var(--color-white);
+@media (hover: hover) and (pointer: fine) {
+    .opendente-gallery button:hover,
+    .opendente-gallery__toolbar a:hover {
+        border-color: var(--color-primary);
+        color: var(--color-white);
+    }
+}
+
+@media (hover: none) {
+    .opendente-gallery__toolbar button,
+    .opendente-gallery__toolbar a {
+        transition:
+            border-color 0.15s ease,
+            color 0.15s ease,
+            transform 0.15s ease;
+    }
+
+    .opendente-gallery__toolbar button:active,
+    .opendente-gallery__toolbar a:active {
+        border-color: var(--color-primary);
+        color: var(--color-white);
+        transform: scale(0.94);
+    }
 }
 
 .opendente-context {

@@ -63,9 +63,24 @@
     cursor: pointer;
     flex-shrink: 0;
 }
-.bruno-gallery__controls button:hover,
-.bruno-gallery__controls a:hover {
-    background: #78caff20;
+@media (hover: hover) and (pointer: fine) {
+    .bruno-gallery__controls button:hover,
+    .bruno-gallery__controls a:hover {
+        background: #78caff20;
+    }
+}
+@media (hover: none) {
+    .bruno-gallery__controls button,
+    .bruno-gallery__controls a {
+        transition:
+            background-color 0.15s ease,
+            transform 0.15s ease;
+    }
+    .bruno-gallery__controls button:active,
+    .bruno-gallery__controls a:active {
+        background: #78caff20;
+        transform: scale(0.94);
+    }
 }
 .bruno-gallery__thumbnails {
     display: flex;

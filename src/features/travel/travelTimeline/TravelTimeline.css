@@ -712,8 +712,7 @@
     font-size: 1.35rem;
 }
 
-.travel-timeline__lightbox-close:hover,
-.travel-timeline__lightbox-nav:hover {
+.travel-timeline__lightbox-close:hover {
     color: var(--color-bg);
     background: var(--color-primary);
 }
@@ -722,8 +721,27 @@
     transform: scale(1.06);
 }
 
-.travel-timeline__lightbox-nav:hover {
-    transform: translateY(-50%) scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+    .travel-timeline__lightbox-nav:hover {
+        color: var(--color-bg);
+        background: var(--color-primary);
+        transform: translateY(-50%) scale(1.05);
+    }
+}
+
+@media (hover: none) {
+    .travel-timeline__lightbox-nav {
+        transition:
+            background-color 0.15s ease,
+            color 0.15s ease,
+            transform 0.15s ease;
+    }
+
+    .travel-timeline__lightbox-nav:active {
+        color: var(--color-bg);
+        background: var(--color-primary);
+        transform: translateY(-50%) scale(0.94);
+    }
 }
 
 .travel-timeline__lightbox-nav.previous {
