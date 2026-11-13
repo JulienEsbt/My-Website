@@ -1,5 +1,7 @@
 import portrait160avif from '../assets/images/home/thumbnails/home-thumb-portrait-160.avif?no-inline'
 import portrait160webp from '../assets/images/home/thumbnails/home-thumb-portrait-160.webp?no-inline'
+import portrait256avif from '../assets/images/home/thumbnails/home-thumb-portrait-256.avif?no-inline'
+import portrait256webp from '../assets/images/home/thumbnails/home-thumb-portrait-256.webp?no-inline'
 import portrait320avif from '../assets/images/home/thumbnails/home-thumb-portrait-320.avif?no-inline'
 import portrait320webp from '../assets/images/home/thumbnails/home-thumb-portrait-320.webp?no-inline'
 import bruno160avif from '../assets/images/home/thumbnails/home-thumb-bruno-160.avif?no-inline'
@@ -20,6 +22,8 @@ export const HOME_THUMBNAILS = {
         variants: [
             {format: 'avif', width: 160, height: 201, url: portrait160avif},
             {format: 'fallback', width: 160, height: 201, url: portrait160webp},
+            {format: 'avif', width: 256, height: 322, url: portrait256avif},
+            {format: 'fallback', width: 256, height: 322, url: portrait256webp},
             {format: 'avif', width: 320, height: 402, url: portrait320avif},
             {format: 'fallback', width: 320, height: 402, url: portrait320webp},
         ],

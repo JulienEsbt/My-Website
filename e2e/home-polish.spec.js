@@ -88,7 +88,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                         const portrait = page.locator('.mobile-home-entry__identity img')
                         await expect(portrait).toBeVisible()
                         expect(await portrait.evaluate((img) => img.currentSrc)).toMatch(
-                            /home-thumb-portrait-/
+                            /home-thumb-portrait-256-/
                         )
                         expect(
                             requestedImages.filter((url) => url.includes('/media/hero/'))
@@ -116,4 +116,39 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
             })
         }
     }
+}
+
+for (const [engine, browserType] of Object.entries({chromium, webkit})) {
+    test(`desktop project covers use an appropriate image without changing their size: ${engine}`, async () => {
+        const browser = await browserType.launch()
+        try {
+            const page = await browser.newPage({
+                viewport: {width: 1440, height: 900},
+                deviceScaleFactor: 1,
+                locale: 'fr-FR',
+                reducedMotion: 'reduce',
+            })
+            await page.goto('http://localhost:4173/')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+            for (const [id, resource] of [
+                ['1', /01-dashboard-640-/],
+                ['2', /hero-800-/],
+            ]) {
+                await page.locator(`#portfolio-tab-${id}`).click()
+                const cover = page.locator(
+                    `.portfolio__item[data-project="${id}"] .portfolio__cover-image`
+                )
+                await cover.scrollIntoViewIfNeeded()
+                await expect
+                    .poll(() => cover.evaluate((img) => img.complete && img.naturalWidth > 0))
+                    .toBe(true)
+                expect(await cover.evaluate((img) => img.currentSrc)).toMatch(resource)
+                const box = await cover.boundingBox()
+                expect(box.width).toBeGreaterThan(500)
+                expect(box.height).toBeGreaterThan(290)
+            }
+        } finally {
+            await browser.close()
+        }
+    })
 }
