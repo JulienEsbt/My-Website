@@ -72,23 +72,27 @@ export const applyInitialLanguage = ({
     storage,
     browserNavigator,
     historyObject = globalThis.history,
+    locationObject = globalThis.location,
     documentElement = globalThis.document?.documentElement,
 } = {}) => {
-    const initialPath = new URL(href, 'https://www.julienesterbet.com').pathname
     const result = resolveInitialLanguage(href, {storage, browserNavigator})
     const currentUrl = new URL(href, 'https://www.julienesterbet.com')
     const currentRelativeUrl = `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`
 
     if (result.source === 'query') rememberLanguagePreference(result.language, storage)
+    const redirecting = new URL(result.targetUrl, currentUrl).pathname !== currentUrl.pathname
+    if (redirecting) {
+        if (documentElement) documentElement.dataset.languageEntryPending = result.language
+        // A different language needs its own document, so the HTTP URL and canonical agree.
+        locationObject.replace(result.targetUrl)
+        return {...result, redirecting}
+    }
     if (result.targetUrl !== currentRelativeUrl) {
         historyObject?.replaceState(historyObject.state, '', result.targetUrl)
     }
     if (documentElement) {
         documentElement.lang = result.language
-        if (languageFromPath(initialPath) !== result.language) {
-            documentElement.dataset.languageEntryPending = result.language
-        }
     }
 
-    return result
+    return {...result, redirecting}
 }

@@ -5,7 +5,7 @@ import {format} from 'prettier'
 const output = 'src/assets/images/home/thumbnails'
 await mkdir(output, {recursive: true})
 const sources = [
-    ['portrait', 'public/media/hero/me-53b31f13aac9/1024.avif', [160, 320]],
+    ['portrait', 'public/media/hero/me-53b31f13aac9/1024.avif', [160, 256, 320]],
     ['bruno', 'src/assets/images/projects/bruno-pizza-v12/01-dashboard-3420.webp', [160, 320]],
     ['opendente', 'src/assets/images/projects/opendente/cover-2400.webp', [160, 320]],
     ['website', 'src/assets/images/projects/my-website/hero-1440.webp', [160, 320]],

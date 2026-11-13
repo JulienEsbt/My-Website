@@ -22,11 +22,15 @@ describe('completed autumn 2026 trips', () => {
         })
         expect(trip.dateLabel).toBe('22–25 octobre 2026')
         expect(trip.dateLabelEn).toBe('22–25 October 2026')
-        expect(trip.story).toMatch(/deux amis/)
+        expect(trip.story).toMatch(/deux potes/)
         expect(trip.storyEn).toMatch(/two friends/)
-        for (const story of [trip.story, trip.storyEn]) {
-            expect(story).toMatch(/Amsterdam Dance Event/)
-            expect(story).toMatch(/KUKO \(kukocologne\)/)
+        for (const [story, description] of [
+            [trip.story, trip.description],
+            [trip.storyEn, trip.descriptionEn],
+        ]) {
+            expect(story).toContain('ADE')
+            expect(story).toContain('KUKO')
+            expect(description).toContain('KUKO (kukocologne)')
         }
         expect(trip.photoAlbumId).toBeUndefined()
     })

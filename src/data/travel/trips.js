@@ -414,12 +414,12 @@ I discovered a beautiful island famous for its luxury, restaurants and beaches. 
         descriptionEn: "Six months living in Budapest as part of my international master's degree.",
         story: `Budapest restera probablement l'une des villes les plus importantes de ma vie.
 
-J'y ai vécu six mois pour terminer mon master international à ELTE. J'y ai rencontré des personnes extraordinaires venues du monde entier, notamment Aleksandra, qui est aujourd'hui l'une de mes meilleures amies.
+J'y ai vécu six mois pour terminer mon master international à ELTE. J'y ai rencontré des personnes extraordinaires venues du monde entier et retrouvé Aleksandra, rencontrée à Tallinn, avec qui j'ai étudié à Budapest.
 
 Entre les cours, les sorties, les cafés, les bains thermaux, les monuments historiques et les nombreux voyages organisés avec les autres étudiants Erasmus, cette expérience a profondément changé ma façon de voir le monde.`,
         storyEn: `Budapest will probably remain one of the most important cities of my life.
 
-I lived there for six months while completing my international master's degree at ELTE. I met incredible people from all around the world, including Aleksandra, who is now one of my closest friends.
+I lived there for six months while completing my international master's degree at ELTE. I met incredible people from all around the world and studied alongside Aleksandra, whom I'd already met in Tallinn.
 
 Between classes, cafés, thermal baths, nightlife and countless Erasmus trips, this experience deeply changed the way I see the world.`,
         polarstepsUrl: 'https://www.polarsteps.com/JulienEsbt/8743115-budapest?mode=track',
@@ -761,10 +761,10 @@ We explored the Old Town, Charles Bridge, Prague Castle and many historic distri
             'Une semaine chez Aleksandra pour découvrir la Macédoine du Nord de l’intérieur.',
         descriptionEn:
             'One week staying with Aleksandra to discover North Macedonia from the inside.',
-        story: `Je suis venu à Skopje rendre visite à Aleksandra, rencontrée durant mon master.
+        story: `Je suis venu à Skopje rendre visite à Aleksandra. On s'est rencontrés à Tallinn, puis on a étudié ensemble à Budapest.
 
 En vivant plusieurs jours chez elle et sa famille, j'ai découvert bien plus qu'une destination touristique. J'ai découvert leur quotidien, leur culture, leur cuisine, leurs traditions et leur incroyable hospitalité. Cette immersion rend ce voyage très particulier parmi tous ceux que j'ai réalisés.`,
-        storyEn: `I travelled to Skopje to visit Aleksandra, whom I met during my master's degree.
+        storyEn: `I travelled to Skopje to visit Aleksandra. We met in Tallinn, then studied together in Budapest.
 
 Living with her and her family allowed me to discover much more than a tourist destination. I experienced their daily life, culture, food, traditions and incredible hospitality. This immersion makes this trip one of the most meaningful I've ever had.`,
         polarstepsUrl: '',
@@ -962,14 +962,16 @@ But above all, this trip was incredible on a human level. I got to know amazing 
         continentEn: 'Europe',
         lat: 41.9981,
         lng: 21.4254,
-        description: 'Retour à Skopje du 22 au 29 septembre 2026 pour le mariage d’Aleksandra.',
-        descriptionEn: 'Back in Skopje from 22 to 29 September 2026 for Aleksandra’s wedding.',
-        story: `Du 22 au 29 septembre 2026, je suis retourné à Skopje, en Macédoine du Nord, pour le mariage d’Aleksandra.
+        description:
+            'Avec Zelda à Skopje pour le mariage d’Aleksandra, et une journée au lac Matka sous le soleil !',
+        descriptionEn:
+            'Skopje with Zelda for Aleksandra’s wedding, plus a sunny day at Lake Matka!',
+        story: `Retour à Skopje, cette fois pour le mariage d’Aleksandra ! On s’est rencontrés à Tallinn, puis on a étudié ensemble à Budapest. Depuis, on s’est revus à Paris, à Barcelone et déjà à Skopje. Ça faisait vraiment plaisir de la retrouver pour son mariage.
 
-Après notre rencontre pendant mon master et ma visite à Skopje en 2025, ce nouveau séjour était lié à un moment important de sa vie.`,
-        storyEn: `From 22 to 29 September 2026, I returned to Skopje, North Macedonia, for Aleksandra’s wedding.
+Avec Zelda, ma copine, on a été accueillis comme des rois. Tout le monde était adorable et le mariage était magnifique. On en a aussi profité pour bien visiter Skopje et passer une journée au lac Matka sous un grand soleil. Une super semaine !`,
+        storyEn: `Back in Skopje, this time for Aleksandra’s wedding! We met in Tallinn, then studied together in Budapest. Since then, we’ve seen each other in Paris, Barcelona and Skopje too. It was so good to be there for her wedding.
 
-After meeting during my master’s degree and my visit to Skopje in 2025, this new stay was connected to an important moment in her life.`,
+Zelda, my girlfriend, came with me and we were treated like royalty. Everyone was lovely and the wedding was beautiful. We also had plenty of time to explore Skopje and spent a brilliant sunny day at Lake Matka. Such a great week!`,
         polarstepsUrl: '',
         isSovereignCountry: true,
         isTerritory: false,
@@ -998,15 +1000,11 @@ After meeting during my master’s degree and my visit to Skopje in 2025, this n
         lat: 52.3676,
         lng: 4.9041,
         description:
-            'Amsterdam avec deux amis pour l’ADE, avec notamment KUKO (kukocologne), mon DJ préféré.',
+            'Quatre jours à Amsterdam avec deux potes pour l’ADE. Et KUKO (kukocologne), mon DJ préféré… oufissime !',
         descriptionEn:
-            'Amsterdam with two friends for ADE, including KUKO (kukocologne), my favourite DJ.',
-        story: `Du 22 au 25 octobre 2026, je suis parti à Amsterdam avec deux amis pour l’Amsterdam Dance Event (ADE).
-
-Un séjour autour de la musique électronique et de l’ADE, avec notamment KUKO (kukocologne), mon DJ préféré.`,
-        storyEn: `From 22 to 25 October 2026, I went to Amsterdam with two friends for Amsterdam Dance Event (ADE).
-
-A stay centred on electronic music and ADE, including KUKO (kukocologne), my favourite DJ.`,
+            'Four days in Amsterdam with two friends for ADE. And KUKO (kukocologne), my favourite DJ… absolutely unreal!',
+        story: `Quatre jours à Amsterdam avec deux potes pour l’ADE ! On s’est baladés un peu partout dans la ville et on a vu plusieurs DJ, mais KUKO… c’était juste oufissime. C’est mon DJ préféré et j’avais tellement hâte de le revoir. Et punaise, j’ai déjà tellement hâte d’encore le revoir !`,
+        storyEn: `Four days in Amsterdam with two friends for ADE! We wandered all over the city and saw several DJs, but KUKO… absolutely unreal. He’s my favourite DJ and I’d been so excited to see him again. And damn, I already can’t wait to see him again!`,
         polarstepsUrl: '',
         isSovereignCountry: true,
         isTerritory: false,

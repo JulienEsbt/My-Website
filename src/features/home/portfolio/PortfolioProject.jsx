@@ -50,7 +50,11 @@ export default function PortfolioProject({project, onOpen}) {
                     media={image}
                     className="portfolio__cover-image"
                     alt={alt}
-                    sizes="(max-width: 700px) 92vw, (min-width: 1600px) 850px, 60vw"
+                    sizes={
+                        id === '1'
+                            ? '(max-width: 700px) 90vw, (max-width: 1099px) 50vw, min(40vw, 640px)'
+                            : '(max-width: 700px) 90vw, min(50vw, 856px)'
+                    }
                     loading="lazy"
                     decoding="async"
                     {...(id === '3' ? {width: 1600, height: 760} : {})}

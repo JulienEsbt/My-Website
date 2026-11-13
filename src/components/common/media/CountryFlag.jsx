@@ -7,7 +7,7 @@ const CountryFlag = ({code, label = '', className = '', decorative = true}) => {
     return (
         <img
             className={`country-flag ${className}`.trim()}
-            src={`/emoji-flags/${normalizedCode}.png`}
+            src={`/emoji-flags/${normalizedCode}.${['fr', 'gb'].includes(normalizedCode) ? 'webp' : 'png'}`}
             alt={decorative ? '' : label}
             aria-hidden={decorative ? 'true' : undefined}
             loading="lazy"

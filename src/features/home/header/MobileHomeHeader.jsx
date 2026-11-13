@@ -20,7 +20,7 @@ export default function MobileHomeHeader() {
                 <ResponsiveImage
                     media={HOME_ASSETS.header.me}
                     alt={t('header.portraitAlt')}
-                    sizes="128px"
+                    sizes="104px"
                     loading="eager"
                     fetchPriority="high"
                 />

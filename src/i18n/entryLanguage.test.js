@@ -55,25 +55,58 @@ describe('entry language', () => {
     it('keeps historical query choices explicit and remembers them', () => {
         const storage = createStorage()
         const historyObject = {state: {key: 'value'}, replaceState: vi.fn()}
+        const locationObject = {replace: vi.fn()}
         const documentElement = {lang: 'fr', dataset: {}}
         const result = applyInitialLanguage({
             href: 'https://www.julienesterbet.com/travel?trip=croatia-2026&lang=en#stories',
             storage,
             historyObject,
+            locationObject,
             documentElement,
         })
 
-        expect(result).toMatchObject({language: 'en', source: 'query'})
+        expect(result).toMatchObject({language: 'en', source: 'query', redirecting: true})
+        expect(locationObject.replace).toHaveBeenCalledWith('/en/travel?trip=croatia-2026#stories')
+        expect(historyObject.replaceState).not.toHaveBeenCalled()
+        expect(storage.setItem).toHaveBeenCalledWith(LANGUAGE_PREFERENCE_KEY, 'en')
+        expect(documentElement).toMatchObject({
+            lang: 'fr',
+            dataset: {languageEntryPending: 'en'},
+        })
+    })
+
+    it('loads the English document when the home entry follows the browser language', () => {
+        const locationObject = {replace: vi.fn()}
+        const result = applyInitialLanguage({
+            href: 'https://www.julienesterbet.com/?source=profile#portfolio',
+            storage: createStorage(),
+            browserNavigator: {languages: ['en-GB']},
+            locationObject,
+            documentElement: {lang: 'fr', dataset: {}},
+        })
+
+        expect(result.redirecting).toBe(true)
+        expect(locationObject.replace).toHaveBeenCalledWith('/en?source=profile#portfolio')
+    })
+
+    it('only cleans the query in place when the document already has the requested language', () => {
+        const historyObject = {state: null, replaceState: vi.fn()}
+        const locationObject = {replace: vi.fn()}
+        const result = applyInitialLanguage({
+            href: 'https://www.julienesterbet.com/en/travel?trip=croatia-2026&lang=en#stories',
+            storage: createStorage(),
+            historyObject,
+            locationObject,
+            documentElement: {lang: 'en', dataset: {}},
+        })
+
+        expect(result.redirecting).toBe(false)
+        expect(locationObject.replace).not.toHaveBeenCalled()
         expect(historyObject.replaceState).toHaveBeenCalledWith(
-            historyObject.state,
+            null,
             '',
             '/en/travel?trip=croatia-2026#stories'
         )
-        expect(storage.setItem).toHaveBeenCalledWith(LANGUAGE_PREFERENCE_KEY, 'en')
-        expect(documentElement).toMatchObject({
-            lang: 'en',
-            dataset: {languageEntryPending: 'en'},
-        })
     })
 
     it('falls back safely when storage is unavailable', () => {
