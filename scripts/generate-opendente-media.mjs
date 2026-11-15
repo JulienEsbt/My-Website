@@ -28,7 +28,8 @@ for (const [name, time] of Object.entries(originals)) {
     const path = resolve(source, filename)
     paths[name] = path
     const {width} = await sharp(path).metadata()
-    for (const size of [360, 720, width]) {
+    const sizes = name.startsWith('panel-') ? [192, 256, 360, 480, 720, width] : [360, 720, width]
+    for (const size of sizes) {
         await sharp(path)
             .resize({width: size, withoutEnlargement: true})
             .webp({lossless: true, effort: 6})

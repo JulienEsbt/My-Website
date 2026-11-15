@@ -32,17 +32,18 @@ export default function PortfolioProject({project, onOpen}) {
             )}
             {id === '4' ? (
                 <div className="portfolio__opendente" role="img" aria-label={alt}>
+                    {/* Match the panel heights in Portfolio.css and the phone cover ratio. */}
                     <ResponsiveImage
                         media={panels.dark}
                         alt=""
                         className="portfolio__opendente-screen portfolio__opendente-screen--dark"
-                        sizes="(min-width: 1600px) 200px, 25vw"
+                        sizes="(max-width: 700px) calc(35vw - 1.8rem), (max-width: 1099px) 18vw, clamp(8.4rem, 13.1vw, 13.1rem)"
                     />
                     <ResponsiveImage
                         media={panels.light}
                         alt=""
                         className="portfolio__opendente-screen portfolio__opendente-screen--light"
-                        sizes="(min-width: 1600px) 180px, 22vw"
+                        sizes="(max-width: 700px) calc(31vw - 1.6rem), (max-width: 1099px) 16vw, clamp(7.4rem, 11.6vw, 11.6rem)"
                     />
                 </div>
             ) : (
