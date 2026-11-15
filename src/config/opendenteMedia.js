@@ -1,13 +1,25 @@
+import panel_fr_light_192 from '../assets/images/projects/opendente/panel-fr-light-192.webp'
+import panel_fr_light_256 from '../assets/images/projects/opendente/panel-fr-light-256.webp'
 import panel_fr_light_360 from '../assets/images/projects/opendente/panel-fr-light-360.webp'
+import panel_fr_light_480 from '../assets/images/projects/opendente/panel-fr-light-480.webp'
 import panel_fr_light_720 from '../assets/images/projects/opendente/panel-fr-light-720.webp'
 import panel_fr_light_864 from '../assets/images/projects/opendente/panel-fr-light-864.webp'
+import panel_fr_dark_192 from '../assets/images/projects/opendente/panel-fr-dark-192.webp'
+import panel_fr_dark_256 from '../assets/images/projects/opendente/panel-fr-dark-256.webp'
 import panel_fr_dark_360 from '../assets/images/projects/opendente/panel-fr-dark-360.webp'
+import panel_fr_dark_480 from '../assets/images/projects/opendente/panel-fr-dark-480.webp'
 import panel_fr_dark_720 from '../assets/images/projects/opendente/panel-fr-dark-720.webp'
 import panel_fr_dark_864 from '../assets/images/projects/opendente/panel-fr-dark-864.webp'
+import panel_en_light_192 from '../assets/images/projects/opendente/panel-en-light-192.webp'
+import panel_en_light_256 from '../assets/images/projects/opendente/panel-en-light-256.webp'
 import panel_en_light_360 from '../assets/images/projects/opendente/panel-en-light-360.webp'
+import panel_en_light_480 from '../assets/images/projects/opendente/panel-en-light-480.webp'
 import panel_en_light_720 from '../assets/images/projects/opendente/panel-en-light-720.webp'
 import panel_en_light_864 from '../assets/images/projects/opendente/panel-en-light-864.webp'
+import panel_en_dark_192 from '../assets/images/projects/opendente/panel-en-dark-192.webp'
+import panel_en_dark_256 from '../assets/images/projects/opendente/panel-en-dark-256.webp'
 import panel_en_dark_360 from '../assets/images/projects/opendente/panel-en-dark-360.webp'
+import panel_en_dark_480 from '../assets/images/projects/opendente/panel-en-dark-480.webp'
 import panel_en_dark_720 from '../assets/images/projects/opendente/panel-en-dark-720.webp'
 import panel_en_dark_864 from '../assets/images/projects/opendente/panel-en-dark-864.webp'
 import charge_fr_360 from '../assets/images/projects/opendente/charge-fr-360.webp'
@@ -38,28 +50,40 @@ import cover1600 from '../assets/images/projects/opendente/cover-1600.webp'
 
 const panel_fr_light = {
     variants: [
+        {format: 'fallback', width: 192, height: 316, url: panel_fr_light_192},
+        {format: 'fallback', width: 256, height: 422, url: panel_fr_light_256},
         {format: 'fallback', width: 360, height: 593, url: panel_fr_light_360},
+        {format: 'fallback', width: 480, height: 791, url: panel_fr_light_480},
         {format: 'fallback', width: 720, height: 1187, url: panel_fr_light_720},
         {format: 'fallback', width: 864, height: 1424, url: panel_fr_light_864},
     ],
 }
 const panel_fr_dark = {
     variants: [
+        {format: 'fallback', width: 192, height: 316, url: panel_fr_dark_192},
+        {format: 'fallback', width: 256, height: 422, url: panel_fr_dark_256},
         {format: 'fallback', width: 360, height: 593, url: panel_fr_dark_360},
+        {format: 'fallback', width: 480, height: 791, url: panel_fr_dark_480},
         {format: 'fallback', width: 720, height: 1187, url: panel_fr_dark_720},
         {format: 'fallback', width: 864, height: 1424, url: panel_fr_dark_864},
     ],
 }
 const panel_en_light = {
     variants: [
+        {format: 'fallback', width: 192, height: 316, url: panel_en_light_192},
+        {format: 'fallback', width: 256, height: 422, url: panel_en_light_256},
         {format: 'fallback', width: 360, height: 593, url: panel_en_light_360},
+        {format: 'fallback', width: 480, height: 791, url: panel_en_light_480},
         {format: 'fallback', width: 720, height: 1187, url: panel_en_light_720},
         {format: 'fallback', width: 864, height: 1424, url: panel_en_light_864},
     ],
 }
 const panel_en_dark = {
     variants: [
+        {format: 'fallback', width: 192, height: 316, url: panel_en_dark_192},
+        {format: 'fallback', width: 256, height: 422, url: panel_en_dark_256},
         {format: 'fallback', width: 360, height: 593, url: panel_en_dark_360},
+        {format: 'fallback', width: 480, height: 791, url: panel_en_dark_480},
         {format: 'fallback', width: 720, height: 1187, url: panel_en_dark_720},
         {format: 'fallback', width: 864, height: 1424, url: panel_en_dark_864},
     ],

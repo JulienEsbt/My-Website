@@ -40,3 +40,5 @@ The three case studies share their header actions: back to projects, an optional
 ## Screenshot clarity
 
 `node scripts/generate-opendente-media.mjs <source folder>` regenerates the screenshots as lossless WebP at 360px, 720px and their original width. Hero panels use the original 864px width; they are no longer rotated in CSS, avoiding resampling of UI text. The overview cover has a 2400px master composed from the original French panels without enlarging them. No interface content is retouched or reconstructed.
+
+The four light/dark French/English panels also have 192px, 256px and 480px lossless variants for the small home project preview. Its `sizes` attributes follow the displayed panel sizes, so the browser can choose a suitable file for both the viewport and its pixel density. The existing 360px, 720px and original 864px files remain available and unchanged; the case study's enlarge link still opens the original width. These variants do not affect travel photos or their galleries.
