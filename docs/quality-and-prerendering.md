@@ -37,6 +37,36 @@ métadonnées EXIF, IPTC ou XMP. Aucun téléversement n'est nécessaire pour v�
 catalogues. Les contrôles navigateur locaux ne valident pas les restrictions de
 jeton Mapbox propres aux domaines Vercel Preview ou production.
 
+## Optimisations PageSpeed du 16 novembre 2026
+
+Les quatre rapports de l'accueil FR/EN, mobile et bureau, obtiennent 100 dans les
+catégories mesurées. Les alertes restantes ne justifient pas de modifier les photos,
+le cadrage ou les animations.
+
+- L'aperçu Bruno Pizza ajoute une variante de 800 pixels depuis le PNG source,
+  avec le même réglage WebP 96 que les autres variantes. Sur un téléphone de
+  412 pixels à densité 1,75, elle remplace le fichier de 1280 pixels : 68 758 octets
+  au lieu de 120 954, tout en couvrant la définition d'affichage. Les fichiers
+  existants et le lien d'ouverture en 3420 pixels restent identiques.
+- Les chapitres professionnels lisent toutes les hauteurs avant de modifier les
+  styles. Chaque hauteur est lue une fois, contre trois auparavant, sans changer
+  les dimensions calculées ni le fonctionnement au redimensionnement.
+
+Deux essais sur la livraison CSS ont été écartés. Mesures locales sur cinq
+chargements à cache froid, CPU ralenti quatre fois, latence de 150 ms et débit de
+1,6 Mbit/s ; ces chiffres ne sont pas des résultats PageSpeed de production :
+
+| Livraison CSS | LCP mobile médian | LCP bureau médian | Décision |
+| --- | --- | --- | --- |
+| Version actuelle, sept fichiers en parallèle | 868 ms | 1 188 ms | Conservée |
+| Styles intégrés dans le HTML | 348 ms | 1 296 ms | Écartée : CLS jusqu'à 0,137 sur mobile |
+| Styles réunis dans un fichier | 1 032 ms | 1 248 ms | Écartée : chargement plus lent |
+
+Les drapeaux FR/GB sont déjà encodés sans perte ; leur réencodage donne exactement
+la même taille. Le JavaScript partagé comprend les fonctions d'animation et les
+interactions utilisées après le chargement : les octets non exécutés pendant une
+mesure ne sont pas nécessairement du code supprimable.
+
 ## Fichiers de test et fichiers générés
 
 `playwright.config.js` configure les navigateurs et les serveurs de test ; `e2e/`
