@@ -12,7 +12,11 @@ for (const [index, file] of files.entries()) {
     const id = file.replace('.png', '')
     const metadata = await sharp(`${source}/${file}`).metadata()
     const widths = [
-        ...new Set([640, 1280, 2048, metadata.width].filter((width) => width <= metadata.width)),
+        ...new Set(
+            [640, ...(id === '01-dashboard' ? [800] : []), 1280, 2048, metadata.width].filter(
+                (width) => width <= metadata.width
+            )
+        ),
     ]
     const variants = []
     for (const width of widths) {

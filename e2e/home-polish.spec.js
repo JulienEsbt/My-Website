@@ -4,6 +4,53 @@ import {readFileSync} from 'node:fs'
 const axe = readFileSync(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8')
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
+    test(`Bruno phone preview stays sharp without downloading the large screenshot: ${engine}`, async () => {
+        const browser = await browserType.launch()
+        try {
+            for (const prefix of ['', '/en']) {
+                const page = await browser.newPage({
+                    viewport: {width: 412, height: 900},
+                    deviceScaleFactor: 1.75,
+                    locale: prefix ? 'en-GB' : 'fr-FR',
+                    reducedMotion: 'reduce',
+                })
+                await page.goto(`http://localhost:4173${prefix || '/'}`)
+                await page.locator('#prerendered-content').waitFor({state: 'detached'})
+                await page
+                    .locator('#portfolio .mobile-accordion__item')
+                    .filter({hasText: 'Bruno Pizza'})
+                    .locator(':scope > summary')
+                    .click()
+                const cover = page.locator(
+                    '.portfolio__item[data-project="1"] .portfolio__cover-image'
+                )
+                await cover.scrollIntoViewIfNeeded()
+                await expect
+                    .poll(() => cover.evaluate((image) => image.complete && image.naturalWidth > 0))
+                    .toBe(true)
+                const source = await cover.evaluate(async (image) => {
+                    const bitmap = new Image()
+                    bitmap.src = image.currentSrc
+                    await bitmap.decode()
+                    return {
+                        url: image.currentSrc,
+                        pixels: bitmap.naturalWidth,
+                        required: image.getBoundingClientRect().width * devicePixelRatio,
+                    }
+                })
+                expect(source.pixels).toBeGreaterThanOrEqual(source.required)
+                const response = await page.request.get(source.url)
+                expect(response.ok()).toBe(true)
+                expect((await response.body()).length).toBeLessThan(80_000)
+                await page.close()
+            }
+        } finally {
+            await browser.close()
+        }
+    })
+}
+
+for (const [engine, browserType] of Object.entries({chromium, webkit})) {
     for (const width of [393, 1440]) {
         for (const prefix of ['', '/en']) {
             test(`home polish preserves layout and improves controls: ${engine}, ${width}px, ${prefix || 'fr'}`, async () => {
