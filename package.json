@@ -30,6 +30,11 @@
     "engines": {
         "node": "^24.15.0"
     },
+    "overrides": {
+        "@typescript-eslint/typescript-estree": {
+            "minimatch": "11.0.1"
+        }
+    },
     "dependencies": {
         "@uniswap/default-token-list": "^21.3.0",
         "@vercel/analytics": "^2.0.1",

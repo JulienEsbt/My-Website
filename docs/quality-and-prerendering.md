@@ -67,6 +67,16 @@ la même taille. Le JavaScript partagé comprend les fonctions d'animation et le
 interactions utilisées après le chargement : les octets non exécutés pendant une
 mesure ne sont pas nécessairement du code supprimable.
 
+## Dépendance de développement minimatch
+
+L'override npm de `minimatch` vers `11.0.1` est limité à
+`@typescript-eslint/typescript-estree` pour corriger CVE-2026-118764
+(GHSA-g3hv-75wg-m249). La version déclarée par typescript-eslint reste vulnérable ;
+retirer cet override quand son intervalle de dépendance adoptera la correction.
+Les autres versions de minimatch utilisées par ESLint ne sont pas concernées par
+cette alerte et conservent leur résolution. Valider avec `npm ci`, `npm audit`
+et `npm run check`.
+
 ## Fichiers de test et fichiers générés
 
 `playwright.config.js` configure les navigateurs et les serveurs de test ; `e2e/`
