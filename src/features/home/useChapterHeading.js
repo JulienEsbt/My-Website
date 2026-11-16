@@ -19,22 +19,19 @@ export default function useChapterHeading(sectionRef) {
             })
         }
         const measure = () => {
-            const dimensions = [
-                heading.firstElementChild.offsetHeight,
-                ...cards.map((card) => card.offsetHeight),
-            ].join(',')
+            // Read every height before writing styles, which can invalidate layout.
+            const headingHeight = heading.firstElementChild.offsetHeight
+            const cardHeights = cards.map((card) => card.offsetHeight)
+            const dimensions = [headingHeight, ...cardHeights].join(',')
             if (dimensions === previousDimensions) return
             previousDimensions = dimensions
-            heading.style.setProperty(
-                '--heading-height',
-                `${heading.firstElementChild.offsetHeight}px`
-            )
+            heading.style.setProperty('--heading-height', `${headingHeight}px`)
             sectionRef.current.style.setProperty(
                 '--stage-height',
-                `${Math.max(heading.firstElementChild.offsetHeight, ...cards.map((card) => card.offsetHeight))}px`
+                `${Math.max(headingHeight, ...cardHeights)}px`
             )
-            cards.forEach((card) =>
-                card.parentElement.style.setProperty('--panel-height', `${card.offsetHeight}px`)
+            cards.forEach((card, index) =>
+                card.parentElement.style.setProperty('--panel-height', `${cardHeights[index]}px`)
             )
             refresh()
         }

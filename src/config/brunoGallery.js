@@ -1,4 +1,5 @@
 import image0w640 from '../assets/images/projects/bruno-pizza-v12/01-dashboard-640.webp'
+import image0w800 from '../assets/images/projects/bruno-pizza-v12/01-dashboard-800.webp'
 import image0w1280 from '../assets/images/projects/bruno-pizza-v12/01-dashboard-1280.webp'
 import image0w2048 from '../assets/images/projects/bruno-pizza-v12/01-dashboard-2048.webp'
 import image0w3420 from '../assets/images/projects/bruno-pizza-v12/01-dashboard-3420.webp'
@@ -44,6 +45,7 @@ export const BRUNO_GALLERY = [
         id: '01-dashboard',
         variants: [
             {format: 'fallback', width: 640, height: 402, url: image0w640},
+            {format: 'fallback', width: 800, height: 502, url: image0w800},
             {format: 'fallback', width: 1280, height: 804, url: image0w1280},
             {format: 'fallback', width: 2048, height: 1286, url: image0w2048},
             {format: 'fallback', width: 3420, height: 2148, url: image0w3420},
