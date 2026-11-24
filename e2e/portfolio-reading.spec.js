@@ -41,7 +41,7 @@ for (const [name, engine] of Object.entries({chromium, webkit})) {
                                 parseFloat(
                                     getComputedStyle(el).getPropertyValue('--project-step-distance')
                                 ) -
-                                4
+                                5
                         )
                     )
                 )
@@ -76,7 +76,7 @@ for (const [name, engine] of Object.entries({chromium, webkit})) {
                 parseFloat(getComputedStyle(el).getPropertyValue('--project-step-distance'))
             )
             await page.mouse.wheel(0, -distance)
-            await expect(page.getByRole('tab', {name: /Archivage/})).toHaveAttribute(
+            await expect(page.getByRole('tab', {name: /MacPanel/})).toHaveAttribute(
                 'aria-selected',
                 'true'
             )

@@ -18,7 +18,7 @@ test('native page scrolling reveals each project and works in reverse', async ({
         distance: parseFloat(getComputedStyle(el).getPropertyValue('--project-step-distance')),
     }))
     await page.evaluate((top) => scrollTo({top, behavior: 'instant'}), metrics.start)
-    const names = [/Bruno Pizza/, /OpenDente/, /My-Website/, /Archivage/, /Agora/]
+    const names = [/Bruno Pizza/, /OpenDente/, /My-Website/, /Archivage/, /MacPanel/, /Agora/]
     for (let index = 0; index < names.length; index++) {
         if (index) await page.mouse.wheel(0, metrics.distance)
         await expect(page.getByRole('tab', {name: names[index]})).toHaveAttribute(
@@ -31,13 +31,10 @@ test('native page scrolling reveals each project and works in reverse', async ({
         )
     }
     await page.mouse.wheel(0, -metrics.distance)
-    await expect(page.getByRole('tab', {name: /Archivage/})).toHaveAttribute(
-        'aria-selected',
-        'true'
-    )
+    await expect(page.getByRole('tab', {name: /MacPanel/})).toHaveAttribute('aria-selected', 'true')
     await page.evaluate(
         (top) => scrollTo({top, behavior: 'instant'}),
-        metrics.start + metrics.distance * 5 + 1000
+        metrics.start + metrics.distance * names.length + 1000
     )
     await expect
         .poll(() => journey.boundingBox().then((box) => box.y + box.height))
@@ -67,7 +64,7 @@ test('manual choice synchronizes the scroll position and Agora reading preserves
                             parseFloat(
                                 getComputedStyle(el).getPropertyValue('--project-step-distance')
                             ) -
-                            4
+                            5
                     )
                 )
         )
