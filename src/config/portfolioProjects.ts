@@ -36,4 +36,12 @@ export const PORTFOLIO_PROJECTS = [
         repository: LINKS.projects.megalis,
         tags: ['solidity', 'evm', 'storage'],
     },
+    {
+        id: '5',
+        status: 'active',
+        image: '/projects/macpanel/cover.svg',
+        repository: LINKS.projects.macPanel,
+        caseStudy: ROUTE_PATHS.macPanelCaseStudy,
+        tags: ['swift6', 'swiftui', 'appkit', 'xctest'],
+    },
 ] as const satisfies readonly PortfolioProject[]

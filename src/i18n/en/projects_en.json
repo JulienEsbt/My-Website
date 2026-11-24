@@ -281,7 +281,7 @@
         },
         "overview": {
             "statusLabel": "Project status",
-            "status": "Personal Edition 0.8.0 · Public source, built and signed locally.",
+            "status": "Personal Edition 0.9.1 · Public source, built and signed locally.",
             "roleLabel": "My contribution",
             "role": "Extending an open source project: new workflows, bilingual interface and experimental native control.",
             "scopeLabel": "Environment",
@@ -313,7 +313,7 @@
             "previous": "Previous view",
             "next": "Next view",
             "enlarge": "Enlarge screenshot",
-            "note": "Real screenshots from version 0.8.0. Customizable thresholds shown as examples.",
+            "note": "History is shown in French (0.9.1). The other screens are from version 0.8.0.",
             "items": {
                 "charge": {
                     "label": "Charging settings",
@@ -344,6 +344,18 @@
                     "title": "Understand a setting as you use it.",
                     "body": "An offline guide explains profiles, thresholds, temporary modes and their limits. Search helps find an answer without leaving the application.",
                     "alt": "OpenDente built-in guide in English with search and explanations of profiles and temporary modes"
+                },
+                "history": {
+                    "label": "History",
+                    "title": "Reviewing an evening of readings",
+                    "body": "I added a local record of battery level, temperature and changes in mode or power source. Readings can be kept for 24 hours or seven days.",
+                    "alt": "French history settings in dark mode showing collection, seven-day retention, battery level and temperature."
+                },
+                "events": {
+                    "label": "Events",
+                    "title": "Interpreting state changes",
+                    "body": "Markers show requests from the experimental charging backend. The chart alone cannot establish when hardware stopped charging. Readings can be cleared at any time. Disabling collection also deletes them.",
+                    "alt": "Lower portion of the French history view in light mode, with temperature, recent events and the clear-history control."
                 }
             }
         },
@@ -386,7 +398,77 @@
         "projects": {
             "1": "Bruno Pizza",
             "4": "OpenDente",
-            "2": "My-Website"
+            "2": "My-Website",
+            "5": "MacPanel"
+        }
+    },
+    "macpanel": {
+        "kicker": "macOS app · Personal project",
+        "subtitle": "Quick controls, system activity, brightness and storage in one menu bar panel.",
+        "source": "View source code",
+        "sections": [
+            {
+                "title": "Why I built MacPanel",
+                "body": "I was opening several small utilities to check network traffic, adjust a display or keep my Mac awake. MacPanel brings those routines into one native interface. This personal open source project is still evolving. Battery charging belongs to my separate OpenDente project."
+            },
+            {
+                "title": "Three views for everyday use",
+                "body": "From the menu bar I can switch appearance, toggle desktop icons, hide the Dock or menu bar, mute audio and start a timed awake session. System brings CPU, RAM, GPU, memory pressure and network rates together."
+            },
+            {
+                "title": "Native and local",
+                "body": "Swift 6 and SwiftUI power the interface, with AppKit integrating it into the menu bar. A configurable global shortcut opens the panel, and launch at login is optional. System sampling stops when the panel closes. Optional brightness synchronization continues to track the built-in display. The app runs locally without accounts, ads, telemetry or AI features."
+            },
+            {
+                "title": "Working with different hardware",
+                "body": "A dash marks an unavailable GPU reading. Hardware brightness depends on the monitor, connection and DDC/CI support. When hardware control fails, the slider offers software dimming, which adjusts the image while leaving the backlight unchanged."
+            },
+            {
+                "title": "Validation on a MacBook Air M3",
+                "body": "Version 0.4.2 documents 42 passing native tests. Linked sliders were checked on the development Mac. The tested external connection uses software dimming."
+            }
+        ],
+        "heroAlt": "MacPanel’s French System view showing quick controls, CPU, RAM and GPU readings and apps ranked by memory.",
+        "gallery": {
+            "choose": "Choose a MacPanel view",
+            "previous": "Previous view",
+            "next": "Next view",
+            "enlarge": "Enlarge screenshot",
+            "title": "Using MacPanel",
+            "kicker": "Interface",
+            "note": "MacPanel 0.4.2 · Screenshots show the French interface.",
+            "items": {
+                "activity": {
+                    "label": "Activity",
+                    "title": "Find busy applications",
+                    "body": "Rank the top five apps by CPU or resident memory.",
+                    "alt": "Dark System view with app CPU rankings and local readings."
+                },
+                "displays": {
+                    "label": "Displays",
+                    "title": "Adjust two displays together",
+                    "body": "Optional linking preserves a fixed offset between sliders. Dedicated shortcuts adjust brightness.",
+                    "alt": "Linked display sliders and brightness offset in light mode."
+                },
+                "disks": {
+                    "label": "Disks",
+                    "title": "Check available space",
+                    "body": "Each volume shows used, total and free space. Compatible external volumes can be ejected without forcing an unmount.",
+                    "alt": "Disks view showing capacity and free space for each volume."
+                },
+                "custom": {
+                    "label": "Customization",
+                    "title": "Arrange the panel",
+                    "body": "Hide or reorder sections and quick controls to suit your routine.",
+                    "alt": "Dark customization view with visibility and ordering controls."
+                },
+                "awake": {
+                    "label": "Awake",
+                    "title": "Keep the Mac awake temporarily",
+                    "body": "A timed session ends automatically when the selected duration expires.",
+                    "alt": "Light appearance showing the awake-session duration selector."
+                }
+            }
         }
     }
 }

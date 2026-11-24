@@ -14,7 +14,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 locator.evaluate((el) => el.scrollIntoView({block: 'center', behavior: 'instant'}))
             await page.goto('http://localhost:4173/?lang=fr')
             const projects = page.locator('#portfolio .mobile-accordion__item')
-            await expect(projects).toHaveCount(5)
+            await expect(projects).toHaveCount(6)
             const sizes = await projects.evaluateAll((nodes) =>
                 nodes.map((el) => el.getBoundingClientRect().height)
             )

@@ -20,7 +20,7 @@ export default function PortfolioProject({project, onOpen}) {
     }[id]
     const visual = (
         <div className="portfolio__cover">
-            {id !== '3' && (
+            {id !== '3' && id !== '5' && (
                 <ResponsiveImage
                     media={thumbnail ?? image}
                     className="portfolio__ambient"
@@ -110,7 +110,7 @@ export default function PortfolioProject({project, onOpen}) {
                         rel="noreferrer"
                     >
                         <BsGithub aria-hidden="true" />
-                        {t('portfolio.cta')}
+                        {t(id === '5' ? 'portfolio.source' : 'portfolio.cta')}
                     </a>
                 </div>
             </div>

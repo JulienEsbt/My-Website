@@ -18,6 +18,11 @@ const content = {
             description:
                 'Étude de cas de Bruno Pizza Production, une application desktop locale qui transforme un plan Excel en parcours de production guidé.',
         },
+        macPanel: {
+            title: 'MacPanel | Julien Esterbet',
+            description:
+                'Commandes rapides, activité système, luminosité et stockage dans un seul panneau de la barre des menus.',
+        },
         openDente: {
             title: 'OpenDente — Application macOS | Julien Esterbet',
             description:
@@ -73,6 +78,11 @@ const content = {
             title: 'Bruno Pizza — Product case study | Julien Esterbet',
             description:
                 'Case study of Bruno Pizza Production, a local desktop application turning an Excel plan into a guided production workflow.',
+        },
+        macPanel: {
+            title: 'MacPanel | Julien Esterbet',
+            description:
+                'Quick controls, system activity, brightness and storage in one menu bar panel.',
         },
         openDente: {
             title: 'OpenDente — macOS application | Julien Esterbet',

@@ -281,7 +281,7 @@
         },
         "overview": {
             "statusLabel": "État du projet",
-            "status": "Personal Edition 0.8.0 · Sources publiques, compilation et signature locales.",
+            "status": "Personal Edition 0.9.1 · Sources publiques, compilation et signature locales.",
             "roleLabel": "Mon intervention",
             "role": "Extension du projet open source : nouveaux usages, interface bilingue et contrôle natif expérimental.",
             "scopeLabel": "Environnement",
@@ -313,7 +313,7 @@
             "previous": "Vue précédente",
             "next": "Vue suivante",
             "enlarge": "Agrandir la capture",
-            "note": "Captures réelles de la version 0.8.0. Seuils personnalisables donnés à titre d’exemple. Vue MagSafe en anglais.",
+            "note": "Historique en français (0.9.1). Les autres vues proviennent de la version 0.8.0 ; MagSafe est en anglais.",
             "items": {
                 "charge": {
                     "label": "Réglages de charge",
@@ -344,6 +344,18 @@
                     "title": "Comprendre un réglage sur le moment.",
                     "body": "Un guide consultable hors ligne explique les profils, les seuils, les modes temporaires et leurs limites. La recherche aide à retrouver une réponse sans quitter l’application.",
                     "alt": "Guide intégré OpenDente en français avec recherche et explications des profils et modes temporaires"
+                },
+                "history": {
+                    "label": "Historique",
+                    "title": "Relire une soirée de mesures",
+                    "body": "J’ai ajouté un historique local du niveau de batterie, de la température et des changements de mode ou de branchement. On choisit de garder les relevés 24 heures ou 7 jours.",
+                    "alt": "Historique en mode sombre, collecte activée, conservation sur sept jours et courbes du niveau et de la température."
+                },
+                "events": {
+                    "label": "Événements",
+                    "title": "Interpréter les changements d’état",
+                    "body": "Les marqueurs indiquent les demandes du moteur expérimental. La courbe seule ne permet pas de dater une coupure matérielle. On peut effacer les relevés à tout moment ; désactiver la collecte les supprime aussi.",
+                    "alt": "Bas de la vue Historique en mode clair avec température, changements récents et commande d’effacement."
                 }
             }
         },
@@ -386,7 +398,77 @@
         "projects": {
             "1": "Bruno Pizza",
             "4": "OpenDente",
-            "2": "My-Website"
+            "2": "My-Website",
+            "5": "MacPanel"
+        }
+    },
+    "macpanel": {
+        "kicker": "Application macOS · Projet personnel",
+        "subtitle": "Commandes rapides, activité système, luminosité et stockage dans un seul panneau de la barre des menus.",
+        "source": "Voir le code source",
+        "sections": [
+            {
+                "title": "Pourquoi MacPanel ?",
+                "body": "J’ouvrais plusieurs petits utilitaires pour vérifier un débit réseau, régler un écran ou garder mon Mac éveillé. MacPanel réunit ces gestes dans une interface native. Ce projet personnel open source continue d’évoluer. OpenDente reste mon projet distinct consacré à la charge de la batterie."
+            },
+            {
+                "title": "Trois vues au quotidien",
+                "body": "Depuis la barre des menus, je peux changer l’apparence, afficher le bureau, masquer le Dock ou la barre des menus, couper le son et lancer une session de maintien éveillé. La vue Système regroupe CPU, RAM, GPU, pression mémoire et débits réseau."
+            },
+            {
+                "title": "Un panneau natif et local",
+                "body": "Swift 6 et SwiftUI portent l’interface, AppKit son intégration à la barre des menus. Un raccourci global configurable ouvre le panneau, et le lancement à la connexion est facultatif. Les mesures système s’arrêtent à la fermeture du panneau. Si la synchronisation de luminosité est activée, elle continue à suivre l’écran intégré. L’application fonctionne sans compte, publicité, télémétrie ni fonction d’IA."
+            },
+            {
+                "title": "Composer avec le matériel",
+                "body": "Une mesure GPU indisponible apparaît sous forme de tiret. Pour la luminosité, le résultat dépend du moniteur, du câble et de la prise en charge de DDC/CI. Si la commande matérielle échoue, le curseur propose une atténuation logicielle qui agit sur l’image et laisse le rétroéclairage inchangé."
+            },
+            {
+                "title": "Validation sur MacBook Air M3",
+                "body": "La version 0.4.2 documente 42 tests natifs réussis. Les curseurs liés ont été vérifiés sur le Mac de développement. La connexion externe testée utilise l’atténuation logicielle."
+            }
+        ],
+        "heroAlt": "Vue Système de MacPanel avec commandes rapides, mesures CPU, RAM et GPU et classement mémoire des applications.",
+        "gallery": {
+            "choose": "Choisir une vue de MacPanel",
+            "previous": "Vue précédente",
+            "next": "Vue suivante",
+            "enlarge": "Agrandir la capture",
+            "title": "MacPanel en pratique",
+            "kicker": "Interface",
+            "note": "MacPanel 0.4.2 · Captures en français.",
+            "items": {
+                "activity": {
+                    "label": "Activité",
+                    "title": "Identifier les applications actives",
+                    "body": "Les cinq premières applications peuvent être classées par CPU ou mémoire résidente.",
+                    "alt": "Classement CPU des applications et mesures système en mode sombre."
+                },
+                "displays": {
+                    "label": "Écrans",
+                    "title": "Régler deux écrans ensemble",
+                    "body": "La liaison optionnelle conserve un écart fixe entre les curseurs. Des raccourcis dédiés ajustent la luminosité.",
+                    "alt": "Deux curseurs liés avec réglage de l’écart de luminosité en mode clair."
+                },
+                "disks": {
+                    "label": "Disques",
+                    "title": "Vérifier la place disponible",
+                    "body": "Chaque volume affiche son espace utilisé, total et libre. Les volumes externes compatibles peuvent être éjectés sans forcer le démontage.",
+                    "alt": "Vue Disques avec capacité et espace libre par volume."
+                },
+                "custom": {
+                    "label": "Personnalisation",
+                    "title": "Organiser le panneau",
+                    "body": "Les commandes et les rubriques peuvent être masquées ou réordonnées.",
+                    "alt": "Réglages de visibilité et d’ordre des rubriques en mode sombre."
+                },
+                "awake": {
+                    "label": "Veille",
+                    "title": "Garder le Mac éveillé temporairement",
+                    "body": "Une durée définie évite de laisser le maintien éveillé actif après une tâche.",
+                    "alt": "Choix de durée du maintien éveillé en mode clair."
+                }
+            }
         }
     }
 }

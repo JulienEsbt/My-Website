@@ -7,6 +7,7 @@ const STUDIES = [
     {id: '1', path: ROUTE_PATHS.brunoPizzaCaseStudy},
     {id: '4', path: ROUTE_PATHS.openDenteCaseStudy},
     {id: '2', path: ROUTE_PATHS.myWebsiteCaseStudy},
+    {id: '5', path: ROUTE_PATHS.macPanelCaseStudy},
 ]
 
 export default function CaseStudyPager({current}) {

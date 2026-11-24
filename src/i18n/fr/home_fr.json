@@ -130,7 +130,10 @@
             "vercel": "Vercel",
             "swift": "Swift",
             "swiftui": "SwiftUI",
-            "macos": "macOS"
+            "macos": "macOS",
+            "swift6": "Swift 6",
+            "appkit": "AppKit",
+            "xctest": "XCTest"
         },
         "items": {
             "1": {
@@ -152,7 +155,13 @@
             "4": {
                 "type": "Application macOS · Open source",
                 "title": "OpenDente — Personal Edition",
-                "description": "Mon édition d’un utilitaire natif pour la batterie du Mac : profils de charge, barre de menus et interface bilingue. Un fork open source enrichi pour le quotidien."
+                "description": "Mon édition d’un utilitaire natif pour la batterie du Mac : profils de charge, barre de menus et interface bilingue. Un fork open source enrichi pour le quotidien. Mon historique local permet de relire niveaux, températures et changements d’état."
+            },
+            "5": {
+                "type": "Application macOS · Projet personnel",
+                "title": "MacPanel",
+                "description": "Commandes rapides, activité système, luminosité et stockage dans un seul panneau de la barre des menus.",
+                "imageAlt": "Logo MacPanel"
             }
         },
         "agora": {
@@ -187,7 +196,8 @@
         },
         "browseLabel": "Parcourir les projets",
         "browseHint": "Choisissez un projet pour découvrir son usage et sa réalisation.",
-        "scrollHint": "Faites défiler pour parcourir les projets, ou choisissez-en un dans la liste."
+        "scrollHint": "Faites défiler pour parcourir les projets, ou choisissez-en un dans la liste.",
+        "source": "Voir le code source"
     },
     "about": {
         "photoAlt": "Julien et deux étudiants pendant une présentation de projet",

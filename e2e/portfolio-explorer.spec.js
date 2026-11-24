@@ -7,7 +7,7 @@ test('the desktop index is keyboard accessible and preserves its project on retu
 }) => {
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
-    await expect(page.getByRole('tab')).toHaveCount(5)
+    await expect(page.getByRole('tab')).toHaveCount(6)
     const bruno = page.getByRole('tab', {name: /Bruno Pizza/})
     await bruno.focus()
     await page.keyboard.press('ArrowDown')
@@ -38,7 +38,7 @@ test('the desktop index is keyboard accessible and preserves its project on retu
     await expect(page.getByRole('tabpanel').getByRole('link')).toHaveCount(0)
 })
 
-test('all five projects remain accessible on phones, tablets and wide screens', async ({page}) => {
+test('all six projects remain accessible on phones, tablets and wide screens', async ({page}) => {
     test.setTimeout(60000)
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
@@ -47,7 +47,7 @@ test('all five projects remain accessible on phones, tablets and wide screens', 
         await page.setViewportSize({width, height: 1000})
         if (width <= 700) {
             const items = page.locator('#portfolio .mobile-accordion__item')
-            await expect(items).toHaveCount(5)
+            await expect(items).toHaveCount(6)
             const openDente = items.filter({hasText: 'OpenDente — Personal Edition'})
             await openDente.locator(':scope > summary').click()
             await expect(
@@ -55,7 +55,7 @@ test('all five projects remain accessible on phones, tablets and wide screens', 
             ).toBeVisible()
             await openDente.locator(':scope > summary').click()
         } else {
-            await expect(page.getByRole('tab')).toHaveCount(5)
+            await expect(page.getByRole('tab')).toHaveCount(6)
             await expect(page.getByRole('tabpanel')).toHaveCount(1)
             await page.getByRole('tab', {name: /OpenDente/}).click()
             await expect(

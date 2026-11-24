@@ -150,10 +150,13 @@ export const OPENDENTE_PANELS = {
     fr: {light: panel_fr_light, dark: panel_fr_dark},
     en: {light: panel_en_light, dark: panel_en_dark},
 }
+import {history_fr_dark, history_fr_light} from './opendenteGalleryMedia.js'
 export const OPENDENTE_SCREENS = [
     {id: 'charge', fr: charge_fr, en: charge_en},
     {id: 'profiles', fr: panel_fr_dark, en: panel_en_dark},
     {id: 'menu', fr: menu_fr, en: menu_en},
     {id: 'magsafe', fr: magsafe_en, en: magsafe_en},
     {id: 'guide', fr: guide_fr, en: guide_en},
+    {id: 'history', media: history_fr_dark},
+    {id: 'events', media: history_fr_light},
 ]
