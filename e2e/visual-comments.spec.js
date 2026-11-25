@@ -296,7 +296,15 @@ test('chapter progress updates after a fresh production load without resizing', 
     await page.emulateMedia({reducedMotion: 'no-preference'})
     await page.goto('/#experience')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
-    await page.evaluate(() => document.fonts.ready)
+    await page.evaluate(async () => {
+        await document.fonts.ready
+        await new Promise(requestAnimationFrame)
+        await new Promise(requestAnimationFrame)
+    })
+    // The portfolio expands after enhancement. Let that layout reach the anchor,
+    // then hand scrolling over to the reader before measuring chapter positions.
+    await expect(page.locator('#experience')).toBeInViewport()
+    await page.mouse.wheel(0, 1)
     for (const id of ['experience', 'services']) {
         const section = page.locator(`#${id}`)
         const content = section.locator('.professional-chapter__heading-content')

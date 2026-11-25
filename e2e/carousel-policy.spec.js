@@ -11,14 +11,15 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 locale: 'fr-FR',
             })
             try {
-                await page.goto('http://localhost:4173/')
+                await page.goto('http://localhost:4173/#goals')
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
                 const goals = page.locator('#goals')
                 const swiper = goals.locator('.swiper')
-                // An immediate DOM scroll avoids WebKit stalling at the sticky project scene.
-                await swiper.evaluate((element) =>
-                    element.scrollIntoView({block: 'center', behavior: 'instant'})
-                )
+                // Anchor restoration follows the portfolio's initial layout changes.
+                // Exercise controls once both entrance animations have finished.
+                await expect(goals).toBeInViewport()
+                await expect(goals).toHaveCSS('opacity', '1')
+                await expect(goals.locator('.goals-carousel')).toHaveCSS('opacity', '1')
                 await swiper.locator('.swiper-pagination-bullet').nth(2).click()
                 await expect
                     .poll(() =>
