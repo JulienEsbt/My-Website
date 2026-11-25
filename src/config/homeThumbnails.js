@@ -16,6 +16,10 @@ import website160avif from '../assets/images/home/thumbnails/home-thumb-website-
 import website160webp from '../assets/images/home/thumbnails/home-thumb-website-160.webp?no-inline'
 import website320avif from '../assets/images/home/thumbnails/home-thumb-website-320.avif?no-inline'
 import website320webp from '../assets/images/home/thumbnails/home-thumb-website-320.webp?no-inline'
+import macpanel160avif from '../assets/images/home/thumbnails/home-thumb-macpanel-160.avif?no-inline'
+import macpanel160webp from '../assets/images/home/thumbnails/home-thumb-macpanel-160.webp?no-inline'
+import macpanel320avif from '../assets/images/home/thumbnails/home-thumb-macpanel-320.avif?no-inline'
+import macpanel320webp from '../assets/images/home/thumbnails/home-thumb-macpanel-320.webp?no-inline'
 
 export const HOME_THUMBNAILS = {
     portrait: {
@@ -50,6 +54,14 @@ export const HOME_THUMBNAILS = {
             {format: 'fallback', width: 160, height: 67, url: website160webp},
             {format: 'avif', width: 320, height: 133, url: website320avif},
             {format: 'fallback', width: 320, height: 133, url: website320webp},
+        ],
+    },
+    macpanel: {
+        variants: [
+            {format: 'avif', width: 160, height: 245, url: macpanel160avif},
+            {format: 'fallback', width: 160, height: 245, url: macpanel160webp},
+            {format: 'avif', width: 320, height: 490, url: macpanel320avif},
+            {format: 'fallback', width: 320, height: 490, url: macpanel320webp},
         ],
     },
 }

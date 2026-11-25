@@ -1,0 +1,171 @@
+.macpanel-page {
+    --opendente-accent: var(--color-primary);
+}
+
+.macpanel-page .page-hero {
+    min-height: 0;
+    padding-bottom: 0;
+}
+
+.macpanel-page .page-hero__container {
+    gap: clamp(1rem, 3vw, 3rem);
+}
+
+.macpanel-page .page-hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.macpanel-page .macpanel-hero__explore {
+    background: rgba(77, 181, 255, 0.12);
+}
+
+.macpanel-hero__screens {
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 1.5;
+    background: radial-gradient(ellipse at 52% 46%, #23569266, transparent 70%);
+}
+
+.macpanel-hero__screens img {
+    position: absolute;
+    height: auto;
+    filter: drop-shadow(0 0.7rem 0.9rem #0008);
+}
+
+.macpanel-hero__displays {
+    top: 11%;
+    left: 4%;
+    width: 38%;
+    rotate: -9deg;
+}
+
+.macpanel-hero__disks {
+    top: 15%;
+    right: 4%;
+    width: 36%;
+    rotate: 8deg;
+}
+
+.macpanel-hero__system {
+    top: 1%;
+    left: 26.5%;
+    width: 47%;
+    rotate: -2deg;
+}
+
+.macpanel-page .opendente-gallery {
+    margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.macpanel-page .opendente-gallery__layout {
+    margin-top: 1.5rem;
+}
+
+.macpanel-page .opendente-gallery__choices button {
+    min-height: 44px;
+    padding-block: 0.55rem;
+}
+
+.macpanel-page .opendente-gallery__choices button span {
+    display: none;
+}
+
+.macpanel-page .opendente-gallery__description {
+    min-height: 0;
+}
+
+.macpanel-page .opendente-gallery__screen {
+    height: clamp(24rem, 38vw, 30rem);
+    background: radial-gradient(ellipse at 50% 45%, #1c426855, transparent 72%);
+}
+
+.macpanel-details {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.macpanel-details section {
+    grid-column: span 2;
+    margin-top: 0;
+}
+
+.macpanel-details section:nth-child(-n + 2) {
+    grid-column: span 3;
+}
+
+.macpanel-details h2 {
+    margin: 0 0 0.6rem;
+    color: var(--color-white);
+    font-size: clamp(1.12rem, 1.8vw, 1.45rem);
+    line-height: 1.25;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .case-study-page.macpanel-page .page-hero__container {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .macpanel-page .page-hero {
+        padding-top: 5rem;
+    }
+
+    .macpanel-page .page-hero__copy {
+        display: contents;
+    }
+
+    .macpanel-page .page-hero__kicker,
+    .macpanel-page .page-hero h1,
+    .macpanel-page .page-hero__actions {
+        margin: 0;
+    }
+
+    .macpanel-page .page-hero__visual {
+        grid-row: 4;
+    }
+
+    .macpanel-page .opendente-gallery__choices {
+        flex-wrap: wrap;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+
+    .macpanel-page .opendente-gallery__choices button svg {
+        display: none;
+    }
+
+    .macpanel-page .opendente-gallery__screen {
+        height: clamp(20rem, 106vw, 27rem);
+    }
+
+    .macpanel-details {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .macpanel-details section:nth-child(n) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 650px) {
+    .macpanel-page .case-study__actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .macpanel-page .case-study__actions .btn {
+        padding-inline: 0.5rem;
+    }
+
+    .macpanel-page .case-study__actions .btn-primary {
+        grid-column: 1 / -1;
+    }
+}

@@ -1,4 +1,5 @@
 import {HOME_ASSETS} from './homeAssets.js'
+import {HOME_THUMBNAILS} from './homeThumbnails.js'
 import {LINKS} from './links.js'
 import {ROUTE_PATHS} from './routes.js'
 import type {PortfolioProject} from '../types/domain'
@@ -39,7 +40,7 @@ export const PORTFOLIO_PROJECTS = [
     {
         id: '5',
         status: 'active',
-        image: '/projects/macpanel/cover.svg',
+        image: HOME_THUMBNAILS.macpanel,
         repository: LINKS.projects.macPanel,
         caseStudy: ROUTE_PATHS.macPanelCaseStudy,
         tags: ['swift6', 'swiftui', 'appkit', 'xctest'],

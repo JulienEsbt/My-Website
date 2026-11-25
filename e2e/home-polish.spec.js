@@ -127,7 +127,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                             .toBe(true)
                         if (!(await image.getAttribute('src'))?.includes('document-timestamp')) {
                             expect(await image.evaluate((img) => img.currentSrc)).toMatch(
-                                /(?:home-thumb-.*-(160|320)-|\/projects\/macpanel\/cover\.svg$)/
+                                /home-thumb-.*-(160|320)-/
                             )
                         }
                     }

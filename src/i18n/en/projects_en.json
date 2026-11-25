@@ -405,6 +405,7 @@
     "macpanel": {
         "kicker": "macOS app · Personal project",
         "subtitle": "Quick controls, system activity, brightness and storage in one menu bar panel.",
+        "explore": "Browse screenshots",
         "source": "View source code",
         "sections": [
             {
@@ -438,6 +439,12 @@
             "kicker": "Interface",
             "note": "MacPanel 0.4.2 · Screenshots show the French interface.",
             "items": {
+                "system": {
+                    "label": "System",
+                    "title": "See how the Mac is doing at a glance",
+                    "body": "The panel brings together quick controls, CPU, RAM and GPU readings, and the apps using the most resources.",
+                    "alt": "Dark System view with quick controls, system readings and apps ranked by memory use."
+                },
                 "activity": {
                     "label": "Activity",
                     "title": "Find busy applications",

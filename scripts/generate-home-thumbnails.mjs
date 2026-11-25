@@ -9,6 +9,7 @@ const sources = [
     ['bruno', 'src/assets/images/projects/bruno-pizza-v12/01-dashboard-3420.webp', [160, 320]],
     ['opendente', 'src/assets/images/projects/opendente/cover-2400.webp', [160, 320]],
     ['website', 'src/assets/images/projects/my-website/hero-1440.webp', [160, 320]],
+    ['macpanel', 'src/assets/images/projects/macpanel/system-dark-464.webp', [160, 320]],
 ]
 const imports = [],
     entries = []

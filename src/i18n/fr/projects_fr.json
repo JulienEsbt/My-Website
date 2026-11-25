@@ -405,6 +405,7 @@
     "macpanel": {
         "kicker": "Application macOS · Projet personnel",
         "subtitle": "Commandes rapides, activité système, luminosité et stockage dans un seul panneau de la barre des menus.",
+        "explore": "Voir les captures",
         "source": "Voir le code source",
         "sections": [
             {
@@ -438,6 +439,12 @@
             "kicker": "Interface",
             "note": "MacPanel 0.4.2 · Captures en français.",
             "items": {
+                "system": {
+                    "label": "Système",
+                    "title": "Voir l’état du Mac d’un coup d’œil",
+                    "body": "Le panneau réunit les commandes rapides, les mesures CPU, RAM et GPU et les applications les plus gourmandes.",
+                    "alt": "Vue Système en mode sombre avec commandes rapides, mesures et classement des applications par mémoire."
+                },
                 "activity": {
                     "label": "Activité",
                     "title": "Identifier les applications actives",
