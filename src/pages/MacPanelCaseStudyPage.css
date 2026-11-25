@@ -112,6 +112,17 @@
     }
 }
 
+@media (min-width: 1024px) {
+    .macpanel-page .opendente-gallery,
+    .macpanel-details {
+        margin-top: clamp(5rem, 8vw, 7rem);
+    }
+
+    .macpanel-page .case-study__pager-footer {
+        margin-top: 3.5rem;
+    }
+}
+
 @media (max-width: 767px) {
     .macpanel-page .page-hero {
         padding-top: 5rem;
