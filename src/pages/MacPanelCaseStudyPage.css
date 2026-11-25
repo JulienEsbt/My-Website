@@ -119,11 +119,15 @@
     }
 
     .macpanel-page .case-study__pager-footer {
-        margin-top: 4.5rem;
+        margin-top: 7rem;
     }
 
     .macpanel-page .case-study {
-        padding-bottom: 4rem;
+        padding-bottom: 1rem;
+    }
+
+    main:has(> .macpanel-page) + .footer-section {
+        margin-top: 4rem;
     }
 }
 
