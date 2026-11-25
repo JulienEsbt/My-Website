@@ -407,6 +407,10 @@
         "subtitle": "Commandes rapides, activité système, luminosité et stockage dans un seul panneau de la barre des menus.",
         "explore": "Voir les captures",
         "source": "Voir le code source",
+        "next": {
+            "title": "Code source et compilation",
+            "body": "Le dépôt contient le code Swift et les instructions pour compiler MacPanel sur macOS."
+        },
         "sections": [
             {
                 "title": "Pourquoi MacPanel ?",

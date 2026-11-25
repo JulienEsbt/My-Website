@@ -407,6 +407,10 @@
         "subtitle": "Quick controls, system activity, brightness and storage in one menu bar panel.",
         "explore": "Browse screenshots",
         "source": "View source code",
+        "next": {
+            "title": "Source code and build instructions",
+            "body": "The repository contains the Swift source and instructions for building MacPanel on macOS."
+        },
         "sections": [
             {
                 "title": "Why I built MacPanel",

@@ -1,5 +1,5 @@
 import {useTranslation} from 'react-i18next'
-import {FiArrowDown} from 'react-icons/fi'
+import {FiArrowDown, FiArrowUpRight} from 'react-icons/fi'
 import PageFrame from '../components/common/layout/pageFrame/PageFrame.jsx'
 import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import CaseStudyActions from '../features/projects/caseStudy/CaseStudyActions.jsx'
@@ -89,6 +89,21 @@ export default function MacPanelCaseStudyPage() {
                             </section>
                         ))}
                     </div>
+                    <aside className="container case-study__next">
+                        <div>
+                            <h2>{t('macpanel.next.title')}</h2>
+                            <p>{t('macpanel.next.body')}</p>
+                        </div>
+                        <a
+                            className="btn btn-primary case-study__button"
+                            href={LINKS.projects.macPanel}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {t('actions.code')}
+                            <FiArrowUpRight aria-hidden="true" />
+                        </a>
+                    </aside>
                     <div className="container case-study__pager-footer">
                         <CaseStudyPager current="5" />
                     </div>

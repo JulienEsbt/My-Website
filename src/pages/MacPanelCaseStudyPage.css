@@ -117,18 +117,6 @@
     .macpanel-details {
         margin-top: clamp(5rem, 8vw, 7rem);
     }
-
-    .macpanel-page .case-study__pager-footer {
-        margin-top: 6rem;
-    }
-
-    .macpanel-page .case-study {
-        padding-bottom: 1rem;
-    }
-
-    main:has(> .macpanel-page) + .footer-section {
-        margin-top: 4rem;
-    }
 }
 
 @media (max-width: 767px) {
