@@ -56,8 +56,9 @@
     rotate: -2deg;
 }
 
-.macpanel-page .opendente-gallery {
-    margin-top: clamp(2rem, 5vw, 4rem);
+.macpanel-page .opendente-gallery,
+.macpanel-details {
+    margin-top: clamp(3rem, 7vw, 6rem);
 }
 
 .macpanel-page .opendente-gallery__layout {
@@ -86,7 +87,6 @@
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1rem;
-    margin-top: clamp(2rem, 5vw, 4rem);
 }
 
 .macpanel-details section {
