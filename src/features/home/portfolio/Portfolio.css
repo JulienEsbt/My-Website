@@ -411,6 +411,7 @@
     }
 
     .portfolio__index-hint {
+        display: grid;
         max-width: 26ch;
         margin-top: 1.5rem;
         color: var(--color-light);

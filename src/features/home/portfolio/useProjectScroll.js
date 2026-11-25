@@ -56,9 +56,11 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
             })
             restoreTop.current = null
         }
+        // Enhancement collapses inactive cards even when the sticky scene cannot fit.
+        // Following sections must be remeasured after that change in document height.
         const frame = requestAnimationFrame(() => ScrollTrigger.refresh?.())
         return () => cancelAnimationFrame(frame)
-    }, [scrolling, stage])
+    }, [enabled, scrolling, stage])
 
     const moveTo = useCallback(
         (index, behavior) => {
