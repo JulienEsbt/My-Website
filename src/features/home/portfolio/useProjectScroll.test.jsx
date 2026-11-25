@@ -46,3 +46,36 @@ it('refreshes following sections when enhancement collapses projects without ena
     expect(result.current.scrolling).toBe(false)
     expect(ScrollTrigger.refresh).toHaveBeenCalledOnce()
 })
+
+it('ignores a resize notification after the portfolio refs are cleared', () => {
+    let notifyResize
+    vi.stubGlobal(
+        'ResizeObserver',
+        class {
+            constructor(callback) {
+                notifyResize = callback
+            }
+            observe() {}
+            disconnect() {}
+        }
+    )
+    const scene = {current: document.createElement('div')}
+    const stage = {current: document.createElement('div')}
+    renderHook(
+        () =>
+            useProjectScroll({
+                scene,
+                stage,
+                enabled: true,
+                count: 6,
+                selected: 0,
+                onSelect: vi.fn(),
+            }),
+        {wrapper: MemoryRouter}
+    )
+
+    // Refs are cleared during commit, before the effect disconnects the observer.
+    scene.current = null
+    stage.current = null
+    expect(() => notifyResize()).not.toThrow()
+})

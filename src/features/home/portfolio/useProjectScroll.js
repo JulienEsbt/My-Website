@@ -20,9 +20,11 @@ export default function useProjectScroll({scene, stage, enabled, count, selected
     useEffect(() => {
         if (!enabled || !scene.current || !stage.current) return undefined
         const measure = () => {
-            const height = stage.current.offsetHeight
-            const placement = desktopScenePlacement(height)
             const root = scene.current
+            const panel = stage.current
+            if (!root || !panel) return
+            const height = panel.offsetHeight
+            const placement = desktopScenePlacement(height)
             if (height <= 0 || !placement.fits) {
                 // Keep the last fitted top while releasing a card into document flow.
                 if (root.dataset.scrollEnabled === 'true' && restoreTop.current === null)
