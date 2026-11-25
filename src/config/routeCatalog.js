@@ -6,6 +6,12 @@ export const ROUTE_CATALOG = /** @type {const} */ ({
         page: 'BrunoPizzaCaseStudyPage',
         namespace: 'projects',
     },
+    macPanelCaseStudy: {
+        path: '/projects/macpanel',
+        seoKey: 'macPanel',
+        page: 'MacPanelCaseStudyPage',
+        namespace: 'projects',
+    },
     openDenteCaseStudy: {
         path: '/projects/opendente',
         seoKey: 'openDente',

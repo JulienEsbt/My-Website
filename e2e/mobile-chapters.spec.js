@@ -38,7 +38,7 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
             await page.setViewportSize({width: 1440, height: 900})
             await expect(page.locator('.mobile-deck')).toHaveCount(0)
             await expect(page.locator('.home-hero')).toBeVisible()
-            await expect(page.getByRole('tab')).toHaveCount(5)
+            await expect(page.getByRole('tab')).toHaveCount(6)
             await expect(page.getByRole('tabpanel')).toHaveCount(1)
         } finally {
             await browser.close()

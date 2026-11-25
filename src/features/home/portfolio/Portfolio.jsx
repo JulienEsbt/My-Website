@@ -206,7 +206,25 @@ export default function Portfolio() {
                                     ))}
                                 </div>
                                 <p className="portfolio__index-hint">
-                                    {t(scrolling ? 'portfolio.scrollHint' : 'portfolio.browseHint')}
+                                    {/* Both copies occupy one cell to keep the scene height stable. */}
+                                    <span
+                                        aria-hidden={!scrolling}
+                                        style={{
+                                            gridArea: '1 / 1',
+                                            visibility: scrolling ? undefined : 'hidden',
+                                        }}
+                                    >
+                                        {t('portfolio.scrollHint')}
+                                    </span>
+                                    <span
+                                        aria-hidden={scrolling}
+                                        style={{
+                                            gridArea: '1 / 1',
+                                            visibility: scrolling ? 'hidden' : undefined,
+                                        }}
+                                    >
+                                        {t('portfolio.browseHint')}
+                                    </span>
                                 </p>
                             </div>
                             <div className="portfolio__panels">

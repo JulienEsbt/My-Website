@@ -7,7 +7,8 @@ import PageHero from '../components/common/layout/pageHero/PageHero.jsx'
 import ResponsiveImage from '../components/common/media/ResponsiveImage.jsx'
 import {LINKS} from '../config/links.js'
 import {OPENDENTE_PANELS} from '../config/opendenteMedia.js'
-import OpenDenteGallery from '../features/projects/openDente/OpenDenteGallery.jsx'
+import ProjectGallery from '../features/projects/caseStudy/ProjectGallery.jsx'
+import {OPENDENTE_SCREENS} from '../config/opendenteMedia.js'
 import './CaseStudyPage.css'
 import './OpenDenteCaseStudyPage.css'
 
@@ -100,7 +101,7 @@ export default function OpenDenteCaseStudyPage() {
                         </div>
                     </section>
 
-                    <OpenDenteGallery />
+                    <ProjectGallery screens={OPENDENTE_SCREENS} project="opendente" />
 
                     <section
                         className="container case-study__section"

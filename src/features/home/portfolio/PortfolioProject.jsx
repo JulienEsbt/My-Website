@@ -2,6 +2,7 @@ import {BsGithub} from 'react-icons/bs'
 import {FiArrowUpRight} from 'react-icons/fi'
 import {useTranslation} from 'react-i18next'
 import {OPENDENTE_PANELS} from '../../../config/opendenteMedia.js'
+import {system_dark, displays_light} from '../../../config/macpanelGalleryMedia.js'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import {HOME_THUMBNAILS} from '../../../config/homeThumbnails.js'
@@ -12,7 +13,10 @@ export default function PortfolioProject({project, onOpen}) {
     const alt = t(`portfolio.items.${id}.imageAlt`, {
         defaultValue: t(`portfolio.items.${id}.title`),
     })
-    const panels = OPENDENTE_PANELS[i18n.resolvedLanguage?.startsWith('en') ? 'en' : 'fr']
+    const panels =
+        id === '5'
+            ? {dark: system_dark, light: displays_light}
+            : OPENDENTE_PANELS[i18n.resolvedLanguage?.startsWith('en') ? 'en' : 'fr']
     const thumbnail = {
         1: HOME_THUMBNAILS.bruno,
         2: HOME_THUMBNAILS.website,
@@ -30,19 +34,19 @@ export default function PortfolioProject({project, onOpen}) {
                     loading="lazy"
                 />
             )}
-            {id === '4' ? (
-                <div className="portfolio__opendente" role="img" aria-label={alt}>
+            {id === '4' || id === '5' ? (
+                <div className="portfolio__app" role="img" aria-label={alt}>
                     {/* Match the panel heights in Portfolio.css and the phone cover ratio. */}
                     <ResponsiveImage
                         media={panels.dark}
                         alt=""
-                        className="portfolio__opendente-screen portfolio__opendente-screen--dark"
+                        className="portfolio__app-screen portfolio__app-screen--dark"
                         sizes="(max-width: 700px) calc(35vw - 1.8rem), (max-width: 1099px) 18vw, clamp(8.4rem, 13.1vw, 13.1rem)"
                     />
                     <ResponsiveImage
                         media={panels.light}
                         alt=""
-                        className="portfolio__opendente-screen portfolio__opendente-screen--light"
+                        className="portfolio__app-screen portfolio__app-screen--light"
                         sizes="(max-width: 700px) calc(31vw - 1.6rem), (max-width: 1099px) 16vw, clamp(7.4rem, 11.6vw, 11.6rem)"
                     />
                 </div>
@@ -110,7 +114,7 @@ export default function PortfolioProject({project, onOpen}) {
                         rel="noreferrer"
                     >
                         <BsGithub aria-hidden="true" />
-                        {t('portfolio.cta')}
+                        {t(id === '5' ? 'portfolio.source' : 'portfolio.cta')}
                     </a>
                 </div>
             </div>

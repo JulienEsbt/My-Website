@@ -411,6 +411,7 @@
     }
 
     .portfolio__index-hint {
+        display: grid;
         max-width: 26ch;
         margin-top: 1.5rem;
         color: var(--color-light);
@@ -697,34 +698,34 @@ img.portfolio__ambient {
 .portfolio__item[data-project='2'] .portfolio__cover-image {
     mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent);
 }
-.portfolio__opendente {
+.portfolio__app {
     position: relative;
     width: min(100%, 48rem);
     height: 100%;
 }
-img.portfolio__opendente-screen {
+img.portfolio__app-screen {
     position: absolute;
     max-width: 40%;
     height: 86%;
     max-height: none;
     filter: drop-shadow(0 0.75rem 1rem rgba(0, 0, 0, 0.3));
 }
-.portfolio__opendente-screen--dark {
+.portfolio__app-screen--dark {
     top: 5%;
     left: 24%;
     transform: rotate(-3deg);
 }
-img.portfolio__opendente-screen--light {
+img.portfolio__app-screen--light {
     height: 76%;
     top: 13%;
     right: 20%;
     transform: rotate(4deg);
 }
 @media (prefers-reduced-motion: no-preference) {
-    .portfolio__panel:not([hidden]) .portfolio__opendente-screen {
+    .portfolio__panel:not([hidden]) .portfolio__app-screen {
         animation: portfolio-product-float 7s ease-in-out var(--float-delay, 0s) infinite;
     }
-    .portfolio__opendente-screen--light {
+    .portfolio__app-screen--light {
         --float-delay: -2s;
     }
 }

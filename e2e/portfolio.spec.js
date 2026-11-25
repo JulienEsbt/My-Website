@@ -315,7 +315,7 @@ test('project selector opens studies and Agora intent without changing card heig
 }) => {
     await page.goto('/#portfolio')
     await page.locator('#prerendered-content').waitFor({state: 'detached'})
-    await expect(page.getByRole('tab')).toHaveCount(5)
+    await expect(page.getByRole('tab')).toHaveCount(6)
     await expect(page.getByRole('tabpanel')).toHaveCount(1)
     await expect(page.getByRole('tabpanel').locator('a.portfolio__image')).toHaveAttribute(
         'href',

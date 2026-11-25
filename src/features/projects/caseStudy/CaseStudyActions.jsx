@@ -4,7 +4,7 @@ import {FiArrowLeft} from 'react-icons/fi'
 import CaseStudyPager from './CaseStudyPager.jsx'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 
-export default function CaseStudyActions({repository, projectId, children}) {
+export default function CaseStudyActions({repository, projectId, codeLabel, children}) {
     const {t} = useTranslation('projects')
     return (
         <>
@@ -21,7 +21,7 @@ export default function CaseStudyActions({repository, projectId, children}) {
                     rel="noreferrer"
                 >
                     <BsGithub aria-hidden="true" />
-                    {t('actions.code')}
+                    {codeLabel ?? t('actions.code')}
                 </a>
             </nav>
             <CaseStudyPager current={projectId} />

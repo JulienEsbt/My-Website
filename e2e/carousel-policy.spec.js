@@ -15,7 +15,10 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 await page.locator('#prerendered-content').waitFor({state: 'detached'})
                 const goals = page.locator('#goals')
                 const swiper = goals.locator('.swiper')
-                await swiper.scrollIntoViewIfNeeded()
+                // An immediate DOM scroll avoids WebKit stalling at the sticky project scene.
+                await swiper.evaluate((element) =>
+                    element.scrollIntoView({block: 'center', behavior: 'instant'})
+                )
                 await swiper.locator('.swiper-pagination-bullet').nth(2).click()
                 await expect
                     .poll(() =>

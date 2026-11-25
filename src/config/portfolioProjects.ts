@@ -1,4 +1,5 @@
 import {HOME_ASSETS} from './homeAssets.js'
+import {HOME_THUMBNAILS} from './homeThumbnails.js'
 import {LINKS} from './links.js'
 import {ROUTE_PATHS} from './routes.js'
 import type {PortfolioProject} from '../types/domain'
@@ -35,5 +36,13 @@ export const PORTFOLIO_PROJECTS = [
         image: HOME_ASSETS.portfolio.megalis,
         repository: LINKS.projects.megalis,
         tags: ['solidity', 'evm', 'storage'],
+    },
+    {
+        id: '5',
+        status: 'active',
+        image: HOME_THUMBNAILS.macpanel,
+        repository: LINKS.projects.macPanel,
+        caseStudy: ROUTE_PATHS.macPanelCaseStudy,
+        tags: ['swift6', 'swiftui', 'appkit', 'xctest'],
     },
 ] as const satisfies readonly PortfolioProject[]

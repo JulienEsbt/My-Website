@@ -16,10 +16,10 @@ test('case studies have a visual hero and circular previous/next navigation in b
         )
         await expect(pager.locator('a[rel="prev"]')).toHaveAttribute(
             'href',
-            `${prefix}/projects/my-website`
+            `${prefix}/projects/macpanel`
         )
         await expect(pager.locator('a[rel="next"]')).toContainText('OpenDente')
-        await expect(pager.locator('a[rel="prev"]')).toContainText('My-Website')
+        await expect(pager.locator('a[rel="prev"]')).toContainText('MacPanel')
         await pager.locator('a[rel="next"]').click()
         await expect(page.getByRole('heading', {level: 1})).toContainText('OpenDente')
         await page.locator('.page-hero .case-study__pager a[rel="next"]').click()
@@ -38,7 +38,7 @@ test('new project heroes and navigation remain accessible across screen sizes', 
     await page.addInitScript(axe.source)
     for (const width of [390, 768, 1440, 2560]) {
         await page.setViewportSize({width, height: 1000})
-        for (const project of ['bruno-pizza', 'my-website', 'opendente']) {
+        for (const project of ['bruno-pizza', 'my-website', 'opendente', 'macpanel']) {
             await page.goto(`/projects/${project}`)
             await page.locator('#prerendered-content').waitFor({state: 'detached'})
             await expect(page.locator('.page-hero .case-study__pager')).toBeVisible()

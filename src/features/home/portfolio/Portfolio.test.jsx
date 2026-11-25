@@ -29,7 +29,7 @@ describe('Portfolio', () => {
                 <Portfolio />
             </MemoryRouter>
         )
-        expect(screen.getAllByRole('tab')).toHaveLength(5)
+        expect(screen.getAllByRole('tab')).toHaveLength(6)
         expect(screen.getAllByRole('tabpanel')).toHaveLength(1)
         const project = screen.getByRole('tabpanel')
         expect(
