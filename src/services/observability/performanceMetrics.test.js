@@ -12,6 +12,8 @@ it('keeps the largest layout shift session and labels the interaction diagnostic
     vi.stubGlobal(
         'PerformanceObserver',
         class {
+            static supportedEntryTypes = ['largest-contentful-paint', 'layout-shift', 'event']
+
             constructor(callback) {
                 this.callback = callback
             }
@@ -52,4 +54,42 @@ it('keeps the largest layout shift session and labels the interaction diagnostic
     expect(metrics.cls).toBe(0.56)
     expect(metrics.maxInteractionDurationMs).toBe(72)
     expect(metrics).not.toHaveProperty('inp')
+})
+
+it('leaves CLS unavailable when the browser silently ignores layout-shift entries', () => {
+    vi.stubGlobal(
+        'PerformanceObserver',
+        class {
+            static supportedEntryTypes = ['largest-contentful-paint', 'event']
+
+            constructor(callback) {
+                this.callback = callback
+            }
+
+            observe({type}) {
+                if (type === 'largest-contentful-paint')
+                    this.callback({getEntries: () => [{startTime: 120}]})
+            }
+
+            disconnect() {}
+        }
+    )
+
+    initializePerformanceMetrics()
+
+    expect(window.__PORTFOLIO_PERFORMANCE__).toMatchObject({lcp: 120, cls: null})
+})
+
+it('does not claim a zero CLS when supported entry types are unavailable', () => {
+    vi.stubGlobal(
+        'PerformanceObserver',
+        class {
+            observe() {}
+            disconnect() {}
+        }
+    )
+
+    initializePerformanceMetrics()
+
+    expect(window.__PORTFOLIO_PERFORMANCE__.cls).toBeNull()
 })

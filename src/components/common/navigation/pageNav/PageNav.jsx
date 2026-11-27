@@ -48,7 +48,17 @@ const PageNav = () => {
             </div>
 
             <nav className="pagenav" aria-label={t('pageNav.aria')}>
-                <div ref={navigationRef} className="pagenavbar">
+                <div
+                    ref={navigationRef}
+                    className="pagenavbar"
+                    onBlur={(event) => {
+                        if (
+                            event.relatedTarget &&
+                            !event.currentTarget.contains(event.relatedTarget)
+                        )
+                            closeMenu()
+                    }}
+                >
                     <button
                         ref={menuButtonRef}
                         type="button"

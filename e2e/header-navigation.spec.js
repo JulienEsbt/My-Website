@@ -15,6 +15,10 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
 
             const navigation = page.getByRole('navigation', {name: 'Primary navigation'})
             await navigation.getByRole('button', {name: 'Open navigation'}).press('Enter')
+            await expect(navigation.getByRole('link').first()).toBeFocused()
+            await navigation.getByRole('link').last().press('Tab')
+            await expect(navigation.getByRole('button')).toHaveAttribute('aria-expanded', 'false')
+            await navigation.getByRole('button', {name: 'Open navigation'}).press('Enter')
             await navigation.getByRole('link', {name: 'Portfolio', exact: true}).press('Enter')
 
             await expect(page).toHaveURL(/\/en$/)

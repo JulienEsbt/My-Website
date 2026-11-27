@@ -11,6 +11,12 @@
     gap: 0.8rem;
     color: var(--color-primary);
 }
+.reader-comments > .btn {
+    max-width: 100%;
+    padding-inline: min(1.25rem, 5%);
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
 .reader-comments__heading h2 {
     font-size: 1.4rem;
 }
@@ -19,6 +25,7 @@
     line-height: 1.7;
 }
 .reader-comments__notice {
+    max-width: 60ch;
     color: var(--color-light);
     font-size: 0.85rem;
 }
@@ -363,7 +370,7 @@
     color: #9fb8cf;
     font-size: 0.8rem;
     line-height: 1.6;
-    max-width: 740px;
+    max-width: 60ch;
     margin: 0 auto 1.6rem;
     padding: 0.7rem 0.9rem;
     border-left: 2px solid #4db5ff50;

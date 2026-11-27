@@ -1,6 +1,34 @@
 import {test, expect, chromium, webkit} from '@playwright/test'
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
+    test(`focus stays inside the photo opened from the mosaic in ${engine}`, async () => {
+        const browser = await browserType.launch()
+        try {
+            const page = await browser.newPage({locale: 'fr-FR', reducedMotion: 'reduce'})
+            await page.goto('http://localhost:4173/travel/portugal-2025')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+            const trigger = page.locator('.travel-timeline__photo-more-wide')
+            await trigger.press('Enter')
+            const dialog = page.getByRole('dialog')
+            await expect(dialog.getByRole('button', {name: 'Fermer la galerie'})).toBeFocused()
+            await dialog.locator('.travel-timeline__gallery-mosaic button').nth(1).press('Enter')
+            const close = dialog.getByRole('button', {name: 'Fermer la galerie'})
+            const next = dialog.locator('.travel-timeline__lightbox-nav.next')
+            await expect(close).toBeFocused()
+            await page.keyboard.press('Shift+Tab')
+            await expect(next).toBeFocused()
+            await page.keyboard.press('Enter')
+            await expect(dialog.locator('.travel-timeline__lightbox-counter')).toContainText('3 /')
+            await expect(next).toBeFocused()
+            await page.keyboard.press('Tab')
+            await expect(close).toBeFocused()
+            await page.keyboard.press('Escape')
+            await expect(trigger).toBeFocused()
+        } finally {
+            await browser.close()
+        }
+    })
+
     for (const width of [393, 1440]) {
         test(`travel photos stay centered in ${engine} at ${width}px`, async () => {
             const browser = await browserType.launch()

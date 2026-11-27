@@ -139,11 +139,18 @@
     border: 1px solid rgba(77, 181, 255, 0.16);
     resize: none;
     color: var(--color-white);
-    font-family: var(--font-sans);
+    font: inherit;
+    font-size: max(1rem, 1em);
     transition:
         background-color 180ms ease,
         border-color 180ms ease,
         box-shadow 180ms ease;
+}
+
+.crypto-contact__field input::placeholder,
+.crypto-contact__field textarea::placeholder {
+    color: #9fb8cf;
+    opacity: 1;
 }
 
 .crypto-contact__field input:focus,

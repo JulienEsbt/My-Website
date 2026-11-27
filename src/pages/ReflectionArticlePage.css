@@ -137,6 +137,7 @@
 }
 
 .reflexion-article__content blockquote p {
+    max-width: 60ch;
     margin-bottom: 0;
     font-style: italic;
     color: rgba(255, 255, 255, 0.86);

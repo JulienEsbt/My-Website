@@ -123,6 +123,9 @@ export default function HomeTravelCarousel({language, readLabel, variant = 'home
         <div
             ref={root}
             className="home-travel-carousel"
+            onFocus={(event) => {
+                if (event.target.matches('a, :focus-visible')) setPaused(true)
+            }}
             role="region"
             aria-label={fr ? 'Récits de voyage sélectionnés' : 'Selected travel stories'}
         >

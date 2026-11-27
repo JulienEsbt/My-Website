@@ -201,7 +201,7 @@
 
 .about__bio {
     position: relative;
-    max-width: 90ch;
+    max-width: 60ch;
     padding-left: 1.25rem;
     color: var(--color-light);
     line-height: 1.85;

@@ -22,6 +22,8 @@ export const initializePerformanceMetrics = () => {
 
     const observe = (type, callback, options = {}) => {
         try {
+            if (!window.PerformanceObserver.supportedEntryTypes?.includes(type)) return false
+
             const observer = new window.PerformanceObserver((list) => callback(list.getEntries()))
             observer.observe({type, buffered: true, ...options})
             observers.push(observer)

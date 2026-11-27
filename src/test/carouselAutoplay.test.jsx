@@ -71,7 +71,7 @@ afterEach(() => {
 })
 
 describe.each(['home', 'entry'])('HomeTravelCarousel (%s)', (variant) => {
-    it('continues after arrows, selection, hover and focus; only Pause stops it', () => {
+    it('continues after pointer navigation and stops or resumes on request', () => {
         render(
             <MemoryRouter>
                 <HomeTravelCarousel language="fr" readLabel="Lire ce récit" variant={variant} />
@@ -80,7 +80,6 @@ describe.each(['home', 'entry'])('HomeTravelCarousel (%s)', (variant) => {
         const region = screen.getByRole('region', {name: 'Récits de voyage sélectionnés'})
         const image = () => within(region).getByRole('img').alt
         fireEvent.mouseEnter(region)
-        fireEvent.focus(within(region).getByRole('link'))
         fireEvent.click(screen.getByRole('button', {name: 'Voyage suivant'}))
         const manuallySelected = image()
         advance(6000)
@@ -139,6 +138,26 @@ describe.each(['home', 'entry'])('HomeTravelCarousel (%s)', (variant) => {
         expect(screen.getByRole('img').alt).toBe(initial)
         expect(screen.queryByRole('button', {name: 'Mettre les voyages en pause'})).toBeNull()
     })
+})
+
+it('keeps the focused home story available until rotation is explicitly resumed', () => {
+    render(
+        <MemoryRouter>
+            <HomeTravelCarousel language="fr" readLabel="Lire ce récit" />
+        </MemoryRouter>
+    )
+    const story = screen.getByRole('link', {name: 'Lire ce récit'})
+    act(() => story.focus())
+    const href = story.getAttribute('href')
+    advance(12000)
+    expect(story).toHaveFocus()
+    expect(story).toHaveAttribute('href', href)
+    act(() => story.blur())
+    advance(6000)
+    expect(screen.getByRole('link')).toHaveAttribute('href', href)
+    fireEvent.click(screen.getByRole('button', {name: 'Reprendre le défilement des voyages'}))
+    advance(6000)
+    expect(screen.getByRole('link')).not.toHaveAttribute('href', href)
 })
 
 describe('DreamDestinations autoplay', () => {
