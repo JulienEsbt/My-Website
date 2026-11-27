@@ -1,6 +1,5 @@
 import React, {useLayoutEffect, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
-import {motion} from 'framer-motion'
 import gsap from 'gsap'
 import HeaderCTA from './HeaderCTA.jsx'
 import HeaderSocials from '../../../components/common/social/headerSocials/HeaderSocials.jsx'
@@ -8,14 +7,12 @@ import {HOME_ASSETS} from '../../../config/homeAssets.js'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './Header.css'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
-import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import MobileHomeHeader from './MobileHomeHeader.jsx'
 
 const DesktopHeader = () => {
     const {t} = useTranslation('home')
 
     const header = useRef(null)
-    const reducedMotion = useReducedMotion()
 
     useLayoutEffect(() => {
         const mm = gsap.matchMedia(header)
@@ -79,12 +76,7 @@ const DesktopHeader = () => {
                 </div>
 
                 <div className="home-hero__visual">
-                    <motion.div
-                        className="home-hero__portrait-card"
-                        initial={false}
-                        whileHover={reducedMotion ? undefined : {y: -5}}
-                        transition={{type: 'spring', stiffness: 180, damping: 16}}
-                    >
+                    <div className="home-hero__portrait-card">
                         <div className="home-hero__portrait-frame">
                             <ResponsiveImage
                                 media={HOME_ASSETS.header.me}
@@ -111,7 +103,7 @@ const DesktopHeader = () => {
                                 {t('header.badges.badge6')}
                             </span>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </header>

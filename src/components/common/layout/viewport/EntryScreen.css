@@ -473,3 +473,33 @@
         }
     }
 }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .entry-screen .home-hero__portrait-card {
+        transition: transform 800ms ease-out;
+        /* Sample the existing spring (stiffness 180, damping 16). */
+        transition-timing-function: linear(
+            0,
+            0.1692,
+            0.4932,
+            0.79,
+            0.986,
+            1.0783,
+            1.0964,
+            1.0757,
+            1.0439,
+            1.0165,
+            0.9992,
+            0.9917,
+            0.9908,
+            0.9931,
+            0.9962,
+            0.9988,
+            1
+        );
+    }
+
+    .entry-screen .home-hero__portrait-card:hover {
+        transform: translateY(-5px);
+    }
+}
