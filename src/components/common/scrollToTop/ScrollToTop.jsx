@@ -24,7 +24,12 @@ const ScrollToTop = () => {
             return
         }
         if (hash) {
-            const targetId = decodeURIComponent(hash.slice(1))
+            let targetId
+            try {
+                targetId = decodeURIComponent(hash.slice(1))
+            } catch {
+                return
+            }
             let observer
             let stopped = false
             let anchoredScrollY = null

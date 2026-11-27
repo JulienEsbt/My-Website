@@ -43,6 +43,7 @@ it('changes language without remounting the page and handles browser history', a
     await waitFor(() => expect(i18n.resolvedLanguage).toBe('en'))
     expect(screen.getByRole('textbox', {name: 'Draft'})).toBe(draft)
     expect(draft).toHaveValue('Preserve this draft')
+    expect(screen.getByRole('link', {name: 'Passer en français'})).toHaveFocus()
     expect(screen.getByRole('link', {name: 'CV'})).toHaveAttribute('href', '/en/resume')
     await user.click(screen.getByRole('button', {name: 'Back'}))
     await waitFor(() => expect(i18n.resolvedLanguage).toBe('fr'))

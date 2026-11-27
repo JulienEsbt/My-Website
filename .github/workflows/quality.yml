@@ -15,7 +15,7 @@ permissions:
     contents: read
 
 env:
-    VITE_MEDIA_BASE_URL: https://pub-35a1591bfd784e15bae49fe6349d16d0.r2.dev
+    VITE_MEDIA_BASE_URL: https://media.julienesterbet.com
 
 jobs:
     code:

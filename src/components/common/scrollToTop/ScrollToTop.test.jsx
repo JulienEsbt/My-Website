@@ -1,4 +1,4 @@
-import {render, waitFor} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 import {MemoryRouter} from 'react-router-dom'
 import ScrollToTop from './ScrollToTop.jsx'
@@ -42,6 +42,18 @@ describe('ScrollToTop', () => {
             behavior: 'instant',
         })
         expect(window.scrollTo).not.toHaveBeenCalled()
+    })
+
+    it('keeps the page interactive when the URL fragment cannot be decoded', () => {
+        render(
+            <MemoryRouter initialEntries={['/en/reflections#%']}>
+                <ScrollToTop />
+                <button type="button">Open navigation</button>
+            </MemoryRouter>
+        )
+
+        expect(screen.getByRole('button', {name: 'Open navigation'})).toBeEnabled()
+        expect(HTMLElement.prototype.scrollIntoView).not.toHaveBeenCalled()
     })
 
     it('returns to the top when a route has no anchor', () => {

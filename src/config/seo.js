@@ -1,7 +1,7 @@
 import {ROUTE_CATALOG} from './routeCatalog.js'
 import {languageFromPath, localizedPath, unlocalizedPath} from './localizedPaths.js'
 import reflections from '../data/reflections/reflections.js'
-import trips from '../data/travel/trips.js'
+import tripSummaries from '../data/travel/tripSummaries.js'
 
 export const SITE_URL = 'https://www.julienesterbet.com'
 export const DEFAULT_SOCIAL_IMAGE = '/og/julien-esterbet-portfolio.png'
@@ -227,7 +227,7 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
         ? reflections.find(({slug}) => slug === reflectionMatch[1])
         : null
     const travelMatch = pathname.match(/^\/travel\/([^/]+)\/?$/)
-    const trip = travelMatch ? trips.find(({id}) => id === travelMatch[1]) : null
+    const trip = travelMatch ? tripSummaries.find(({id}) => id === travelMatch[1]) : null
     const normalizedPath = pathname !== '/' ? pathname.replace(/\/$/, '') : '/'
     const key = reflection ? 'reflection' : trip ? 'travelStory' : staticRoutes[normalizedPath]
     const isNotFound = !key
@@ -295,7 +295,7 @@ export const getSeoMetadata = (pathname, requestedLanguage = languageFromPath(pa
 export const BASE_INDEXABLE_PATHS = [
     ...Object.keys(staticRoutes),
     ...reflections.map(({slug}) => `/reflections/${slug}`),
-    ...trips.map(({id}) => `/travel/${id}`),
+    ...tripSummaries.map(({id}) => `/travel/${id}`),
 ]
 
 export const INDEXABLE_PATHS = BASE_INDEXABLE_PATHS.flatMap((path) => [

@@ -4,13 +4,16 @@ import './index.css'
 import i18n from './i18n/i18n.js'
 import {applyInitialLanguage} from './i18n/entryLanguage.js'
 import App from './App'
-import {initializePerformanceMetrics} from './services/observability/performanceMetrics.js'
 
 const {language: initialLanguage, redirecting} = applyInitialLanguage()
 if (!redirecting) {
     if (i18n.resolvedLanguage !== initialLanguage) await i18n.changeLanguage(initialLanguage)
 
-    initializePerformanceMetrics()
+    if (import.meta.env.DEV || new URLSearchParams(window.location.search).has('measure')) {
+        void import('./services/observability/performanceMetrics.js').then((module) =>
+            module.initializePerformanceMetrics()
+        )
+    }
 
     if (import.meta.env.DEV) {
         const accessibilityPreviewParams = new URLSearchParams(window.location.search)
