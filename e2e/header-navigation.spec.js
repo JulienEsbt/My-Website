@@ -1,6 +1,33 @@
 import {test, expect, chromium, webkit} from '@playwright/test'
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
+    test(`recovers from a malformed fragment and restores route focus in ${engine}`, async () => {
+        const browser = await browserType.launch()
+        try {
+            const context = await browser.newContext({
+                locale: 'en-GB',
+                reducedMotion: 'reduce',
+                viewport: {width: 390, height: 844},
+            })
+            const page = await context.newPage()
+            await page.goto('http://localhost:4173/en/reflections#%')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+
+            const navigation = page.getByRole('navigation', {name: 'Primary navigation'})
+            await navigation.getByRole('button', {name: 'Open navigation'}).press('Enter')
+            await navigation.getByRole('link', {name: 'Portfolio', exact: true}).press('Enter')
+
+            await expect(page).toHaveURL(/\/en$/)
+            const main = page.locator('#main')
+            await expect(
+                main.getByRole('heading', {name: 'Julien Esterbet', exact: true})
+            ).toBeVisible()
+            await expect(main).toBeFocused()
+        } finally {
+            await browser.close()
+        }
+    })
+
     for (const route of ['/', '/web3']) {
         test(`navigation remains visible with delayed animation frames in ${engine} on ${route}`, async () => {
             const browser = await browserType.launch()

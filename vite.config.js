@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import mdx from '@mdx-js/rollup'
 import {createContactDevMiddleware} from './server/contact/contactDevMiddleware.js'
 import {createBlockchainStatusHandler} from './server/web3/blockchainStatusHandler.js'
+import travelHighlightMedia from './scripts/vite-travel-highlight-media.mjs'
 
 function blockchainStatusDevApi(env) {
     const handler = createBlockchainStatusHandler({env})
@@ -48,7 +49,13 @@ export default defineConfig(({mode}) => {
     const env = {...process.env, ...loadEnv(mode, process.cwd(), '')}
 
     return {
-        plugins: [react(), mdx(), blockchainStatusDevApi(env), commentsDevApi(env)],
+        plugins: [
+            react(),
+            mdx(),
+            travelHighlightMedia(),
+            blockchainStatusDevApi(env),
+            commentsDevApi(env),
+        ],
         server: {port: 3000},
         build: {manifest: true},
         assetsInclude: ['**/*.JPG', '**/*.PNG'],

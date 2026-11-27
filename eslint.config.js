@@ -13,6 +13,7 @@ export default [
             'test-results/**',
             'playwright-report/**',
             'node_modules/**',
+            '.idea/**',
         ],
     },
     js.configs.recommended,
