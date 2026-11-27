@@ -1,38 +1,23 @@
 import React from 'react'
-import {motion} from 'framer-motion'
 import {Link} from '../../../components/common/navigation/LocalizedLink.jsx'
 import {useTranslation} from 'react-i18next'
-
-const Btn = ({href, children, className = 'btn', ...props}) => (
-    <motion.a
-        href={href}
-        whileHover={{y: -2}}
-        whileTap={{scale: 0.98}}
-        className={className}
-        {...props}
-    >
-        {children}
-    </motion.a>
-)
-
-const RouteBtn = ({to, children, className = 'btn'}) => (
-    <Link to={to} className={className}>
-        {children}
-    </Link>
-)
 
 const HeaderCTA = () => {
     const {t} = useTranslation('home')
 
     return (
         <div className="cta" role="group" aria-label={t('cta.aria')}>
-            <Btn href="#contact">{t('cta.contact')}</Btn>
+            <a className="btn" href="#contact">
+                {t('cta.contact')}
+            </a>
 
-            <RouteBtn to="/web3">{t('cta.web3')}</RouteBtn>
+            <Link className="btn" to="/web3">
+                {t('cta.web3')}
+            </Link>
 
-            <RouteBtn to="/resume" className="btn btn-primary">
+            <Link to="/resume" className="btn btn-primary">
                 {t('cta.cv')}
-            </RouteBtn>
+            </Link>
         </div>
     )
 }

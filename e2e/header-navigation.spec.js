@@ -23,6 +23,13 @@ for (const [engine, browserType] of Object.entries({chromium, webkit})) {
                 main.getByRole('heading', {name: 'Julien Esterbet', exact: true})
             ).toBeVisible()
             await expect(main).toBeFocused()
+            const rail = main.locator('.mobile-home-entry__links .header-socials')
+            const bounds = await rail.evaluate((element) => ({
+                height: element.clientHeight,
+                highlight: parseFloat(getComputedStyle(element, '::before').height),
+            }))
+            expect(bounds.highlight).toBeGreaterThan(0)
+            expect(bounds.highlight).toBeLessThanOrEqual(bounds.height)
         } finally {
             await browser.close()
         }

@@ -8,41 +8,39 @@ import {HOME_ASSETS} from '../../../config/homeAssets.js'
 import ResponsiveImage from '../../../components/common/media/ResponsiveImage.jsx'
 import './Header.css'
 import useMediaQuery from '../../../components/common/accessibility/useMediaQuery.js'
+import useReducedMotion from '../../../components/common/accessibility/useReducedMotion.js'
 import MobileHomeHeader from './MobileHomeHeader.jsx'
 
 const DesktopHeader = () => {
     const {t} = useTranslation('home')
 
-    const title = useRef(null)
-    const name = useRef(null)
-    const subtitle = useRef(null)
-    const description = useRef(null)
-    const badges = useRef(null)
-    const cta = useRef(null)
-    const visual = useRef(null)
-    const floating = useRef(null)
-    const socials = useRef(null)
+    const header = useRef(null)
+    const reducedMotion = useReducedMotion()
 
     useLayoutEffect(() => {
-        const mm = gsap.matchMedia()
-
+        const mm = gsap.matchMedia(header)
         mm.add('(prefers-reduced-motion: no-preference)', () => {
-            const tl = gsap.timeline({defaults: {ease: 'power3.out', duration: 0.7}})
-
-            tl.from(title.current, {y: 18, opacity: 0})
-                .from(name.current, {y: 22, opacity: 0}, '-=0.45')
-                .from(subtitle.current, {y: 18, opacity: 0}, '-=0.45')
-                .from(description.current, {y: 18, opacity: 0}, '-=0.45')
-                .from(badges.current?.children, {y: 14, opacity: 0, stagger: 0.08}, '-=0.4')
-                .from(cta.current, {y: 18, opacity: 0}, '-=0.4')
-                .from(visual.current, {scale: 0.92, opacity: 0}, '-=0.5')
-                .from(floating.current?.children, {y: 16, opacity: 0, stagger: 0.08}, '-=0.35')
-                // Keep navigation visible while the entrance timeline starts or is throttled.
-                // Animate only its contents, not the responsive rail's centering.
-                .from(socials.current?.children, {x: -14}, '-=0.45')
+            gsap.timeline({defaults: {ease: 'power3.out', duration: 0.7}})
+                .from('.home-hero__eyebrow', {y: 18, opacity: 0})
+                .from('.home-hero__title', {y: 22, opacity: 0}, '-=0.45')
+                .from('.home-hero__subtitle', {y: 18, opacity: 0}, '-=0.45')
+                .from('.home-hero__description', {y: 18, opacity: 0}, '-=0.45')
+                .from(
+                    '.home-hero__badges > span',
+                    {y: 14, opacity: 0, stagger: 0.08, clearProps: 'transform,translate'},
+                    '-=0.4'
+                )
+                .from('.cta', {y: 18, opacity: 0}, '-=0.4')
+                .from('.home-hero__visual', {scale: 0.92, opacity: 0}, '-=0.5')
+                .from(
+                    '.home-hero__floating-pill',
+                    {'--pill-entry-y': '16px', opacity: 0, stagger: 0.08},
+                    '-=0.35'
+                )
+                .from('.home-hero__socials-wrapper > *', {x: -14}, '-=0.45')
 
             gsap.to('.home-hero__floating-pill', {
-                y: -8,
+                '--pill-float-y': '-8px',
                 duration: 2.8,
                 repeat: -1,
                 yoyo: true,
@@ -55,46 +53,37 @@ const DesktopHeader = () => {
     }, [])
 
     return (
-        <header id="top" className="home-hero entry-screen">
+        <header ref={header} id="top" className="home-hero entry-screen">
             <div className="container home-hero__container">
-                <div ref={socials} className="home-hero__socials-wrapper">
+                <div className="home-hero__socials-wrapper">
                     <HeaderSocials />
                 </div>
                 <div className="home-hero__copy">
-                    <span ref={title} className="home-hero__eyebrow">
-                        {t('header.eyebrow')}
-                    </span>
+                    <span className="home-hero__eyebrow">{t('header.eyebrow')}</span>
 
-                    <h1 ref={name} className="home-hero__title">
+                    <h1 className="home-hero__title">
                         {t('header.name.first')} <span>{t('header.name.last')}</span>
                     </h1>
 
-                    <p ref={subtitle} className="home-hero__subtitle">
-                        {t('header.subtitle')}
-                    </p>
+                    <p className="home-hero__subtitle">{t('header.subtitle')}</p>
 
-                    <p ref={description} className="home-hero__description">
-                        {t('header.description')}
-                    </p>
+                    <p className="home-hero__description">{t('header.description')}</p>
 
-                    <div ref={badges} className="home-hero__badges">
+                    <div className="home-hero__badges">
                         <span>{t('header.badges.badge1')}</span>
                         <span>{t('header.badges.badge2')}</span>
                         <span>{t('header.badges.badge3')}</span>
                     </div>
 
-                    <div ref={cta}>
-                        <HeaderCTA />
-                    </div>
+                    <HeaderCTA />
                 </div>
 
                 <div className="home-hero__visual">
                     <motion.div
-                        ref={visual}
-                        initial={false}
-                        whileHover={{y: -5}}
-                        transition={{type: 'spring', stiffness: 180, damping: 16}}
                         className="home-hero__portrait-card"
+                        initial={false}
+                        whileHover={reducedMotion ? undefined : {y: -5}}
+                        transition={{type: 'spring', stiffness: 180, damping: 16}}
                     >
                         <div className="home-hero__portrait-frame">
                             <ResponsiveImage
@@ -111,7 +100,7 @@ const DesktopHeader = () => {
                             <span>{t('header.identity.focus')}</span>
                         </div>
 
-                        <div ref={floating} className="home-hero__floating">
+                        <div className="home-hero__floating">
                             <span className="home-hero__floating-pill pill-build">
                                 {t('header.badges.badge4')}
                             </span>

@@ -4,6 +4,42 @@ import {readFileSync} from 'node:fs'
 const axe = readFileSync(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8')
 
 for (const [engine, browserType] of Object.entries({chromium, webkit})) {
+    test(`home portrait and badges respond to the pointer in ${engine}`, async () => {
+        const browser = await browserType.launch()
+        try {
+            const page = await browser.newPage({
+                viewport: {width: 1440, height: 900},
+                reducedMotion: 'no-preference',
+            })
+            await page.goto('http://localhost:4173/')
+            await page.locator('#prerendered-content').waitFor({state: 'detached'})
+            const portrait = page.locator('.home-hero__portrait-card')
+            const pill = portrait.locator('.home-hero__floating-pill').first()
+            const offsetY = (element) =>
+                element.evaluate((el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m42)
+            const initial = await offsetY(pill)
+            await expect
+                .poll(async () => Math.abs((await offsetY(pill)) - initial))
+                .toBeGreaterThan(2)
+            await portrait.hover()
+            await expect.poll(() => offsetY(portrait)).toBeCloseTo(-5, 1)
+            const box = await pill.boundingBox()
+            await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+            await expect(pill).toHaveCSS('translate', '0px -2px')
+            const badge = page.locator('.home-hero__badges span').first()
+            await badge.hover()
+            await expect(badge).toHaveCSS('translate', '0px -2px')
+            await expect.poll(() => offsetY(portrait)).toBeCloseTo(0, 1)
+            await page.emulateMedia({reducedMotion: 'reduce'})
+            await expect(badge).toHaveCSS('translate', 'none')
+            await expect.poll(() => offsetY(pill)).toBe(0)
+            await portrait.hover()
+            await expect.poll(() => offsetY(portrait)).toBe(0)
+        } finally {
+            await browser.close()
+        }
+    })
+
     test(`Bruno phone preview stays sharp without downloading the large screenshot: ${engine}`, async () => {
         const browser = await browserType.launch()
         try {

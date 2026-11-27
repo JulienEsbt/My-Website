@@ -408,6 +408,6 @@ img {
         translate: 0 -2px;
         border-color: rgba(77, 181, 255, 0.55);
         box-shadow: 0 5px 18px rgba(77, 181, 255, 0.13);
-        background-color: rgba(77, 181, 255, 0.14);
+        background-color: var(--chip-hover-bg, rgba(77, 181, 255, 0.14));
     }
 }
